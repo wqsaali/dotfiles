@@ -1,0 +1,18 @@
+[user]
+	email = ${EMAIL}
+	name = ${NAME}
+[push]
+	default = simple
+[fetch]
+	prune = true
+[alias]
+	cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+	switch = !legit switch
+	branches = !legit branches
+	graft = !legit graft
+	harvest = !legit harvest
+	publish = !legit publish
+	unpublish = !legit unpublish
+	sprout = !legit sprout
+	sync = !legit sync
+	resync = !legit resync
