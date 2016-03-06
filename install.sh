@@ -25,7 +25,7 @@ function installDotFiles (){
   cp files/terminator.config $HOME/.config/terminator/
   cp files/git_prompt.sh $HOME/.bash/
   cp files/shell_prompt.sh $HOME/.bash/
-  cp files/files/bashrc $HOME/.bashrc
+  cp files/bashrc $HOME/.bashrc
   cp files/profile $HOME/.profile
   cp files/vimrc $HOME/.vimrc
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
