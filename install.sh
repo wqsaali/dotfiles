@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function installPacakges (){
-  sudo apt-mark manual $(cat packages.lst)
+  sudo apt-mark manual $(cat files/packages.lst)
 
   sudo pip install -U pip setuptools
   sudo pip install -U thefuck
@@ -22,13 +22,13 @@ function installFonts (){
 function installDotFiles (){
   mkdir -p $HOME/.bash/
 
-  cp terminator.config $HOME/.config/terminator/
-  cp git_prompt.sh $HOME/.bash/
-  cp shell_prompt.sh $HOME/.bash/
-  cp bashrc $HOME/.bashrc
-  cp profile $HOME/.profile
-  cp vimrc $HOME/.vimrc
-  cp git-prompt-colors.sh $HOME/.git-prompt-colors.sh
+  cp files/terminator.config $HOME/.config/terminator/
+  cp files/git_prompt.sh $HOME/.bash/
+  cp files/shell_prompt.sh $HOME/.bash/
+  cp files/files/bashrc $HOME/.bashrc
+  cp files/profile $HOME/.profile
+  cp files/vimrc $HOME/.vimrc
+  cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
 
   SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
   source config.sh
@@ -37,21 +37,21 @@ function installDotFiles (){
   #read -p "Please enter your name (for gitconfig):" NAME
   #read -p "Please enter your email address (for gitconfig):" EMAIL
 
-  #cp bash_aliases $HOME/.bash_aliases
+  #cp files/bash_aliases $HOME/.bash_aliases
   sedcmd=''
   for var in $(echo $CONF);do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done
-  cat bash_aliases | sed -e "$sedcmd" > $HOME/.bash_aliases
+  cat files/bash_aliases | sed -e "$sedcmd" > $HOME/.bash_aliases
 
-  # cp gitconfig $HOME/.gitconfig
+  # cp files/gitconfig $HOME/.gitconfig
   sedcmd=''
   for var in NAME EMAIL;do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done
-  cat gitconfig | sed -e "$sedcmd" > $HOME/.gitconfig
+  cat files/gitconfig | sed -e "$sedcmd" > $HOME/.gitconfig
 
   if [ ! -d  $HOME/.bash/powerline-shell ]; then
     git clone https://github.com/milkbikis/powerline-shell $HOME/.bash/powerline-shell

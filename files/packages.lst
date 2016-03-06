@@ -43,6 +43,7 @@ ruby
 rubygems
 ruby-all-dev
 silversearcher-ag
+software-properties-common
 terminator
 unrar
 unzip
