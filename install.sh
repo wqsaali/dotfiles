@@ -23,6 +23,7 @@ function installDotFiles (){
   mkdir -p $HOME/.bash/
 
   cp files/terminator.config $HOME/.config/terminator/
+  ln -s $HOME/.config/terminator/terminator.config $HOME/.config/terminator/config
   cp files/git_prompt.sh $HOME/.bash/
   cp files/shell_prompt.sh $HOME/.bash/
   cp files/bashrc $HOME/.bashrc
