@@ -51,7 +51,7 @@
   Plugin 'alvan/vim-closetag'
   Plugin 'Townk/vim-autoclose'
   Plugin 'godlygeek/tabular'
-  Plugin 'neilagabriel/vim-geeknote'
+  "Plugin 'neilagabriel/vim-geeknote'
   Plugin 'elzr/vim-json'
   Plugin 'Konfekt/FastFold'
   Plugin 'scrooloose/syntastic'
