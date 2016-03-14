@@ -80,6 +80,11 @@
   hi NonText ctermbg=none
   hi Folded ctermbg=none
 
+  au ColorScheme * hi Normal ctermbg=none
+  au ColorScheme * hi NonText ctermbg=none
+  au ColorScheme * hi Folded ctermbg=none
+
+
   set guifont=droid\ sans\ mono\ for\ powerline\ plus\ nerd\ file\ types\ 10
 " }
 
