@@ -1,4 +1,8 @@
 # Location aliases
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../../'
 alias workingCopies='cd ${WORKINGCOPIES}'
 alias code='cd ${CODE}'
 alias github='cd ${GITHUB}'
@@ -178,13 +182,25 @@ alias docker-cleanup='docker-killall; docker-rm-all; docker-rmi-all'
 
 # apt aliases
 alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
+#alias install="sudo aptitude install" #This breaks the make install.
+#alias remove="sudo aptitude remove"
+
+# if user is not root, pass all commands via sudo #
+if [ $UID -ne 0 ]; then
+    alias apt-get='sudo apt-get'
+    alias aptitude='sudo aptitude'
+fi
 
 function apt-cleanup () {
-ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | grep -v $(uname -r) | sort -Vr | tail -n +2 | xargs -r sudo aptitude purge -y
-sudo aptitude autoclean
-sudo apt-get autoremove
-sudo apt-get clean
-dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
+  ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | grep -v $(uname -r) | sort -Vr | tail -n +2 | xargs -r sudo aptitude purge -y
+  sudo aptitude autoclean
+  sudo apt-get autoremove
+  sudo apt-get clean
+  dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
 }
 alias apt-cleanup=apt-cleanup
 
+#Bash calculator.
+function calc () {
+  echo "${1}" | bc -l;
+}
