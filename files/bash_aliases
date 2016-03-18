@@ -40,8 +40,8 @@ function gn_sync_all {
 }
 
 # Vim aliases
-alias vim-geeknote='vi -c Geeknote'
-alias geeknote-vim='vi -c Geeknote'
+alias vim-geeknote='nvim -c Geeknote'
+alias geeknote-vim='nvim -c Geeknote'
 
 # Json aliases
 function json-diff () {
