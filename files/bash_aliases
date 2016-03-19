@@ -145,7 +145,7 @@ alias chef-env-compare-versions=chef-env-compare-versions
 function chef-promote-all () {
   cdir=$(pwd)
   chef-environments
-  grep $1 * | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
+  grep -P '".*":\s*"= .*"' * |grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
   cd $cdir
 }
 alias chef-promote-all=chef-promote-all
