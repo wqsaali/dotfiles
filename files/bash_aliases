@@ -49,11 +49,15 @@ function json-diff () {
 #  while getopts {a..z} opt; do :; done
 #  shift $(($OPTIND-1))
   for o in $opts; do shift; done
-  section=$3
-  if [ -z $section ]; then
-    section='.'
+  section1=$3
+  section2=$4
+  if [ -z $section1 ]; then
+    section1='.'
   fi
-  colordiff $opts <(cat ${1} | jq -S "$section") <(cat ${2} | jq -S "$section")
+  if [ -z $section2 ]; then
+    section2=$section1
+  fi
+  colordiff $opts <(cat ${1} | jq -S "$section1") <(cat ${2} | jq -S "$section2")
 }
 alias json-diff=json-diff
 
