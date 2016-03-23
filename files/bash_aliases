@@ -151,10 +151,20 @@ alias chef-env-compare-versions=chef-env-compare-versions
 function chef-promote-all () {
   cdir=$(pwd)
   chef-environments
-  grep -P '".*":\s*"= .*"' * |grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
+  grep -P '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
   cd $cdir
 }
 alias chef-promote-all=chef-promote-all
+
+# Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a specific version
+# Usage: chef-promot-eq <cookbook> <version_old> <version_new>
+function chef-promote-eq () {
+  cdir=$(pwd)
+  chef-environments
+  grep -P '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $3 --remote --yes
+  cd $cdir
+}
+alias chef-promote-all=chef-promote-eq
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to an older version
 # Usage: chef-promot-lt <cookbook> <version>
