@@ -306,6 +306,7 @@
   noremap  <C-\> :NERDTreeToggle<CR>
   nmap <leader>TB <Plug>ToggleBrackets
   imap <leader>TB <Plug>ToggleBrackets
+  noremap <leader>co <C-W><C-O>
 
   "vimdiff current vs git head (fugitive extension)
   nnoremap <Leader>gd :Gdiff<cr>
