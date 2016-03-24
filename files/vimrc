@@ -27,6 +27,7 @@
   "Plugin 'Shougo/neosnippet'
   "Plugin 'Shougo/neosnippet-snippets'
   "Plugin 'SirVer/ultisnips'
+  Plugin 'chrisbra/vim-diff-enhanced'
   Plugin 'MarcWeber/vim-addon-mw-utils'
   Plugin 'tomtom/tlib_vim'
   Plugin 'garbas/vim-snipmate'
@@ -90,8 +91,10 @@
 
 " GeneralSettings {
   " Open files allways in new tabs
-  autocmd VimEnter * tab all
-  "autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
+  if ! &diff
+    autocmd VimEnter * tab all
+    "autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
+  endif
 
   if has('autocmd')
     filetype plugin indent on
@@ -303,6 +306,12 @@
   noremap  <C-\> :NERDTreeToggle<CR>
   nmap <leader>TB <Plug>ToggleBrackets
   imap <leader>TB <Plug>ToggleBrackets
+
+  "vimdiff current vs git head (fugitive extension)
+  nnoremap <Leader>gd :Gdiff<cr>
+  "switch back to current file and closes fugitive buffer
+  "nnoremap <Leader>gD :diffoff!<cr><c-w>h:bd<cr>
+  nnoremap <Leader>gD <c-w>h<c-w>c
 
 " }
 
