@@ -14,6 +14,7 @@
   "Plugin 'powerline/powerline'
   "Plugin 'tpope/vim-flagship'
   Plugin 'airblade/vim-gitgutter'
+  "Plugin 'miyakogi/conoline.vim'
   "Plugin 'mhinz/vim-signify'
   Plugin 'tpope/vim-fugitive'
   Plugin 'gcmt/breeze.vim'
@@ -119,7 +120,9 @@
   set ttimeout
   set ttimeoutlen=50
   set updatetime=250
-  set cursorline
+  if !&diff
+    set cursorline
+  endif
 
   set laststatus=2
   set ruler
