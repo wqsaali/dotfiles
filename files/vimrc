@@ -325,7 +325,7 @@
   nnoremap <Leader>ge :Gedit<CR>
   nnoremap <Leader>gr :Gread<CR>
   nnoremap <Leader>gw :Gwrite<CR><CR>
-  nnoremap <Leader>ge :Gblame<CR>
+  nnoremap <Leader>gbl :Gblame<CR>
   nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
   nnoremap <Leader>gp :Ggrep<Space>
   nnoremap <Leader>gm :Gmove<Space>
