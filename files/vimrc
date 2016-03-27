@@ -104,6 +104,12 @@
     syntax enable
   endif
 
+  " GUI options:
+  "set guioptions-=m  "remove menu bar
+  "set guioptions-=T  "remove toolbar
+  set guioptions-=r  "remove right-hand scroll bar
+  set guioptions-=L  "remove left-hand scroll bar
+
   " Use :help 'option' to see the documentation for the given option.
   set autoindent
   set smartindent
