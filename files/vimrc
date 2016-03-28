@@ -319,6 +319,10 @@
   imap <leader>TB <Plug>ToggleBrackets
   noremap <leader>co :diffoff!<CR><C-W><C-O>
 
+  "  Window management:
+  nnoremap <Leader>sv :windo wincmd K
+  nnoremap <Leader>sh :windo wincmd H
+
   " fugitive git bindings
   "vimdiff current vs git head (fugitive extension)
   nnoremap <Leader>gd :Gdiff<cr>
