@@ -16,6 +16,7 @@
   Plugin 'airblade/vim-gitgutter'
   Plugin 'tpope/vim-fugitive'
   Plugin 'gregsexton/gitv'
+  Plugin 'junegunn/gv.vim'
   "Plugin 'miyakogi/conoline.vim'
   "Plugin 'mhinz/vim-signify'
   Plugin 'gcmt/breeze.vim'

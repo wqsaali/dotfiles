@@ -43,6 +43,7 @@ function gn_sync_all {
 #alias vim='nvim'
 #alias vi='nvim'
 #alias vimdiff='nvim -d'
+
 alias vim-geeknote='nvim -c Geeknote'
 alias geeknote-vim='nvim -c Geeknote'
 
@@ -50,6 +51,8 @@ alias vim-install='vim +PluginInstall +qall'
 alias vim-install='vim +PluginInstall +qall'
 alias vim-update='vim +PluginUpdate +qall'
 alias vim-clean='vim +PluginClean +qall'
+
+alias gitv='vim +GV'
 
 # Json aliases
 function json-diff () {
