@@ -59,13 +59,14 @@ function installDotFiles (){
   if [ ! -d  $HOME/.bash/powerline-shell ]; then
     git clone https://github.com/milkbikis/powerline-shell $HOME/.bash/powerline-shell
   fi
-  if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-  fi
 }
 
 function installVimPlugins (){
   mkdir -p $HOME/.vim/bundle/
+
+  if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+  fi
 
   if [ ! -d  $HOME/.bash/bash-git-prompt ]; then
     git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.bash/bash-git-prompt
