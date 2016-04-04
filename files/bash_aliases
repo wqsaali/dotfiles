@@ -206,6 +206,11 @@ alias docker-rm-all='docker rm $(docker ps -a -q)'
 alias docker-rmi-all='docker rmi $(docker images -q)'
 alias docker-cleanup='docker-killall; docker-rm-all; docker-rmi-all'
 
+function docker-enter () {
+  docker exec -i -t $1 bash
+}
+alias docker-enter=docker-enter
+
 # apt aliases
 alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
 #alias install="sudo aptitude install" #This breaks the make install.
