@@ -32,6 +32,7 @@ function installDotFiles (){
   cp files/profile $HOME/.profile
   cp files/vimrc $HOME/.vimrc
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
+  sudo cp files/docker-enter-completion /etc/bash_completion.d/
 
   SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
   source config.sh
