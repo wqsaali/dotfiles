@@ -1,9 +1,9 @@
 # docker-enter completion
 
-_docker-enter() { 
-  local cur=${COMP_WORDS[COMP_CWORD]}; 
-  local containers=$(docker ps -q | xargs docker inspect --format "{{.Name}}" | awk '{printf("%s ", substr($1,2))}')
-  COMPREPLY=( $(compgen -W "$containers" -- $cur) ); 
+_docker-enter() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local containers=$(docker ps -q | xargs -r -n1 docker inspect --format "{{.Name}}" | awk '{printf("%s ", substr($1,2))}')
+  COMPREPLY=( $(compgen -W "$containers" -- $cur) );
 }
 
 
