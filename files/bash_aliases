@@ -40,9 +40,9 @@ function gn_sync_all {
 }
 
 # Vim aliases
-#alias vim='nvim'
-#alias vi='nvim'
-#alias vimdiff='nvim -d'
+alias vim='nvim'
+alias vi='nvim'
+alias vimdiff='nvim -d'
 
 alias vim-geeknote='nvim -c Geeknote'
 alias geeknote-vim='nvim -c Geeknote'
