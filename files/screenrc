@@ -1,0 +1,27 @@
+#################################################################################
+## Usage:
+## screen -r     ==> resumes a detached screen session
+## screen -x     ==> Cool, Attach to a not detached screen session. (Multi display mode)
+## detach : Press F10 or "C-a d"
+## HELP: "C-a, ?"
+## "C-a C-a" : fast switch between 2 screens
+##################################################################################
+
+# Fix for residual text
+altscreen on
+
+startup_message off
+defscrollback 50000
+termcapinfo xterm* ti@:te@
+
+# 256 colors
+term xterm-256color
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+
+# mouse tracking allows to switch region focus by clicking
+#mousetrack on
+
+# get rid of silly xoff stuff
+bind s split
