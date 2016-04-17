@@ -236,3 +236,8 @@ alias apt-cleanup=apt-cleanup
 function calc () {
   echo "${1}" | bc -l;
 }
+
+function wttr () {
+  curl "wttr.in/$1"
+}
+alias wttr_moon='curl wttr.in/Moon'
