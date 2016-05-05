@@ -55,6 +55,7 @@ alias vim-clean='vim +PluginClean +qall'
 alias gitv='vim +GV'
 
 # Json aliases
+# Usage: json-diff file1 section_on_file1 file2 section_on_file2
 function json-diff () {
   opts=$(echo $@ | grep -Po '(( |^)-\w+)+' | tr '\n' ' ')
 #  while getopts {a..z} opt; do :; done
