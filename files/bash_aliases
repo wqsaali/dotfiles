@@ -202,9 +202,9 @@ function knife-ciphertext () {
 alias knife-ciphertext=knife-ciphertext
 
 # Docker aliases
-alias docker-killall='docker kill $(docker ps -a -q)'
-alias docker-rm-all='docker rm $(docker ps -a -q)'
-alias docker-rmi-all='docker rmi $(docker images -q)'
+alias docker-killall='docker ps -a -q | xargs -r docker kill'
+alias docker-rm-all='docker ps -a -q | xargs -r docker rm'
+alias docker-rmi-all='docker images -q | xargs -r docker rmi'
 alias docker-cleanup='docker-killall; docker-rm-all; docker-rmi-all'
 
 function docker-enter () {
