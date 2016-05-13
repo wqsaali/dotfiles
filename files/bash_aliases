@@ -119,6 +119,7 @@ alias git-prune-merged='git branch -r --merged | grep -v master | sed '\''s/orig
 alias git-purge-branches='git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '\''{ print $1 }'\'' | xargs -n 1 git branch -d'
 alias git-current-tag='git name-rev --tags --name-only $(git rev-parse HEAD)'
 alias git-reset='git fetch origin; git reset --hard; git clean -fdx'
+alias git-tas='git for-each-ref --format "%(refname) %09 %(taggerdate) %(subject) %(taggeremail)" refs/tags  --sort=taggerdate'
 
 function git-compare () {
   git rev-list --left-right --count $1...$2
