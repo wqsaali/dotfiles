@@ -125,6 +125,7 @@
   set nrformats-=octal
   set shiftround
 
+  set ttyfast
   set lazyredraw
   set ttimeout
   set ttimeoutlen=50
