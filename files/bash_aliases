@@ -214,6 +214,9 @@ function docker-enter () {
 }
 alias docker-enter=docker-enter
 
+# PIP aliases
+alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo pip install -U'
+
 # apt aliases
 alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
 #alias install="sudo aptitude install" #This breaks the make install.
@@ -244,3 +247,9 @@ function wttr () {
   curl "wttr.in/$1"
 }
 alias wttr_moon='curl wttr.in/Moon'
+
+# GTK Theme overrides
+alias meld='env GTK_THEME=Arc-Dark meld'
+alias terminator='env GTK_THEME=Arc-Dark terminator'
+alias gnome-terminal='env GTK_THEME=Arc-Dark gnome-terminal'
+alias gedit='env GTK_THEME=Arc-Dark gedit'
