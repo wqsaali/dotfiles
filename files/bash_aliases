@@ -248,6 +248,8 @@ function wttr () {
 }
 alias wttr_moon='curl wttr.in/Moon'
 
+alias ipinfo='curl -s http://ipinfo.io/ip'
+
 # GTK Theme overrides
 alias meld='env GTK_THEME=Arc-Dark meld'
 alias terminator='env GTK_THEME=Arc-Dark terminator'
