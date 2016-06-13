@@ -57,6 +57,8 @@
   Plugin 'godlygeek/tabular'
   "Plugin 'neilagabriel/vim-geeknote'
   Plugin 'elzr/vim-json'
+  "Plugin 'kopischke/vim-stay'
+  "Plugin 'kopischke/vim-fetch'
   Plugin 'Konfekt/FastFold'
   Plugin 'scrooloose/syntastic'
   Plugin 'luisdavim/pretty-folds'
