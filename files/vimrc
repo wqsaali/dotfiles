@@ -181,6 +181,11 @@
   " GeekNote
   "let g:GeeknoteFormat="markdown"
 
+  " Syntastic
+  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
+  noremap <C-w>e :SyntasticCheck<CR>
+  noremap <C-w>f :SyntasticToggleMode<CR>
+
   " Gundu
   "let g:gundo_width = 60
   "let g:gundo_preview_height = 40
