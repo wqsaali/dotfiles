@@ -216,8 +216,8 @@ alias docker-enter=docker-enter
 
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip install -U'
-alias pip3-upgrade='(echo pip3; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip3 install -U'
-alias pip2-upgrade='(echo pip2; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip2 install -U'
+alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip3 install -U'
+alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip2 install -U'
 
 # apt aliases
 alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
