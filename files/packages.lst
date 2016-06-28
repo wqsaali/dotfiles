@@ -6,6 +6,7 @@ build-essential
 bundler
 chef
 chef-zero
+cargo
 cmake
 colordiff
 command-not-found
