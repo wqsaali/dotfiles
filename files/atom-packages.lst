@@ -19,7 +19,6 @@ git-log
 git-plus
 git-projects
 git-status
-git-tab-status
 git-time-machine
 highlight-line
 hyperclick
@@ -36,7 +35,6 @@ linter
 linter-foodcritic
 merge-conflicts
 minimap
-minimap-color-highlight
 minimap-cursorline
 minimap-find-and-replace
 minimap-git-diff
