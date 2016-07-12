@@ -33,6 +33,7 @@ function installDotFiles (){
   cp files/screenrc $HOME/.screenrc
   cp files/profile $HOME/.profile
   cp files/vimrc $HOME/.vimrc
+  cp files/atom/* $HOME/.atom/
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
   sudo cp files/docker-enter-completion /etc/bash_completion.d/
 
@@ -64,7 +65,13 @@ function installDotFiles (){
   fi
 }
 
+function installAtomPackages (){
+  cp files/atom/* $HOME/.atom/
+  apm install --packages-file files/atom-packages.lst
+}
+
 function installVimPlugins (){
+  cp files/vimrc $HOME/.vimrc
   mkdir -p $HOME/.vim/bundle/
 
   if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
@@ -85,6 +92,7 @@ function installAll (){
   installFonts
   installDotFiles
   installVimPlugins
+  installAtomPackages
 }
 
 case "$1" in
@@ -99,6 +107,9 @@ case "$1" in
     ;;
   "vimplugins")
     installVimPlugins
+    ;;
+  "atompackages" | "apkgs")
+    installAtomPackages
     ;;
   *)
     installAll

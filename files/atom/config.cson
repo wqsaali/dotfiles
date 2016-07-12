@@ -1,0 +1,98 @@
+"*":
+  Termrk: {}
+  "atom-fuzzy-grep": {}
+  "atom-terminal-panel": {}
+  autocomplete:
+    includeCompletionsFromAllBuffers: true
+  "autocomplete-plus": {}
+  "branch-status": {}
+  core:
+    disabledPackages: [
+      "metrics"
+      "file-type-icons"
+      "file-icon-supplement"
+      "branch-status"
+      "activate-power-mode"
+      "vim-mode-plus-ex-mode"
+    ]
+    packagesWithKeymapsDisabled: []
+    themes: [
+      "one-dark-ui"
+      "one-sharp-syntax"
+    ]
+  editor:
+    invisibles: {}
+    showIndentGuide: true
+    showInvisibles: true
+  "exception-reporting":
+    userId: "1db6d7ac-7474-8816-cace-1fff112b7737"
+  "file-watcher":
+    promptWhenFileHasChangedOnDisk: false
+  "find-and-replace":
+    scrollToResultOnLiveSearch: true
+  "git-diff": {}
+  "git-history": {}
+  "git-log": {}
+  "git-status": {}
+  "highlight-line":
+    hideHighlightOnSelect: true
+  linter:
+    showErrorPanel: false
+  "markdown-preview":
+    useGitHubStyle: true
+  "markdown-preview-plus": {}
+  metrics: false
+  minimap:
+    plugins:
+      cursorline: true
+      cursorlineDecorationsZIndex: 0
+      "find-and-replace": true
+      "find-and-replaceDecorationsZIndex": 0
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
+      "split-diff": true
+      "split-diffDecorationsZIndex": 0
+  "one-dark-ui":
+    layoutMode: "Compact"
+  "quantum-shell": {}
+  "seti-ui":
+    compactView: true
+    themeColor: "Steel"
+  "split-diff":
+    diffWords: true
+    ignoreWhitespace: true
+    leftEditorColor: "red"
+    rightEditorColor: "green"
+    syncHorizontalScroll: true
+  "status-bar": {}
+  "symbols-tree-view": {}
+  tabs:
+    enableVcsColoring: true
+  term3: {}
+  "vim-mode":
+    useSmartcaseForSearch: true
+  "vim-mode-plus":
+    clearHighlightSearchOnResetNormalMode: true
+    highlightSearch: true
+    ignoreCaseForSearch: true
+    ignoreCaseForSearchCurrentWord: true
+    incrementalSearch: true
+    showHoverOnOperate: true
+    showHoverSearchCounter: true
+    stayOnTransformString: true
+    useSmartcaseForSearch: true
+    useSmartcaseForSearchCurrentWord: true
+  "vim-surround":
+    pairs: [
+      "()"
+      "[]"
+      "{}"
+      "\"\""
+      "''"
+      "<>"
+      "{%%}"
+      "<%%>"
+      "<??>"
+    ]
+  welcome:
+    showOnStartup: false

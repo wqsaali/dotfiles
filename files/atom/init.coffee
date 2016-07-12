@@ -1,0 +1,30 @@
+# Your init script
+#
+# Atom will evaluate this file each time a new window is opened. It is run
+# after packages are loaded/activated and after the previous editor state
+# has been restored.
+#
+# An example hack to log to the console when each text editor is saved.
+#
+# atom.workspace.observeTextEditors (editor) ->
+#   editor.onDidSave ->
+#     console.log "Saved! #{editor.getPath()}"
+atom.packages.onDidActivatePackage (pack) ->
+  if pack.name == 'ex-mode'
+    editor = atom.workspace.getActiveTextEditor()
+    Ex = pack.mainModule.provideEx()
+    Ex.registerCommand 'term', -> atom.commands.dispatch(atom.views.getView(editor), 'termrk:toggle')
+
+aliasCommand = atom.packages.getLoadedPackage('alias-command').requireMainModule()
+aliasCommand 'w',
+  orig: 'core:save'
+aliasCommand 'q',
+  orig: 'core:close'
+aliasCommand 'qall',
+  orig: 'window:close'
+aliasCommand '%',
+  orig: 'find-and-replace:show'
+aliasCommand 'split',
+  orig: 'pane:split-down'
+aliasCommand 'diffthis',
+  orig: 'split-diff:toggle'
