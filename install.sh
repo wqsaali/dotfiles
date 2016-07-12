@@ -66,6 +66,8 @@ function installDotFiles (){
 }
 
 function installAtomPackages (){
+  # Backup package list with:
+  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* $HOME/.atom/
   apm install --packages-file files/atom-packages.lst
 }
