@@ -107,10 +107,10 @@ case "$1" in
   "fonts")
     installFonts
     ;;
-  "vimplugins")
+  "vimplugins" | "vim")
     installVimPlugins
     ;;
-  "atompackages" | "apkgs")
+  "atompackages" | "apkgs" | "atom")
     installAtomPackages
     ;;
   *)
