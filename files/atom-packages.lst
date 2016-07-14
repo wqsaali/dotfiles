@@ -49,6 +49,9 @@ one-dark-dim-syntax
 one-darker-syntax
 one-sharp-syntax
 pain-split
+quick-query
+quick-query-mssql
+quick-query-sqlite
 set-syntax
 seti-syntax
 seti-ui
