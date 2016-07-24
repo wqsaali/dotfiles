@@ -146,3 +146,5 @@ source ~/.bash/bash-git-prompt/gitprompt.sh
 #     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 # fi
 
+source ~/azure.completion.sh
+complete -C '/usr/bin/aws_completer' aws
