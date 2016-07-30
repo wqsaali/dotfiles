@@ -26,5 +26,7 @@ aliasCommand '%',
   orig: 'find-and-replace:show'
 aliasCommand 'split',
   orig: 'pane:split-down'
+aliasCommand 'vsplit',
+  orig: 'pane:split-left'
 aliasCommand 'diffthis',
   orig: 'split-diff:toggle'
