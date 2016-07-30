@@ -116,7 +116,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
+source ~/azure.completion.sh
+complete -C '/usr/bin/aws_completer' aws
+
 eval $(thefuck --alias)
+
+source /etc/profile.d/vte-2.91.sh
 
 # gitprompt configuration
 
@@ -145,6 +150,3 @@ source ~/.bash/bash-git-prompt/gitprompt.sh
 # if [ "$TERM" != "linux" ]; then
 #     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 # fi
-
-source ~/azure.completion.sh
-complete -C '/usr/bin/aws_completer' aws
