@@ -116,6 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# create with:
+# azure --completion >> ~/azure.completion.sh
 source ~/azure.completion.sh
 complete -C '/usr/bin/aws_completer' aws
 
