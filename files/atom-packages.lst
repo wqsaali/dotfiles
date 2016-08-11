@@ -58,6 +58,8 @@ seti-ui
 split-diff
 symbols-tree-view
 term3
+tool-bar
+tool-bar-atom
 tree-view-git-status
 vim-mode-plus
 vim-mode-plus-ex-mode
