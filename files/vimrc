@@ -62,6 +62,7 @@
   Plugin 'Konfekt/FastFold'
   Plugin 'scrooloose/syntastic'
   Plugin 'luisdavim/pretty-folds'
+  Plugin 'metakirby5/codi.vim'
   "Plugin 'lilydjwg/colorizer'
   "Plugin 'chriskempson/base16-vim'
   Plugin 'flazz/vim-colorschemes'
