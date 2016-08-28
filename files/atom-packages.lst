@@ -7,7 +7,10 @@ atom-fuzzy-grep
 autocomplete
 blame
 branch-status
+choose-pane
+clip-history
 color-picker
+cursor-history
 dark-monokai-batch
 emmet
 emmet-snippets-compatibility
@@ -49,7 +52,9 @@ one-dark-atom
 one-dark-dim-syntax
 one-darker-syntax
 one-sharp-syntax
+open-this
 pain-split
+paner
 quick-query
 quick-query-mssql
 quick-query-sqlite
