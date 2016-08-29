@@ -1,4 +1,3 @@
-activate-power-mode
 alias-command
 ansible-snippets
 atom-arc-ui
@@ -59,8 +58,6 @@ quick-query
 quick-query-mssql
 quick-query-sqlite
 set-syntax
-seti-syntax
-seti-ui
 split-diff
 symbols-tree-view
 term3
