@@ -12,7 +12,6 @@
       "file-type-icons"
       "file-icon-supplement"
       "branch-status"
-      "activate-power-mode"
       "vim-mode-plus-ex-mode"
     ]
     packagesWithKeymapsDisabled: []
@@ -69,6 +68,8 @@
   tabs:
     enableVcsColoring: true
   term3: {}
+  "tool-bar":
+    visible: false
   "vim-mode":
     useSmartcaseForSearch: true
   "vim-mode-plus":
