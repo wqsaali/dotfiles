@@ -38,6 +38,9 @@ language-varnish
 language-viml
 linter
 linter-foodcritic
+linter-jsonlint
+linter-rubocop
+linter-ruby
 merge-conflicts
 minimap
 minimap-cursorline
@@ -59,6 +62,7 @@ quick-query
 quick-query-mssql
 quick-query-sqlite
 ruby-block-converter
+scroll-searcher
 set-syntax
 split-diff
 symbols-tree-view
