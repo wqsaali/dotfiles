@@ -22,6 +22,8 @@ aliasCommand 'q',
   orig: 'core:close'
 aliasCommand 'wq',
   orig: ['core:save', 'core:close']
+aliasCommand 'wqall',
+  orig: ['core:save', 'window:close']
 aliasCommand 'qall',
   orig: 'window:close'
 aliasCommand '%',
