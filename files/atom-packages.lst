@@ -3,6 +3,7 @@ ansible-snippets
 atom-arc-ui
 atom-darker-ui
 atom-fuzzy-grep
+atom-hide-tabs
 autocomplete
 blame
 branch-status

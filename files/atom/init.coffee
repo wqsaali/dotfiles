@@ -18,6 +18,8 @@ atom.packages.onDidActivatePackage (pack) ->
 aliasCommand = atom.packages.getLoadedPackage('alias-command').requireMainModule()
 aliasCommand 'w',
   orig: 'core:save'
+aliasCommand 'wall',
+  orig: 'window:save-all'
 aliasCommand 'q',
   orig: 'core:close'
 aliasCommand 'wq',
@@ -26,6 +28,8 @@ aliasCommand 'wqall',
   orig: ['core:save', 'window:close']
 aliasCommand 'qall',
   orig: 'window:close'
+aliasCommand ':',
+  orig: 'go-to-line:toggle'
 aliasCommand '%',
   orig: 'find-and-replace:show'
 aliasCommand 'split',
@@ -34,3 +38,5 @@ aliasCommand 'vsplit',
   orig: 'pane:split-left'
 aliasCommand 'diffthis',
   orig: 'split-diff:toggle'
+aliasCommand 'git-blame',
+  orig: 'blame:toggle'
