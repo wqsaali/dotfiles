@@ -2,6 +2,7 @@ ansible
 ansible-fireball
 ansible-node-fireball
 aptitude
+awscli
 build-essential
 bundler
 chef
@@ -43,6 +44,8 @@ rake
 ruby
 rubygems
 ruby-all-dev
+s3cmd
+s3fs
 silversearcher-ag
 software-properties-common
 python-software-properties

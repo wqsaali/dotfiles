@@ -4,6 +4,7 @@ atom-arc-ui
 atom-darker-ui
 atom-fuzzy-grep
 atom-hide-tabs
+atom-shell-commands
 autocomplete
 blame
 branch-status

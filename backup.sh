@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function installDotFiles (){
+function backupDotFiles (){
   cp $HOME/.config/terminator/terminator.config files/terminator.config
   cp $HOME/.bash/git_prompt.sh files/git_prompt.sh
   cp $HOME/.bash/shell_prompt.sh files/shell_prompt.sh
@@ -19,3 +19,54 @@ function installDotFiles (){
 function backupAtomPackages (){
   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/atom-packages.lst
 }
+
+function backupPPAs() {
+  # Get list of PPAs
+  echo '#!/bin/bash' > restore-ppas.sh
+  echo '#!/bin/bash' > restore-repos.sh
+  for APT in `find /etc/apt/ -name \*.list`; do
+      grep -Po "(?<=^deb\s).*?(?=#|$)" $APT | while read ENTRY ; do
+          HOST=`echo $ENTRY | cut -d/ -f3`
+          USER=`echo $ENTRY | cut -d/ -f4`
+          PPA=`echo $ENTRY | cut -d/ -f5`
+          if [ "ppa.launchpad.net" = "$HOST" ]; then
+              echo "sudo apt-add-repository ppa:$USER/$PPA" >> restore-ppas.sh
+          else
+              echo "sudo apt-add-repository \'${ENTRY}\'" >> restore-repos.sh
+          fi
+      done
+  done
+}
+
+function backupPackages() {
+  # Get list of installed packages
+  apt-mark showauto > files/pkgs_auto.lst
+  apt-mark showmanual > files/pkgs_manual.lst
+}
+
+function restorePackages() {
+  cat files/pkgs_manual.lst | tr '\n' '  ' | xargs apt-get install -y
+  sudo apt-mark auto $(cat files/pkgs_auto.lst)
+  sudo apt-mark manual $(cat files/pkgs_manual.lst)
+}
+
+function backupAll() {
+  backupDotFiles
+  backupAtomPackages
+  backupPPAs
+}
+
+case "$1" in
+  "dotfiles" )
+    backupDotFiles
+    ;;
+   "atompackages" | "apkgs" | "atom" )
+    backupAtomPackages
+    ;;
+  "ppas" )
+    backupPPAs
+    ;;
+  *)
+    backupAll
+    ;;
+esac
