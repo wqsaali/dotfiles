@@ -5,7 +5,9 @@ atom-darker-ui
 atom-fuzzy-grep
 atom-hide-tabs
 atom-shell-commands
+atom-vim-like-tab
 autocomplete
+automate-power-mode
 blame
 branch-status
 choose-pane
