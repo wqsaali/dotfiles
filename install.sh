@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PWD=$(pwd)
+
 function installPacakges (){
   cat files/packages.lst | tr '\n' '  ' | xargs apt-get install -y
   sudo apt-mark manual $(cat files/packages.lst)
@@ -66,6 +68,10 @@ function installDotFiles (){
 
   if [ ! -d  $HOME/.bash/powerline-shell ]; then
     git clone https://github.com/milkbikis/powerline-shell $HOME/.bash/powerline-shell
+  else
+    cd $HOME/.bash/powerline-shell
+    git pull
+    cd ${PWD}
   fi
 }
 
@@ -86,6 +92,10 @@ function installVimPlugins (){
 
   if [ ! -d  $HOME/.bash/bash-git-prompt ]; then
     git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.bash/bash-git-prompt
+  else
+    cd $HOME/.bash/bash-git-prompt
+    git pull
+    cd ${PWD}
   fi
 
   vim +PluginInstall +qall

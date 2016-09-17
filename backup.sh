@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function backupDotFiles (){
+  mkdir -p files
   cp $HOME/.config/terminator/terminator.config files/terminator.config
   cp $HOME/.bash/git_prompt.sh files/git_prompt.sh
   cp $HOME/.bash/shell_prompt.sh files/shell_prompt.sh
@@ -44,16 +45,31 @@ function backupPackages() {
   apt-mark showmanual > files/pkgs_manual.lst
 }
 
-function restorePackages() {
-  cat files/pkgs_manual.lst | tr '\n' '  ' | xargs apt-get install -y
-  sudo apt-mark auto $(cat files/pkgs_auto.lst)
-  sudo apt-mark manual $(cat files/pkgs_manual.lst)
-}
-
 function backupAll() {
   backupDotFiles
   backupAtomPackages
   backupPPAs
+}
+
+function restorePackages() {
+  sudo apt-get update
+  cat files/pkgs_manual.lst | tr '\n' '  ' | xargs sudo apt-get install -y
+  sudo apt-mark auto $(cat files/pkgs_auto.lst)
+  sudo apt-mark manual $(cat files/pkgs_manual.lst)
+}
+
+function restoreRepos() {
+  bash restore-repos.#!/bin/sh
+  bash restore-ppas.sh
+}
+
+function restoreDotfiles() {
+  bash install.sh dotfiles
+}
+
+function restoreAll() {
+  restoreRepos
+  restorePackages
 }
 
 case "$1" in
@@ -63,8 +79,11 @@ case "$1" in
    "atompackages" | "apkgs" | "atom" )
     backupAtomPackages
     ;;
-  "ppas" )
+  "ppas | repos" )
     backupPPAs
+    ;;
+  "restore" )
+    restoreAll
     ;;
   *)
     backupAll

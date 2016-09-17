@@ -9,6 +9,9 @@
 # atom.workspace.observeTextEditors (editor) ->
 #   editor.onDidSave ->
 #     console.log "Saved! #{editor.getPath()}"
+
+# atom.commands.dispatch(atom.views.getView(atom.workspace), 'atom-hide-tabs:toggle');
+
 atom.packages.onDidActivatePackage (pack) ->
   if pack.name == 'ex-mode'
     editor = atom.workspace.getActiveTextEditor()
@@ -16,6 +19,11 @@ atom.packages.onDidActivatePackage (pack) ->
     Ex.registerCommand 'term', -> atom.commands.dispatch(atom.views.getView(editor), 'termrk:toggle')
 
 aliasCommand = atom.packages.getLoadedPackage('alias-command').requireMainModule()
+
+aliasCommand 'package-control:install',
+  orig: 'settings-view:install-packages-and-themes'
+
+# Vim like commands
 aliasCommand 'w',
   orig: 'core:save'
 aliasCommand 'wall',

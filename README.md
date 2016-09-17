@@ -17,4 +17,17 @@ The install script will install my custom dotfiles but also some extra packages 
 ./install packages # will install the packages listes in files/packages.lst
 ```
 
-Before running the install script you should take a look at the config.sh file and edit it to your prefererences
+Before running the install script you **should** take a **look at** the **config.sh** file and edit it to your prefererences
+
+The backup script can backup and restore your:
+- List of deb repos
+- Installed packages
+- Atom packages
+- Dotfiles
+
+Usage examples:
+```
+./backup.sh dotfiles # Will backup your dotfiles, the ones managed by the install.sh script
+./backup.sh atom
+./backup.sh repos
+```
