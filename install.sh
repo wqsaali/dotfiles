@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function installPacakges (){
+  cat files/packages.lst | tr '\n' '  ' | xargs apt-get install -y
   sudo apt-mark manual $(cat files/packages.lst)
 
   sudo pip install -U pip setuptools
