@@ -6,6 +6,9 @@ function installPacakges (){
   sudo pip install -U pip setuptools
   sudo pip install -U thefuck
   sudo pip install -U howdoi
+
+  sudo npm install -g coffee-scrip
+  sudo npm install -g azure-cli
 }
 
 function installFonts (){
