@@ -118,7 +118,10 @@ fi
 
 # create with:
 # azure --completion >> ~/.bash/azure.completion.sh
-source ~/.bash/azure.completion.sh
+if [ -f ~/.bash/azure.completion.sh ]; then
+  . ~/.bash/azure.completion.sh
+fi
+
 complete -C '/usr/bin/aws_completer' aws
 
 eval $(thefuck --alias)
