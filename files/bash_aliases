@@ -12,19 +12,16 @@ alias chef-roles='cd ${CHEF_ROLES}'
 alias chef-environments='cd ${CHEF_ENVIRONMENTS}'
 alias chef-handlers='cd ${CHEF_HANDLERS}'
 
-# alias chef-data-bags='cd ~/workingCopies/code/gitlab/chef-data-bags'
 function chef-data-bags (){
   cd ${CHEF_DATA_BAGS}/$1
 }
 alias chef-data-bags=chef-data-bags
 
-#alias chef-cookbooks='cd ~/workingCopies/code/gitlab/chef-cookbooks'
 function chef-cookbooks (){
   cd ${CHEF_COOKBOOKS}/$1
 }
 alias chef-cookbooks=chef-cookbooks
 
-#alias dockerfiles='cd ~/workingCopies/code/gitlab/dockerfiles'
 function dockerfiles (){
   cd ${DOCKERFILES}/$1
 }
