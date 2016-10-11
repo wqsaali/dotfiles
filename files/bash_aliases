@@ -27,10 +27,10 @@ function dockerfiles (){
 }
 alias dockerfiles=dockerfiles
 
-function terraform (){
+function terraformfiles (){
   cd ${TERRAFORM}/$1
 }
-alias dockerfiles=dockerfiles
+alias terraformfiles=terraformfiles
 
 # Geeknote alias
 function gn_sync_notebook {
