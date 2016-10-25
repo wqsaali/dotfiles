@@ -73,6 +73,18 @@ function installDotFiles (){
     git pull
     cd ${PWD}
   fi
+ 
+  if [ ! -d  $HOME/.tmux ]; then
+    git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
+  else
+    cd $HOME/.tmux/
+    git pull
+    cd ${PWD}
+  fi
+  cp files/tmux.conf.local $HOME/.tmux.conf.local
+  if [ ! -s $HOME/.tmux.conf ]; then
+    ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
+  fi
 }
 
 function installAtomPackages (){
