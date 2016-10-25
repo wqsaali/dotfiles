@@ -6,4 +6,6 @@ _docker-enter() {
   COMPREPLY=( $(compgen -W "$containers" -- $cur) );
 }
 
+
 complete -F _docker-enter docker-enter
+

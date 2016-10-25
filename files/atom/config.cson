@@ -1,5 +1,7 @@
 "*":
   Termrk: {}
+  "activate-power-mode":
+    autoToggle: false
   "atom-fuzzy-grep": {}
   "atom-terminal-panel": {}
   autocomplete:
@@ -13,13 +15,17 @@
       "file-icon-supplement"
       "branch-status"
       "vim-mode-plus-ex-mode"
+      "activate-power-mode"
+      "automate-power-mode"
     ]
     packagesWithKeymapsDisabled: []
+    telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
       "one-sharp-syntax"
     ]
   editor:
+    fontSize: 13
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -36,7 +42,7 @@
   "highlight-line":
     hideHighlightOnSelect: true
   linter:
-    showErrorPanel: false
+    errorPanelHeight: 24
   "markdown-preview":
     useGitHubStyle: true
   "markdown-preview-plus": {}
