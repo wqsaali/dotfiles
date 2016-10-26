@@ -129,6 +129,8 @@ tmux_conf_new_session_prompt=false
 
 #set -g history-limit 10000
 
+bind-key t choose-session
+
 # vi-style controls in copy mode
 set-option -g status-keys vi
 set-window-option -g mode-keys vi
