@@ -6,6 +6,7 @@ function backupDotFiles (){
   cp $HOME/.bash/git_prompt.sh files/git_prompt.sh
   cp $HOME/.bash/shell_prompt.sh files/shell_prompt.sh
   cp $HOME/.bashrc files/bashrc
+  cp $HOME/.tmux.conf.local files/tmux.conf.local
   cp $HOME/.screenrc files/screenrc
   cp $HOME/.profile files/profile
   cp $HOME/.vimrc files/vimrc

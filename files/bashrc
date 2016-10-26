@@ -155,3 +155,8 @@ source ~/.bash/bash-git-prompt/gitprompt.sh
 # if [ "$TERM" != "linux" ]; then
 #     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 # fi
+
+if command -v tmux>/dev/null; then
+    [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+fi
+
