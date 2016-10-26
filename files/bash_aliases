@@ -80,7 +80,12 @@ function json-merge (){
 }
 alias json-merge=json-merge
 
-alias json-prettify-all='for f in *.json; do cat ${f} | jq -S . > ${f}.fixed; mv ${f}.fixed ${f}; done'
+function json-prettify (){
+  cat ${1} | jq -S . > ${1}.fixed; mv ${1}.fixed ${1}
+}
+alias json-prettify=json-prettify
+
+alias json-prettify-all='for f in *.json; do json-prettify ${f}; done'
 
 # Git aliases
 function git-pull-all (){
