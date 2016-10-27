@@ -18,6 +18,7 @@ tmux_conf_theme_session_bg=colour2
 tmux_conf_theme_window_status_bell_fg=colour2
 tmux_conf_theme_window_status_bell_fg=colour2
 tmux_conf_theme_username_bg=colour101
+tmux_conf_theme_window_status_sync_msg="↱↲"
 
 # display an indicator in the status line when the prefix key has been pressed,
 # possible values are:
