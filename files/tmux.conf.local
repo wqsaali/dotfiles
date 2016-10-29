@@ -128,7 +128,7 @@ tmux_conf_new_session_prompt=false
 # ------------------------------------------------------------------------------
 # this is the place to further customize tmux's configuration
 
-#set -g history-limit 10000
+set -g history-limit 10000
 
 bind-key t choose-session
 
@@ -145,19 +145,18 @@ bind-key C-b set-window-option synchronize-panes
 set -g @yank_selection 'primary'
 
 #list of plugins
-set -g @plugin 'tmux-plugins/tpm'
-#set -g @plugin 'tmux-plugins/tmux-sensible'
-#set -g @plugin 'tmux-plugins/tmux-sessionist'
-set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'tmux-plugins/tmux-copycat'
-# set -g @plugin 'tmux-plugins/tmux-cpu'
-set -g @plugin 'tmux-plugins/tmux-open'
+set -g @tpm_plugins '
+  tmux-plugins/tpm          \
+  tmux-plugins/tmux-yank    \
+  tmux-plugins/tmux-copycat \
+  tmux-plugins/tmux-open    \
+'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
-# TPM is not workin this is a temporay workaround
 run '~/.tmux/plugins/tpm/tpm'
+# TPM is not working this is a temporay workaround
 run '~/.tmux/plugins/tmux-open/open.tmux'
 run '~/.tmux/plugins/tmux-copycat/copycat.tmux'
 run '~/.tmux/plugins/tmux-yank/yank.tmux'
