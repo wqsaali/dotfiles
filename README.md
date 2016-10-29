@@ -3,6 +3,7 @@
 Waht's included:
 - a bashrc file
 - installs https://github.com/magicmonty/bash-git-prompt.git
+- installs https://github.com/gpakosz/.tmux
 - a custom theme for bash-git-prompt
 - a vimrc file
 - Atom configuration including list of installed packages

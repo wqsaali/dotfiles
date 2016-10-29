@@ -50,6 +50,7 @@ silversearcher-ag
 software-properties-common
 python-software-properties
 terminator
+tmux
 unrar
 unzip
 vagrant
