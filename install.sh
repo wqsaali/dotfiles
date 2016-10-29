@@ -73,7 +73,7 @@ function installDotFiles (){
     git pull
     cd ${PWD}
   fi
- 
+
   if [ ! -d  $HOME/.tmux ]; then
     git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
   else
