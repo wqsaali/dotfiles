@@ -15,6 +15,7 @@ function backupDotFiles (){
   cp $HOME/.atom/*.less files/atom/
   cp $HOME/.atom/*.json files/atom/
   cp $HOME/.git-prompt-colors.sh files/git-prompt-colors.sh
+  cp $HOME/.config/tilda/config_0 files/tilda
   cp /etc/bash_completion.d/docker-enter-completion files/docker-enter-completion
 }
 
