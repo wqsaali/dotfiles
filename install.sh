@@ -2,7 +2,7 @@
 
 PWD=$(pwd)
 
-function installPacakges (){
+function installPacakges() {
   cat files/packages.lst | tr '\n' '  ' | xargs apt-get install -y
   sudo apt-mark manual $(cat files/packages.lst)
 
@@ -14,7 +14,7 @@ function installPacakges (){
   sudo npm install -g azure-cli
 }
 
-function installFonts (){
+function installFonts() {
   mkdir -p $HOME/.fonts/
 
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
@@ -26,7 +26,7 @@ function installFonts (){
   sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
 }
 
-function installDotFiles (){
+function installDotFiles() {
   mkdir -p $HOME/.bash/
 
   cp files/terminator.config $HOME/.config/terminator/
@@ -88,14 +88,14 @@ function installDotFiles (){
   fi
 }
 
-function installAtomPackages (){
+function installAtomPackages() {
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* $HOME/.atom/
   apm install --packages-file files/atom-packages.lst
 }
 
-function installVimPlugins (){
+function installVimPlugins() {
   cp files/vimrc $HOME/.vimrc
   mkdir -p $HOME/.vim/bundle/
 
@@ -116,7 +116,7 @@ function installVimPlugins (){
   ./install.py
 }
 
-function installAll (){
+function installAll() {
   installPacakges
   installFonts
   installDotFiles

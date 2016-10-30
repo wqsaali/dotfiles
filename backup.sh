@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function backupDotFiles (){
+function backupDotFiles() {
   mkdir -p files
   cp $HOME/.config/terminator/terminator.config files/terminator.config
   cp $HOME/.bash/git_prompt.sh files/git_prompt.sh
@@ -19,7 +19,7 @@ function backupDotFiles (){
   cp /etc/bash_completion.d/docker-enter-completion files/docker-enter-completion
 }
 
-function backupAtomPackages (){
+function backupAtomPackages() {
   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/atom-packages.lst
 }
 
