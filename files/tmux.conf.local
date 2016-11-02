@@ -232,6 +232,8 @@ set -g mode-keys vi
 # move status line to top
 #set -g status-position top
 
+bind-key t choose-tree
+
 bind-key v split-window -h
 bind-key s split-window -v
 
