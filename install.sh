@@ -39,6 +39,7 @@ function installDotFiles() {
   cp files/bashrc $HOME/.bashrc
   cp files/bash_profile $HOME/.bash_profile
   cp files/screenrc $HOME/.screenrc
+  cp files/tmux.conf.local $HOME/.tmux.conf.local
   cp files/profile $HOME/.profile
   cp files/vimrc $HOME/.vimrc
   cp files/atom/* $HOME/.atom/
@@ -68,6 +69,14 @@ function installDotFiles() {
   done
   cat files/gitconfig | sed -e "$sedcmd" > $HOME/.gitconfig
 
+  if [ ! -d  $HOME/.bash/bash-git-prompt ]; then
+    git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.bash/bash-git-prompt
+  else
+    cd $HOME/.bash/bash-git-prompt
+    git pull
+    cd ${PWD}
+  fi
+
   if [ ! -d  $HOME/.bash/powerline-shell ]; then
     git clone https://github.com/milkbikis/powerline-shell $HOME/.bash/powerline-shell
   else
@@ -83,7 +92,6 @@ function installDotFiles() {
     git pull
     cd ${PWD}
   fi
-  cp files/tmux.conf.local $HOME/.tmux.conf.local
   if [ ! -s $HOME/.tmux.conf ]; then
     ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
   fi
@@ -102,14 +110,6 @@ function installVimPlugins() {
 
   if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-  fi
-
-  if [ ! -d  $HOME/.bash/bash-git-prompt ]; then
-    git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.bash/bash-git-prompt
-  else
-    cd $HOME/.bash/bash-git-prompt
-    git pull
-    cd ${PWD}
   fi
 
   vim +PluginInstall +qall
