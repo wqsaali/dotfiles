@@ -259,6 +259,14 @@ alias wttr_moon='curl wttr.in/Moon'
 
 alias ipinfo='curl -s http://ipinfo.io/ip'
 
+function hgrep () {
+  if [ ! -z "$1" ]; then
+    history | grep $1
+  else
+    history
+  fi
+}
+
 # GTK Theme overrides
 alias meld='env GTK_THEME=Arc-Dark meld'
 alias terminator='env GTK_THEME=Arc-Dark terminator'

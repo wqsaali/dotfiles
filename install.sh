@@ -37,6 +37,7 @@ function installDotFiles() {
   cp files/git_prompt.sh $HOME/.bash/
   cp files/shell_prompt.sh $HOME/.bash/
   cp files/bashrc $HOME/.bashrc
+  cp files/bash_profile $HOME/.bash_profile
   cp files/screenrc $HOME/.screenrc
   cp files/profile $HOME/.profile
   cp files/vimrc $HOME/.vimrc
