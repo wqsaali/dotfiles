@@ -15,22 +15,18 @@ alias chef-handlers='cd ${CHEF_HANDLERS}'
 function chef-data-bags (){
   cd ${CHEF_DATA_BAGS}/$1
 }
-alias chef-data-bags=chef-data-bags
 
 function chef-cookbooks (){
   cd ${CHEF_COOKBOOKS}/$1
 }
-alias chef-cookbooks=chef-cookbooks
 
 function dockerfiles (){
   cd ${DOCKERFILES}/$1
 }
-alias dockerfiles=dockerfiles
 
 function terraformfiles (){
   cd ${TERRAFORM}/$1
 }
-alias terraformfiles=terraformfiles
 
 # Geeknote alias
 function gn_sync_notebook {
@@ -73,17 +69,14 @@ function json-diff () {
   fi
   colordiff $opts <(cat ${1} | jq -S "$section1") <(cat ${2} | jq -S "$section2")
 }
-alias json-diff=json-diff
 
 function json-merge (){
   jq -s '.[0] * .[1]' $1 $2
 }
-alias json-merge=json-merge
 
 function json-prettify (){
   cat ${1} | jq -S . > ${1}.fixed; mv ${1}.fixed ${1}
 }
-alias json-prettify=json-prettify
 
 alias json-prettify-all='for f in *.json; do json-prettify ${f}; done'
 
@@ -96,7 +89,6 @@ function git-pull-all (){
   for d in $(ls -d */); do echo $d; cd $d; git pull; cd ..; done
   cd $cdir
 }
-alias git-pull-all=git-pull-all
 
 function git-status (){
   UNCOMMITED=$(git status -s)
@@ -116,7 +108,7 @@ function git-status (){
     echo "Diverged"
   fi
 }
-alias git-status=git-status
+
 alias git-info='git remote show origin'
 alias git-status-sb='git status -sb'
 alias git-logbranches='git for-each-ref --sort=-committerdate refs/heads/ --format="%(color:red)%(refname:short)%(color:reset)   %(subject)"'
@@ -132,7 +124,6 @@ alias git-log='git lg'
 function git-compare () {
   git rev-list --left-right --count $1...$2
 }
-alias git-compare=git-compare
 
 function git-branch-status (){
   git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads | \
@@ -145,7 +136,6 @@ function git-branch-status (){
     echo "$local (ahead $LEFT_AHEAD) | (behind $RIGHT_AHEAD) $remote"
   done
 }
-alias git-branch-status=git-branch-status
 
 #Knife and chef aliases
 function chef-env-list-versions () {
@@ -154,7 +144,6 @@ function chef-env-list-versions () {
   grep -P '".*":\s*"= .*"' * | tr -s " " | tr -d ','| cut -d ':' -f2,3 | sort -u
   cd $cdir
 }
-alias chef-env-list-versions=chef-env-list-versions
 
 # Compares tow environments in terms of pinned cookbook versions
 # Usage: chef-env-compare-versions env-a env-b
@@ -164,7 +153,6 @@ function chef-env-compare-versions () {
   json-diff -y ${1}.json ${2}.json ".cookbook_versions"
   cd $cdir
 }
-alias chef-env-compare-versions=chef-env-compare-versions
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a different version
 # Usage: chef-promot-all <cookbook> <version>
@@ -174,7 +162,6 @@ function chef-promote-all () {
   grep -P '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
   cd $cdir
 }
-alias chef-promote-all=chef-promote-all
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a specific version
 # Usage: chef-promot-eq <cookbook> <version_old> <version_new>
@@ -184,7 +171,6 @@ function chef-promote-eq () {
   grep -P '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $3 --remote --yes
   cd $cdir
 }
-alias chef-promote-all=chef-promote-eq
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to an older version
 # Usage: chef-promot-lt <cookbook> <version>
@@ -201,14 +187,12 @@ function chef-promote-lt () {
   done
   cd $cdir
 }
-alias chef-promote-lt=chef-promote-lt
 
 function knife-ciphertext () {
   sed -e "s/knife\[\:secret_file\]/\#knife\[\:secret_file\]/" -i.bak ~/.chef/knife.rb
   knife $@ --format=json
   mv ~/.chef/knife.rb.bak ~/.chef/knife.rb
 }
-alias knife-ciphertext=knife-ciphertext
 
 # Docker aliases
 alias docker-killall='docker ps -a -q | xargs -r docker kill'
@@ -219,7 +203,6 @@ alias docker-cleanup='docker-killall; docker-rm-all; docker-rmi-all'
 function docker-enter () {
   docker exec -i -t $1 bash
 }
-alias docker-enter=docker-enter
 
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip install -U'
@@ -245,7 +228,6 @@ function apt-cleanup () {
   sudo apt-get clean
   dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
 }
-alias apt-cleanup=apt-cleanup
 
 #Bash calculator.
 function calc () {

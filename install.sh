@@ -42,6 +42,7 @@ function installDotFiles() {
   cp files/tmux.conf.local $HOME/.tmux.conf.local
   cp files/profile $HOME/.profile
   cp files/vimrc $HOME/.vimrc
+  cp files/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
   sudo cp files/docker-enter-completion /etc/bash_completion.d/
@@ -106,6 +107,7 @@ function installAtomPackages() {
 
 function installVimPlugins() {
   cp files/vimrc $HOME/.vimrc
+  cp files/vimrc.local $HOME/.vimrc.local
   mkdir -p $HOME/.vim/bundle/
 
   if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
