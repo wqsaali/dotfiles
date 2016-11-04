@@ -22,6 +22,13 @@ function installFonts() {
   mv *.otf $HOME/.fonts/
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
   sudo mv PowerlineSymbols.otf /usr/share/fonts/
+  if ! [ -d $HOME/.fonts/ubuntu-mono-powerline-ttf ]
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git $HOME/.fonts/ubuntu-mono-powerline-ttf
+  else
+    cd $HOME/.fonts/ubuntu-mono-powerline-ttf
+    git pull
+    cd ${PWD}
+  fi
   sudo fc-cache -vf
   sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
 }
