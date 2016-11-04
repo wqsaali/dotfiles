@@ -40,10 +40,9 @@
   "Plugin 'sjl/gundo.vim'
   Plugin 'Yggdroot/indentLine'
   "Plugin 'luochen1990/indent-detector.vim'
-  Plugin 'tpope/vim-sleuth'
+  " Plugin 'tpope/vim-sleuth'
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-repeat'
-  Plugin 'tpope/vim-endwise'
   Plugin 'tomtom/tcomment_vim'
   "Plugin 'scrooloose/nerdcommenter'
   Plugin 'ryanoasis/vim-devicons'
@@ -53,14 +52,15 @@
   "Plugin 'LucHermitte/lh-dev'
   "Plugin 'LucHermitte/lh-brackets'
   "Plugin 'alvan/vim-closetag'
-  Plugin 'Townk/vim-autoclose'
+  " Plugin 'Townk/vim-autoclose'
+  " Plugin 'tpope/vim-endwise'
   " Plugin 'godlygeek/tabular'
   "Plugin 'neilagabriel/vim-geeknote'
   Plugin 'elzr/vim-json'
   "Plugin 'kopischke/vim-stay'
   "Plugin 'kopischke/vim-fetch'
   Plugin 'Konfekt/FastFold'
-  Plugin 'scrooloose/syntastic'
+  " Plugin 'scrooloose/syntastic'
   Plugin 'luisdavim/pretty-folds'
   " Plugin 'metakirby5/codi.vim'
   "Plugin 'lilydjwg/colorizer'
@@ -183,9 +183,9 @@
   "let g:GeeknoteFormat="markdown"
 
   " Syntastic
-  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
-  noremap <C-w>e :SyntasticCheck<CR>
-  noremap <C-w>f :SyntasticToggleMode<CR>
+  "let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
+  "noremap <C-w>e :SyntasticCheck<CR>
+  "noremap <C-w>f :SyntasticToggleMode<CR>
 
   " Gundu
   "let g:gundo_width = 60
