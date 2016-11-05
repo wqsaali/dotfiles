@@ -2,6 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+if [[ $(tty) == /dev/tty* ]]; then
+  setfont ter-powerline-v16b.psf.gz
+fi
+
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 
