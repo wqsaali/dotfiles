@@ -7,8 +7,8 @@
   call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
 
-  "Plugin 'edkolev/promptline.vim'
   Plugin 'tpope/vim-sensible'
+  "Plugin 'edkolev/promptline.vim'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   "Plugin 'powerline/powerline'
@@ -22,8 +22,8 @@
   "Plugin 'gcmt/breeze.vim'
   Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'scrooloose/nerdtree'
-  "Plugin 'majutsushi/tagbar'
   "Plugin 'jlanzarotta/bufexplorer'
+  "Plugin 'majutsushi/tagbar'
   "Plugin 'severin-lemaignan/vim-minimap'
   Plugin 'nelstrom/vim-visual-star-search'
   "Plugin 'Shougo/neocomplete.vim.git'
@@ -90,7 +90,6 @@
   au ColorScheme * hi Normal ctermbg=none
   au ColorScheme * hi NonText ctermbg=none
   au ColorScheme * hi Folded ctermbg=none
-
 
   set guifont=droid\ sans\ mono\ for\ powerline\ plus\ nerd\ file\ types\ 10
 " }
@@ -246,7 +245,6 @@
   let g:airline#extensions#tabline#buffer_min_count = 1
   let g:airline#extensions#tabline#show_buffers = 1
   let g:airline_powerline_fonts = 1
-  "let g:airline_theme='badwolf'
   let g:airline_theme='term'
 " }
 
