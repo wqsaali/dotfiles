@@ -20,8 +20,12 @@ function installFonts() {
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   sudo chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
   mv *.otf $HOME/.fonts/
-  wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+  wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
   sudo mv PowerlineSymbols.otf /usr/share/fonts/
+  wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+  sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+  wget https://github.com/powerline/fonts/raw/master/Terminus/PSF/ter-powerline-v16b.psf.gz
+  sudo mv ter-powerline-v16b.psf.gz /usr/share/consolefonts/
   if ! [ -d $HOME/.fonts/ubuntu-mono-powerline-ttf ]; then
     git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git $HOME/.fonts/ubuntu-mono-powerline-ttf
   else
@@ -30,7 +34,6 @@ function installFonts() {
     cd ${PWD}
   fi
   sudo fc-cache -vf
-  sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
 }
 
 function installDotFiles() {
