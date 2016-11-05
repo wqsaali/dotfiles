@@ -32,7 +32,7 @@
   "Plugin 'SirVer/ultisnips'
   Plugin 'chrisbra/vim-diff-enhanced'
   " Plugin 'MarcWeber/vim-addon-mw-utils'
-  Plugin 'tomtom/tlib_vim'
+  " Plugin 'tomtom/tlib_vim'
   " Plugin 'garbas/vim-snipmate'
   " Plugin 'honza/vim-snippets'
   Plugin 'Valloric/YouCompleteMe'
@@ -52,8 +52,8 @@
   "Plugin 'LucHermitte/lh-dev'
   "Plugin 'LucHermitte/lh-brackets'
   "Plugin 'alvan/vim-closetag'
-  " Plugin 'Townk/vim-autoclose'
-  " Plugin 'tpope/vim-endwise'
+  Plugin 'Townk/vim-autoclose'
+  Plugin 'tpope/vim-endwise'
   " Plugin 'godlygeek/tabular'
   "Plugin 'neilagabriel/vim-geeknote'
   Plugin 'elzr/vim-json'
@@ -241,7 +241,13 @@
   let g:usemarks = 0
 
   " vim-airline
-  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_extensions = ['branch', 'tabline']
+  " let g:airline#extensions#disable_rtp_load = 1
+  " let g:airline#extensions#branch#enabled = 1
+  " let g:airline#extensions#csv#enabled = 0
+  " let g:airline#extensions#fugitive#enabled = 1
+  " let g:airline#extensions#whitespace#enabled = 1
+  " let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_min_count = 1
   let g:airline#extensions#tabline#show_buffers = 1
   let g:airline_powerline_fonts = 1
@@ -315,13 +321,13 @@
   nnoremap <S-h> gT
   nnoremap <S-l> gt
 
-  "tab navigation like firefox
-  "nnoremap <C-S-tab> :tabprevious<CR>
-  "nnoremap <C-tab>   :tabnext<CR>
-  "nnoremap <C-t>     :tabnew<CR>
-  "inoremap <C-S-tab> <Esc>:tabprevious<CR>i
-  "inoremap <C-tab>   <Esc>:tabnext<CR>i
-  "inoremap <C-t>     <Esc>:tabnew<CR>
+  " tab navigation like firefox
+  " nnoremap <C-S-tab> :tabprevious<CR>
+  " nnoremap <C-tab>   :tabnext<CR>
+  " nnoremap <C-t>     :tabnew<CR>
+  " inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+  " inoremap <C-tab>   <Esc>:tabnext<CR>i
+  " inoremap <C-t>     <Esc>:tabnew<CR>
 
   " lazy ':'
   map ; :
