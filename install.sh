@@ -51,8 +51,11 @@ function installDotFiles() {
   cp files/screenrc $HOME/.screenrc
   cp files/tmux.conf.local $HOME/.tmux.conf.local
   cp files/profile $HOME/.profile
-  cp files/vimrc $HOME/.vimrc
-  cp files/vimrc.local $HOME/.vimrc.local
+  mkdir -p $HOME/.vim/ftdetect
+  mkdir -p $HOME/.vim/ftplugin
+  cp -r files/vim/ft* $HOME/.vim/
+  cp files/vim/vimrc $HOME/.vimrc
+  cp files/vim/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
   sudo cp files/docker-enter-completion /etc/bash_completion.d/
@@ -116,9 +119,12 @@ function installAtomPackages() {
 }
 
 function installVimPlugins() {
-  cp files/vimrc $HOME/.vimrc
-  cp files/vimrc.local $HOME/.vimrc.local
+  mkdir -p $HOME/.vim/ftdetect
+  mkdir -p $HOME/.vim/ftplugin
   mkdir -p $HOME/.vim/bundle/
+  cp files/vim/vimrc $HOME/.vimrc
+  cp files/vim/vimrc.local $HOME/.vimrc.local
+  cp -r files/vim/ft* $HOME/.vim/
 
   if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
