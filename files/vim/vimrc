@@ -17,7 +17,7 @@
   Plugin 'tpope/vim-fugitive'
   Plugin 'gregsexton/gitv'
   Plugin 'junegunn/gv.vim'
-  "Plugin 'miyakogi/conoline.vim'
+  " Plugin 'miyakogi/conoline.vim'
   "Plugin 'mhinz/vim-signify'
   "Plugin 'gcmt/breeze.vim'
   Plugin 'ctrlpvim/ctrlp.vim'
@@ -29,12 +29,12 @@
   "Plugin 'Shougo/neocomplete.vim.git'
   "Plugin 'Shougo/neosnippet'
   "Plugin 'Shougo/neosnippet-snippets'
-  "Plugin 'SirVer/ultisnips'
+  " Plugin 'SirVer/ultisnips'
   Plugin 'chrisbra/vim-diff-enhanced'
-  " Plugin 'MarcWeber/vim-addon-mw-utils'
-  " Plugin 'tomtom/tlib_vim'
-  " Plugin 'garbas/vim-snipmate'
-  " Plugin 'honza/vim-snippets'
+  Plugin 'MarcWeber/vim-addon-mw-utils' "requiered by snipmate
+  Plugin 'tomtom/tlib_vim' "requiered by snipmate
+  Plugin 'garbas/vim-snipmate'
+  Plugin 'honza/vim-snippets'
   Plugin 'Valloric/YouCompleteMe'
   Plugin 'ervandew/supertab'
   "Plugin 'sjl/gundo.vim'
@@ -60,7 +60,7 @@
   "Plugin 'kopischke/vim-stay'
   "Plugin 'kopischke/vim-fetch'
   Plugin 'Konfekt/FastFold'
-  " Plugin 'scrooloose/syntastic'
+  Plugin 'scrooloose/syntastic'
   Plugin 'luisdavim/pretty-folds'
   " Plugin 'metakirby5/codi.vim'
   "Plugin 'lilydjwg/colorizer'
@@ -182,9 +182,9 @@
   "let g:GeeknoteFormat="markdown"
 
   " Syntastic
-  "let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
-  "noremap <C-w>e :SyntasticCheck<CR>
-  "noremap <C-w>f :SyntasticToggleMode<CR>
+  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
+  noremap <C-w>e :SyntasticCheck<CR>
+  noremap <C-w>f :SyntasticToggleMode<CR>
 
   " Gundu
   "let g:gundo_width = 60
@@ -203,6 +203,9 @@
   let g:indentLine_char = '┊'
   let g:indentLine_leadingSpaceChar = '˰'
   let g:indentLine_noConcealCursor = ""
+
+  " Conoline
+  let g:conoline_auto_enable = 1
 
   " Vim
   let g:indentLine_color_term = 239
@@ -244,13 +247,8 @@
   let g:usemarks = 0
 
   " vim-airline
-  let g:airline_extensions = ['branch', 'tabline']
-  " let g:airline#extensions#disable_rtp_load = 1
-  " let g:airline#extensions#branch#enabled = 1
-  " let g:airline#extensions#csv#enabled = 0
-  " let g:airline#extensions#fugitive#enabled = 1
-  " let g:airline#extensions#whitespace#enabled = 1
-  " let g:airline#extensions#tabline#enabled = 1
+  " let g:airline_extensions = ['branch', 'tabline', 'whitespace']
+  let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_min_count = 1
   let g:airline#extensions#tabline#show_buffers = 1
   let g:airline_powerline_fonts = 1
