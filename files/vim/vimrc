@@ -195,9 +195,12 @@
   let g:minimap_highlight='Visual'
 
   " IndentLine
+  let g:indentLine_faster = 1
+  if g:indentLine_faster == 0
+   let g:indentLine_leadingSpaceEnabled = 1
+  endif
   let g:vim_json_syntax_conceal = 0
   let g:indentLine_char = '┊'
-  let g:indentLine_leadingSpaceEnabled = 1
   let g:indentLine_leadingSpaceChar = '˰'
   let g:indentLine_noConcealCursor = ""
 
