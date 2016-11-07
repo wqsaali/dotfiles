@@ -247,8 +247,8 @@ bind-key t choose-tree
 bind-key v split-window -h -c '#{pane_current_path}'
 bind-key s split-window -v -c '#{pane_current_path}'
 # Duplicate panes (including SSH connection)
-bind V run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -v -c '#{pane_current_path}'"
-bind S run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -h -c '#{pane_current_path}'"
+bind V run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -h -c '#{pane_current_path}'"
+bind S run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -v -c '#{pane_current_path}'"
 
 bind-key C-b set-window-option synchronize-panes
 
