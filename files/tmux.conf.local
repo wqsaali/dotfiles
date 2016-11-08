@@ -241,6 +241,8 @@ set -g mode-keys vi
 # move status line to top
 #set -g status-position top
 
+set -gw xterm-keys on
+
 bind-key t choose-tree
 
 # Split panes

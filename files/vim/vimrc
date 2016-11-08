@@ -11,6 +11,7 @@
   "Plugin 'edkolev/promptline.vim'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'breuckelen/vim-resize'
   "Plugin 'powerline/powerline'
   "Plugin 'tpope/vim-flagship'
   Plugin 'airblade/vim-gitgutter'
@@ -162,6 +163,36 @@
     set mouse=a
   endif
 
+  " Enable (better) mouse support under tmux
+  if &term =~ '^screen' && exists('$TMUX')
+    set mouse+=a
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+    " tmux will send xterm-style keys when xterm-keys is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+    execute "set <xHome>=\e[1;*H"
+    execute "set <xEnd>=\e[1;*F"
+    execute "set <Insert>=\e[2;*~"
+    execute "set <Delete>=\e[3;*~"
+    execute "set <PageUp>=\e[5;*~"
+    execute "set <PageDown>=\e[6;*~"
+    execute "set <xF1>=\e[1;*P"
+    execute "set <xF2>=\e[1;*Q"
+    execute "set <xF3>=\e[1;*R"
+    execute "set <xF4>=\e[1;*S"
+    execute "set <F5>=\e[15;*~"
+    execute "set <F6>=\e[17;*~"
+    execute "set <F7>=\e[18;*~"
+    execute "set <F8>=\e[19;*~"
+    execute "set <F9>=\e[20;*~"
+    execute "set <F10>=\e[21;*~"
+    execute "set <F11>=\e[23;*~"
+    execute "set <F12>=\e[24;*~"
+  endif
+
   " do not history when leavy buffer
   set hidden
 
@@ -175,6 +206,13 @@
 
 " PluginSettings {
 
+  " vim-resize
+  " let g:vim_resize_disable_auto_mappings = 1
+  " nnoremap <silent> <C-Left> :CmdResizeLeft<cr>
+  " nnoremap <silent> <C-Down> :CmdResizeDown<cr>
+  " nnoremap <silent> <C-Up> :CmdResizeUp<cr>
+  " nnoremap <silent> <C-Right> :CmdResizeRight<cr>
+
   " matchparen
   let g:matchparen_timeout = 2
   let g:matchparen_insert_timeout = 2
@@ -187,9 +225,9 @@
   noremap <C-w>f :SyntasticToggleMode<CR>
 
   " Gundu
-  "let g:gundo_width = 60
-  "let g:gundo_preview_height = 40
-  "let g:gundo_right = 1
+  " let g:gundo_width = 60
+  " let g:gundo_preview_height = 40
+  " let g:gundo_right = 1
 
   " MinMap
   let g:minimap_highlight='Visual'
@@ -256,6 +294,7 @@
 " }
 
 " Shortcuts {
+
   " Don't use Ex mode, use Q for formatting
   map Q gq
 
