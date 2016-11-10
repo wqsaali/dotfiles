@@ -37,6 +37,7 @@
   Plugin 'garbas/vim-snipmate'
   Plugin 'honza/vim-snippets'
   Plugin 'Valloric/YouCompleteMe'
+  "Plugin 'davidhalter/jedi-vim.git'
   Plugin 'ervandew/supertab'
   "Plugin 'sjl/gundo.vim'
   Plugin 'Yggdroot/indentLine'
@@ -134,9 +135,6 @@
   set ttimeout
   set ttimeoutlen=50
   set updatetime=250
-  " if !&diff
-  "   set cursorline
-  " endif
 
   set laststatus=2
   set ruler
@@ -241,9 +239,14 @@
   let g:indentLine_char = '┊'
   let g:indentLine_leadingSpaceChar = '˰'
   let g:indentLine_noConcealCursor = ""
+  set conceallevel=1
+  let g:indentLine_conceallevel=1
 
   " Conoline
-  let g:conoline_auto_enable = 1
+  " if !&diff
+  "   set cursorline
+  "   let g:conoline_auto_enable = 1
+  " endif
 
   " Vim
   let g:indentLine_color_term = 239
