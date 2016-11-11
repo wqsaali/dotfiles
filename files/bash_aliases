@@ -138,6 +138,7 @@ function git-branch-status (){
 }
 
 #Knife and chef aliases
+
 function chef-env-list-versions () {
   cdir=$(pwd)
   chef-environments
@@ -156,7 +157,7 @@ function chef-env-compare-versions () {
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a different version
 # Usage: chef-promot-all <cookbook> <version>
-function chef-promote-all () {
+function knife-promote-all () {
   cdir=$(pwd)
   chef-environments
   grep -P '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
@@ -165,7 +166,7 @@ function chef-promote-all () {
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a specific version
 # Usage: chef-promot-eq <cookbook> <version_old> <version_new>
-function chef-promote-eq () {
+function knife-promote-eq () {
   cdir=$(pwd)
   chef-environments
   grep -P '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $3 --remote --yes
@@ -174,7 +175,7 @@ function chef-promote-eq () {
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to an older version
 # Usage: chef-promot-lt <cookbook> <version>
-function chef-promote-lt () {
+function knife-promote-lt () {
   cdir=$(pwd)
   chef-environments
   for environment in $(grep -P '".*":\s*"= .*"' * | grep $1 | tr -d ' '| grep -v "$2"); do
@@ -192,6 +193,11 @@ function knife-ciphertext () {
   sed -e "s/knife\[\:secret_file\]/\#knife\[\:secret_file\]/" -i.bak ~/.chef/knife.rb
   knife $@ --format=json
   mv ~/.chef/knife.rb.bak ~/.chef/knife.rb
+}
+
+# Usage knife-delete-attr 'name:some-server' default some_attribute
+function knife-delete-attr () {
+  knife exec -E "nodes.transform(\"$1\") { |n| n.$2_attrs.delete(\"$3\"); n.save() }"
 }
 
 # Docker aliases

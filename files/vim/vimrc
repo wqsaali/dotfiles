@@ -125,6 +125,9 @@
   set showmode
   set smarttab
   set scrolloff=1
+  " if !&diff
+  "   set cursorline
+  " endif
 
   set nrformats-=octal
   set shiftround
@@ -239,12 +242,11 @@
   let g:indentLine_char = '┊'
   let g:indentLine_leadingSpaceChar = '˰'
   let g:indentLine_noConcealCursor = ""
-  set conceallevel=1
-  let g:indentLine_conceallevel=1
+  " set conceallevel=1
+  " let g:indentLine_conceallevel=1
 
   " Conoline
   " if !&diff
-  "   set cursorline
   "   let g:conoline_auto_enable = 1
   " endif
 
