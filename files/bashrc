@@ -25,6 +25,8 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=""
 HISTFILESIZE=200000
+HISTTIMEFORMAT="%d-%m-%y %H:%M:%S (%s) "
+export PROMPT_COMMAND="history -a; history -c; history -r; "'echo "$(history 1)" >> ~/.bash_eternal_history'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.

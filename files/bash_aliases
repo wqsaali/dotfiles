@@ -146,7 +146,7 @@ function chef-env-list-versions () {
   cd $cdir
 }
 
-# Compares tow environments in terms of pinned cookbook versions
+# Compares two environments in terms of pinned cookbook versions
 # Usage: chef-env-compare-versions env-a env-b
 function chef-env-compare-versions () {
   cdir=$(pwd)
