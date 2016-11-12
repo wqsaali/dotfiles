@@ -72,7 +72,6 @@ scroll-searcher
 set-syntax
 split-diff
 symbols-tree-view
-term3
 tool-bar
 tool-bar-atom
 tree-view-git-branch
