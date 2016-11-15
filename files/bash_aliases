@@ -217,6 +217,7 @@ alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'
 
 # apt aliases
 alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
+alias apt-upgrade=dist-upgrade
 #alias install="sudo aptitude install" #This breaks the make install.
 #alias remove="sudo aptitude remove"
 
