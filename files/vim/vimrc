@@ -208,11 +208,11 @@
 " PluginSettings {
 
   " vim-resize
-  " let g:vim_resize_disable_auto_mappings = 1
-  " nnoremap <silent> <C-Left> :CmdResizeLeft<cr>
-  " nnoremap <silent> <C-Down> :CmdResizeDown<cr>
-  " nnoremap <silent> <C-Up> :CmdResizeUp<cr>
-  " nnoremap <silent> <C-Right> :CmdResizeRight<cr>
+  let g:vim_resize_disable_auto_mappings = 1
+  nnoremap <silent> <S-Left> :CmdResizeLeft<cr>
+  nnoremap <silent> <S-Down> :CmdResizeDown<cr>
+  nnoremap <silent> <S-Up> :CmdResizeUp<cr>
+  nnoremap <silent> <S-Right> :CmdResizeRight<cr>
 
   " matchparen
   let g:matchparen_timeout = 2
@@ -346,25 +346,25 @@
   nmap <leader>p "*p
 
   " Undo, Redo (broken)
-  nnoremap <C-z>  :undo<CR>
-  inoremap <C-z>  <Esc>:undo<CR>
-  nnoremap <C-y>  :redo<CR>
-  inoremap <C-y>  <Esc>:redo<CR>
-  nnoremap <F5> :GundoToggle<CR>
+  nnoremap <C-z> :undo<CR>
+  inoremap <C-z> <Esc>:undo<CR>
+  nnoremap <C-y> :redo<CR>
+  inoremap <C-y> <Esc>:redo<CR>
+  nnoremap <F5>  :GundoToggle<CR>
 
   " Tabs
 
   " Tab navigation
-  nnoremap <C-b>  :tabprevious<CR>
-  inoremap <C-b>  <Esc>:tabprevious<CR>i
-  nnoremap <C-n>  :tabnext<CR>
-  inoremap <C-n>  <Esc>:tabnext<CR>i
-  nnoremap <C-t>  :tabnew<CR>
-  inoremap <C-t>  <Esc>:tabnew<CR>i
-  nnoremap <C-k>  :tabclose<CR>
-  inoremap <C-k>  <Esc>:tabclose<CR>i
-  nnoremap <S-h> gT
-  nnoremap <S-l> gt
+  nnoremap <S-PageUp>   :tabprevious<CR>
+  inoremap <S-PageUp>   <Esc>:tabprevious<CR>i
+  nnoremap <S-PageDown> :tabnext<CR>
+  inoremap <S-PageDown> <Esc>:tabnext<CR>i
+  nnoremap <C-t>        :tabnew<CR>
+  inoremap <C-t>        <Esc>:tabnew<CR>i
+  nnoremap <C-k>        :tabclose<CR>
+  inoremap <C-k>        <Esc>:tabclose<CR>i
+  nnoremap <S-h>        gT
+  nnoremap <S-l>        gt
 
   " tab navigation like firefox
   " nnoremap <C-S-tab> :tabprevious<CR>
@@ -384,9 +384,9 @@
   noremap  <Leader>tb :TagbarToggle<CR>
   noremap  <Leader>nt :NERDTreeToggle<CR>
   noremap  <C-\> :NERDTreeToggle<CR>
-  nmap <leader>TB <Plug>ToggleBrackets
-  imap <leader>TB <Plug>ToggleBrackets
-  noremap <leader>co :diffoff!<CR><C-W><C-O>
+  nmap     <leader>TB <Plug>ToggleBrackets
+  imap     <leader>TB <Plug>ToggleBrackets
+  noremap  <leader>co :diffoff!<CR><C-W><C-O>
 
   "  Window management:
   nnoremap <Leader>sv :windo wincmd K<CR>

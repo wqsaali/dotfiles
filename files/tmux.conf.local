@@ -40,7 +40,7 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (since tmux 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_theme_24b_colour=false
+tmux_conf_theme_24b_colour=true
 
 # window style
 tmux_conf_theme_window_fg='default'
@@ -252,11 +252,14 @@ bind-key s split-window -v -c '#{pane_current_path}'
 bind V run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -h -c '#{pane_current_path}'"
 bind S run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -v -c '#{pane_current_path}'"
 
+bind -r PPage previous-window # select previous window
+bind -r NPage next-window     # select next window
+
 bind-key C-b set-window-option synchronize-panes
 
 set -g @yank_selection 'primary'
 
-#list of plugins
+# List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'tmux-plugins/tmux-copycat'
