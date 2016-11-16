@@ -18,7 +18,7 @@
   Plugin 'tpope/vim-fugitive'
   Plugin 'gregsexton/gitv'
   Plugin 'junegunn/gv.vim'
-  " Plugin 'miyakogi/conoline.vim'
+  "Plugin 'miyakogi/conoline.vim'
   "Plugin 'mhinz/vim-signify'
   "Plugin 'gcmt/breeze.vim'
   Plugin 'ctrlpvim/ctrlp.vim'
@@ -84,7 +84,7 @@
   color Tomorrow-Night-Bright
 
   " Overrides
-  "set transparency=15 "only works in macvim
+  " set transparency=15 "only works in macvim
   hi Normal ctermbg=none
   hi NonText ctermbg=none
   hi Folded ctermbg=none
@@ -125,9 +125,9 @@
   set showmode
   set smarttab
   set scrolloff=1
-  " if !&diff
-  "   set cursorline
-  " endif
+  if !&diff
+    set cursorline
+  endif
 
   set nrformats-=octal
   set shiftround
@@ -217,6 +217,7 @@
   " matchparen
   let g:matchparen_timeout = 2
   let g:matchparen_insert_timeout = 2
+
   " GeekNote
   "let g:GeeknoteFormat="markdown"
 
