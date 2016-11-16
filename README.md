@@ -15,7 +15,7 @@ The install script will install my custom dotfiles but also some extra packages 
 ./install fonts # will install some powerline patched fonts
 ./install vimplugins # will install the vim plugins from the vimrc
 ./install atompackages # will install the atom plugins and configuration
-./install packages # will install the packages listes in files/packages.lst
+./install packages # will install the packages listed in files/packages.lst
 ```
 
 Before running the install script you **should** take a **look at** the **config.sh** file and edit it to your prefererences
