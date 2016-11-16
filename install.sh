@@ -59,6 +59,9 @@ function installDotFiles() {
   cp files/atom/* $HOME/.atom/
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
   sudo cp files/*-completion /etc/bash_completion.d/
+  curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
+  sudo mv knife_autocomplete /etc/bash_completion.d/
+  sudo chown root:root /etc/bash_completion.d/*
 
   SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
   source config.sh
