@@ -4,9 +4,16 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
 alias workingCopies='cd ${WORKINGCOPIES}'
-alias code='cd ${CODE}'
-alias github='cd ${GITHUB}'
-alias gitlab='cd ${GITLAB}'
+
+function code (){
+  cd ${CODE}/$1
+}
+function github (){
+  cd ${GITHUB}/$1
+}
+function gitlab (){
+  cd ${GITLAB}/$1
+}
 
 alias chef-roles='cd ${CHEF_ROLES}'
 alias chef-environments='cd ${CHEF_ENVIRONMENTS}'
@@ -15,7 +22,6 @@ alias chef-handlers='cd ${CHEF_HANDLERS}'
 function chef-data-bags (){
   cd ${CHEF_DATA_BAGS}/$1
 }
-
 function chef-cookbooks (){
   cd ${CHEF_COOKBOOKS}/$1
 }
@@ -137,7 +143,7 @@ function git-branch-status (){
   done
 }
 
-#Knife and chef aliases
+# Knife and chef aliases
 
 function chef-env-list-versions () {
   cdir=$(pwd)
