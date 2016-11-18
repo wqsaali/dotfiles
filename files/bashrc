@@ -111,7 +111,7 @@ fi
 # Key bindings, up/down arrow searches through history
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
-bind '"\M-\e[B"':"\"\C-k\C-ahistory | grep '^ *[0-9]* *\C-e.'\C-m\""
+bind '"\C-\e[B"':"\"\C-k\C-ahistory | grep '^ *[0-9]* *\C-e.'\C-m\""
 bind Space:magic-space
 
 # some more ls aliases
