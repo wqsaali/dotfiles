@@ -17,6 +17,7 @@
       "vim-mode-plus-ex-mode"
       "activate-power-mode"
       "automate-power-mode"
+      "welcome"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "limited"

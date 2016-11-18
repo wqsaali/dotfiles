@@ -28,6 +28,18 @@ HISTFILESIZE=200000
 HISTTIMEFORMAT="%d-%m-%Y %H:%M:%S "
 export PROMPT_COMMAND="history -a; history -c; history -r; "'echo "$(history 1)" >> ~/.bash_eternal_history'
 
+# hh configuration:
+# https://github.com/dvorka/hstr
+# Generated with: hh --show-configuration >> ~/.bashrc
+export HH_CONFIG=hicolor         # get more colors
+shopt -s histappend              # append new history items to .bash_history
+export HISTCONTROL=ignorespace   # leading space hides commands from history
+export HISTFILESIZE=10000        # increase history file size (default is 500)
+export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
+# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
+if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -95,6 +107,12 @@ fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Key bindings, up/down arrow searches through history
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\eOA": history-search-backward'
+bind '"\eOB": history-search-forward'
 
 # some more ls aliases
 alias ll='ls -alF'

@@ -1,6 +1,6 @@
 # This is the custom theme template for gitprompt.sh
 
-# These are the defaults from the "Default" theme 
+# These are the defaults from the "Default" theme
 # You just need to override what you want to have changed
 override_git_prompt_colors() {
   GIT_PROMPT_THEME_NAME="Custom"
