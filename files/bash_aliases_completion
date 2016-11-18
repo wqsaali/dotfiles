@@ -1,0 +1,57 @@
+# docker-enter completion
+_docker-enter() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local containers=$(docker ps -q | xargs -r -n1 docker inspect --format "{{.Name}}" | awk '{printf("%s ", substr($1,2))}')
+  COMPREPLY=( $(compgen -W "$containers" -- $cur) );
+}
+complete -F _docker-enter docker-enter
+
+_dockerfiles() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local dockerfiles=$(dockerfiles; ls -1)
+  COMPREPLY=( $(compgen -W "$dockerfiles" -- $cur) );
+}
+complete -F _dockerfiles dockerfiles
+
+_terraformfiles() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local terraformfiles=$(terraformfiles; ls -1)
+  COMPREPLY=( $(compgen -W "$terraformfiles" -- $cur) );
+}
+complete -F _terraformfiles terraformfiles
+
+_chef-cookbooks() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local cookbooks=$(chef-cookbooks; ls -1)
+  COMPREPLY=( $(compgen -W "$cookbooks" -- $cur) );
+}
+complete -F _chef-cookbooks chef-cookbooks
+
+_chef-data-bags() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local databags=$(chef-data-bags; ls -1)
+  COMPREPLY=( $(compgen -W "$databags" -- $cur) );
+}
+complete -F _chef-data-bags chef-data-bags
+
+_github() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local github=$(github; ls -1)
+  COMPREPLY=( $(compgen -W "$github" -- $cur) );
+}
+complete -F _github github
+
+_gitlab() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local gitlab=$(gitlab; ls -1)
+  COMPREPLY=( $(compgen -W "$gitlab" -- $cur) );
+}
+complete -F _gitlab gitlab
+
+_code() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local code=$(code; ls -1)
+  COMPREPLY=( $(compgen -W "$code" -- $cur) );
+}
+complete -F _code code
+

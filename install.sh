@@ -66,7 +66,7 @@ function installDotFiles() {
   cp files/vim/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
-  sudo cp files/*-completion /etc/bash_completion.d/
+  sudo cp files/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   sudo mv knife_autocomplete /etc/bash_completion.d/
   sudo chown root:root /etc/bash_completion.d/*
