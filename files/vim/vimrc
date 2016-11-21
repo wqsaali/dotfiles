@@ -9,6 +9,7 @@
 
   Plugin 'tpope/vim-sensible'
   "Plugin 'edkolev/promptline.vim'
+  "Plugin 'edkolev/tmuxline.vim'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'breuckelen/vim-resize'
@@ -62,8 +63,8 @@
   "Plugin 'kopischke/vim-stay'
   "Plugin 'kopischke/vim-fetch'
   Plugin 'Konfekt/FastFold'
-  Plugin 'scrooloose/syntastic'
   Plugin 'luisdavim/pretty-folds'
+  Plugin 'scrooloose/syntastic'
   " Plugin 'metakirby5/codi.vim'
   "Plugin 'lilydjwg/colorizer'
   "Plugin 'chriskempson/base16-vim'
@@ -90,6 +91,10 @@
   hi NonText ctermbg=none
   hi Folded ctermbg=none
 
+  set fillchars+=vert:│
+  au ColorScheme * hi VertSplit cterm=none ctermfg=Green ctermbg=none
+
+  au ColorScheme * hi FoldColumn ctermbg=none ctermfg=none
   au ColorScheme * hi Normal ctermbg=none
   au ColorScheme * hi NonText ctermbg=none
   au ColorScheme * hi Folded ctermbg=none
