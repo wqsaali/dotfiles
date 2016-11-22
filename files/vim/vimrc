@@ -92,7 +92,7 @@
   hi Folded ctermbg=none
 
   set fillchars+=vert:│
-  au ColorScheme * hi VertSplit cterm=none ctermfg=Green ctermbg=none
+  au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none
 
   au ColorScheme * hi FoldColumn ctermbg=none ctermfg=none
   au ColorScheme * hi Normal ctermbg=none
