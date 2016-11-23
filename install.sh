@@ -122,6 +122,17 @@ function installDotFiles() {
   fi
 }
 
+function installFish() {
+  sudo apt-add-repository ppa:fish-shell/release-2
+  sudo apt-get update
+  sudo apt-get install fish
+  curl -sfL https://git.io/fundle-install | fish
+  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+  curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+  fisher fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
+  omf install chain 
+}
+
 function installAtomPackages() {
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
