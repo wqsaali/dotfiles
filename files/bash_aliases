@@ -222,6 +222,12 @@ alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'
 alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip2 install -U'
 
 # apt aliases
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  alias brew='apt'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  alias apt='brew'
+fi
+
 alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
 alias apt-upgrade=dist-upgrade
 #alias install="sudo aptitude install" #This breaks the make install.
