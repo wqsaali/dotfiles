@@ -173,6 +173,9 @@ case "$1" in
   "dotfiles")
    installDotFiles
     ;;
+  "fish")
+   installFish
+    ;;
   "fonts")
     installFonts
     ;;
