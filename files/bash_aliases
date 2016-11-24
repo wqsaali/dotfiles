@@ -260,6 +260,8 @@ alias cls="clear"
 alias fingerprint='ssh-keygen -lf'
 alias pubkey='ssh-keygen -y -f'
 
+alias headers='curl -ISs'
+
 #Bash calculator.
 function calc () {
   echo "${1}" | bc -l;
