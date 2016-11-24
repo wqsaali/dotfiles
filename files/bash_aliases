@@ -4,6 +4,7 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
 alias workingCopies='cd ${WORKINGCOPIES}'
+alias back='cd $OLDPWD'
 
 function code (){
   cd ${CODE}/$1
@@ -126,6 +127,8 @@ alias git-current-tag='git name-rev --tags --name-only $(git rev-parse HEAD)'
 alias git-reset='git fetch origin; git reset --hard; git clean -fdx'
 alias git-tags='git for-each-ref --format "%(refname) %09 %(taggerdate) %(subject) %(taggeremail)" refs/tags  --sort=taggerdate'
 alias git-log='git lg'
+# change the current directory to the parent directory that contains the .git folder
+alias git-root='cd "`git rev-parse --show-toplevel`"'
 
 function git-compare () {
   git rev-list --left-right --count $1...$2
@@ -211,6 +214,7 @@ alias docker-killall='docker ps -a -q | xargs -r docker kill'
 alias docker-rm-all='docker ps -a -q | xargs -r docker rm'
 alias docker-rmi-all='docker images -q | xargs -r docker rmi'
 alias docker-cleanup='docker-killall; docker-rm-all; docker-rmi-all'
+alias docker-exec="docker exec -i -t"
 
 function docker-enter () {
   docker exec -i -t $1 bash
@@ -250,6 +254,12 @@ fi
 
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
+alias cls="clear"
+
+# key management aliases: fingerprint a pubkey and retrieve pubkey from a private key
+alias fingerprint='ssh-keygen -lf'
+alias pubkey='ssh-keygen -y -f'
+
 #Bash calculator.
 function calc () {
   echo "${1}" | bc -l;
@@ -260,7 +270,10 @@ function wttr () {
 }
 alias wttr_moon='curl wttr.in/Moon'
 
+# get external ip address
 alias ipinfo='curl -s http://ipinfo.io/ip'
+# get internet speed
+alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 
 function hgrep () {
   if [ ! -z "$1" ]; then
