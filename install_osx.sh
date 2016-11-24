@@ -4,15 +4,22 @@ PWD=$(pwd)
 
 function installPacakges() {
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew install git
   brew install python
   brew install --env-std --override-system-vim
+  # brew install macvim --HEAD --with-cscope --with-lua --with-override-system-vim --with-luajit --with-python
   brew install tmux
+  brew install bash
+  sudo echo $(brew --prefix)/bin/bash >> /etc/shells && \
+  chsh -s $(brew --prefix)/bin/bash
   sudo pip install -U pip setuptools
   sudo pip install -U thefuck
   sudo pip install -U howdoi
 
+  brew install node
   sudo npm install -g coffee-scrip
   sudo npm install -g azure-cli
+  xcode-select --install
 }
 
 function installFonts() {
@@ -20,21 +27,20 @@ function installFonts() {
 
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   sudo chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
-  mv *.otf $HOME/.fonts/
+  mv *.otf $HOME/Library/Fonts
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
   sudo mv PowerlineSymbols.otf /usr/share/fonts/
   wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
   sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
   wget https://github.com/powerline/fonts/raw/master/Terminus/PSF/ter-powerline-v16b.psf.gz
   sudo mv ter-powerline-v16b.psf.gz /usr/share/consolefonts/
-  if ! [ -d $HOME/.fonts/ubuntu-mono-powerline-ttf ]; then
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git $HOME/.fonts/ubuntu-mono-powerline-ttf
+  if ! [ -d $HOME/Library/Fonts/ubuntu-mono-powerline-ttf ]; then
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git $HOME/Library/Fonts/ubuntu-mono-powerline-ttf
   else
-    cd $HOME/.fonts/ubuntu-mono-powerline-ttf
+    cd $HOME/Library/Fonts/ubuntu-mono-powerline-ttf
     git pull
     cd ${PWD}
   fi
-  sudo fc-cache -vf
 }
 
 function installDotFiles() {
@@ -62,10 +68,9 @@ function installDotFiles() {
   cp files/vim/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
-  sudo cp files/bash_aliases_completion /etc/bash_completion.d/
+  cp files/bash_aliases_completion $HOME/.bash/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
-  sudo mv knife_autocomplete /etc/bash_completion.d/
-  sudo chown root:root /etc/bash_completion.d/*
+  mv knife_autocomplete $HOME/.bash/
 
   SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
   source config.sh

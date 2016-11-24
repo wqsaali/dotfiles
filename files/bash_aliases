@@ -228,25 +228,25 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias apt='brew'
 fi
 
-alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
-alias apt-upgrade=dist-upgrade
-#alias install="sudo aptitude install" #This breaks the make install.
-#alias remove="sudo aptitude remove"
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
+  alias apt-upgrade=dist-upgrade
 
 # if user is not root, pass all commands via sudo #
-if [ $(id -u) -ne 0 ]; then
-    alias apt='sudo apt'
-    alias apt-get='sudo apt-get'
-    alias aptitude='sudo aptitude'
-fi
+  if [ $(id -u) -ne 0 ]; then
+      alias apt='sudo apt'
+      alias apt-get='sudo apt-get'
+      alias aptitude='sudo aptitude'
+  fi
 
-function apt-cleanup () {
-  ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | grep -v $(uname -r) | sort -Vr | tail -n +2 | xargs -r sudo aptitude purge -y
-  sudo aptitude autoclean
-  sudo apt-get autoremove
-  sudo apt-get clean
-  dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
-}
+  function apt-cleanup () {
+    ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | grep -v $(uname -r) | sort -Vr | tail -n +2 | xargs -r sudo aptitude purge -y
+    sudo aptitude autoclean
+    sudo apt-get autoremove
+    sudo apt-get clean
+    dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
+  }
+fi
 
 #Bash calculator.
 function calc () {
@@ -268,8 +268,3 @@ function hgrep () {
   fi
 }
 
-# GTK Theme overrides
-alias meld='env GTK_THEME=Arc-Dark meld'
-alias terminator='env GTK_THEME=Arc-Dark terminator'
-alias gnome-terminal='env GTK_THEME=Arc-Dark gnome-terminal'
-alias gedit='env GTK_THEME=Arc-Dark gedit'
