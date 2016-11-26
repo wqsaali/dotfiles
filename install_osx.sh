@@ -6,6 +6,7 @@ function installPacakges() {
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew install git
   brew install python
+  brew install the_silver_searcher
   brew install --env-std --override-system-vim
   # brew install macvim --HEAD --with-cscope --with-lua --with-override-system-vim --with-luajit --with-python
   brew install tmux
