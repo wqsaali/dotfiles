@@ -3,8 +3,9 @@
 PWD=$(pwd)
 
 function installPacakges() {
+  xcode-select --install
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install git
+  # brew install git
   brew install python
   brew install the_silver_searcher
   brew install --env-std --override-system-vim
@@ -20,12 +21,9 @@ function installPacakges() {
   brew install node
   sudo npm install -g coffee-scrip
   sudo npm install -g azure-cli
-  xcode-select --install
 }
 
 function installFonts() {
-  mkdir -p $HOME/.fonts/
-
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   sudo chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
   mv *.otf $HOME/Library/Fonts
