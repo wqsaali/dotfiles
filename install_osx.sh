@@ -44,15 +44,6 @@ function installFonts() {
 }
 
 function installDotFiles() {
-  if ! [ -x "$(command -v hh)" ]; then
-    echo 'installing hh!' >&2
-    sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt-get update && sudo apt-get install hh
-  fi
-  if ! [ -x "$(command -v git)" ]; then
-    echo 'installing git!' >&2
-    sudo apt-get install git
-  fi
-
   mkdir -p $HOME/.bash/
   cp files/git_prompt.sh $HOME/.bash/
   cp files/shell_prompt.sh $HOME/.bash/
