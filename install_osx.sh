@@ -111,7 +111,9 @@ function installPacakges() {
   brew_install_or_upgrade 'bash-completion'
 
   # brew install caskroom/cask/brew-cask
-  brew tap caskroom/cask
+  brew_tap 'caskroom/cask'
+  brew_tap 'homebrew/services'
+  brew_install_or_upgrade 'brew-cask'
   cask_install 'iterm2'
   cask_install 'atom'
   cask_install 'chefdk'

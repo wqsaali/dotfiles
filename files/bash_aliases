@@ -252,7 +252,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias apt='brew'
   alias cask='brew cask'
-  alias brew-upgrade='brew update && brew upgrade'
+  alias tap='brew tap'
+  alias brew-upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
 fi
 
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
