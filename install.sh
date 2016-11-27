@@ -44,6 +44,8 @@ function installPacakges() {
   installHashicorp terraform
   installHashicorp packer
 
+  curl -L https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk
+
   sudo npm install -g coffee-scrip
   sudo npm install -g azure-cli
 }
