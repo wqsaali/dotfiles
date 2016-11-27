@@ -114,7 +114,10 @@ function installPacakges() {
   brew tap caskroom/cask
   cask_install 'iterm2'
   cask_install 'atom'
+  cask_install 'chefdk'
+  cask_install 'docker'
   cask_install 'google-chrome'
+  cask_install 'cakebrew'
 
   fancy_echo "Cleaning up old Homebrew formulae ..."
   brew cleanup
