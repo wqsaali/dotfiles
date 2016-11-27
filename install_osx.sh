@@ -92,6 +92,10 @@ function installPacakges() {
   brew_install_or_upgrade 'vim'
   # brew install macvim --HEAD --with-cscope --with-lua --with-override-system-vim --with-luajit --with-python
   brew_install_or_upgrade 'tmux'
+  brew_install_or_upgrade 'jq'
+  brew_install_or_upgrade 'tig'
+  brew_install_or_upgrade 'htop'
+  brew_install_or_upgrade 'colordiff'
   brew_install_or_upgrade 'bash'
   sudo echo $(brew --prefix)/bin/bash >> /etc/shells && \
   chsh -s $(brew --prefix)/bin/bash
@@ -106,6 +110,8 @@ function installPacakges() {
   brew_install_or_upgrade 'imagemagick'
   brew_install_or_upgrade 'bash-completion'
 
+  # brew install caskroom/cask/brew-cask
+  brew tap caskroom/cask
   cask_install 'iterm2'
   cask_install 'atom'
   cask_install 'google-chrome'

@@ -18,6 +18,7 @@ fonts-powerline
 foodcritic
 gist
 git
+tig
 jq
 legit
 lxc-docker
