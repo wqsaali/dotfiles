@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  echo 'Looks like you are on OS X'
+  echo '  please try the install_osx.sh script'
+  exit 1
+fi
+
 PWD=$(pwd)
 
 function installPacakges() {

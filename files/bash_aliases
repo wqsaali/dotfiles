@@ -130,6 +130,10 @@ alias git-log='git lg'
 # change the current directory to the parent directory that contains the .git folder
 alias git-root='cd "`git rev-parse --show-toplevel`"'
 
+alias masterDiff=\"git diff \$(git merge-base --fork-point master)\"
+alias latestTag='git describe --tags `git rev-list --tags --max-count=1`'
+alias latestTagDiff='git show --name-only `git describe --tags` `git rev-list --tags --max-count=1`..'
+
 function git-compare () {
   git rev-list --left-right --count $1...$2
 }
@@ -228,11 +232,6 @@ alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'
 # apt aliases
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias brew='apt'
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  alias apt='brew'
-fi
-
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias dist-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
   alias apt-upgrade=dist-upgrade
 
@@ -250,6 +249,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt-get clean
     dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
   }
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  alias apt='brew'
+  alias cask='brew cask'
+  alias brew-upgrade='brew update && brew upgrade'
 fi
 
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"

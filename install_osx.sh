@@ -1,26 +1,118 @@
 #!/bin/bash
 
+if [[ "$OSTYPE" != "darwin"* ]]; then
+  echo 'Doesnt look like you are on OS X'
+  exit 1
+fi
+
 PWD=$(pwd)
 
+fancy_echo() {
+  local fmt="$1"; shift
+
+  # shellcheck disable=SC2059
+  printf "\n$fmt\n" "$@"
+}
+
+install_or_upgrade() {
+  if brew_is_installed "$1"; then
+    if brew_is_upgradable "$1"; then
+      brew upgrade "$@"
+    fi
+  else
+    brew install "$@"
+  fi
+}
+
+cask_install() {
+    fancy_echo "Installing $1 ..."
+    brew cask install "$@ --appdir=/Applications"
+}
+
+brew_is_installed() {
+  local name
+  name="$(brew_expand_alias "$1")"
+
+  brew list -1 | grep -Fqx "$name"
+}
+
+brew_is_upgradable() {
+  local name
+  name="$(brew_expand_alias "$1")"
+
+  ! brew outdated --quiet "$name" >/dev/null
+}
+
+brew_tap() {
+  brew tap "$1" --repair 2> /dev/null
+}
+
+brew_expand_alias() {
+  brew info "$1" 2>/dev/null | head -1 | awk '{gsub(/.*\//, ""); gsub(/:/, ""); print $1}'
+}
+
+brew_launchctl_restart() {
+  local name
+  name="$(brew_expand_alias "$1")"
+  local domain="homebrew.mxcl.$name"
+  local plist="$domain.plist"
+
+  mkdir -p "$HOME/Library/LaunchAgents"
+  ln -sfv "/usr/local/opt/$name/$plist" "$HOME/Library/LaunchAgents"
+
+  if launchctl list | grep -Fq "$domain"; then
+    launchctl unload "$HOME/Library/LaunchAgents/$plist" >/dev/null
+  fi
+  launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
+}
+
+gem_install_or_update() {
+  if gem list "$1" --installed > /dev/null; then
+    gem update "$@"
+  else
+    gem install "$@"
+    rbenv rehash
+  fi
+}
+
 function installPacakges() {
-  xcode-select --install
+  if ! [ -x "$(command -v git)" ]; then
+    echo 'You need to install git!' >&2
+    xcode-select --install
+    exit 1
+  fi
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  # brew install git
-  brew install python
-  brew install the_silver_searcher
-  brew install --env-std --override-system-vim
+  brew update
+  # brew_install_or_upgrade 'git'
+  brew_install_or_upgrade 'python'
+  brew_install_or_upgrade 'openssl'
+  brew_install_or_upgrade 'wget'
+  brew_install_or_upgrade 'reattach-to-user-namespace'
+  brew_install_or_upgrade 'the_silver_searcher'
+  brew_install_or_upgrade 'vim'
   # brew install macvim --HEAD --with-cscope --with-lua --with-override-system-vim --with-luajit --with-python
-  brew install tmux
-  brew install bash
+  brew_install_or_upgrade 'tmux'
+  brew_install_or_upgrade 'bash'
   sudo echo $(brew --prefix)/bin/bash >> /etc/shells && \
   chsh -s $(brew --prefix)/bin/bash
   sudo pip install -U pip setuptools
   sudo pip install -U thefuck
   sudo pip install -U howdoi
+  sudo pip install -U awscli
 
-  brew install node
+  brew_install_or_upgrade 'node'
   sudo npm install -g coffee-scrip
   sudo npm install -g azure-cli
+  brew_install_or_upgrade 'imagemagick'
+  brew_install_or_upgrade 'bash-completion'
+
+  cask_install 'iterm2'
+  cask_install 'atom'
+  cask_install 'google-chrome'
+
+  fancy_echo "Cleaning up old Homebrew formulae ..."
+  brew cleanup
+  brew cask cleanup
 }
 
 function installFonts() {
