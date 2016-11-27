@@ -89,13 +89,18 @@ function installPacakges() {
   brew_install_or_upgrade 'wget'
   brew_install_or_upgrade 'reattach-to-user-namespace'
   brew_install_or_upgrade 'the_silver_searcher'
+  brew_install_or_upgrade 'cmake'
   brew_install_or_upgrade 'vim'
+  brew_install_or_upgrade 'macvim'
   # brew install macvim --HEAD --with-cscope --with-lua --with-override-system-vim --with-luajit --with-python
   brew_install_or_upgrade 'tmux'
   brew_install_or_upgrade 'jq'
   brew_install_or_upgrade 'tig'
   brew_install_or_upgrade 'htop'
   brew_install_or_upgrade 'colordiff'
+  brew_install_or_upgrade 'packer'
+  brew_install_or_upgrade 'terraform'
+  brew_install_or_upgrade 'kubernetes-cli'
   brew_install_or_upgrade 'bash'
   sudo echo $(brew --prefix)/bin/bash >> /etc/shells && \
   chsh -s $(brew --prefix)/bin/bash
@@ -118,6 +123,7 @@ function installPacakges() {
   cask_install 'atom'
   cask_install 'chefdk'
   cask_install 'docker'
+  cask_install 'hab'
   cask_install 'google-chrome'
   cask_install 'cakebrew'
 

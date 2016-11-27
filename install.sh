@@ -8,6 +8,31 @@ fi
 
 PWD=$(pwd)
 
+function installDocker(){
+  # Don't run this as root as you'll not add your user to the docker group
+  sudo apt-get update
+  sudo apt-get install apt-transport-https ca-certificates
+  sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  echo deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release -c | awk '{print $2}') main | sudo tee /etc/apt/sources.list.d/docker.list
+  sudo apt-get update
+  sudo apt-get purge lxc-docker
+  sudo apt-get install -y linux-image-extra-$(uname -r)
+  sudo rm -rf /etc/default/docker
+  sudo apt-get install -y docker-engine
+  sudo service docker start
+  sudo usermod -aG docker `echo $USER`
+}
+
+function installHashicorp() {
+  # Get URLs for most recent versions
+  url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | egrep "linux.*64" | sort -rh | head -1 | awk -F[\"] '{print $4}')
+  cd $HOME/.local/bin/
+  curl -o package.zip $url
+  unzip package.zip
+  rm package.zip
+  cd ${PWD}
+}
+
 function installPacakges() {
   cat files/packages.lst | tr '\n' '  ' | xargs apt-get install -y
   sudo apt-mark manual $(cat files/packages.lst)
@@ -15,6 +40,9 @@ function installPacakges() {
   sudo pip install -U pip setuptools
   sudo pip install -U thefuck
   sudo pip install -U howdoi
+
+  installHashicorp terraform
+  installHashicorp packer
 
   sudo npm install -g coffee-scrip
   sudo npm install -g azure-cli
