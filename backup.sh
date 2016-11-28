@@ -23,7 +23,7 @@ function backupDotFiles() {
 }
 
 function backupAtomPackages() {
-  apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/atom-packages.lst
+  apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/atom-apt.lst
 }
 
 function backupPPAs() {

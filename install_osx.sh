@@ -14,7 +14,7 @@ fancy_echo() {
   printf "\n$fmt\n" "$@"
 }
 
-install_or_upgrade() {
+brew_install_or_upgrade() {
   if brew_is_installed "$1"; then
     if brew_is_upgradable "$1"; then
       brew upgrade "$@"
@@ -82,51 +82,28 @@ function installPacakges() {
     exit 1
   fi
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew_tap 'caskroom/cask'
+  brew_tap 'homebrew/services'
   brew update
-  # brew_install_or_upgrade 'git'
-  brew_install_or_upgrade 'python'
-  brew_install_or_upgrade 'openssl'
-  brew_install_or_upgrade 'wget'
-  brew_install_or_upgrade 'reattach-to-user-namespace'
-  brew_install_or_upgrade 'the_silver_searcher'
-  brew_install_or_upgrade 'cmake'
-  brew_install_or_upgrade 'vim'
-  brew_install_or_upgrade 'macvim'
-  # brew install macvim --HEAD --with-cscope --with-lua --with-override-system-vim --with-luajit --with-python
-  brew_install_or_upgrade 'tmux'
-  brew_install_or_upgrade 'jq'
-  brew_install_or_upgrade 'tig'
-  brew_install_or_upgrade 'htop'
-  brew_install_or_upgrade 'colordiff'
-  brew_install_or_upgrade 'packer'
-  brew_install_or_upgrade 'terraform'
-  brew_install_or_upgrade 'kubernetes-cli'
-  brew_install_or_upgrade 'bash'
+
+  while read -r PKG; do
+    brew_install_or_upgrade "$PKG"
+  done < brew.lst
+
+  while read -r PKG; do
+    cask_install "$PKG"
+  done < cask.lst
+
   sudo echo $(brew --prefix)/bin/bash >> /etc/shells && \
   chsh -s $(brew --prefix)/bin/bash
+
   sudo pip install -U pip setuptools
   sudo pip install -U thefuck
   sudo pip install -U howdoi
   sudo pip install -U awscli
 
-  brew_install_or_upgrade 'node'
   sudo npm install -g coffee-scrip
   sudo npm install -g azure-cli
-  brew_install_or_upgrade 'imagemagick'
-  brew_install_or_upgrade 'bash-completion'
-
-  # brew install caskroom/cask/brew-cask
-  brew_tap 'caskroom/cask'
-  brew_tap 'homebrew/services'
-  brew_install_or_upgrade 'brew-cask'
-  cask_install 'iterm2'
-  cask_install 'atom'
-  cask_install 'chefdk'
-  cask_install 'docker'
-  cask_install 'docker-compose'
-  cask_install 'hab'
-  cask_install 'google-chrome'
-  cask_install 'cakebrew'
 
   fancy_echo "Cleaning up old Homebrew formulae ..."
   brew cleanup
@@ -235,9 +212,9 @@ function installFish() {
 
 function installAtomPackages() {
   # Backup package list with:
-  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
+  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-apt.lst
   cp files/atom/* $HOME/.atom/
-  apm install --packages-file files/atom-packages.lst
+  apm install --packages-file files/atom-apt.lst
 }
 
 function installVimPlugins() {
