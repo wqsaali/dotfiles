@@ -130,7 +130,7 @@ alias git-log='git lg'
 # change the current directory to the parent directory that contains the .git folder
 alias git-root='cd "`git rev-parse --show-toplevel`"'
 
-alias masterDiff=\"git diff \$(git merge-base --fork-point master)\"
+alias masterDiff='git diff $(git merge-base --fork-point master)'
 alias latestTag='git describe --tags `git rev-list --tags --max-count=1`'
 alias latestTagDiff='git show --name-only `git describe --tags` `git rev-list --tags --max-count=1`..'
 
