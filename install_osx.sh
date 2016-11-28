@@ -123,6 +123,7 @@ function installPacakges() {
   cask_install 'atom'
   cask_install 'chefdk'
   cask_install 'docker'
+  cask_install 'docker-compose'
   cask_install 'hab'
   cask_install 'google-chrome'
   cask_install 'cakebrew'
