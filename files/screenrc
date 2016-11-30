@@ -15,7 +15,7 @@ defscrollback 50000
 termcapinfo xterm* ti@:te@
 
 # 256 colors
-term xterm-256color
+term screen-256color
 attrcolor b ".I"
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 defbce on

@@ -151,7 +151,9 @@ if [ -f ~/.bash/azure.completion.sh ]; then
   . ~/.bash/azure.completion.sh
 fi
 
-complete -C 'aws_completer' aws
+if [ -x "$(command -v aws_completer)" ]; then
+  complete -C 'aws_completer' aws
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
