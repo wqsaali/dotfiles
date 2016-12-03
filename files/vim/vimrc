@@ -69,7 +69,7 @@
   "Plugin 'lilydjwg/colorizer'
   "Plugin 'chriskempson/base16-vim'
   Plugin 'flazz/vim-colorschemes'
-  Plugin 'rakr/vim-one'
+  " Plugin 'rakr/vim-one'
   Plugin 'nginx.vim'
 
   " All of your Plugins must be added before the following line
@@ -95,12 +95,15 @@
   "   set termguicolors
   " endif
 
+  if has('gui_macvim')
+    set transparency=10
+  endif
+
   color Tomorrow-Night-Bright
   " color one
 
   " Overrides
   set background=dark
-  " set transparency=15 "only works in macvim
 
   au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
   au ColorScheme * hi! Normal ctermbg=none guibg=NONE
