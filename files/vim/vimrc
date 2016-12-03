@@ -84,18 +84,29 @@
   set background=dark
   set t_Co=256
 
+  " " Use GIU colors
+  " if (has("nvim"))
+  "   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  " else
+  "   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  "   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  " endif
+  " if (has("termguicolors"))
+  "   set termguicolors
+  " endif
+
   color Tomorrow-Night-Bright
+  " color one
 
   " Overrides
-  " set transparency=15 "only works in macvim
   set background=dark
+  " set transparency=15 "only works in macvim
 
-  au ColorScheme * hi FoldColumn ctermbg=none ctermfg=none
-  au ColorScheme * hi Normal ctermbg=none
-  au ColorScheme * hi NonText ctermbg=none
-  au ColorScheme * hi Folded ctermbg=none
-
-  au ColorScheme * hi CursorLine guifg=NONE guibg=#2E3436 ctermbg=0 gui=NONE term=NONE cterm=NONE
+  au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
+  au ColorScheme * hi! Normal ctermbg=none guibg=NONE
+  au ColorScheme * hi! NonText ctermbg=none guibg=NONE
+  au ColorScheme * hi! Folded ctermbg=none guibg=NONE
+  au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
 
   set fillchars+=vert:│
   au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none
@@ -308,6 +319,7 @@
   let g:airline#extensions#tabline#show_buffers = 1
   let g:airline_powerline_fonts = 1
   let g:airline_theme='term'
+  " let g:airline_theme='one'
 " }
 
 " Shortcuts {
