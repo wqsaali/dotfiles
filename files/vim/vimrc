@@ -153,6 +153,8 @@
   set nrformats-=octal
   set shiftround
 
+  set clipboard=unnamedplus
+
   set regexpengine=1
   set ttyfast
   set lazyredraw
