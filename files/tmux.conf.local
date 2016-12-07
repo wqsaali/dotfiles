@@ -96,7 +96,7 @@ tmux_conf_theme_window_status_bg='#080808'              # dark gray
 tmux_conf_theme_window_status_attr='none'
 #tmux_conf_theme_window_status_format='#I #W'
 #tmux_conf_theme_window_status_format='#{circled_window_index} #W'
-tmux_conf_theme_window_status_format='#I #W#{?window_bell_flag, 🔔,}#{?window_zoomed_flag,🔍,}'
+tmux_conf_theme_window_status_format='#I #W#{?window_bell_flag, 🔔,}#{?window_zoomed_flag, 🔍,}'
 
 # window current status style
 #   - built-in variables are:
@@ -106,7 +106,7 @@ tmux_conf_theme_window_status_current_bg='#55A900'      # green
 tmux_conf_theme_window_status_current_attr='bold'
 #tmux_conf_theme_window_status_current_format='#I #W'
 #tmux_conf_theme_window_status_current_format='#{circled_window_index} #W'
-tmux_conf_theme_window_status_current_format='#I #W#{?window_zoomed_flag,🔍,}'
+tmux_conf_theme_window_status_current_format='#I #W#{?window_zoomed_flag, 🔍,}'
 
 # window activity status style
 tmux_conf_theme_window_status_activity_fg='default'
@@ -119,7 +119,7 @@ tmux_conf_theme_window_status_bell_bg='default'
 tmux_conf_theme_window_status_bell_attr='blink,bold'
 
 # window last status style
-tmux_conf_theme_window_status_last_fg='#55A900'         # yellow
+tmux_conf_theme_window_status_last_fg='#55A900'         # green
 tmux_conf_theme_window_status_last_bg='default'
 tmux_conf_theme_window_status_last_attr='none'
 
@@ -159,8 +159,8 @@ tmux_conf_theme_status_left=' #S#{?window_zoomed_flag, 🔍,} , #{?pane_synchron
 tmux_conf_theme_status_right='#{prefix}#{pairing}#{?battery_status, #{battery_status},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
 
 # status left style
-tmux_conf_theme_status_left_fg='#000000,#55A900,#000000'  # black, green , black
-tmux_conf_theme_status_left_bg='#55A900,#2f2f2f,#55A900'  # green, grey, white blue
+tmux_conf_theme_status_left_fg='#000000,#55A900,#000000'  # black, green, black
+tmux_conf_theme_status_left_bg='#55A900,#2f2f2f,#55A900'  # green, grey, green
 tmux_conf_theme_status_left_attr='bold,none,none'
 
 # status right style
