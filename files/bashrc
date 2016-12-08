@@ -17,15 +17,15 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=""
-HISTFILESIZE=200000
-HISTTIMEFORMAT="%d-%m-%Y %H:%M:%S "
+export HISTSIZE=""
+export HISTFILESIZE=200000
+export HISTTIMEFORMAT="%d-%m-%Y %H:%M:%S "
 export PROMPT_COMMAND="history -a; history -c; history -r; "'echo "$(history 1)" >> ~/.bash_eternal_history'
 
 if [ -x "$(command -v hh)" ]; then
@@ -33,11 +33,7 @@ if [ -x "$(command -v hh)" ]; then
   # https://github.com/dvorka/hstr
   # Generated with: hh --show-configuration >> ~/.bashrc
   export HH_CONFIG=hicolor         # get more colors
-  shopt -s histappend              # append new history items to .bash_history
-  export HISTCONTROL=ignorespace   # leading space hides commands from history
-  export HISTFILESIZE=10000        # increase history file size (default is 500)
-  export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
-  export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
+  # export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
   # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
   if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
 fi
