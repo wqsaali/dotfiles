@@ -450,11 +450,25 @@
 
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
+fun! DiffToggle()
+    if &diff
+       windo set cursorline
+       windo diffoff
+    else
+       windo set nocursorline
+       windo diffthis
+    endif
+:endfun
+
+command! DiffToggle call DiffToggle()
+nnoremap <silent> <Leader>df :call DiffToggle()<CR>
+
 fun! TrimWhitespace()
   let l:save_cursor = getpos('.')
   %s/\s\+$//e
   call setpos('.', l:save_cursor)
 endfun
+
 command! TrimWhitespace call TrimWhitespace()
 noremap <Leader>w :call TrimWhitespace()<CR>
 " Some people like to automatically do this before they write a file to disk, like so:
