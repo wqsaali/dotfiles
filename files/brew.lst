@@ -1,5 +1,7 @@
 brew-cask
 bash
+ccat
+source-highlight
 findutils
 python
 openssl

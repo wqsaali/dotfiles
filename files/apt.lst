@@ -52,6 +52,7 @@ s3cmd
 s3fs
 silversearcher-ag
 software-properties-common
+source-highlight
 python-software-properties
 terminator
 tilda
