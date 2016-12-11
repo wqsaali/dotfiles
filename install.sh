@@ -41,6 +41,7 @@ function installPacakges() {
   sudo pip install -U pip setuptools
   sudo pip install -U thefuck
   sudo pip install -U howdoi
+  sudo pip install -U Pygment
 
   installHashicorp terraform
   installHashicorp packer
