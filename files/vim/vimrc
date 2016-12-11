@@ -381,6 +381,8 @@
   inoremap <C-y> <Esc>:redo<CR>
   nnoremap <F5>  :GundoToggle<CR>
 
+  noremap <Leader>i :set list!<CR>
+
   " Tabs
 
   " Tab navigation
