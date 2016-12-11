@@ -9,6 +9,7 @@ the_silver_searcher
 cmake
 vim
 macvim
+neovim
 tmux
 jq
 tig

@@ -13,6 +13,7 @@ sudo apt-add-repository ppa:neovim-ppa/unstable
 sudo apt-add-repository ppa:fixnix/indicator-systemtray-unity
 sudo apt-add-repository ppa:fingerprint/fingerprint-gui
 sudo apt-add-repository ppa:webupd8team/terminix
+sudo apt-add-repository ppa:nathan-renniewaldock/flux
 sudo apt-add-repository ppa:ultradvorka/ppa
 sudo apt-add-repository ppa:nilarimogard/webupd8
 sudo apt-add-repository ppa:pi-rho/dev
