@@ -8,7 +8,17 @@ fi
 
 PWD=$(pwd)
 
-function installDocker(){
+function fancy_echo() {
+  COLOR=1
+  if [ ! -z "$2" ]; then
+    COLOR=$2
+  fi
+  tput setaf $COLOR
+  echo "$1"
+  tput sgr0
+}
+
+function installDocker() {
   # Don't run this as root as you'll not add your user to the docker group
   sudo apt-get update
   sudo apt-get install apt-transport-https ca-certificates
