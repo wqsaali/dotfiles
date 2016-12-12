@@ -1,1 +1,3 @@
-. ~/.bashrc
+if [ -f "$HOME/.bashrc" ] && [ "$CONFIGURED" != "true" ]; then
+  . "$HOME/.bashrc"
+fi
