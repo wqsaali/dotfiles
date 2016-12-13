@@ -151,6 +151,8 @@ function installDotFiles() {
   cp files/bash_aliases_completion $HOME/.bash/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   mv knife_autocomplete $HOME/.bash/
+  curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
+  mv kitchen-completion $HOME/.bash/
 
   SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
   source config.sh

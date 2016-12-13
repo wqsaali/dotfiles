@@ -128,6 +128,8 @@ function installDotFiles() {
   sudo cp files/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   sudo mv knife_autocomplete /etc/bash_completion.d/
+  curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
+  sudo mv kitchen-completion /etc/bash_completion.d/
   sudo chown root:root /etc/bash_completion.d/*
 
   SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
@@ -222,6 +224,7 @@ function installAll() {
   installPacakges
   installFonts
   installDotFiles
+  installGnomeTerminalProfiles
   installVimPlugins
   installAtomPackages
 }

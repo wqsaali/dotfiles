@@ -135,6 +135,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
       . $(brew --prefix)/etc/bash_completion
       . $HOME/.bash/bash_aliases_completion
       . $HOME/.bash/knife_autocomplete
+      . $HOME/.bash/kitchen-completion
   fi
 fi
 
