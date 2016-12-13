@@ -2,7 +2,7 @@
 sudo apt-add-repository \'http://dl.bintray.com/aluxian/deb stable main\'
 sudo apt-add-repository \'https://packagecloud.io/JonasGroeger/soundnode/ubuntu/ yakkety main\'
 sudo apt-add-repository \'http://repository.spotify.com stable non-free\'
-sudo apt-add-repository \'https://apt.dockerproject.org/repo ubuntu-xenial main\'
+sudo apt-add-repository \'https://apt.dockerproject.org/repo ubuntu-yakkety testing\'
 sudo apt-add-repository \'http://downloads.hipchat.com/linux/apt stable main\'
 sudo apt-add-repository \'[arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main\'
 sudo apt-add-repository \'https://atlassian.artifactoryonline.com/atlassian/hipchat-apt-client yakkety main\'
