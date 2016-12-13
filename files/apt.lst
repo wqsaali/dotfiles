@@ -33,11 +33,11 @@ php-net-socket
 php-net-url
 php-pear
 php-soap
-php5-cli
-php5-common
-php5-json
-php5-mysql
-php5-readline
+php-cli
+php-common
+php-json
+php-mysql
+php-readline
 python-dev
 python-pip
 python-gdbm
