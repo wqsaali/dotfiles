@@ -213,6 +213,7 @@ function installVimPlugins() {
   vim +PluginInstall +qall
   cd $HOME/.vim/bundle/YouCompleteMe
   ./install.py
+  cd ${PWD}
 }
 
 function installAll() {
