@@ -53,6 +53,7 @@ function installPacakges() {
   sudo pip install -U howdoi
   sudo pip install -U Pygment
 
+  installDocker
   installHashicorp terraform
   installHashicorp packer
 
@@ -103,6 +104,7 @@ function installDotFiles() {
     sudo apt-get install git
   fi
 
+  cd ${PWD}
   mkdir -p $HOME/.bash/
   cp files/terminator.config $HOME/.config/terminator/
   cp files/tilda $HOME/.config/tilda/config_0
