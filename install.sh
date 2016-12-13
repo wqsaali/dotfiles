@@ -45,7 +45,7 @@ function installHashicorp() {
 }
 
 function installPacakges() {
-  cat files/apt.lst | tr '\n' '  ' | xargs apt-get install -y
+  cat files/apt.lst | tr '\n' '  ' | xargs sudo apt-get install -y
   sudo apt-mark manual $(cat files/apt.lst)
 
   sudo pip install -U pip setuptools
@@ -193,9 +193,9 @@ function installFish() {
 
 function installAtomPackages() {
   # Backup package list with:
-  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-apt.lst
+  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* $HOME/.atom/
-  apm install --packages-file files/atom-apt.lst
+  apm install --packages-file files/atom-packages.lst
 }
 
 function installVimPlugins() {
