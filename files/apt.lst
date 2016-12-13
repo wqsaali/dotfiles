@@ -22,7 +22,6 @@ git
 tig
 jq
 legit
-lxc-docker
 mysql-client
 perl
 php-http-request
