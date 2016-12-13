@@ -40,7 +40,6 @@ php-readline
 python-dev
 python-pip
 python-gdbm
-python3-dev
 rake
 redshift
 gtk-redshift
