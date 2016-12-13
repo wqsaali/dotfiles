@@ -22,6 +22,8 @@ git
 tig
 jq
 legit
+libxml2-dev
+libxslt1-dev
 mysql-client
 perl
 php-http-request
@@ -40,6 +42,7 @@ php-readline
 python-dev
 python-pip
 python-gdbm
+python-lxml
 rake
 redshift
 gtk-redshift
