@@ -60,9 +60,9 @@ function backupAll() {
 
 function restorePackages() {
   sudo apt-get update
-  cat files/pkgs_manual.lst | tr '\n' '  ' | xargs sudo apt-get install -y
-  sudo apt-mark auto $(cat files/pkgs_auto.lst)
-  sudo apt-mark manual $(cat files/pkgs_manual.lst)
+  cat files/pkgs_manual.lst | tr '\n' ' ' | xargs sudo apt-get install -y
+  sudo apt-mark auto $(cat files/pkgs_auto.lst | tr '\n' ' ')
+  sudo apt-mark manual $(cat files/pkgs_manual.lst | tr '\n' ' ')
 }
 
 function restoreRepos() {
