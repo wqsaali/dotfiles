@@ -25,6 +25,7 @@ jq
 legit
 libxml2-dev
 libxslt1-dev
+libz-dev
 mysql-client
 perl
 php-cli
