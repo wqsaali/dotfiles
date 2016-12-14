@@ -224,9 +224,9 @@ function installAll() {
   installPacakges
   installFonts
   installDotFiles
-  installGnomeTerminalProfiles
-  installVimPlugins
   installAtomPackages
+  installVimPlugins
+  installGnomeTerminalProfiles
 }
 
 case "$1" in
