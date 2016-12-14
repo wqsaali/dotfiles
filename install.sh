@@ -46,8 +46,12 @@ function installHashicorp() {
 }
 
 function installPacakges() {
-  cat files/apt.lst | tr '\n' '  ' | xargs sudo apt-get install -y
-  sudo apt-mark manual $(cat files/apt.lst)
+  sudo apt-get update
+  cat files/apt-core.lst | tr '\n' '  ' | xargs sudo apt-get install -y
+  sudo apt-mark manual $(cat files/apt-core.lst)
+
+  cat files/apt-extra.lst | tr '\n' '  ' | xargs sudo apt-get install -y
+  sudo apt-mark manual $(cat files/apt-extra.lst)
 
   sudo pip install -U pip setuptools
   sudo pip install -U thefuck
