@@ -7,6 +7,7 @@ atom
 awscli
 build-essential
 bundler
+caffeine-plus
 cargo
 chef
 chef-zero
@@ -21,6 +22,7 @@ fonts-powerline
 foodcritic
 gist
 git
+google-chrome-stable
 gtk-redshift
 jq
 legit
@@ -57,6 +59,9 @@ s3fs
 silversearcher-ag
 software-properties-common
 source-highlight
+spotify-client
+spotify-client-gnome-support
+skype
 terminator
 tig
 tilda
