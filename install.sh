@@ -34,6 +34,7 @@ function installDocker() {
 }
 
 function installHashicorp() {
+  cd ${PWD}
   # List available packages with: curl --silent https://releases.hashicorp.com/index.json | jq 'keys[]'
   # Get URLs for most recent versions
   url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | egrep "linux.*64" | sort -rh | head -1 | awk -F[\"] '{print $4}')
@@ -196,6 +197,7 @@ function installFish() {
 }
 
 function installAtomPackages() {
+  cd ${PWD}
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* $HOME/.atom/
@@ -203,6 +205,7 @@ function installAtomPackages() {
 }
 
 function installVimPlugins() {
+  cd ${PWD}
   mkdir -p $HOME/.vim/ftdetect
   mkdir -p $HOME/.vim/ftplugin
   mkdir -p $HOME/.vim/bundle/
