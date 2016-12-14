@@ -38,7 +38,7 @@ function backupPPAs() {
           if [ "ppa.launchpad.net" = "$HOST" ]; then
               echo "sudo apt-add-repository ppa:$USER/$PPA" >> restore-ppas.sh
           else
-              echo "sudo apt-add-repository \'${ENTRY}\'" >> restore-repos.sh
+              echo "sudo apt-add-repository \"${ENTRY}\"" >> restore-repos.sh
           fi
       done
   done
@@ -84,7 +84,7 @@ case "$1" in
    "atompackages" | "apkgs" | "atom" )
     backupAtomPackages
     ;;
-  "ppas | repos" )
+  "ppas" | "repos" )
     backupPPAs
     ;;
   "restore" )
