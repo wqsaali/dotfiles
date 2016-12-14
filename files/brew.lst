@@ -2,8 +2,12 @@ brew-cask
 bash
 ccat
 source-highlight
+coreutils
+moreutils
 findutils
 python
+awscli
+thefuck
 openssl
 wget
 reattach-to-user-namespace
@@ -12,6 +16,7 @@ cmake
 vim
 macvim
 neovim
+dark-mode
 tmux
 jq
 tig
