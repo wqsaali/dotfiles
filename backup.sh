@@ -42,6 +42,8 @@ function backupPPAs() {
           fi
       done
   done
+  echo 'sudo apt update' >> restore-ppas.sh
+  echo 'sudo apt update' >> restore-repos.sh
 }
 
 function backupPackages() {
@@ -64,7 +66,7 @@ function restorePackages() {
 }
 
 function restoreRepos() {
-  bash restore-repos.#!/bin/sh
+  bash restore-repos.sh
   bash restore-ppas.sh
 }
 
