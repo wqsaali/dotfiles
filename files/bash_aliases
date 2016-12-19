@@ -80,8 +80,8 @@ alias vim-install='vim +PluginInstall +qall'
 alias vim-update='vim +PluginUpdate +qall'
 alias vim-clean='vim +PluginClean +qall'
 
-alias gitv='vim +GV'
-alias Gitv='vim "$(git rev-parse --show-toplevel)"/.git/index -c "Gitv --all" -c "tabonly"'
+alias gitv='vim +GV -c tabonly'
+# alias Gitv='vim "$(git rev-parse --show-toplevel)"/.git/index -c "Gitv --all" -c "tabonly"'
 
 # Json aliases
 # Usage: json-diff file1 file2 section_on_file1 section_on_file2
