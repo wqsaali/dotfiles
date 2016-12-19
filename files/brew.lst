@@ -6,6 +6,7 @@ coreutils
 moreutils
 findutils
 python
+brew-pip
 node
 awscli
 azure-cli
