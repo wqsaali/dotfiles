@@ -107,8 +107,8 @@ function installPacakges() {
   sudo pip install -U Pygment
   # sudo pip install -U awscli
 
-  sudo npm install -g coffee-scrip
-  sudo npm install -g azure-cli
+  # sudo npm install -g coffee-scrip
+  # sudo npm install -g azure-cli
 
   fancy_echo "Cleaning up old Homebrew formulae ..."
   brew cleanup
