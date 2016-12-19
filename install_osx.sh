@@ -88,6 +88,8 @@ function installPacakges() {
   brew_tap 'neovim/neovim'
   brew update
 
+  curl -s https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh | sh
+
   while read -r PKG; do
     brew_install_or_upgrade "$PKG"
   done < brew.lst
