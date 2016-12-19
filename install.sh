@@ -45,6 +45,14 @@ function installHashicorp() {
   cd ${PWD}
 }
 
+function installKubernetes() {
+  cd $HOME/.local/bin/
+  curl -sS https://get.k8s.io | bash
+  rm -rf kubernetes.tar.gz
+  ln -s ~/.local/bin/kubernetes/client/bin/* ~/.local/bin/
+  cd ${PWD}
+}
+
 function installPacakges() {
   sudo apt-get update
   cat files/apt-core.lst | tr '\n' ' ' | xargs sudo apt-get install -y
@@ -58,9 +66,18 @@ function installPacakges() {
   sudo pip install -U howdoi
   sudo pip install -U Pygment
 
-  installDocker
-  installHashicorp terraform
-  installHashicorp packer
+  if ! [ -x "$(command -v docker)" ]; then
+    installDocker
+  fi
+  if ! [ -x "$(command -v terraform)" ]; then
+    installHashicorp terraform
+  fi
+  if ! [ -x "$(command -v packer)" ]; then
+    installHashicorp packer
+  fi
+  if ! [ -x "$(command -v kubectl)" ]; then
+    installKubernetes
+  fi
 
   curl -L https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk
 

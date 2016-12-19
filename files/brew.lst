@@ -29,5 +29,6 @@ colordiff
 packer
 terraform
 kubernetes-cli
+kube-aws
 imagemagick
 bash-completion
