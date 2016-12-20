@@ -33,6 +33,16 @@ function installDocker() {
   sudo usermod -aG docker `echo $USER`
 }
 
+function installVagrantPlugins() {
+  if ! [ -x "$(command -v vagrant)" ]; then
+    apt-get install vagrant
+  fi
+   vagrant plugin install vagrant-list
+   vagrant plugin install vagrant-clean
+   vagrant plugin install vagrant-box-updater
+   vagrant plugin install vagrant-nuke
+}
+
 function installHashicorp() {
   cd ${PWD}
   # List available packages with: curl --silent https://releases.hashicorp.com/index.json | jq 'keys[]'
