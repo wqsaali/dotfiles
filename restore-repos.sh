@@ -19,3 +19,4 @@ sudo apt-add-repository "http://archive.ubuntu.com/ubuntu yakkety-security main 
 sudo apt-add-repository "http://archive.ubuntu.com/ubuntu yakkety-security universe"
 sudo apt-add-repository "http://archive.ubuntu.com/ubuntu yakkety-security multiverse"
 sudo apt-add-repository "http://archive.ubuntu.com/ubuntu yakkety-proposed multiverse restricted main universe"
+sudo apt update

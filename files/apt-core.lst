@@ -62,6 +62,7 @@ tmux
 unrar
 unzip
 vagrant
+vagrant-lxc
 vim
 vim-common
 vim-gnome

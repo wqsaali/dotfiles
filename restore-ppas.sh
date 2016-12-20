@@ -18,3 +18,4 @@ sudo apt-add-repository ppa:nathan-renniewaldock/flux
 sudo apt-add-repository ppa:ultradvorka/ppa
 sudo apt-add-repository ppa:nilarimogard/webupd8
 sudo apt-add-repository ppa:pi-rho/dev
+sudo apt update
