@@ -26,6 +26,9 @@
   Plugin 'scrooloose/nerdtree'
   "Plugin 'jlanzarotta/bufexplorer'
   "Plugin 'majutsushi/tagbar'
+  "Plugin 'vim-scripts/taglist.vim'
+  "Plugin 'vim-scripts/cmdalias.vim'
+  Plugin 'benmills/vimux'
   "Plugin 'severin-lemaignan/vim-minimap'
   Plugin 'nelstrom/vim-visual-star-search'
   "Plugin 'Shougo/neocomplete.vim.git'
@@ -71,7 +74,6 @@
   Plugin 'flazz/vim-colorschemes'
   " Plugin 'rakr/vim-one'
   Plugin 'nginx.vim'
-  Plugin 'benmills/vimux'
 
   " All of your Plugins must be added before the following line
   call vundle#end()            " required
