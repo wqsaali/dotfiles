@@ -76,6 +76,17 @@ gem_install_or_update() {
   fi
 }
 
+function installVagrantPlugins() {
+  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
+  if ! [ -x "$(command -v vagrant)" ]; then
+    cask_install vagrant
+  fi
+   vagrant plugin install vagrant-list
+   vagrant plugin install vagrant-clean
+   vagrant plugin install vagrant-box-updater
+   vagrant plugin install vagrant-nuke
+}
+
 function installPacakges() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'You need to install git!' >&2

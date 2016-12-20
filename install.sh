@@ -34,6 +34,7 @@ function installDocker() {
 }
 
 function installVagrantPlugins() {
+  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
   if ! [ -x "$(command -v vagrant)" ]; then
     apt-get install vagrant
   fi
