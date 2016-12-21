@@ -201,14 +201,15 @@ function man () {
 
 # Syntax highlighting in cat and less
 # you need Pygments: pip install Pygments
-# you need source-highlight: sudo apt install source-highlight
+# or source-highlight: sudo apt install source-highlight
 alias colorcat='pygmentize -g'
-alias Cat='source-highlight --out-format=esc -o STDOUT -i'
-alias PCat='source-highlight --out-format=esc -o STDOUT'
+alias Cat='colorcat'
+# alias Cat='source-highlight --out-format=esc -o STDOUT -i'
+# alias PCat='source-highlight --out-format=esc -o STDOUT'
 
 function cless () {
-# pygmentize -f terminal "$1" | less -R
-  source-highlight --out-format=esc -o STDOUT -i "$1" | less -R
+  pygmentize -f terminal "$1" | less -R
+# source-highlight --out-format=esc -o STDOUT -i "$1" | less -R
 }
 
 # Knife and chef aliases
