@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo apt-add-repository ppa:noobslab/themes
 sudo apt-add-repository ppa:alexlarsson/flatpak
 sudo apt-add-repository ppa:dawidd0811/neofetch
 sudo apt-add-repository ppa:wereturtle/ppa
@@ -17,5 +18,6 @@ sudo apt-add-repository ppa:webupd8team/terminix
 sudo apt-add-repository ppa:nathan-renniewaldock/flux
 sudo apt-add-repository ppa:ultradvorka/ppa
 sudo apt-add-repository ppa:nilarimogard/webupd8
+sudo apt-add-repository ppa:gerardpuig/ppa
 sudo apt-add-repository ppa:pi-rho/dev
 sudo apt update
