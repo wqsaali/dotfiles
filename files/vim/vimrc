@@ -108,27 +108,33 @@
   " Overrides
   set background=dark
 
-  au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
-  au ColorScheme * hi! Normal ctermbg=none guibg=NONE
-  au ColorScheme * hi! NonText ctermbg=none guibg=NONE
-  au ColorScheme * hi! Folded ctermbg=none guibg=NONE
-  au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
+  if has('autocmd')
+    au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
+    au ColorScheme * hi! Normal ctermbg=none guibg=NONE
+    au ColorScheme * hi! NonText ctermbg=none guibg=NONE
+    au ColorScheme * hi! Folded ctermbg=none guibg=NONE
+    au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
 
-  set fillchars+=vert:│
-  au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none
+    set fillchars+=vert:│
+    au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none
+  endif
 
   set guifont=droid\ sans\ mono\ for\ powerline\ plus\ nerd\ file\ types\ 10
 " }
 
 " GeneralSettings {
-  " Open files allways in new tabs
   if ! &diff
-    autocmd VimEnter * tab all
-    "autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
+    if has('autocmd')
+      " Open files allways in new tabs
+      au VimEnter * tab all
+      " Make vim remember the line where you were the last time
+      au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    endif
   endif
 
   if has('autocmd')
     filetype plugin indent on
+    au FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=AL
   endif
   if has('syntax') && !exists('g:syntax_on')
     syntax enable
@@ -171,8 +177,6 @@
   set wildmenu
 
   set autoread
-
-  autocmd FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=AL
 
   set encoding=utf-8
   set tabstop=2 shiftwidth=2 expandtab
@@ -482,7 +486,9 @@ endfun
 command! TrimWhitespace call TrimWhitespace()
 noremap <Leader>w :call TrimWhitespace()<CR>
 " Some people like to automatically do this before they write a file to disk, like so:
-"autocmd BufWritePre * :call TrimWhitespace()
+" if has('autocmd')
+"   au BufWritePre * :call TrimWhitespace()
+" endif
 
 " this machine config
 if filereadable(expand("~/.vimrc.local"))

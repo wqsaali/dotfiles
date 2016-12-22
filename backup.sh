@@ -7,6 +7,7 @@ function backupDotFiles() {
   cp $HOME/.bash/shell_prompt.sh files/shell_prompt.sh
   cp $HOME/.bashrc files/bashrc
   cp $HOME/.bash_profile files/bash_profile
+  cp $HOME/.bash_variables files/bash_variables
   cp $HOME/.tmux.conf.local files/tmux.conf.local
   cp $HOME/.screenrc files/screenrc
   cp $HOME/.profile files/profile

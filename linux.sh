@@ -159,6 +159,7 @@ function installDotFiles() {
   cp files/git_prompt.sh $HOME/.bash/
   cp files/shell_prompt.sh $HOME/.bash/
   cp files/bashrc $HOME/.bashrc
+  cp files/bash_variables $HOME/.bash_variables
   cp files/bash_profile $HOME/.bash_profile
   cp files/screenrc $HOME/.screenrc
   cp files/tmux.conf.local $HOME/.tmux.conf.local

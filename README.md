@@ -1,6 +1,6 @@
 # Dotfiles
 
-Waht's included:
+What's included:
 - a bashrc file
 - installs https://github.com/magicmonty/bash-git-prompt.git
 - installs https://github.com/gpakosz/.tmux
