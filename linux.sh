@@ -142,6 +142,9 @@ function installDotFiles() {
 
   cd ${PWD}
   mkdir -p $HOME/.bash/
+  mkdir -p $HOME/.vim/
+  mkdir -p $HOME/.atom/
+  mkdir -p $HOME/.config/terminator/
   cp files/terminator.config $HOME/.config/terminator/
   cp files/tilda $HOME/.config/tilda/config_0
   if ! [ -s  $HOME/.config/terminator/config ]; then

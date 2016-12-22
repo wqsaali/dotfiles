@@ -147,6 +147,8 @@ function installFonts() {
 
 function installDotFiles() {
   mkdir -p $HOME/.bash/
+  mkdir -p $HOME/.vim/
+  mkdir -p $HOME/.atom/
   cp files/git_prompt.sh $HOME/.bash/
   cp files/shell_prompt.sh $HOME/.bash/
   cp files/bashrc $HOME/.bashrc

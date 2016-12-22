@@ -3,7 +3,6 @@ ansible
 ansible-fireball
 ansible-node-fireball
 aptitude
-atom
 awscli
 build-essential
 bundler
@@ -20,7 +19,6 @@ fonts-powerline
 foodcritic
 gist
 git
-gtk-redshift
 jq
 legit
 libxml2-dev
@@ -65,8 +63,6 @@ vagrant
 vagrant-lxc
 vim
 vim-common
-vim-gnome
-vim-gui-common
 vim-haproxy
 vim-latexsuite
 vim-migemo
@@ -79,3 +75,5 @@ vim-syntax-gtk
 vim-tiny
 vim-vimerl
 vim-vimerl-syntax
+virtualbox
+virtualbox-ext-pack
