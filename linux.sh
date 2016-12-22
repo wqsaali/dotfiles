@@ -9,6 +9,11 @@ fi
 PWD=$(pwd)
 
 function fancy_echo() {
+  # red=`tput setaf 1`
+  # green=`tput setaf 2`
+  # reset=`tput sgr0`
+  # echo "${red}red text ${green}green text${reset}"
+
   COLOR=1
   if [ ! -z "$2" ]; then
     COLOR=$2
@@ -69,6 +74,7 @@ function installPacakges() {
   cat files/apt-core.lst | tr '\n' ' ' | xargs sudo apt-get install -y
   sudo apt-mark manual $(cat files/apt-core.lst | tr '\n' ' ')
 
+  # You might need some extra PPAs for these
   cat files/apt-extra.lst | tr '\n' ' ' | xargs sudo apt-get install -y
   sudo apt-mark manual $(cat files/apt-extra.lst | tr '\n' ' ')
 
