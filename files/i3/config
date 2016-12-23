@@ -12,10 +12,11 @@ set $WS1 
 set $WS2 
 set $WS3 
 set $WS4 
-set $WS5 
+set $WS5 
 set $WS6 
 set $WS7 
 set $WS8 
+set $WS9 
 
 set $black3 #002b36
 set $black2 #073642
@@ -193,6 +194,18 @@ bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 
+# switch to workspace
+# bindsym $mod+1 workspace  1. 
+# bindsym $mod+2 workspace  2.  ;exec firefox
+# bindsym $mod+3 workspace  3.  ;exec --no-startup-id /usr/bin/google-chrome-stable
+# bindsym $mod+4 workspace  4.  ;exec pcmanfm
+# bindsym $mod+5 workspace  5.  ;exec gvim
+# bindsym $mod+6 workspace  6.  ;exec geany
+# bindsym $mod+7 workspace  7. _ ;exec terminator
+# bindsym $mod+8 workspace  8.  ;exec thunderbird
+# bindsym $mod+9 workspace  9.  ;exec libreoffice
+# bindsym $mod+0 workspace  0.  ;exec vlc
+
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -275,7 +288,7 @@ mode "move workspace" {
 
 bindsym $mod+Shift+w mode "move workspace"
 
-set $mode_system system: lock(l), logout(e), suspend(s), hibernate(h), reboot(r), shutdown(Shift+s)
+set $mode_system system: lock(l)   | logout(e)   | suspend(s) | hibernate(h) | reboot(r)  | shutdown(Shift+s) 
 
 mode "$mode_system" {
   bindsym l exec --no-startup-id $locker, mode "default"
