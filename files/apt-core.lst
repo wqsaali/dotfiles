@@ -24,6 +24,7 @@ legit
 libxml2-dev
 libxslt1-dev
 libz-dev
+lm-sensors
 mysql-client
 perl
 php-cli

@@ -230,7 +230,9 @@ function installDotFiles() {
 }
 
 function installi3wm() {
-  sudo apt install i3 i3blocks i3status i3lock conky alsa-utils mpd mpc ncmpcpp lxappearance notification-daemon rxvt-unicode-256color x11-xserver-utils
+  if ! [ -x "$(command -v i3)" ]; then
+    sudo apt install i3 i3blocks i3status i3lock compton conky alsa-utils mpd mpc ncmpcpp feh lxappearance notification-daemon rxvt-unicode-256color x11-xserver-utils
+  fi
   mkdir -p $HOME/.config/i3
   cp -r files/i3/* $HOME/.config/i3
 
