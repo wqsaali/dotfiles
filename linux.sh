@@ -229,6 +229,16 @@ function installDotFiles() {
   fi
 }
 
+function installi3wm() {
+  apt install i3 i3blocks i3status i3lock conky alsa-utils mpd mpc ncmpcpp lxappearance notification-daemon rxvt-unicode-256color x11-xserver-utils
+  mkdir -p $HOME/.config/i3
+  cp -r files/i3/* $HOME/.config/i3
+
+  if [ ! -s $HOME/.i3 ]; then
+    ln -s $HOME/.config/i3 $HOME/.i3
+  fi
+}
+
 function installFish() {
   sudo apt-add-repository ppa:fish-shell/release-2
   sudo apt-get update
@@ -298,6 +308,9 @@ case "$1" in
     ;;
   "termProfiles" | "gnomeTermProfiles")
     installGnomeTerminalProfiles
+    ;;
+  "i3wm" | "i3")
+    installi3wm
     ;;
   *)
     installAll
