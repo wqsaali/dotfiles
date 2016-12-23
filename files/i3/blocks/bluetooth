@@ -2,13 +2,6 @@
 case $BLOCK_BUTTON in
   1) blueman-manager;;
 esac
-arr=($(bluetooth))
-state=${arr[N-2]}
-if [[ $state == off ]]
-then
-  state=Off
-else
-  state=On
-fi
+state=$(bluetooth | cut -d ' ' -f3 | tr o O)
 echo '  '$state' '
 
