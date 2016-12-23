@@ -459,6 +459,7 @@
   command -nargs=+ Run VimuxRunCommand <args>
   command -nargs=+ Prompt VimuxPromptCommand <args>
   command CloseRunner VimuxCloseRunner
+  command RunAgain VimuxRunLastCommand
 
 " }
 
