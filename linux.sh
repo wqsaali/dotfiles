@@ -233,8 +233,13 @@ function installi3wm() {
   if ! [ -x "$(command -v i3)" ]; then
     sudo apt install i3 i3blocks i3status i3lock compton conky alsa-utils mpd mpc ncmpcpp feh lxappearance notification-daemon rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig
   fi
+
   mkdir -p $HOME/.config/i3
   cp -r files/i3/* $HOME/.config/i3
+
+  if ! [ -x "$(command -v nautilus-i3)" ]; then
+    sudo cp files/nautilus-i3 /usr/bin/
+  fi
 
   if [ ! -s $HOME/.i3 ]; then
     ln -s $HOME/.config/i3 $HOME/.i3
