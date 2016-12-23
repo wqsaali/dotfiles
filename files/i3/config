@@ -106,6 +106,7 @@ exec --no-startup-id ~/.bin/gcevent-notifier
 exec compton --config ~/.i3/compton.conf
 # exec dunst -config ~/.i3/dunstrc
 exec --no-startup-id nm-applet
+exec --no-startup-id redshift
 exec --no-startup-id volumeicon
 exec --no-startup-id glipper
 exec --no-startup-id albert
