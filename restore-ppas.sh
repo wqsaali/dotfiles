@@ -12,6 +12,7 @@ sudo apt-add-repository ppa:libreoffice/ppa
 sudo apt-add-repository ppa:team-xbmc/ppa
 sudo apt-add-repository ppa:neovim-ppa/unstable
 sudo apt-add-repository ppa:fixnix/indicator-systemtray-unity
+sudo apt-add-repository ppa:apandada1/brightness-controller
 sudo apt-add-repository ppa:fingerprint/fingerprint-gui
 sudo apt-add-repository ppa:webupd8team/terminix
 sudo apt-add-repository ppa:nathan-renniewaldock/flux
