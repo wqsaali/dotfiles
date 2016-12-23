@@ -15,10 +15,12 @@ command-not-found
 curl
 exuberant-ctags
 fabric
+fonts-font-awesome
 fonts-powerline
 foodcritic
 gist
 git
+iwconfig
 jq
 legit
 libxml2-dev
