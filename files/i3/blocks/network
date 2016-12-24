@@ -11,6 +11,8 @@ for INTERFACE in $(ls /sys/class/net/); do
 
     if [ "$INTERFACE" = "wlp4s0" ]; then
       text=" $text |    $iwid    $ipaddr"
+    elif [ "$INTERFACE" = "vpn0" ]; then
+      text=" $text |   VPN    $ipaddr"
     else
       text=" $text |   wired    $ipaddr"
     fi
@@ -19,11 +21,11 @@ done
 
 if [ -n "$text" ]; then
   text=$(echo $text | sed "s/^| //")
-  if nmcli -t -f name,type con show --active | grep -q vpn; then
-    text=" $text |  VPN "
+  # if nmcli -t -f name,type con show --active | grep -q vpn; then
+  #   text=" $text |  VPN "
   # else
   #   text=" $text |  VPN "
-  fi
+  # fi
   echo "${text} "
 else
   echo ' '"-/->"' '
