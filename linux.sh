@@ -149,28 +149,34 @@ function installDotFiles() {
   cd ${PWD}
   mkdir -p $HOME/.bash/
   mkdir -p $HOME/.vim/
+  mkdir -p $HOME/.vim/ftdetect
+  mkdir -p $HOME/.vim/ftplugin
   mkdir -p $HOME/.atom/
   mkdir -p $HOME/.config/terminator/
-  cp files/terminator.config $HOME/.config/terminator/
+  mkdir -p $HOME/.config/i3
+
+  cp -r files/i3/* $HOME/.config/i3
+  if [ ! -s $HOME/.i3 ]; then
+    ln -s $HOME/.config/i3 $HOME/.i3
+  fi
   cp files/tilda $HOME/.config/tilda/config_0
+  cp files/terminator.config $HOME/.config/terminator/
   if ! [ -s  $HOME/.config/terminator/config ]; then
     ln -s $HOME/.config/terminator/terminator.config $HOME/.config/terminator/config
   fi
   cp files/git_prompt.sh $HOME/.bash/
+  cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
   cp files/shell_prompt.sh $HOME/.bash/
   cp files/bashrc $HOME/.bashrc
   cp files/bash_variables $HOME/.bash_variables
   cp files/bash_profile $HOME/.bash_profile
+  cp files/profile $HOME/.profile
   cp files/screenrc $HOME/.screenrc
   cp files/tmux.conf.local $HOME/.tmux.conf.local
-  cp files/profile $HOME/.profile
-  mkdir -p $HOME/.vim/ftdetect
-  mkdir -p $HOME/.vim/ftplugin
   cp -r files/vim/ft* $HOME/.vim/
   cp files/vim/vimrc $HOME/.vimrc
   cp files/vim/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
-  cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
   sudo cp files/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   sudo mv knife_autocomplete /etc/bash_completion.d/
@@ -231,7 +237,7 @@ function installDotFiles() {
 
 function installi3wm() {
   if ! [ -x "$(command -v i3)" ]; then
-    sudo apt install i3 i3blocks i3status i3lock compton conky alsa-utils mpd mpc ncmpcpp feh lxappearance notification-daemon rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig
+    sudo apt install i3 i3blocks i3status i3lock compton conky alsa-utils mpd mpc ncmpcpp feh lxappearance rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig
   fi
 
   mkdir -p $HOME/.config/i3

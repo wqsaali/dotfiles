@@ -44,7 +44,7 @@ set $barfont droid sans mono for powerline plus nerd file types 10
 set $border_size 1
 
 set $locker dm-tool lock
-set $compositor compton --config ~/.compton.conf
+set $compositor compton --config  ~/.i3/compton.conf
 
 ####################
 # General Settings #
@@ -103,7 +103,6 @@ exec_always --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id ~/.bin/gcevent-notifier
 
 # autostart programs
-exec compton --config ~/.i3/compton.conf
 # exec dunst -config ~/.i3/dunstrc
 exec --no-startup-id nm-applet
 exec --no-startup-id mpd
