@@ -7,6 +7,7 @@ set $termnial gnome-terminal
 
 #
 #	Set Workspace names with icons
+#	icons from: http://fontawesome.io/cheatsheet/
 #
 set $WS1 
 set $WS2 
@@ -17,6 +18,7 @@ set $WS6 
 set $WS7 
 set $WS8 
 set $WS9 
+set $WP0 
 
 set $black3 #002b36
 set $black2 #073642
@@ -200,13 +202,13 @@ bindsym $mod+6 workspace $ws6
 # bindsym $mod+1 workspace  1. 
 # bindsym $mod+2 workspace  2.  ;exec firefox
 # bindsym $mod+3 workspace  3.  ;exec --no-startup-id /usr/bin/google-chrome-stable
-# bindsym $mod+4 workspace  4.  ;exec pcmanfm
-# bindsym $mod+5 workspace  5.  ;exec gvim
+# bindsym $mod+4 workspace  4.  ;exec nautilus-i3
+# bindsym $mod+5 workspace  5.  ;exec atom
 # bindsym $mod+6 workspace  6.  ;exec geany
-# bindsym $mod+7 workspace  7. _ ;exec terminator
+# bindsym $mod+7 workspace  7. _ ;exec gnome-terminal
 # bindsym $mod+8 workspace  8.  ;exec thunderbird
 # bindsym $mod+9 workspace  9.  ;exec libreoffice
-# bindsym $mod+0 workspace  0.  ;exec vlc
+# bindsym $mod+0 workspace  0.  ;exec spotify
 
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
