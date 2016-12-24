@@ -95,6 +95,7 @@ function installPacakges() {
   fi
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew_tap 'caskroom/cask'
+  brew_tap 'caskroom/fonts'
   brew_tap 'homebrew/services'
   brew_tap 'neovim/neovim'
   brew update
