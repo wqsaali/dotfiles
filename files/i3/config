@@ -224,6 +224,7 @@ bindsym $mod+Shift+r restart
 
 # Lock screen
 bindsym Control+Mod1+l exec --no-startup-id $locker
+exec --no-startup-id xautolock -time 5 -locker $locker &
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
