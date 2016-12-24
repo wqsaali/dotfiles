@@ -9,7 +9,7 @@ function backupDotFiles() {
   cp $HOME/.bash_profile files/bash_profile
   cp $HOME/.bash_variables files/bash_variables
   cp $HOME/.tmux.conf.local files/tmux.conf.local
-  cp -r $HOME/.config/i3/*  files/i3/
+  cp -r $HOME/.config/i3/* files/i3/
   cp $HOME/.screenrc files/screenrc
   cp $HOME/.profile files/profile
   cp $HOME/.vimrc files/vim/vimrc
