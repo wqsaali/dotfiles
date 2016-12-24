@@ -19,6 +19,11 @@ done
 
 if [ -n "$text" ]; then
   text=$(echo $text | sed "s/^| //")
+  if nmcli -t -f name,type con show --active | grep -q vpn; then
+    text=" $text |  VPN "
+  # else
+  #   text=" $text |  VPN "
+  fi
   echo "${text} "
 else
   echo ' '"-/->"' '
