@@ -48,6 +48,16 @@ set $border_size 1
 set $locker dm-tool lock
 set $compositor compton --config  ~/.i3/compton.conf
 
+###################
+# Special Windows #
+###################
+
+# for_window [class="(?i)gloobus"] border pixel 0
+
+# Floating Windows
+for_window [class="mpv"] floating enable
+for_window [class="(?i)gloobus"] floating enable
+
 ####################
 # General Settings #
 ####################
