@@ -207,6 +207,10 @@ bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
 
 # switch to workspace
 # bindsym $mod+1 workspace  1. 
@@ -236,7 +240,7 @@ bindsym $mod+Shift+r restart
 
 # Lock screen
 bindsym Control+Mod1+l exec --no-startup-id $locker
-exec --no-startup-id xautolock -detectsleep -time 5 -locker "$locker" &
+exec --no-startup-id xautolock -detectsleep -time 5 -locker "$locker"
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
