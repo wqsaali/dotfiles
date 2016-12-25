@@ -1,6 +1,10 @@
 #!/bin/bash
 # Source: http://askubuntu.com/a/450136
 
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+  i3-sensible-terminal -e 'htop'
+fi
+
 URGENT_VALUE=90
 
 PREV_TOTAL=0

@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+  i3-sensible-terminal -e 'htop'
+fi
+
 TYPE="${1:-mem}"
 ALERT_MAX="${2:-80}"
 
