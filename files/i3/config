@@ -254,9 +254,9 @@ bindsym $mod+Shift+r restart
 # Lock screen
 bindsym Control+Mod1+l exec --no-startup-id $locker
 
-exec xset s 300 300 dpms 300 300 300 # screen blanking after 5 minutes
+# exec xset s 300 300 dpms 300 300 300 # screen blanking after 5 minutes
 # exec --no-startup-id xautolock -detectsleep -time 5 -locker "$locker" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"
-exec --no-startup-id xautolock -detectsleep -time 5 -locker "$locker" -notify 15 -notifier "$HOME/.i3/screen-fader.sh"
+# exec --no-startup-id xautolock -detectsleep -time 5 -locker "$locker" -notify 15 -notifier "$HOME/.i3/screen-fader.sh"
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
@@ -268,9 +268,9 @@ bindsym XF86KbdBrightnessDown exec --no-startup-id kbdlight down 5
 
 # Pulse Audio controls
 bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioMute exec --no-startup-id BLOCK_BUTTON=3 BLOCK_INSTANCE=Master ~/.i3/blocks/volume && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioRaiseVolume exec --no-startup-id BLOCK_BUTTON=4 BLOCK_INSTANCE=Master ~/.i3/blocks/volume && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id BLOCK_BUTTON=5 BLOCK_INSTANCE=Master ~/.i3/b-width 100 -padding 150 locks/volume && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioMute exec --no-startup-id BLOCK_BUTTON=2 ~/.i3/blocks/audio && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id BLOCK_BUTTON=1 ~/.i3/blocks/audio && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id BLOCK_BUTTON=3 ~/.i3/blocks/audio && pkill -RTMIN+10 i3blocks
 
 # MPD controls
 bindsym XF86AudioPlay exec --no-startup-id mpc toggle && pkill -RTMIN+12 i3blocks
