@@ -155,7 +155,7 @@ function installDotFiles() {
   mkdir -p $HOME/.config/terminator/
   mkdir -p $HOME/.config/i3
 
-  cp -r files/i3/* $HOME/.config/i3
+  cp -r files/i3/* $HOME/.config/i3/
   if [ ! -s $HOME/.i3 ]; then
     ln -s $HOME/.config/i3 $HOME/.i3
   fi
@@ -241,7 +241,7 @@ function installi3wm() {
   fi
 
   mkdir -p $HOME/.config/i3
-  cp -r files/i3/* $HOME/.config/i3
+  cp -r files/i3/* $HOME/.config/i3/
 
   if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
     sudo cp files/nautilus-i3 /usr/bin/
