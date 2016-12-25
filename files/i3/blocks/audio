@@ -1,15 +1,13 @@
 #!/bin/bash
 
 # Left click
-if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-  amixer -D pulse -q sset Master 5%+
+case $BLOCK_BUTTON in
+  1) amixer -D pulse -q sset Master 5%+ ;;
 # Middle click
-elif [[ "${BLOCK_BUTTON}" -eq 2 ]]; then
-  amixer -D pulse -q sset Master toggle
+  2) amixer -D pulse -q sset Master toggle ;;
 # Right click
-elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
-  amixer -D pulse -q sset Master 5%-
-fi
+  3) amixer -D pulse -q sset Master 5%- ;;
+esac
 
 statusLine=$(amixer -D pulse get Master | tail -n 1)
 status=$(echo "${statusLine}" | grep -wo "on")

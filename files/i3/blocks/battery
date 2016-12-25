@@ -44,6 +44,9 @@ then
     fi
   fi
 
+  if [[ "$remaining" != "" ]]; then
+    remaining="[$remaining]"
+  fi
   # Full text
   echo "$baticon $capacity% $remaining"
   # Short text

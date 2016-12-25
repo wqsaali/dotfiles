@@ -1,7 +1,11 @@
 #!/bin/sh
-case $BLOCK_BUTTON in
-  1) blueman-manager;;
-esac
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+  if [ -x $(command -v blueman-manager) ]; then
+    blueman-manager
+  else
+    export XDG_CURRENT_DESKTOP=GNOME; gnome-control-center;
+  fi
+fi
 state=$(bluetooth | cut -d ' ' -f3 | tr o O)
 echo '  '$state' '
 

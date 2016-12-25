@@ -6,8 +6,8 @@ set $mod Mod4
 set $termnial i3-sensible-terminal
 
 #
-#	Set Workspace names with icons
-#	icons from: http://fontawesome.io/cheatsheet/
+# Set Workspace names with icons
+# icons from: http://fontawesome.io/cheatsheet/
 #
 set $WS1 
 set $WS2 
@@ -17,7 +17,7 @@ set $WS5 
 set $WS6 
 set $WS7 
 set $WS8 
-set $WS9 
+set $WS9 
 set $WP0 
 
 set $black3 #002b36
