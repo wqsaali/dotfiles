@@ -116,6 +116,11 @@ exec --no-startup-id ~/.bin/gcevent-notifier
 
 # autostart programs
 # exec dunst -config ~/.i3/dunstrc
+
+# exec export XDG_CURRENT_DESKTOP="Unity"
+# exec --no-startup-id unity-settings-daemon
+# exec --no-startup-id gnome-settings-daemon
+
 exec --no-startup-id nm-applet
 exec --no-startup-id mpd
 exec --no-startup-id redshift-gtk
