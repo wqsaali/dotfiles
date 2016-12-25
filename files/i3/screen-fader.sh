@@ -2,7 +2,7 @@
 
 # notify-send -u critical -t 10000 -- 'LOCKING screen now'
 
-SEC=10
+SEC=5
 [ $# -eq 1 ] && SEC=$1
 FRAMES=100
 SLEEP=`echo $SEC / $FRAMES | bc -l`
@@ -22,4 +22,5 @@ for (( i = 1; i <= $FRAMES; i++ )); do
   sleep $SLEEP
 done
 
+# dm-tool lock
 xset dpms force off
