@@ -1,20 +1,22 @@
 #!/bin/bash
 
 # One of the following: xrandr, xbacklight, kernel
-METHOD="xbacklight"
+METHOD="xrandr"
 
-# Left click
-if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-  xbacklight -inc 5
-# Right click
-elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
-  xbacklight -dec 5
+if [[ "${METHOD}" = "xbacklight" ]]; then
+  # Left click
+  if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+    xbacklight -inc 5
+  # Right click
+  elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
+    xbacklight -dec 5
+  fi
 fi
 
 URGENT_VALUE=10
 
 if [[ "${METHOD}" = "xrandr" ]]; then
-  device="${BLOCK_INSTANCE:-primary}"
+  device="$(xrandr -q | grep 'connected' | head -n 1 | cut -d ' ' -f1)"
   xrandrOutput=$(xrandr --verbose)
 
   if [[ "${device}" = "primary" ]]; then
@@ -30,8 +32,10 @@ elif [[ "${METHOD}" = "xbacklight" ]]; then
   curBrightness=$(xbacklight -get)
 fi
 
-if [[ "${curBrightness}" -le 0 ]]; then
-  curBrightness=$((($(cat /sys/class/backlight/intel_backlight/brightness)*100)/$(cat /sys/class/backlight/intel_backlight/max_brightness)))
+if [[ "${METHOD}" = "xbacklight" ]]; then
+  if [[ "${curBrightness}" -le 0 ]]; then
+    exit 1
+  fi
 fi
 
 if [[ "${METHOD}" = "xrandr" ]]; then
@@ -51,6 +55,17 @@ fi
 echo " ${percent}%"
 echo " ${percent}%"
 echo ""
+
+if [[ "${METHOD}" = "xrandr" ]]; then
+  # Left click
+  if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+    xrandr --output $device --brightness $(echo "($percent + 5 ) / 100")
+  # Right click
+  elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
+    xrandr --output $device --brightness $(echo "($percent - 5 ) / 100")
+  fi
+fi
+
 
 if [[ "${percent}" -le "${URGENT_VALUE}" ]]; then
   exit 33
