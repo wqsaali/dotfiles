@@ -52,9 +52,13 @@ set $compositor compton --config  ~/.i3/compton.conf
 # Special Windows #
 ###################
 
+# xprop tool can be used to get WM_CLASS, WM_NAME properties
+
+# Borders
 # for_window [class="(?i)gloobus"] border pixel 0
 
 # Floating Windows
+for_window [class="Remmina"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="(?i)gloobus"] floating enable
 
