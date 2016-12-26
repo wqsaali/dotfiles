@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
   i3-sensible-terminal -e 'htop'

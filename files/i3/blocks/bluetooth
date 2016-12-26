@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-  if [ -x $(command -v blueman-manager) ]; then
+  if [ -x "$(command -v blueman-manager)" ]; then
     blueman-manager
   else
     export XDG_CURRENT_DESKTOP=GNOME; gnome-control-center;
