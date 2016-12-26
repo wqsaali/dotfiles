@@ -106,7 +106,7 @@ function installFonts() {
   mkdir -p $HOME/.fonts/
 
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
-  sudo chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
+  chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
   mv *.otf $HOME/.fonts/
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
   sudo mv PowerlineSymbols.otf /usr/share/fonts/
@@ -137,13 +137,13 @@ function installGnomeTerminalProfiles() {
 }
 
 function installDotFiles() {
-  if ! [ -x "$(command -v hh)" ]; then
-    echo 'installing hh!' >&2
-    sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt-get update && sudo apt-get install hh
-  fi
   if ! [ -x "$(command -v git)" ]; then
     echo 'installing git!' >&2
     sudo apt-get install git
+  fi
+  if ! [ -x "$(command -v hh)" ]; then
+    echo 'installing hh!' >&2
+    sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt-get update && sudo apt-get install hh
   fi
 
   cd ${PWD}
@@ -159,11 +159,13 @@ function installDotFiles() {
   if [ ! -s $HOME/.i3 ]; then
     ln -s $HOME/.config/i3 $HOME/.i3
   fi
+
   cp files/tilda $HOME/.config/tilda/config_0
   cp files/terminator.config $HOME/.config/terminator/
   if ! [ -s  $HOME/.config/terminator/config ]; then
     ln -s $HOME/.config/terminator/terminator.config $HOME/.config/terminator/config
   fi
+
   cp files/git_prompt.sh $HOME/.bash/
   cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
   cp files/shell_prompt.sh $HOME/.bash/
@@ -177,6 +179,7 @@ function installDotFiles() {
   cp files/vim/vimrc $HOME/.vimrc
   cp files/vim/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
+
   sudo cp files/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   sudo mv knife_autocomplete /etc/bash_completion.d/
