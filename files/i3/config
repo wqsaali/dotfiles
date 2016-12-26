@@ -10,14 +10,14 @@ set $termnial i3-sensible-terminal
 # icons from: http://fontawesome.io/cheatsheet/
 #
 set $WS1 
-set $WS2 
-set $WS3 
-set $WS4 
-set $WS5 
-set $WS6 
+set $WS2 
+set $WS3 
+set $WS4 
+set $WS5 
+set $WS6 
 set $WS7 
 set $WS8 
-set $WS9 
+set $WS9 
 set $WP0 
 
 set $black3 #002b36
