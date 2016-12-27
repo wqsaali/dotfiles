@@ -240,7 +240,7 @@ function installDotFiles() {
 
 function installi3wm() {
   if ! [ -x "$(command -v i3)" ]; then
-    sudo apt install i3 i3blocks i3status i3lock compton conky alsa-utils mpd mpc ncmpcpp feh lxappearance rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig xcalib xprintidle
+    sudo apt install i3 i3blocks i3status i3lock compton conky-all alsa-utils mpd mpc ncmpcpp feh lxappearance rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig xcalib xprintidle
     sudo pip install i3-cycle
     sudo npm i -g i3-alt-tab
   fi

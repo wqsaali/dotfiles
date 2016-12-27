@@ -317,8 +317,11 @@ bindsym XF86PowerOff exec --no-startup-id $locker
 bindsym $mod+XF86PowerOff exec --no-startup-id systemctl suspend
 
 # Screenshots
-bindsym --release $mod+Shift+p exec --no-startup-id scrot -s ~/Pictures/Screenshots/%y-%b-%d_%H%M%S.png
-bindsym --release $mod+p exec --no-startup-id scrot ~/Pictures/Screenshots/%y-%b-%d_%H%M%S.png
+# bindsym --release $mod+Shift+p exec --no-startup-id scrot -s ~/Pictures/Screenshots/%y-%b-%d_%H%M%S.png
+# bindsym --release $mod+p exec --no-startup-id scrot ~/Pictures/Screenshots/%y-%b-%d_%H%M%S.png
+bindsym Print exec scrot
+bindsym --release Control+Print exec scrot -s
+bindsym --release Control+Shift+Print exec import png:- | xclip -selection c -t image/png
 
 # Resize window (you can also use the mouse for that)
 mode "resize" {
