@@ -243,6 +243,7 @@ function installi3wm() {
     sudo apt install i3 i3blocks i3status i3lock compton conky alsa-utils mpd mpc ncmpcpp feh lxappearance rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig xcalib xprintidle
     sudo pip install i3-cycle
     sudo npm i -g i3-alt-tab
+    sudo chmod 666 /sys/class/backlight/intel_backlight/brightness
   fi
 
   mkdir -p $HOME/.config/i3

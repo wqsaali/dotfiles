@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Left click
 case $BLOCK_BUTTON in
+# Left click
   1) amixer -D pulse -q sset Master 5%+ ;;
 # Middle click
   2) amixer -D pulse -q sset Master toggle ;;
