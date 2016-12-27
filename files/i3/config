@@ -289,8 +289,10 @@ bindsym Control+Mod1+l exec --no-startup-id $locker
 # exec --no-startup-id xautolock -detectsleep -time 5 -locker "$locker" -notify 15 -notifier "$HOME/.i3/screen-fader.sh"
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 3
+# bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+# bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 3
+bindsym XF86MonBrightnessUp exec --no-startup-id BLOCK_BUTTON=1 ~/.i3/blocks/brightness && pkill -RTMIN+10 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id BLOCK_BUTTON=3 ~/.i3/blocks/brightness && pkill -RTMIN+10 i3blocks
 
 # Keyboard backlit brightness
 bindsym XF86KbdBrightnessUp exec --no-startup-id kbdlight up 5
