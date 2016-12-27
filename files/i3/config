@@ -62,6 +62,9 @@ set $compositor compton --config  ~/.i3/compton.conf
 for_window [class="Remmina"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="(?i)gloobus"] floating enable
+# for_window [class="(?i)tilda"] floating enable
+
+# for_window [title="^dropin-term$"] move scratchpad
 
 ####################
 # General Settings #
