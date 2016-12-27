@@ -56,6 +56,7 @@ set $compositor compton --config  ~/.i3/compton.conf
 
 # Borders
 # for_window [class="(?i)gloobus"] border pixel 0
+# for [window_type=floating] border pixel 3
 
 # Floating Windows
 for_window [class="Remmina"] floating enable
@@ -217,6 +218,25 @@ bindsym $mod+space focus mode_toggle
 # Focus the parent container
 bindsym $mod+a focus parent
 
+# Cycle through open windows
+# you need to install i3-alt-tab:
+# sudo npm i -g i3-alt-tab
+bindsym Mod1+Tab exec i3-alt-tab --next
+bindsym Mod1+Shift+Tab exec i3-alt-tab --prev
+
+# Alternatively you can use i3-cycle
+# to install run: sudo pip install i3-cycle
+# bindsym $mod+} exec i3-cycle right
+# bindsym $mod+{ exec i3-cycle left
+# bindsym $mod+Shift+{ exec i3-cycle up
+# bindsym $mod+Shift+} exec i3-cycle down
+# bind Mod1+Tab exec i3-cycle next
+# bind Mod1+Shift+Tab exec i3-cycle prev
+
+# Cycle through active workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -248,6 +268,12 @@ bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6
+
+# Use mod-Control-Left and Right to move the selected window to an
+# adjacent workspace. (This does *not* change your view to that workspace,
+# it just "zaps" the window there.)
+bindsym $mod+Control+Left move container to workspace prev
+bindsym $mod+Control+Right move container to workspace next
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
