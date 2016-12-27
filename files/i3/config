@@ -226,10 +226,10 @@ bindsym Mod1+Shift+Tab exec i3-alt-tab --prev
 
 # Alternatively you can use i3-cycle
 # to install run: sudo pip install i3-cycle
-# bindsym $mod+} exec i3-cycle right
-# bindsym $mod+{ exec i3-cycle left
-# bindsym $mod+Shift+{ exec i3-cycle up
-# bindsym $mod+Shift+} exec i3-cycle down
+# bindsym $mod+] exec i3-cycle right
+# bindsym $mod+[ exec i3-cycle left
+# bindsym $mod+Shift+[ exec i3-cycle up
+# bindsym $mod+Shift+] exec i3-cycle down
 # bind Mod1+Tab exec i3-cycle next
 # bind Mod1+Shift+Tab exec i3-cycle prev
 
