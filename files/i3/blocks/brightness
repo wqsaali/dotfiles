@@ -5,6 +5,7 @@ BRIGHTNESS_PATH="/sys/class/backlight/$DEVICE/brightness"
 MAXBRIGHTNESS=$(cat /sys/class/backlight/$DEVICE/max_brightness)
 MINBRIGHTNESS=1
 light=$(cat $BRIGHTNESS_PATH)
+INCREMENT=100
 
 function brightness() {
   NUMBER=$1
@@ -24,11 +25,11 @@ function brightness() {
 
 case $BLOCK_BUTTON in
 # Left click
-  1) brightness $(($light + 100)) ;;
+  1) brightness $(($light + $INCREMENT)) ;;
 # Middle click
   2) brightness $MAXBRIGHTNESS ;;
 # Right click
-  3) brightness $(($light - 100)) ;;
+  3) brightness $(($light - $INCREMENT)) ;;
 esac
 
 light=$(($(($light*100))/$MAXBRIGHTNESS))
