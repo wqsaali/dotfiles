@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 sudo rm -f /tmp/update.txt; tput setaf 6; echo "Initializing.. Please Wait"
 sudo apt-get update >> /tmp/update.txt 2>&1; awk '( /E:|W:/ && /launchpad/ && /404/ ) { print substr($5,26) }' /tmp/update.txt > /tmp/awk.txt; awk -F '/' '{ print $1"/"$2 }' /tmp/awk.txt > /tmp/awk1.txt; sort -u /tmp/awk1.txt > /tmp/awk2.txt
 tput sgr0

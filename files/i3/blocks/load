@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #INSTANCE="${BLOCK_INSTANCE:-1}"
 #INSTANCE="1,2,3"

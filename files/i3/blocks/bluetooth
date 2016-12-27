@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
   if [ -x "$(command -v blueman-manager)" ]; then
     blueman-manager

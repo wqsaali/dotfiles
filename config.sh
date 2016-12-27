@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 NAME='Luis Davim'
 EMAIL='luis.davim@smartbox.com'
 

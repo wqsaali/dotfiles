@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 sudo apt-add-repository "http://dl.bintray.com/aluxian/deb stable main"
 sudo apt-add-repository "https://packagecloud.io/JonasGroeger/soundnode/ubuntu/ yakkety main"
 sudo apt-add-repository "http://repository.spotify.com stable non-free"

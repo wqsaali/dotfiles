@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function backupDotFiles() {
   mkdir -p files
@@ -30,8 +30,8 @@ function backupAtomPackages() {
 
 function backupPPAs() {
   # Get list of PPAs
-  echo '#!/bin/bash' > restore-ppas.sh
-  echo '#!/bin/bash' > restore-repos.sh
+  echo '#!/usr/bin/env bash' > restore-ppas.sh
+  echo '#!/usr/bin/env bash' > restore-repos.sh
   for APT in `find /etc/apt/ -name \*.list`; do
       grep -Po "(?<=^deb\s).*?(?=#|$)" $APT | while read ENTRY ; do
           HOST=`echo $ENTRY | cut -d/ -f3`

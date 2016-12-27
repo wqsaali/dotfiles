@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   echo 'Looks like you are on OS X'

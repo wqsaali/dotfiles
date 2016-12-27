@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DEVICE="${BLOCK_INSTANCE:-intel_backlight}"
 BRIGHTNESS_PATH="/sys/class/backlight/$DEVICE/brightness"
