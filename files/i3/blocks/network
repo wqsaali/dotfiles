@@ -26,7 +26,7 @@ if [ -n "$text" ]; then
   # else
   #   text=" $text |  VPN "
   # fi
-  echo "${text} "
+  echo "${text}"
 else
   echo ' '"-/->"' '
 fi

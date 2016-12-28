@@ -27,11 +27,11 @@ if [[ "$(awk '/mute/ {print $2}' /proc/acpi/ibm/volume)" = "on" ]] ; then
 fi
 
 if [[ "${status}" == "on" ]]; then
-  echo "${logo} ${volume}%"
-  echo "${logo} ${volume}%"
+  echo "${logo} ${volume}% "
+  echo "${logo} ${volume}% "
   echo ""
 else
-  echo "${logo} off"
-  echo "${logo} off"
+  echo "${logo} off "
+  echo "${logo} off "
   echo ""
 fi
