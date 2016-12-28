@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+MIC_SYMBOL="\uf130"
+SIZE="10"
+ON_COLOR="#ffcc33"
+OFF_COLOR="#333333"
+MICRO_DEVICE="/dev/snd/pcmC*D*c"
+
+symbol=${MIC_SYMBOL}
+color=${OFF_COLOR}
+
+if [[ "$(fuser ${MICRO_DEVICE})" != "" ]]; then
+  symbol=${MIC_SYMBOL}
+  color=${ON_COLOR}
+fi
+
+echo -e "<span font='${SIZE}' color='${color}'>${symbol}</span>"
+echo -e "<span font='${SIZE}' color='${color}'>${symbol}</span>"

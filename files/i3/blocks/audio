@@ -23,7 +23,7 @@ fi
 
 if [[ "$(awk '/mute/ {print $2}' /proc/acpi/ibm/volume)" = "on" ]] ; then
   logo=''
-  color="color='#FF3333'"
+  color="#FF3333"
 fi
 
 if [[ "${status}" == "on" ]]; then

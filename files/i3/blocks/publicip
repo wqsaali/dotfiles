@@ -1,0 +1,5 @@
+#!/bin/sh
+
+ipaddr="$(curl -s http://ipinfo.io/ip)"
+
+echo "  $ipaddr"
