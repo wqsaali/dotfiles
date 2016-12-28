@@ -16,7 +16,9 @@ DATA=$(echo "${OUTPUT}" | egrep -A4 "${CORE}")
 CURRENT="$(echo "${DATA}" | grep -Po "(?<=_input: )([0-9]+)") $FIRST"
 HIGH=$(echo "${DATA}" | grep -Po "(?<=_max: )([0-9]+)")
 
-echo ' '"  ${CURRENT}"' '
+icon=' '
+
+echo " ${icon} ${CURRENT} "
 #[[ "${FIRST}" -lt 50 ]] && echo ''&& echo "#808080"
 
 [[ "${CURRENT}" -gt "${HIGH}" ]] && exit 33

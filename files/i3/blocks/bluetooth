@@ -7,5 +7,5 @@ if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
   fi
 fi
 state=$(bluetooth | cut -d ' ' -f3 | tr o O)
-echo '  '$state' '
+echo "  $state "
 
