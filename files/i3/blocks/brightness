@@ -11,10 +11,10 @@ function brightness() {
   NUMBER=$1
   #Check if integer
   Int='^[0-9]+$'
-  if [[ $NUMBER =~ $Int ]]; then
-    if [[ $NUMBER -ge $MAXBRIGHTNESS ]]; then
+  if [ $NUMBER =~ $Int ]; then
+    if [ $NUMBER -ge $MAXBRIGHTNESS ]; then
       NUMBER=$MAXBRIGHTNESS
-    elif [[ $NUMBER -lt $MINBRIGHTNESS ]]; then
+    elif [ $NUMBER -lt $MINBRIGHTNESS ]; then
       NUMBER=$MINBRIGHTNESS
     fi
     echo $NUMBER > $BRIGHTNESS_PATH
