@@ -1,25 +1,27 @@
 #!/usr/bin/env bash
 # vim:ts=4:sw=4:expandtab
-CORE="Core 0"
 OUTPUT=$(sensors -Au)
-
-IFS=$'\n'
-DATA=$(echo "${OUTPUT}" | egrep -A4 "${CORE}")
-FIRST=$(echo "${DATA}" | grep -Po "(?<=_input: )([0-9]+)")
-HIGH=$(echo "${DATA}" | grep -Po "(?<=_max: )([0-9]+)")
-#CRIT=$(echo "${DATA}" | grep -Po "(?<=_crit: )([0-9]+)")
-
-CORE="Core 1"
-OUTPUT=$(sensors -Au)
-IFS=$'\n'
-DATA=$(echo "${OUTPUT}" | egrep -A4 "${CORE}")
-CURRENT="$(echo "${DATA}" | grep -Po "(?<=_input: )([0-9]+)") $FIRST"
-HIGH=$(echo "${DATA}" | grep -Po "(?<=_max: )([0-9]+)")
-
+# IFS=$'\n'
+NCORES=$(sensors -Au | grep -c "Core")
+CURRENT=""
+HIGH=""
 icon=' '
 
-echo " ${icon} ${CURRENT} "
-#[[ "${FIRST}" -lt 50 ]] && echo ''&& echo "#808080"
+for i in $(seq 0 $(($NCORES -1))); do
+  CORE="Core $i"
+  DATA=$(echo "${OUTPUT}" | egrep -A4 "${CORE}")
+  CURRENT="$(echo "${DATA}" | grep -Po "(?<=_input: )([0-9]+)") $CURRENT"
+  HIGH="$(echo "${DATA}" | grep -Po "(?<=_max: )([0-9]+)") $HIGH"
+  #CRIT=$(echo "${DATA}" | grep -Po "(?<=_crit: )([0-9]+)")
+done
 
-[[ "${CURRENT}" -gt "${HIGH}" ]] && exit 33
+# HIGH=$(echo $HIGH | sed -e 's/\s*$//g')
+HIGH=($HIGH)
+# CURRENT=$(echo $CURRENT | sed -e 's/\s*$//g')
+CURRENT=($CURRENT)
+
+echo " ${icon} ${CURRENT[@]} "
+#[[ "${CURRENT[0]}" -lt 50 ]] && echo ''&& echo "#808080"
+
+[[ "${CURRENT[0]}" -gt "${HIGH[0]}" ]] && exit 33
 exit 0
