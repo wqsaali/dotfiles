@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 DEVICE="${BLOCK_INSTANCE:-intel_backlight}"
 BRIGHTNESS_PATH="/sys/class/backlight/$DEVICE/brightness"
@@ -7,7 +7,7 @@ MINBRIGHTNESS=1
 light=$(cat $BRIGHTNESS_PATH)
 INCREMENT=100
 
-function brightness() {
+brightness () {
   NUMBER=$1
   #Check if integer
   Int='^[0-9]+$'
