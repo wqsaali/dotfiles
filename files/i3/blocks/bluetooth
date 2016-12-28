@@ -1,11 +1,11 @@
 #!/bin/sh
 
-state=$(bluetooth | cut -d ' ' -f3 | tr o O)
+state=$(bluetooth | cut -d ' ' -f3)
 
 case $BLOCK_BUTTON in
 # Left click
   1)
-  if [ "$state" = "On" ]; then
+  if [ "$state" = "on" ]; then
     rfkill block bluetooth
   else
     rfkill unblock bluetooth
@@ -29,5 +29,6 @@ case $BLOCK_BUTTON in
   ;;
 esac
 
+state=$(bluetooth | cut -d ' ' -f3 | tr o O)
 echo "  $state "
 
