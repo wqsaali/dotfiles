@@ -149,12 +149,15 @@ function installFonts() {
 function installDotFiles() {
   mkdir -p $HOME/.bash/
   mkdir -p $HOME/.vim/
+  mkdir -p $HOME/.vim/ftdetect
+  mkdir -p $HOME/.vim/ftplugin
   mkdir -p $HOME/.atom/
-  cp files/git_prompt.sh $HOME/.bash/
-  cp files/shell_prompt.sh $HOME/.bash/
-  cp files/bashrc $HOME/.bashrc
-  cp files/bash_variables $HOME/.bash_variables
-  cp files/bash_profile $HOME/.bash_profile
+
+  cp files/bash/git_prompt.sh $HOME/.bash/
+  cp files/bash/shell_prompt.sh $HOME/.bash/
+  cp files/bash/bashrc $HOME/.bashrc
+  cp files/bash/bash_variables $HOME/.bash_variables
+  cp files/bash/bash_profile $HOME/.bash_profile
   cp files/screenrc $HOME/.screenrc
   cp files/tmux.conf.local $HOME/.tmux.conf.local
   cp files/profile $HOME/.profile
@@ -164,8 +167,8 @@ function installDotFiles() {
   cp files/vim/vimrc $HOME/.vimrc
   cp files/vim/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
-  cp files/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
-  cp files/bash_aliases_completion $HOME/.bash/
+  cp files/bash/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
+  cp files/bash/bash_aliases_completion $HOME/.bash/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   mv knife_autocomplete $HOME/.bash/
   curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
@@ -178,13 +181,13 @@ function installDotFiles() {
   #read -p "Please enter your name (for gitconfig):" NAME
   #read -p "Please enter your email address (for gitconfig):" EMAIL
 
-  #cp files/bash_aliases $HOME/.bash_aliases
+  #cp files/bash/bash_aliases $HOME/.bash_aliases
   sedcmd=''
   for var in $(echo $CONF);do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done
-  cat files/bash_aliases | sed -e "$sedcmd" > $HOME/.bash_aliases
+  cat files/bash/bash_aliases | sed -e "$sedcmd" > $HOME/.bash_aliases
 
   # cp files/gitconfig $HOME/.gitconfig
   sedcmd=''
