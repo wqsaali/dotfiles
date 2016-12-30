@@ -50,7 +50,7 @@ then
   # Full text
   echo "$baticon $capacity% $remaining"
   # Short text
-  #echo "Ψ $capacity% $symbol"
+  echo "$baticon $capacity% $symbol"
 
   # Color
   #if test $capacity -le $ALERT_LOW -a $status = "Discharging"
