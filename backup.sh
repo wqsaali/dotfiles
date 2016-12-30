@@ -2,16 +2,16 @@
 
 function backupDotFiles() {
   mkdir -p files
-  cp $HOME/.config/terminator/terminator.config files/terminator.config
-  cp $HOME/.bash/git_prompt.sh files/git_prompt.sh
-  cp $HOME/.bash/shell_prompt.sh files/shell_prompt.sh
-  cp $HOME/.bashrc files/bashrc
-  cp $HOME/.bash_profile files/bash_profile
-  cp $HOME/.bash_variables files/bash_variables
-  cp $HOME/.tmux.conf.local files/tmux.conf.local
-  cp -r $HOME/.config/i3/* files/i3/
-  cp $HOME/.screenrc files/screenrc
+  cp $HOME/.bash/git_prompt.sh files/bash/git_prompt.sh
+  cp $HOME/.bash/shell_prompt.sh files/bash/shell_prompt.sh
+  cp $HOME/.bashrc files/bash/bashrc
+  cp $HOME/.bash_profile files/bash/bash_profile
+  cp $HOME/.bash_variables files/bash/bash_variables
+  cp $HOME/.git-prompt-colors.sh files/bash/git-prompt-colors.sh
+  cp /etc/bash_completion.d/bash_aliases_completion files/bash/bash_aliases_completion
   cp $HOME/.profile files/profile
+  cp $HOME/.tmux.conf.local files/tmux.conf.local
+  cp $HOME/.screenrc files/screenrc
   cp $HOME/.vimrc files/vim/vimrc
   cp $HOME/.vimrc.local files/vim/vimrc.local
   cp -r $HOME/.vim/ft* files/vim/
@@ -19,9 +19,9 @@ function backupDotFiles() {
   cp $HOME/.atom/*.coffee files/atom/
   cp $HOME/.atom/*.less files/atom/
   cp $HOME/.atom/*.json files/atom/
-  cp $HOME/.git-prompt-colors.sh files/git-prompt-colors.sh
   cp $HOME/.config/tilda/config_0 files/tilda
-  cp /etc/bash_completion.d/bash_aliases_completion files/bash_aliases_completion
+  cp $HOME/.config/terminator/terminator.config files/terminator.config
+  cp -r $HOME/.config/i3/* files/i3/
 }
 
 function backupAtomPackages() {
