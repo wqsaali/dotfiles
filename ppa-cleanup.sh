@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+
+# Remove broken repos
 sudo rm -f /tmp/update.txt; tput setaf 6; echo "Initializing.. Please Wait"
 sudo apt-get update >> /tmp/update.txt 2>&1; awk '( /E:|W:/ && /launchpad/ && /404/ ) { print substr($5,26) }' /tmp/update.txt > /tmp/awk.txt; awk -F '/' '{ print $1"/"$2 }' /tmp/awk.txt > /tmp/awk1.txt; sort -u /tmp/awk1.txt > /tmp/awk2.txt
 tput sgr0
@@ -17,3 +19,16 @@ fi
 rm -f /tmp/update.txt
 rm -f /tmp/awk*.txt
 rm -rf /tmp/out
+
+# Fix missing GPG keys
+sudo apt-get update 2> /tmp/keymissing
+if [ -f /tmp/keymissing ]
+then
+  for key in $(grep "NO_PUBKEY" /tmp/keymissing |sed "s/.*NO_PUBKEY //")
+    do
+    echo -e "\nProcessing key: $key"
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys $key
+    sudo apt-get update
+  done
+  rm /tmp/keymissing
+fi
