@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+sudo apt-add-repository ppa:noobslab/themes
 sudo apt-add-repository ppa:alexlarsson/flatpak
 sudo apt-add-repository ppa:dawidd0811/neofetch
 sudo apt-add-repository ppa:wereturtle/ppa
