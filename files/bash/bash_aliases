@@ -14,8 +14,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lt='ls -At1 && echo "------Oldest--"'
-alias ltr='ls -Art1 && echo "------Newest--"'
+alias lt='ls -lht && echo "------Oldest--"'
+alias ltr='ls -lhtr && echo "------Newest--"'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
