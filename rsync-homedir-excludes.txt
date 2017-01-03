@@ -32,6 +32,7 @@ Android/Sdk
 Applications/eclipse*
 /Downloads
 *Popcorntime*
+*Popcorn-Time*
 /Scribus
 /VirtualBox*
 *.log
@@ -60,6 +61,7 @@ Applications/eclipse*
 /.cache
 /.Trash
 .local/share/Trash
+.config/*/Cache
 
 # Gnome
 .gnome2_private
@@ -183,6 +185,12 @@ Applications/eclipse*
 
 # Keychain dir (manage SSH and GPG keys, front-end to ssh-agent and ssh-add)
 /.keychain
+
+# Atom
+.atom/compile-cache
+.atom/packages
+.atom/blob-store
+.atom/.apm
 
 #Komodo Edit:
 
