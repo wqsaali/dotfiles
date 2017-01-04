@@ -45,7 +45,8 @@ set $barfont droid sans mono for powerline plus nerd file types 10
 
 set $border_size 1
 
-set $locker dm-tool lock
+# set $locker dm-tool lock
+set $locker gnome-screensaver-command --lock
 set $compositor compton --config  ~/.i3/compton.conf
 
 ###################
