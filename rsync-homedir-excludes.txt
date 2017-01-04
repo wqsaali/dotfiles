@@ -4,6 +4,8 @@
 .AndroidStudio*/
 .ICEauthority
 .PlayOnLinux
+.Private
+.Trash
 .Xauthority
 .adobe
 .android
@@ -12,6 +14,9 @@
 .atom/blob-store
 .atom/compile-cache
 .atom/packages
+.berkshelf
+.bundle
+.cache
 .cddb
 .config/VirtualBox/VBoxGuestAdditions_*.iso
 .config/chromium/Default/Application Cache
@@ -22,6 +27,7 @@
 .config/google-chrome/Default/History Index *
 .config/google-chrome/Default/Local Storage
 .config/google-chrome/Default/Session Storage
+.dbus
 .emacs.d/elpa
 .esd_auth
 .gem
@@ -52,6 +58,8 @@
 .kde4/share/apps/kmess/customemoticons
 .kde4/share/apps/kmess/displaypics
 .kde4/share/apps/okular/docdata
+.keychain
+.knife_autocomplete_cache
 .komodoedit/*/*.xmlc
 .komodoedit/*/XRE/*.sqlite-journal
 .komodoedit/*/XRE/.activatestate/komodo edit/*/Cache
@@ -91,6 +99,8 @@
 .local/share/notbit
 .local/share/torbrowser
 .local/share/zeitgeist
+.log
+.m2/repository
 .macromedia
 .minecraft
 .mozilla/firefox/*/.parentlock
@@ -132,10 +142,10 @@
 .pulse/icons
 .recently-used
 .recently-used.xbel
-.tmux/plugins
 .thumb
 .thumbnails
 .thunderbird/*/Cache
+.tmux/plugins
 .twister
 .vagrant
 .vagrant.d
@@ -144,17 +154,11 @@
 .wayland-errors
 .wine
 .xsession-errors
-.Private
-.Trash
-.cache
-.dbus
-.keychain
-.m2/repository
+Android/Sdk
+Applications/eclipse*
 Downloads
+Dropbox
 Scribus
 VirtualBox*
 games
 twister
-Android/Sdk
-Applications/eclipse*
-Dropbox
