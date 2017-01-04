@@ -132,12 +132,14 @@
 .pulse/icons
 .recently-used
 .recently-used.xbel
+.tmux/plugins
 .thumb
 .thumbnails
 .thunderbird/*/Cache
 .twister
 .vagrant
 .vagrant.d
+.vim/bundle
 .virtualenv
 .wayland-errors
 .wine
