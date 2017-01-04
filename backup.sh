@@ -67,6 +67,14 @@ function restorePackages() {
   sudo apt-mark manual $(cat files/pkgs_manual.lst | tr '\n' ' ')
 }
 
+function backupHomeDir() {
+  if [ ! -d "$1" ]; then
+    echo "$1 is not a valid directory"
+  fi
+  FOLDER=$(echo "$1"|sed 's/\/$//g')
+  sudo rsync -aP --exclude-from=rsync-homedir-excludes.txt $HOME/ $FOLDER/
+}
+
 function restoreRepos() {
   bash restore-repos.sh
   bash restore-ppas.sh
@@ -90,6 +98,9 @@ case "$1" in
     ;;
   "ppas" | "repos" )
     backupPPAs
+    ;;
+  "homedir" | "home" )
+    backupHomeDir $2
     ;;
   "restore" )
     restoreAll

@@ -24,6 +24,7 @@ neovim
 dark-mode
 tmux
 jq
+jid
 tig
 htop
 colordiff
