@@ -18,6 +18,12 @@
 .bundle
 .cache
 .cddb
+.chef/cache
+.chef/syntax_check_cache
+.chefdk
+.compiz
+.composer
+.config/*/Cache
 .config/VirtualBox/VBoxGuestAdditions_*.iso
 .config/chromium/Default/Application Cache
 .config/chromium/Default/History Index *
@@ -28,6 +34,8 @@
 .config/google-chrome/Default/Local Storage
 .config/google-chrome/Default/Session Storage
 .dbus
+.dropbox
+.dropbox-dist
 .emacs.d/elpa
 .esd_auth
 .gem
