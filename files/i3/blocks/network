@@ -1,6 +1,7 @@
 #!/bin/sh
 
 text=''
+short_text=''
 
 for INTERFACE in $(ls /sys/class/net/); do
   state="$(cat /sys/class/net/$INTERFACE/operstate)"
@@ -11,22 +12,27 @@ for INTERFACE in $(ls /sys/class/net/); do
 
     if [ "$INTERFACE" = "wlp4s0" ]; then
       text=" $text |    $iwid    $ipaddr"
+      short_text=" $short_text |    $iwid"
     elif [ "$INTERFACE" = "vpn0" ]; then
       text=" $text |   VPN    $ipaddr"
+      short_text=" $short_text |   VPN "
     else
       text=" $text |   wired    $ipaddr"
+      short_text=" $short_text |   wired "
     fi
   fi
 done
 
 if [ -n "$text" ]; then
   text=$(echo $text | sed "s/^| //")
-  # if nmcli -t -f name,type con show --active | grep -q vpn; then
-  #   text=" $text |  VPN "
-  # else
-  #   text=" $text |  VPN "
-  # fi
   echo "${text}"
 else
-  echo ' '"-/->"' '
+  echo '  Offline '
+fi
+
+if [ -n "$short_text" ]; then
+  short_text=$(echo $short_text | sed "s/^| //")
+  echo "${short_text}"
+else
+  echo '  Offline '
 fi
