@@ -96,7 +96,7 @@ tmux_conf_theme_window_status_bg='#080808'              # dark gray
 tmux_conf_theme_window_status_attr='none'
 #tmux_conf_theme_window_status_format='#I #W'
 #tmux_conf_theme_window_status_format='#{circled_window_index} #W'
-tmux_conf_theme_window_status_format='#I #W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}'
+tmux_conf_theme_window_status_format='#I #W#{?window_bell_flag, ,}#{?window_zoomed_flag, ,}'
 
 # window current status style
 #   - built-in variables are:
@@ -106,7 +106,7 @@ tmux_conf_theme_window_status_current_bg='#55A900'      # green
 tmux_conf_theme_window_status_current_attr='bold'
 #tmux_conf_theme_window_status_current_format='#I #W'
 #tmux_conf_theme_window_status_current_format='#{circled_window_index} #W'
-tmux_conf_theme_window_status_current_format='#I #W#{?window_zoomed_flag, 🔍,}'
+tmux_conf_theme_window_status_current_format='#I #W#{?window_zoomed_flag, ,}'
 
 # window activity status style
 tmux_conf_theme_window_status_activity_fg='default'
@@ -155,7 +155,7 @@ tmux_conf_theme_right_separator_sub=''  #   PowerlineSymbols.otf font
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=' #S#{?window_zoomed_flag, 🔍,} , #{?pane_synchronized,Sync!,•} | ↑#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
+tmux_conf_theme_status_left=' #S#{?window_zoomed_flag, ,} , #{?pane_synchronized,Sync!,•} | ↑#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
 tmux_conf_theme_status_right='#{prefix}#{pairing}#{?battery_status, #{battery_status},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
 
 # status left style
