@@ -252,6 +252,11 @@ bind-key s split-window -v -c '#{pane_current_path}'
 bind V run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -h -c '#{pane_current_path}'"
 bind S run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -v -c '#{pane_current_path}'"
 
+# Layouts
+bind M-v select-layout even-vertical
+bind M-h select-layout even-horizontal
+bind M-t select-layout tiled
+
 bind -r PPage previous-window # select previous window
 bind -r NPage next-window     # select next window
 
@@ -272,5 +277,5 @@ run '~/.tmux/plugins/tpm/tpm'
 
 # TPM is not working this is a temporay workaround
 run '~/.tmux/plugins/tmux-open/open.tmux'
-run '~/.tmux/plugins/tmux-copycat/copycat.tmux'
+# run '~/.tmux/plugins/tmux-copycat/copycat.tmux'
 run '~/.tmux/plugins/tmux-yank/yank.tmux'
