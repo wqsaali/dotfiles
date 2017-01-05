@@ -9,16 +9,16 @@ set $termnial i3-sensible-terminal
 # Set Workspace names with icons
 # icons from: http://fontawesome.io/cheatsheet/
 #
-set $WS1 
-set $WS2 
-set $WS3 
-set $WS4 
-set $WS5 
-set $WS6 
-set $WS7 
-set $WS8 
-set $WS9 
-set $WP0 
+set $ws1 
+set $ws2 
+set $ws3 
+set $ws4 
+set $ws5 
+set $ws6 
+set $ws7 
+set $ws8 
+set $ws9 
+set $ws0 
 
 set $black3 #002b36
 set $black2 #073642
@@ -272,6 +272,10 @@ bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
 
 # Use mod-Control-Left and Right to move the selected window to an
 # adjacent workspace. (This does *not* change your view to that workspace,
