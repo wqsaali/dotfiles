@@ -253,8 +253,8 @@ bind V run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -h -c '#{pan
 bind S run "cut -c3- ~/.tmux.conf | sh -s _split_window #{pane_tty} -v -c '#{pane_current_path}'"
 
 # Layouts
-bind M-v select-layout even-vertical
-bind M-h select-layout even-horizontal
+bind M-h select-layout even-vertical
+bind M-v select-layout even-horizontal
 bind M-t select-layout tiled
 
 bind -r PPage previous-window # select previous window
