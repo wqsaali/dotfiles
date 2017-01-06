@@ -238,6 +238,10 @@ function installDotFiles() {
   fi
 }
 
+function installScripts() {
+  cp -r files/scripts/* $HOME/.local/bin/
+}
+
 function installi3wm() {
   if ! [ -x "$(command -v i3)" ]; then
     sudo apt install i3 i3blocks i3status i3lock compton conky-all alsa-utils mpd mpc ncmpcpp feh lxappearance rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig xcalib xprintidle npm python-pip
@@ -300,6 +304,7 @@ function installAll() {
   installPacakges
   installFonts
   installDotFiles
+  installScripts
   installAtomPackages
   installVimPlugins
   installGnomeTerminalProfiles
@@ -329,6 +334,9 @@ case "$1" in
     ;;
   "i3wm" | "i3")
     installi3wm
+    ;;
+  "scripts")
+    installScripts
     ;;
   *)
     installAll
