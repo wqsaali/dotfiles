@@ -11,16 +11,8 @@ case $BLOCK_BUTTON in
     rfkill unblock bluetooth
   fi
   ;;
-# Middle click
-  2)
-    if [ -x "$(command -v blueman-manager)" ]; then
-      blueman-manager
-    else
-      export XDG_CURRENT_DESKTOP=GNOME; gnome-control-center;
-    fi
-  ;;
-# Right click
-  3)
+# Middle or right click
+  2|3)
     if [ -x "$(command -v blueman-manager)" ]; then
       blueman-manager
     else
