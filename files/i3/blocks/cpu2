@@ -6,6 +6,7 @@ if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
 fi
 
 URGENT_VALUE=90
+ALERT_VALUE=60
 
 PREV_TOTAL=0
 PREV_IDLE=0
@@ -35,12 +36,16 @@ if [[ "${PREV_TOTAL}" != "" ]] && [[ "${PREV_IDLE}" != "" ]]; then
   let "DIFF_TOTAL=$TOTAL-$PREV_TOTAL"
   let "DIFF_USAGE=(1000*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL+5)/10"
   echo " ${DIFF_USAGE}% "
-  echo " ${DIFF_USAGE}% "
-  echo ""
+  echo " ${DIFF_USAGE}%"
+  if [[ "${DIFF_USAGE}" -gt 0 ]] && [[ "${DIFF_USAGE}" -gt "${ALERT_VALUE}" ]]; then
+    echo "#FF0000"
+  else
+    echo ""
+  fi
 else
   echo "?"
   echo "?"
-  echo ""
+  echo "#FF0000"
 fi
 
 # Remember the total and idle CPU times for the next check.

@@ -31,3 +31,4 @@ esac
 light=$(cat $BRIGHTNESS_PATH)
 light=$(($(($light*100))/$MAXBRIGHTNESS))
 echo " $light% "
+echo " $light%"

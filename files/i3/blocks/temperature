@@ -1,27 +1,35 @@
 #!/usr/bin/env bash
 # vim:ts=4:sw=4:expandtab
+
 OUTPUT=$(sensors -Au)
-# IFS=$'\n'
 NCORES=$(sensors -Au | grep -c "Core")
 CURRENT=""
 HIGH=""
 icon=' '
+color=''
 
 for i in $(seq 0 $(($NCORES -1))); do
   CORE="Core $i"
   DATA=$(echo "${OUTPUT}" | egrep -A4 "${CORE}")
   CURRENT="$(echo "${DATA}" | grep -Po "(?<=_input: )([0-9]+)") $CURRENT"
   HIGH="$(echo "${DATA}" | grep -Po "(?<=_max: )([0-9]+)") $HIGH"
-  #CRIT=$(echo "${DATA}" | grep -Po "(?<=_crit: )([0-9]+)")
+  # CRIT=$(echo "${DATA}" | grep -Po "(?<=_crit: )([0-9]+)")
 done
 
-# HIGH=$(echo $HIGH | sed -e 's/\s*$//g')
 HIGH=($HIGH)
-# CURRENT=$(echo $CURRENT | sed -e 's/\s*$//g')
+# CRIT=($CRIT)
 CURRENT=($CURRENT)
 
 echo " ${icon} ${CURRENT[@]} "
-#[[ "${CURRENT[0]}" -lt 50 ]] && echo ''&& echo "#808080"
+echo "${icon} ${CURRENT[@]}"
 
-[[ "${CURRENT[0]}" -gt "${HIGH[0]}" ]] && exit 33
+for i in $(seq 0 $(($NCORES -1))); do
+  if [[ "${CURRENT[$i]}" -gt "${HIGH[$i]}" ]]; then
+    color="FF0000"
+  fi
+done
+# for i in $(seq 0 $(($NCORES -1))); do
+#   [[ "${CURRENT[$i]}" -gt "${CRIT[$i]}" ]] && exit 33
+# done
+echo "${color}"
 exit 0

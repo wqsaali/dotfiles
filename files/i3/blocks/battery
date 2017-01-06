@@ -10,12 +10,12 @@ then
   case "$status" in
     "Discharging")
       symbol=''
-      remaining="$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "time" | cut -d ' ' -f 14-15)"
+      remaining="$(upower -i /org/freedesktop/UPower/devices/battery_$INSTANCE | grep -E "time" | cut -d ' ' -f 14-15)"
       #remaining="$(acpi)"
       ;;
     "Charging")
       symbol=''
-      remaining="$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "time" | cut -d ' ' -f 15-16)"
+      remaining="$(upower -i /org/freedesktop/UPower/devices/battery_$INSTANCE | grep -E "time" | cut -d ' ' -f 15-16)"
       #remaining="$(acpi)"
       ;;
     "Full")
@@ -54,12 +54,14 @@ then
   echo "$baticon $capacity% $symbol"
 
   # Color
-  #if test $capacity -le $ALERT_LOW -a $status = "Discharging"
-  #then
-  #echo "#F5A3A3"
-  #fi
-  #if [ $status = "Charging" ]
-  #then
-  #echo "#70CBB6"
-  #fi
+  color=''
+  if test $capacity -le $ALERT_LOW -a $status = "Discharging"
+  then
+  color="#FF0000"
+  fi
+  if test $capacity -le 100 -a $status = "Charging"
+  then
+  color="#00FF00"
+  fi
+  echo "${color}"
 fi

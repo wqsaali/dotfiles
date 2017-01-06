@@ -31,4 +31,5 @@ esac
 
 state=$(bluetooth | cut -d ' ' -f3 | tr o O)
 echo "  $state "
+echo " $state"
 
