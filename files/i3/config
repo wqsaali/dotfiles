@@ -321,8 +321,10 @@ bindsym Control+$mod+Mod1+space exec --no-startup-id mpc toggle && pkill -RTMIN+
 bindsym Control+$mod+Mod1+n exec --no-startup-id mpc next && pkill -RTMIN+12 i3blocks
 bindsym Control+$mod+Mod1+p exec --no-startup-id mpc previous && pkill -RTMIN+12 i3blocks
 
-bindsym XF86PowerOff exec --no-startup-id $locker
+# bindsym XF86PowerOff exec --no-startup-id $locker
 bindsym $mod+XF86PowerOff exec --no-startup-id systemctl suspend
+bindsym $mod+Shift+XF86PowerOff exec --no-startup-id poweroff
+bindsym XF86PowerOff mode "$mode_system"
 
 # Screenshots
 # bindsym --release $mod+Shift+p exec --no-startup-id scrot -s ~/Pictures/Screenshots/%y-%b-%d_%H%M%S.png
