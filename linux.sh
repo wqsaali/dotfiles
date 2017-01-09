@@ -239,6 +239,7 @@ function installDotFiles() {
 }
 
 function installScripts() {
+  mkdir -p $HOME/.local/bin/
   cp -r files/scripts/* $HOME/.local/bin/
 }
 
@@ -252,9 +253,9 @@ function installi3wm() {
   mkdir -p $HOME/.config/i3
   cp -r files/i3/* $HOME/.config/i3/
 
-  if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
-    sudo cp files/nautilus-i3 /usr/bin/
-  fi
+  # if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
+  #   sudo cp files/nautilus-i3 /usr/bin/
+  # fi
 
   if [ ! -s $HOME/.i3 ]; then
     ln -s $HOME/.config/i3 $HOME/.i3

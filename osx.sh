@@ -155,6 +155,11 @@ function installFonts() {
   fi
 }
 
+function installScripts() {
+  mkdir -p $HOME/.local/bin/
+  cp -r files/scripts/* $HOME/.local/bin/
+}
+
 function installDotFiles() {
   mkdir -p $HOME/.bash/
   mkdir -p $HOME/.vim/
@@ -297,6 +302,9 @@ case "$1" in
     ;;
   "atompackages" | "apkgs" | "atom")
     installAtomPackages
+    ;;
+  "scripts")
+    installScripts
     ;;
   *)
     installAll
