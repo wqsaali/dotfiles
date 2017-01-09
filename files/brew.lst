@@ -35,4 +35,5 @@ kubernetes-cli
 kube-aws
 imagemagick
 docker-compose
+git
 bash-completion

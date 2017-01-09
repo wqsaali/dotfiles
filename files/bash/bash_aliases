@@ -1,13 +1,13 @@
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  #alias dir='dir --color=auto'
+  #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # some more ls aliases
@@ -320,6 +320,29 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias tap='brew tap'
   alias brew-upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
   alias brew-cleanup='brew cleanup && brew cask cleanup'
+
+  brew-cask-upgrade() {
+    if [ "$1" != '--continue' ]; then
+      echo "Removing brew cache"
+      rm -rf "$(brew --cache)"
+      echo "Running brew update"
+      brew update
+    fi
+    for c in $(brew cask list); do
+      echo -e "\n\nInstalled versions of $c: "
+      ls /opt/homebrew-cask/Caskroom/$c
+      echo "Cask info for $c"
+      brew cask info $c
+      select ynx in "Yes" "No" "Exit"; do
+        case $ynx in
+          "Yes") echo "Uninstalling $c"; brew cask uninstall --force "$c"; echo "Re-installing $c"; brew cask install "$c"; break;;
+          "No") echo "Skipping $c"; break;;
+          "Exit") echo "Exiting brew-cask-upgrade"; return;;
+        esac
+      done
+    done
+  }
+  alias cask-upgrade='brew-cask-upgrade'
 fi
 
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
