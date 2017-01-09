@@ -6,7 +6,7 @@ if [[ "$OSTYPE" != "darwin"* ]]; then
   exit 1
 fi
 
-PWD=$(pwd)
+INSTALLDIR=$(pwd)
 
 fancy_echo() {
   local fmt="$1"; shift
@@ -151,8 +151,9 @@ function installFonts() {
   else
     cd $HOME/Library/Fonts/ubuntu-mono-powerline-ttf
     git pull
-    cd ${PWD}
+    cd ${INSTALLDIR}
   fi
+  cd ${INSTALLDIR}
 }
 
 function installScripts() {
@@ -166,6 +167,8 @@ function installDotFiles() {
   mkdir -p $HOME/.vim/ftdetect
   mkdir -p $HOME/.vim/ftplugin
   mkdir -p $HOME/.atom/
+
+  cd ${INSTALLDIR}
 
   cp files/bash/git_prompt.sh $HOME/.bash/
   cp files/bash/shell_prompt.sh $HOME/.bash/
@@ -216,7 +219,7 @@ function installDotFiles() {
   else
     cd $HOME/.bash/bash-git-prompt
     git pull
-    cd ${PWD}
+    cd ${INSTALLDIR}
   fi
 
   if [ ! -d  $HOME/.bash/powerline-shell ]; then
@@ -224,7 +227,7 @@ function installDotFiles() {
   else
     cd $HOME/.bash/powerline-shell
     git pull
-    cd ${PWD}
+    cd ${INSTALLDIR}
   fi
 
   if [ ! -d  $HOME/.tmux ]; then
@@ -232,12 +235,12 @@ function installDotFiles() {
   else
     cd $HOME/.tmux/
     git pull
-    cd ${PWD}
+    cd ${INSTALLDIR}
   fi
   if [ ! -s $HOME/.tmux.conf ]; then
     ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
   fi
-  cd ${PWD}
+  cd ${INSTALLDIR}
 }
 
 function installFish() {
@@ -251,12 +254,12 @@ function installFish() {
 }
 
 function installAtomPackages() {
-  cd ${PWD}
+  cd ${INSTALLDIR}
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* $HOME/.atom/
   apm install --packages-file files/atom-packages.lst
-  cd ${PWD}
+  cd ${INSTALLDIR}
 }
 
 function installVimPlugins() {
@@ -274,6 +277,7 @@ function installVimPlugins() {
   vim +PluginInstall +qall
   cd $HOME/.vim/bundle/YouCompleteMe
   ./install.py
+  cd ${INSTALLDIR}
 }
 
 function installAll() {
@@ -300,7 +304,7 @@ case "$1" in
   "vimplugins" | "vim")
     installVimPlugins
     ;;
-  "atompackages" | "apkgs" | "atom")
+  "atompackages" | "apkgs" | "atom" | "apm")
     installAtomPackages
     ;;
   "scripts")

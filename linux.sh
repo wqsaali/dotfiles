@@ -6,7 +6,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   exit 1
 fi
 
-PWD=$(pwd)
+INSTALLDIR=$(pwd)
 
 function fancy_echo() {
   # red=`tput setaf 1`
@@ -50,7 +50,7 @@ function installVagrantPlugins() {
 }
 
 function installHashicorp() {
-  cd ${PWD}
+  cd ${INSTALLDIR}
   # List available packages with: curl --silent https://releases.hashicorp.com/index.json | jq 'keys[]'
   # Get URLs for most recent versions
   url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | egrep "linux.*64" | sort -rh | head -1 | awk -F[\"] '{print $4}')
@@ -58,7 +58,7 @@ function installHashicorp() {
   curl -o package.zip $url
   unzip package.zip
   rm package.zip
-  cd ${PWD}
+  cd ${INSTALLDIR}
 }
 
 function installKubernetes() {
@@ -66,7 +66,7 @@ function installKubernetes() {
   curl -sS https://get.k8s.io | bash
   rm -rf kubernetes.tar.gz
   ln -s ~/.local/bin/kubernetes/client/bin/* ~/.local/bin/
-  cd ${PWD}
+  cd ${INSTALLDIR}
 }
 
 function installPacakges() {
@@ -119,9 +119,10 @@ function installFonts() {
   else
     cd $HOME/.fonts/ubuntu-mono-powerline-ttf
     git pull
-    cd ${PWD}
+    cd ${INSTALLDIR}
   fi
   sudo fc-cache -vf
+  cd ${INSTALLDIR}
 }
 
 function installGnomeTerminalProfiles() {
@@ -146,7 +147,6 @@ function installDotFiles() {
     sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt-get update && sudo apt-get install hh
   fi
 
-  cd ${PWD}
   mkdir -p $HOME/.bash/
   mkdir -p $HOME/.vim/
   mkdir -p $HOME/.vim/ftdetect
@@ -154,6 +154,8 @@ function installDotFiles() {
   mkdir -p $HOME/.atom/
   mkdir -p $HOME/.config/terminator/
   mkdir -p $HOME/.config/i3
+
+  cd ${INSTALLDIR}
 
   cp -r files/i3/* $HOME/.config/i3/
   if [ ! -s $HOME/.i3 ]; then
@@ -215,7 +217,7 @@ function installDotFiles() {
   else
     cd $HOME/.bash/bash-git-prompt
     git pull
-    cd ${PWD}
+    cd ${INSTALLDIR}
   fi
 
   if [ ! -d  $HOME/.bash/powerline-shell ]; then
@@ -223,7 +225,7 @@ function installDotFiles() {
   else
     cd $HOME/.bash/powerline-shell
     git pull
-    cd ${PWD}
+    cd ${INSTALLDIR}
   fi
 
   if [ ! -d  $HOME/.tmux ]; then
@@ -231,7 +233,7 @@ function installDotFiles() {
   else
     cd $HOME/.tmux/
     git pull
-    cd ${PWD}
+    cd ${INSTALLDIR}
   fi
   if [ ! -s $HOME/.tmux.conf ]; then
     ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
@@ -275,7 +277,7 @@ function installFish() {
 }
 
 function installAtomPackages() {
-  cd ${PWD}
+  cd ${INSTALLDIR}
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* $HOME/.atom/
@@ -283,7 +285,7 @@ function installAtomPackages() {
 }
 
 function installVimPlugins() {
-  cd ${PWD}
+  cd ${INSTALLDIR}
   mkdir -p $HOME/.vim/ftdetect
   mkdir -p $HOME/.vim/ftplugin
   mkdir -p $HOME/.vim/bundle/
@@ -298,7 +300,7 @@ function installVimPlugins() {
   vim +PluginInstall +qall
   cd $HOME/.vim/bundle/YouCompleteMe
   ./install.py
-  cd ${PWD}
+  cd ${INSTALLDIR}
 }
 
 function installAll() {
@@ -327,7 +329,7 @@ case "$1" in
   "vimplugins" | "vim")
     installVimPlugins
     ;;
-  "atompackages" | "apkgs" | "atom")
+  "atompackages" | "apkgs" | "atom" | "apm")
     installAtomPackages
     ;;
   "termProfiles" | "gnomeTermProfiles")
