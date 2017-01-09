@@ -1,4 +1,6 @@
+cask
 brew-cask
+cmake
 bash
 ccat
 source-highlight
@@ -17,7 +19,6 @@ openssl
 wget
 reattach-to-user-namespace
 the_silver_searcher
-cmake
 vim
 macvim
 neovim

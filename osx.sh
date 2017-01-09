@@ -27,7 +27,7 @@ brew_install_or_upgrade() {
 
 cask_install() {
     fancy_echo "Installing $1 ..."
-    brew cask install "$@ --appdir=/Applications"
+    brew cask install $@ --appdir=/Applications
 }
 
 brew_is_installed() {
@@ -87,7 +87,7 @@ function installVagrantPlugins() {
    vagrant plugin install vagrant-nuke
 }
 
-function installPacakges() {
+function installPackages() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'You need to install git!' >&2
     xcode-select --install
@@ -101,15 +101,15 @@ function installPacakges() {
   brew_tap 'neovim/neovim'
   brew update
 
-  curl -s https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh | sh
+  /bin/bash "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
 
   while read -r PKG; do
     brew_install_or_upgrade "$PKG"
-  done < brew.lst
+  done < files/brew.lst
 
   while read -r PKG; do
     cask_install "$PKG"
-  done < cask.lst
+  done < files/cask.lst
 
   sudo echo $(brew --prefix)/bin/bash >> /etc/shells && \
   chsh -s $(brew --prefix)/bin/bash
@@ -133,11 +133,7 @@ function installFonts() {
   sudo chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
   mv *.otf $HOME/Library/Fonts
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-  sudo mv PowerlineSymbols.otf /usr/share/fonts/
-  wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
-  sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
-  wget https://github.com/powerline/fonts/raw/master/Terminus/PSF/ter-powerline-v16b.psf.gz
-  sudo mv ter-powerline-v16b.psf.gz /usr/share/consolefonts/
+  sudo mv PowerlineSymbols.otf $HOME/Library/Fonts/
   if ! [ -d $HOME/Library/Fonts/ubuntu-mono-powerline-ttf ]; then
     git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git $HOME/Library/Fonts/ubuntu-mono-powerline-ttf
   else
@@ -224,6 +220,7 @@ function installDotFiles() {
   if [ ! -s $HOME/.tmux.conf ]; then
     ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
   fi
+  cd ${PWD}
 }
 
 function installFish() {
@@ -237,10 +234,12 @@ function installFish() {
 }
 
 function installAtomPackages() {
+  cd ${PWD}
   # Backup package list with:
-  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-apt.lst
+  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* $HOME/.atom/
-  apm install --packages-file files/atom-apt.lst
+  apm install --packages-file files/atom-packages.lst
+  cd ${PWD}
 }
 
 function installVimPlugins() {
@@ -261,16 +260,16 @@ function installVimPlugins() {
 }
 
 function installAll() {
-  installPacakges
+  installPackages
+  installVimPlugins
   installFonts
   installDotFiles
-  installVimPlugins
   installAtomPackages
 }
 
 case "$1" in
   "packages" | "pkgs")
-    installPacakges
+    installPackages
     ;;
   "dotfiles")
    installDotFiles

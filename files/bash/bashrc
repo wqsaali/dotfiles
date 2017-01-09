@@ -2,7 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-if [[ $(tty) == /dev/tty* ]]; then
+if [ $(tty) == /dev/tty* ] && [ "$OSTYPE" == "linux-gnu" ]; then
   setfont ter-powerline-v16b.psf.gz
 fi
 
