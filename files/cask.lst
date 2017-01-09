@@ -9,6 +9,7 @@ docker-compose
 hab
 google-chrome
 skype
+slack
 flux
 caffeine
 firefox
