@@ -141,7 +141,9 @@ fi
 
 eval $(thefuck --alias)
 
-source /etc/profile.d/vte-2.91.sh
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  source /etc/profile.d/vte-2.91.sh
+fi
 
 # gitprompt configuration
 
