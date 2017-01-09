@@ -37,6 +37,13 @@ brew_is_installed() {
   brew list -1 | grep -Fqx "$name"
 }
 
+cask_is_installed() {
+  local name
+  name="$(cask_expand_alias "$1")"
+
+  brew cask list -1 | grep -Fqx "$name"
+}
+
 brew_is_upgradable() {
   local name
   name="$(brew_expand_alias "$1")"
@@ -50,6 +57,10 @@ brew_tap() {
 
 brew_expand_alias() {
   brew info "$1" 2>/dev/null | head -1 | awk '{gsub(/.*\//, ""); gsub(/:/, ""); print $1}'
+}
+
+cask_expand_alias() {
+  brew cask info "$1" 2>/dev/null | head -1 | awk '{gsub(/.*\//, ""); gsub(/:/, ""); print $1}'
 }
 
 brew_launchctl_restart() {
@@ -99,6 +110,7 @@ function installPackages() {
   brew_tap 'caskroom/fonts'
   brew_tap 'homebrew/services'
   brew_tap 'neovim/neovim'
+  brew_tap 'buo/cask-upgrade'
   brew update
 
   /bin/bash "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"

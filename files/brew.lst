@@ -34,4 +34,5 @@ terraform
 kubernetes-cli
 kube-aws
 imagemagick
+docker-compose
 bash-completion
