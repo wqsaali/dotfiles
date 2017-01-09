@@ -93,6 +93,7 @@ function installPacakges() {
     xcode-select --install
     exit 1
   fi
+  sudo spctl --master-disable
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew_tap 'caskroom/cask'
   brew_tap 'caskroom/fonts'
