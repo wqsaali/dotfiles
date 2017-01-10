@@ -32,6 +32,7 @@ colordiff
 packer
 terraform
 kubernetes-cli
+openshift-cli
 kube-aws
 imagemagick
 docker-compose

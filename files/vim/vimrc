@@ -99,7 +99,7 @@
   " endif
 
   if has('gui_macvim')
-    set transparency=10
+    set transparency=5
   endif
 
   color Tomorrow-Night-Bright
@@ -110,8 +110,10 @@
 
   if has('autocmd')
     au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
-    au ColorScheme * hi! Normal ctermbg=none guibg=NONE
-    au ColorScheme * hi! NonText ctermbg=none guibg=NONE
+    if ! has('gui_macvim')
+      au ColorScheme * hi! Normal ctermbg=none guibg=NONE
+      au ColorScheme * hi! NonText ctermbg=none guibg=NONE
+    endif
     au ColorScheme * hi! Folded ctermbg=none guibg=NONE
     au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
 
@@ -119,7 +121,7 @@
     au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none
   endif
 
-  set guifont=droid\ sans\ mono\ for\ powerline\ plus\ nerd\ file\ types\ 10
+  set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
 " }
 
 " GeneralSettings {
