@@ -48,6 +48,13 @@ _gitlab() {
 }
 complete -F _gitlab gitlab
 
+_bitbucket() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local bitbucket=$(bitbucket; ls -1)
+  COMPREPLY=( $(compgen -W "$bitbucket" -- $cur) );
+}
+complete -F _bitbucket bitbucket
+
 _code() {
   local cur=${COMP_WORDS[COMP_CWORD]};
   local code=$(code; ls -1)
