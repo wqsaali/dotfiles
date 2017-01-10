@@ -18,6 +18,7 @@
       "activate-power-mode"
       "automate-power-mode"
       "welcome"
+      "scroll-searcher"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "limited"
@@ -26,8 +27,7 @@
       "one-sharp-syntax"
     ]
   editor:
-    fontFamily: "droid sans mono for powerline plus nerd file types"
-    fontSize: 13
+    fontSize: 11
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -40,6 +40,9 @@
   "git-diff": {}
   "git-history": {}
   "git-log": {}
+  "git-plus":
+    general:
+      _analyticsUserId: "eb326373-bb43-4f00-bf71-50474208d826"
   "git-status": {}
   "highlight-line":
     hideHighlightOnSelect: true
