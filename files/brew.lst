@@ -32,6 +32,7 @@ colordiff
 packer
 terraform
 kubernetes-cli
+kubernetes-helm
 kops
 openshift-cli
 kube-aws
