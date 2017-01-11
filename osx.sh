@@ -83,8 +83,14 @@ gem_install_or_update() {
     gem update "$@"
   else
     gem install "$@"
-    rbenv rehash
+    # rbenv rehash
   fi
+}
+
+function installGems() {
+  while read -r PKG; do
+    gem_install_or_upgrade "$PKG"
+  done < files/gem.lst
 }
 
 function installVagrantPlugins() {
@@ -282,10 +288,11 @@ function installVimPlugins() {
 
 function installAll() {
   installPackages
-  installVimPlugins
   installFonts
   installDotFiles
+  installScripts
   installAtomPackages
+  installVimPlugins
 }
 
 case "$1" in

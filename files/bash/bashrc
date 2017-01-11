@@ -130,6 +130,10 @@ if [ -x "$(command -v aws_completer)" ]; then
   complete -C 'aws_completer' aws
 fi
 
+if [ -x "$(command -v kontena)" ]; then
+  . "$( kontena whoami --bash-completion-path )"
+fi
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
       . $(brew --prefix)/etc/bash_completion

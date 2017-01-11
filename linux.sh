@@ -38,6 +38,21 @@ function installDocker() {
   sudo usermod -aG docker `echo $USER`
 }
 
+gem_install_or_update() {
+  if gem list "$1" --installed > /dev/null; then
+    gem update "$@"
+  else
+    gem install "$@"
+    # rbenv rehash
+  fi
+}
+
+function installGems() {
+  while read -r PKG; do
+    gem_install_or_upgrade "$PKG"
+  done < files/gem.lst
+}
+
 function installVagrantPlugins() {
   # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
   if ! [ -x "$(command -v vagrant)" ]; then
@@ -69,7 +84,7 @@ function installKubernetes() {
   cd ${INSTALLDIR}
 }
 
-function installPacakges() {
+function installPackages() {
   sudo apt-get update
   cat files/apt-core.lst | tr '\n' ' ' | xargs sudo apt-get install -y
   sudo apt-mark manual $(cat files/apt-core.lst | tr '\n' ' ')
@@ -304,7 +319,7 @@ function installVimPlugins() {
 }
 
 function installAll() {
-  installPacakges
+  installPackages
   installFonts
   installDotFiles
   installScripts
@@ -315,7 +330,7 @@ function installAll() {
 
 case "$1" in
   "packages" | "pkgs")
-    installPacakges
+    installPackages
     ;;
   "dotfiles")
    installDotFiles
