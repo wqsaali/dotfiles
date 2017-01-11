@@ -332,15 +332,15 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       brew update
     fi
     for c in $(brew cask list); do
-      echo -e "\n\nInstalled versions of $c:"
       installed=$(ls $(brew --prefix)/Caskroom/$c)
-      echo "$installed"
-      echo -e "\nCask info for $c:"
       info=$(brew cask info $c)
-      echo "$info"
       installed_version=$(echo $installed)
       info_version=$(echo $info | grep "$c: " | cut -d ' ' -f2)
       if [[ "$installed_version" != "$info_version" ]]; then
+        echo -e "\n\nInstalled versions of $c:"
+        echo "$installed"
+        echo -e "\nCask info for $c:"
+        echo "$info"
         select ynx in "Yes" "No" "Exit"; do
           case $ynx in
             "Yes") echo "Re-installing $c"; brew cask reinstall "$c"; break;;
