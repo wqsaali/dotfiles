@@ -332,17 +332,25 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       brew update
     fi
     for c in $(brew cask list); do
-      echo -e "\n\nInstalled versions of $c: "
-      ls /opt/homebrew-cask/Caskroom/$c
-      echo "Cask info for $c"
-      brew cask info $c
-      select ynx in "Yes" "No" "Exit"; do
-        case $ynx in
-          "Yes") echo "Uninstalling $c"; brew cask uninstall --force "$c"; echo "Re-installing $c"; brew cask install "$c"; break;;
-          "No") echo "Skipping $c"; break;;
-          "Exit") echo "Exiting brew-cask-upgrade"; return;;
-        esac
-      done
+      echo -e "\n\nInstalled versions of $c:"
+      installed=$(ls $(brew --prefix)/Caskroom/$c)
+      echo "$installed"
+      echo -e "\nCask info for $c:"
+      info=$(brew cask info $c)
+      echo "$info"
+      installed_version=$(echo $installed)
+      info_version=$(echo $info | grep "$c: " | cut -d ' ' -f2)
+      if [[ "$installed_version" != "$info_version" ]]; then
+        select ynx in "Yes" "No" "Exit"; do
+          case $ynx in
+            "Yes") echo "Re-installing $c"; brew cask reinstall "$c"; break;;
+            "No") echo "Skipping $c"; break;;
+            "Exit") echo "Exiting brew-cask-upgrade"; return;;
+          esac
+        done
+      else
+          echo -e "\n>>> $c is up to date"
+      fi
     done
   }
   alias cask-upgrade='brew-cask-upgrade'
