@@ -349,6 +349,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias sysState="top -l 1 -s 0 | awk ' /Processes/ || /PhysMem/ || /Load Avg/{print}'"
 
 alias cls="clear"
 
