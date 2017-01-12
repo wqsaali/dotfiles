@@ -468,14 +468,14 @@
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 fun! DiffToggle()
-    if &diff
-       windo set cursorline
-       windo diffoff
-    else
-       windo set nocursorline
-       windo diffthis
-    endif
-:endfun
+  if &diff
+    windo set cursorline
+    windo diffoff
+  else
+    windo set nocursorline
+    windo diffthis
+  endif
+endfun
 
 command! DiffToggle call DiffToggle()
 nnoremap <silent> <Leader>df :call DiffToggle()<CR>
