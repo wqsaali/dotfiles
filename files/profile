@@ -24,3 +24,6 @@ if [ -d "$HOME/.local/bin" ] ; then
   PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d '/usr/local/opt/coreutils/libexec/gnubin' ]; then
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi

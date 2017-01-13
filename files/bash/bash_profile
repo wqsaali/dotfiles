@@ -1,3 +1,3 @@
-if [ -f "$HOME/.bashrc" ] && [ "$CONFIGURED" != "true" ]; then
-  . "$HOME/.bashrc"
+if [ -f "$HOME/.profile" ] && [ "$CONFIGURED" != "true" ]; then
+  . "$HOME/.profile"
 fi

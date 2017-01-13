@@ -37,6 +37,8 @@ kops
 openshift-cli
 kube-aws
 imagemagick
+exif
+exiftool
 docker-compose
 git
 bash-completion
