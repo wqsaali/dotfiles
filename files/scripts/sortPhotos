@@ -70,7 +70,7 @@ do
     FILETYPE=$(toUpper ${f#*.})
     timestamp=""
 
-    if [ "$FILETYPE" = "JPG" -o "$FILETYPE" = "NEF" ]; then
+    if [ "$FILETYPE" = "JPG" ]; then
       ##Using exiv2:
       #timestamp=$(exiv2 "${f}" | grep timestamp | cut -d " " -f4)
       ##Using exif:
