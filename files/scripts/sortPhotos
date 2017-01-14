@@ -3,6 +3,10 @@
 # When possible it uses the exif information on the photo to get the original date
 # otherwise it uses the last modification date
 
+STAT_CMD='stat'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  STAT_CMD='gstat'
+fi
 cfgSource="$1"
 cfgDestRoot="$2"
 
@@ -23,7 +27,7 @@ if [ "$#" != "2" ]; then
   exit 1
 fi
 
-which stat > /dev/null
+which $STAT_CMD > /dev/null
 
 # make sure stat command is installed
 if [ $? -eq 1 ]
@@ -42,12 +46,12 @@ then
 fi
 
 # using a tmp file you can have spaces in the file path
-find "$cfgSource" -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.cr2" -o -iname "*.nef" -o -iname "*.png" -o -iname "*.bmp" -o -iname "*.avi" -o -iname "*.mov" -o -iname "*.mpg" -o -iname "*.mp4" > images.tmp
+find "$cfgSource" -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.cr2" -o -iname "*.nef" -o -iname "*.png" -o -iname "*.bmp" -o -iname "*.avi" -o -iname "*.mov" -o -iname "*.mpg" -o -iname "*.mp4" > /tmp/images.tmp
 
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 
-cat ./images.tmp | while read f;
+cat /tmp/images.tmp | while read f;
 do
   #f=$(escapeSpaces "${f}")
   # Make sure the file we've been given by find actually exists.
@@ -78,7 +82,7 @@ do
     #If identify fails to read the date from exif
     # or file is not an image, use stat to get last modification date
     if [ "${timestamp}" = "" ]; then
-      timestamp=$(stat -c %y ${f})
+      timestamp=$($STAT_CMD -c %y ${f})
     fi
 
     # Looks like there are three possible timestamp formats:
@@ -113,8 +117,8 @@ do
         rm "${f}"
       else
         # Is this file larger than the existing one?
-        sizeSrc=$(stat -c%s "$f")
-        sizeDst=$(stat -c%s "$destFile")
+        sizeSrc=$($STAT_CMD -c%s "$f")
+        sizeDst=$($STAT_CMD -c%s "$destFile")
         echo "Duplicate Found, keeping the larger file."
         if [ $sizeSrc -gt $sizeDst ]; then
           mv "${f}" "$destFile"
@@ -144,6 +148,6 @@ find "$cfgSource" -type d -empty -delete
 #find "$cfgSource" -depth -type d -empty -exec rmdir -v {} +
 
 #Delete temporary file
-rm images.tmp
+rm /tmp/images.tmp
 
 echo "Done."
