@@ -15,7 +15,7 @@ complete -F _dockerfiles dockerfiles
 
 _kubectl-enter() {
   local cur=${COMP_WORDS[COMP_CWORD]};
-  local pods=$(kubectl get pods -o name)
+  local pods=$(kubectl get pods -o name | sed -e 's@pod/@@')
   COMPREPLY=( $(compgen -W "$pods" -- $cur) );
 }
 complete -F _kubectl-enter kubectl-enter
