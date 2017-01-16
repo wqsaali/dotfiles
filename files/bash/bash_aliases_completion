@@ -18,7 +18,7 @@ _kubectl-enter() {
   local pods=$(kubectl get pods -o name)
   COMPREPLY=( $(compgen -W "$pods" -- $cur) );
 }
-complete -F _docker-enter docker-enter
+complete -F _kubectl-enter kubectl-enter
 
 _terraformfiles() {
   local cur=${COMP_WORDS[COMP_CWORD]};
