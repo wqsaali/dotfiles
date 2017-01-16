@@ -304,9 +304,11 @@ function installVimPlugins() {
   mkdir -p $HOME/.vim/ftdetect
   mkdir -p $HOME/.vim/ftplugin
   mkdir -p $HOME/.vim/bundle/
+  mkdir -p $HOME/.config/nvim
   cp files/vim/vimrc $HOME/.vimrc
   cp files/vim/vimrc.local $HOME/.vimrc.local
   cp -r files/vim/ft* $HOME/.vim/
+  ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
 
   if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
