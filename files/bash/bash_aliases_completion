@@ -13,6 +13,13 @@ _dockerfiles() {
 }
 complete -F _dockerfiles dockerfiles
 
+_kubectl-enter() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local pods=$(kubectl get pods -o name)
+  COMPREPLY=( $(compgen -W "$pods" -- $cur) );
+}
+complete -F _docker-enter docker-enter
+
 _terraformfiles() {
   local cur=${COMP_WORDS[COMP_CWORD]};
   local terraformfiles=$(terraformfiles; ls -1)
