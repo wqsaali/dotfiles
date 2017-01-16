@@ -78,22 +78,7 @@ brew_launchctl_restart() {
   launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
 }
 
-gem_install_or_update() {
-  if gem list "$1" --installed > /dev/null; then
-    gem update "$@"
-  else
-    gem install "$@"
-    # rbenv rehash
-  fi
-}
-
-function installGems() {
-  while read -r PKG; do
-    gem_install_or_upgrade "$PKG"
-  done < files/gem.lst
-}
-
-function installVagrantPlugins() {
+installVagrantPlugins() {
   # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
   if ! [ -x "$(command -v vagrant)" ]; then
     cask_install vagrant
@@ -104,7 +89,7 @@ function installVagrantPlugins() {
    vagrant plugin install vagrant-nuke
 }
 
-function installPackages() {
+installPackages() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'You need to install git!' >&2
     xcode-select --install
@@ -146,7 +131,7 @@ function installPackages() {
   brew cask cleanup
 }
 
-function installFonts() {
+installFonts() {
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   sudo chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
   mv *.otf $HOME/Library/Fonts
@@ -162,12 +147,7 @@ function installFonts() {
   cd ${INSTALLDIR}
 }
 
-function installScripts() {
-  mkdir -p $HOME/.local/bin/
-  cp -r files/scripts/* $HOME/.local/bin/
-}
-
-function installDotFiles() {
+installDotFiles() {
   mkdir -p $HOME/.bash/
   mkdir -p $HOME/.vim/
   mkdir -p $HOME/.vim/ftdetect
@@ -181,9 +161,9 @@ function installDotFiles() {
   cp files/bash/bashrc $HOME/.bashrc
   cp files/bash/bash_variables $HOME/.bash_variables
   cp files/bash/bash_profile $HOME/.bash_profile
+  cp files/profile $HOME/.profile
   cp files/screenrc $HOME/.screenrc
   cp files/tmux.conf.local $HOME/.tmux.conf.local
-  cp files/profile $HOME/.profile
   mkdir -p $HOME/.vim/ftdetect
   mkdir -p $HOME/.vim/ftplugin
   cp -r files/vim/ft* $HOME/.vim/
@@ -249,7 +229,7 @@ function installDotFiles() {
   cd ${INSTALLDIR}
 }
 
-function installFish() {
+installFish() {
   brew install fish
   curl -sfL https://git.io/fundle-install | fish
   curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
@@ -259,36 +239,7 @@ function installFish() {
   fisher teapot
 }
 
-function installAtomPackages() {
-  cd ${INSTALLDIR}
-  # Backup package list with:
-  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
-  cp files/atom/* $HOME/.atom/
-  apm install --packages-file files/atom-packages.lst
-  cd ${INSTALLDIR}
-}
-
-function installVimPlugins() {
-  mkdir -p $HOME/.vim/ftdetect
-  mkdir -p $HOME/.vim/ftplugin
-  mkdir -p $HOME/.vim/bundle/
-  mkdir -p $HOME/.config/nvim
-  cp files/vim/vimrc $HOME/.vimrc
-  cp files/vim/vimrc.local $HOME/.vimrc.local
-  cp -r files/vim/ft* $HOME/.vim/
-  ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
-
-  if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-  fi
-
-  vim +PluginInstall +qall
-  cd $HOME/.vim/bundle/YouCompleteMe
-  ./install.py
-  cd ${INSTALLDIR}
-}
-
-function installAll() {
+installAll() {
   installPackages
   installFonts
   installDotFiles
@@ -309,15 +260,6 @@ case "$1" in
     ;;
   "fonts")
     installFonts
-    ;;
-  "vimplugins" | "vim")
-    installVimPlugins
-    ;;
-  "atompackages" | "apkgs" | "atom" | "apm")
-    installAtomPackages
-    ;;
-  "scripts")
-    installScripts
     ;;
   *)
     installAll

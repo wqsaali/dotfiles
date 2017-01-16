@@ -8,7 +8,7 @@ fi
 
 INSTALLDIR=$(pwd)
 
-function fancy_echo() {
+fancy_echo() {
   # red=`tput setaf 1`
   # green=`tput setaf 2`
   # reset=`tput sgr0`
@@ -23,7 +23,18 @@ function fancy_echo() {
   tput sgr0
 }
 
-function installDocker() {
+installVagrantPlugins() {
+  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
+  if ! [ -x "$(command -v vagrant)" ]; then
+    apt-get install vagrant
+  fi
+   vagrant plugin install vagrant-list
+   vagrant plugin install vagrant-clean
+   vagrant plugin install vagrant-box-updater
+   vagrant plugin install vagrant-nuke
+}
+
+installDocker() {
   # Don't run this as root as you'll not add your user to the docker group
   sudo apt-get update
   sudo apt-get install apt-transport-https ca-certificates
@@ -38,33 +49,7 @@ function installDocker() {
   sudo usermod -aG docker `echo $USER`
 }
 
-gem_install_or_update() {
-  if gem list "$1" --installed > /dev/null; then
-    gem update "$@"
-  else
-    gem install "$@"
-    # rbenv rehash
-  fi
-}
-
-function installGems() {
-  while read -r PKG; do
-    gem_install_or_upgrade "$PKG"
-  done < files/gem.lst
-}
-
-function installVagrantPlugins() {
-  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
-  if ! [ -x "$(command -v vagrant)" ]; then
-    apt-get install vagrant
-  fi
-   vagrant plugin install vagrant-list
-   vagrant plugin install vagrant-clean
-   vagrant plugin install vagrant-box-updater
-   vagrant plugin install vagrant-nuke
-}
-
-function installHashicorp() {
+installHashicorp() {
   cd ${INSTALLDIR}
   # List available packages with: curl --silent https://releases.hashicorp.com/index.json | jq 'keys[]'
   # Get URLs for most recent versions
@@ -76,7 +61,7 @@ function installHashicorp() {
   cd ${INSTALLDIR}
 }
 
-function installKubernetes() {
+installKubernetes() {
   cd $HOME/.local/bin/
   curl -sS https://get.k8s.io | bash
   rm -rf kubernetes.tar.gz
@@ -84,7 +69,38 @@ function installKubernetes() {
   cd ${INSTALLDIR}
 }
 
-function installPackages() {
+installGnomeTerminalProfiles() {
+   # gconftool-2 --set /apps/gnome-terminal/profiles/Default/font --type string "Ubuntu Mono derivative Powerline 11"
+   # gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_system_font --type=boolean false
+
+  # Profiles from https://github.com/Mayccoll/Gogh
+  export {PROFILE_NAME,PROFILE_SLUG}="TomorrowNightBright" && wget -O xt http://git.io/v3DRJ && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="OneDark" && wget -O xt http://git.io/vs7Ut && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="MonokaiDark" && wget -O xt http://git.io/v3DBO && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="SolarizedDark" && wget -O xt http://git.io/v3DBQ && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="GruvboxDark" && wget -O xt http://git.io/v6JYg && chmod +x xt && ./xt && rm xt
+}
+
+installi3wm() {
+  if ! [ -x "$(command -v i3)" ]; then
+    sudo apt install i3 i3blocks i3status i3lock compton conky-all alsa-utils mpd mpc ncmpcpp feh lxappearance rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig xcalib xprintidle npm python-pip
+    sudo pip install i3-cycle
+    sudo npm i -g i3-alt-tab
+  fi
+
+  mkdir -p $HOME/.config/i3
+  cp -r files/i3/* $HOME/.config/i3/
+
+  # if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
+  #   sudo cp files/nautilus-i3 /usr/bin/
+  # fi
+
+  if [ ! -s $HOME/.i3 ]; then
+    ln -s $HOME/.config/i3 $HOME/.i3
+  fi
+}
+
+installPackages() {
   sudo apt-get update
   cat files/apt-core.lst | tr '\n' ' ' | xargs sudo apt-get install -y
   sudo apt-mark manual $(cat files/apt-core.lst | tr '\n' ' ')
@@ -117,7 +133,7 @@ function installPackages() {
   sudo npm install -g azure-cli
 }
 
-function installFonts() {
+installFonts() {
   mkdir -p $HOME/.fonts/
 
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
@@ -140,19 +156,7 @@ function installFonts() {
   cd ${INSTALLDIR}
 }
 
-function installGnomeTerminalProfiles() {
-   # gconftool-2 --set /apps/gnome-terminal/profiles/Default/font --type string "Ubuntu Mono derivative Powerline 11"
-   # gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_system_font --type=boolean false
-
-  # Profiles from https://github.com/Mayccoll/Gogh
-  export {PROFILE_NAME,PROFILE_SLUG}="TomorrowNightBright" && wget -O xt http://git.io/v3DRJ && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="OneDark" && wget -O xt http://git.io/vs7Ut && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="MonokaiDark" && wget -O xt http://git.io/v3DBO && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="SolarizedDark" && wget -O xt http://git.io/v3DBQ && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="GruvboxDark" && wget -O xt http://git.io/v6JYg && chmod +x xt && ./xt && rm xt
-}
-
-function installDotFiles() {
+installDotFiles() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'installing git!' >&2
     sudo apt-get install git
@@ -253,33 +257,10 @@ function installDotFiles() {
   if [ ! -s $HOME/.tmux.conf ]; then
     ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
   fi
+  cd ${INSTALLDIR}
 }
 
-function installScripts() {
-  mkdir -p $HOME/.local/bin/
-  cp -r files/scripts/* $HOME/.local/bin/
-}
-
-function installi3wm() {
-  if ! [ -x "$(command -v i3)" ]; then
-    sudo apt install i3 i3blocks i3status i3lock compton conky-all alsa-utils mpd mpc ncmpcpp feh lxappearance rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig xcalib xprintidle npm python-pip
-    sudo pip install i3-cycle
-    sudo npm i -g i3-alt-tab
-  fi
-
-  mkdir -p $HOME/.config/i3
-  cp -r files/i3/* $HOME/.config/i3/
-
-  # if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
-  #   sudo cp files/nautilus-i3 /usr/bin/
-  # fi
-
-  if [ ! -s $HOME/.i3 ]; then
-    ln -s $HOME/.config/i3 $HOME/.i3
-  fi
-}
-
-function installFish() {
+installFish() {
   sudo apt-add-repository ppa:fish-shell/release-2
   sudo apt-get update
   sudo apt-get install fish
@@ -291,36 +272,7 @@ function installFish() {
   fisher teapot
 }
 
-function installAtomPackages() {
-  cd ${INSTALLDIR}
-  # Backup package list with:
-  #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
-  cp files/atom/* $HOME/.atom/
-  apm install --packages-file files/atom-packages.lst
-}
-
-function installVimPlugins() {
-  cd ${INSTALLDIR}
-  mkdir -p $HOME/.vim/ftdetect
-  mkdir -p $HOME/.vim/ftplugin
-  mkdir -p $HOME/.vim/bundle/
-  mkdir -p $HOME/.config/nvim
-  cp files/vim/vimrc $HOME/.vimrc
-  cp files/vim/vimrc.local $HOME/.vimrc.local
-  cp -r files/vim/ft* $HOME/.vim/
-  ln -s $HOME/.vimrc $HOME/.config/nvim/init.vim
-
-  if [ ! -d  $HOME/.vim/bundle/Vundle.vim ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-  fi
-
-  vim +PluginInstall +qall
-  cd $HOME/.vim/bundle/YouCompleteMe
-  ./install.py
-  cd ${INSTALLDIR}
-}
-
-function installAll() {
+installAll() {
   installPackages
   installFonts
   installDotFiles
@@ -343,20 +295,11 @@ case "$1" in
   "fonts")
     installFonts
     ;;
-  "vimplugins" | "vim")
-    installVimPlugins
-    ;;
-  "atompackages" | "apkgs" | "atom" | "apm")
-    installAtomPackages
-    ;;
   "termProfiles" | "gnomeTermProfiles")
     installGnomeTerminalProfiles
     ;;
   "i3wm" | "i3")
     installi3wm
-    ;;
-  "scripts")
-    installScripts
     ;;
   *)
     installAll
