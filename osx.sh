@@ -253,6 +253,9 @@ case "$1" in
   "packages" | "pkgs")
     installPackages
     ;;
+  "vagrant" | "VagrantPlugins")
+    installVagrantPlugins
+    ;;
   "dotfiles")
    installDotFiles
     ;;

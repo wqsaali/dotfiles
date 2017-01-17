@@ -27,3 +27,14 @@ fi
 if [ -d '/usr/local/opt/coreutils/libexec/gnubin' ]; then
   PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
 fi
+
+# Linuxbrew paths
+if [ -d "$HOME/.linuxbrew/bin:$PATH" ]; then
+  PATH="$HOME/.linuxbrew/bin:$PATH"
+fi
+if [ -d "$HOME/.linuxbrew/share/man:$MANPATH" ]; then
+  MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+fi
+if [ -d "$HOME/.linuxbrew/share/info:$INFOPATH" ]; then
+  INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+fi

@@ -23,17 +23,6 @@ fancy_echo() {
   tput sgr0
 }
 
-installVagrantPlugins() {
-  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
-  if ! [ -x "$(command -v vagrant)" ]; then
-    apt-get install vagrant
-  fi
-   vagrant plugin install vagrant-list
-   vagrant plugin install vagrant-clean
-   vagrant plugin install vagrant-box-updater
-   vagrant plugin install vagrant-nuke
-}
-
 installDocker() {
   # Don't run this as root as you'll not add your user to the docker group
   sudo apt-get update
@@ -49,8 +38,22 @@ installDocker() {
   sudo usermod -aG docker `echo $USER`
 }
 
+installVagrantPlugins() {
+  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
+  if ! [ -x "$(command -v vagrant)" ]; then
+    apt-get install vagrant
+  fi
+   vagrant plugin install vagrant-list
+   vagrant plugin install vagrant-clean
+   vagrant plugin install vagrant-box-updater
+   vagrant plugin install vagrant-nuke
+}
+
 installHashicorp() {
-  cd ${INSTALLDIR}
+  if [[ "$1" == "vagrant" ]]; then
+    installVagrantPlugins
+    return
+  fi
   # List available packages with: curl --silent https://releases.hashicorp.com/index.json | jq 'keys[]'
   # Get URLs for most recent versions
   url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | egrep "linux.*64" | sort -rh | head -1 | awk -F[\"] '{print $4}')
@@ -98,6 +101,10 @@ installi3wm() {
   if [ ! -s $HOME/.i3 ]; then
     ln -s $HOME/.config/i3 $HOME/.i3
   fi
+}
+
+installLinuxbrew() {
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
 }
 
 installPackages() {
@@ -286,6 +293,12 @@ installAll() {
 case "$1" in
   "packages" | "pkgs")
     installPackages
+    ;;
+  "vagrant" | "VagrantPlugins")
+    installVagrantPlugins
+    ;;
+  "hashicorp")
+    installHashicorp $2
     ;;
   "dotfiles")
    installDotFiles
