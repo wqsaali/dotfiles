@@ -118,9 +118,10 @@ installPackages() {
   chsh -s $(brew --prefix)/bin/bash
 
   sudo pip install -U pip setuptools
-  # sudo pip install -U thefuck
+  sudo pip install -U yq
   sudo pip install -U howdoi
   sudo pip install -U Pygment
+  # sudo pip install -U thefuck
   # sudo pip install -U awscli
 
   # sudo npm install -g coffee-scrip

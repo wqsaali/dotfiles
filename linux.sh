@@ -110,6 +110,7 @@ installPackages() {
   sudo apt-mark manual $(cat files/apt-extra.lst | tr '\n' ' ')
 
   sudo pip install -U pip setuptools
+  sudo pip install -U yq
   sudo pip install -U thefuck
   sudo pip install -U howdoi
   sudo pip install -U Pygment
