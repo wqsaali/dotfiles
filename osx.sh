@@ -78,6 +78,39 @@ brew_launchctl_restart() {
   launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
 }
 
+osConfigs() {
+  # Enable Key Repeat
+  defaults write -g ApplePressAndHoldEnabled -bool false
+  # Set keyboard repeate speed
+  defaults write -g KeyRepeat -int 0.02
+
+  # Dock
+  # Add a Stack with Recent Applications
+  # defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 1; }; "tile-type" = "recents-tile"; }'
+  # Enable icon bounce
+  # defaults write com.apple.dock no-bouncing -bool true
+  # Set dock size and magnification
+  defaults write com.apple.dock tilesize -int 48
+  defaults write com.apple.dock largesize -int 57
+  defaults write com.apple.dock magnification -bool true
+  # Enable auto hiding
+  defaults write com.apple.dock autohide -bool true
+  # Move to the left
+  defaults write com.apple.dock orientation left
+  killall Dock
+
+
+  # Reduce Transparency
+  defaults write com.apple.universalaccess reduceTransparency -bool true
+
+  # Enable Develop Menu and Web Inspector in Safari
+  defaults write com.apple.Safari IncludeInternalDebugMenu -bool true && \
+    defaults write com.apple.Safari IncludeDevelopMenu -bool true && \
+    defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true && \
+    defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true && \
+    defaults write -g WebKitDeveloperExtras -bool true
+}
+
 installVagrantPlugins() {
   # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
   if ! [ -x "$(command -v vagrant)" ]; then
