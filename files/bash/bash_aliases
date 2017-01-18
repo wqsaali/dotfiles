@@ -361,6 +361,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
           echo -e "\n>>> $c is up to date"
       fi
     done
+    brew cleanup && brew cask cleanup
   }
   alias cask-upgrade='brew-cask-upgrade'
 fi
