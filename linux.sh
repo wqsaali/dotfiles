@@ -54,9 +54,13 @@ installHashicorp() {
     installVagrantPlugins
     return
   fi
-  # List available packages with: curl --silent https://releases.hashicorp.com/index.json | jq 'keys[]'
-  # Get URLs for most recent versions
-  url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | egrep "linux.*64" | sort -rh | head -1 | awk -F[\"] '{print $4}')
+  if [[ "$1" == "list" ]]; then
+    # List available packages:
+    curl --silent https://releases.hashicorp.com/index.json | jq 'keys[]'
+    return
+  fi
+  # Get URLs for most recent versions:
+  url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | grep 'url' | egrep -i "$(uname -s).*$(uname -m | cut -d'_' -f2)" | sort -rh | head -1 | awk -F[\"] '{print $4}')
   cd $HOME/.local/bin/
   curl -o package.zip $url
   unzip package.zip
