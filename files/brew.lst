@@ -11,6 +11,7 @@ python
 brew-pip
 node
 awscli
+s3cmd
 azure-cli
 coffeescript
 thefuck
