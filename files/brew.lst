@@ -11,6 +11,7 @@ gawk
 python
 brew-pip
 node
+groovy
 awscli
 s3cmd
 azure-cli
