@@ -301,6 +301,9 @@ function kubectl-enter () {
   kubectl exec -ti $1 -- bash
 }
 
+# Gem aliases
+alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'
+
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip install -U'
 alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip3 install -U'
