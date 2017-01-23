@@ -38,6 +38,7 @@ kubernetes-cli
 kubernetes-helm
 kops
 openshift-cli
+compose2kube
 kube-aws
 imagemagick
 ufraw
