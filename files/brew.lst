@@ -40,6 +40,7 @@ kops
 openshift-cli
 compose2kube
 kube-aws
+elktail
 imagemagick
 ufraw
 exif
