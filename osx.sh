@@ -134,8 +134,10 @@ installPackages() {
   brew_tap 'caskroom/cask'
   brew_tap 'caskroom/fonts'
   brew_tap 'homebrew/services'
+  brew_tap 'homebrew/command-not-found'
   brew_tap 'neovim/neovim'
   brew_tap 'buo/cask-upgrade'
+  brew_tap 'knes1/tap'
   brew update
 
   /bin/bash "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
