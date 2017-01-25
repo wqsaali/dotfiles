@@ -125,6 +125,7 @@ installPackages() {
   sudo pip install -U thefuck
   sudo pip install -U howdoi
   sudo pip install -U Pygment
+  sudo pip install -U sshuttle
 
   if ! [ -x "$(command -v docker)" ]; then
     installDocker

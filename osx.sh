@@ -157,6 +157,7 @@ installPackages() {
   sudo pip install -U yq
   sudo pip install -U howdoi
   sudo pip install -U Pygment
+  sudo pip install -U sshuttle
   # sudo pip install -U thefuck
   # sudo pip install -U awscli
 
