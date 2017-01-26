@@ -7,6 +7,8 @@ source-highlight
 coreutils
 moreutils
 findutils
+binutils
+iproute2mac
 gawk
 python
 brew-pip
