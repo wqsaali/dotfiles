@@ -9,6 +9,15 @@ gem_install_or_update() {
   fi
 }
 
+installFission() {
+  # http://fission.io/
+  version='linux'
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    version='mac'
+  fi
+  curl http://fission.io/$version/fission > fission && chmod +x fission && mv fission ~/.local/bin/
+}
+
 installGems() {
   while read -r PKG; do
     gem_install_or_upgrade "$PKG"
