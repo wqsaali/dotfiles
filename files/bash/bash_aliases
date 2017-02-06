@@ -90,6 +90,14 @@ alias vim-clean='vim +PluginClean +qall'
 alias gitv='vim +GV -c tabonly'
 # alias Gitv='vim "$(git rev-parse --show-toplevel)"/.git/index -c "Gitv --all" -c "tabonly"'
 
+# Codi
+# Usage: codi [filetype] [filename]
+function codi () {
+  local syntax="${1:-python}"
+  shift
+  vim -c "Codi $syntax" "$@"
+}
+
 # Json aliases
 # Usage: json-diff file1 file2 section_on_file1 section_on_file2
 function json-diff () {
