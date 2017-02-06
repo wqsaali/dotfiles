@@ -11,11 +11,17 @@ gem_install_or_update() {
 
 installFission() {
   # http://fission.io/
+  mkdir -p ~/.local/bin/
   version='linux'
   if [[ "$OSTYPE" == "darwin"* ]]; then
     version='mac'
   fi
   curl http://fission.io/$version/fission > fission && chmod +x fission && mv fission ~/.local/bin/
+}
+
+installMinikube() {
+  mkdir -p ~/.local/bin/
+  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-$(uname -s | tr '[:upper:]' '[:lower:]')-amd64 && chmod +x minikube && mv minikube ~/.local/bin/
 }
 
 installGems() {
@@ -70,6 +76,12 @@ case "$1" in
     ;;
   "scripts")
     installScripts
+    ;;
+  "minikube")
+    installMinikube
+    ;;
+  "fission")
+    installFission
     ;;
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then
