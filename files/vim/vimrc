@@ -327,6 +327,14 @@
   " Brackets
   let g:usemarks = 0
 
+  " Codi
+  " Use pry instead od irb
+  " let g:codi#interpreters = {
+  " \ 'ruby': {
+  "     \ 'bin': '/usr/local/bin/pry',
+  "     \ },
+  " \ }
+
   " vim-airline
   " let g:airline_extensions = ['branch', 'tabline', 'whitespace']
   let g:airline#extensions#tabline#enabled = 1
