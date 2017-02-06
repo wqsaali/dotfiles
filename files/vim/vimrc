@@ -329,11 +329,13 @@
 
   " Codi
   " Use pry instead od irb
-  " let g:codi#interpreters = {
-  " \ 'ruby': {
-  "     \ 'bin': '/usr/local/bin/pry',
-  "     \ },
-  " \ }
+  let g:codi#interpreters = {
+  \ 'ruby': {
+      \ 'bin': ['pry', '-f'],
+      \ 'prompt': '^[\d\+] pry(\w\+). ',
+      \ 'preprocess': function('s:pp_remove_fat_arrow'),
+      \ },
+  \ }
 
   " vim-airline
   " let g:airline_extensions = ['branch', 'tabline', 'whitespace']
