@@ -5,6 +5,7 @@ iterm2
 atom
 chefdk
 docker
+minikube
 minishift
 hab
 google-chrome
