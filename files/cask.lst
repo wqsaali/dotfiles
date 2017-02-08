@@ -5,9 +5,12 @@ iterm2
 atom
 chefdk
 docker
+virtualbox
+vagrant
 minikube
 minishift
 hab
+powershell
 google-chrome
 skype
 slack
@@ -18,8 +21,6 @@ amethyst
 keepingyouawake
 firefox
 spotify
-virtualbox
-vagrant
 whatsapp
 viber
 the-unarchiver
