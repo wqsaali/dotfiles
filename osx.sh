@@ -150,7 +150,7 @@ installPackages() {
     cask_install "$PKG"
   done < files/cask.lst
 
-  sudo echo $(brew --prefix)/bin/bash >> /etc/shells && \
+  echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells && \
   chsh -s $(brew --prefix)/bin/bash
 
   sudo pip install -U pip setuptools

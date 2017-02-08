@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script to sort Photos and movies from digital cameras into folders by date
 # When possible it uses the exif information on the photo to get the original date
 # otherwise it uses the last modification date
