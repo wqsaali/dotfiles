@@ -2,7 +2,7 @@
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   echo 'Looks like you are on OS X'
-  echo '  please try the install_osx.sh script'
+  echo '  please try the install.sh script'
   exit 1
 fi
 

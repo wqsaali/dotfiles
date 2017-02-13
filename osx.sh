@@ -195,6 +195,7 @@ installDotFiles() {
   cd ${INSTALLDIR}
 
   cp files/bash/git_prompt.sh $HOME/.bash/
+  cp files/bash/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
   cp files/bash/shell_prompt.sh $HOME/.bash/
   cp files/bash/bashrc $HOME/.bashrc
   cp files/bash/bash_variables $HOME/.bash_variables
@@ -202,18 +203,16 @@ installDotFiles() {
   cp files/profile $HOME/.profile
   cp files/screenrc $HOME/.screenrc
   cp files/tmux.conf.local $HOME/.tmux.conf.local
-  mkdir -p $HOME/.vim/ftdetect
-  mkdir -p $HOME/.vim/ftplugin
   cp -r files/vim/ft* $HOME/.vim/
   cp files/vim/vimrc $HOME/.vimrc
   cp files/vim/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
-  cp files/bash/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
-  cp files/bash/bash_aliases_completion $HOME/.bash/
+
+  sudo cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
-  mv knife_autocomplete $HOME/.bash/
+  sudo mv knife_autocomplete /usr/local/etc/bash_completion.d/
   curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
-  mv kitchen-completion $HOME/.bash/
+  sudo mv kitchen-completion /usr/local/etc/bash_completion.d/
 
   SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
   source config.sh
