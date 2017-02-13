@@ -21,7 +21,16 @@ installFission() {
 
 installMinikube() {
   mkdir -p ~/.local/bin/
-  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-$(uname -s | tr '[:upper:]' '[:lower:]')-amd64 && chmod +x minikube && mv minikube ~/.local/bin/
+  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-$(uname -s | tr '[:upper:]' '[:lower:]')-amd64
+  chmod +x minikube
+  mv minikube ~/.local/bin/
+}
+
+installKubetail() {
+  mkdir -p ~/.local/bin/
+  curl -Lo kubetail https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail
+  chmod +x kubetail
+  mv kubetail ~/.local/bin/
 }
 
 installGems() {
@@ -79,6 +88,9 @@ case "$1" in
     ;;
   "minikube")
     installMinikube
+    ;;
+  "kubetail")
+    installKubetail
     ;;
   "fission")
     installFission
