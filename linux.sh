@@ -243,6 +243,7 @@ installDotFiles() {
     sedcmd+="$sc"
   done
   cat files/gitconfig | sed -e "$sedcmd" > $HOME/.gitconfig
+  cp files/gitexcludes $HOME/.gitexcludes
 
   if [ ! -d  $HOME/.bash/bash-git-prompt ]; then
     git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.bash/bash-git-prompt

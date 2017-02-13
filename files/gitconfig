@@ -26,3 +26,4 @@
   lg = !"git lg1"
 [core]
   editor = vim
+  excludesfile = /Users/ldavim/.gitexcludes
