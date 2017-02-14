@@ -34,6 +34,7 @@ jid
 tig
 htop
 colordiff
+xhyve
 packer
 terraform
 kubernetes-cli
