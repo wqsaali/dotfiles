@@ -42,6 +42,9 @@ installGems() {
 installScripts() {
   mkdir -p $HOME/.local/bin/
   cp -r files/scripts/* $HOME/.local/bin/
+  curl -Lo testssl testssl.sh
+  chmod +x testssl
+  mv testssl $HOME/.local/bin/
 }
 
 installAtomPackages() {
