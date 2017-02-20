@@ -109,6 +109,7 @@ installFish() {
 
 installAll() {
   installScripts
+  installVagrantPlugins
   installAtomPackages
   installVimPlugins
 }

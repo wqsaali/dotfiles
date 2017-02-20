@@ -112,6 +112,10 @@ osConfigs() {
     defaults write -g WebKitDeveloperExtras -bool true
 }
 
+installHomebrew() {
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
+
 installPackages() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'You need to install git!' >&2
