@@ -1,7 +1,10 @@
 *.log
+*.tmp
 *Popcorn-Time*
 *Popcorntime*
 .AndroidStudio*/
+.AppleDouble
+.DS_Store
 .ICEauthority
 .PlayOnLinux
 .Private
@@ -167,6 +170,7 @@ Applications/eclipse*
 Downloads
 Dropbox
 Scribus
+Thumbs.db
 VirtualBox*
 games
 twister
