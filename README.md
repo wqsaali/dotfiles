@@ -22,7 +22,7 @@ The install script supports both OS X and Linux (Ubuntu) and will install my cus
 ./install i3 # will install and configure i3
 ```
 
-Before running the install script you **should** take a **look at** the **config.sh** file and edit it to your prefererences
+**NOTE:** Before running the install script you **should** take a **look at** the **config.sh** file and edit it to your prefererences
 
 The backup script can backup and restore your:
 - List of deb repos
