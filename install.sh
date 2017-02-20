@@ -55,6 +55,21 @@ installAtomPackages() {
   apm install --packages-file files/atom-packages.lst
 }
 
+installVagrantPlugins() {
+  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
+  if ! [ -x "$(command -v vagrant)" ]; then
+    if [[ "$OSTYPE" != "darwin"* ]]; then
+      sudo apt-get install vagrant
+    else
+      brew cask install vagrant --appdir=/Applications
+    fi
+  fi
+   vagrant plugin install vagrant-list
+   vagrant plugin install vagrant-clean
+   vagrant plugin install vagrant-box-updater
+   vagrant plugin install vagrant-nuke
+}
+
 installVimPlugins() {
   cd ${INSTALLDIR}
   mkdir -p $HOME/.vim/ftdetect
@@ -76,9 +91,34 @@ installVimPlugins() {
   cd ${INSTALLDIR}
 }
 
+installFish() {
+  if [[ "$OSTYPE" != "darwin"* ]]; then
+    sudo apt-add-repository ppa:fish-shell/release-2
+    sudo apt-get update
+    sudo apt-get install fish
+  else
+    brew install fish
+  fi
+  curl -sfL https://git.io/fundle-install | fish
+  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+  curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+  fisher fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
+  omf install chain
+  fisher teapot
+}
+
+installAll() {
+  installScripts
+  installAtomPackages
+  installVimPlugins
+}
+
 case "$1" in
   "gems")
     installGems
+    ;;
+  "vagrant" | "VagrantPlugins")
+    installVagrantPlugins
     ;;
   "vimplugins" | "vim")
     installVimPlugins
@@ -97,6 +137,17 @@ case "$1" in
     ;;
   "fission")
     installFission
+    ;;
+  "fish")
+   installFish
+    ;;
+  "all")
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      ./osx.sh
+    else
+      ./linux.sh
+    fi
+    installAll
     ;;
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then

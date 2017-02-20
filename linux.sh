@@ -38,20 +38,9 @@ installDocker() {
   sudo usermod -aG docker `echo $USER`
 }
 
-installVagrantPlugins() {
-  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
-  if ! [ -x "$(command -v vagrant)" ]; then
-    apt-get install vagrant
-  fi
-   vagrant plugin install vagrant-list
-   vagrant plugin install vagrant-clean
-   vagrant plugin install vagrant-box-updater
-   vagrant plugin install vagrant-nuke
-}
-
 installHashicorp() {
   if [[ "$1" == "vagrant" ]]; then
-    installVagrantPlugins
+    ./install.sh vagrant
     return
   fi
   if [[ "$1" == "list" ]]; then
@@ -274,25 +263,10 @@ installDotFiles() {
   cd ${INSTALLDIR}
 }
 
-installFish() {
-  sudo apt-add-repository ppa:fish-shell/release-2
-  sudo apt-get update
-  sudo apt-get install fish
-  curl -sfL https://git.io/fundle-install | fish
-  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-  curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
-  fisher fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
-  omf install chain
-  fisher teapot
-}
-
 installAll() {
   installPackages
   installFonts
   installDotFiles
-  installScripts
-  installAtomPackages
-  installVimPlugins
   installGnomeTerminalProfiles
 }
 
@@ -300,17 +274,11 @@ case "$1" in
   "packages" | "pkgs")
     installPackages
     ;;
-  "vagrant" | "VagrantPlugins")
-    installVagrantPlugins
-    ;;
   "hashicorp")
     installHashicorp $2
     ;;
   "dotfiles")
    installDotFiles
-    ;;
-  "fish")
-   installFish
     ;;
   "fonts")
     installFonts

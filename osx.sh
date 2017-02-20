@@ -112,17 +112,6 @@ osConfigs() {
     defaults write -g WebKitDeveloperExtras -bool true
 }
 
-installVagrantPlugins() {
-  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
-  if ! [ -x "$(command -v vagrant)" ]; then
-    cask_install vagrant
-  fi
-   vagrant plugin install vagrant-list
-   vagrant plugin install vagrant-clean
-   vagrant plugin install vagrant-box-updater
-   vagrant plugin install vagrant-nuke
-}
-
 installPackages() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'You need to install git!' >&2
@@ -267,37 +256,18 @@ installDotFiles() {
   cd ${INSTALLDIR}
 }
 
-installFish() {
-  brew install fish
-  curl -sfL https://git.io/fundle-install | fish
-  curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
-  curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
-  fisher fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
-  omf install chain
-  fisher teapot
-}
-
 installAll() {
   installPackages
   installFonts
   installDotFiles
-  installScripts
-  installAtomPackages
-  installVimPlugins
 }
 
 case "$1" in
   "packages" | "pkgs")
     installPackages
     ;;
-  "vagrant" | "VagrantPlugins")
-    installVagrantPlugins
-    ;;
   "dotfiles")
    installDotFiles
-    ;;
-  "fish")
-   installFish
     ;;
   "fonts")
     installFonts
