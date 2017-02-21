@@ -96,6 +96,23 @@ installi3wm() {
   fi
 }
 
+installCerebro() {
+  sudo npm install -g cerebro
+  sudo npm install -g cerebro-linux-system
+  sudo npm install -g cerebro-linux-commands
+  sudo npm install -g cerebro-shell
+  sudo npm install -g cerebro-clipboard
+  sudo npm install -g cerebro-kill
+  sudo npm install -g cerebro-timezones
+  sudo npm install -g cerebro-gif
+  sudo npm install -g cerebro-imdb
+  sudo npm install -g cerebro-ip
+  sudo npm install -g cerebro-emoj
+  sudo npm install -g cerebro-hash
+  sudo npm install -g cerebro-stackoverflow
+  sudo npm install -g cerebro-devdocs
+}
+
 installLinuxbrew() {
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
 }
@@ -116,6 +133,9 @@ installPackages() {
   sudo pip install -U Pygment
   sudo pip install -U sshuttle
 
+  if ! [ -x "$(command -v cerebro)" ]; then
+    installCerebro
+  fi
   if ! [ -x "$(command -v docker)" ]; then
     installDocker
   fi
