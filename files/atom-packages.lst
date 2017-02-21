@@ -5,6 +5,7 @@ atom-beautify
 atom-fuzzy-grep
 atom-hide-tabs
 atom-shell-commands
+atom-vim-colon-command-on-command-pallete
 atom-vim-like-tab
 autocomplete
 automate-power-mode
@@ -74,7 +75,9 @@ tool-bar-atom
 tree-view-git-branch
 tree-view-git-status
 vim-mode-plus
+vim-mode-plus-duplicate
 vim-mode-plus-ex-mode
+vim-mode-plus-exchange
 vim-mode-plus-jasmine-increase-focus
 vim-mode-plus-move-selected-text
 vim-mode-plus-move-to-symbols
