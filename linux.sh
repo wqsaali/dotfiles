@@ -127,13 +127,6 @@ installPackages() {
   cat files/apt-extra.lst | tr '\n' ' ' | xargs sudo apt-get install -y
   sudo apt-mark manual $(cat files/apt-extra.lst | tr '\n' ' ')
 
-  sudo pip install -U pip setuptools
-  sudo pip install -U yq
-  sudo pip install -U thefuck
-  sudo pip install -U howdoi
-  sudo pip install -U Pygment
-  sudo pip install -U sshuttle
-
   if ! [ -x "$(command -v cerebro)" ]; then
     installCerebro
   fi

@@ -39,6 +39,12 @@ installGems() {
   done < files/gem.lst
 }
 
+installPips() {
+  while read -r PKG; do
+    pip install -U "$PKG"
+  done < files/pip.lst
+}
+
 installScripts() {
   mkdir -p $HOME/.local/bin/
   cp -r files/scripts/* $HOME/.local/bin/
@@ -108,6 +114,8 @@ installFish() {
 }
 
 installAll() {
+  installGems
+  installPips
   installScripts
   installVagrantPlugins
   installAtomPackages
@@ -115,8 +123,11 @@ installAll() {
 }
 
 case "$1" in
-  "gems")
+  "gems" | "gem")
     installGems
+    ;;
+  "pip" | "pips")
+    installPips
     ;;
   "vagrant" | "VagrantPlugins")
     installVagrantPlugins
