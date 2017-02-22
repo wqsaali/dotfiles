@@ -101,6 +101,7 @@ installCerebro() {
   sudo npm install -g cerebro-linux-system
   sudo npm install -g cerebro-linux-commands
   sudo npm install -g cerebro-shell
+  sudo npm install -g cerebro-fix-path
   sudo npm install -g cerebro-clipboard
   sudo npm install -g cerebro-kill
   sudo npm install -g cerebro-timezones
