@@ -60,10 +60,12 @@ set $compositor compton --config  ~/.i3/compton.conf
 # for [window_type=floating] border pixel 3
 
 # Floating Windows
-for_window [class="Remmina"] floating enable
-for_window [class="mpv"] floating enable
-for_window [class="(?i)gloobus"] floating enable
-# for_window [class="(?i)tilda"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [class="Cerebro"]      floating enable, border none
+for_window [class="Remmina"]      floating enable
+for_window [class="mpv"]          floating enable
+for_window [class="(?i)gloobus"]  floating enable
+# for_window [class="(?i)tilda"]  floating enable
 
 # for_window [title="^dropin-term$"] move scratchpad
 

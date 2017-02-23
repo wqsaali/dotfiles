@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
 
+path() {
+  mkdir -p "$(dirname "$1")"
+  echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+}
+
+dotfiles_dir="$(dirname $0)"
+
+link() {
+  create_link "$dotfiles_dir/$1" "$HOME/$1"
+}
+
+create_link() {
+  real_file="$(path "$1")"
+  link_file="$(path "$2")"
+
+  rm -rf $link_file
+  ln -s $real_file $link_file
+
+  echo "$real_file <-> $link_file"
+}
+
 gem_install_or_update() {
   if gem list "$1" --installed > /dev/null; then
     gem update "$@"
