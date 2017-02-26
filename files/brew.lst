@@ -13,6 +13,7 @@ gawk
 python
 brew-pip
 node
+yarn
 groovy
 awscli
 s3cmd
