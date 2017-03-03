@@ -7,6 +7,7 @@ atom
 chefdk
 docker
 virtualbox
+virtualbox-extension-pack
 vagrant
 minikube
 minishift

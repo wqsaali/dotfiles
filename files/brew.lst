@@ -1,5 +1,6 @@
 cask
 brew-cask
+brew-cask-completion
 cmake
 bash
 ccat
