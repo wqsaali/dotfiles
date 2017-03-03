@@ -95,6 +95,7 @@ installVagrantPlugins() {
    vagrant plugin install vagrant-clean
    vagrant plugin install vagrant-box-updater
    vagrant plugin install vagrant-nuke
+   vagrant plugin install vagrant-vbguest
 }
 
 installVimPlugins() {
