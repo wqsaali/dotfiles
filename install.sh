@@ -96,6 +96,7 @@ installVagrantPlugins() {
    vagrant plugin install vagrant-box-updater
    vagrant plugin install vagrant-nuke
    vagrant plugin install vagrant-vbguest
+   vagrant plugin install vagrant-hostmanager
 }
 
 installVimPlugins() {
