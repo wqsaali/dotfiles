@@ -52,4 +52,5 @@ exif
 exiftool
 docker-compose
 git
+vagrant-completion
 bash-completion

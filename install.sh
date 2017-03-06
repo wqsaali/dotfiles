@@ -89,6 +89,7 @@ installVagrantPlugins() {
       sudo apt-get install vagrant
     else
       brew cask install vagrant --appdir=/Applications
+      brew install vagrant-completion
     fi
   fi
    vagrant plugin install vagrant-list
