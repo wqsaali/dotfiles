@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+INSTALLDIR=$(pwd)
+
 path() {
   mkdir -p "$(dirname "$1")"
   echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"

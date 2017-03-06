@@ -18,35 +18,36 @@ atom.packages.onDidActivatePackage (pack) ->
     Ex = pack.mainModule.provideEx()
     Ex.registerCommand 'term', -> atom.commands.dispatch(atom.views.getView(editor), 'termrk:toggle')
 
-aliasCommand = atom.packages.getLoadedPackage('alias-command').requireMainModule()
+  if pack.name == 'alias-command'
+    aliasCommand = atom.packages.getLoadedPackage('alias-command').requireMainModule()
 
-aliasCommand 'package-control:install',
-  orig: 'settings-view:install-packages-and-themes'
+    aliasCommand 'package-control:install',
+      orig: 'settings-view:install-packages-and-themes'
 
 # Vim like commands
-# aliasCommand 'w',
-#   orig: 'core:save'
-# aliasCommand 'wall',
-#   orig: 'window:save-all'
-# aliasCommand 'wall-qall',
-#   orig: ['window:save-all', 'window:close']
-# aliasCommand 'q',
-#   orig: 'core:close'
-# aliasCommand 'wq',
-#   orig: ['core:save', 'core:close']
-# aliasCommand 'wqall',
-#   orig: ['core:save', 'window:close']
-# aliasCommand 'qall',
-#   orig: 'window:close'
-# aliasCommand ':',
-#   orig: 'go-to-line:toggle'
-# aliasCommand '%',
-#   orig: 'find-and-replace:show'
-# aliasCommand 'split',
-#   orig: 'pane:split-down'
-# aliasCommand 'vsplit',
-#   orig: 'pane:split-left'
-# aliasCommand 'diffthis',
-#   orig: 'split-diff:toggle'
-# aliasCommand 'git-blame',
-#   orig: 'blame:toggle'
+#      aliasCommand 'w',
+#        orig: 'core:save'
+#      aliasCommand 'wall',
+#        orig: 'window:save-all'
+#      aliasCommand 'wall-qall',
+#        orig: ['window:save-all', 'window:close']
+#      aliasCommand 'q',
+#        orig: 'core:close'
+#      aliasCommand 'wq',
+#        orig: ['core:save', 'core:close']
+#      aliasCommand 'wqall',
+#        orig: ['core:save', 'window:close']
+#      aliasCommand 'qall',
+#        orig: 'window:close'
+#      aliasCommand ':',
+#        orig: 'go-to-line:toggle'
+#      aliasCommand '%',
+#        orig: 'find-and-replace:show'
+#      aliasCommand 'split',
+#        orig: 'pane:split-down'
+#      aliasCommand 'vsplit',
+#        orig: 'pane:split-left'
+#      aliasCommand 'diffthis',
+#        orig: 'split-diff:toggle'
+#      aliasCommand 'git-blame',
+#        orig: 'blame:toggle'
