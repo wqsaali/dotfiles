@@ -321,8 +321,6 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   if ! [ -x "$(command -v brew)" ]; then
     alias brew='apt'
   fi
-  alias apt-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade'
-  alias dist-upgrade=apt-upgrade
 
 # if user is not root, pass all commands via sudo #
   if [ $(id -u) -ne 0 ]; then
@@ -338,6 +336,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt-get clean
     dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
   }
+
+  alias apt-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade; apt-cleanup'
+  alias dist-upgrade=apt-upgrade
+
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias apt='brew'
   alias cask='brew cask'

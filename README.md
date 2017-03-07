@@ -1,6 +1,6 @@
 # Dotfiles
 
-What's included:
+**What's included:**
 - a bashrc file
 - installs https://github.com/magicmonty/bash-git-prompt.git
 - a custom theme for bash-git-prompt
@@ -11,6 +11,32 @@ What's included:
 - a bash_alias file
 - i3 and compton configuration files
 - i3blocks scripts
+
+Some of the included aliases:
+```
+json-diff # Usage: json-diff file1 file2 [section_on_file1] [section_on_file2]
+json-merge # Usage json-merge file1 file2
+
+git-pull-all # Executes git pull on each sub-folder
+
+docker-killall # kill all running docker containers
+docker-rm-all # remove all docker containers
+docker-rmi-all # remove all docker images
+docker-cleanup # all of the above
+
+calc # a simple bash calculator
+Cat # syntax highlighting cat
+
+vim-update # update all active vim plugins
+
+# Linux specific
+apt-upgrade # apt update, upgrade and cleanup, including removing unused kernels
+
+# macOS specific
+brew-upgrade # upgrade all installed brew formulas
+cask-upgrade # upgrade all installed brew cask formulas
+cask # alias for brew cask
+```
 
 The install script supports both OS X and Linux (Ubuntu) and will install my custom dotfiles but also some extra packages and fonts, you can select what to install by passing an argument to the install script:
 ```
