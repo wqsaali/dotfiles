@@ -49,6 +49,13 @@ installMinikube() {
   mv minikube ~/.local/bin/
 }
 
+installDCOScli() {
+  mkdir -p ~/.local/bin/
+  curl -Lo dcos https://downloads.dcos.io/binaries/cli/$(uname -s | tr '[:upper:]' '[:lower:]')/x86-64/latest/dcos
+  chmod +x dcos
+  mv dcos ~/.local/bin/
+}
+
 installKubetail() {
   mkdir -p ~/.local/bin/
   curl -Lo kubetail https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail
@@ -169,6 +176,9 @@ case "$1" in
     ;;
   "minikube")
     installMinikube
+    ;;
+  "dcos|dcos-cli|dcoscli")
+    installDCOScli
     ;;
   "kubetail")
     installKubetail
