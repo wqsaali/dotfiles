@@ -177,7 +177,7 @@ case "$1" in
   "minikube")
     installMinikube
     ;;
-  "dcos|dcos-cli|dcoscli")
+  "dcos"|"dcos-cli"|"dcoscli")
     installDCOScli
     ;;
   "kubetail")
