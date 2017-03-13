@@ -364,13 +364,17 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo "$installed"
         echo -e "\nCask info for $c:"
         echo "$info"
-        select ynx in "Yes" "No" "Exit"; do
-          case $ynx in
-            "Yes") echo "Re-installing $c"; brew cask reinstall "$c"; break;;
-            "No") echo "Skipping $c"; break;;
-            "Exit") echo "Exiting brew-cask-upgrade"; return;;
-          esac
-        done
+        if [ "$1" != '-y' ]; then
+          select ynx in "Yes" "No" "Exit"; do
+            case $ynx in
+              "Yes") echo "Re-installing $c"; brew cask reinstall "$c"; break;;
+              "No") echo "Skipping $c"; break;;
+              "Exit") echo "Exiting brew-cask-upgrade"; return;;
+            esac
+          done
+        else
+          echo "Re-installing $c"; brew cask reinstall "$c"
+        fi
       else
           echo -e "\n>>> $c is up to date"
       fi
