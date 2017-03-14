@@ -344,8 +344,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias apt='brew'
   alias cask='brew cask'
   alias tap='brew tap'
-  alias brew-upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
-  alias brew-cleanup='brew cleanup && brew cask cleanup'
 
   brew-cask-upgrade() {
     if [ "$1" != '--continue' ]; then
@@ -381,7 +379,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     done
     brew cleanup && brew cask cleanup
   }
+
   alias cask-upgrade='brew-cask-upgrade'
+  alias brew-cleanup='brew cleanup && brew cask cleanup'
+  alias brew-upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
+  alias dist-upgrade='brew-upgrade && brew-cask-upgrade -y'
 fi
 
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
