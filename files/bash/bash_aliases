@@ -374,7 +374,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
           echo "Re-installing $c"; brew cask reinstall "$c"
         fi
       else
-          echo -e "\n>>> $c is up to date"
+          echo -e ">>> $c is up to date"
       fi
     done
     brew cleanup && brew cask cleanup
