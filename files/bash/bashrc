@@ -6,18 +6,18 @@ if [ "$CONFIGURED" == "true" ]; then
   exit 0
 fi
 
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 if [[ $(tty) == "/dev/tty"* ]] && [[ "$OSTYPE" == "linux-gnu" ]]; then
   setfont ter-powerline-v16b.psf.gz
 fi
 
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
