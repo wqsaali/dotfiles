@@ -2,6 +2,7 @@
 
 **What's included:**
 - a bashrc file
+- a set of bash aliases
 - installs https://github.com/magicmonty/bash-git-prompt.git
 - a custom theme for bash-git-prompt
 - installs https://github.com/gpakosz/.tmux
@@ -45,7 +46,7 @@ The install script supports both OS X and Linux (Ubuntu) and will install my cus
 ./install fonts # will install some powerline patched fonts
 ./install vimplugins # will install the vim plugins from the vimrc
 ./install atompackages # will install the atom plugins and configuration
-./install packages # will install the packages listed in files/apt.lst
+./install packages # will install the packages listed in files/apt.lst (or brew.lst and cask.lst if running on macOS)
 ./install i3 # will install and configure i3
 ```
 

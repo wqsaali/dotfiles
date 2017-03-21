@@ -39,6 +39,7 @@ installDocker() {
 }
 
 installHashicorp() {
+  # this is not Linux specific and it would work on macOS but there we can use brew to install all of these and that makes it easier to keep things up to date.
   if [[ "$1" == "vagrant" ]]; then
     ./install.sh vagrant
     return
@@ -49,7 +50,7 @@ installHashicorp() {
     return
   fi
   # Get URLs for most recent versions:
-  url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | grep 'url' | egrep -i "$(uname -s).*$(uname -m | cut -d'_' -f2)" | sort -rh | head -1 | awk -F[\"] '{print $4}')
+  url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | grep 'url' | egrep -i "$(uname -s).*$(uname -m | cut -d'_' -f2)" | sort -h | tail -1 | awk -F[\"] '{print $4}')
   cd $HOME/.local/bin/
   curl -o package.zip $url
   unzip package.zip
