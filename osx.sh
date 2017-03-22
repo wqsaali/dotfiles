@@ -193,6 +193,7 @@ installDotFiles() {
   cp files/vim/vimrc.local $HOME/.vimrc.local
   cp files/atom/* $HOME/.atom/
   cp files/slate $HOME/.slate
+  cp files/slate.js $HOME/.slate.js
 
   sudo cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
@@ -249,6 +250,14 @@ installDotFiles() {
   fi
   if [ ! -s $HOME/.tmux.conf ]; then
     ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
+  fi
+
+  if [ ! -d  $HOME/.reslate ]; then
+    git clone https://github.com/lunixbochs/reslate.git $HOME/.reslate
+  else
+    cd $HOME/.reslate/
+    git pull
+    cd ${INSTALLDIR}
   fi
   cd ${INSTALLDIR}
 }

@@ -15,15 +15,19 @@ alias bigCenter move screenOriginX+screenSizeX/12;screenOriginY+screenSizeY/12 1
 
 # The key aliases
 alias double alt;cmd
+alias double2 alt;ctrl
 alias triple ctrl;alt;cmd
 alias triple2 alt;ctrl;shift
 alias hyper ctrl;shift;alt;cmd
 
+# Misc Aliases
+alias browser 'Google Chrome'
+
 # Bind command+option+b to google chrome
-bind b:${double} focus 'Google Chrome'
+bind b:${double} focus ${browser}
 
 # Grid bindings
-bind g:cmd grid padding:5 0:4,4 1:4,4 2:4,4
+bind g:${double} grid padding:5 0:4,2 1:4,2 2:2,4
 
 # Location bindings
 bind f:${double} ${full}
@@ -49,5 +53,6 @@ bind up:${hyper}       focus up
 bind down:${hyper}     focus down
 
 # Monitor switching bindings
-bind right:alt,ctrl throw 1 resize
-bind left:alt,ctrl throw 0 resize
+bind up:${double2} throw 0 resize
+bind left:${double2} throw 1 resize
+bind right:${double2} throw 2 resize
