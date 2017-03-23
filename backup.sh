@@ -22,8 +22,8 @@ function backupDotFiles() {
   cp $HOME/.config/tilda/config_0 files/tilda
   cp $HOME/.config/terminator/terminator.config files/terminator.config
   cp -r $HOME/.config/i3/* files/i3/
-  cp $HOME/.slate files/slate
-  cp $HOME/.slate.js files/slate.js
+  cp $HOME/.slate files/slate/slate
+  cp $HOME/.slate.js files/slate/slate.js
 }
 
 function backupAtomPackages() {

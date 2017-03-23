@@ -27,7 +27,7 @@ alias browser 'Google Chrome'
 bind b:${double} focus ${browser}
 
 # Grid bindings
-bind g:${double} grid padding:5 0:4,2 1:4,2 2:2,4
+bind g:${double} grid padding:5 0:2,2 1:2,2 2:2,2
 
 # Location bindings
 bind f:${double} ${full}
