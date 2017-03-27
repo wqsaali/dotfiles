@@ -36,6 +36,7 @@ macvim
 moreutils
 mtr
 neovim
+nmap
 node
 openshift-cli
 openssl
