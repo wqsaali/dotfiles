@@ -11,6 +11,7 @@ autocomplete
 automate-power-mode
 blame
 branch-status
+busy-signal
 choose-pane
 clip-history
 color-picker
@@ -31,6 +32,7 @@ git-status
 git-time-machine
 highlight-line
 hyperclick
+intentions
 json-schema
 language-ansible
 language-apache
@@ -45,6 +47,7 @@ linter-foodcritic
 linter-jsonlint
 linter-rubocop
 linter-ruby
+linter-ui-default
 merge-conflicts
 minimap
 minimap-cursorline

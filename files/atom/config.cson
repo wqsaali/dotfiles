@@ -46,8 +46,7 @@
   "git-status": {}
   "highlight-line":
     hideHighlightOnSelect: true
-  linter:
-    errorPanelHeight: 24
+  linter: {}
   "markdown-preview":
     useGitHubStyle: true
   "markdown-preview-plus": {}
