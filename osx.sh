@@ -194,6 +194,7 @@ installDotFiles() {
   cp files/atom/* $HOME/.atom/
   cp files/slate/slate $HOME/.slate
   cp files/slate/slate.js $HOME/.slate.js
+  cp -r files/hammerspoon/* $HOME/.hammerspoon/
 
   sudo cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
