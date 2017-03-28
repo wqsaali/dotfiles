@@ -1,5 +1,5 @@
 -----------------------------------------------
--- Hyper ctlr up,down,left,right to switch window focus
+-- hyper ctlr up,down,left,right to switch window focus
 -----------------------------------------------
 
 hs.hotkey.bind(hyperCtlr, 'up', function()
