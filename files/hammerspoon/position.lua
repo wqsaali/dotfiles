@@ -162,9 +162,38 @@ end, function ()
   pressed.up = false
 end)
 
+-----------------------------------------------
+-- hyper f to center window and clicle through different sizes
+-----------------------------------------------
+
 hs.hotkey.bind(hyper, "f", function ()
   nextFullScreenStep()
 end)
+
+-----------------------------------------------
+-- hyper c to center window
+-----------------------------------------------
+
+hs.hotkey.bind(hyper, 'c', function()
+    if hs.window.focusedWindow() then
+        local win = hs.window.focusedWindow()
+        local f = win:frame()
+        local screen = win:screen()
+        local max = screen:frame()
+
+        f.w = max.w * 0.7
+        f.h = max.h * 0.7
+        f.x = (max.w - f.w)/2
+        f.y = (max.h - f.h)/2
+        win:setFrame(f)
+    else
+        hs.alert.show("No active window")
+    end
+end)
+
+-----------------------------------------------
+-- hyper i for window information
+-----------------------------------------------
 
 hs.hotkey.bind(hyper, "i", function ()
   local win = hs.window.frontmostWindow()
