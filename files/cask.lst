@@ -1,5 +1,5 @@
 alfred
-amethyst
+# amethyst
 android-file-transfer
 atom
 cakebrew
@@ -24,9 +24,11 @@ minikube
 minishift
 powershell
 skype
+skype-for-business
 slack
-mattr-slate
-spectacle
+# slate
+# mattr-slate
+# spectacle
 spotify
 the-unarchiver
 vagrant
