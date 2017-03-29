@@ -136,10 +136,14 @@ installPackages() {
   /bin/bash "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
 
   while read -r PKG; do
+    [[ "$PKG" =~ ^#.*$ ]] && continue
+    [[ "$PKG" =~ ^\s*$ ]] && continue
     brew_install_or_upgrade "$PKG"
   done < files/brew.lst
 
   while read -r PKG; do
+    [[ "$PKG" =~ ^#.*$ ]] && continue
+    [[ "$PKG" =~ ^\s*$ ]] && continue
     cask_install "$PKG"
   done < files/cask.lst
 

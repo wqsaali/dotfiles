@@ -65,12 +65,16 @@ installKubetail() {
 
 installGems() {
   while read -r PKG; do
+    [[ "$PKG" =~ ^#.*$ ]] && continue
+    [[ "$PKG" =~ ^\s*$ ]] && continue
     gem_install_or_upgrade "$PKG"
   done < files/gem.lst
 }
 
 installPips() {
   while read -r PKG; do
+    [[ "$PKG" =~ ^#.*$ ]] && continue
+    [[ "$PKG" =~ ^\s*$ ]] && continue
     pip install -U "$PKG"
   done < files/pip.lst
 }
