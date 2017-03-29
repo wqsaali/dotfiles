@@ -58,6 +58,16 @@ installHashicorp() {
   cd ${INSTALLDIR}
 }
 
+installTerragrunt() {
+  mkdir -p ~/.local/bin/
+  arch='amd64'
+  os=$(uname -s | tr '[:upper:]' '[:lower:]')
+  url=$(curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | jq -r ".assets[] | select(.name | test(\"${os}_${arch}\")) | .browser_download_url")
+  curl -Lo terragrunt $url
+  chmod +x terragrunt
+  mv terragrunt ~/.local/bin/
+}
+
 installKubernetes() {
   cd $HOME/.local/bin/
   curl -sS https://get.k8s.io | bash
@@ -136,6 +146,7 @@ installPackages() {
   fi
   if ! [ -x "$(command -v terraform)" ]; then
     installHashicorp terraform
+    installTerragrunt
   fi
   if ! [ -x "$(command -v packer)" ]; then
     installHashicorp packer

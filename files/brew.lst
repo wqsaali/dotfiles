@@ -46,6 +46,7 @@ reattach-to-user-namespace
 s3cmd
 source-highlight
 terraform
+terragrunt
 the_silver_searcher
 thefuck
 tig

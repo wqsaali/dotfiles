@@ -73,6 +73,7 @@ scroll-searcher
 set-syntax
 split-diff
 symbols-tree-view
+terraform-fmt
 tool-bar
 tool-bar-atom
 tree-view-git-branch
