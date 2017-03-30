@@ -12,6 +12,7 @@
 - a bash_alias file
 - i3 and compton configuration files
 - i3blocks scripts
+- Hammerspoon configuration scripts
 
 Some of the included aliases:
 ```
