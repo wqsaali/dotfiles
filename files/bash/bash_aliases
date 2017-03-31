@@ -29,16 +29,16 @@ alias .....='cd ../../../../'
 alias workingCopies='cd ${WORKINGCOPIES}'
 alias back='cd $OLDPWD'
 
-function code (){
+function code () {
   cd ${CODE}/$1
 }
-function github (){
+function github () {
   cd ${GITHUB}/$1
 }
-function gitlab (){
+function gitlab () {
   cd ${GITLAB}/$1
 }
-function bitbucket (){
+function bitbucket () {
   cd ${BITBUCKET}/$1
 }
 
@@ -46,27 +46,27 @@ alias chef-roles='cd ${CHEF_ROLES}'
 alias chef-environments='cd ${CHEF_ENVIRONMENTS}'
 alias chef-handlers='cd ${CHEF_HANDLERS}'
 
-function chef-data-bags (){
+function chef-data-bags () {
   cd ${CHEF_DATA_BAGS}/$1
 }
-function chef-cookbooks (){
+function chef-cookbooks () {
   cd ${CHEF_COOKBOOKS}/$1
 }
 
-function dockerfiles (){
+function dockerfiles () {
   cd ${DOCKERFILES}/$1
 }
 
-function terraformfiles (){
+function terraformfiles () {
   cd ${TERRAFORM}/$1
 }
 
 # Geeknote alias
-function gn_sync_notebook {
+function gn_sync_notebook () {
   gnsync --path ~/Evernote/$1 --logpath ~/.log/geeknote$1.log --format markdown --notebook "$1" --two-way TWO_WAY
 }
 
-function gn_sync_all {
+function gn_sync_all () {
   for D in *; do gn_sync_notebook $D; done
 }
 
@@ -115,18 +115,18 @@ function json-diff () {
   colordiff $opts <(cat ${1} | jq -S "$section1") <(cat ${2} | jq -S "$section2")
 }
 
-function json-merge (){
+function json-merge () {
   jq -s '.[0] * .[1]' $1 $2
 }
 
-function json-prettify (){
+function json-prettify () {
   cat ${1} | jq -S . > ${1}.fixed; mv ${1}.fixed ${1}
 }
 
 alias json-prettify-all='for f in *.json; do json-prettify ${f}; done'
 
 # Git aliases
-function git-pull-all (){
+function git-pull-all () {
   cdir=$(pwd)
   if [ ! -z $1 ]; then
     cd $1
@@ -135,7 +135,7 @@ function git-pull-all (){
   cd $cdir
 }
 
-function git-status (){
+function git-status () {
   UNCOMMITED=$(git status -s)
   LOCAL=$(git rev-parse @)
   REMOTE=$(git rev-parse @{u})
@@ -176,7 +176,7 @@ function git-compare () {
   git rev-list --left-right --count $1...$2
 }
 
-function git-branch-status (){
+function git-branch-status () {
   git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads | \
   while read local remote
   do
@@ -421,7 +421,7 @@ function hgrep () {
 }
 alias histg='hgrep'
 
-function extract {
+function extract () {
   if [ -z "$1" ]; then
     # display usage if no parameters given
     echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
