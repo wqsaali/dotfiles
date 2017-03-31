@@ -26,6 +26,7 @@
       "one-dark-ui"
       "one-sharp-syntax"
     ]
+    useCustomTitleBar: true
   editor:
     fontSize: 11
     invisibles: {}
