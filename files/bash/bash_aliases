@@ -26,8 +26,9 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
-alias workingCopies='cd ${WORKINGCOPIES}'
 alias back='cd $OLDPWD'
+
+alias workingCopies='cd ${WORKINGCOPIES}'
 
 function code () {
   cd ${CODE}/$1
@@ -75,6 +76,7 @@ function gn_sync_all () {
 # alias vim='nvim'
 # alias vi='nvim'
 # alias vimdiff='nvim -d'
+
 # Use vim
 alias vi='vim'
 alias vimdiff='vim -d'
