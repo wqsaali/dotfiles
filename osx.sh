@@ -100,7 +100,6 @@ osConfigs() {
   defaults write com.apple.dock orientation left
   killall Dock
 
-
   # Reduce Transparency
   defaults write com.apple.universalaccess reduceTransparency -bool true
 

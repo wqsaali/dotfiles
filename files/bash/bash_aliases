@@ -30,16 +30,16 @@ alias back='cd $OLDPWD'
 
 alias workingCopies='cd ${WORKINGCOPIES}'
 
-function code () {
+function code() {
   cd ${CODE}/$1
 }
-function github () {
+function github() {
   cd ${GITHUB}/$1
 }
-function gitlab () {
+function gitlab() {
   cd ${GITLAB}/$1
 }
-function bitbucket () {
+function bitbucket() {
   cd ${BITBUCKET}/$1
 }
 
@@ -47,27 +47,27 @@ alias chef-roles='cd ${CHEF_ROLES}'
 alias chef-environments='cd ${CHEF_ENVIRONMENTS}'
 alias chef-handlers='cd ${CHEF_HANDLERS}'
 
-function chef-data-bags () {
+function chef-data-bags() {
   cd ${CHEF_DATA_BAGS}/$1
 }
-function chef-cookbooks () {
+function chef-cookbooks() {
   cd ${CHEF_COOKBOOKS}/$1
 }
 
-function dockerfiles () {
+function dockerfiles() {
   cd ${DOCKERFILES}/$1
 }
 
-function terraformfiles () {
+function terraformfiles() {
   cd ${TERRAFORM}/$1
 }
 
 # Geeknote alias
-function gn_sync_notebook () {
+function gn_sync_notebook() {
   gnsync --path ~/Evernote/$1 --logpath ~/.log/geeknote$1.log --format markdown --notebook "$1" --two-way TWO_WAY
 }
 
-function gn_sync_all () {
+function gn_sync_all() {
   for D in *; do gn_sync_notebook $D; done
 }
 
@@ -93,7 +93,7 @@ alias gitv='vim +GV -c tabonly'
 
 # Codi
 # Usage: codi [filetype] [filename]
-function codi () {
+function codi() {
   local syntax="${1:-python}"
   shift
   vim -c "Codi $syntax" "$@"
@@ -101,7 +101,7 @@ function codi () {
 
 # Json aliases
 # Usage: json-diff file1 file2 section_on_file1 section_on_file2
-function json-diff () {
+function json-diff() {
   opts=$(echo $@ | grep -Po '(( |^)-\w+)+' | tr '\n' ' ')
 #  while getopts {a..z} opt; do :; done
 #  shift $(($OPTIND-1))
@@ -117,18 +117,18 @@ function json-diff () {
   colordiff $opts <(cat ${1} | jq -S "$section1") <(cat ${2} | jq -S "$section2")
 }
 
-function json-merge () {
+function json-merge() {
   jq -s '.[0] * .[1]' $1 $2
 }
 
-function json-prettify () {
+function json-prettify() {
   cat ${1} | jq -S . > ${1}.fixed; mv ${1}.fixed ${1}
 }
 
 alias json-prettify-all='for f in *.json; do json-prettify ${f}; done'
 
 # Git aliases
-function git-pull-all () {
+function git-pull-all() {
   cdir=$(pwd)
   if [ ! -z $1 ]; then
     cd $1
@@ -137,7 +137,7 @@ function git-pull-all () {
   cd $cdir
 }
 
-function git-status () {
+function git-status() {
   UNCOMMITED=$(git status -s)
   LOCAL=$(git rev-parse @)
   REMOTE=$(git rev-parse @{u})
@@ -174,11 +174,11 @@ alias masterDiff='git diff $(git merge-base --fork-point master)'
 alias latestTag='git describe --tags `git rev-list --tags --max-count=1`'
 alias latestTagDiff='git show --name-only `git describe --tags` `git rev-list --tags --max-count=1`..'
 
-function git-compare () {
+function git-compare() {
   git rev-list --left-right --count $1...$2
 }
 
-function git-branch-status () {
+function git-branch-status() {
   git for-each-ref --format="%(refname:short) %(upstream:short)" refs/heads | \
   while read local remote
   do
@@ -194,7 +194,7 @@ function git-branch-status () {
 alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 
 # Usage: df -h|fawk 2 ; replaces: df -h | awk '{print $2}'
-function fawk () {
+function fawk() {
     first="awk '{print "
     last="}' $2"
     cmd="${first}\$${1}${last}"
@@ -203,7 +203,7 @@ function fawk () {
 }
 
 # Colored man pages
-function man () {
+function man() {
   env \
   LESS_TERMCAP_mb=$(printf "\e[1;31m") \
   LESS_TERMCAP_md=$(printf "\e[1;31m") \
@@ -223,7 +223,7 @@ alias Cat='colorcat'
 # alias Cat='source-highlight --out-format=esc -o STDOUT -i'
 # alias PCat='source-highlight --out-format=esc -o STDOUT'
 
-function cless () {
+function cless() {
   if [ $# -eq 0 ]; then
     cat | pygmentize -g | less -R
   else
@@ -233,7 +233,7 @@ function cless () {
 
 # Knife and chef aliases
 
-function chef-env-list-versions () {
+function chef-env-list-versions() {
   cdir=$(pwd)
   chef-environments
   grep -P '".*":\s*"= .*"' * | tr -s " " | tr -d ','| cut -d ':' -f2,3 | sort -u
@@ -242,7 +242,7 @@ function chef-env-list-versions () {
 
 # Compares two environments in terms of pinned cookbook versions
 # Usage: chef-env-compare-versions env-a env-b
-function chef-env-compare-versions () {
+function chef-env-compare-versions() {
   cdir=$(pwd)
   chef-environments
   json-diff -y ${1}.json ${2}.json ".cookbook_versions"
@@ -251,7 +251,7 @@ function chef-env-compare-versions () {
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a different version
 # Usage: chef-promot-all <cookbook> <version>
-function knife-promote-all () {
+function knife-promote-all() {
   cdir=$(pwd)
   chef-environments
   grep -P '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
@@ -260,7 +260,7 @@ function knife-promote-all () {
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a specific version
 # Usage: chef-promot-eq <cookbook> <version_old> <version_new>
-function knife-promote-eq () {
+function knife-promote-eq() {
   cdir=$(pwd)
   chef-environments
   grep -P '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $3 --remote --yes
@@ -269,7 +269,7 @@ function knife-promote-eq () {
 
 # Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to an older version
 # Usage: chef-promot-lt <cookbook> <version>
-function knife-promote-lt () {
+function knife-promote-lt() {
   cdir=$(pwd)
   chef-environments
   for environment in $(grep -P '".*":\s*"= .*"' * | grep $1 | tr -d ' '| grep -v "$2"); do
@@ -283,14 +283,14 @@ function knife-promote-lt () {
   cd $cdir
 }
 
-function knife-ciphertext () {
+function knife-ciphertext() {
   sed -e "s/knife\[\:secret_file\]/\#knife\[\:secret_file\]/" -i.bak ~/.chef/knife.rb
   knife $@ --format=json
   mv ~/.chef/knife.rb.bak ~/.chef/knife.rb
 }
 
 # Usage knife-delete-attr 'name:some-server' default some_attribute
-function knife-delete-attr () {
+function knife-delete-attr() {
   knife exec -E "nodes.transform(\"$1\") { |n| n.$2_attrs.delete(\"$3\"); n.save() }"
 }
 
@@ -301,12 +301,12 @@ alias docker-rmi-all='docker images -q | xargs -r docker rmi'
 alias docker-cleanup='docker-killall; docker-rm-all; docker-rmi-all'
 alias docker-exec="docker exec -i -t"
 
-function docker-enter () {
+function docker-enter() {
   docker exec -i -t $1 bash
 }
 
 # Kubernetes aliases
-function kubectl-enter () {
+function kubectl-enter() {
   kubectl exec -ti $1 -- bash
 }
 
@@ -331,7 +331,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       alias aptitude='sudo aptitude'
   fi
 
-  function apt-cleanup () {
+  function apt-cleanup() {
     ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | grep -v $(uname -r) | sort -Vr | tail -n +2 | xargs -r sudo aptitude purge -y
     sudo aptitude autoclean
     sudo apt-get autoremove
@@ -400,11 +400,11 @@ alias pubkey='ssh-keygen -y -f'
 alias headers='curl -ISs'
 
 #Bash calculator.
-function calc () {
+function calc() {
   echo "${1}" | bc -l;
 }
 
-function wttr () {
+function wttr() {
   curl "wttr.in/$1"
 }
 alias wttr_moon='curl wttr.in/Moon'
@@ -414,7 +414,7 @@ alias ipinfo='curl -s http://ipinfo.io/ip'
 # get internet speed
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 
-function hgrep () {
+function hgrep() {
   if [ ! -z "$1" ]; then
     history | grep $1
   else
@@ -423,7 +423,7 @@ function hgrep () {
 }
 alias histg='hgrep'
 
-function extract () {
+function extract() {
   if [ -z "$1" ]; then
     # display usage if no parameters given
     echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
