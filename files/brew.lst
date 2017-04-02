@@ -44,6 +44,7 @@ packer
 python
 reattach-to-user-namespace
 s3cmd
+shellcheck
 source-highlight
 terraform
 terragrunt
