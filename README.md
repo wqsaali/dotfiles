@@ -31,6 +31,9 @@ back # go back to the previous folder
 calc # a simple bash calculator
 Cat # syntax highlighting cat
 wttr # displays the whether forecast
+gitv # like tig but with vim
+
+dig-all # get all dns records from a domain
 
 vim-update # update all active vim plugins
 
