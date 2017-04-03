@@ -35,7 +35,7 @@ installDocker() {
   sudo rm -rf /etc/default/docker
   sudo apt-get install -y docker-engine
   sudo service docker start
-  sudo usermod -aG docker `echo $USER`
+  sudo usermod -aG docker ${USER}
 }
 
 installHashicorp() {
