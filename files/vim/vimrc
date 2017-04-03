@@ -168,7 +168,7 @@
 
   " Folding
   set foldmarker={,}
-  set foldlevel=0
+  set foldlevelstart=99
   set foldmethod=marker
 
   " set clipboard=unnamedplus

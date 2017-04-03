@@ -388,6 +388,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias dist-upgrade='brew-upgrade && brew-cask-upgrade -y'
 fi
 
+# Get all records from a domain
+alias dig-all="dig +nocmd +multiline +noall +answer any"
+
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias sysState="top -l 1 -s 0 | awk ' /Processes/ || /PhysMem/ || /Load Avg/{print}'"
 
