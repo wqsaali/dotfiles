@@ -12,22 +12,22 @@ fancy_echo() {
   local fmt="$1"; shift
 
   # shellcheck disable=SC2059
-  printf "\n$fmt\n" "$@"
+  printf "\n$fmt\n" ${@}
 }
 
 brew_install_or_upgrade() {
   if brew_is_installed "$1"; then
     if brew_is_upgradable "$1"; then
-      brew upgrade "$@"
+      brew upgrade ${@}
     fi
   else
-    brew install "$@"
+    brew install ${@}
   fi
 }
 
 cask_install() {
     fancy_echo "Installing $1 ..."
-    brew cask install $@ --appdir=/Applications
+    brew cask install ${@} --appdir=/Applications
 }
 
 brew_is_installed() {
@@ -69,13 +69,13 @@ brew_launchctl_restart() {
   local domain="homebrew.mxcl.$name"
   local plist="$domain.plist"
 
-  mkdir -p "$HOME/Library/LaunchAgents"
-  ln -sfv "/usr/local/opt/$name/$plist" "$HOME/Library/LaunchAgents"
+  mkdir -p "${HOME}/Library/LaunchAgents"
+  ln -sfv "/usr/local/opt/$name/$plist" "${HOME}/Library/LaunchAgents"
 
   if launchctl list | grep -Fq "$domain"; then
-    launchctl unload "$HOME/Library/LaunchAgents/$plist" >/dev/null
+    launchctl unload "${HOME}/Library/LaunchAgents/$plist" >/dev/null
   fi
-  launchctl load "$HOME/Library/LaunchAgents/$plist" >/dev/null
+  launchctl load "${HOME}/Library/LaunchAgents/$plist" >/dev/null
 }
 
 osConfigs() {
@@ -135,15 +135,15 @@ installPackages() {
   /bin/bash "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
 
   while read -r PKG; do
-    [[ "$PKG" =~ ^#.*$ ]] && continue
-    [[ "$PKG" =~ ^\s*$ ]] && continue
-    brew_install_or_upgrade "$PKG"
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    brew_install_or_upgrade "${PKG}"
   done < files/brew.lst
 
   while read -r PKG; do
-    [[ "$PKG" =~ ^#.*$ ]] && continue
-    [[ "$PKG" =~ ^\s*$ ]] && continue
-    cask_install "$PKG"
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    cask_install "${PKG}"
   done < files/cask.lst
 
   echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells > /dev/null
@@ -160,13 +160,13 @@ installPackages() {
 installFonts() {
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   sudo chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
-  mv *.otf $HOME/Library/Fonts
+  mv *.otf ${HOME}/Library/Fonts
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-  sudo mv PowerlineSymbols.otf $HOME/Library/Fonts/
-  if ! [ -d $HOME/Library/Fonts/ubuntu-mono-powerline-ttf ]; then
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git $HOME/Library/Fonts/ubuntu-mono-powerline-ttf
+  sudo mv PowerlineSymbols.otf ${HOME}/Library/Fonts/
+  if ! [ -d ${HOME}/Library/Fonts/ubuntu-mono-powerline-ttf ]; then
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/Library/Fonts/ubuntu-mono-powerline-ttf
   else
-    cd $HOME/Library/Fonts/ubuntu-mono-powerline-ttf
+    cd ${HOME}/Library/Fonts/ubuntu-mono-powerline-ttf
     git pull
     cd ${INSTALLDIR}
   fi
@@ -174,30 +174,30 @@ installFonts() {
 }
 
 installDotFiles() {
-  mkdir -p $HOME/.bash/
-  mkdir -p $HOME/.vim/
-  mkdir -p $HOME/.vim/ftdetect
-  mkdir -p $HOME/.vim/ftplugin
-  mkdir -p $HOME/.atom/
+  mkdir -p ${HOME}/.bash/
+  mkdir -p ${HOME}/.vim/
+  mkdir -p ${HOME}/.vim/ftdetect
+  mkdir -p ${HOME}/.vim/ftplugin
+  mkdir -p ${HOME}/.atom/
 
   cd ${INSTALLDIR}
 
-  cp files/bash/git_prompt.sh $HOME/.bash/
-  cp files/bash/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
-  cp files/bash/shell_prompt.sh $HOME/.bash/
-  cp files/bash/bashrc $HOME/.bashrc
-  cp files/bash/bash_variables $HOME/.bash_variables
-  cp files/bash/bash_profile $HOME/.bash_profile
-  cp files/profile $HOME/.profile
-  cp files/screenrc $HOME/.screenrc
-  cp files/tmux.conf.local $HOME/.tmux.conf.local
-  cp -r files/vim/ft* $HOME/.vim/
-  cp files/vim/vimrc $HOME/.vimrc
-  cp files/vim/vimrc.local $HOME/.vimrc.local
-  cp files/atom/* $HOME/.atom/
-  cp files/slate/slate $HOME/.slate
-  cp files/slate/slate.js $HOME/.slate.js
-  cp -r files/hammerspoon/* $HOME/.hammerspoon/
+  cp files/bash/git_prompt.sh ${HOME}/.bash/
+  cp files/bash/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
+  cp files/bash/shell_prompt.sh ${HOME}/.bash/
+  cp files/bash/bashrc ${HOME}/.bashrc
+  cp files/bash/bash_variables ${HOME}/.bash_variables
+  cp files/bash/bash_profile ${HOME}/.bash_profile
+  cp files/profile ${HOME}/.profile
+  cp files/screenrc ${HOME}/.screenrc
+  cp files/tmux.conf.local ${HOME}/.tmux.conf.local
+  cp -r files/vim/ft* ${HOME}/.vim/
+  cp files/vim/vimrc ${HOME}/.vimrc
+  cp files/vim/vimrc.local ${HOME}/.vimrc.local
+  cp files/atom/* ${HOME}/.atom/
+  cp files/slate/slate ${HOME}/.slate
+  cp files/slate/slate.js ${HOME}/.slate.js
+  cp -r files/hammerspoon/* ${HOME}/.hammerspoon/
 
   sudo cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
@@ -212,54 +212,54 @@ installDotFiles() {
   #read -p "Please enter your name (for gitconfig):" NAME
   #read -p "Please enter your email address (for gitconfig):" EMAIL
 
-  #cp files/bash/bash_aliases $HOME/.bash_aliases
+  #cp files/bash/bash_aliases ${HOME}/.bash_aliases
   sedcmd=''
   for var in $(echo $CONF);do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done
-  cat files/bash/bash_aliases | sed -e "$sedcmd" > $HOME/.bash_aliases
+  cat files/bash/bash_aliases | sed -e "$sedcmd" > ${HOME}/.bash_aliases
 
-  # cp files/gitconfig $HOME/.gitconfig
+  # cp files/gitconfig ${HOME}/.gitconfig
   sedcmd=''
   for var in NAME EMAIL;do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done
-  cat files/gitconfig | sed -e "$sedcmd" > $HOME/.gitconfig
-  cp files/gitexcludes $HOME/.gitexcludes
+  cat files/gitconfig | sed -e "$sedcmd" > ${HOME}/.gitconfig
+  cp files/gitexcludes ${HOME}/.gitexcludes
 
-  if [ ! -d  $HOME/.bash/bash-git-prompt ]; then
-    git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.bash/bash-git-prompt
+  if [ ! -d  ${HOME}/.bash/bash-git-prompt ]; then
+    git clone https://github.com/magicmonty/bash-git-prompt.git ${HOME}/.bash/bash-git-prompt
   else
-    cd $HOME/.bash/bash-git-prompt
+    cd ${HOME}/.bash/bash-git-prompt
     git pull
     cd ${INSTALLDIR}
   fi
 
-  if [ ! -d  $HOME/.bash/powerline-shell ]; then
-    git clone https://github.com/milkbikis/powerline-shell $HOME/.bash/powerline-shell
+  if [ ! -d  ${HOME}/.bash/powerline-shell ]; then
+    git clone https://github.com/milkbikis/powerline-shell ${HOME}/.bash/powerline-shell
   else
-    cd $HOME/.bash/powerline-shell
+    cd ${HOME}/.bash/powerline-shell
     git pull
     cd ${INSTALLDIR}
   fi
 
-  if [ ! -d  $HOME/.tmux ]; then
-    git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
+  if [ ! -d  ${HOME}/.tmux ]; then
+    git clone https://github.com/gpakosz/.tmux.git ${HOME}/.tmux
   else
-    cd $HOME/.tmux/
+    cd ${HOME}/.tmux/
     git pull
     cd ${INSTALLDIR}
   fi
-  if [ ! -s $HOME/.tmux.conf ]; then
-    ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
+  if [ ! -s ${HOME}/.tmux.conf ]; then
+    ln -s ${HOME}/.tmux/.tmux.conf ${HOME}/.tmux.conf
   fi
 
-  if [ ! -d  $HOME/.reslate ]; then
-    git clone https://github.com/lunixbochs/reslate.git $HOME/.reslate
+  if [ ! -d  ${HOME}/.reslate ]; then
+    git clone https://github.com/lunixbochs/reslate.git ${HOME}/.reslate
   else
-    cd $HOME/.reslate/
+    cd ${HOME}/.reslate/
     git pull
     cd ${INSTALLDIR}
   fi

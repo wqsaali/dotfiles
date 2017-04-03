@@ -51,7 +51,7 @@ installHashicorp() {
   fi
   # Get URLs for most recent versions:
   url=$(curl --silent https://releases.hashicorp.com/index.json | jq "{$1}" | grep 'url' | egrep -i "$(uname -s).*$(uname -m | cut -d'_' -f2)" | sort -h | tail -1 | awk -F[\"] '{print $4}')
-  cd $HOME/.local/bin/
+  cd ${HOME}/.local/bin/
   curl -o package.zip $url
   unzip package.zip
   rm package.zip
@@ -69,7 +69,7 @@ installTerragrunt() {
 }
 
 installKubernetes() {
-  cd $HOME/.local/bin/
+  cd ${HOME}/.local/bin/
   curl -sS https://get.k8s.io | bash
   rm -rf kubernetes.tar.gz
   ln -s ~/.local/bin/kubernetes/client/bin/* ~/.local/bin/
@@ -95,15 +95,15 @@ installi3wm() {
     sudo npm i -g i3-alt-tab
   fi
 
-  mkdir -p $HOME/.config/i3
-  cp -r files/i3/* $HOME/.config/i3/
+  mkdir -p ${HOME}/.config/i3
+  cp -r files/i3/* ${HOME}/.config/i3/
 
   # if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
   #   sudo cp files/nautilus-i3 /usr/bin/
   # fi
 
-  if [ ! -s $HOME/.i3 ]; then
-    ln -s $HOME/.config/i3 $HOME/.i3
+  if [ ! -s ${HOME}/.i3 ]; then
+    ln -s ${HOME}/.config/i3 ${HOME}/.i3
   fi
 }
 
@@ -162,21 +162,21 @@ installPackages() {
 }
 
 installFonts() {
-  mkdir -p $HOME/.fonts/
+  mkdir -p ${HOME}/.fonts/
 
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
-  mv *.otf $HOME/.fonts/
+  mv *.otf ${HOME}/.fonts/
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
   sudo mv PowerlineSymbols.otf /usr/share/fonts/
   wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
   sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
   wget https://github.com/powerline/fonts/raw/master/Terminus/PSF/ter-powerline-v16b.psf.gz
   sudo mv ter-powerline-v16b.psf.gz /usr/share/consolefonts/
-  if ! [ -d $HOME/.fonts/ubuntu-mono-powerline-ttf ]; then
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git $HOME/.fonts/ubuntu-mono-powerline-ttf
+  if ! [ -d ${HOME}/.fonts/ubuntu-mono-powerline-ttf ]; then
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-powerline-ttf
   else
-    cd $HOME/.fonts/ubuntu-mono-powerline-ttf
+    cd ${HOME}/.fonts/ubuntu-mono-powerline-ttf
     git pull
     cd ${INSTALLDIR}
   fi
@@ -194,40 +194,40 @@ installDotFiles() {
     sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt-get update && sudo apt-get install hh
   fi
 
-  mkdir -p $HOME/.bash/
-  mkdir -p $HOME/.vim/
-  mkdir -p $HOME/.vim/ftdetect
-  mkdir -p $HOME/.vim/ftplugin
-  mkdir -p $HOME/.atom/
-  mkdir -p $HOME/.config/terminator/
-  mkdir -p $HOME/.config/i3
+  mkdir -p ${HOME}/.bash/
+  mkdir -p ${HOME}/.vim/
+  mkdir -p ${HOME}/.vim/ftdetect
+  mkdir -p ${HOME}/.vim/ftplugin
+  mkdir -p ${HOME}/.atom/
+  mkdir -p ${HOME}/.config/terminator/
+  mkdir -p ${HOME}/.config/i3
 
   cd ${INSTALLDIR}
 
-  cp -r files/i3/* $HOME/.config/i3/
-  if [ ! -s $HOME/.i3 ]; then
-    ln -s $HOME/.config/i3 $HOME/.i3
+  cp -r files/i3/* ${HOME}/.config/i3/
+  if [ ! -s ${HOME}/.i3 ]; then
+    ln -s ${HOME}/.config/i3 ${HOME}/.i3
   fi
 
-  cp files/tilda $HOME/.config/tilda/config_0
-  cp files/terminator.config $HOME/.config/terminator/
-  if ! [ -s  $HOME/.config/terminator/config ]; then
-    ln -s $HOME/.config/terminator/terminator.config $HOME/.config/terminator/config
+  cp files/tilda ${HOME}/.config/tilda/config_0
+  cp files/terminator.config ${HOME}/.config/terminator/
+  if ! [ -s  ${HOME}/.config/terminator/config ]; then
+    ln -s ${HOME}/.config/terminator/terminator.config ${HOME}/.config/terminator/config
   fi
 
-  cp files/bash/git_prompt.sh $HOME/.bash/
-  cp files/bash/git-prompt-colors.sh $HOME/.git-prompt-colors.sh
-  cp files/bash/shell_prompt.sh $HOME/.bash/
-  cp files/bash/bashrc $HOME/.bashrc
-  cp files/bash/bash_variables $HOME/.bash_variables
-  cp files/bash/bash_profile $HOME/.bash_profile
-  cp files/profile $HOME/.profile
-  cp files/screenrc $HOME/.screenrc
-  cp files/tmux.conf.local $HOME/.tmux.conf.local
-  cp -r files/vim/ft* $HOME/.vim/
-  cp files/vim/vimrc $HOME/.vimrc
-  cp files/vim/vimrc.local $HOME/.vimrc.local
-  cp files/atom/* $HOME/.atom/
+  cp files/bash/git_prompt.sh ${HOME}/.bash/
+  cp files/bash/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
+  cp files/bash/shell_prompt.sh ${HOME}/.bash/
+  cp files/bash/bashrc ${HOME}/.bashrc
+  cp files/bash/bash_variables ${HOME}/.bash_variables
+  cp files/bash/bash_profile ${HOME}/.bash_profile
+  cp files/profile ${HOME}/.profile
+  cp files/screenrc ${HOME}/.screenrc
+  cp files/tmux.conf.local ${HOME}/.tmux.conf.local
+  cp -r files/vim/ft* ${HOME}/.vim/
+  cp files/vim/vimrc ${HOME}/.vimrc
+  cp files/vim/vimrc.local ${HOME}/.vimrc.local
+  cp files/atom/* ${HOME}/.atom/
 
   sudo cp files/bash/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
@@ -243,48 +243,48 @@ installDotFiles() {
   #read -p "Please enter your name (for gitconfig):" NAME
   #read -p "Please enter your email address (for gitconfig):" EMAIL
 
-  #cp files/bash/bash_aliases $HOME/.bash_aliases
+  #cp files/bash/bash_aliases ${HOME}/.bash_aliases
   sedcmd=''
   for var in $(echo $CONF);do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done
-  cat files/bash/bash_aliases | sed -e "$sedcmd" > $HOME/.bash_aliases
+  cat files/bash/bash_aliases | sed -e "$sedcmd" > ${HOME}/.bash_aliases
 
-  # cp files/gitconfig $HOME/.gitconfig
+  # cp files/gitconfig ${HOME}/.gitconfig
   sedcmd=''
   for var in NAME EMAIL;do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done
-  cat files/gitconfig | sed -e "$sedcmd" > $HOME/.gitconfig
-  cp files/gitexcludes $HOME/.gitexcludes
+  cat files/gitconfig | sed -e "$sedcmd" > ${HOME}/.gitconfig
+  cp files/gitexcludes ${HOME}/.gitexcludes
 
-  if [ ! -d  $HOME/.bash/bash-git-prompt ]; then
-    git clone https://github.com/magicmonty/bash-git-prompt.git $HOME/.bash/bash-git-prompt
+  if [ ! -d  ${HOME}/.bash/bash-git-prompt ]; then
+    git clone https://github.com/magicmonty/bash-git-prompt.git ${HOME}/.bash/bash-git-prompt
   else
-    cd $HOME/.bash/bash-git-prompt
+    cd ${HOME}/.bash/bash-git-prompt
     git pull
     cd ${INSTALLDIR}
   fi
 
-  if [ ! -d  $HOME/.bash/powerline-shell ]; then
-    git clone https://github.com/milkbikis/powerline-shell $HOME/.bash/powerline-shell
+  if [ ! -d  ${HOME}/.bash/powerline-shell ]; then
+    git clone https://github.com/milkbikis/powerline-shell ${HOME}/.bash/powerline-shell
   else
-    cd $HOME/.bash/powerline-shell
+    cd ${HOME}/.bash/powerline-shell
     git pull
     cd ${INSTALLDIR}
   fi
 
-  if [ ! -d  $HOME/.tmux ]; then
-    git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
+  if [ ! -d  ${HOME}/.tmux ]; then
+    git clone https://github.com/gpakosz/.tmux.git ${HOME}/.tmux
   else
-    cd $HOME/.tmux/
+    cd ${HOME}/.tmux/
     git pull
     cd ${INSTALLDIR}
   fi
-  if [ ! -s $HOME/.tmux.conf ]; then
-    ln -s $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
+  if [ ! -s ${HOME}/.tmux.conf ]; then
+    ln -s ${HOME}/.tmux/.tmux.conf ${HOME}/.tmux.conf
   fi
   cd ${INSTALLDIR}
 }
