@@ -83,6 +83,7 @@ vim-mode-plus-duplicate
 vim-mode-plus-ex-mode
 vim-mode-plus-exchange
 vim-mode-plus-jasmine-increase-focus
+vim-mode-plus-keymaps-for-surround
 vim-mode-plus-move-selected-text
 vim-mode-plus-move-to-symbols
 vim-mode-plus-replace-with-execution

@@ -25,9 +25,6 @@
 # https://github.com/bevry/cson#what-is-cson
 
 'atom-text-editor.vim-mode-plus.normal-mode':
-  ':': 'command-palette:toggle'
-#  ':': 'vim-mode-plus-ex-mode:open'
-#  '!': 'vim-mode-plus-ex-mode:toggle-setting'
   # surround: ys
   # -------------------------
   'S': 'vim-mode-plus:surround-smart-word'
@@ -37,6 +34,15 @@
   'y s w': 'vim-mode-plus:surround-word'
   'y s m': 'vim-mode-plus:map-surround'
 
+'atom-text-editor.vim-mode-plus:not(.insert-mode)':
+  ':': 'command-palette:toggle'
+#  ':': 'vim-mode-plus-ex-mode:open'
+#  '!': 'vim-mode-plus-ex-mode:toggle-setting'
+  # Choose-pane
+  # -------------------------
+  '-': 'choose-pane:start'
+  'm m': 'choose-pane:focus-last-focused'
+
 'atom-text-editor.vim-mode-plus.visual-mode':
   'S': 'vim-mode-plus:surround'
   'g I': 'vim-mode-plus:insert-at-start-of-target'
@@ -44,3 +50,16 @@
   'space i': 'vim-mode-plus:insert-at-start-of-target'
   'g A': 'vim-mode-plus:insert-at-end-of-target'
   'A': 'vim-mode-plus:insert-at-end-of-target'
+
+'.markdown-preview':
+  '-': 'choose-pane:start'
+  'm m': 'choose-pane:focus-last-focused'
+
+# For tree-view
+'.tree-view':
+  '-': 'choose-pane:start'
+  'm m': 'choose-pane:focus-last-focused'
+
+# Map '-', so that I can focus last-focused element by typing `-` twice.
+'atom-text-editor#choose-pane-editor':
+  '-': 'choose-pane:last-focused'

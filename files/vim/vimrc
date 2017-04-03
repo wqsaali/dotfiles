@@ -13,6 +13,7 @@
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'breuckelen/vim-resize'
+  Plugin 't9md/vim-choosewin'
   "Plugin 'powerline/powerline'
   "Plugin 'tpope/vim-flagship'
   Plugin 'airblade/vim-gitgutter'
@@ -165,6 +166,11 @@
   set nrformats-=octal
   set shiftround
 
+  " Folding
+  set foldmarker={,}
+  set foldlevel=0
+  set foldmethod=marker
+
   " set clipboard=unnamedplus
   set clipboard=unnamed
   set regexpengine=1
@@ -247,6 +253,10 @@
   nnoremap <silent> <S-Up> :CmdResizeUp<cr>
   nnoremap <silent> <S-Right> :CmdResizeRight<cr>
 
+  " vim-choosewin
+  let g:choosewin_overlay_enable = 1
+  nmap - <Plug>(choosewin)
+
   " matchparen
   let g:matchparen_timeout = 2
   let g:matchparen_insert_timeout = 2
@@ -279,11 +289,6 @@
   " set conceallevel=1
   " let g:indentLine_conceallevel=1
 
-  " Conoline
-  " if !&diff
-  "   let g:conoline_auto_enable = 1
-  " endif
-
   " Vim
   let g:indentLine_color_term = 239
   "GVim
@@ -291,6 +296,11 @@
   " none X terminal
   let g:indentLine_color_tty_light = 7 " (default: 4)
   let g:indentLine_color_dark = 1 " (default: 2)'
+
+  " Conoline
+  " if !&diff
+  "   let g:conoline_auto_enable = 1
+  " endif
 
   " CtrlP
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
