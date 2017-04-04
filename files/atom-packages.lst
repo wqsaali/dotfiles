@@ -43,6 +43,7 @@ language-terraform
 language-varnish
 language-viml
 linter
+linter-docker
 linter-foodcritic
 linter-jsonlint
 linter-rubocop
