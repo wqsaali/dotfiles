@@ -43,6 +43,10 @@ function bitbucket() {
   cd ${BITBUCKET}/$1
 }
 
+function playbooks() {
+  cd ${PLAYBOOKS}/$1
+}
+
 alias chef-roles='cd ${CHEF_ROLES}'
 alias chef-environments='cd ${CHEF_ENVIRONMENTS}'
 alias chef-handlers='cd ${CHEF_HANDLERS}'

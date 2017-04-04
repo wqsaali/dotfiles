@@ -27,6 +27,13 @@ _terraformfiles() {
 }
 complete -F _terraformfiles terraformfiles
 
+_playbooks() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local playbooks=$(playbooks; ls -1)
+  COMPREPLY=( $(compgen -W "$playbooks" -- $cur) );
+}
+complete -F _playbooks playbooks
+
 _chef-cookbooks() {
   local cur=${COMP_WORDS[COMP_CWORD]};
   local cookbooks=$(chef-cookbooks; ls -1)
