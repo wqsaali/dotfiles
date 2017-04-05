@@ -32,6 +32,7 @@ kops
 kube-aws
 kubernetes-cli
 kubernetes-helm
+legit
 macvim
 moreutils
 mtr
@@ -52,6 +53,7 @@ the_silver_searcher
 thefuck
 tig
 tmux
+tree
 ufraw
 vagrant-completion
 vim
