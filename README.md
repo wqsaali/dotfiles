@@ -1,6 +1,6 @@
 # Dotfiles
 
-##What's included:
+## What's included:
 - a bashrc file
 - a set of bash aliases
 - installs https://github.com/magicmonty/bash-git-prompt.git

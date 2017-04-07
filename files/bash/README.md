@@ -1,5 +1,7 @@
 # Bash configuration
 
+Includes some aliases and functions (with auto completion) to make your life easier.
+
 ## Some of the included aliases:
 ```
 json-diff # Usage: json-diff file1 file2 [section_on_file1] [section_on_file2]
