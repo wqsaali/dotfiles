@@ -38,6 +38,7 @@ language-ansible
 language-apache
 language-chef
 language-docker
+language-lua
 language-nginx
 language-terraform
 language-varnish
@@ -46,6 +47,7 @@ linter
 linter-docker
 linter-foodcritic
 linter-jsonlint
+linter-lua
 linter-rubocop
 linter-ruby
 linter-ui-default

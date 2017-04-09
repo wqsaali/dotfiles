@@ -1,6 +1,6 @@
 # Dotfiles
 
-## What's included:
+### What's included:
 - a bashrc file
 - a set of bash aliases
 - installs https://github.com/magicmonty/bash-git-prompt.git
@@ -40,4 +40,17 @@ Usage examples:
 ./backup.sh dotfiles # Will backup your dotfiles, the ones managed by the install.sh script
 ./backup.sh atom # Will backup your atom configuration files and installed package list
 ./backup.sh repos # Will backup your deb package repos
+```
+
+### For more information check out the other README files and the code.
+```
+.
+├── README.md
+└── files
+    ├── bash
+    │   └── README.md
+    ├── hammerspoon
+    │   └── README.md
+    └── i3
+        └── README.md
 ```

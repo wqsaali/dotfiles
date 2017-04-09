@@ -7,7 +7,7 @@ With this configuration you will be able to move the windows in halves and in co
 
 ### Hyper key
 
-The hyper key is defined as `ctrl` + `cmd`. This means that each shortcut will start by pressing these three keys. If you consider this too verbose for your personal keyboard interactions, you can also change this key by editing the file `init.lua`.
+The hyper key is defined as `ctrl` + `cmd`. This means that each shortcut will start by pressing these keys. If you consider this too verbose for your personal keyboard interactions, you can also change this key by editing the file `init.lua`.
 
 ### Move in halves
 
