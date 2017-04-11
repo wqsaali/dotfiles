@@ -1,8 +1,13 @@
-  pip
-  setuptools
-  pyobjc
-  yq
-  thefuck
-  howdoi
-  Pygment
-  sshuttle
+pip
+setuptools
+pyobjc
+yq
+thefuck
+howdoi
+Pygment
+sshuttle
+boto
+boto3
+ansible
+ansible-test
+container-transform
