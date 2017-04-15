@@ -392,6 +392,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias dist-upgrade='brew-upgrade && brew-cask-upgrade -y'
 fi
 
+alias update-all-things='dist-upgrade && apm upgrade && vim-update'
+
 # Get all records from a domain
 alias dig-all="dig +nocmd +multiline +noall +answer any"
 
