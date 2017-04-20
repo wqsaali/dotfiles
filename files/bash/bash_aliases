@@ -194,6 +194,13 @@ function git-branch-status() {
   done
 }
 
+# Merges current branch with the specified branch
+function git-merge() {
+  CUR_BRANCH=$(basename $(git symbolic-ref -q HEAD))
+  SRC_BRANCH=${1:-"master"}
+  git pull && git checkout ${SRC_BRANCH} && git pull && git checkout ${CUR_BRANCH} && git pull && git merge ${SRC_BRANCH}
+}
+
 # Grep aliases
 alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 
