@@ -79,6 +79,14 @@ installPips() {
   done < files/pip.lst
 }
 
+installNpms() {
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    npm install -g "${PKG}"
+  done < files/npm.lst
+}
+
 installScripts() {
   mkdir -p ${HOME}/.local/bin/
   cp -r files/scripts/* ${HOME}/.local/bin/
@@ -153,6 +161,7 @@ installFish() {
 installAll() {
   installGems
   installPips
+  installNpms
   installScripts
   installVagrantPlugins
   installAtomPackages
@@ -165,7 +174,10 @@ case "$1" in
     ;;
   "pip" | "pips")
     installPips
-    ;;
+    ;;i
+  "npm" | "npms")
+    installNpms
+    ;;
   "vagrant" | "VagrantPlugins")
     installVagrantPlugins
     ;;
