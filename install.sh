@@ -177,7 +177,7 @@ case "$1" in
     ;;
   "npm" | "npms")
     installNpms
-    ;;
+    ;;
   "vagrant" | "VagrantPlugins")
     installVagrantPlugins
     ;;
