@@ -174,7 +174,7 @@ case "$1" in
     ;;
   "pip" | "pips")
     installPips
-    ;;i
+    ;;
   "npm" | "npms")
     installNpms
     ;;
