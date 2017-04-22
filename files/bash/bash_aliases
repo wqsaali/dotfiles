@@ -322,7 +322,11 @@ function kubectl-enter() {
 }
 
 # Gem aliases
-alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'
+# alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'
+alias gem-upgrade='gem update && gem cleanup'
+
+# npm aliases
+alias npm-upgrade='npm upgrade -g'
 
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs sudo -H pip install -U'
