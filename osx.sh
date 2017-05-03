@@ -152,6 +152,9 @@ installPackages() {
   # sudo npm install -g coffee-scrip
   # sudo npm install -g azure-cli
 
+  # gettext is installed as a dependency but it's not linked
+  brew link gettext --force
+
   fancy_echo "Cleaning up old Homebrew formulae ..."
   brew cleanup
   brew cask cleanup
