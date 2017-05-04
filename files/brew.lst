@@ -44,6 +44,7 @@ openssl
 packer
 python
 reattach-to-user-namespace
+rename
 s3cmd
 shellcheck
 source-highlight
