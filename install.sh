@@ -32,6 +32,20 @@ gem_install_or_update() {
   fi
 }
 
+installFastPath() {
+  # https://github.com/mfornasa/docker-fastpath
+  mkdir -p ~/.local/bin/
+  version='linux'
+  arch='-amb64'
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    version='osx'
+    arch=''
+  fi
+  curl https://docker-fastpath.s3-eu-west-1.amazonaws.com/releases/${version}/docker-fastpath-${version}${arch}-latest.zip > fastpath.zip
+  unzip fastpath.zip
+  chmod +x fastpath && mv fastpath ~/.local/bin/
+}
+
 installFission() {
   # http://fission.io/
   mkdir -p ~/.local/bin/
