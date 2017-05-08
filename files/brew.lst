@@ -28,6 +28,7 @@ imagemagick
 iproute2mac
 jid
 jq
+jruby
 kops
 kube-aws
 kubernetes-cli
