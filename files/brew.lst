@@ -43,6 +43,7 @@ node
 openshift-cli
 openssl
 packer
+pre-commit
 python
 reattach-to-user-namespace
 rename
