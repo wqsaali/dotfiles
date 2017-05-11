@@ -76,6 +76,8 @@
   Plugin 'flazz/vim-colorschemes'
   " Plugin 'rakr/vim-one'
   Plugin 'nginx.vim'
+  Plugin 'cespare/vim-toml'
+  Plugin 'maralla/vim-toml-enhance'
 
   " All of your Plugins must be added before the following line
   call vundle#end()            " required
