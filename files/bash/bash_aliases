@@ -141,6 +141,15 @@ function git-pull-all() {
   cd $cdir
 }
 
+function git-clean-all() {
+  cdir=$(pwd)
+  if [ ! -z $1 ]; then
+    cd $1
+  fi
+  for d in $(ls -d */); do echo $d; cd $d; git clean -fdX; cd ..; done
+  cd $cdir
+}
+
 function git-status() {
   UNCOMMITED=$(git status -s)
   LOCAL=$(git rev-parse @)
