@@ -26,7 +26,7 @@
       "one-dark-ui"
       "one-sharp-syntax"
     ]
-    useCustomTitleBar: true
+    titleBar: "custom"
   editor:
     fontSize: 11
     invisibles: {}
@@ -62,8 +62,7 @@
       "git-diffDecorationsZIndex": 0
       "split-diff": true
       "split-diffDecorationsZIndex": 0
-  "one-dark-ui":
-    layoutMode: "Compact"
+  "one-dark-ui": {}
   "quantum-shell": {}
   "seti-ui":
     compactView: true
