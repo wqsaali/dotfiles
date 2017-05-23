@@ -36,6 +36,7 @@ kubernetes-cli
 kubernetes-helm
 legit
 macvim
+molecule
 moreutils
 mtr
 neovim
