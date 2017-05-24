@@ -13,6 +13,7 @@ cmake
 coffeescript
 colordiff
 compose2kube
+cookiecutter
 coreutils
 dark-mode
 docker-compose
