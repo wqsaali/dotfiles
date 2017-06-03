@@ -35,7 +35,7 @@
   'y s m': 'vim-mode-plus:map-surround'
 
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
-  ':': 'command-palette:toggle'
+#  ':': 'command-palette:toggle'
 #  ':': 'vim-mode-plus-ex-mode:open'
 #  '!': 'vim-mode-plus-ex-mode:toggle-setting'
   # Choose-pane

@@ -14,11 +14,12 @@
       "file-type-icons"
       "file-icon-supplement"
       "branch-status"
-      "vim-mode-plus-ex-mode"
       "activate-power-mode"
       "automate-power-mode"
       "welcome"
       "scroll-searcher"
+      "atom-vim-colon-command-on-command-pallete"
+      "alias-command"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "limited"

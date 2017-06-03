@@ -21,6 +21,7 @@ dark-monokai-batch
 emmet
 emmet-snippets-compatibility
 erb-snippets
+ex-mode
 f5-networks-iRules
 file-icons
 git-control
@@ -84,7 +85,6 @@ tree-view-git-branch
 tree-view-git-status
 vim-mode-plus
 vim-mode-plus-duplicate
-vim-mode-plus-ex-mode
 vim-mode-plus-exchange
 vim-mode-plus-jasmine-increase-focus
 vim-mode-plus-keymaps-for-surround

@@ -17,6 +17,13 @@ atom.packages.onDidActivatePackage (pack) ->
     editor = atom.workspace.getActiveTextEditor()
     Ex = pack.mainModule.provideEx()
     Ex.registerCommand 'term', -> atom.commands.dispatch(atom.views.getView(editor), 'termrk:toggle')
+    Ex.registerCommand 'diffToggle', -> atom.commands.dispatch(atom.views.getView(editor), 'split-diff:toggle')
+    Ex.registerCommand 'diffget', -> atom.commands.dispatch(atom.views.getView(editor), 'split-diff:copy-to-right')
+    Ex.registerCommand 'diffput', -> atom.commands.dispatch(atom.views.getView(editor), 'split-diff:copy-to-left')
+    Ex.registerCommand 'git-blame', -> atom.commands.dispatch(atom.views.getView(editor), 'blame:toggle')
+    # Ex mode aliases
+    Ex.registerAlias 'gblame', 'git-blame'
+    Ex.registerAlias 'diffthis', 'diffToggle'
 
   if pack.name == 'alias-command'
     aliasCommand = atom.packages.getLoadedPackage('alias-command').requireMainModule()
