@@ -176,6 +176,13 @@ installFonts() {
   cd ${INSTALLDIR}
 }
 
+function installIterm() {
+  cask_install "iterm2"
+  cp files/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+  plutil -convert binary1 ~/Library/Preferences/com.googlecode.iterm2.plist
+  defaults read com.googlecode.iterm2
+}
+
 installDotFiles() {
   mkdir -p ${HOME}/.bash/
   mkdir -p ${HOME}/.vim/
@@ -272,6 +279,7 @@ installDotFiles() {
 installAll() {
   installPackages
   installFonts
+  installIterm
   installDotFiles
 }
 

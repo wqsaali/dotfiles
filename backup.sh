@@ -27,6 +27,16 @@ function backupDotFiles() {
   cp ${HOME}/.slate.js files/slate/slate.js
 }
 
+function backupIterm() {
+  defaults read com.googlecode.iterm2 > files/com.googlecode.iterm2.plist
+}
+
+function restoreIterm() {
+  cp files/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+  plutil -convert binary1 ~/Library/Preferences/com.googlecode.iterm2.plist
+  defaults read com.googlecode.iterm2
+}
+
 function backupAtomPackages() {
   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/atom-packages.lst
   cp ${HOME}/.atom/*.cson files/atom/
