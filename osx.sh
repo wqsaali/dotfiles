@@ -123,13 +123,13 @@ installPackages() {
   fi
   sudo spctl --master-disable
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew_tap 'caskroom/cask'
-  brew_tap 'caskroom/fonts'
-  brew_tap 'homebrew/services'
-  brew_tap 'homebrew/command-not-found'
-  brew_tap 'neovim/neovim'
-  brew_tap 'buo/cask-upgrade'
-  brew_tap 'knes1/tap'
+
+  while read -r TAP; do
+    [[ "${TAP}" =~ ^#.*$ ]] && continue
+    [[ "${TAP}" =~ ^\\s*$ ]] && continue
+    brew_tap "${TAP}"
+  done < files/tap.lst
+
   brew update
 
   /bin/bash "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
