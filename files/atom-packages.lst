@@ -1,8 +1,8 @@
 activate-power-mode
 alias-command
 ansible-snippets
+ansible-vault
 atom-beautify
-atom-console
 atom-fuzzy-grep
 atom-hide-tabs
 atom-shell-commands

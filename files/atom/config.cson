@@ -49,6 +49,8 @@
   "highlight-line":
     hideHighlightOnSelect: true
   linter: {}
+  "linter-ui-default":
+    panelHeight: 74
   "markdown-preview":
     useGitHubStyle: true
   "markdown-preview-plus": {}
