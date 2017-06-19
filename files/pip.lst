@@ -5,6 +5,7 @@ boto
 boto3
 container-transform
 docker
+glances
 howdoi
 molecule
 pip
