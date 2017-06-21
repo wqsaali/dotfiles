@@ -210,6 +210,8 @@ function git-merge() {
   git pull && git checkout ${SRC_BRANCH} && git pull && git checkout ${CUR_BRANCH} && git pull && git merge ${SRC_BRANCH}
 }
 
+alias standup='code; git standup -m3 -d3; back'
+
 # Grep aliases
 alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 
