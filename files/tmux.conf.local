@@ -238,7 +238,7 @@ tmux_conf_theme_clock_style='24'
 #   - true
 #   - false (default)
 # on macOS, this require installing reattach-to-user-namespace, see README.md
-tmux_conf_copy_to_os_clipboard=false
+tmux_conf_copy_to_os_clipboard=true
 
 
 # -- user customizations -------------------------------------------------------
@@ -291,16 +291,16 @@ set -g @yank_selection 'primary'
 # set -g @plugin 'tmux-plugins/tmux-copycat'
 # set -g @plugin 'tmux-plugins/tmux-open'
 
-set -g @tpm_plugins '          \
-  tmux-plugins/tpm             \
-  tmux-plugins/tmux-sensible   \
-  tmux-plugins/tmux-resurrect  \
-'
+# set -g @tpm_plugins '          \
+#   tmux-plugins/tpm             \
+#   tmux-plugins/tmux-sensible   \
+#   tmux-plugins/tmux-resurrect  \
+# '
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-if "test ! -d ~/.tmux/plugins/tpm" \
-   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
-run '~/.tmux/plugins/tpm/tpm'
+# if "test ! -d ~/.tmux/plugins/tpm" \
+#    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
+# run '~/.tmux/plugins/tpm/tpm'
 
 # If TPM is not working this is a temporay workaround
 # run '~/.tmux/plugins/tmux-open/open.tmux'
