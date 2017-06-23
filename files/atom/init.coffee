@@ -31,7 +31,7 @@ atom.packages.onDidActivatePackage (pack) ->
     aliasCommand 'package-control:install',
       orig: 'settings-view:install-packages-and-themes'
 
-# Vim like commands
+# Vim like commands for the alias-command plugin
 #      aliasCommand 'w',
 #        orig: 'core:save'
 #      aliasCommand 'wall',
