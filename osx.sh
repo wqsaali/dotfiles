@@ -160,9 +160,17 @@ installPackages() {
   brew cask cleanup
 }
 
+function installIterm() {
+  cask_install "iterm2"
+  cp files/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+  plutil -convert binary1 ~/Library/Preferences/com.googlecode.iterm2.plist
+  defaults read com.googlecode.iterm2
+}
+
 installFonts() {
+  mkdir -p ${HOME}/Library/Fonts
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/0.6.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
-  sudo chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
+  chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
   mv *.otf ${HOME}/Library/Fonts
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
   sudo mv PowerlineSymbols.otf ${HOME}/Library/Fonts/
@@ -174,13 +182,6 @@ installFonts() {
     cd ${INSTALLDIR}
   fi
   cd ${INSTALLDIR}
-}
-
-function installIterm() {
-  cask_install "iterm2"
-  cp files/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
-  plutil -convert binary1 ~/Library/Preferences/com.googlecode.iterm2.plist
-  defaults read com.googlecode.iterm2
 }
 
 installDotFiles() {

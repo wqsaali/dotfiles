@@ -292,8 +292,8 @@ installDotFiles() {
 installAll() {
   installPackages
   installFonts
-  installDotFiles
   installGnomeTerminalProfiles
+  installDotFiles
 }
 
 case "$1" in
