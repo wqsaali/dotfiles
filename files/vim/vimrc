@@ -77,6 +77,7 @@
   " Plugin 'rakr/vim-one'
   Plugin 'hashivim/vim-hashicorp-tools'
   Plugin 'nginx.vim'
+  Plugin 'pearofducks/ansible-vim'
   Plugin 'cespare/vim-toml'
   Plugin 'maralla/vim-toml-enhance'
 
