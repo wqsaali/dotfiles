@@ -20,6 +20,13 @@ _kubectl-enter() {
 }
 complete -F _kubectl-enter kubectl-enter
 
+_dcos-clusters() {
+  local cur=${COMP_WORDS[COMP_CWORD]};
+  local dcos-clusters=$(dcos-clusters; ls -1)
+  COMPREPLY=( $(compgen -W "$dcos-clusters" -- $cur) );
+}
+complete -F _dcos-clusters dcos-clusters
+
 _terraformfiles() {
   local cur=${COMP_WORDS[COMP_CWORD]};
   local terraformfiles=$(terraformfiles; ls -1)
