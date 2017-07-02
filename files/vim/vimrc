@@ -1,91 +1,101 @@
 " Best view with a 256 color terminal and Powerline fonts
 
+let s:darwin = has('mac')
+
 " Plugins {
-  set nocompatible
-  filetype off
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-  Plugin 'VundleVim/Vundle.vim'
+  " Load vim-plug
+  if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+  endif
+  call plug#begin('~/.vim/bundle')
 
-  Plugin 'tpope/vim-sensible'
-  "Plugin 'edkolev/promptline.vim'
-  "Plugin 'edkolev/tmuxline.vim'
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'breuckelen/vim-resize'
-  Plugin 't9md/vim-choosewin'
-  "Plugin 'powerline/powerline'
-  "Plugin 'tpope/vim-flagship'
-  Plugin 'airblade/vim-gitgutter'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'gregsexton/gitv'
-  Plugin 'junegunn/gv.vim'
-  "Plugin 'miyakogi/conoline.vim'
-  "Plugin 'mhinz/vim-signify'
-  "Plugin 'gcmt/breeze.vim'
-  Plugin 'ctrlpvim/ctrlp.vim'
-  Plugin 'scrooloose/nerdtree'
-  "Plugin 'jlanzarotta/bufexplorer'
-  "Plugin 'majutsushi/tagbar'
-  "Plugin 'vim-scripts/taglist.vim'
-  "Plugin 'vim-scripts/cmdalias.vim'
-  Plugin 'benmills/vimux'
-  "Plugin 'severin-lemaignan/vim-minimap'
-  Plugin 'nelstrom/vim-visual-star-search'
-  "Plugin 'Shougo/neocomplete.vim.git'
-  "Plugin 'Shougo/neosnippet'
-  "Plugin 'Shougo/neosnippet-snippets'
-  " Plugin 'SirVer/ultisnips'
-  Plugin 'chrisbra/vim-diff-enhanced'
-  Plugin 'MarcWeber/vim-addon-mw-utils' "requiered by snipmate
-  Plugin 'tomtom/tlib_vim' "requiered by snipmate
-  Plugin 'garbas/vim-snipmate'
-  Plugin 'honza/vim-snippets'
-  Plugin 'Valloric/YouCompleteMe'
-  "Plugin 'davidhalter/jedi-vim.git'
-  Plugin 'ervandew/supertab'
-  "Plugin 'sjl/gundo.vim'
-  Plugin 'Yggdroot/indentLine'
-  "Plugin 'luochen1990/indent-detector.vim'
-  " Plugin 'tpope/vim-sleuth'
-  Plugin 'tpope/vim-surround'
-  Plugin 'tpope/vim-repeat'
-  Plugin 'tomtom/tcomment_vim'
-  "Plugin 'scrooloose/nerdcommenter'
-  Plugin 'ryanoasis/vim-devicons'
-  Plugin 'nvie/vim-togglemouse'
-  "Plugin 'LucHermitte/lh-vim-lib'
-  "Plugin 'LucHermitte/lh-tags'
-  "Plugin 'LucHermitte/lh-dev'
-  "Plugin 'LucHermitte/lh-brackets'
-  "Plugin 'alvan/vim-closetag'
-  Plugin 'Townk/vim-autoclose'
-  Plugin 'tpope/vim-endwise'
-  " Plugin 'godlygeek/tabular'
-  "Plugin 'neilagabriel/vim-geeknote'
-  Plugin 'elzr/vim-json'
-  Plugin 'jamessan/vim-gnupg'
-  "Plugin 'kopischke/vim-stay'
-  "Plugin 'kopischke/vim-fetch'
-  Plugin 'Konfekt/FastFold'
-  Plugin 'luisdavim/pretty-folds'
-  Plugin 'scrooloose/syntastic'
-  Plugin 'metakirby5/codi.vim'
-  "Plugin 'lilydjwg/colorizer'
-  "Plugin 'chriskempson/base16-vim'
-  Plugin 'flazz/vim-colorschemes'
-  " Plugin 'rakr/vim-one'
-  Plugin 'hashivim/vim-hashicorp-tools'
-  Plugin 'nginx.vim'
-  Plugin 'pearofducks/ansible-vim'
-  Plugin 'cespare/vim-toml'
-  Plugin 'maralla/vim-toml-enhance'
+  if s:darwin
+    let g:plug_url_format = 'git@github.com:%s.git'
+  else
+    let $GIT_SSL_NO_VERIFY = 'true'
+  endif
 
-  " All of your Plugins must be added before the following line
-  call vundle#end()            " required
-  filetype plugin indent on    " required
-  " To ignore plugin indent changes, instead use:
-  "filetype plugin on
+  Plug 'tpope/vim-sensible'
+  "Plug 'edkolev/promptline.vim'
+  "Plug 'edkolev/tmuxline.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'breuckelen/vim-resize'
+  Plug 't9md/vim-choosewin'
+  "Plug 'powerline/powerline'
+  "Plug 'tpope/vim-flagship'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-fugitive'
+  Plug 'gregsexton/gitv'
+  Plug 'junegunn/gv.vim'
+  "Plug 'miyakogi/conoline.vim'
+  "Plug 'mhinz/vim-signify'
+  "Plug 'gcmt/breeze.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
+  "Plug 'jlanzarotta/bufexplorer'
+  "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+  "Plug 'vim-scripts/taglist.vim'
+  "Plug 'vim-scripts/cmdalias.vim'
+  Plug 'benmills/vimux'
+  "Plug 'severin-lemaignan/vim-minimap'
+  Plug 'nelstrom/vim-visual-star-search'
+  "Plug 'Shougo/neocomplete.vim.git'
+  "Plug 'Shougo/neosnippet'
+  "Plug 'Shougo/neosnippet-snippets'
+  " Plug 'SirVer/ultisnips'
+  Plug 'chrisbra/vim-diff-enhanced'
+  Plug 'MarcWeber/vim-addon-mw-utils' "requiered by snipmate
+  Plug 'tomtom/tlib_vim' "requiered by snipmate
+  Plug 'garbas/vim-snipmate'
+  Plug 'honza/vim-snippets'
+  function! BuildYCM(info)
+    if a:info.status == 'installed' || a:info.force
+      !./install.py --clang-completer --gocode-completer
+    endif
+  endfunction
+  Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
+  "Plug 'davidhalter/jedi-vim.git'
+  Plug 'ervandew/supertab'
+  "Plug 'sjl/gundo.vim'
+  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+  "Plug 'luochen1990/indent-detector.vim'
+  " Plug 'tpope/vim-sleuth'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'tomtom/tcomment_vim'
+  "Plug 'scrooloose/nerdcommenter'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'nvie/vim-togglemouse'
+  "Plug 'LucHermitte/lh-vim-lib'
+  "Plug 'LucHermitte/lh-tags'
+  "Plug 'LucHermitte/lh-dev'
+  "Plug 'LucHermitte/lh-brackets'
+  "Plug 'alvan/vim-closetag'
+  Plug 'Townk/vim-autoclose'
+  Plug 'tpope/vim-endwise'
+  " Plug 'godlygeek/tabular'
+  "Plug 'neilagabriel/vim-geeknote'
+  Plug 'elzr/vim-json'
+  Plug 'jamessan/vim-gnupg'
+  "Plug 'kopischke/vim-stay'
+  "Plug 'kopischke/vim-fetch'
+  Plug 'Konfekt/FastFold'
+  Plug 'luisdavim/pretty-folds'
+  Plug 'scrooloose/syntastic'
+  Plug 'metakirby5/codi.vim'
+  "Plug 'lilydjwg/colorizer'
+  "Plug 'chriskempson/base16-vim'
+  Plug 'flazz/vim-colorschemes'
+  " Plug 'rakr/vim-one'
+  Plug 'hashivim/vim-hashicorp-tools'
+  Plug 'chr4/nginx.vim'
+  Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+  Plug 'pearofducks/ansible-vim'
+  Plug 'cespare/vim-toml'
+  Plug 'maralla/vim-toml-enhance'
+
+  call plug#end()
 " }
 
 " ColorThemes {
@@ -489,6 +499,7 @@
 
 " }
 
+command! PU PlugUpdate | PlugUpgrade
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 fun! DiffToggle()

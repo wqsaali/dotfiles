@@ -139,6 +139,7 @@ installVimPlugins() {
   cd ${INSTALLDIR}
   mkdir -p ${HOME}/.vim/ftdetect
   mkdir -p ${HOME}/.vim/ftplugin
+  mkdir -p ${HOME}/.vim/autoload/
   mkdir -p ${HOME}/.vim/bundle/
   mkdir -p ${HOME}/.config/nvim
   cp files/vim/vimrc ${HOME}/.vimrc
@@ -146,14 +147,21 @@ installVimPlugins() {
   cp -r files/vim/ft* ${HOME}/.vim/
   ln -s ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
 
-  if [ ! -d  ${HOME}/.vim/bundle/Vundle.vim ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
-  fi
+  # Using vim Vundle
+  # if [ ! -d  ${HOME}/.vim/bundle/Vundle.vim ]; then
+  #   git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
+  # fi
+  #
+  # vim +PluginInstall +qall
+  # cd ${HOME}/.vim/bundle/YouCompleteMe
+  # ./install.py
+  # cd ${INSTALLDIR}
 
-  vim +PluginInstall +qall
-  cd ${HOME}/.vim/bundle/YouCompleteMe
-  ./install.py
-  cd ${INSTALLDIR}
+  # Using vim-plug
+  if [ ! -f ~/.vim/autoload/plug.vim ]; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
+  vim +PlugInstall +qall
 }
 
 installFish() {

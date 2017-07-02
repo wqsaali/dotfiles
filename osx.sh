@@ -189,6 +189,7 @@ installDotFiles() {
   mkdir -p ${HOME}/.vim/
   mkdir -p ${HOME}/.vim/ftdetect
   mkdir -p ${HOME}/.vim/ftplugin
+  mkdir -p ${HOME}/.vim/autoload
   mkdir -p ${HOME}/.atom/
 
   cd ${INSTALLDIR}
