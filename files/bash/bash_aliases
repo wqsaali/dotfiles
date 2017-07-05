@@ -145,12 +145,14 @@ alias json-prettify-all='for f in *.json; do json-prettify ${f}; done'
 # Git aliases
 function git-pull-all() {
   cdir=$(pwd)
+  bdir='.'
   if [ ! -z $1 ]; then
-    cd $1
+    bdir=$1
   fi
-  for d in $(ls -d */); do echo $d; cd $d; git pull; cd ..; done
-  cd $cdir
+  repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname \\"{}/\\"" \; | grep -Ev '.*\/\..*')
+  for d in $repos; do echo ">>> $d"; cd $d; git pull; cd $cdir; done
 }
+alias git-pull-recursive='git-pull-all'
 
 function git-clean-all() {
   cdir=$(pwd)
