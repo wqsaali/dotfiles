@@ -25,14 +25,15 @@ findutils
 gawk
 git
 groovy
-hub
 htop
+hub
 imagemagick
 ipcalc
 iproute2mac
 jid
 jq
 jruby
+jsonnet
 kops
 kube-aws
 kubernetes-cli
