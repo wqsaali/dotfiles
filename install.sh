@@ -32,6 +32,18 @@ gem_install_or_update() {
   fi
 }
 
+installFromGithub() {
+  mkdir -p ~/.local/bin/
+  project="${1}"
+  os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
+  arch="${3:-amd64}"
+  name="${4:-$(basename ${project})}"
+  url=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[] | select(.name | test(\"${os}${arch}\")) | .browser_download_url")
+  curl -Lo $name $url
+  chmod +x $name
+  mv $name ~/.local/bin/
+}
+
 installFastPath() {
   # https://github.com/mfornasa/docker-fastpath
   mkdir -p ~/.local/bin/
@@ -63,6 +75,13 @@ installMinikube() {
   mv minikube ~/.local/bin/
 }
 
+installKubetail() {
+  mkdir -p ~/.local/bin/
+  curl -Lo kubetail https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail
+  chmod +x kubetail
+  mv kubetail ~/.local/bin/
+}
+
 installDCOScli() {
   mkdir -p ~/.local/bin/
   curl -Lo dcos https://downloads.dcos.io/binaries/cli/$(uname -s | tr '[:upper:]' '[:lower:]')/x86-64/latest/dcos
@@ -70,11 +89,8 @@ installDCOScli() {
   mv dcos ~/.local/bin/
 }
 
-installKubetail() {
-  mkdir -p ~/.local/bin/
-  curl -Lo kubetail https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail
-  chmod +x kubetail
-  mv kubetail ~/.local/bin/
+installDepcon() {
+  installFromGithub 'ContainX/depcon' ${1} ${2}
 }
 
 installGems() {
@@ -217,6 +233,13 @@ case "$1" in
     ;;
   "dcos"|"dcos-cli"|"dcoscli")
     installDCOScli
+    ;;
+  "depcon")
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      installDepcon 'osx' '64'
+    else
+      installDepcon 'linux' '64'
+    fi
     ;;
   "kubetail")
     installKubetail
