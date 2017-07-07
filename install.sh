@@ -36,9 +36,9 @@ installFromGithub() {
   mkdir -p ~/.local/bin/
   project="${1}"
   os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
-  arch="${3:-amd64}"
+  arch="${3:-64}"
   name="${4:-$(basename ${project})}"
-  url=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[] | select(.name | test(\"${os}${arch}\")) | .browser_download_url")
+  url=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[] | select(.name | test(\"${os}.*${arch}\")) | .browser_download_url")
   curl -Lo $name $url
   chmod +x $name
   mv $name ~/.local/bin/
