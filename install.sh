@@ -44,6 +44,13 @@ installFromGithub() {
   mv $name ~/.local/bin/
 }
 
+installEls() {
+  mkdir -p ~/.local/bin/
+  curl -O https://raw.githubusercontent.com/AnthonyDiGirolamo/els/master/els
+  chmod +x els
+  mv els ~/.local/bin/
+}
+
 installFastPath() {
   # https://github.com/mfornasa/docker-fastpath
   mkdir -p ~/.local/bin/
@@ -204,6 +211,7 @@ installAll() {
   installVagrantPlugins
   installAtomPackages
   installVimPlugins
+  installEls
 }
 
 case "$1" in
