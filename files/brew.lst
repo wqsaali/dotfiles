@@ -19,6 +19,7 @@ coreutils
 dark-mode
 docker-compose
 elktail
+exa
 exif
 exiftool
 findutils
