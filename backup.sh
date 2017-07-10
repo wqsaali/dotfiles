@@ -119,6 +119,9 @@ case "$1" in
   "homedir" | "home" )
     backupHomeDir $2
     ;;
+ "iterm" | "iterm2" )
+   backupIterm
+   ;;
   "restore" )
     restoreAll
     ;;
