@@ -37,6 +37,38 @@ function restoreIterm() {
   defaults read com.googlecode.iterm2
 }
 
+function exportItermColors() {
+  cdir=$(pwd)
+  mkdir -p files/iterm
+  cd files/iterm
+  # rm -f *
+  /usr/libexec/PlistBuddy -c "print :'Custom Color Presets'" \
+    ~/Library/Preferences/com.googlecode.iterm2.plist | grep '^    \w' | \
+    ruby -e 'puts STDIN.read.gsub(/\s=\sDict\s{/,"").gsub(/^\s+/,"")' > list.txt
+  while read THEME; do
+    echo "exporting ${THEME}"
+    /usr/libexec/PlistBuddy -c "print :'Custom Color Presets':'$THEME'" \
+      ~/Library/Preferences/com.googlecode.iterm2.plist | \
+      ruby -e "puts STDIN.read.strip.gsub(/Dict {/, '{')
+        .gsub(/([A-Z][a-z0-9\\s]+)\\s=\\s/i, %Q{'\\\\1' = })
+        .gsub(/(\\d(?:\.\\d+)?)$/, %Q{'\\\\1';})
+        .gsub(/}\\n/, %Q(};\n))" > "$THEME.itermcolors"
+  done < list.txt
+  rm list.txt
+  cd ${cdir}
+}
+
+function importItermColors() {
+  cdir=$(pwd)
+  cd files/iterm
+  for f in *.itermcolors; do
+    THEME=$(basename "${f%.*}")
+    echo "importing ${THEME}"
+    defaults write -app iTerm 'Custom Color Presets' -dict-add "$THEME" "$(cat "${f}")"
+  done
+  cd ${cdir}
+}
+
 function backupAtomPackages() {
   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/atom-packages.lst
   cp ${HOME}/.atom/*.cson files/atom/
@@ -121,6 +153,9 @@ case "$1" in
     ;;
  "iterm" | "iterm2" )
    backupIterm
+   ;;
+ "itermColors" | "iterm2Colors" )
+   exportItermColors
    ;;
   "restore" )
     restoreAll

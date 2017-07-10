@@ -162,7 +162,7 @@ installPackages() {
 
 function installIterm() {
   cask_install "iterm2"
-  cp files/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+  cp files/iterm/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
   plutil -convert binary1 ~/Library/Preferences/com.googlecode.iterm2.plist
   defaults read com.googlecode.iterm2
 }
