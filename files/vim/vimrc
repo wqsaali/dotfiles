@@ -92,6 +92,7 @@ let s:darwin = has('mac')
   "Plug 'lilydjwg/colorizer'
   "Plug 'chriskempson/base16-vim'
   Plug 'flazz/vim-colorschemes'
+  Plug 'dracula/vim'
   " Plug 'rakr/vim-one'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'chr4/nginx.vim'
@@ -125,6 +126,7 @@ let s:darwin = has('mac')
 
   color Tomorrow-Night-Bright
   " color one
+  " color dracula
 
   " Overrides
   set background=dark

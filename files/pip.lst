@@ -10,9 +10,11 @@ howdoi
 molecule
 pip
 pycodestyle
+pygments-style-tomorrownightbright
 pyhcl
 pyobjc
 setuptools
 sshuttle
 thefuck
+tomorrow
 yq

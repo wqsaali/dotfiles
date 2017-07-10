@@ -18,6 +18,8 @@ clip-history
 color-picker
 cursor-history
 dark-monokai-batch
+dracula-syntax
+dracula-ui
 emmet
 emmet-snippets-compatibility
 erb-snippets
