@@ -53,7 +53,7 @@ tmux_conf_theme_highlight_focused_pane=false
 
 # focused pane colours:
 tmux_conf_theme_focused_pane_fg='default'
-tmux_conf_theme_focused_pane_bg='#55A900'               # green
+tmux_conf_theme_focused_pane_bg='#b9ca4a'               # green
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -65,22 +65,22 @@ tmux_conf_theme_pane_border='#444444'                   # gray
 tmux_conf_theme_pane_active_border='#8a8a8a'            # light gray
 
 # pane indicator colours
-tmux_conf_theme_pane_indicator='#55A900'                # green
-tmux_conf_theme_pane_active_indicator='#55A900'         # green
+tmux_conf_theme_pane_indicator='#b9ca4a'                # green
+tmux_conf_theme_pane_active_indicator='#b9ca4a'         # green
 
 # status line style
 tmux_conf_theme_message_fg='#000000'                    # black
-tmux_conf_theme_message_bg='#55A900'                    # green
+tmux_conf_theme_message_bg='#b9ca4a'                    # green
 tmux_conf_theme_message_attr='bold'
 
 # status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg='#ffff00'            # yellow
+tmux_conf_theme_message_command_fg='#e7c547'            # yellow
 tmux_conf_theme_message_command_bg='#000000'            # black
 tmux_conf_theme_message_command_attr='bold'
 
 # window modes style
 tmux_conf_theme_mode_fg='#000000'                       # black
-tmux_conf_theme_mode_bg='#ffff00'                       # yellow
+tmux_conf_theme_mode_bg='#e7c547'                       # yellow
 tmux_conf_theme_mode_attr='bold'
 
 # status line style
@@ -102,7 +102,7 @@ tmux_conf_theme_window_status_format='#I #W#{?window_bell_flag, ,}#{?window_z
 #   - built-in variables are:
 #     - #{circled_window_index}
 tmux_conf_theme_window_status_current_fg='#000000'      # black
-tmux_conf_theme_window_status_current_bg='#55A900'      # green
+tmux_conf_theme_window_status_current_bg='#b9ca4a'      # green
 tmux_conf_theme_window_status_current_attr='bold'
 #tmux_conf_theme_window_status_current_format='#I #W'
 #tmux_conf_theme_window_status_current_format='#{circled_window_index} #W'
@@ -114,12 +114,12 @@ tmux_conf_theme_window_status_activity_bg='default'
 tmux_conf_theme_window_status_activity_attr='underscore'
 
 # window bell status style
-tmux_conf_theme_window_status_bell_fg='#ffff00'         # yellow
+tmux_conf_theme_window_status_bell_fg='#e7c547'         # yellow
 tmux_conf_theme_window_status_bell_bg='default'
 tmux_conf_theme_window_status_bell_attr='blink,bold'
 
 # window last status style
-tmux_conf_theme_window_status_last_fg='#55A900'         # green
+tmux_conf_theme_window_status_last_fg='#b9ca4a'         # green
 tmux_conf_theme_window_status_last_bg='default'
 tmux_conf_theme_window_status_last_attr='none'
 
@@ -159,8 +159,8 @@ tmux_conf_theme_status_left=' #S , #{?pane_synchronized,Sync!,•} | ↑#{?uptim
 tmux_conf_theme_status_right='#{prefix}#{pairing}#{?battery_status, #{battery_status},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
 
 # status left style
-tmux_conf_theme_status_left_fg='#000000,#55A900,#000000'  # black, green, black
-tmux_conf_theme_status_left_bg='#55A900,#2f2f2f,#55A900'  # green, grey, green
+tmux_conf_theme_status_left_fg='#000000,#b9ca4a,#000000'  # black, green, black
+tmux_conf_theme_status_left_bg='#b9ca4a,#2f2f2f,#b9ca4a'  # green, grey, green
 tmux_conf_theme_status_left_attr='bold,none,none'
 
 # status right style
@@ -228,7 +228,7 @@ tmux_conf_battery_status_discharging=' '  # U+1F50B
 #tmux_conf_battery_status_discharging='🔋 ' # U+1F50B
 
 # clock style
-tmux_conf_theme_clock_colour='#55A900'  # green
+tmux_conf_theme_clock_colour='#b9ca4a'  # green
 tmux_conf_theme_clock_style='24'
 
 
@@ -238,6 +238,7 @@ tmux_conf_theme_clock_style='24'
 #   - true
 #   - false (default)
 # on macOS, this require installing reattach-to-user-namespace, see README.md
+# on Linux, this requires xsel or xclip
 tmux_conf_copy_to_os_clipboard=true
 
 
