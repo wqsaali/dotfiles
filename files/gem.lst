@@ -1,5 +1,6 @@
 colorls
 kitchen-ansible
+kitchen-terraform
 kitchen-vagrant
 kontena-cli
 pry
