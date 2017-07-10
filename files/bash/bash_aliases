@@ -158,7 +158,7 @@ function git-pull-all() {
     bdir=$1
   fi
   repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname \\"{}/\\"" \; | grep -Ev '.*\/\..*')
-  for d in $repos; do echo ">>> $d"; cd $d; git pull; cd $cdir; done
+  for d in $repos; do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; git pull; cd $cdir; done
 }
 alias git-pull-recursive='git-pull-all'
 
@@ -167,7 +167,7 @@ function git-clean-all() {
   if [ ! -z $1 ]; then
     cd $1
   fi
-  for d in $(ls -d */); do echo $d; cd $d; git clean -fdX; cd ..; done
+  for d in $(ls -d */); do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; git clean -fdX; cd ..; done
   cd $cdir
 }
 
@@ -420,10 +420,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
             esac
           done
         else
-          echo "Re-installing $c"; brew cask reinstall "$c"
+          echo -e "${COL_RED}>>>${COL_RESET} Re-installing $c"; brew cask reinstall "$c"
         fi
       else
-          echo -e ">>> $c is up to date"
+          echo -e "${COL_BLUE}>>>${COL_RESET} $c is up to date"
       fi
     done
     brew cleanup && brew cask cleanup
