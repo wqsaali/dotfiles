@@ -158,7 +158,7 @@ function git-pull-all() {
     bdir=$1
   fi
   repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname \\"{}/\\"" \; | grep -Ev '.*\/\..*')
-  for d in $repos; do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; git pull; cd $cdir; done
+  for d in $repos; do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; echo -ne "${COL_GREY}"; git pull; echo -ne "${COL_RESET}"; cd $cdir; done
 }
 alias git-pull-recursive='git-pull-all'
 

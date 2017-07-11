@@ -1,8 +1,9 @@
-caskroom/cask
-caskroom/fonts
-caskroom/drivers
-homebrew/services
-homebrew/command-not-found
-neovim/neovim
 buo/cask-upgrade
+caskroom/cask
+caskroom/drivers
+caskroom/fonts
+homebrew/command-not-found
+homebrew/services
 knes1/tap
+neovim/neovim
+wallix/awless

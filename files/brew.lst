@@ -1,5 +1,6 @@
 ansible
 ansible-lint
+awless
 awscli
 azure-cli
 bash
