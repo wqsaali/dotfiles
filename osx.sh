@@ -160,6 +160,14 @@ installPackages() {
   brew cask cleanup
 }
 
+function installItermColors() {
+  url="https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/${1// /%20}.itermcolors"
+  curl -fLo theme.itermcolors ${url}
+  echo "importing ${1}"
+  defaults write -app iTerm 'Custom Color Presets' -dict-add "$1" "$(cat theme.itermcolors)"
+  rm theme.itermcolors
+}
+
 function installIterm() {
   cask_install "iterm2"
   cp files/iterm/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
@@ -294,6 +302,9 @@ case "$1" in
     ;;
   "fonts")
     installFonts
+    ;;
+  "itermcolors")
+    installItermColors $2
     ;;
   *)
     installAll
