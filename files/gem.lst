@@ -1,5 +1,6 @@
 colorls
 kitchen-ansible
+kitchen-goss
 kitchen-terraform
 kitchen-vagrant
 kontena-cli

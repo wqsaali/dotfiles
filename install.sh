@@ -96,6 +96,11 @@ installDCOScli() {
   mv dcos ~/.local/bin/
 }
 
+installGoss() {
+  mkdir -p ~/.local/bin/
+  curl -fsSL https://goss.rocks/install | GOSS_DST=~/.local/bin sh
+}
+
 installDepcon() {
   installFromGithub 'ContainX/depcon' ${1} ${2}
 }
@@ -211,6 +216,7 @@ installAll() {
   installVagrantPlugins
   installAtomPackages
   installVimPlugins
+  installGoss
   installEls
 }
 
@@ -248,6 +254,9 @@ case "$1" in
     else
       installDepcon 'linux' '64'
     fi
+    ;;
+  "goss")
+    installGoss
     ;;
   "kubetail")
     installKubetail
