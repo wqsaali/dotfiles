@@ -462,7 +462,7 @@ function wttr() {
 alias wttr_moon='curl wttr.in/Moon'
 
 # get external ip address
-alias ipinfo='curl -s http://ipinfo.io/ip'
+alias ipinfo='echo "Egress address: $(curl -s http://ipinfo.io/ip)" && ip route get default'
 # get internet speed
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
 
