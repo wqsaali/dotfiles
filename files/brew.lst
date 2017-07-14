@@ -19,6 +19,8 @@ cookiecutter
 coreutils
 dark-mode
 docker-compose
+ec2-ami-tools
+ec2-api-tools
 elktail
 exa
 exif
