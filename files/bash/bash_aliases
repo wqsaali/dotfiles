@@ -420,7 +420,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
             esac
           done
         else
-          echo -e "${COL_RED}>>>${COL_RESET} Re-installing $c"; brew cask reinstall "$c"
+          echo -e "${COL_YELLOW}>>>${COL_RESET} Re-installing $c"; brew cask reinstall "$c"
         fi
       else
           echo -e "${COL_BLUE}>>>${COL_RESET} $c is up to date"
