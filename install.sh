@@ -145,6 +145,20 @@ installAtomPackages() {
   apm install --packages-file files/atom-packages.lst
 }
 
+installTmuxConf() {
+  cp files/tmux.conf.local ${HOME}/.tmux.conf.local
+  if [ ! -d  ${HOME}/.tmux ]; then
+    git clone https://github.com/gpakosz/.tmux.git ${HOME}/.tmux
+  else
+    cd ${HOME}/.tmux/
+    git pull
+    cd ${INSTALLDIR}
+  fi
+  if [ ! -s ${HOME}/.tmux.conf ]; then
+    ln -s ${HOME}/.tmux/.tmux.conf ${HOME}/.tmux.conf
+  fi
+}
+
 installVagrantPlugins() {
   # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
   if ! [ -x "$(command -v vagrant)" ]; then
@@ -164,12 +178,14 @@ installVagrantPlugins() {
 }
 
 installVimPlugins() {
-  cd ${INSTALLDIR}
-  mkdir -p ${HOME}/.vim/ftdetect
-  mkdir -p ${HOME}/.vim/ftplugin
+  mkdir -p ${HOME}/.vim/ftdetect/
+  mkdir -p ${HOME}/.vim/ftplugin/
   mkdir -p ${HOME}/.vim/autoload/
   mkdir -p ${HOME}/.vim/bundle/
-  mkdir -p ${HOME}/.config/nvim
+  mkdir -p ${HOME}/.config/nvim/
+
+  cd ${INSTALLDIR}
+
   cp files/vim/vimrc ${HOME}/.vimrc
   cp files/vim/vimrc.local ${HOME}/.vimrc.local
   cp -r files/vim/ft* ${HOME}/.vim/
@@ -235,6 +251,9 @@ case "$1" in
     ;;
   "vimplugins" | "vim")
     installVimPlugins
+    ;;
+  "tmuxconf" | "tmux")
+    installTmuxConf
     ;;
   "atompackages" | "apkgs" | "atom" | "apm")
     installAtomPackages

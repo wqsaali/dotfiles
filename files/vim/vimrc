@@ -2,6 +2,14 @@
 
 let s:darwin = has('mac')
 
+if !exists("g:os")
+  if has("win64") || has("win32") || has("win16")
+    let g:os = "Windows"
+  else
+    let g:os = substitute(system('uname -o'), '\n', '', '')
+  endif
+endif
+
 " Plugins {
 
   "auto-install vim-plug
@@ -139,8 +147,9 @@ let s:darwin = has('mac')
     endif
     au ColorScheme * hi! Folded ctermbg=none guibg=NONE
     au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
-
-    set fillchars+=vert:│
+    if g:os != 'Android'
+      set fillchars+=vert:│
+    endif
     au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none
   endif
 
@@ -543,3 +552,8 @@ endif
 if exists("g:loaded_webdevicons")
   call webdevicons#refresh()
 endif
+
+if g:os == 'Android'
+  color Tomorrow-Night-Bright
+endif
+

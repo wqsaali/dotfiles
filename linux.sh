@@ -198,12 +198,12 @@ installDotFiles() {
 
   mkdir -p ${HOME}/.bash/
   mkdir -p ${HOME}/.vim/
-  mkdir -p ${HOME}/.vim/ftdetect
-  mkdir -p ${HOME}/.vim/ftplugin
-  mkdir -p ${HOME}/.vim/autoload
+  mkdir -p ${HOME}/.vim/ftdetect/
+  mkdir -p ${HOME}/.vim/ftplugin/
+  mkdir -p ${HOME}/.vim/autoload/
   mkdir -p ${HOME}/.atom/
   mkdir -p ${HOME}/.config/terminator/
-  mkdir -p ${HOME}/.config/i3
+  mkdir -p ${HOME}/.config/i3/
 
   cd ${INSTALLDIR}
 
