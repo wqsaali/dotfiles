@@ -56,6 +56,7 @@ openssl
 packer
 pre-commit
 python
+ranger
 reattach-to-user-namespace
 rename
 s3cmd
@@ -71,6 +72,7 @@ tree
 ufraw
 vagrant-completion
 vim
+w3m
 wget
 xhyve
 yarn
