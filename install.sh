@@ -137,6 +137,7 @@ installScripts() {
 }
 
 installAtomPackages() {
+  mkdir -p ${HOME}/.atom/
   cd ${INSTALLDIR}
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
@@ -210,16 +211,12 @@ installVimPlugins() {
 }
 
 installGitConf() {
-  SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
-  source config.sh
-  CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
-  CONF=$(comm -3 <(echo $CONF | tr ' ' '\n' | sort -u ) <(echo $SHELLVARS | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
   #read -p "Please enter your name (for gitconfig):" NAME
   #read -p "Please enter your email address (for gitconfig):" EMAIL
 
   # cp files/gitconfig ${HOME}/.gitconfig
   sedcmd=''
-  for var in NAME EMAIL;do
+  for var in NAME EMAIL; do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done
@@ -228,6 +225,13 @@ installGitConf() {
 }
 
 installBashConf() {
+  if [[ -z "$SHELLVARS" ]]; then
+    SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
+    source config.sh
+    CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
+    CONF=$(comm -3 <(echo $CONF | tr ' ' '\n' | sort -u ) <(echo $SHELLVARS | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
+  fi
+
   mkdir -p ${HOME}/.bash/
 
   cd ${INSTALLDIR}
@@ -240,14 +244,9 @@ installBashConf() {
   cp files/bash/bash_profile ${HOME}/.bash_profile
   cp files/profile ${HOME}/.profile
 
-  SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
-  source config.sh
-  CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
-  CONF=$(comm -3 <(echo $CONF | tr ' ' '\n' | sort -u ) <(echo $SHELLVARS | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
-
   #cp files/bash/bash_aliases ${HOME}/.bash_aliases
   sedcmd=''
-  for var in $(echo $CONF);do
+  for var in $(echo $CONF); do
     printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
     sedcmd+="$sc"
   done

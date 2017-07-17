@@ -15,7 +15,7 @@
 - Hammerspoon configuration scripts
 
 ### The install script
-The install script supports macOS, Linux (Ubuntu) and Android (Termux) and will install my custom dotfiles but also some extra packages and fonts, you can select what to install by passing an argument to the install script:
+The install script supports macOS, Linux (Ubuntu) and Android ([Termux](https://termux.com)) and will install my custom dotfiles but also some extra packages and fonts, you can select what to install by passing an argument to the install script:
 ```
 ./install all # to bootstrap a new workstation
 ./install dotfiles # will install the dotfiles only (.vimrc .bashrc etc...)

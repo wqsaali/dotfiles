@@ -27,6 +27,11 @@ function backupDotFiles() {
   cp ${HOME}/.slate.js files/slate/slate.js
 }
 
+function backupTermux() {
+  pkg list-installed | cut -d '/' -f1 | grep -v '\.\.\.'| sort -u > files/pkg.lst
+  cp -r ${HOME}/.termux/* files/termux/
+}
+
 function backupIterm() {
   defaults read com.googlecode.iterm2 > files/com.googlecode.iterm2.plist
 }

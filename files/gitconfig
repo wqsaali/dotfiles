@@ -1,6 +1,6 @@
 [user]
-  email = ldavim@ptc.com
-  name = Luis Davim
+  email = ${EMAIL}
+  name = ${NAME}
 [push]
   default = simple
 [fetch]
