@@ -150,7 +150,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
-eval $(thefuck --alias)
+if [ -x "$(command -v thefuck)" ]; then
+ eval $(thefuck --alias)
+fi
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   source /etc/profile.d/vte-2.91.sh

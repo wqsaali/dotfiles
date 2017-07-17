@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/data/data/com.termux/files/usr/bin/env bash
 
-if [[ "$OSTYPE" == *"android"* ]]; then
-  echo 'Looks like you are on Android'
+if [[ "$OSTYPE" != *"android"* ]]; then
+  echo 'Doesnt look like you are on Android'
   echo '  please try the install.sh script'
   exit 1
 fi
@@ -24,12 +24,13 @@ installDotFiles() {
 
   cp -r files/termux/* ${HOME}/.termux/
 
-  # sudo cp files/bash/bash_aliases_completion /etc/bash_completion.d/
-  # curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
-  # sudo mv knife_autocomplete /etc/bash_completion.d/
-  # curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
-  # sudo mv kitchen-completion /etc/bash_completion.d/
-  # sudo chown root:root /etc/bash_completion.d/*
+  cp files/bash/bash_aliases_completion ${PREFIX}/etc/bash_completion.d/
+  curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
+  mv knife_autocomplete ${PREFIX}/etc/bash_completion.d/
+  curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
+  mv kitchen-completion ${PREFIX}/etc/bash_completion.d/
+
+  termux-fix-shebang /data/data/com.termux/files/usr/etc/bash_completion.d/*
 
   cd ${INSTALLDIR}
 }

@@ -188,7 +188,9 @@ installVimPlugins() {
   cp files/vim/vimrc ${HOME}/.vimrc
   cp files/vim/vimrc.local ${HOME}/.vimrc.local
   cp -r files/vim/ft* ${HOME}/.vim/
-  ln -s ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
+  if [ ! -s ~/.config/nvim/init.vim ]; then
+    ln -s ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
+  fi
 
   # Using vim Vundle
   # if [ ! -d  ${HOME}/.vim/bundle/Vundle.vim ]; then
@@ -296,7 +298,7 @@ installDotFiles() {
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh ${@}
-  elif [[ "$OSTYPE" != *"android"* ]]; then
+  elif [[ "$OSTYPE" == *"android"* ]]; then
     ./android.sh ${@}
   else
     ./linux.sh ${@}
@@ -375,7 +377,7 @@ case "$1" in
   "all")
     if [[ "$OSTYPE" == "darwin"* ]]; then
       ./osx.sh
-    elif [[ "$OSTYPE" != *"android"* ]]; then
+    elif [[ "$OSTYPE" == *"android"* ]]; then
       ./android.sh
     else
       ./linux.sh
@@ -385,7 +387,7 @@ case "$1" in
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then
       ./osx.sh ${@}
-    elif [[ "$OSTYPE" != *"android"* ]]; then
+    elif [[ "$OSTYPE" == *"android"* ]]; then
       ./android.sh ${@}
     else
       ./linux.sh ${@}
