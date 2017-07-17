@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
 INSTALLDIR=$(pwd)
+dotfiles_dir="$(dirname $0)"
 
 path() {
   mkdir -p "$(dirname "$1")"
   echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
 }
-
-dotfiles_dir="$(dirname $0)"
 
 link() {
   create_link "$dotfiles_dir/$1" "${HOME}/$1"
@@ -208,6 +207,67 @@ installVimPlugins() {
   vim +PlugInstall +qall
 }
 
+installGitConf() {
+  SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
+  source config.sh
+  CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
+  CONF=$(comm -3 <(echo $CONF | tr ' ' '\n' | sort -u ) <(echo $SHELLVARS | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
+  #read -p "Please enter your name (for gitconfig):" NAME
+  #read -p "Please enter your email address (for gitconfig):" EMAIL
+
+  # cp files/gitconfig ${HOME}/.gitconfig
+  sedcmd=''
+  for var in NAME EMAIL;do
+    printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
+    sedcmd+="$sc"
+  done
+  cat files/gitconfig | sed -e "$sedcmd" > ${HOME}/.gitconfig
+  cp files/gitexcludes ${HOME}/.gitexcludes
+}
+
+installBashConf() {
+  mkdir -p ${HOME}/.bash/
+
+  cd ${INSTALLDIR}
+
+  cp files/bash/git_prompt.sh ${HOME}/.bash/
+  cp files/bash/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
+  cp files/bash/shell_prompt.sh ${HOME}/.bash/
+  cp files/bash/bashrc ${HOME}/.bashrc
+  cp files/bash/bash_variables ${HOME}/.bash_variables
+  cp files/bash/bash_profile ${HOME}/.bash_profile
+  cp files/profile ${HOME}/.profile
+
+  SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
+  source config.sh
+  CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
+  CONF=$(comm -3 <(echo $CONF | tr ' ' '\n' | sort -u ) <(echo $SHELLVARS | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
+
+  #cp files/bash/bash_aliases ${HOME}/.bash_aliases
+  sedcmd=''
+  for var in $(echo $CONF);do
+    printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
+    sedcmd+="$sc"
+  done
+  cat files/bash/bash_aliases | sed -e "$sedcmd" > ${HOME}/.bash_aliases
+
+  if [ ! -d  ${HOME}/.bash/bash-git-prompt ]; then
+    git clone https://github.com/magicmonty/bash-git-prompt.git ${HOME}/.bash/bash-git-prompt
+  else
+    cd ${HOME}/.bash/bash-git-prompt
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
+  if [ ! -d  ${HOME}/.bash/powerline-shell ]; then
+    git clone https://github.com/milkbikis/powerline-shell ${HOME}/.bash/powerline-shell
+  else
+    cd ${HOME}/.bash/powerline-shell
+    git pull
+    cd ${INSTALLDIR}
+  fi
+}
+
 installFish() {
   if [[ "$OSTYPE" != "darwin"* ]]; then
     sudo apt-add-repository ppa:fish-shell/release-2
@@ -224,16 +284,39 @@ installFish() {
   fisher teapot
 }
 
-installAll() {
-  installGems
-  installPips
-  installNpms
-  installScripts
-  installVagrantPlugins
-  installAtomPackages
+installDotFiles() {
+  if ! [ -x "$(command -v git)" ]; then
+    echo 'You need to install git!' >&2
+    exit 1
+  fi
   installVimPlugins
-  installGoss
-  installEls
+  installTmuxConf
+  installGitConf
+  installBashConf
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    ./osx.sh ${@}
+  elif [[ "$OSTYPE" != *"android"* ]]; then
+    ./android.sh ${@}
+  else
+    ./linux.sh ${@}
+  fi
+}
+
+installAll() {
+  if [[ "$OSTYPE" != *"android"* ]]; then
+    installGems
+    installPips
+    installNpms
+    installScripts
+    installVagrantPlugins
+    installAtomPackages
+    installGoss
+    installEls
+  fi
+    installVimPlugins
+    installTmuxConf
+    installDotFiles
 }
 
 case "$1" in
@@ -254,6 +337,9 @@ case "$1" in
     ;;
   "tmuxconf" | "tmux")
     installTmuxConf
+    ;;
+  "dotfiles")
+    installDotFiles
     ;;
   "atompackages" | "apkgs" | "atom" | "apm")
     installAtomPackages
@@ -289,6 +375,8 @@ case "$1" in
   "all")
     if [[ "$OSTYPE" == "darwin"* ]]; then
       ./osx.sh
+    elif [[ "$OSTYPE" != *"android"* ]]; then
+      ./android.sh
     else
       ./linux.sh
     fi
@@ -297,6 +385,8 @@ case "$1" in
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then
       ./osx.sh ${@}
+    elif [[ "$OSTYPE" != *"android"* ]]; then
+      ./android.sh ${@}
     else
       ./linux.sh ${@}
     fi

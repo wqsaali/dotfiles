@@ -25,15 +25,15 @@ fancy_echo() {
 
 installDocker() {
   # Don't run this as root as you'll not add your user to the docker group
-  sudo apt-get update
-  sudo apt-get install apt-transport-https ca-certificates
+  sudo apt update
+  sudo apt install apt-transport-https ca-certificates
   sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
   echo deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release -c | awk '{print $2}') main | sudo tee /etc/apt/sources.list.d/docker.list
-  sudo apt-get update
-  sudo apt-get purge lxc-docker
-  sudo apt-get install -y linux-image-extra-$(uname -r)
+  sudo apt update
+  sudo apt purge lxc-docker
+  sudo apt install -y linux-image-extra-$(uname -r)
   sudo rm -rf /etc/default/docker
-  sudo apt-get install -y docker-engine
+  sudo apt install -y docker-engine
   sudo service docker start
   sudo usermod -aG docker ${USER}
 }
@@ -132,12 +132,12 @@ installLinuxbrew() {
 }
 
 installPackages() {
-  sudo apt-get update
-  cat files/apt-core.lst | tr '\n' ' ' | xargs sudo apt-get install -y
+  sudo apt update
+  cat files/apt-core.lst | tr '\n' ' ' | xargs sudo apt install -y
   sudo apt-mark manual $(cat files/apt-core.lst | tr '\n' ' ')
 
   # You might need some extra PPAs for these
-  cat files/apt-extra.lst | tr '\n' ' ' | xargs sudo apt-get install -y
+  cat files/apt-extra.lst | tr '\n' ' ' | xargs sudo apt install -y
   sudo apt-mark manual $(cat files/apt-extra.lst | tr '\n' ' ')
 
   if ! [ -x "$(command -v cerebro)" ]; then
@@ -189,18 +189,13 @@ installFonts() {
 installDotFiles() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'installing git!' >&2
-    sudo apt-get install git
+    sudo apt install git
   fi
   if ! [ -x "$(command -v hh)" ]; then
     echo 'installing hh!' >&2
-    sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt-get update && sudo apt-get install hh
+    sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt update && sudo apt install hh
   fi
 
-  mkdir -p ${HOME}/.bash/
-  mkdir -p ${HOME}/.vim/
-  mkdir -p ${HOME}/.vim/ftdetect/
-  mkdir -p ${HOME}/.vim/ftplugin/
-  mkdir -p ${HOME}/.vim/autoload/
   mkdir -p ${HOME}/.atom/
   mkdir -p ${HOME}/.config/terminator/
   mkdir -p ${HOME}/.config/i3/
@@ -218,18 +213,7 @@ installDotFiles() {
     ln -s ${HOME}/.config/terminator/terminator.config ${HOME}/.config/terminator/config
   fi
 
-  cp files/bash/git_prompt.sh ${HOME}/.bash/
-  cp files/bash/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
-  cp files/bash/shell_prompt.sh ${HOME}/.bash/
-  cp files/bash/bashrc ${HOME}/.bashrc
-  cp files/bash/bash_variables ${HOME}/.bash_variables
-  cp files/bash/bash_profile ${HOME}/.bash_profile
-  cp files/profile ${HOME}/.profile
   cp files/screenrc ${HOME}/.screenrc
-  cp files/tmux.conf.local ${HOME}/.tmux.conf.local
-  cp -r files/vim/ft* ${HOME}/.vim/
-  cp files/vim/vimrc ${HOME}/.vimrc
-  cp files/vim/vimrc.local ${HOME}/.vimrc.local
   cp files/atom/* ${HOME}/.atom/
 
   sudo cp files/bash/bash_aliases_completion /etc/bash_completion.d/
@@ -239,56 +223,6 @@ installDotFiles() {
   sudo mv kitchen-completion /etc/bash_completion.d/
   sudo chown root:root /etc/bash_completion.d/*
 
-  SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
-  source config.sh
-  CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort)|grep -v '^_')
-  CONF=$(comm -3 <(echo $CONF | tr ' ' '\n' | sort -u ) <(echo $SHELLVARS | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
-  #read -p "Please enter your name (for gitconfig):" NAME
-  #read -p "Please enter your email address (for gitconfig):" EMAIL
-
-  #cp files/bash/bash_aliases ${HOME}/.bash_aliases
-  sedcmd=''
-  for var in $(echo $CONF);do
-    printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
-    sedcmd+="$sc"
-  done
-  cat files/bash/bash_aliases | sed -e "$sedcmd" > ${HOME}/.bash_aliases
-
-  # cp files/gitconfig ${HOME}/.gitconfig
-  sedcmd=''
-  for var in NAME EMAIL;do
-    printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
-    sedcmd+="$sc"
-  done
-  cat files/gitconfig | sed -e "$sedcmd" > ${HOME}/.gitconfig
-  cp files/gitexcludes ${HOME}/.gitexcludes
-
-  if [ ! -d  ${HOME}/.bash/bash-git-prompt ]; then
-    git clone https://github.com/magicmonty/bash-git-prompt.git ${HOME}/.bash/bash-git-prompt
-  else
-    cd ${HOME}/.bash/bash-git-prompt
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d  ${HOME}/.bash/powerline-shell ]; then
-    git clone https://github.com/milkbikis/powerline-shell ${HOME}/.bash/powerline-shell
-  else
-    cd ${HOME}/.bash/powerline-shell
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d  ${HOME}/.tmux ]; then
-    git clone https://github.com/gpakosz/.tmux.git ${HOME}/.tmux
-  else
-    cd ${HOME}/.tmux/
-    git pull
-    cd ${INSTALLDIR}
-  fi
-  if [ ! -s ${HOME}/.tmux.conf ]; then
-    ln -s ${HOME}/.tmux/.tmux.conf ${HOME}/.tmux.conf
-  fi
   cd ${INSTALLDIR}
 }
 
@@ -307,12 +241,12 @@ case "$1" in
     installHashicorp $2
     ;;
   "dotfiles")
-   installDotFiles
+    installDotFiles
     ;;
   "fonts")
     installFonts
     ;;
-  "termProfiles" | "gnomeTermProfiles")
+  "termProfiles" | "gnomeTermProfiles" | "termColors")
     installGnomeTerminalProfiles
     ;;
   "i3wm" | "i3")
