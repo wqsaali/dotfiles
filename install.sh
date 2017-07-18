@@ -211,25 +211,26 @@ installVimPlugins() {
 }
 
 installGitConf() {
+  source config.sh
   #read -p "Please enter your name (for gitconfig):" NAME
   #read -p "Please enter your email address (for gitconfig):" EMAIL
 
   # cp files/gitconfig ${HOME}/.gitconfig
   sedcmd=''
   for var in NAME EMAIL; do
-    printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
-    sedcmd+="$sc"
+    printf -v sc 's|${%s}|%s|;' ${var} "${!var//\//\\/}"
+    sedcmd+="${sc}"
   done
-  cat files/gitconfig | sed -e "$sedcmd" > ${HOME}/.gitconfig
+  cat files/gitconfig | sed -e "${sedcmd}" > ${HOME}/.gitconfig
   cp files/gitexcludes ${HOME}/.gitexcludes
 }
 
 installBashConf() {
-  if [[ -z "$SHELLVARS" ]]; then
+  if [[ -z "${SHELLVARS}" ]]; then
     SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
     source config.sh
     CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
-    CONF=$(comm -3 <(echo $CONF | tr ' ' '\n' | sort -u ) <(echo $SHELLVARS | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
+    CONF=$(comm -3 <(echo ${CONF} | tr ' ' '\n' | sort -u ) <(echo ${SHELLVARS} | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
   fi
 
   mkdir -p ${HOME}/.bash/
@@ -246,11 +247,11 @@ installBashConf() {
 
   #cp files/bash/bash_aliases ${HOME}/.bash_aliases
   sedcmd=''
-  for var in $(echo $CONF); do
-    printf -v sc 's|${%s}|%s|;' $var "${!var//\//\\/}"
-    sedcmd+="$sc"
+  for var in $(echo ${CONF}); do
+    printf -v sc 's|${%s}|%s|;' ${var} "${!var//\//\\/}"
+    sedcmd+="${sc}"
   done
-  cat files/bash/bash_aliases | sed -e "$sedcmd" > ${HOME}/.bash_aliases
+  cat files/bash/bash_aliases | sed -e "${sedcmd}" > ${HOME}/.bash_aliases
 
   if [ ! -d  ${HOME}/.bash/bash-git-prompt ]; then
     git clone https://github.com/magicmonty/bash-git-prompt.git ${HOME}/.bash/bash-git-prompt
@@ -292,15 +293,15 @@ installDotFiles() {
   fi
   installVimPlugins
   installTmuxConf
-  installGitConf
   installBashConf
+  installGitConf
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    ./osx.sh ${@}
+    ./osx.sh dotfiles
   elif [[ "$OSTYPE" == *"android"* ]]; then
-    ./android.sh ${@}
+    ./android.sh dotfiles
   else
-    ./linux.sh ${@}
+    ./linux.sh dotfiles
   fi
 }
 
