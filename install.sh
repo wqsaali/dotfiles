@@ -24,9 +24,9 @@ create_link() {
 
 gem_install_or_update() {
   if gem list "$1" --installed > /dev/null; then
-    gem update ${@}
+    gem update "${@}"
   else
-    gem install ${@}
+    gem install "${@}"
     # rbenv rehash
   fi
 }
@@ -386,11 +386,11 @@ case "$1" in
     ;;
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then
-      ./osx.sh ${@}
+      ./osx.sh "${@}"
     elif [[ "$OSTYPE" == *"android"* ]]; then
-      ./android.sh ${@}
+      ./android.sh "${@}"
     else
-      ./linux.sh ${@}
+      ./linux.sh "${@}"
     fi
     ;;
 esac
