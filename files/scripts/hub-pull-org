@@ -49,9 +49,11 @@ for repo in $repos; do
     echo -ne "$COL_RESET"
     cd ..
   fi
-  cd ${repo}
-  echo -e "${COL_BLUE}>>>${COL_RESET} Status:"
-  echo -e "    This branch is ${COL_YELLOW}$(git rev-list upstream/master..origin/master --count)${COL_RESET} commits ahead and ${COL_RED}$(git rev-list origin/master..upstream/master --count)${COL_RESET} commits behind of Upstream.\n"
-  cd ..
+  if [[ ! -z $upstream ]]; then
+    cd ${repo}
+    echo -e "${COL_BLUE}>>>${COL_RESET} Status:"
+    echo -e "    This branch is ${COL_YELLOW}$(git rev-list upstream/master..origin/master --count)${COL_RESET} commits ahead and ${COL_RED}$(git rev-list origin/master..upstream/master --count)${COL_RESET} commits behind of Upstream.\n"
+    cd ..
+  fi
   sleep 1
 done
