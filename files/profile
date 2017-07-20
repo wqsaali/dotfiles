@@ -16,6 +16,11 @@ if [ -d '/usr/local/opt/coreutils/libexec/gnubin' ]; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
+# Use brew python
+if [ -d '/usr/local/opt/python/libexec/bin' ]; then
+  PATH="/usr/local/opt/python/libexec/bin:$PATH"
+fi
+
 # Linuxbrew paths
 if [ -d "$HOME/.linuxbrew/bin:$PATH" ]; then
   PATH="$HOME/.linuxbrew/bin:$PATH"
