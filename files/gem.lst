@@ -5,3 +5,4 @@ kitchen-terraform
 kitchen-vagrant
 kontena-cli
 pry
+rubocop
