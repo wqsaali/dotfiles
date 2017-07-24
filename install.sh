@@ -43,6 +43,13 @@ installFromGithub() {
   mv $name ~/.local/bin/
 }
 
+getNerdFont() {
+  project='ryanoasis/nerd-fonts/'
+  tag=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r '.tag_name' | tr -d 'v' )
+  url="https://raw.githubusercontent.com/${project}/${tag}/patched-fonts/${1// /%20}"
+  curl -fLo "${1}" "${url}"
+}
+
 installEls() {
   mkdir -p ~/.local/bin/
   curl -O https://raw.githubusercontent.com/AnthonyDiGirolamo/els/master/els
