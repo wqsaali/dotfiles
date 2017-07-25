@@ -1,0 +1,2 @@
+printf "\ek\e\\"
+tmux set-window-option automatic-rename "on"

@@ -157,7 +157,7 @@ function git-pull-all() {
   if [ ! -z $1 ]; then
     bdir=$1
   fi
-  repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname \\"{}/\\"" \; | grep -Ev '.*\/\..*')
+  repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname '{}/'" \; | grep -Ev '.*\/\..*')
   for d in $repos; do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; echo -ne "${COL_GREY}"; git pull; echo -ne "${COL_RESET}"; cd $cdir; done
 }
 alias git-pull-recursive='git-pull-all'
@@ -444,6 +444,16 @@ alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias sysState="top -l 1 -s 0 | awk ' /Processes/ || /PhysMem/ || /Load Avg/{print}'"
 
 alias cls="clear"
+
+# Fix window title after ssh
+function ssh() {
+  if [[ "$TERM" =~ "screen" ]] && [ -n "$TMUX" ]; then
+    command ssh "$@"
+    tmux set-window-option automatic-rename "on" 1>/dev/null
+  else
+    command ssh "$@"
+  fi
+}
 
 # key management aliases: fingerprint a pubkey and retrieve pubkey from a private key
 alias fingerprint='ssh-keygen -lf'
