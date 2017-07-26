@@ -303,6 +303,9 @@ installDotFiles() {
   installBashConf
   installGitConf
 
+  rm -f ~/.config/ranger/*.{sh,py}
+  ranger --copy-config=all
+
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh dotfiles
   elif [[ "$OSTYPE" == *"android"* ]]; then
