@@ -380,13 +380,13 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
   function apt-cleanup() {
     ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | grep -v $(uname -r) | sort -Vr | tail -n +2 | xargs -r sudo aptitude purge -y
+    sudo apt autoremove
     sudo aptitude autoclean
-    sudo apt-get autoremove
     sudo apt-get clean
     dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
   }
 
-  alias apt-upgrade='sudo aptitude update ; sudo aptitude dist-upgrade; apt-cleanup'
+  alias apt-upgrade='sudo apt update; sudo apt full-upgrade; apt-cleanup'
   alias dist-upgrade=apt-upgrade
 
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -433,9 +433,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias brew-cleanup='brew cleanup && brew cask cleanup'
   alias brew-upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
   alias dist-upgrade='brew-upgrade && brew-cask-upgrade -y'
+elif [[ "$OSTYPE" == *"android"* ]]; then
+  alias apt-upgrade='apt update; apt full-upgrade'
+  alias dist-upgrade=apt-upgrade
 fi
 
-alias update-all-things='npm-upgrade && gem-upgrade && pip-upgrade && dist-upgrade && apm upgrade && vim-update'
+alias update-all-things='npm-upgrade && gem-upgrade && pip-upgrade && dist-upgrade && vim-update'
 
 # Get all records from a domain
 alias dig-all="dig +nocmd +multiline +noall +answer any"
