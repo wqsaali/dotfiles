@@ -2,7 +2,9 @@ ack-grep
 alfred
 arc-theme
 atom
+atool
 brightness-controller
+caca-utils
 caffeine-plus
 ec2-ami-tools
 ec2-api-tools
@@ -13,8 +15,12 @@ google-chrome-stable
 gtk-redshift
 highlight
 httpie
+mediainfo
+poppler-utils
+ranger
 shellcheck
 skype
 spotify-client
 spotify-client-gnome-support
 terminator
+w3m
