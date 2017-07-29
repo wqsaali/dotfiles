@@ -3,10 +3,13 @@ ansible
 ansible-test
 boto
 boto3
+bpython
 container-transform
 docker
+dreampie
 glances
 howdoi
+ipython
 molecule
 pip
 pycodestyle

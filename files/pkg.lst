@@ -66,6 +66,7 @@ openssl
 pcre
 perl
 python
+python-dev
 ranger
 readline
 resolv-conf
