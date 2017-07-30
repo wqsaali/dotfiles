@@ -198,6 +198,7 @@ installVimPlugins() {
   cp -r files/vim/ft* ${HOME}/.vim/
   if [ ! -s ~/.config/nvim/init.vim ]; then
     ln -s ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
+    ln -s ${HOME}/.vim/autoload/ ${HOME}/.config/nvim/autoload
   fi
 
   # Using vim Vundle
