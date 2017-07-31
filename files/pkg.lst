@@ -63,6 +63,8 @@ nmap
 nodejs
 openssh
 openssl
+openssl-dev
+openssl-tool
 pcre
 perl
 python
@@ -71,6 +73,7 @@ ranger
 readline
 resolv-conf
 ruby
+ruby-dev
 screenfetch
 termux-api
 termux-elf-cleaner
