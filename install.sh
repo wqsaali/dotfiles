@@ -115,7 +115,7 @@ installGems() {
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    gem_install_or_upgrade "${PKG}"
+    gem_install_or_update "${PKG}"
   done < files/gem.lst
 }
 
