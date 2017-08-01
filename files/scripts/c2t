@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require "csv"
+require "table_print"
+require 'terminal-table'
+
+d = CSV.parse(ARGF.read)
+w = `/usr/bin/env tput cols`.to_i
+tp.set :max_width, w
+# tp d
+table = Terminal::Table.new :rows => d
+puts table
