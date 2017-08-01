@@ -164,11 +164,12 @@ alias git-pull-recursive='git-pull-all'
 
 function git-clean-all() {
   cdir=$(pwd)
+  bdir='.'
   if [ ! -z $1 ]; then
-    cd $1
+    bdir=$1
   fi
-  for d in $(ls -d */); do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; git clean -fdX; cd ..; done
-  cd $cdir
+  repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname '{}/'" \; | grep -Ev '.*\/\..*')
+  for d in $repos; do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; git clean -fdX; cd $cdir; done
 }
 
 function git-status() {
