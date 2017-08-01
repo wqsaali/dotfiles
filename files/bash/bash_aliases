@@ -477,7 +477,7 @@ alias wttr_moon='curl wttr.in/Moon'
 
 # get external ip address
 function ipinfo() {
-  echo "Egress address: $(curl -s http://ipinfo.io/ip)"
+  echo "Egress address: $(curl -s http://ipinfo.io/ip || echo 'Unable to connect!')"
   ip route get default 2>/dev/null || ip route ls
   ping -c 1 google.com >/dev/null 2>&1 && echo -e "Connection: ${COL_GREEN}✔${COL_RESET}" || echo -e "Connection: ${COL_RED}✘${COL_RESET}"
 }
