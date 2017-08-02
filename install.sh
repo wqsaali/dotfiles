@@ -176,13 +176,11 @@ installVagrantPlugins() {
       brew install vagrant-completion
     fi
   fi
-   vagrant plugin install vagrant-list
-   vagrant plugin install vagrant-clean
-   vagrant plugin install vagrant-box-updater
-   vagrant plugin install vagrant-nuke
-   vagrant plugin install vagrant-vbguest
-   vagrant plugin install vagrant-hostmanager
-   vagrant plugin install vagrant-scp
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    vagrant plugin install "${PKG}"
+  done < files/vagrant.lst
 }
 
 installVimPlugins() {

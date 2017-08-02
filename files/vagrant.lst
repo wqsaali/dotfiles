@@ -1,0 +1,7 @@
+vagrant-list
+vagrant-clean
+vagrant-box-updater
+vagrant-nuke
+vagrant-vbguest
+vagrant-hostmanager
+vagrant-scp
