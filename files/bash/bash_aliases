@@ -338,6 +338,9 @@ function knife-delete-attr() {
   knife exec -E "nodes.transform(\"$1\") { |n| n.$2_attrs.delete(\"$3\"); n.save() }"
 }
 
+# Vagrant aliases
+alias vagrant-clean='vagrant nuke && vagrant global-status --prune'
+
 # Docker aliases
 alias docker-killall='docker ps -a -q | xargs -r docker kill'
 alias docker-rm-all='docker ps -a -q | xargs -r docker rm'
