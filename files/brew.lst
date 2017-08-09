@@ -29,6 +29,7 @@ exiftool
 findutils
 gawk
 git
+godep
 groovy
 highlight
 htop
