@@ -74,6 +74,7 @@ function terraformfiles() {
   cd ${TERRAFORM}/$1
 }
 alias terraform-modules='terraformfiles'
+alias tf_modules='terraformfiles'
 
 function dcos-clusters() {
   cd ${DCOS_CLUSTERS}/$1
