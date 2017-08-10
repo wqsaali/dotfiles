@@ -12,6 +12,7 @@
 - a bash_alias file
 - i3 and compton configuration files
 - i3blocks scripts
+- iTerm profile
 - Hammerspoon configuration scripts
 
 ### The install script

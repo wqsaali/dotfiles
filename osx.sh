@@ -201,6 +201,7 @@ installDotFiles() {
 
   mkdir -p ${HOME}/.atom/
   mkdir -p ${HOME}/.hammerspoon/
+  mkdir -p $HOME/.hammerspoon/hs
 
   cd ${INSTALLDIR}
 
@@ -209,6 +210,14 @@ installDotFiles() {
   cp files/slate/slate ${HOME}/.slate
   cp files/slate/slate.js ${HOME}/.slate.js
   cp -r files/hammerspoon/* ${HOME}/.hammerspoon/
+
+  if [ ! -d  ${HOME}/.hammerspoon/hs/tiling ]; then
+    git clone https://github.com/dsanson/hs.tiling $HOME/.hammerspoon/hs/tiling
+  else
+    cd ${HOME}/.hammerspoon/hs/tiling
+    git pull
+    cd ${INSTALLDIR}
+  fi
 
   if [ ! -d  ${HOME}/.reslate ]; then
     git clone https://github.com/lunixbochs/reslate.git ${HOME}/.reslate

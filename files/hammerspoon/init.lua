@@ -17,6 +17,18 @@ require("hs.window")
 require('watcher')
 require('position')
 require('focus')
+require('applications')
+
+-----------------------------------------------
+-- Tilling
+-----------------------------------------------
+
+local tiling = require "hs.tiling"
+hs.hotkey.bind(hyper, "`", function() tiling.cycleLayout() end)
+hs.hotkey.bind(hyper, ",", function() tiling.cycle(1) end)
+hs.hotkey.bind(hyper, ".", function() tiling.cycle(-1) end)
+hs.hotkey.bind(hyper, "space", function() tiling.promote() end)
+hs.hotkey.bind(hyper, "/", function() tiling.goToLayout("fullscreen") end)
 
 -----------------------------------------------
 -- Lock
@@ -27,14 +39,3 @@ hs.hotkey.bind(hyper, 'l', function()
   os.execute("/System/Library/CoreServices/Menu\\ Extras/User.menu/Contents/Resources/CGSession -suspend")
 end)
 
------------------------------------------------
--- Applications
------------------------------------------------
-
-hs.hotkey.bind(hyper, "return", function()
-  hs.application.launchOrFocus(term)
-end)
-
-hs.hotkey.bind(hyper, "b", function()
-  hs.application.launchOrFocus(browser)
-end)
