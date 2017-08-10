@@ -40,6 +40,9 @@ if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
 fi
 
+# CDPATH
+CDPATH='.:~:~/workingCopies:~/workingCopies/code:~/workingCopies/code/github:~/workingCopies/code/bitbucket:~/workingCopies/code/gitlab'
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
   # include .bashrc if it exists
