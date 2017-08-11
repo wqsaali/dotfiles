@@ -20,7 +20,7 @@ export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
 
 # CDPATH
-CDPATH='.:~:~/workingCopies:~/workingCopies/code:~/workingCopies/code/github:~/workingCopies/code/bitbucket:~/workingCopies/code/gitlab'
+export CDPATH='.:~:~/workingCopies:~/workingCopies/code:~/workingCopies/code/github:~/workingCopies/code/bitbucket:~/workingCopies/code/gitlab'
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
