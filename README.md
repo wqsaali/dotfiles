@@ -27,6 +27,11 @@ The install script supports macOS, Linux (Ubuntu) and Android ([Termux](https://
 ./install i3 # will install and configure i3
 ```
 
+To install on android use:
+```
+termux-fix-shebang install.sh; ./install.sh
+```
+
 **NOTE:** Before running the install script you **should** take a **look at** the **config.sh** file and edit it to your preferences
 
 ### The backup script
