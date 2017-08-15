@@ -551,6 +551,8 @@
     "Default Bookmark Guid" = "9568989A-4281-4710-953B-3BADC6DDFD05";
     DimBackgroundWindows = 0;
     DisableFullscreenTransparency = 1;
+    DoubleClickPerformsSmartSelection = 1;
+    FocusFollowsMouse = 1;
     HideScrollbar = 1;
     HideTab = 1;
     Hotkey = 1;
@@ -570,12 +572,12 @@
     "NSToolbar Configuration com.apple.NSColorPanel" =     {
         "TB Is Shown" = 1;
     };
-    "NSWindow Frame NSFontPanel" = "78 212 823 157 0 0 1920 1200 ";
+    "NSWindow Frame NSFontPanel" = "2004 206 823 77 1920 -145 1080 1920 ";
     "NSWindow Frame SUUpdateAlert" = "652 606 620 392 0 0 1920 1200 ";
     "NSWindow Frame SessionsPreferences" = "2187 551 599 388 1920 -145 1080 1920 ";
-    "NSWindow Frame SharedPreferences" = "625 506 918 495 0 0 1920 1200 ";
+    "NSWindow Frame SharedPreferences" = "3106 864 918 452 3000 -52 1080 1920 ";
     "NSWindow Frame UKCrashReporter" = "155 594 592 584 0 0 1920 1178 ";
-    "NSWindow Frame iTerm Window 0" = "1950 432 955 601 1920 -145 1080 1920 ";
+    "NSWindow Frame iTerm Window 0" = "1920 162 955 664 1920 -52 1080 1898 ";
     "NSWindow Frame iTerm Window 1" = "313 307 1074 727 0 0 1920 1178 ";
     "New Bookmarks" =     (
                 {
@@ -932,7 +934,7 @@
             "Use HFS Plus Mapping" = 0;
             "Use Italic Font" = 1;
             "Use Non-ASCII Font" = 0;
-            "Vertical Spacing" = "0.9961702277861446";
+            "Vertical Spacing" = "1.00109422063253";
             "Visual Bell" = 1;
             "Window Type" = 0;
             "Working Directory" = "/Users/ldavim";
@@ -978,12 +980,14 @@
     SUFeedAlternateAppNameKey = iTerm;
     SUFeedURL = "https://iterm2.com/appcasts/final.xml?shard=77";
     SUHasLaunchedBefore = 1;
-    SULastCheckTime = "2017-07-09 19:35:59 +0000";
+    SULastCheckTime = "2017-08-14 08:12:36 +0000";
     SUSendProfileInfo = 0;
     ShowFullScreenTabBar = 1;
     SmartPlacement = 1;
     SplitPaneDimmingAmount = "0.1314703525641026";
     TabStyle = 1;
+    ThreeFingerEmulates = 0;
+    TripleClickSelectsFullWrappedLines = 1;
     UKCrashReporterLastCrashReportDate = "1.498729e+09";
     UseBorder = 0;
     WordCharacters = "/-+\\\\~_.";

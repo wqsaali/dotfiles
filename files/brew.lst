@@ -18,6 +18,7 @@ colordiff
 compose2kube
 cookiecutter
 coreutils
+curl
 dark-mode
 docker-compose
 ec2-ami-tools

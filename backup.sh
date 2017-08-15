@@ -33,11 +33,11 @@ function backupTermux() {
 }
 
 function backupIterm() {
-  defaults read com.googlecode.iterm2 > files/com.googlecode.iterm2.plist
+  defaults read com.googlecode.iterm2 > files/iterm/com.googlecode.iterm2.plist
 }
 
 function restoreIterm() {
-  cp files/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+  cp files/iterm/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
   plutil -convert binary1 ~/Library/Preferences/com.googlecode.iterm2.plist
   defaults read com.googlecode.iterm2
 }
