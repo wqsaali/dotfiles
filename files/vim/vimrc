@@ -71,7 +71,7 @@ endif
   "Plug 'davidhalter/jedi-vim.git'
   Plug 'ervandew/supertab'
   "Plug 'sjl/gundo.vim'
-  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+  Plug 'Yggdroot/indentLine'
   "Plug 'luochen1990/indent-detector.vim'
   " Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-surround'
@@ -120,6 +120,7 @@ endif
   " Overrides
   if has('autocmd')
     au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
+    au ColorScheme * hi! Conceal ctermbg=none ctermfg=239  guibg=NONE guifg=#4e4e4e
     if ! has('gui_macvim')
       au ColorScheme * hi! Normal ctermbg=none guibg=NONE
       au ColorScheme * hi! NonText ctermbg=none guibg=NONE
@@ -320,7 +321,7 @@ endif
   " Vim
   let g:indentLine_color_term = 239
   "GVim
-  let g:indentLine_color_gui = '#A4E57E'
+  let g:indentLine_color_gui = '#4e4e4e'
   " none X terminal
   let g:indentLine_color_tty_light = 7 " (default: 4)
   let g:indentLine_color_dark = 1 " (default: 2)'
