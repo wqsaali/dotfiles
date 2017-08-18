@@ -2,6 +2,7 @@ buo/cask-upgrade
 caskroom/cask
 caskroom/drivers
 caskroom/fonts
+cloudfoundry/tap
 homebrew/command-not-found
 homebrew/services
 knes1/tap
