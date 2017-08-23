@@ -69,6 +69,7 @@ pcre
 perl
 python
 python-dev
+proot
 ranger
 readline
 resolv-conf
