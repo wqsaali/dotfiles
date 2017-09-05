@@ -293,11 +293,19 @@ installFish() {
   fisher teapot
 }
 
+createSkeleton() {
+  dirs=$(cat config.sh | awk -F\' '{print $2}' | grep 'HOME')
+  for d in $(echo ${dirs}); do
+    mkdir -p "${d}"
+  done
+}
+
 installDotFiles() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'You need to install git!' >&2
     exit 1
   fi
+  createSkeleton
   installVimPlugins
   installTmuxConf
   installBashConf
