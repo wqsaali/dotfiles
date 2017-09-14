@@ -5,6 +5,7 @@ ansible-vault
 atom-beautify
 atom-fuzzy-grep
 atom-hide-tabs
+atom-ide-ui
 atom-shell-commands
 atom-vim-colon-command-on-command-pallete
 atom-vim-like-tab
@@ -37,6 +38,9 @@ git-status
 git-time-machine
 highlight-line
 hyperclick
+ide-go
+ide-json
+ide-python
 intentions
 json-schema
 language-ansible
@@ -76,6 +80,7 @@ paner
 quick-query
 quick-query-mssql
 quick-query-sqlite
+rubocop-auto-correct
 ruby-block-converter
 scroll-searcher
 set-syntax
