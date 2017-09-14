@@ -1,10 +1,13 @@
 colorls
+hipchat
 kitchen-ansible
 kitchen-goss
 kitchen-terraform
 kitchen-vagrant
+knife-spork
 kontena-cli
 pry
 racker
 rubocop
+slack-notifier
 terminal-table
