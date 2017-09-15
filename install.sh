@@ -143,6 +143,11 @@ installScripts() {
   mv testssl ${HOME}/.local/bin/
 }
 
+installChefVM() {
+  git clone git@github.com:trobrock/chefvm.git ~/.chefvm
+  ~/.chefvm/bin/chefvm init
+}
+
 installAtomPackages() {
   mkdir -p ${HOME}/.atom/
   cd ${INSTALLDIR}
