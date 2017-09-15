@@ -157,7 +157,7 @@ if [ -x "$(command -v thefuck)" ]; then
  eval $(thefuck --alias)
 fi
 
-if [ -x "~/.chefvm/bin/chefvm" ]; then
+if [ -x ~/.chefvm/bin/chefvm ]; then
   eval "$(~/.chefvm/bin/chefvm init -)"
 fi
 
