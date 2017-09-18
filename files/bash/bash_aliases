@@ -329,9 +329,9 @@ function knife-promote-lt() {
 }
 
 function knife-ciphertext() {
-  sed -e "s/knife\[\:secret_file\]/\#knife\[\:secret_file\]/" -i.bak ~/.chef/knife.rb
+  sed -e "s/knife\[\:secret_file\]/\#knife\[\:secret_file\]/" -i.bak ~/.chef/config.rb
   knife $@ --format=json
-  mv ~/.chef/knife.rb.bak ~/.chef/knife.rb
+  mv ~/.chef/config.rb.bak ~/.chef/config.rb
 }
 
 # Usage knife-delete-attr 'name:some-server' default some_attribute
