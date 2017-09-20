@@ -365,6 +365,10 @@ alias gem-upgrade='gem update && gem cleanup'
 # npm aliases
 alias npm-upgrade='npm upgrade -g'
 
+if [[ "$OSTYPE" == *"android"* ]]; then
+  alias npm='proot --link2symlink npm'
+fi
+
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip install -U'
 alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip3 install -U'
