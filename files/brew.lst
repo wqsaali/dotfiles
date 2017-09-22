@@ -24,6 +24,7 @@ cookiecutter
 coreutils
 credhub-cli
 curl
+dateutils
 dark-mode
 docker-compose
 ec2-ami-tools
