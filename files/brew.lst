@@ -24,8 +24,8 @@ cookiecutter
 coreutils
 credhub-cli
 curl
-dateutils
 dark-mode
+dateutils
 docker-compose
 ec2-ami-tools
 ec2-api-tools
@@ -37,6 +37,7 @@ findutils
 gawk
 git
 godep
+gotty
 groovy
 highlight
 htop
@@ -80,6 +81,7 @@ thefuck
 tig
 tmux
 tree
+ttyd
 ufraw
 vagrant-completion
 vim
