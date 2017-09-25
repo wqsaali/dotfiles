@@ -75,6 +75,7 @@ s3cmd
 shellcheck
 source-highlight
 terraform
+terraform-docs
 terragrunt
 the_silver_searcher
 thefuck

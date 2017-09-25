@@ -4,6 +4,7 @@ kitchen-ansible
 kitchen-goss
 kitchen-terraform
 kitchen-vagrant
+knife-cookbook-doc
 knife-spork
 kontena-cli
 pry
