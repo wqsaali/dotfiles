@@ -47,6 +47,8 @@ language-ansible
 language-apache
 language-chef
 language-docker
+language-habitat
+language-inspec
 language-lua
 language-nginx
 language-terraform

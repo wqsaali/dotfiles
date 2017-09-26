@@ -4,6 +4,7 @@
     AppleAntiAliasingThreshold = 1;
     AppleScrollAnimationEnabled = 0;
     AppleSmoothFixedFontsSizeThreshold = 1;
+    AppleWindowTabbingMode = manual;
     "Custom Color Presets" =     {
         Atom =         {
             "Ansi 0 Color" =             {
@@ -573,12 +574,12 @@
     "NSToolbar Configuration com.apple.NSColorPanel" =     {
         "TB Is Shown" = 1;
     };
-    "NSWindow Frame NSFontPanel" = "2059 236 823 77 1920 -52 1080 1920 ";
+    "NSWindow Frame NSFontPanel" = "2059 262 823 77 1920 -52 1080 1920 ";
     "NSWindow Frame SUUpdateAlert" = "2150 1094 620 392 1920 -52 1080 1920 ";
     "NSWindow Frame SessionsPreferences" = "2187 551 599 388 1920 -145 1080 1920 ";
-    "NSWindow Frame SharedPreferences" = "1961 869 918 394 1920 -52 1080 1920 ";
+    "NSWindow Frame SharedPreferences" = "1961 948 918 394 1920 -52 1080 1920 ";
     "NSWindow Frame UKCrashReporter" = "155 594 592 584 0 0 1920 1178 ";
-    "NSWindow Frame iTerm Window 0" = "1989 521 955 642 1920 -52 1080 1898 ";
+    "NSWindow Frame iTerm Window 0" = "69 467 955 683 0 0 1920 1178 ";
     "NSWindow Frame iTerm Window 1" = "313 307 1074 727 0 0 1920 1178 ";
     "New Bookmarks" =     (
                 {
@@ -720,7 +721,7 @@
                 "Red Component" = "0.9165446162223816";
             };
             Guid = "9568989A-4281-4710-953B-3BADC6DDFD05";
-            "Horizontal Spacing" = "1.002476703689759";
+            "Horizontal Spacing" = "0.9924522307981928";
             "Idle Code" = 0;
             "Jobs to Ignore" =             (
                 rlogin,
@@ -981,7 +982,7 @@
     SUFeedAlternateAppNameKey = iTerm;
     SUFeedURL = "https://iterm2.com/appcasts/final.xml?shard=77";
     SUHasLaunchedBefore = 1;
-    SULastCheckTime = "2017-09-20 11:07:36 +0000";
+    SULastCheckTime = "2017-09-25 20:20:23 +0000";
     SUSendProfileInfo = 0;
     ShowFullScreenTabBar = 1;
     SmartPlacement = 1;
@@ -992,7 +993,7 @@
     UKCrashReporterLastCrashReportDate = "1.498729e+09";
     UseBorder = 0;
     WordCharacters = "/-+\\\\~_.";
-    "iTerm Version" = "3.1.1";
+    "iTerm Version" = "3.1.2";
     kCPKSelectionViewPreferredModeKey = 0;
     kCPKSelectionViewShowHSBTextFieldsKey = 0;
 }
