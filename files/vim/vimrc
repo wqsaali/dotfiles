@@ -517,6 +517,8 @@ endif
 command! PU PlugUpdate | PlugUpgrade
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
 fun! DiffToggle()
   if &diff
     windo set cursorline
