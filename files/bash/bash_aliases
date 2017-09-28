@@ -17,6 +17,7 @@ if [ -x "$(command -v els)" ]; then
 fi
 if [ -x "$(command -v exa)" ]; then
   alias ls='exa'
+  alias tree='exa -T'
 fi
 alias lc='colorls'
 alias ll='ls -alF'
