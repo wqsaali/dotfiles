@@ -83,11 +83,11 @@ installGnomeTerminalProfiles() {
   # gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_system_font --type=boolean false
 
   # Profiles from https://github.com/Mayccoll/Gogh
-  export {PROFILE_NAME,PROFILE_SLUG}="TomorrowNightBright" && wget -O xt http://git.io/v3DRJ && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="OneDark" && wget -O xt http://git.io/vs7Ut && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="MonokaiDark" && wget -O xt http://git.io/v3DBO && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="SolarizedDark" && wget -O xt http://git.io/v3DBQ && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="GruvboxDark" && wget -O xt http://git.io/v6JYg && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="TomorrowNightBright" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/tomorrow-night-bright.sh && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="OneDark" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/one-dark.sh && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="MonokaiDark" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/monokai-dark.sh && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="SolarizedDark" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/solarized-dark.sh && chmod +x xt && ./xt && rm xt
+  export {PROFILE_NAME,PROFILE_SLUG}="GruvboxDark" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/gruvbox-derk.sh && chmod +x xt && ./xt && rm xt
 }
 
 installi3wm() {
@@ -133,12 +133,12 @@ installLinuxbrew() {
 
 installPackages() {
   sudo apt update
-  cat files/apt-core.lst | tr '\n' ' ' | xargs sudo apt install -y
-  sudo apt-mark manual $(cat files/apt-core.lst | tr '\n' ' ')
+  cat files/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
+  sudo apt-mark manual $(cat files/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
 
   # You might need some extra PPAs for these
-  cat files/apt-extra.lst | tr '\n' ' ' | xargs sudo apt install -y
-  sudo apt-mark manual $(cat files/apt-extra.lst | tr '\n' ' ')
+  cat files/apt-extra.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
+  sudo apt-mark manual $(cat files/apt-extra.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
 
   if ! [ -x "$(command -v cerebro)" ]; then
     installCerebro

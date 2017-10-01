@@ -330,9 +330,15 @@ installDotFiles() {
 
 installAll() {
   if [[ "$OSTYPE" != *"android"* ]]; then
-    installGems
-    installPips
-    installNpms
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+      sudo installGems
+      sudo installPips
+      sudo installNpms
+    else
+      installGems
+      installPips
+      installNpms
+    fi
     installScripts
     installVagrantPlugins
     installAtomPackages

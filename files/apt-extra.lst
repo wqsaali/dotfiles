@@ -9,9 +9,7 @@ caffeine-plus
 dateutils
 ec2-ami-tools
 ec2-api-tools
-fingerprint-gui
-gloobus-preview
-gloobus-sushi
+#fingerprint-gui
 google-chrome-stable
 gtk-redshift
 highlight

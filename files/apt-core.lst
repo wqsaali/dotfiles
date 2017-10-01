@@ -1,7 +1,6 @@
-ack-grep
 ansible
-ansible-fireball
-ansible-node-fireball
+#ansible-fireball
+#ansible-node-fireball
 aptitude
 awscli
 build-essential
@@ -20,7 +19,7 @@ fonts-powerline
 foodcritic
 gist
 git
-iwconfig
+#iwconfig
 jq
 legit
 libxml2-dev
@@ -69,7 +68,7 @@ vim-common
 vim-haproxy
 vim-latexsuite
 vim-migemo
-vim-puppet
+#vim-puppet
 vim-rails
 vim-runtime
 vim-scripts

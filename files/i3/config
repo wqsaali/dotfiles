@@ -38,11 +38,12 @@ set $blue #268bd2
 set $cyan #2aa198
 set $green #859900
 
-set $wallpaper ~/Pictures/Wallpapers/android-5-0-lollipop-material-5355.jpg
+set $wallpaper ~/Pictures/Wallpapers/the_dark_knight_rises_hd_wallpapers_desktop_backgrounds_latest_2012.jpeg
 
-set $font droid sans mono for powerline plus nerd file types 10
-set $barfont droid sans mono for powerline plus nerd file types 10
-
+# set $font droid sans mono for powerline plus nerd file types 10
+# set $barfont droid sans mono for powerline plus nerd file types 10
+set $font DroidSansMonoForPowerline Nerd Font 10
+set $barfont DroidSansMonoForPowerline Nerd Font 10
 set $border_size 1
 
 # set $locker dm-tool lock
