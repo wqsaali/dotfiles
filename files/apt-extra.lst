@@ -1,11 +1,11 @@
-ack-grep
+#ack-grep
 alfred
 arc-theme
-atom
+#atom
 atool
-brightness-controller
+#brightness-controller
 caca-utils
-caffeine-plus
+#caffeine-plus
 dateutils
 ec2-ami-tools
 ec2-api-tools
@@ -18,8 +18,8 @@ mediainfo
 poppler-utils
 ranger
 shellcheck
-skype
-spotify-client
-spotify-client-gnome-support
+#skype
+#spotify-client
+#spotify-client-gnome-support
 terminator
 w3m
