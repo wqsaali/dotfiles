@@ -19,7 +19,7 @@ poppler-utils
 ranger
 shellcheck
 #skype
-#spotify-client
-#spotify-client-gnome-support
+spotify-client
+spotify-client-gnome-support
 terminator
 w3m
