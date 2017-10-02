@@ -328,6 +328,12 @@ installDotFiles() {
   fi
 }
 
+installWebApps() {
+  npm install -g nativefier
+  nativefier --name 'Whatsapp Web' 'https://web.whatsapp.com/'
+  nativefier --name 'Evernote Web' 'https://www.evernote.com/Home.action?login=true&prompt=none&authuser=0#n=66f8e46f-8a98-4294-b42f-8abf8cb9774a&s=s14&ses=4&sh=2&sds=5&'
+}
+
 installAll() {
   if [[ "$OSTYPE" != *"android"* ]]; then
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
