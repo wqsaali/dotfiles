@@ -57,6 +57,12 @@ installEls() {
   mv els ~/.local/bin/
 }
 
+installAwless() {
+  mkdir -p ~/.local/bin/
+  curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
+  mv awless ~/.local/bin/
+}
+
 installFastPath() {
   # https://github.com/mfornasa/docker-fastpath
   mkdir -p ~/.local/bin/
@@ -400,6 +406,9 @@ case "$1" in
     ;;
   "goss")
     installGoss
+    ;;
+  "awless")
+    installAwless
     ;;
   "kubetail")
     installKubetail
