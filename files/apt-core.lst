@@ -1,6 +1,8 @@
-ansible
 #ansible-fireball
 #ansible-node-fireball
+#iwconfig
+#vim-puppet
+ansible
 aptitude
 awscli
 build-essential
@@ -19,7 +21,6 @@ fonts-powerline
 foodcritic
 gist
 git
-#iwconfig
 jq
 legit
 libxml2-dev
@@ -48,6 +49,7 @@ python-pip
 python-software-properties
 rake
 redshift
+rename
 ruby
 ruby-all-dev
 rubygems
@@ -68,7 +70,6 @@ vim-common
 vim-haproxy
 vim-latexsuite
 vim-migemo
-#vim-puppet
 vim-rails
 vim-runtime
 vim-scripts
