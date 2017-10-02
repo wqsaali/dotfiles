@@ -26,14 +26,16 @@ fancy_echo() {
 installDocker() {
   # Don't run this as root as you'll not add your user to the docker group
   sudo apt update
-  sudo apt install apt-transport-https ca-certificates
-  sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-  echo deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release -c | awk '{print $2}') main | sudo tee /etc/apt/sources.list.d/docker.list
+  sudo apt install apt-transport-https ca-certificates software-properties-common curl
+  # sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  # echo deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release -c | awk '{print $2}') main | sudo tee /etc/apt/sources.list.d/docker.list
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   sudo apt update
-  sudo apt purge lxc-docker
   sudo apt install -y linux-image-extra-$(uname -r)
+  sudo apt purge lxc-docker docker-engine docker.io
   sudo rm -rf /etc/default/docker
-  sudo apt install -y docker-engine
+  sudo apt install -y docker-ce
   sudo service docker start
   sudo usermod -aG docker ${USER}
 }
@@ -131,7 +133,17 @@ installLinuxbrew() {
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
 }
 
+addExtraRepos() {
+  # Google
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google.list
+  # Spotify
+  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 0DF731E45CE24F27EEEB1450EFDC8610341D9410
+  echo 'deb http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list
+}
+
 installPackages() {
+  addExtraRepos
   sudo apt update
   cat files/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
   sudo apt-mark manual $(cat files/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
