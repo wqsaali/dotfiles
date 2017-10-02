@@ -347,6 +347,7 @@ installAll() {
   fi
     installVimPlugins
     installTmuxConf
+    installChefVM
     installDotFiles
 }
 
