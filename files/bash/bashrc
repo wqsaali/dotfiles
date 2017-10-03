@@ -18,6 +18,9 @@ fi
 
 export EDITOR=/usr/bin/vim
 export VISUAL=/usr/bin/vim
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  export TERMINAL=/usr/bin/gnome-terminal
+fi
 
 # CDPATH
 export CDPATH='.:~:~/workingCopies:~/workingCopies/code:~/workingCopies/code/github:~/workingCopies/code/bitbucket:~/workingCopies/code/gitlab'
