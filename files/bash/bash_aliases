@@ -279,6 +279,8 @@ function cless() {
 
 # Knife and chef aliases
 
+alias setChef='eval "$(chef shell-init bash)"'
+
 function chef-env-list-versions() {
   cdir=$(pwd)
   chef-environments
