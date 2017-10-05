@@ -146,8 +146,12 @@ function json-merge() {
   jq -s '.[0] * .[1]' $1 $2
 }
 
-function json-prettify() {
+function json-prettify-sort() {
   cat ${1} | jq -S . > ${1}.fixed; mv ${1}.fixed ${1}
+}
+
+function json-prettify() {
+  cat ${1} | jq . > ${1}.fixed; mv ${1}.fixed ${1}
 }
 
 alias json-prettify-all='for f in *.json; do json-prettify ${f}; done'
@@ -248,6 +252,11 @@ function fawk() {
     eval $cmd
 }
 
+# Colored diffs
+if [ -x "$(command -v colordiff)" ]; then
+  alias diff='colordiff'
+fi
+
 # Colored man pages
 function man() {
   env \
@@ -283,7 +292,7 @@ alias setChef='eval "$(chef shell-init bash)"'
 
 function chef-env-list-versions() {
   cdir=$(pwd)
-  chef-environments
+  cd chef/environments
   grep -P '".*":\s*"= .*"' * | tr -s " " | tr -d ','| cut -d ':' -f2,3 | sort -u
   cd $cdir
 }
@@ -292,7 +301,7 @@ function chef-env-list-versions() {
 # Usage: chef-env-compare-versions env-a env-b
 function chef-env-compare-versions() {
   cdir=$(pwd)
-  chef-environments
+  cd chef/environments
   json-diff -y ${1}.json ${2}.json ".cookbook_versions"
   cd $cdir
 }
@@ -301,7 +310,7 @@ function chef-env-compare-versions() {
 # Usage: chef-promot-all <cookbook> <version>
 function knife-promote-all() {
   cdir=$(pwd)
-  chef-environments
+  cd chef/environments
   grep -P '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
   cd $cdir
 }
@@ -310,7 +319,7 @@ function knife-promote-all() {
 # Usage: chef-promot-eq <cookbook> <version_old> <version_new>
 function knife-promote-eq() {
   cdir=$(pwd)
-  chef-environments
+  cd chef/environments
   grep -P '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $3 --remote --yes
   cd $cdir
 }
@@ -319,7 +328,7 @@ function knife-promote-eq() {
 # Usage: chef-promot-lt <cookbook> <version>
 function knife-promote-lt() {
   cdir=$(pwd)
-  chef-environments
+  cd chef/environments
   for environment in $(grep -P '".*":\s*"= .*"' * | grep $1 | tr -d ' '| grep -v "$2"); do
     version=$(echo $environment | cut -d \" -f4 | tr -d '=')
     environment=$(echo $environment | cut -d \. -f1)
