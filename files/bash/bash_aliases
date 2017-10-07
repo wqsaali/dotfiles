@@ -394,9 +394,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
 # if user is not root, pass all commands via sudo #
   if [ $(id -u) -ne 0 ]; then
-      alias apt='sudo apt'
-      alias apt-get='sudo apt-get'
-      alias aptitude='sudo aptitude'
+    alias apt='sudo apt'
+    alias apt-get='sudo apt-get'
+    alias aptitude='sudo aptitude'
+    alias gem='sudo gem'
+    alias pip='sudo pip'
   fi
 
   function apt-cleanup() {
