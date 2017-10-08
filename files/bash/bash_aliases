@@ -402,7 +402,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   fi
 
   function apt-cleanup() {
-    ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | grep -v $(uname -r) | sort -Vr | tail -n +2 | xargs -r sudo aptitude purge -y
+    ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | sed 's@\.efi\.signed@@g' | grep -v $(uname -r) | sort -Vru | tail -n +2 | xargs -r sudo aptitude purge -y
     sudo apt autoremove
     sudo aptitude autoclean
     sudo apt-get clean
