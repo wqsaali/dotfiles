@@ -1,7 +1,10 @@
 colorls
 hipchat
 kitchen-ansible
+kitchen-docker
 kitchen-goss
+kitchen-inspec
+kitchen-localhost
 kitchen-terraform
 kitchen-vagrant
 knife-cookbook-doc
@@ -12,4 +15,5 @@ racker
 rubocop
 slack-notifier
 terminal-table
+test-kitchen
 yard-chef
