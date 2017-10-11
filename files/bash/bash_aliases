@@ -462,7 +462,12 @@ elif [[ "$OSTYPE" == *"android"* ]]; then
   alias dist-upgrade=apt-upgrade
 fi
 
-alias update-all-things='npm-upgrade && gem-upgrade && pip-upgrade && dist-upgrade && vim-update'
+function update-all-things() {
+  npm-upgrade && gem-upgrade && pip-upgrade && dist-upgrade && vim-update
+  if [ -x "$(command -v apm)" ]; then
+    apm upgrade --no-confirm
+  fi
+}
 
 # Get all records from a domain
 alias dig-all="dig +nocmd +multiline +noall +answer any"
