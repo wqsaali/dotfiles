@@ -12,6 +12,7 @@ dateutils
 ec2-ami-tools
 ec2-api-tools
 google-chrome-stable
+graphicsmagick
 gtk-redshift
 highlight
 httpie
