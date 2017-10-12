@@ -25,6 +25,10 @@ fi
 # CDPATH
 export CDPATH='.:~:~/workingCopies:~/workingCopies/code:~/workingCopies/code/github:~/workingCopies/code/bitbucket:~/workingCopies/code/gitlab'
 
+# GOPATH
+export GOPATH="${HOME}/go"
+export PATH="$PATH:$GOPATH/bin"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups
