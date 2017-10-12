@@ -147,6 +147,9 @@ installScripts() {
   curl -sLo testssl testssl.sh
   chmod +x testssl
   mv testssl ${HOME}/.local/bin/
+  curl -sLo bashmarks.sh https://raw.githubusercontent.com/huyng/bashmarks/master/bashmarks.sh
+  chmod +x bashmarks.sh
+  mv bashmarks.sh ${HOME}/.local/bin/
 }
 
 installChefVM() {
