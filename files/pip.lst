@@ -4,6 +4,7 @@ ansible-test
 boto
 boto3
 bpython
+click
 container-transform
 docker
 dreampie
