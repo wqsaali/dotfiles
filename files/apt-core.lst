@@ -26,6 +26,7 @@ legit
 libxml2-dev
 libxslt1-dev
 libz-dev
+linux-image-generic
 lm-sensors
 mysql-client
 perl
