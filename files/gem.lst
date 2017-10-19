@@ -10,6 +10,7 @@ kitchen-vagrant
 knife-cookbook-doc
 knife-spork
 kontena-cli
+overcommit
 pry
 racker
 rubocop
