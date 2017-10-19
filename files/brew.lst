@@ -40,6 +40,7 @@ godep
 gotty
 graphicsmagick
 groovy
+hadolint
 highlight
 htop
 httpie
