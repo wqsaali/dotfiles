@@ -27,6 +27,7 @@ curl
 dark-mode
 dateutils
 docker-compose
+docker-completion
 ec2-ami-tools
 ec2-api-tools
 elktail
