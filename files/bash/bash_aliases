@@ -364,7 +364,7 @@ alias docker-gc='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-exec="docker exec -i -t"
 
 function docker-enter() {
-  docker exec -i -t $1 bash
+  docker exec -i -t $1 /bin/sh
 }
 
 # Kubernetes aliases
