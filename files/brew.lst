@@ -26,8 +26,8 @@ credhub-cli
 curl
 dark-mode
 dateutils
-docker-compose
 docker-completion
+docker-compose
 ec2-ami-tools
 ec2-api-tools
 elktail
@@ -77,6 +77,7 @@ rename
 s3cmd
 shellcheck
 source-highlight
+telnet
 terraform
 terraform-docs
 terragrunt
