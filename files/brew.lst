@@ -73,6 +73,7 @@ pre-commit
 python
 ranger
 reattach-to-user-namespace
+remarshal
 rename
 s3cmd
 shellcheck
