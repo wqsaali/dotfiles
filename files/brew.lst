@@ -2,6 +2,7 @@ ack
 ansible
 ansible-lint
 awless
+aws-shell
 awscli
 azure-cli
 bash
@@ -15,6 +16,7 @@ brew-cask-completion
 brew-pip
 cask
 ccat
+certbot
 cf-cli
 cmake
 coffeescript
