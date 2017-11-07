@@ -39,6 +39,7 @@ exiftool
 findutils
 gawk
 git
+git-secrets
 godep
 gotty
 graphicsmagick
