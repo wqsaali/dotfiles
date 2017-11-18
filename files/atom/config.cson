@@ -21,6 +21,7 @@
       "atom-vim-colon-command-on-command-pallete"
       "alias-command"
       "git-projects"
+      "linter"
     ]
     packagesWithKeymapsDisabled: []
     telemetryConsent: "limited"
