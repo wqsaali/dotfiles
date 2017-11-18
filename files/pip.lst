@@ -19,6 +19,7 @@ pycodestyle
 pygments-style-tomorrownightbright
 pyhcl
 pyobjc
+python-language-server
 setuptools
 sshuttle
 thefuck
