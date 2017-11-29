@@ -13,6 +13,7 @@ kontena-cli
 overcommit
 pry
 racker
+ripl
 rubocop
 slack-notifier
 stove
