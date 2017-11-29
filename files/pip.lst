@@ -15,6 +15,7 @@ mdv
 molecule
 pip
 pterraform
+ptpython
 pycodestyle
 pygments-style-tomorrownightbright
 pyhcl

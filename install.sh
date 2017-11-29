@@ -325,6 +325,9 @@ installDotFiles() {
   installBashConf
   installGitConf
 
+  mkdir -p ${HOME}/.ptpython
+  cp files/ptpython.py ${HOME}/.ptpython/config.py
+
   rm -f ~/.config/ranger/*.{sh,py}
   ranger --copy-config=all
 
