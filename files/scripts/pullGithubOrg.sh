@@ -17,43 +17,59 @@ if [[ ! -z $TOKEN ]]; then
 fi
 ORG=$(basename $(pwd))
 
-repos=$(curl -s https://api.github.com/orgs/${ORG}/repos${TOKEN} | jq -r '.[].name')
+# repos=$(curl -s https://api.github.com/orgs/${ORG}/repos${TOKEN} | jq -r '.[].name')
+# Github uses headers for pagination, headers go into response-1.txt and the response body goes into the response-2.txt file
+curl -si https://api.github.com/orgs/${ORG}/repos${TOKEN} | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
+repos=$(jq -r '.[].name' response-2.txt)
+next=$(grep 'rel="next"' response-1.txt | cut -d\; -f1 | grep -io '<https://api.github.com/organizations/25588791/repos?access_.*>' | tr -d '<>')
 
-for repo in $repos; do
-  upstream=''
-  fork=$(curl -s https://api.github.com/orgs/${ORG}/repos${TOKEN} |jq -r ".[] | select(.name == \"${repo}\")| .fork")
-  if [ $fork == "true" ]; then
-    upstream=$(curl -s https://api.github.com/repos/${ORG}/${repo}${TOKEN} | jq -r '.parent.ssh_url')
-  fi
-  if [ ! -d ${repo} ]; then
-    url=$(curl -s https://api.github.com/orgs/${ORG}/repos${TOKEN} |jq -r ".[] | select(.name == \"${repo}\")| .ssh_url")
-    git clone ${url}
-    if [[ ! -z $upstream ]]; then
-      cd ${repo}
-      echo -e "${COL_YELLOW}>>>${COL_RESET} Adding remote upstream ${upstream}"
-      git remote add upstream ${upstream}
-      git fetch --all
-      cd ..
+while [ ! -z "${repos}" ]; do
+  for repo in $repos; do
+    upstream=''
+    fork=$(jq -r ".[] | select(.name == \"${repo}\")| .fork" response-2.txt)
+    if [ $fork == "true" ]; then
+      upstream=$(curl -s https://api.github.com/repos/${ORG}/${repo}${TOKEN} | jq -r '.parent.ssh_url')
     fi
-  else
-    echo -e "${COL_YELLOW}>>>${COL_RESET} Updating ${repo}"
-    cd ${repo}
-    if [[ ! -z $upstream ]]; then
-      if ! git remote | grep -qv 'upstream' &> /dev/null; then
+    if [ ! -d ${repo} ]; then
+      echo -e "${COL_RED}>>>${COL_RESET} Found new repo ${upstream}"
+      url=$(jq -r ".[] | select(.name == \"${repo}\")| .ssh_url" response-2.txt)
+      git clone ${url}
+      if [[ ! -z $upstream ]]; then
+        cd ${repo}
         echo -e "${COL_YELLOW}>>>${COL_RESET} Adding remote upstream ${upstream}"
         git remote add upstream ${upstream}
+        git fetch --all
+        cd ..
       fi
+    else
+      echo -e "${COL_YELLOW}>>>${COL_RESET} Updating ${repo}"
+      cd ${repo}
+      if [[ ! -z $upstream ]]; then
+        if ! git remote | grep -qv 'upstream' &> /dev/null; then
+          echo -e "${COL_YELLOW}>>>${COL_RESET} Adding remote upstream ${upstream}"
+          git remote add upstream ${upstream}
+        fi
+      fi
+      echo -ne "$COL_GREY"
+      git pull --all
+      echo -ne "$COL_RESET"
+      cd ..
     fi
-    echo -ne "$COL_GREY"
-    git pull --all
-    echo -ne "$COL_RESET"
-    cd ..
-  fi
-  if [[ ! -z $upstream ]]; then
-    cd ${repo}
-    echo -e "${COL_BLUE}>>>${COL_RESET} Status:"
-    echo -e "    This branch is ${COL_YELLOW}$(git rev-list upstream/master..origin/master --count)${COL_RESET} commits ahead and ${COL_RED}$(git rev-list origin/master..upstream/master --count)${COL_RESET} commits behind of Upstream.\n"
-    cd ..
-  fi
-  sleep 1
+    if [[ ! -z $upstream ]]; then
+      cd ${repo}
+      echo -e "${COL_BLUE}>>>${COL_RESET} Status:"
+      echo -e "    This branch is ${COL_YELLOW}$(git rev-list upstream/master..origin/master --count)${COL_RESET} commits ahead and ${COL_RED}$(git rev-list origin/master..upstream/master --count)${COL_RESET} commits behind of Upstream.\n"
+      cd ..
+    fi
+    sleep 1
+  done
+  rm response-*
+  if [ -z "${next}" ]; then break; fi
+  curl -si ${next} | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
+  repos=$(jq -r '.[].name' response-2.txt)
+  next=$(grep 'rel="next"' response-1.txt | cut -d\; -f1 | grep -io '<https://api.github.com/organizations/25588791/repos?access_.*>' | tr -d '<>')
 done
+
+if [ -f response-1.txt ]; then
+  rm response-*
+fi
