@@ -38,9 +38,12 @@ git-status
 git-time-machine
 highlight-line
 hyperclick
+ide-css
 ide-go
+ide-html
 ide-json
 ide-python
+ide-yaml
 intentions
 json-schema
 language-ansible
