@@ -1,3 +1,4 @@
+# vim: set filetype=sh:
 # enable color support of ls and also add handy aliases
 if [ -x "$(command -v dircolors)" ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -157,26 +158,9 @@ function json-prettify() {
 alias json-prettify-all='for f in *.json; do json-prettify ${f}; done'
 
 # Git aliases
-function git-pull-all() {
-  cdir=$(pwd)
-  bdir='.'
-  if [ ! -z $1 ]; then
-    bdir=$1
-  fi
-  repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname '{}/'" \; | grep -Ev '.*\/\..*')
-  for d in $repos; do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; echo -ne "${COL_GREY}"; git pull; echo -ne "${COL_RESET}"; cd $cdir; done
-}
-alias git-pull-recursive='git-pull-all'
-
-function git-clean-all() {
-  cdir=$(pwd)
-  bdir='.'
-  if [ ! -z $1 ]; then
-    bdir=$1
-  fi
-  repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname '{}/'" \; | grep -Ev '.*\/\..*')
-  for d in $repos; do echo -e "${COL_BLUE}>>>${COL_RESET} $d"; cd $d; git clean -fdX; cd $cdir; done
-}
+alias git-pull-recursive='git recursive pull'
+alias git-pull-all='git recursive pull'
+alias git-clean-all='git recursive clean'
 
 function git-status() {
   UNCOMMITED=$(git status -s)

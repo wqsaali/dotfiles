@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+function git-recursive() {
+  git_cmd=${1}
+  cdir=$(pwd)
+  bdir='.'
+  if [ ! -z "$2" ]; then
+    bdir=${2}
+  fi
+  repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname '{}/'" \; | grep -Ev '.*\/\..*')
+  for d in $repos; do
+    echo -e "${COL_BLUE}>>>${COL_RESET} $d"
+    cd $d
+    echo -ne "${COL_GREY}"; ${git_cmd}; echo -ne "${COL_RESET}"
+    cd $cdir
+  done
+}
+
+case "${1}" in
+  pull) git-recursive 'git pull' ;;
+  fetch) git-recursive 'git fetch' ;;
+  status) git-recursive 'git status -sb' ;;
+  clean) git-recursive 'git clean -fdX' ;;
+  *) echo "Unrecognised subcommand"
+esac
