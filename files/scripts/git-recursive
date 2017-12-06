@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+_help(){
+  echo -e "Runs git commands recusively by looking for git repos under the current directory."
+  echo -e "  git recursive [CMD]."
+  echo -e "Available subcommands are: pull status clean reset"\\n
+  echo -e "Example: ${BOLD}git recursive pull ${NORM}"\\n
+  exit 1
+}
+
 function git-recursive() {
   git_cmd=${1}
   cdir=$(pwd)
@@ -18,10 +26,10 @@ function git-recursive() {
 }
 
 case "${1}" in
-  pull) git-recursive 'git pull' ;;
-  fetch) git-recursive 'git fetch' ;;
-  status|sb) git-recursive 'git status -sb' ;;
-  clean) git-recursive 'git clean -fdX' ;;
-  reset) git-recursive 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' ;;
-  *) echo "Unrecognised subcommand"
+  pull) git-recursive 'git pull' ${2} ;;
+  fetch) git-recursive 'git fetch' ${2} ;;
+  status|sb) git-recursive 'git status -sb' ${2} ;;
+  clean) git-recursive 'git clean -fdX' ${2} ;;
+  reset) git-recursive 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' ${2} ;;
+  *) echo "Unrecognised subcommand ${1}"; _help ;;
 esac
