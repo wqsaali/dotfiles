@@ -11,7 +11,8 @@ function git-recursive() {
   for d in $repos; do
     echo -e "${COL_BLUE}>>>${COL_RESET} $d"
     cd $d
-    echo -ne "${COL_GREY}"; ${git_cmd}; echo -ne "${COL_RESET}"
+    # echo -e "${COL_GREY}${git_cmd}${COL_RESET}"
+    echo -ne "${COL_GREY}"; eval ${git_cmd}; echo -ne "${COL_RESET}"
     cd $cdir
   done
 }
@@ -19,7 +20,8 @@ function git-recursive() {
 case "${1}" in
   pull) git-recursive 'git pull' ;;
   fetch) git-recursive 'git fetch' ;;
-  status) git-recursive 'git status -sb' ;;
+  status|sb) git-recursive 'git status -sb' ;;
   clean) git-recursive 'git clean -fdX' ;;
+  reset) git-recursive 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' ;;
   *) echo "Unrecognised subcommand"
 esac
