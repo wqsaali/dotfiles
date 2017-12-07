@@ -144,6 +144,9 @@ installNpms() {
 installScripts() {
   mkdir -p ${HOME}/.local/bin/
   cp -r files/scripts/* ${HOME}/.local/bin/
+  if [[ "$OSTYPE" != *"android"* ]]; then
+    termux-fix-shebang ${HOME}/.local/bin/*
+  fi
   curl -sLo testssl testssl.sh
   chmod +x testssl
   mv testssl ${HOME}/.local/bin/
