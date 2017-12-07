@@ -64,8 +64,6 @@ ndk-stl
 ndk-sysroot
 netcat
 nmap
-nodejs
-nodejs-dev
 nodejs-current
 openssh
 openssl
