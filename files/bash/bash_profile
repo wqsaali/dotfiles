@@ -1,4 +1,4 @@
-#if [ -f "$HOME/.profile" ] && [ "$CONFIGURED" != "true" ]; then
-if [ -f "$HOME/.profile" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+if [ -f "$HOME/.profile" ] && [ "$CONFIGURED" != "true" ]; then
+# if [ -f "$HOME/.profile" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
   . "$HOME/.profile"
 fi
