@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/env bash
+#!/usr/bin/env bash
 
 INSTALLDIR=$(pwd)
 dotfiles_dir="$(dirname $0)"
