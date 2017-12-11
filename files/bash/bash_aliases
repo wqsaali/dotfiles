@@ -383,8 +383,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     alias apt='sudo apt'
     alias apt-get='sudo apt-get'
     alias aptitude='sudo aptitude'
-    alias gem='sudo gem'
-    alias pip='sudo pip'
+    alias gem='sudo -H gem'
+    alias pip='sudo -H pip'
   fi
 
   function apt-cleanup() {
