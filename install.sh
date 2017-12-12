@@ -312,7 +312,7 @@ installFish() {
 
 createSkeleton() {
   dirs=$(cat config.sh | awk -F\' '{print $2}' | grep 'HOME')
-  for d in $(echo ${dirs}); do
+  for d in $(envsubst <<< ${dirs}); do
     mkdir -p "${d}"
   done
 }
