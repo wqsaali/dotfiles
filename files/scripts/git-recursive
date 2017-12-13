@@ -31,5 +31,6 @@ case "${1}" in
   status|sb) git-recursive 'git status -sb' ${2} ;;
   clean) git-recursive 'git clean -fdX' ${2} ;;
   reset) git-recursive 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' ${2} ;;
+  fork-status) git-recursive 'git fork-status' ;;
   *) echo "Unrecognised subcommand ${1}"; _help ;;
 esac
