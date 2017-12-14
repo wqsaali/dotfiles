@@ -15,5 +15,6 @@ if [ -z "${remotes}" ]; then
   echo -e "    ${COL_RED}No aditional remotes found!${COL_RESET}"
 fi
 for remote in ${remotes}; do
-  echo -e "    This branch is ${COL_YELLOW}$(git rev-list ${remote}/master..origin/master --count)${COL_RESET} commits ahead and ${COL_RED}$(git rev-list origin/master..${remote}/master --count)${COL_RESET} commits behind of Upstream."
+  read ahead behind <<< $(git rev-list --left-right --count origin/master...${remote}/master)
+  echo -e "    ${COL_RESET}This fork is ${COL_YELLOW}${ahead}${COL_RESET} commits ahead and ${COL_RED}${behind}${COL_RESET} commits behind of Upstream."
 done
