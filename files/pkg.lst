@@ -60,6 +60,7 @@ make
 man
 ncurses
 ncurses-ui-libs
+ncurses-utils
 ndk-stl
 ndk-sysroot
 netcat
