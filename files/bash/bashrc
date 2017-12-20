@@ -158,6 +158,9 @@ if [ -x "$(command -v kontena)" ]; then
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
+  export RBENV_ROOT="$(brew --prefix rbenv)"
+  export GEM_HOME="$(brew --prefix)/opt/gems"
+  export GEM_PATH="$(brew --prefix)/opt/gems"
   if [ -f $(brew --prefix)/etc/bash_completion ]; then
       . $(brew --prefix)/etc/bash_completion
   fi
