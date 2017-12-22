@@ -25,6 +25,7 @@ compose2kube
 cookiecutter
 coreutils
 credhub-cli
+csvkit
 curl
 dark-mode
 dateutils
