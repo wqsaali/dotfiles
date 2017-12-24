@@ -58,6 +58,7 @@ libxml2
 libyaml
 make
 man
+mosh
 ncurses
 ncurses-ui-libs
 ncurses-utils
