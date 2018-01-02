@@ -43,6 +43,7 @@ ide-go
 ide-html
 ide-json
 ide-python
+ide-ruby
 ide-yaml
 intentions
 json-schema
