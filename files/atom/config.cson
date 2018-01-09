@@ -9,6 +9,7 @@
   "autocomplete-plus": {}
   "branch-status": {}
   core:
+    debugLSP: true
     disabledPackages: [
       "metrics"
       "file-type-icons"

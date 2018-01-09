@@ -189,7 +189,7 @@ alias git-prune-branches='git remote prune origin'
 alias git-prune-merged='git branch -r --merged | grep -v master | sed '\''s/origin\///'\'' | xargs -n 1 git push --delete origin'
 alias git-purge-branches='git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '\''{ print $1 }'\'' | xargs -n 1 git branch -d'
 alias git-current-tag='git name-rev --tags --name-only $(git rev-parse HEAD)'
-alias git-reset='git fetch origin; git reset --hard origin/master; git clean -fdx'
+alias git-reset='git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx'
 alias git-tags='git for-each-ref --format "%(refname) %09 %(taggerdate) %(subject) %(taggeremail)" refs/tags  --sort=taggerdate'
 alias git-log='git lg'
 # change the current directory to the parent directory that contains the .git folder

@@ -74,6 +74,7 @@ node
 openshift-cli
 openssl
 packer
+pet
 pre-commit
 python
 ranger
