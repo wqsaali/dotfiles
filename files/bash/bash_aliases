@@ -502,6 +502,8 @@ alias lstcp='lsof -nP | grep TCP | grep LISTEN'
 alias lsudp='lsof -nP | grep UDP | grep LISTEN'
 alias lsservers='lsof -nP | grep LISTEN'
 
+alias netdata='docker run --cap-add SYS_PTRACE -v /proc:/host/proc:ro -v /sys:/host/sys:ro -p 19999:19999 titpetric/netdata'
+
 function hgrep() {
   if [ ! -z "$1" ]; then
     grep "${1}" ~/.bash_eternal_history
