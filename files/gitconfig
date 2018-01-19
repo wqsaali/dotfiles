@@ -23,6 +23,8 @@
   accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
   accept-theirs = "!f() { git checkout --theirs -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
   vomit = commit
+  piss = push
+  pill = pull
   info = remote show origin
   df = diff
   sb = status -sb
