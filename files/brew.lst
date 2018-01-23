@@ -99,6 +99,7 @@ ufraw
 vagrant-completion
 vim
 w3m
+watch
 wget
 xhyve
 yarn
