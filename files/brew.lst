@@ -31,6 +31,7 @@ dark-mode
 dateutils
 docker-completion
 docker-compose
+docker-ls
 ec2-ami-tools
 ec2-api-tools
 elktail
