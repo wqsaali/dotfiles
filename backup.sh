@@ -154,6 +154,9 @@ case "$1" in
   "ppas" | "repos" )
     backupPPAs
     ;;
+  "termux" )
+    backupTermux
+    ;;
   "homedir" | "home" )
     backupHomeDir $2
     ;;
