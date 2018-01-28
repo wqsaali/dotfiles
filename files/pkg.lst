@@ -49,6 +49,7 @@ liblzma
 libmpfr
 libnghttp2
 libpcap
+libprotobuf
 libsqlite
 libtalloc
 libunistring
@@ -64,6 +65,7 @@ ncurses-ui-libs
 ncurses-utils
 ndk-stl
 ndk-sysroot
+neofetch
 netcat
 nmap
 nodejs-current
@@ -85,6 +87,7 @@ ruby-dev
 screenfetch
 termux-api
 termux-elf-cleaner
+termux-exec
 termux-tools
 tmux
 tree
