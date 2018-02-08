@@ -33,5 +33,6 @@
   lg = !"git lg1"
   unstage = reset --
 [core]
+  pager = less -F -X
   editor = vim
   excludesfile = /Users/ldavim/.gitexcludes
