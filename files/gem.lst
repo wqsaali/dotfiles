@@ -10,7 +10,7 @@ kitchen-vagrant
 knife-cookbook-doc
 knife-cookbook-readme
 knife-spork
-kontena-cli
+# kontena-cli
 overcommit
 pry
 racker

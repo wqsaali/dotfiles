@@ -143,27 +143,39 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# create with:
-# azure --completion >> ~/.bash/azure.completion.sh
-if [ -f ~/.bash/azure.completion.sh ]; then
-  . ~/.bash/azure.completion.sh
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # export RBENV_ROOT="$(brew --prefix rbenv)"
+  # export GEM_HOME="$(brew --prefix)/opt/gems"
+  # export GEM_PATH="$(brew --prefix)/opt/gems"
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    source $(brew --prefix)/etc/bash_completion
+  fi
 fi
 
 if [ -x "$(command -v aws_completer)" ]; then
   complete -C 'aws_completer' aws
 fi
 
-if [ -x "$(command -v kontena)" ]; then
-  . "$( kontena whoami --bash-completion-path )"
+if [ -x "$(command -v awless)" ]; then
+  if [ -f ~/.bash/awless.completion.sh ]; then
+    source ~/.bash/awless.completion.sh
+  else
+    awless completion bash >> ~/.bash/awless.completion.sh
+    source ~/.bash/awless.completion.sh
+  fi
 fi
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # export RBENV_ROOT="$(brew --prefix rbenv)"
-  # export GEM_HOME="$(brew --prefix)/opt/gems"
-  # export GEM_PATH="$(brew --prefix)/opt/gems"
-  if [ -f $(brew --prefix)/etc/bash_completion ]; then
-      . $(brew --prefix)/etc/bash_completion
-  fi
+# if [ -x "$(command -v azure)" ]; then
+#   if [ -f ~/.bash/azure.completion.sh ]; then
+#     source  ~/.bash/azure.completion.sh
+#   else
+#     azure --completion >> ~/.bash/azure.completion.sh
+#     source  ~/.bash/azure.completion.sh
+#   fi
+# fi
+
+if [ -x "$(command -v kontena)" ]; then
+  source "$(kontena whoami --bash-completion-path)"
 fi
 
 if [ -x "$(command -v thefuck)" ]; then
@@ -172,10 +184,6 @@ fi
 
 if [ -x ~/.chefvm/bin/chefvm ]; then
   eval "$(~/.chefvm/bin/chefvm init -)"
-fi
-
-if [ -x "$(command -v awless)" ]; then
-  source <(awless completion bash)
 fi
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then

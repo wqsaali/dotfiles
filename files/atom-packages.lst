@@ -59,6 +59,7 @@ language-terraform
 language-varnish
 language-viml
 linter
+linter-cookstyle
 linter-docker
 linter-foodcritic
 linter-jsonlint

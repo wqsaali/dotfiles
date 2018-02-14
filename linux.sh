@@ -143,6 +143,10 @@ addExtraRepos() {
   # Skype
   wget -q -O - https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add -
   echo 'deb [arch=amd64] https://repo.skype.com/deb stable main' | sudo tee /etc/apt/sources.list.d/skype-stable.list
+  # Azure
+  AZ_REPO=$(lsb_release -cs)
+  sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
+  echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
 }
 
 installPackages() {
@@ -175,7 +179,7 @@ installPackages() {
   curl -L https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk
 
   sudo npm install -g coffee-scrip
-  sudo npm install -g azure-cli
+  # sudo npm install -g azure-cli
 }
 
 installFonts() {
