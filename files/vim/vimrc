@@ -541,9 +541,10 @@ endfun
 command! TrimWhitespace call TrimWhitespace()
 noremap <Leader>w :call TrimWhitespace()<CR>
 " Some people like to automatically do this before they write a file to disk, like so:
-" if has('autocmd')
-"   au BufWritePre * :call TrimWhitespace()
-" endif
+if has('autocmd')
+  au BufWritePre * :call TrimWhitespace()
+  au BufWritePre * if &filetype == 'terraform' | :call terraform#fmt() | endif
+endif
 
 " this machine config
 if filereadable(expand("~/.vimrc.local"))
