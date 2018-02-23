@@ -12,6 +12,7 @@ jp-cli
 jsnice
 mdlt
 nativefier
+npmrc
 organize-cli
 parse-columns-cli
 ramda-cli
