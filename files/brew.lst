@@ -77,6 +77,7 @@ openssl
 packer
 pet
 pre-commit
+pyenv
 python
 ranger
 reattach-to-user-namespace
