@@ -169,6 +169,20 @@ installAtomPackages() {
   apm install --packages-file files/atom-packages.lst
 }
 
+installVscodePackages() {
+  settings="$HOME/.config/Code/User"
+  if [[ "$OSTYPE" != "darwin"* ]]; then
+    settings="$HOME/Library/Application\ Support/Code/User"
+  fi
+  mkdir -p $settings
+  cp -r files/files/vscode/* $settings/
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    code --install-extension "${PKG}"
+  done < files/vscode-packages.lst
+}
+
 installTmuxConf() {
   cp files/tmux.conf.local ${HOME}/.tmux.conf.local
   if [ ! -d  ${HOME}/.tmux ]; then

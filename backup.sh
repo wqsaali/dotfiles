@@ -83,6 +83,15 @@ function backupAtomPackages() {
   cp ${HOME}/.atom/*.json files/atom/
 }
 
+function backupVscode() {
+  code --list-extensions > files/vscode-packages.lst
+  settings="$HOME/.config/Code/User"
+  if [[ "$OSTYPE" != "darwin"* ]]; then
+    settings="$HOME/Library/Application\ Support/Code/User"
+  fi
+  cp -r $settings/* files/files/vscode/
+}
+
 function backupPPAs() {
   # Get list of PPAs
   echo '#!/usr/bin/env bash' > restore-ppas.sh
