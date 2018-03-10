@@ -86,10 +86,10 @@ function backupAtomPackages() {
 function backupVscode() {
   code --list-extensions > files/vscode-packages.lst
   settings="$HOME/.config/Code/User"
-  if [[ "$OSTYPE" != "darwin"* ]]; then
-    settings="$HOME/Library/Application\ Support/Code/User"
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    settings="$HOME/Library/Application Support/Code/User"
   fi
-  cp -r $settings/* files/files/vscode/
+  cp -r "$settings"/* files/vscode/
 }
 
 function backupPPAs() {
@@ -121,7 +121,10 @@ function backupPackages() {
 function backupAll() {
   backupDotFiles
   backupAtomPackages
-  backupPPAs
+  backupVscode
+  if [[ "$OSTYPE" != "darwin"* ]]; then
+    backupPPAs
+  fi
 }
 
 function restorePackages() {
@@ -159,6 +162,9 @@ case "$1" in
     ;;
    "atompackages" | "apkgs" | "atom" )
     backupAtomPackages
+    ;;
+  "vscode" )
+    backupVscode
     ;;
   "ppas" | "repos" )
     backupPPAs

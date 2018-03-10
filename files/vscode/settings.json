@@ -4,5 +4,8 @@
     "atomKeymap.promptV3Features": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.formatOnPaste": true,
-    "workbench.iconTheme": "file-icons"
+    "workbench.iconTheme": "file-icons",
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "editor.minimap.renderCharacters": false
 }
