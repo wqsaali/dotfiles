@@ -1,24 +1,11 @@
 # kontena-cli
 colorls
 hipchat
-kitchen-ansible
-kitchen-docker
-kitchen-goss
-kitchen-inspec
-kitchen-localhost
-kitchen-terraform
-kitchen-vagrant
-knife-cookbook-doc
-knife-cookbook-readme
-knife-spork
 overcommit
 pry
 racker
 ripl
 rubocop
 slack-notifier
-stove
 terminal-table
 terraform_landscape
-test-kitchen
-yard-chef

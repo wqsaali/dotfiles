@@ -125,6 +125,14 @@ installGems() {
   done < files/gem.lst
 }
 
+installChefGems() {
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    chef gem install "${PKG}"
+  done < files/chef_gem.lst
+}
+
 installPips() {
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
@@ -389,6 +397,9 @@ installAll() {
 case "$1" in
   "gems" | "gem")
     installGems
+    ;;
+  "chef_gems" | "chefgems")
+    installChefGems
     ;;
   "pip" | "pips")
     installPips
