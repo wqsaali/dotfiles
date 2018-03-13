@@ -383,14 +383,16 @@ installAll() {
       installNpms
     fi
     installScripts
+    installChefGems
+    installChefVM
     installVagrantPlugins
     installAtomPackages
+    installVscodePackages
     installGoss
     installEls
   fi
     installVimPlugins
     installTmuxConf
-    installChefVM
     installDotFiles
 }
 
