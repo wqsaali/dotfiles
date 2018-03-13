@@ -1,0 +1,15 @@
+berkshelf
+kitchen-ansible
+kitchen-docker
+kitchen-goss
+kitchen-inspec
+kitchen-localhost
+kitchen-terraform
+kitchen-vagrant
+knife-cookbook-doc
+knife-cookbook-readme
+knife-spork
+slack-notifier
+stove
+test-kitchen
+yard-chef
