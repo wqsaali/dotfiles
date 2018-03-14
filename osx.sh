@@ -161,10 +161,11 @@ installPackages() {
 }
 
 installItermColors() {
-  url="https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/${1// /%20}.itermcolors"
+  name="$*"
+  url="https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/${name// /%20}.itermcolors"
   curl -fLo theme.itermcolors ${url}
-  echo "importing ${1}"
-  defaults write -app iTerm 'Custom Color Presets' -dict-add "$1" "$(cat theme.itermcolors)"
+  echo "importing ${name} from ${url}"
+  defaults write -app iTerm 'Custom Color Presets' -dict-add "${name// /_}" "$(cat theme.itermcolors)"
   rm theme.itermcolors
 }
 
@@ -256,7 +257,7 @@ case "$1" in
     installFonts
     ;;
   "itermcolors" | "termColors" | "termProfiles")
-    installItermColors $2
+    installItermColors ${@:2}
     ;;
   *)
     installAll
