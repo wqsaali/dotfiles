@@ -8,8 +8,8 @@ _help(){
   exit 1
 }
 
-function git-recursive() {
-  git_cmd=${1}
+function recursive-cmd() {
+  cmd=${1}
   cdir=$(pwd)
   bdir='.'
   if [ ! -z "$2" ]; then
@@ -19,18 +19,16 @@ function git-recursive() {
   for d in $repos; do
     echo -e "${COL_BLUE}>>>${COL_RESET} $d"
     cd $d
-    # echo -e "${COL_GREY}${git_cmd}${COL_RESET}"
-    echo -ne "${COL_GREY}"; eval ${git_cmd}; echo -ne "${COL_RESET}"
+    # echo -e "${COL_GREY}${cmd}${COL_RESET}"
+    echo -ne "${COL_GREY}"; eval ${cmd}; echo -ne "${COL_RESET}"
     cd $cdir
   done
 }
 
 case "${1}" in
-  pull) git-recursive 'git pull' ${2} ;;
-  fetch) git-recursive 'git fetch' ${2} ;;
-  status|sb) git-recursive 'git status -sb' ${2} ;;
-  clean) git-recursive 'git clean -fdX' ${2} ;;
-  reset) git-recursive 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' ${2} ;;
-  fork-status) git-recursive 'git fork-status' ;;
-  *) echo "Unrecognised subcommand ${1}"; _help ;;
+  help) _help ;;
+  sb) recursive-cmd 'git status -sb' ${2} ;;
+  clean) recursive-cmd 'git clean -fdX' ${2} ;;
+  reset) recursive-cmd 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' ${2} ;;
+  *) recursive-cmd "git ${*}" ;;
 esac
