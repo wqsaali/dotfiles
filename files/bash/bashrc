@@ -180,6 +180,7 @@ fi
 
 if [ -x "$(command -v pyenv)" ]; then
 eval "$(pyenv init -)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
 
 if [ -x "$(command -v thefuck)" ]; then

@@ -78,6 +78,7 @@ packer
 pet
 pre-commit
 pyenv
+pyenv-virtualenv
 python
 ranger
 reattach-to-user-namespace
