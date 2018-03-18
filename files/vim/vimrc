@@ -105,6 +105,7 @@ endif
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'chr4/nginx.vim'
   Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+  Plug 'tell-k/vim-autopep8', {'for': 'python'}
   Plug 'pearofducks/ansible-vim'
   Plug 'cespare/vim-toml'
   Plug 'maralla/vim-toml-enhance'
