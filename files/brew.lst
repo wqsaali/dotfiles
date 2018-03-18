@@ -76,6 +76,7 @@ openshift-cli
 openssl
 packer
 pet
+pipenv
 pre-commit
 pyenv
 pyenv-virtualenv
