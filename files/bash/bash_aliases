@@ -282,6 +282,13 @@ function chef-env-list-versions() {
   cd $cdir
 }
 
+function knife-env-list-versions() {
+  cdir=$(pwd)
+  cd chef/environments
+  for f in *.json; do echo ">>> $f"; jq '.cookbook_versions' $f; echo ''; done
+  cd $cdir
+}
+
 # Compares two environments in terms of pinned cookbook versions
 # Usage: chef-env-compare-versions env-a env-b
 function chef-env-compare-versions() {
