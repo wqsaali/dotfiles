@@ -5,3 +5,5 @@ vagrant-nuke
 vagrant-vbguest
 vagrant-hostmanager
 vagrant-scp
+vagrant-omnibus
+vagrant-berkshelf
