@@ -459,6 +459,9 @@ function update-all-things() {
   if [ -x "$(command -v apm)" ]; then
     apm upgrade --no-confirm
   fi
+  if [ -x "$(command -v mas)" ]; then
+    mas upgrade
+  fi
 }
 
 # Get all records from a domain
