@@ -25,4 +25,5 @@ shellcheck
 spotify-client
 spotify-client-gnome-support
 terminator
+code
 w3m

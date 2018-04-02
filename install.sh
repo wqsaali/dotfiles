@@ -183,7 +183,7 @@ installVscodePackages() {
     settings="$HOME/Library/Application\ Support/Code/User"
   fi
   mkdir -p $settings
-  cp -r files/files/vscode/* $settings/
+  cp -r files/vscode/* $settings/
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
@@ -423,6 +423,9 @@ case "$1" in
     ;;
   "atompackages" | "apkgs" | "atom" | "apm")
     installAtomPackages
+    ;;
+  "vscodepackages" | "vscode" | "vspkgs")
+    installVscodePackages
     ;;
   "scripts")
     installScripts
