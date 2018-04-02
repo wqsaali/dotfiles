@@ -179,8 +179,8 @@ installAtomPackages() {
 
 installVscodePackages() {
   settings="$HOME/.config/Code/User"
-  if [[ "$OSTYPE" != "darwin"* ]]; then
-    settings="$HOME/Library/Application\ Support/Code/User"
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    settings="$HOME/Library/Application Support/Code/User"
   fi
   mkdir -p $settings
   cp -r files/vscode/* $settings/
