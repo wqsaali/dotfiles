@@ -289,6 +289,17 @@ function knife-env-list-versions() {
   cd $cdir
 }
 
+function knife-prune-nodes() {
+  env=${1}
+  if [ -z "${env}" ]; then
+    env="*"
+  fi
+  for node in $(knife search node "chef_environment:${env} AND ohai_time:[* TO $(date +%s -d '25hours ago')]" -i); do
+    knife client delete -y $node
+    knife node delete -y $node
+  done
+}
+
 # Compares two environments in terms of pinned cookbook versions
 # Usage: chef-env-compare-versions env-a env-b
 function chef-env-compare-versions() {
