@@ -9,6 +9,7 @@
 - a custom theme for tmux
 - a vimrc file
 - Atom configuration including list of installed packages
+- VSCode configuration including list of installed packages
 - a bash_alias file
 - i3 and compton configuration files
 - i3blocks scripts

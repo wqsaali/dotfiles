@@ -128,7 +128,7 @@ function codi() {
 # Json aliases
 # Usage: json-diff file1 file2 section_on_file1 section_on_file2
 function json-diff() {
-  opts=$(echo $@ | grep -Po '(( |^)-\w+)+' | tr '\n' ' ')
+  opts=$(echo $@ | grep -Eo '(( |^)-\w+)+' | tr '\n' ' ')
 #  while getopts {a..z} opt; do :; done
 #  shift $(($OPTIND-1))
   for o in $opts; do shift; done
@@ -278,7 +278,7 @@ alias useChef='setChef'
 function chef-env-list-versions() {
   cdir=$(pwd)
   cd chef/environments
-  grep -P '".*":\s*"= .*"' * | tr -s " " | tr -d ','| cut -d ':' -f2,3 | sort -u
+  grep -E '".*":\s*"= .*"' * | tr -s " " | tr -d ','| cut -d ':' -f2,3 | sort -u
   cd $cdir
 }
 
@@ -303,7 +303,7 @@ function chef-env-compare-versions() {
 function knife-promote-all() {
   cdir=$(pwd)
   cd chef/environments
-  grep -P '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
+  grep -E '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
   cd $cdir
 }
 
@@ -312,7 +312,7 @@ function knife-promote-all() {
 function knife-promote-eq() {
   cdir=$(pwd)
   cd chef/environments
-  grep -P '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $3 --remote --yes
+  grep -E '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $3 --remote --yes
   cd $cdir
 }
 
@@ -321,7 +321,7 @@ function knife-promote-eq() {
 function knife-promote-lt() {
   cdir=$(pwd)
   cd chef/environments
-  for environment in $(grep -P '".*":\s*"= .*"' * | grep $1 | tr -d ' '| grep -v "$2"); do
+  for environment in $(grep -E '".*":\s*"= .*"' * | grep $1 | tr -d ' '| grep -v "$2"); do
     version=$(echo $environment | cut -d \" -f4 | tr -d '=')
     environment=$(echo $environment | cut -d \. -f1)
     if [ "$version" = "$(echo -e "$version\n$2" | sort -V | head -n1)" ]; then
