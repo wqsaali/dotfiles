@@ -7,5 +7,7 @@
     "workbench.iconTheme": "file-icons",
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": true,
-    "editor.minimap.renderCharacters": false
+    "editor.minimap.renderCharacters": false,
+    "editor.fontFamily": "'DroidSansMono Nerd Font', Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "'DroidSansMono Nerd Font', Menlo, Monaco, 'Courier New', monospace"
 }
