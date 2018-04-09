@@ -1,4 +1,8 @@
 berkshelf
+chef-provisioning
+chef-provisioning-docker
+docker
+docker-api
 kitchen-ansible
 kitchen-docker
 kitchen-goss
@@ -6,9 +10,9 @@ kitchen-inspec
 kitchen-localhost
 kitchen-terraform
 kitchen-vagrant
+knife-cleanup
 knife-cookbook-doc
 knife-cookbook-readme
-knife-cleanup
 knife-spork
 slack-notifier
 stove
