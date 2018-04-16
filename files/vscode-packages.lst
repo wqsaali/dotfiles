@@ -5,6 +5,7 @@ PeterJausovec.vscode-docker
 castwide.solargraph
 chiragpat.tomorrow-and-tomorrow-night-operator-mono-theme
 dracula-theme.theme-dracula
+eamodio.gitlens
 erd0s.terraform-autocomplete
 file-icons.file-icons
 haaaad.ansible
@@ -13,12 +14,14 @@ in4margaret.compareit
 letmaik.git-tree-compare
 loganarnett.tf-snippets
 magicstack.MagicPython
+marquesmps.dockerfile-validator
 mauve.terraform
 mindginative.terraform-snippets
 misogi.ruby-rubocop
 ms-python.python
 ms-vscode.atom-keybindings
 ms-vscode.azurecli
+p1c2u.docker-compose
 rebornix.Ruby
 robertohuertasm.vscode-icons
 ryu1kn.partial-diff
