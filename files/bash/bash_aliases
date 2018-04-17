@@ -38,50 +38,6 @@ alias ....='cd ../../../'
 alias .....='cd ../../../../'
 alias back='cd $OLDPWD'
 
-# alias workingCopies='cd ${WORKINGCOPIES}'
-#
-# function code() {
-#   cd ${CODE}/$1
-# }
-# function github() {
-#   cd ${GITHUB}/$1
-# }
-# function gitlab() {
-#   cd ${GITLAB}/$1
-# }
-# function bitbucket() {
-#   cd ${BITBUCKET}/$1
-# }
-#
-# function playbooks() {
-#   cd ${PLAYBOOKS}/$1
-# }
-#
-# alias chef-roles='cd ${CHEF_ROLES}'
-# alias chef-environments='cd ${CHEF_ENVIRONMENTS}'
-# alias chef-handlers='cd ${CHEF_HANDLERS}'
-#
-# function chef-data-bags() {
-#   cd ${CHEF_DATA_BAGS}/$1
-# }
-# function chef-cookbooks() {
-#   cd ${CHEF_COOKBOOKS}/$1
-# }
-#
-# function dockerfiles() {
-#   cd ${DOCKERFILES}/$1
-# }
-#
-# function terraformfiles() {
-#   cd ${TERRAFORM}/$1
-# }
-# alias terraform-modules='terraformfiles'
-# alias tf_modules='terraformfiles'
-#
-# function dcos-clusters() {
-#   cd ${DCOS_CLUSTERS}/$1
-# }
-
 # Geeknote alias
 function gn_sync_notebook() {
   gnsync --path ~/Evernote/$1 --logpath ~/.log/geeknote$1.log --format markdown --notebook "$1" --two-way TWO_WAY
