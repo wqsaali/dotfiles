@@ -10,6 +10,7 @@ kitchen-inspec
 kitchen-localhost
 kitchen-terraform
 kitchen-vagrant
+knife-acl
 knife-cleanup
 knife-cookbook-doc
 knife-cookbook-readme
