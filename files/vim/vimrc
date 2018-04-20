@@ -109,6 +109,7 @@ endif
   Plug 'pearofducks/ansible-vim'
   Plug 'cespare/vim-toml'
   Plug 'maralla/vim-toml-enhance'
+  Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'handlebars'] }
 
   call plug#end()
 " }
