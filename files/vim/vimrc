@@ -73,7 +73,7 @@ endif
   "Plug 'sjl/gundo.vim'
   Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
   "Plug 'luochen1990/indent-detector.vim'
-  " Plug 'tpope/vim-sleuth'
+  Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tomtom/tcomment_vim'
