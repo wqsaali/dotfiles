@@ -29,7 +29,7 @@ csvkit
 curl
 dark-mode
 dateutils
-docker-completion
+# docker-completion
 docker-compose
 docker-ls
 ec2-ami-tools
@@ -73,6 +73,7 @@ molecule
 moreutils
 mtr
 neovim
+ngrep
 nmap
 node
 openshift-cli
