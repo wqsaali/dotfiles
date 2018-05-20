@@ -29,7 +29,6 @@ csvkit
 curl
 dark-mode
 dateutils
-# docker-completion
 docker-compose
 docker-ls
 ec2-ami-tools
@@ -64,6 +63,7 @@ jsonnet
 kompose
 kops
 kube-aws
+kubectx
 kubernetes-cli
 kubernetes-helm
 legit
