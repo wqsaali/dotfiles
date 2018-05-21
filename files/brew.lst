@@ -91,6 +91,7 @@ remarshal
 rename
 s3cmd
 shellcheck
+siege
 source-highlight
 telnet
 terraform
