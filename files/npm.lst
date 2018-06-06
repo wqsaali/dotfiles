@@ -17,6 +17,7 @@ npmrc
 organize-cli
 parse-columns-cli
 ramda-cli
+shrinkpack
 tiny-care-terminal
 underscore-cli
 vtop
