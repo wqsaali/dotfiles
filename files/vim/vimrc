@@ -87,6 +87,7 @@ endif
   "Plug 'alvan/vim-closetag'
   Plug 'Townk/vim-autoclose'
   Plug 'tpope/vim-endwise'
+  Plug 'mileszs/ack.vim'
   " Plug 'godlygeek/tabular'
   "Plug 'neilagabriel/vim-geeknote'
   Plug 'elzr/vim-json', { 'for': 'json' }
