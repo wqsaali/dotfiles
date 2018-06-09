@@ -334,6 +334,15 @@ endif
   "   let g:conoline_auto_enable = 1
   " endif
 
+  "Ack
+  for command in ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
+    exe 'command ' . substitute(command, 'Ack', 'Ag', "") . ' ' . command
+  endfor
+
+  if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+  endif
+
   " CtrlP
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
   " NOTE: The following should make CtrlP faster
@@ -518,7 +527,7 @@ endif
 " }
 
 command! PU PlugUpdate | PlugUpgrade
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+"command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
