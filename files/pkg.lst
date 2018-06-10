@@ -16,6 +16,7 @@ coreutils
 curl
 dash
 diffutils
+dnsutils
 dpkg
 file
 findutils
