@@ -1,6 +1,7 @@
 ack
 ansible
 ansible-lint
+asciinema
 awless
 aws-shell
 awscli
@@ -29,7 +30,6 @@ csvkit
 curl
 dark-mode
 dateutils
-# docker-compose
 docker-ls
 ec2-ami-tools
 ec2-api-tools

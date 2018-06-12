@@ -6,9 +6,11 @@
 ack-grep
 alfred
 arc-theme
+asciinema
 atool
 azure-cli
 caca-utils
+code
 dateutils
 ec2-ami-tools
 ec2-api-tools
@@ -25,5 +27,4 @@ shellcheck
 spotify-client
 spotify-client-gnome-support
 terminator
-code
 w3m
