@@ -30,6 +30,8 @@ csvkit
 curl
 dark-mode
 dateutils
+docker-completion
+docker-compose-completion
 docker-ls
 ec2-ami-tools
 ec2-api-tools
