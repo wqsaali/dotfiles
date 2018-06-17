@@ -1,5 +1,8 @@
 asciicast2gif
+check-dependencies
 cli-github
+dependency-check
+dependency-comparator
 dockerfile_lint
 dockly
 dracula-theme
@@ -14,6 +17,8 @@ jsnice
 mdlt
 nativefier
 nesh
+npm-check
+npm-compare
 npmrc
 organize-cli
 parse-columns-cli
