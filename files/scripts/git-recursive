@@ -17,7 +17,7 @@ function recursive-cmd() {
   fi
   repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname '{}/'" \; | grep -Ev '.*\/\..*')
   for d in $repos; do
-    echo -e "${COL_BLUE}>>>${COL_RESET} $d"
+    echo -e "\n${COL_BLUE}>>>${COL_RESET} $d"
     cd $d
     # echo -e "${COL_GREY}${cmd}${COL_RESET}"
     echo -ne "${COL_GREY}"; eval ${cmd}; echo -ne "${COL_RESET}"
