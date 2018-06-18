@@ -104,6 +104,7 @@ endif
   Plug 'dracula/vim'
   " Plug 'rakr/vim-one'
   Plug 'hashivim/vim-hashicorp-tools'
+  Plug 'andrewstuart/vim-kubernetes'
   Plug 'chr4/nginx.vim'
   Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
   Plug 'tell-k/vim-autopep8', {'for': 'python'}

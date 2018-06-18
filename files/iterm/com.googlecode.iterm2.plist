@@ -136,8 +136,8 @@
     "NSWindow Frame SUUpdateAlert" = "2150 1094 620 392 1920 -52 1080 1920 ";
     "NSWindow Frame SharedPreferences" = "1995 633 937 512 1920 -52 1080 1920 ";
     "NSWindow Frame UKCrashReporter" = "155 594 592 584 0 0 1920 1178 ";
-    "NSWindow Frame iTerm Window 0" = "2064 749 640 377 1920 -52 1080 1920 ";
-    "NSWindow Frame iTerm Window 1" = "43 801 640 377 0 0 1920 1200 ";
+    "NSWindow Frame iTerm Window 0" = "2240 713 640 377 1920 -52 1080 1920 ";
+    "NSWindow Frame iTerm Window 1" = "3000 604 640 377 3000 -52 1080 1920 ";
     "NSWindow Frame iTerm Window 2" = "0 0 1920 1178 0 0 1920 1178 ";
     "New Bookmarks" =     (
                 {
@@ -528,7 +528,7 @@
     SUFeedAlternateAppNameKey = iTerm;
     SUFeedURL = "https://iterm2.com/appcasts/final.xml?shard=47";
     SUHasLaunchedBefore = 1;
-    SULastCheckTime = "2018-05-11 15:48:34 +0000";
+    SULastCheckTime = "2018-06-15 08:50:01 +0000";
     SUSendProfileInfo = 0;
     TabStyle = 1;
     UKCrashReporterLastCrashReportDate = "1.522695e+09";
