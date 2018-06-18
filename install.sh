@@ -237,6 +237,8 @@ installVimPlugins() {
   if [ ! -s ~/.config/nvim/init.vim ]; then
     ln -s ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
     ln -s ${HOME}/.vim/autoload/ ${HOME}/.config/nvim/autoload
+    ln -s ${HOME}/.vim/ftdetect/ ${HOME}/.config/nvim/ftdetect
+    ln -s ${HOME}/.vim/ftplugin/ ${HOME}/.config/nvim/ftplugin
   fi
 
   # Using vim Vundle
