@@ -311,6 +311,7 @@ endif
   let g:minimap_highlight='Visual'
 
   " IndentLine
+  let g:indentLine_enabled = 0
   let g:indentLine_faster = 1
   if g:indentLine_faster == 0
    let g:indentLine_leadingSpaceEnabled = 1
