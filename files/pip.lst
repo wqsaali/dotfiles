@@ -22,6 +22,7 @@ ptpython
 pycodestyle
 pygments-style-tomorrownightbright
 pyhcl
+pyinstaller
 pyobjc
 python-language-server
 setuptools
