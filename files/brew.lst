@@ -114,3 +114,4 @@ watch
 wget
 xhyve
 yarn
+yq
