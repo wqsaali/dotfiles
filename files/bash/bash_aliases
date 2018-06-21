@@ -31,6 +31,12 @@ alias ltr='ls -lhtr && echo "------Newest--"'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# https://github.com/idank/explainshell/issues/4#issuecomment-354709120
+function explain-shell() {
+  response=$(w3m -dump "http://explainshell.com/explain?cmd="$(echo $@ | tr ' ' '+'}))
+  cat -s <(grep -v -e explainshell -e • -e □ -e "source manpages" <<< "$response")
+}
+
 # Location aliases
 alias ..='cd ..'
 alias ...='cd ../../'
