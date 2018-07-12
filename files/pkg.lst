@@ -52,6 +52,7 @@ libffi
 libgc
 libgmp
 libgnustl
+libidn
 libllvm
 liblua
 liblzma
@@ -60,7 +61,6 @@ libmsgpack
 libnghttp2
 libpcap
 libprotobuf
-librhash
 libsqlite
 libtalloc
 libtermkey
@@ -82,6 +82,7 @@ ndk-stl
 ndk-sysroot
 neofetch
 neovim
+net-tools
 netcat
 nmap
 nodejs-current
@@ -99,18 +100,23 @@ python-dev
 ranger
 readline
 resolv-conf
+rhash
 ruby
 ruby-dev
 screenfetch
 silversearcher-ag
+tar
 termux-am
 termux-api
 termux-elf-cleaner
 termux-exec
 termux-tools
 tmux
+tracepath
 tree
+util-linux
 vim-python
 vim-runtime
 w3m
 wget
+xz-utils

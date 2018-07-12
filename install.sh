@@ -149,6 +149,15 @@ installNpms() {
   done < files/npm.lst
 }
 
+installGoPkgs() {
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    go get -u "${PKG}"
+  done < files/go.lst
+}
+
+
 installScripts() {
   mkdir -p ${HOME}/.local/bin/
   cp -r files/scripts/* ${HOME}/.local/bin/
