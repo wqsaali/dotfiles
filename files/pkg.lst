@@ -49,6 +49,7 @@ libedit
 libevent
 libexpat
 libffi
+libffi-dev
 libgc
 libgmp
 libgnustl
