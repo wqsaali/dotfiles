@@ -420,6 +420,9 @@ case "$1" in
   "npm" | "npms")
     installNpms
     ;;
+  "go" | "gopkgs")
+    installGoPkgs
+    ;;
   "vagrant" | "VagrantPlugins")
     installVagrantPlugins
     ;;
