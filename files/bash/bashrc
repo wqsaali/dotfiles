@@ -43,44 +43,43 @@ export HISTTIMEFORMAT="%d-%m-%Y %H:%M:%S "
 
 PROMPT_COMMAND="history -a; history -c; history -r; "'echo "$(history 1)" >> ~/.bash_eternal_history'";${PROMPT_COMMAND}"
 
-if [ -x "$(command -v hh)" ]; then
-  # hh configuration:
-  # https://github.com/dvorka/hstr
-  # Generated with: hh --show-configuration >> ~/.bashrc
-  export HH_CONFIG=hicolor         # get more colors
-  # export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
-  # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
-  if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
-fi
+# CTRL+R Alternatives
+
+# HH
+
+# if [ -x "$(command -v hh)" ]; then
+#   # hh configuration:
+#   # https://github.com/dvorka/hstr
+#   # Generated with: hh --show-configuration >> ~/.bashrc
+#   export HH_CONFIG=hicolor         # get more colors
+#   # export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
+#   # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
+#   if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
+# fi
 
 # Fuzzy Find
 
-# fh - repeat history
-fh() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+__ehc() {
+  if
+    [[ -n $1 ]]
+  then
+    bind '"\er": redraw-current-line'
+    bind '"\e^": magic-space'
+    READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${1}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
+    READLINE_POINT=$(( READLINE_POINT + ${#1} ))
+  else
+    bind '"\er":'
+    bind '"\e^":'
+  fi
 }
 
-# __ehc() {
-#   if
-#     [[ -n $1 ]]
-#   then
-#     bind '"\er": redraw-current-line'
-#     bind '"\e^": magic-space'
-#     READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${1}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
-#     READLINE_POINT=$(( READLINE_POINT + ${#1} ))
-#   else
-#     bind '"\er":'
-#     bind '"\e^":'
-#   fi
-# }
-#
-# __fzf_history ()
-# {
-#   __ehc $(history | fzf --tac --tiebreak=index | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
-# }
-#
-# bind '"\C-r": "\C-x1\e^\er"'
-# bind -x '"\C-x1": __fzf_history';
+__fzf_history ()
+{
+  __ehc $(history | fzf --tac --tiebreak=index --height=10 | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
+}
+
+bind '"\C-r": "\C-x1\e^\er"'
+bind -x '"\C-x1": __fzf_history';
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
