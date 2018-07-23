@@ -332,6 +332,28 @@ function docker-enter() {
   docker exec -i -t $1 /bin/sh
 }
 
+# function docker-retag() {
+#   docker_host='docker.for.mac.host.internal'
+#   for repository in $(curl -s http://${docker_host}:5000/v2/_catalog | jq -r '.repositories[]'); do
+#     for image in $(curl -s http://${docker_host}:5000/v2/${repository}/tags/list | jq -r '(.name + ":" + .tags[])')
+#       docker image pull ${docker_host}:5000/${image}
+#       docker image tag ${docker_host}:5000/${image} ${1}/${image}
+#       docker image push ${1}/${image}
+#       # if you need some cleanup
+#       # docker image rm ${docker_host}:5000/${image} ${1}/${image}
+#     done
+#   done
+# }
+
+function docker-retag() {
+  for image in $(docker images | grep "${1}" | awk '{print $1}'); do
+    # image2=${image/artifactory.rd2.thingworx.io/shootman.azurecr.io}
+    image2=$(echo ${image} | sed -e "s/${1}/${2}/")
+    echo "Retagging ${image} as ${image2}"
+    docker tag ${image} ${image2}
+    docker push ${image2}
+  done
+}
 # Kubernetes aliases
 function kubectl-enter() {
   kubectl exec -ti $1 -- bash
