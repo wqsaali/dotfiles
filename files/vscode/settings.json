@@ -21,5 +21,14 @@
         "suppressResultsExplorerNotice": false,
         "suppressShowKeyBindingsNotice": true
     },
-    "gitlens.historyExplorer.enabled": true
+    "gitlens.historyExplorer.enabled": true,
+    "gitlens.settings.mode": "advanced",
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.scopes": [
+        "containers",
+        "document"
+    ],
+    "gitlens.codeLens.enabled": false,
+    "diffEditor.originalEditable": true
 }
