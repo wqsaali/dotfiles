@@ -5,6 +5,7 @@ caskroom/drivers
 caskroom/fonts
 chef/chef
 cloudfoundry/tap
+habitat-sh/habitat
 homebrew/command-not-found
 homebrew/services
 knes1/tap
