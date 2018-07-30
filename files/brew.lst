@@ -20,6 +20,7 @@ cask
 ccat
 certbot
 cf-cli
+cfssl
 cmake
 coffeescript
 colordiff
