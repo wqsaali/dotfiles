@@ -21,6 +21,7 @@ dnsutils
 dpkg
 file
 findutils
+fzf
 gawk
 gdbm
 gettext
@@ -98,6 +99,8 @@ procps
 proot
 python
 python-dev
+python2
+python2-dev
 ranger
 readline
 resolv-conf
