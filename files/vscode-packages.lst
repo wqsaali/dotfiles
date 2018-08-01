@@ -2,7 +2,6 @@ DavidAnson.vscode-markdownlint
 Pendrica.chef
 PeterJausovec.vscode-docker
 castwide.solargraph
-chiragpat.tomorrow-and-tomorrow-night-operator-mono-theme
 dbaeumer.vscode-eslint
 DotJoshJohnson.xml
 dracula-theme.theme-dracula
@@ -15,6 +14,7 @@ huizhou.githd
 in4margaret.compareit
 ipedrazas.kubernetes-snippets
 jetmartin.bats
+joshpeng.theme-tomorrowkit-sublime
 letmaik.git-tree-compare
 loganarnett.tf-snippets
 magicstack.MagicPython
