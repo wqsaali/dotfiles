@@ -78,6 +78,11 @@ __fzf_history ()
   __ehc $(history | fzf --tac --tiebreak=index --height=10 | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
 }
 
+__fzf_full_history ()
+{
+  __ehc $(cat ~/.bash_eternal_history | fzf --tac --tiebreak=index | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
+}
+
 bind '"\C-r": "\C-x1\e^\er"'
 bind -x '"\C-x1": __fzf_history';
 
