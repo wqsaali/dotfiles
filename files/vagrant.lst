@@ -7,3 +7,4 @@ vagrant-hostmanager
 vagrant-scp
 vagrant-omnibus
 vagrant-berkshelf
+docker-provider
