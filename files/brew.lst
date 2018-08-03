@@ -39,6 +39,7 @@ docker-compose-completion
 docker-ls
 ec2-ami-tools
 ec2-api-tools
+egison
 elktail
 exa
 exif
@@ -109,6 +110,7 @@ thefuck
 tig
 tldr
 tmux
+tmux-xpanes
 tree
 ttyd
 ufraw
