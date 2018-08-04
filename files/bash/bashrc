@@ -45,19 +45,9 @@ PROMPT_COMMAND="history -a; history -c; history -r; "'echo "$(history 1)" >> ~/.
 
 # CTRL+R Alternatives
 
-# HH
-
-# if [ -x "$(command -v hh)" ]; then
-#   # hh configuration:
-#   # https://github.com/dvorka/hstr
-#   # Generated with: hh --show-configuration >> ~/.bashrc
-#   export HH_CONFIG=hicolor         # get more colors
-#   # export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
-#   # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
-#   if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
-# fi
-
 # Fuzzy Find
+
+if [ -x "$(command -v fzf)" ]; then
 
 __ehc() {
   if
@@ -78,13 +68,22 @@ __fzf_history ()
   __ehc $(history | fzf --tac --tiebreak=index --height=10 | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
 }
 
-__fzf_full_history ()
-{
-  __ehc $(cat ~/.bash_eternal_history | fzf --tac --tiebreak=index | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
-}
-
 bind '"\C-r": "\C-x1\e^\er"'
 bind -x '"\C-x1": __fzf_history';
+
+# HH
+
+elif [ -x "$(command -v hh)" ]; then
+
+  # hh configuration:
+  # https://github.com/dvorka/hstr
+  # Generated with: hh --show-configuration >> ~/.bashrc
+  export HH_CONFIG=hicolor         # get more colors
+  # export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
+  # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
+  if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
+
+fi
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
