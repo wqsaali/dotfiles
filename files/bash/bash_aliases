@@ -455,9 +455,9 @@ fi
 
 function update-all-things() {
   npm-upgrade && gem-upgrade && pip-upgrade && dist-upgrade && vim-update
-  if [ -x "$(command -v go)" ]; then
-    go get -u all
-  fi
+  # if [ -x "$(command -v go)" ]; then
+  #   go get -u all
+  # fi
   if [ -x "$(command -v apm)" ]; then
     apm upgrade --no-confirm
   fi
