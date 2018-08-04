@@ -153,6 +153,7 @@ installGoPkgs() {
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    echo ">>> ${PKG}"
     go get -u "${PKG}"
   done < files/go.lst
 }
