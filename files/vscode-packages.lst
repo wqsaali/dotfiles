@@ -1,7 +1,6 @@
-DavidAnson.vscode-markdownlint
 Pendrica.chef
-PeterJausovec.vscode-docker
 castwide.solargraph
+DavidAnson.vscode-markdownlint
 dbaeumer.vscode-eslint
 DotJoshJohnson.xml
 dracula-theme.theme-dracula
@@ -26,7 +25,8 @@ ms-python.python
 ms-vscode.atom-keybindings
 ms-vscode.azurecli
 p1c2u.docker-compose
-rebornix.Ruby
+PeterJausovec.vscode-docker
+rebornix.ruby
 redhat.vscode-yaml
 robertohuertasm.vscode-icons
 ryu1kn.partial-diff
