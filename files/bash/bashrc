@@ -227,6 +227,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   source /etc/profile.d/vte-2.91.sh
 fi
 
+[ -f ~/.kube-fzf/kube-fzf.sh ] && source ~/.kube-fzf/kube-fzf.sh
+
 # gitprompt configuration
 
 # bash-git-prompt configuration - https://github.com/magicmonty/bash-git-prompt:

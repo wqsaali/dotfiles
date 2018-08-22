@@ -101,6 +101,16 @@ installKubetail() {
   mv kubetail ~/.local/bin/
 }
 
+installKubeFZF() {
+  if [ ! -d  ${HOME}/.kube-fzf ]; then
+    git clone https://github.com/arunvelsriram/kube-fzf.git ${HOME}/.kube-fzf
+  else
+    cd ${HOME}/.kube-fzf/
+    git pull
+    cd ${INSTALLDIR}
+  fi
+}
+
 installDCOScli() {
   mkdir -p ~/.local/bin/
   curl -Lo dcos https://downloads.dcos.io/binaries/cli/$(uname -s | tr '[:upper:]' '[:lower:]')/x86-64/latest/dcos
@@ -361,6 +371,7 @@ installDotFiles() {
   installTmuxConf
   installBashConf
   installGitConf
+  installKubeFZF
 
   mkdir -p ${HOME}/.ptpython
   cp files/ptpython.py ${HOME}/.ptpython/config.py
@@ -406,6 +417,7 @@ installAll() {
     installVimPlugins
     installTmuxConf
     installDotFiles
+    installKubeFZF
 }
 
 case "$1" in
@@ -447,6 +459,9 @@ case "$1" in
     ;;
   "minikube")
     installMinikube
+    ;;
+  "kube-fzf")
+    installKubeFZF
     ;;
   "dcos"|"dcos-cli"|"dcoscli")
     installDCOScli
