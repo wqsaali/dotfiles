@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/env bash
+#!/usr/bin/env bash
 
 if [[ "$OSTYPE" != *"android"* ]]; then
   echo 'Doesnt look like you are on Android'
