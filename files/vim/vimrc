@@ -10,7 +10,7 @@ if !exists("g:os")
   endif
 endif
 
-" Plugins {
+" Plugins {{{
 
   "auto-install vim-plug
   if empty(glob('~/.vim/autoload/plug.vim'))
@@ -114,9 +114,9 @@ endif
   Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'handlebars'] }
 
   call plug#end()
-" }
+" }}}
 
-" ColorThemes {
+" ColorThemes {{{
   highlight clear
   set background=dark
   set t_Co=256
@@ -157,9 +157,9 @@ endif
   color Tomorrow-Night-Bright
   " color one
   " color dracula
-" }
+" }}}
 
-" GeneralSettings {
+" GeneralSettings {{{
   if ! &diff
     if has('autocmd')
       " Open files allways in new tabs
@@ -200,7 +200,7 @@ endif
   set shiftround
 
   " Folding
-  set foldmarker={,}
+  set foldmarker={{{,}}}
   set foldlevelstart=99
   set foldmethod=marker
 
@@ -222,7 +222,7 @@ endif
 
   set encoding=utf-8
   set tabstop=2 shiftwidth=2 expandtab
-  set listchars=tab:▒░,trail:▓
+  set listchars=tab:\|\ ,trail:▓ ",space:·,nbsp:␣,precedes:«,extends:»,eol:¬
   set list
 
   set number
@@ -275,9 +275,9 @@ endif
   set fileformats=unix,dos,mac
 
   set completeopt=menuone,longest,preview
-" }
+" }}}
 
-" PluginSettings {
+" PluginSettings {{{
 
   " vim-resize
   let g:vim_resize_disable_auto_mappings = 1
@@ -314,7 +314,7 @@ endif
   let g:indentLine_enabled = 0
   let g:indentLine_faster = 1
   if g:indentLine_faster == 0
-   let g:indentLine_leadingSpaceEnabled = 1
+    let g:indentLine_leadingSpaceEnabled = 1
   endif
   let g:vim_json_syntax_conceal = 0
   let g:indentLine_char = '┊'
@@ -359,9 +359,9 @@ endif
   "let g:ctrlp_working_path_mode = 'ra'
   " Always open files in new tabs
   let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("e")': ['<c-t>'],
-      \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-      \ }
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
 
   " Ultisnip
   " NOTE: <f1> otherwise it overrides <tab> forever
@@ -381,7 +381,7 @@ endif
   let g:usemarks = 0
 
   " Codi
-  " Use pry instead od irb
+  " Use pry instead of irb
   " let g:codi#interpreters = {
   " \ 'ruby': {
   "     \ 'bin': ['pry', '-f'],
@@ -396,10 +396,9 @@ endif
   let g:airline#extensions#tabline#show_buffers = 1
   let g:airline_powerline_fonts = 1
   let g:airline_theme='term'
-  " let g:airline_theme='one'
-" }
+" }}}
 
-" Shortcuts {
+" Shortcuts {{{
 
   " Don't use Ex mode, use Q for formatting
   map Q gq
@@ -526,7 +525,7 @@ endif
   command CloseRunner VimuxCloseRunner
   command RunAgain VimuxRunLastCommand
 
-" }
+" }}}
 
 command! PU PlugUpdate | PlugUpgrade
 "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
