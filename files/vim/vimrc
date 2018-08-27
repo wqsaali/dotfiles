@@ -222,7 +222,7 @@ endif
 
   set encoding=utf-8
   set tabstop=2 shiftwidth=2 expandtab
-  set listchars=tab:\|\ ,trail:▓ ",space:·,nbsp:␣,precedes:«,extends:»,eol:¬
+  set listchars=tab:┊\ ,trail:▓ ",space:·,nbsp:␣,precedes:«,extends:»,eol:¬
   set list
 
   set number
