@@ -34,7 +34,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # https://github.com/idank/explainshell/issues/4#issuecomment-354709120
 function explain-shell() {
   response=$(w3m -dump "http://explainshell.com/explain?cmd="$(echo $@ | tr ' ' '+'}))
-  cat -s <(grep -v -e explainshell -e • -e □ -e "source manpages" <<< "$response")
+  cat -s <(grep -v -e explainshell -e • -e □ -e 'source manpages' <<< "$response")
 }
 
 # Location aliases
@@ -219,10 +219,11 @@ function man() {
 # Syntax highlighting in cat and less
 # you need Pygments: pip install Pygments
 alias colorcat='pygmentize -g'
-alias Cat='colorcat'
+# alias Cat='colorcat'
 # or source-highlight: sudo apt install source-highlight
 # alias Cat='source-highlight --out-format=esc -o STDOUT -i'
 # alias PCat='source-highlight --out-format=esc -o STDOUT'
+alias Cat='bat'
 
 function cless() {
   if [ $# -eq 0 ]; then

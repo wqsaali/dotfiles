@@ -8,6 +8,7 @@ awscli
 azure-cli
 bash
 bash-completion
+bat
 bbl
 binutils
 bosh-cli
@@ -34,6 +35,7 @@ curl
 dark-mode
 dateutils
 dep
+diff-so-fancy
 docker-completion
 docker-compose-completion
 docker-ls
@@ -44,6 +46,7 @@ elktail
 exa
 exif
 exiftool
+fd
 findutils
 gawk
 git
@@ -80,6 +83,7 @@ mas
 molecule
 moreutils
 mtr
+ncdu
 neovim
 ngrep
 nmap
@@ -90,6 +94,7 @@ packer
 pet
 pipenv
 pre-commit
+prettyping
 pyenv
 pyenv-virtualenv
 python
