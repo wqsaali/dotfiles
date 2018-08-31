@@ -127,6 +127,14 @@ installDepcon() {
   installFromGithub 'ContainX/depcon' ${1} ${2}
 }
 
+installCargo() {
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    cargo install "${PKG}"
+  done < files/cargo.lst
+}
+
 installGems() {
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue

@@ -97,6 +97,7 @@ ranger
 reattach-to-user-namespace
 remarshal
 rename
+rust
 s3cmd
 shellcheck
 siege
