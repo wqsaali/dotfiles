@@ -3,6 +3,7 @@ check-dependencies
 cli-github
 dependency-check
 dependency-comparator
+diff-so-fancy
 dockerfile_lint
 dockly
 dracula-theme
