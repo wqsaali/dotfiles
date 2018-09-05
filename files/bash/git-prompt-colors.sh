@@ -59,7 +59,7 @@ override_git_prompt_colors() {
   # To specify multiple branches, use
   #   shopt -s extglob
   #   GIT_PROMPT_MASTER_BRANCHES='@(master|production)'
-  # GIT_PROMPT_MASTER_BRANCHES="master"
+  GIT_PROMPT_MASTER_BRANCHES="master"
 }
 
 reload_git_prompt_colors "Custom"
