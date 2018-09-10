@@ -1,4 +1,5 @@
-# vim: set filetype=sh:
+# vim:set filetype=sh:
+
 # enable color support of ls and also add handy aliases
 if [ -x "$(command -v dircolors)" ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -30,12 +31,6 @@ alias ltr='ls -lhtr && echo "------Newest--"'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# https://github.com/idank/explainshell/issues/4#issuecomment-354709120
-function explain-shell() {
-  response=$(w3m -dump "http://explainshell.com/explain?cmd="$(echo $@ | tr ' ' '+'}))
-  cat -s <(grep -v -e explainshell -e • -e □ -e 'source manpages' <<< "$response")
-}
 
 # Location aliases
 alias ..='cd ..'
@@ -219,10 +214,10 @@ function man() {
 # Syntax highlighting in cat and less
 # you need Pygments: pip install Pygments
 alias colorcat='pygmentize -g'
-# alias Cat='colorcat'
 # or source-highlight: sudo apt install source-highlight
 # alias Cat='source-highlight --out-format=esc -o STDOUT -i'
 # alias PCat='source-highlight --out-format=esc -o STDOUT'
+# alias Cat='colorcat'
 alias Cat='bat --theme DarkNeon'
 
 function cless() {
@@ -496,9 +491,10 @@ alias headers='curl -ISs'
 
 #Bash calculator.
 function calc() {
-  echo "${1}" | bc -l;
+  bc -l <<< "${1}";
 }
 
+# Bash weather app
 function wttr() {
   curl "wttr.in/${1}"
 }
@@ -563,4 +559,10 @@ function extract() {
       echo "'$1' - file does not exist"
     fi
   fi
+}
+
+# https://github.com/idank/explainshell/issues/4#issuecomment-354709120
+function explain-shell() {
+  response=$(w3m -dump 'http://explainshell.com/explain?cmd='$(echo $@ | tr ' ' '+'}))
+  cat -s <(grep -v -e explainshell -e • -e □ -e 'source manpages' <<< "$response")
 }
