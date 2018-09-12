@@ -1,5 +1,6 @@
-github.com/gardener/gardenctl
-github.com/liggitt/audit2rbac
-github.com/hashicorp/terraform
-k8s.io/kubernetes/cmd/kubectl
 # k8s.io/helm/cmd/helm
+github.com/gardener/gardenctl
+github.com/hashicorp/terraform
+github.com/liggitt/audit2rbac
+github.com/reactiveops/rbac-lookup
+k8s.io/kubernetes/cmd/kubectl
