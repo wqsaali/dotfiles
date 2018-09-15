@@ -19,6 +19,7 @@ dash
 diffutils
 dnsutils
 dpkg
+fd
 file
 findutils
 fzf
@@ -40,6 +41,7 @@ libandroid-glob
 libandroid-support
 libandroid-support-dev
 libarchive
+libassuan
 libbz2
 libc++
 libcroco
@@ -52,15 +54,19 @@ libexpat
 libffi
 libffi-dev
 libgc
+libgcrypt
 libgmp
 libgnustl
+libgpg-error
 libidn
+libksba
 libllvm
 liblua
 liblzma
 libmpfr
 libmsgpack
 libnghttp2
+libnpth
 libpcap
 libprotobuf
 libsqlite
@@ -77,6 +83,7 @@ libyaml
 make
 man
 mosh
+ncdu
 ncurses
 ncurses-ui-libs
 ncurses-utils
@@ -95,6 +102,7 @@ openssl-tool
 pcre
 pcre2
 perl
+pinentry
 procps
 proot
 python
