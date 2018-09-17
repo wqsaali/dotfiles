@@ -111,6 +111,7 @@ endif
   Plug 'chr4/nginx.vim'
   Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
   Plug 'tell-k/vim-autopep8', {'for': 'python'}
+  Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
   Plug 'pearofducks/ansible-vim'
   Plug 'cespare/vim-toml'
   Plug 'maralla/vim-toml-enhance'
@@ -368,9 +369,9 @@ endif
 
   " Ultisnip
   " NOTE: <f1> otherwise it overrides <tab> forever
-  let g:UltiSnipsExpandTrigger="<C-tab>"
-  let g:UltiSnipsJumpForwardTrigger="<C-tab>"
-  let g:UltiSnipsJumpBackwardTrigger="<C-S-tab>"
+  let g:UltiSnipsExpandTrigger = "<C-tab>"
+  let g:UltiSnipsJumpForwardTrigger = "<C-tab>"
+  let g:UltiSnipsJumpBackwardTrigger = "<C-S-tab>"
   let g:did_UltiSnips_vim_after = 1
 
   " make YCM compatible with UltiSnips (using supertab)
@@ -382,6 +383,9 @@ endif
 
   " Brackets
   let g:usemarks = 0
+
+  " Vim-go
+  let g:go_fmt_autosave = 1
 
   " Codi
   " Use pry instead of irb

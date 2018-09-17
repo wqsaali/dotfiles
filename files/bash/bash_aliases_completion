@@ -1,3 +1,12 @@
+source ${HOME}/.bash/complete-alias/completions/bash_completion.sh
+
+# _code() {
+#   local cur=${COMP_WORDS[COMP_CWORD]};
+#   local code=$(code; ls -1)
+#   COMPREPLY=( $(compgen -W "$code" -- $cur) );
+# }
+# complete -F _code code
+
 # docker-enter completion
 _docker-enter() {
   local cur=${COMP_WORDS[COMP_CWORD]};
@@ -6,13 +15,6 @@ _docker-enter() {
 }
 complete -F _docker-enter docker-enter
 
-# _dockerfiles() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local dockerfiles=$(dockerfiles; ls -1)
-#   COMPREPLY=( $(compgen -W "$dockerfiles" -- $cur) );
-# }
-# complete -F _dockerfiles dockerfiles
-
 _kubectl-enter() {
   local cur=${COMP_WORDS[COMP_CWORD]};
   local pods=$(kubectl get pods -o name | sed -e 's@pod/@@')
@@ -20,66 +22,5 @@ _kubectl-enter() {
 }
 complete -F _kubectl-enter kubectl-enter
 
-# _dcos-clusters() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local clusters=$(dcos-clusters; ls -1)
-#   COMPREPLY=( $(compgen -W "$clusters" -- $cur) );
-# }
-# complete -F _dcos-clusters dcos-clusters
-#
-# _terraformfiles() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local terraformfiles=$(terraformfiles; ls -1)
-#   COMPREPLY=( $(compgen -W "$terraformfiles" -- $cur) );
-# }
-# complete -F _terraformfiles terraformfiles
-#
-# _playbooks() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local playbooks=$(playbooks; ls -1)
-#   COMPREPLY=( $(compgen -W "$playbooks" -- $cur) );
-# }
-# complete -F _playbooks playbooks
-#
-# _chef-cookbooks() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local cookbooks=$(chef-cookbooks; ls -1)
-#   COMPREPLY=( $(compgen -W "$cookbooks" -- $cur) );
-# }
-# complete -F _chef-cookbooks chef-cookbooks
-#
-# _chef-data-bags() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local databags=$(chef-data-bags; ls -1)
-#   COMPREPLY=( $(compgen -W "$databags" -- $cur) );
-# }
-# complete -F _chef-data-bags chef-data-bags
-#
-# _github() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local github=$(github; ls -1)
-#   COMPREPLY=( $(compgen -W "$github" -- $cur) );
-# }
-# complete -F _github github
-#
-# _gitlab() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local gitlab=$(gitlab; ls -1)
-#   COMPREPLY=( $(compgen -W "$gitlab" -- $cur) );
-# }
-# complete -F _gitlab gitlab
-#
-# _bitbucket() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local bitbucket=$(bitbucket; ls -1)
-#   COMPREPLY=( $(compgen -W "$bitbucket" -- $cur) );
-# }
-# complete -F _bitbucket bitbucket
-#
-# _code() {
-#   local cur=${COMP_WORDS[COMP_CWORD]};
-#   local code=$(code; ls -1)
-#   COMPREPLY=( $(compgen -W "$code" -- $cur) );
-# }
-# complete -F _code code
-
+complete -F _complete_alias kctl
+complete -F _complete_alias kube

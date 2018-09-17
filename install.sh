@@ -329,6 +329,14 @@ installBashConf() {
   done
   cat files/bash/bash_aliases | sed -e "${sedcmd}" > ${HOME}/.bash_aliases
 
+  if [ ! -d  ${HOME}/.bash/complete-alias ]; then
+    git clone https://github.com/cykerway/complete-alias.git ${HOME}/.bash/complete-alias
+  else
+    cd ${HOME}/.bash/complete-alias
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
   if [ ! -d  ${HOME}/.bash/bash-git-prompt ]; then
     git clone https://github.com/magicmonty/bash-git-prompt.git ${HOME}/.bash/bash-git-prompt
   else

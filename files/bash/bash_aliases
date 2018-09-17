@@ -350,13 +350,27 @@ function docker-retag() {
     docker push ${image2}
   done
 }
+
 # Kubernetes aliases
 function kubectl-enter() {
-  kubectl exec -ti $1 -- bash
+  kubectl exec -ti ${@} -- sh
 }
+alias kexec='kubectl-enter'
 
 alias kube='kubectl'
+alias kctl='kubectl'
+
+# Gardener aliases
 alias gk='gardenctl kubectl --'
+
+# Target a shoot in a graden
+# gtarget <garden> <shoot>
+function gtarget() {
+  gardenctl target garden ${1} > /dev/null
+  export $(gardenctl target shoot ${2})
+  echo "KUBECONFIG=${KUBECONFIG}"
+}
+alias shoot='gtarget'
 
 # Gem aliases
 # alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'
