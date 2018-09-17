@@ -455,12 +455,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
           echo -e "${COL_BLUE}>>>${COL_RESET} $c is up to date"
       fi
     done
-    brew cleanup && brew cask cleanup
+    brew cleanup
   }
 
   alias cask-upgrade='brew-cask-upgrade'
-  alias brew-cleanup='brew cleanup && brew cask cleanup'
-  alias brew-upgrade='brew update && brew upgrade && brew cleanup && brew cask cleanup'
+  alias brew-cleanup='brew cleanup'
+  alias brew-upgrade='brew update && brew upgrade && brew cleanup'
   alias dist-upgrade='brew-upgrade && brew-cask-upgrade -y'
 elif [[ "$OSTYPE" == *"android"* ]]; then
   alias apt-upgrade='apt update; apt full-upgrade'
