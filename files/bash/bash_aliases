@@ -217,8 +217,12 @@ alias colorcat='pygmentize -g'
 # or source-highlight: sudo apt install source-highlight
 # alias Cat='source-highlight --out-format=esc -o STDOUT -i'
 # alias PCat='source-highlight --out-format=esc -o STDOUT'
-# alias Cat='colorcat'
-alias Cat='bat --theme DarkNeon'
+if [ -x "$(command -v bat)" ]; then
+  alias Cat='bat --theme DarkNeon'
+else
+  alias Cat='colorcat'
+fi
+
 
 function cless() {
   if [ $# -eq 0 ]; then
