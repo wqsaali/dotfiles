@@ -8,8 +8,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-if [ -d "usr/local/sbin" ] ; then
-  PATH="usr/local/sbin:$PATH"
+if [ -d "/usr/local/sbin" ] ; then
+  PATH="/usr/local/sbin:$PATH"
 fi
 
 # Use GNU utils instead of the default ones on MacOS
