@@ -347,7 +347,6 @@ function docker-enter() {
 
 function docker-retag() {
   for image in $(docker images | grep "${1}" | awk '{print $1}'); do
-    # image2=${image/artifactory.rd2.thingworx.io/shootman.azurecr.io}
     image2=$(echo ${image} | sed -e "s/${1}/${2}/")
     echo "Retagging ${image} as ${image2}"
     docker tag ${image} ${image2}
@@ -369,12 +368,17 @@ alias gk='gardenctl kubectl --'
 
 # Target a shoot in a graden
 # gtarget <garden> <shoot>
-function gtarget() {
+function shoot() {
   gardenctl target garden ${1} > /dev/null
   export $(gardenctl target shoot ${2})
   echo "KUBECONFIG=${KUBECONFIG}"
 }
-alias shoot='gtarget'
+
+function seed() {
+  gardenctl target garden ${1} > /dev/null
+  export $(gardenctl target seed ${2})
+  echo "KUBECONFIG=${KUBECONFIG}"
+}
 
 # Gem aliases
 # alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'
