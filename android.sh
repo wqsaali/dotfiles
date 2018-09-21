@@ -44,6 +44,7 @@ installAll() {
   installPackages
   installDotFiles
   osConfigs
+  ./install.sh gopkgs
 }
 
 case "$1" in
