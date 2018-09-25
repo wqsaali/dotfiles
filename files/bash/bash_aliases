@@ -367,7 +367,7 @@ alias kctl='kubectl'
 alias gk='gardenctl kubectl --'
 
 # Target a shoot in a graden
-# gtarget <garden> <shoot>
+# shoot <garden> <shoot>
 function shoot() {
   gardenctl target garden ${1} > /dev/null
   export $(gardenctl target shoot ${2})
@@ -379,6 +379,8 @@ function seed() {
   export $(gardenctl target seed ${2})
   echo "KUBECONFIG=${KUBECONFIG}"
 }
+
+alias garden='gardenctl target garden'
 
 # Gem aliases
 # alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'
@@ -486,6 +488,13 @@ function update-all-things() {
     vagrant plugin update
   fi
 }
+
+# Make open and xdg-open work on all plaforms
+if ! [ -x "$(command -v open)" ]; then
+  alias open='xdg-open'
+elif ! [ -x "$(command -v xdg-open)" ]; then
+  alias xdg-open='open'
+fi
 
 # Get all records from a domain
 alias dig-all="dig +nocmd +multiline +noall +answer any"
