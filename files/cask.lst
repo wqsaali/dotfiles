@@ -1,3 +1,4 @@
+#hab
 alfred
 android-file-transfer
 applepi-baker
@@ -19,7 +20,6 @@ font-ubuntumono-nerd-font-mono
 google-chrome
 google-hangouts
 gpgtools
-#hab
 hammerspoon
 hipchat
 iterm2
@@ -28,6 +28,7 @@ keepingyouawake
 magicprefs
 minikube
 minishift
+osxfuse
 powershell
 skype
 skype-for-business
