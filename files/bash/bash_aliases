@@ -484,6 +484,9 @@ function update-all-things() {
   if [ -x "$(command -v mas)" ]; then
     mas upgrade
   fi
+  if [ -x "$(command -v softwareupdate)" ]; then
+    softwareupdate --install -a
+  fi
   if [ -x "$(command -v vagrant)" ]; then
     vagrant plugin update
   fi
