@@ -174,10 +174,12 @@ installGoPkgs() {
     echo ">>> ${PKG}"
     go get -u "${PKG}"
   done < files/go.lst
+  echo ">>> helm"
   go get -d -u k8s.io/helm/cmd/helm
   cd ${GOPATH}/src/k8s.io/helm/
   make bootstrap build
   mv bin/* ${GOPATH}/bin/
+  echo ">>> Cleanup go sources"
   cd ${INSTALLDIR}
   rm -rf ${GOPATH}/src/*
 }
