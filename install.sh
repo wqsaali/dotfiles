@@ -173,7 +173,7 @@ installGoPkgs() {
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     echo ">>> ${PKG}"
     go get -u "${PKG}"
-  done < files/go.lsit
+  done < files/go.lst
   go get -d -u k8s.io/helm/cmd/helm
   cd ${GOPATH}/src/k8s.io/helm/
   make bootstrap build
