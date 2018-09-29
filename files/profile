@@ -19,6 +19,12 @@ fi
 if [ -d '/usr/local/opt/coreutils/libexec/gnubin' ]; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
+if [ -d '/usr/local/opt/make/libexec/gnubin' ];then
+  PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+fi
+if [ -d "/usr/local/opt/gnu-tar/libexec/gnubin" ]; then
+  PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+fi
 
 # Use brew python
 if [ -d '/usr/local/opt/python/libexec/bin' ]; then
