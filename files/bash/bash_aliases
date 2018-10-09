@@ -380,7 +380,10 @@ function seed() {
   echo "KUBECONFIG=${KUBECONFIG}"
 }
 
-alias garden='gardenctl target garden'
+function garden() {
+  export $(gardenctl target garden ${1})
+  echo "KUBECONFIG=${KUBECONFIG}"
+}
 
 # Gem aliases
 # alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'
