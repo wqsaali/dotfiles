@@ -401,6 +401,15 @@ installDotFiles() {
 
   rm -f ~/.config/ranger/*.{sh,py}
   ranger --copy-config=all
+  mkdir -p ${HOME}/.ranger_plugins/
+  cd ${HOME}/.ranger_plugins/
+  if [ ! -d ${HOME}/.ranger_plugins/ranger_devicons ]
+    git clone git@github.com:alexanderjeurissen/ranger_devicons.git
+  fi
+  cd ranger_devicons
+  git pull
+  make install
+  cd ${INSTALLDIR}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh dotfiles
