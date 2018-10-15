@@ -25,6 +25,8 @@ ccat
 certbot
 cf-cli
 cfssl
+chunkwm
+chunkwm-blur
 cmake
 coffeescript
 colordiff

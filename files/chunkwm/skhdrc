@@ -86,7 +86,7 @@
 # open terminal, blazingly fast compared to iTerm/Hyper
 # cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
 # cmd - return : /Applications/iTerm.app/Contents/MacOS/iTerm2
-cmd - return : open -na /Applications/iTerm.app
+cmd + alt - return : open -na /Applications/iTerm.app
 
 # open qutebrowser
 cmd + shift - return : ~/Scripts/qtb.sh
@@ -103,6 +103,11 @@ alt - j : chunkc tiling::window --focus south
 alt - k : chunkc tiling::window --focus north
 alt - l : chunkc tiling::window --focus east
 
+alt - left  : chunkc tiling::window --focus west
+alt - down  : chunkc tiling::window --focus south
+alt - up    : chunkc tiling::window --focus north
+alt - right : chunkc tiling::window --focus east
+
 cmd - j : chunkc tiling::window --focus prev
 cmd - k : chunkc tiling::window --focus next
 
@@ -115,11 +120,21 @@ shift + alt - j : chunkc tiling::window --swap south
 shift + alt - k : chunkc tiling::window --swap north
 shift + alt - l : chunkc tiling::window --swap east
 
+ctrl + alt - left  : chunkc tiling::window --swap west
+ctrl + alt - down  : chunkc tiling::window --swap south
+ctrl + alt - up    : chunkc tiling::window --swap north
+ctrl + alt - right : chunkc tiling::window --swap east
+
 # move window
 shift + cmd - h : chunkc tiling::window --warp west
 shift + cmd - j : chunkc tiling::window --warp south
 shift + cmd - k : chunkc tiling::window --warp north
 shift + cmd - l : chunkc tiling::window --warp east
+
+cmd + alt - left  : chunkc tiling::window --warp west
+cmd + alt - down  : chunkc tiling::window --warp south
+cmd + alt - up    : chunkc tiling::window --warp north
+cmd + alt - right : chunkc tiling::window --warp east
 
 # make floating window fill screen
 shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
@@ -199,11 +214,21 @@ shift + alt - s : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-windo
 shift + alt - w : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
 shift + alt - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
 
+shift + ctrl - left  : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
+shift + ctrl - right : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
+shift + ctrl - up    : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
+shift + ctrl - down  : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
+
 # decrease region size
 shift + cmd - a : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
 shift + cmd - s : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
 shift + cmd - w : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
 shift + cmd - d : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
+
+shift + ctrl + alt - left  : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
+shift + ctrl + alt - right : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
+shift + ctrl + alt - up    : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
+shift + ctrl + alt - down  : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
 
 # set insertion point for focused container
 ctrl + alt - f : chunkc tiling::window --use-insertion-point cancel
