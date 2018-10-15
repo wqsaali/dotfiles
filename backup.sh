@@ -25,6 +25,8 @@ function backupDotFiles() {
   cp -r ${HOME}/.hammerspoon/* files/hammerspoon/
   cp ${HOME}/.slate files/slate/slate
   cp ${HOME}/.slate.js files/slate/slate.js
+  cp ${HOME}/.chunkwmrc files/chunkwm/chunkwmrc
+  cp ${HOME}/.skhdrc files/chunkwm/skhdrc
   cp ${HOME}/.ptpython/config.py files/ptpython.py
 }
 
