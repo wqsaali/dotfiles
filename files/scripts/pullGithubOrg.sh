@@ -19,16 +19,16 @@ ORG=$(basename $(pwd))
 
 # repos=$(curl -s https://api.github.com/orgs/${ORG}/repos${TOKEN} | jq -r '.[].name')
 # Github uses headers for pagination, headers go into response-1.txt and the response body goes into the response-2.txt file
-curl -si https://api.github.com/orgs/${ORG}/repos${TOKEN} | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
+curl -si "https://api.github.com/orgs/${ORG}/repos${TOKEN}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
 repos=$(jq -r '.[].name' response-2.txt)
-next=$(grep 'rel="next"' response-1.txt | cut -d\; -f1 | grep -io '<https://api.github.com/organizations/25588791/repos?access_.*>' | tr -d '<>')
+next=$(grep -io 'rel="next", <https://api.github.com/organizations/.*/repos?access_.*>' response-1.txt | cut -d' '  -f2 | tr -d '<>;')
 
 while [ ! -z "${repos}" ]; do
   for repo in $repos; do
     upstream=''
     fork=$(jq -r ".[] | select(.name == \"${repo}\")| .fork" response-2.txt)
-    if [ $fork == "true" ]; then
-      upstream=$(curl -s https://api.github.com/repos/${ORG}/${repo}${TOKEN} | jq -r '.parent.ssh_url')
+    if [ ${fork} == "true" ]; then
+      upstream=$(curl -s "https://api.github.com/repos/${ORG}/${repo}${TOKEN}" | jq -r '.parent.ssh_url')
     fi
     if [ ! -d ${repo} ]; then
       echo -e "${COL_RED}>>>${COL_RESET} Found new repo ${upstream}"
@@ -58,16 +58,27 @@ while [ ! -z "${repos}" ]; do
     if [[ ! -z $upstream ]]; then
       cd ${repo}
       echo -e "${COL_BLUE}>>>${COL_RESET} Status:"
-      echo -e "    This branch is ${COL_YELLOW}$(git rev-list upstream/master..origin/master --count)${COL_RESET} commits ahead and ${COL_RED}$(git rev-list origin/master..upstream/master --count)${COL_RESET} commits behind of Upstream.\n"
+      AHEAD=$(git rev-list upstream/master..origin/master --count)
+      BEHIND=$(git rev-list origin/master..upstream/master --count)
+      echo -e "    This branch is ${COL_YELLOW}${AHEAD}${COL_RESET} commits ahead and ${COL_RED}${BEHIND}${COL_RESET} commits behind of Upstream."
+      if [ ${BEHIND} -ne 0 ]; then
+        echo -e "    ${COL_RED}This branch needs rebasing${COL_RESET}"
+        if [ ${AHEAD} -eq 0 ]; then
+          echo -e "    ${COL_YELLOW}Automatic rebasing...${COL_RESET}"
+          git rebase upstream/master
+          git push
+        fi
+      fi
+      echo ''
       cd ..
     fi
     sleep 1
   done
   rm response-*
   if [ -z "${next}" ]; then break; fi
-  curl -si ${next} | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
+  curl -si "${next}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
   repos=$(jq -r '.[].name' response-2.txt)
-  next=$(grep 'rel="next"' response-1.txt | cut -d\; -f1 | grep -io '<https://api.github.com/organizations/25588791/repos?access_.*>' | tr -d '<>')
+  next=$(grep -io 'rel="next", <https://api.github.com/organizations/.*/repos?access_.*>' response-1.txt | cut -d' '  -f2 | tr -d '<>;')
 done
 
 if [ -f response-1.txt ]; then
