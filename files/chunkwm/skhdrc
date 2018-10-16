@@ -83,10 +83,16 @@
 #     "finder"      : false
 # ]
 
+# reload config
+shift + ctrl - r : brew services restart skhd; brew services restart chunkwm
+
 # open terminal, blazingly fast compared to iTerm/Hyper
 # cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
 # cmd - return : /Applications/iTerm.app/Contents/MacOS/iTerm2
 cmd + alt - return : open -na /Applications/iTerm.app
+
+# open finder
+cmd + alt - f : open -na Finder
 
 # open qutebrowser
 cmd + shift - return : ~/Scripts/qtb.sh
