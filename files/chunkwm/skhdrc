@@ -170,8 +170,13 @@ cmd + alt - w : chunkc tiling::desktop --annihilate
 
 # fast focus desktop
 cmd + alt - x : chunkc tiling::desktop --focus $(chunkc get _last_active_desktop)
+
+# ctrl + cmd + alt - left : chunkc tiling::desktop --focus prev
+# ctrl + cmd + alt - right : chunkc tiling::desktop --focus next
+
 cmd + alt - z : chunkc tiling::desktop --focus prev
 cmd + alt - c : chunkc tiling::desktop --focus next
+
 cmd + alt - 1 : chunkc tiling::desktop --focus 1
 cmd + alt - 2 : chunkc tiling::desktop --focus 2
 cmd + alt - 3 : chunkc tiling::desktop --focus 3
