@@ -214,6 +214,10 @@ if [ -x "$(command -v kontena)" ]; then
   source "$(kontena whoami --bash-completion-path)"
 fi
 
+if [ -f /usr/local/opt/chpharos/share/chpharos/chpharos.sh ]; then
+  source /usr/local/opt/chpharos/share/chpharos/chpharos.sh
+fi
+
 if [ -x "$(command -v pyenv)" ]; then
 eval "$(pyenv init -)"
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi

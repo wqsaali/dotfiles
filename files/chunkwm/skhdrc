@@ -104,27 +104,30 @@ cmd - m : open -na /Applications/mpv.app $(pbpaste)
 alt - w : chunkc tiling::window --close
 
 # focus window
-alt - h : chunkc tiling::window --focus west
-alt - j : chunkc tiling::window --focus south
-alt - k : chunkc tiling::window --focus north
-alt - l : chunkc tiling::window --focus east
+# alt - h : chunkc tiling::window --focus west
+# alt - j : chunkc tiling::window --focus south
+# alt - k : chunkc tiling::window --focus north
+# alt - l : chunkc tiling::window --focus east
 
 alt - left  : chunkc tiling::window --focus west
 alt - down  : chunkc tiling::window --focus south
 alt - up    : chunkc tiling::window --focus north
 alt - right : chunkc tiling::window --focus east
 
-cmd - j : chunkc tiling::window --focus prev
-cmd - k : chunkc tiling::window --focus next
+# cmd - j : chunkc tiling::window --focus prev
+# cmd - k : chunkc tiling::window --focus next
+
+cmd - left  : chunkc tiling::window --focus prev
+cmd - right : chunkc tiling::window --focus next
 
 # equalize size of windows
 shift + alt - 0 : chunkc tiling::desktop --equalize
 
 # swap window
-shift + alt - h : chunkc tiling::window --swap west
-shift + alt - j : chunkc tiling::window --swap south
-shift + alt - k : chunkc tiling::window --swap north
-shift + alt - l : chunkc tiling::window --swap east
+# shift + alt - h : chunkc tiling::window --swap west
+# shift + alt - j : chunkc tiling::window --swap south
+# shift + alt - k : chunkc tiling::window --swap north
+# shift + alt - l : chunkc tiling::window --swap east
 
 ctrl + alt - left  : chunkc tiling::window --swap west
 ctrl + alt - down  : chunkc tiling::window --swap south
@@ -132,10 +135,10 @@ ctrl + alt - up    : chunkc tiling::window --swap north
 ctrl + alt - right : chunkc tiling::window --swap east
 
 # move window
-shift + cmd - h : chunkc tiling::window --warp west
-shift + cmd - j : chunkc tiling::window --warp south
-shift + cmd - k : chunkc tiling::window --warp north
-shift + cmd - l : chunkc tiling::window --warp east
+# shift + cmd - h : chunkc tiling::window --warp west
+# shift + cmd - j : chunkc tiling::window --warp south
+# shift + cmd - k : chunkc tiling::window --warp north
+# shift + cmd - l : chunkc tiling::window --warp east
 
 cmd + alt - left  : chunkc tiling::window --warp west
 cmd + alt - down  : chunkc tiling::window --warp south
@@ -161,6 +164,7 @@ shift + cmd - n : chunkc tiling::desktop --create;\
 cmd + alt - n : chunkc tiling::desktop --create;\
                 id=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
                 chunkc tiling::desktop --focus $(echo ${id##* })
+
 # destroy desktop
 cmd + alt - w : chunkc tiling::desktop --annihilate
 
@@ -206,6 +210,7 @@ ctrl + alt - c  : chunkc tiling::monitor -f next
 ctrl + alt - 1  : chunkc tiling::monitor -f 1
 ctrl + alt - 2  : chunkc tiling::monitor -f 2
 ctrl + alt - 3  : chunkc tiling::monitor -f 3
+ctrl + alt - 3  : chunkc tiling::monitor -f 4
 
 # send window to monitor and follow focus
 ctrl + cmd - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
@@ -213,6 +218,7 @@ ctrl + cmd - c  : chunkc tiling::window --send-to-monitor next; chunkc tiling::m
 ctrl + cmd - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
 ctrl + cmd - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
 ctrl + cmd - 3  : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
+ctrl + cmd - 4  : chunkc tiling::window --send-to-monitor 4; chunkc tiling::monitor -f 4
 
 # increase region size
 shift + alt - a : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west

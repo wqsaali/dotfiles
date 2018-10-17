@@ -25,6 +25,7 @@ ccat
 certbot
 cf-cli
 cfssl
+chpharos
 chunkwm
 chunkwm-blur
 cmake
