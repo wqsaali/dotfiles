@@ -3,7 +3,7 @@ sudo apt-add-repository ppa:noobslab/themes
 sudo apt-add-repository ppa:alexlarsson/flatpak
 sudo apt-add-repository ppa:dawidd0811/neofetch
 sudo apt-add-repository ppa:wereturtle/ppa
-sudo apt-add-repository ppa:snwh/pulp
+sudo apt-add-repository ppa:snwh/ppa
 sudo apt-add-repository ppa:webupd8team/atom
 sudo apt-add-repository ppa:fish-shell/release-2
 sudo apt-add-repository ppa:atareao/atareao
