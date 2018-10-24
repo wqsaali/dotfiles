@@ -3,12 +3,12 @@
 # These are the defaults from the "Default" theme
 # You just need to override what you want to have changed
 override_git_prompt_colors() {
-  KUBE_PS1_PREFIX="["
-  KUBE_PS1_SUFFIX="]"
-  KUBE_PS1_CTX_COLOR="white"
+  KUBE_PS1_PREFIX=""
+  KUBE_PS1_SUFFIX=""
+  KUBE_PS1_CTX_COLOR="blue"
   KUBE_PS1_NS_COLOR="cyan"
   KUBE_PS1_NS_ENABLE=false
-  KUBE_PS1_SEPARATOR=''
+  KUBE_PS1_SEPARATOR=""
 
   GIT_PROMPT_THEME_NAME="Custom"
   PROMPT_DIRTRIM=2
