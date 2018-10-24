@@ -3,6 +3,13 @@
 # These are the defaults from the "Default" theme
 # You just need to override what you want to have changed
 override_git_prompt_colors() {
+  KUBE_PS1_PREFIX="["
+  KUBE_PS1_SUFFIX="]"
+  KUBE_PS1_CTX_COLOR="white"
+  KUBE_PS1_NS_COLOR="cyan"
+  KUBE_PS1_NS_ENABLE=false
+  KUBE_PS1_SEPARATOR=''
+
   GIT_PROMPT_THEME_NAME="Custom"
   PROMPT_DIRTRIM=2
   Time12a="\$(date +%H:%M:%S)"
@@ -44,8 +51,8 @@ override_git_prompt_colors() {
   # GIT_PROMPT_UPSTREAM=" {${Blue}_UPSTREAM_${ResetColor}}"
 
   ## _LAST_COMMAND_INDICATOR_ will be replaced by the appropriate GIT_PROMPT_COMMAND_OK OR GIT_PROMPT_COMMAND_FAIL
-  GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_ ${Cyan}${PathShort}${ResetColor}"
-  GIT_PROMPT_START_ROOT="_LAST_COMMAND_INDICATOR_ ${Red}${PathShort}${ResetColor}"
+  GIT_PROMPT_START_USER="_LAST_COMMAND_INDICATOR_ ${Cyan}${PathShort}${ResetColor} \$(kube_ps1)"
+  GIT_PROMPT_START_ROOT="_LAST_COMMAND_INDICATOR_ ${Red}${PathShort}${ResetColor} \$(kube_ps1)"
   GIT_PROMPT_END_USER=" \n${DimWhite}${Time12a}${ResetColor} $ "
   GIT_PROMPT_END_ROOT=" \n${DimWhite}${Time12a}${ResetColor} # "
 

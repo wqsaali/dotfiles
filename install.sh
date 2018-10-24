@@ -353,6 +353,14 @@ installBashConf() {
     cd ${INSTALLDIR}
   fi
 
+  if [ ! -d  ${HOME}/.bash/kube-ps1 ]; then
+    git clone https://github.com/jonmosco/kube-ps1.git ${HOME}/.bash/kube-ps1
+  else
+    cd ${HOME}/.bash/kube-ps1
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
   if [ ! -d  ${HOME}/.bash/powerline-shell ]; then
     git clone https://github.com/milkbikis/powerline-shell ${HOME}/.bash/powerline-shell
   else
