@@ -3,6 +3,7 @@ apt
 asciinema
 bash
 bash-completion
+bat
 binutils
 boost
 boost-dev
@@ -70,6 +71,7 @@ libnpth
 libpcap
 libprotobuf
 libsqlite
+libssh2
 libtalloc
 libtermkey
 libunibilium
