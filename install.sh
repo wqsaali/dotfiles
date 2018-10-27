@@ -182,6 +182,7 @@ installGoPkgs() {
   echo ">>> Cleanup go sources"
   cd ${INSTALLDIR}
   rm -rf ${GOPATH}/src/*
+  rm -rf ${GOPATH}/pkg/*
   rm -rf ${GOPATH}/.cache
 }
 
