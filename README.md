@@ -4,7 +4,8 @@
 - a bashrc file
 - a set of bash aliases
 - installs https://github.com/magicmonty/bash-git-prompt.git
-- a custom theme for bash-git-prompt
+- installs https://github.com/jonmosco/kube-ps1
+- a custom theme for bash-git-prompt that includes kube-ps1
 - installs https://github.com/gpakosz/.tmux
 - a custom theme for tmux
 - a vimrc file
