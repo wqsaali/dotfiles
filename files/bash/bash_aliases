@@ -218,12 +218,14 @@ alias colorcat='pygmentize -g'
 # alias Cat='source-highlight --out-format=esc -o STDOUT -i'
 # alias PCat='source-highlight --out-format=esc -o STDOUT'
 if [ -x "$(command -v bat)" ]; then
-  alias Cat='bat --theme DarkNeon'
+  BAT_THEME='DarkNeon'
+  alias Cat="bat --theme $BAT_THEME"
+  alias cat="bat --theme $BAT_THEME --plain"
 else
   alias Cat='colorcat'
 fi
 
-
+# Colorful less
 function cless() {
   if [ $# -eq 0 ]; then
     cat | pygmentize -g | less -R
@@ -359,6 +361,10 @@ function kubectl-enter() {
   kubectl exec -ti ${@} -- sh
 }
 alias kexec='kubectl-enter'
+
+function kgy() {
+  kubectl get ${@} -o yaml | bat -l yaml
+}
 
 alias kube='kubectl'
 alias kctl='kubectl'
