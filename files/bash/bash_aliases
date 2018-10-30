@@ -363,7 +363,7 @@ function kubectl-enter() {
 alias kexec='kubectl-enter'
 
 function kgy() {
-  kubectl get ${@} -o yaml | bat -l yaml
+  kubectl get ${@} -o yaml | bat --theme $BAT_THEME -l yaml
 }
 
 alias kube='kubectl'
