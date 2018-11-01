@@ -21,6 +21,7 @@ marquesmps.dockerfile-validator
 mauve.terraform
 mindginative.terraform-snippets
 misogi.ruby-rubocop
+ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.python
 ms-vscode.atom-keybindings
 ms-vscode.azurecli

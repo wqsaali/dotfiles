@@ -139,8 +139,8 @@
     "NSWindow Frame NSFontPanel" = "1144 110 710 303 0 0 1920 1178 ";
     "NSWindow Frame SUUpdateAlert" = "650 588 620 392 0 0 1920 1177 ";
     "NSWindow Frame SharedPreferences" = "507 484 770 429 0 0 1920 1177 ";
-    "NSWindow Frame UKCrashReporter" = "155 593 592 584 0 0 1920 1177 ";
-    "NSWindow Frame iTerm Window 0" = "7 6 948 1166 0 0 1920 1177 ";
+    "NSWindow Frame UKCrashReporter" = "961 590 956 584 0 0 1920 1177 ";
+    "NSWindow Frame iTerm Window 0" = "3 -2 1914 1177 0 0 1920 1177 ";
     "NSWindow Frame iTerm Window 1" = "3178 1025 640 377 3000 -52 1080 1920 ";
     "NSWindow Frame iTerm Window 2" = "229 640 640 377 0 0 1920 1200 ";
     "New Bookmarks" =     (
@@ -505,6 +505,7 @@
             "Working Directory" = "/Users/ldavim";
         }
     );
+    NoSyncHaveRequestedFullDiskAccess = 1;
     NoSyncHaveWarnedAboutPasteConfirmationChange = 1;
     NoSyncInstallationId = "DC4E2D5C-743B-4A70-99A9-ACF1B29479C9";
     NoSyncNeverAskAboutSettingAlternateMouseScroll = 1;
@@ -537,13 +538,13 @@
     SUFeedAlternateAppNameKey = iTerm;
     SUFeedURL = "https://iterm2.com/appcasts/final.xml?shard=47";
     SUHasLaunchedBefore = 1;
-    SULastCheckTime = "2018-10-15 14:49:48 +0000";
+    SULastCheckTime = "2018-11-01 08:41:50 +0000";
     SUSendProfileInfo = 0;
     ShowPaneTitles = 1;
     TabStyle = 1;
-    UKCrashReporterLastCrashReportDate = "1.53933e+09";
+    UKCrashReporterLastCrashReportDate = "1.540386e+09";
     WindowNumber = 1;
     WordCharacters = "/-+\\\\~_.";
     "findMode_iTerm" = 0;
-    "iTerm Version" = "3.2.3";
+    "iTerm Version" = "3.2.5";
 }
