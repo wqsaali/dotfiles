@@ -362,6 +362,11 @@ function kubectl-enter() {
 }
 alias kexec='kubectl-enter'
 
+function kube-remote-shell() {
+  kubectl ${@} run --restart=Never --rm -i --tty alpine --image=alpine -- sh
+}
+alias kube-shell='kube-remote-shell'
+
 function kgy() {
   kubectl get ${@} -o yaml | bat --theme $BAT_THEME -l yaml
 }
