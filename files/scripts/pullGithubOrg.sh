@@ -21,7 +21,7 @@ ORG=$(basename $(pwd))
 # Github uses headers for pagination, headers go into response-1.txt and the response body goes into the response-2.txt file
 curl -si "https://api.github.com/orgs/${ORG}/repos${TOKEN}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
 repos=$(jq -r '.[].name' response-2.txt)
-next=$(grep -io '<https://api.github.com/organizations/.*/repos?access_.*>; rel="next",' response-1.txt | cut -d';'  -f1 | tr -d '<>;')
+next=$(grep -io '<https://api.github.com/organizations/.*/repos?access_.*>; rel="next",' response-1.txt| sed -e 's/^.* rel="prev",//' | cut -d';'  -f1 | tr -d '<>;')
 
 while [ ! -z "${repos}" ]; do
   for repo in $repos; do
@@ -78,7 +78,7 @@ while [ ! -z "${repos}" ]; do
   if [ -z "${next}" ]; then break; fi
   curl -si "${next}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
   repos=$(jq -r '.[].name' response-2.txt)
-  next=$(grep -io '<https://api.github.com/organizations/.*/repos?access_.*>; rel="next",' response-1.txt | cut -d';'  -f1 | tr -d '<>;')
+  next=$(grep -io '<https://api.github.com/organizations/.*/repos?access_.*>; rel="next",' response-1.txt| sed -e 's/^.* rel="prev",//' | cut -d';'  -f1 | tr -d '<>;')
 done
 
 if [ -f response-1.txt ]; then
