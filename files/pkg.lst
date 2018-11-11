@@ -59,7 +59,6 @@ libgcrypt
 libgmp
 libgnustl
 libgpg-error
-libicu
 libidn
 libksba
 libllvm
