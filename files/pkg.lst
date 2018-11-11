@@ -59,6 +59,7 @@ libgcrypt
 libgmp
 libgnustl
 libgpg-error
+libicu
 libidn
 libksba
 libllvm
@@ -84,6 +85,7 @@ libxml2
 libyaml
 make
 man
+mlocate
 mosh
 ncdu
 ncurses
@@ -96,7 +98,7 @@ neovim
 net-tools
 netcat
 nmap
-nodejs-current
+nodejs
 openssh
 openssl
 openssl-dev
