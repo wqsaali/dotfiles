@@ -54,6 +54,7 @@ exiftool
 fd
 findutils
 gawk
+gcal
 git
 git-secrets
 godep
