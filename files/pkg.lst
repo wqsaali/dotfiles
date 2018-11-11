@@ -98,7 +98,7 @@ neovim
 net-tools
 netcat
 nmap
-nodejs
+nodejs-lts
 openssh
 openssl
 openssl-dev
