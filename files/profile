@@ -33,7 +33,7 @@ fi
 
 # Use brew ruby
 if [ -d '/usr/local/opt/ruby/bin' ]; then
-  PATH='/usr/local/opt/ruby/bin:$PATH'
+  PATH="/usr/local/opt/ruby/bin:$PATH"
   # LDFLAGS="-L/usr/local/opt/ruby/lib"
   # CPPFLAGS="-I/usr/local/opt/ruby/include"
   # PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
