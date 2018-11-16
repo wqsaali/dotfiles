@@ -113,7 +113,9 @@ rust
 s3cmd
 shellcheck
 siege
+socat
 source-highlight
+telepresence
 telnet
 terraform
 terraform-docs

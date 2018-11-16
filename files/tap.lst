@@ -6,6 +6,7 @@ caskroom/fonts
 chef/chef
 cloudfoundry/tap
 crisidev/homebrew-chunkwm
+datawire/blackbird
 egison/egison
 habitat-sh/habitat
 homebrew/command-not-found
