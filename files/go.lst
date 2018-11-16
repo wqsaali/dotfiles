@@ -1,4 +1,5 @@
 # k8s.io/helm/cmd/helm
+github.com/cloudposse/slack-notifier
 github.com/gardener/gardenctl
 github.com/hashicorp/terraform
 github.com/liggitt/audit2rbac
