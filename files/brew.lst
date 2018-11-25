@@ -41,6 +41,7 @@ curl
 dark-mode
 dateutils
 dep
+dive
 docker-completion
 docker-compose-completion
 docker-ls
