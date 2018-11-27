@@ -4,5 +4,6 @@ github.com/gardener/gardenctl
 github.com/hashicorp/terraform
 github.com/liggitt/audit2rbac
 github.com/reactiveops/rbac-lookup
+github.com/uber/astro/astro/cli/astro
 github.com/wagoodman/dive
 k8s.io/kubernetes/cmd/kubectl
