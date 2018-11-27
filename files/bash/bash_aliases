@@ -380,20 +380,51 @@ alias gk='gardenctl kubectl --'
 # Target a shoot in a graden
 # shoot <garden> <shoot>
 function shoot() {
+  if [[ "${1}" == "ls" ]]; then
+    for g in $(garden ls | grep name | cut -d' ' -f3); do
+      echo -n "${g} "
+      shoot ${g} ls
+      echo ''
+    done
+    return
+  fi
   gardenctl target garden ${1} > /dev/null
-  export $(gardenctl target shoot ${2})
-  echo "KUBECONFIG=${KUBECONFIG}"
+  case ${2} in
+    "ls") gardenctl ls shoots;;
+    *)
+      export $(gardenctl target shoot ${2})
+      echo "KUBECONFIG=${KUBECONFIG}"
+      ;;
+  esac
 }
 
 function seed() {
+  if [[ "${1}" == "ls" ]]; then
+    for g in $(garden ls | grep name | cut -d' ' -f3); do
+      echo -n "${g} "
+      seed ${g} ls
+      echo ''
+    done
+    return
+  fi
   gardenctl target garden ${1} > /dev/null
-  export $(gardenctl target seed ${2})
-  echo "KUBECONFIG=${KUBECONFIG}"
+  case ${2} in
+    "ls") gardenctl ls seeds;;
+    *)
+      export $(gardenctl target seed ${2})
+      echo "KUBECONFIG=${KUBECONFIG}"
+      ;;
+  esac
 }
 
 function garden() {
-  export $(gardenctl target garden ${1})
-  echo "KUBECONFIG=${KUBECONFIG}"
+  case ${1} in
+    "ls") gardenctl ls gardens;;
+    *)
+      export $(gardenctl target garden ${1})
+      echo "KUBECONFIG=${KUBECONFIG}"
+      ;;
+  esac
 }
 
 # Gem aliases
