@@ -1,4 +1,3 @@
-Pendrica.chef
 castwide.solargraph
 DavidAnson.vscode-markdownlint
 dbaeumer.vscode-eslint
@@ -27,6 +26,7 @@ ms-vscode.atom-keybindings
 ms-vscode.azurecli
 ms-vscode.Go
 p1c2u.docker-compose
+Pendrica.chef
 PeterJausovec.vscode-docker
 rebornix.ruby
 redhat.vscode-yaml
