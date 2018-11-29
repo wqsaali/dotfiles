@@ -1,4 +1,4 @@
-source ${HOME}/.bash/complete-alias/completions/bash_completion.sh
+source ${HOME}/.bash/complete-alias/bash_completion.sh
 
 # _code() {
 #   local cur=${COMP_WORDS[COMP_CWORD]};
