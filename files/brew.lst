@@ -57,6 +57,7 @@ findutils
 gawk
 gcal
 git
+git-quick-stats
 git-secrets
 godep
 gotty
