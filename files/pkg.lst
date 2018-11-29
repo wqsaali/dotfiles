@@ -123,6 +123,7 @@ silversearcher-ag
 tar
 termux-am
 termux-api
+termux-auth
 termux-elf-cleaner
 termux-exec
 termux-tools
