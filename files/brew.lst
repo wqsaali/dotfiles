@@ -1,3 +1,4 @@
+# macvim
 ack
 ansible
 ansible-lint
@@ -86,7 +87,6 @@ kubectx
 kubernetes-cli
 kubernetes-helm
 legit
-macvim
 mas
 molecule
 moreutils
