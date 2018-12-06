@@ -40,26 +40,26 @@ endif
   "Plug 'powerline/powerline'
   "Plug 'tpope/vim-flagship'
   Plug 'airblade/vim-gitgutter'
+  "Plug 'miyakogi/conoline.vim'
+  "Plug 'mhinz/vim-signify'
   Plug 'tpope/vim-fugitive'
   Plug 'gregsexton/gitv'
   Plug 'junegunn/gv.vim'
-  "Plug 'miyakogi/conoline.vim'
-  "Plug 'mhinz/vim-signify'
+  Plug 'chrisbra/vim-diff-enhanced'
   "Plug 'gcmt/breeze.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
   "Plug 'jlanzarotta/bufexplorer'
   "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   "Plug 'vim-scripts/taglist.vim'
+  "Plug 'severin-lemaignan/vim-minimap'
   "Plug 'vim-scripts/cmdalias.vim'
   Plug 'benmills/vimux'
-  "Plug 'severin-lemaignan/vim-minimap'
   Plug 'nelstrom/vim-visual-star-search'
   "Plug 'Shougo/neocomplete.vim.git'
   "Plug 'Shougo/neosnippet'
   "Plug 'Shougo/neosnippet-snippets'
-  " Plug 'SirVer/ultisnips'
-  Plug 'chrisbra/vim-diff-enhanced'
+  Plug 'SirVer/ultisnips'
   Plug 'MarcWeber/vim-addon-mw-utils' "requiered by snipmate
   Plug 'tomtom/tlib_vim' "requiered by snipmate
   Plug 'garbas/vim-snipmate'
@@ -70,6 +70,7 @@ endif
     endif
   endfunction
   Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
+  Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
   "Plug 'davidhalter/jedi-vim.git'
   Plug 'ervandew/supertab'
   "Plug 'sjl/gundo.vim'
@@ -379,8 +380,7 @@ endif
   let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
   let g:SuperTabDefaultCompletionType = '<C-n>'
 
-  " Disable YCM
-  " let g:loaded_youcompleteme = 1
+  " let g:loaded_youcompleteme = 1 " Disable YCM
   let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
   let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
   let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
@@ -388,6 +388,16 @@ endif
   let g:ycm_complete_in_strings = 1 " Completion in string
   let g:ycm_autoclose_preview_window_after_completion=1
   let g:ycm_autoclose_preview_window_after_insertion = 1
+
+  let g:complete_parameter_use_ultisnips_mapping = 1
+  inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+  smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+  imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+  smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+  imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+
+  let g:AutoPairs = {'[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+  inoremap <buffer><silent> ) <C-R>=AutoPairsInsert(')')<CR>
 
   " Brackets
   let g:usemarks = 0
