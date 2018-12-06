@@ -30,5 +30,7 @@
         "document"
     ],
     "gitlens.codeLens.enabled": false,
-    "diffEditor.originalEditable": true
+    "diffEditor.originalEditable": true,
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": true
 }
