@@ -375,6 +375,7 @@ alias kube='kubectl'
 alias kctl='kubectl'
 
 # Gardener aliases
+alias gctl='gardenctl'
 alias gk='gardenctl kubectl --'
 
 # Target a shoot in a graden
