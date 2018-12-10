@@ -31,6 +31,7 @@ endif
   endif
 
   Plug 'tpope/vim-sensible'
+  Plug 'editorconfig/editorconfig-vim'
   "Plug 'edkolev/promptline.vim'
   "Plug 'edkolev/tmuxline.vim'
   Plug 'vim-airline/vim-airline'
@@ -48,6 +49,9 @@ endif
   Plug 'chrisbra/vim-diff-enhanced'
   "Plug 'gcmt/breeze.vim'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'mileszs/ack.vim'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
   "Plug 'jlanzarotta/bufexplorer'
   "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
@@ -72,16 +76,16 @@ endif
   Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
   Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
   "Plug 'davidhalter/jedi-vim.git'
-  Plug 'ervandew/supertab'
+  " Plug 'ervandew/supertab'
   "Plug 'sjl/gundo.vim'
   Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
   "Plug 'luochen1990/indent-detector.vim'
   Plug 'tpope/vim-sleuth'
+  Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tomtom/tcomment_vim'
   "Plug 'scrooloose/nerdcommenter'
-  Plug 'ryanoasis/vim-devicons'
   Plug 'nvie/vim-togglemouse'
   "Plug 'LucHermitte/lh-vim-lib'
   "Plug 'LucHermitte/lh-tags'
@@ -91,11 +95,8 @@ endif
   "Plug 'alvan/vim-closetag'
   Plug 'Townk/vim-autoclose'
   Plug 'tpope/vim-endwise'
-  Plug 'mileszs/ack.vim'
   " Plug 'godlygeek/tabular'
   "Plug 'neilagabriel/vim-geeknote'
-  Plug 'elzr/vim-json', { 'for': 'json' }
-  Plug 'jamessan/vim-gnupg'
   "Plug 'kopischke/vim-stay'
   "Plug 'kopischke/vim-fetch'
   Plug 'Konfekt/FastFold'
@@ -107,6 +108,7 @@ endif
   Plug 'flazz/vim-colorschemes'
   Plug 'dracula/vim'
   " Plug 'rakr/vim-one'
+  Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'
   Plug 'chr4/nginx.vim'
@@ -114,8 +116,9 @@ endif
   Plug 'tell-k/vim-autopep8', {'for': 'python'}
   Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
   Plug 'pearofducks/ansible-vim'
-  Plug 'cespare/vim-toml'
-  Plug 'maralla/vim-toml-enhance'
+  Plug 'elzr/vim-json', { 'for': 'json' }
+  Plug 'cespare/vim-toml', { 'for': 'toml' }
+  Plug 'maralla/vim-toml-enhance', { 'for': 'toml' }
   Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'handlebars'] }
 
   call plug#end()
