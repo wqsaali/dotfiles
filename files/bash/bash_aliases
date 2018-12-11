@@ -437,7 +437,15 @@ alias npm-upgrade='npm upgrade -g'
 
 if [[ "$OSTYPE" == *"android"* ]]; then
   alias npm='proot --link2symlink npm'
-fi
+fii
+
+# go aliases
+function goclean() {
+  rm -rf ~/.glide/
+  rm -rf ~/go/.cache/
+  rm -rf ~/go/pkg/*
+  rm -rf ~/go/src/*
+}
 
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip install -U'
