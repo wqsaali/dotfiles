@@ -437,7 +437,7 @@ alias npm-upgrade='npm upgrade -g'
 
 if [[ "$OSTYPE" == *"android"* ]]; then
   alias npm='proot --link2symlink npm'
-fii
+fi
 
 # go aliases
 function goclean() {
