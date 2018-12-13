@@ -31,7 +31,7 @@ case "${1}" in
   clean) recursive-cmd 'git clean -fdX' ${2} ;;
   reset) recursive-cmd 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' ${2} ;;
   purge-branches)
-    recursive-cmd 'git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '"'"'{ print $1 }'"'"' | xargs -n 1 git branch -d' ${2}
+    recursive-cmd 'git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '"'"'{ print $1 }'"'"' | xargs -r -n 1 git branch -d' ${2}
   ;;
   prune)
     recursive-cmd 'git branch -r --merged | grep -v master | sed "s/origin\///" | xargs -r -n 1 git push --delete origin' ${2}
