@@ -76,7 +76,7 @@ endif
   Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
   Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
   "Plug 'davidhalter/jedi-vim.git'
-  " Plug 'ervandew/supertab'
+  Plug 'ervandew/supertab'
   "Plug 'sjl/gundo.vim'
   Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
   "Plug 'luochen1990/indent-detector.vim'
