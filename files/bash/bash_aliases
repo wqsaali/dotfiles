@@ -49,37 +49,37 @@ function gn_sync_all() {
 }
 
 # Vim aliases
-# Use nvim
-# alias vim='nvim'
-# alias vi='nvim'
-# alias vimdiff='nvim -d'
+# Use neovim
+alias vi='nvim'
+alias vim='nvim'
+alias vimdiff='nvim -d'
 
 # Use vim
-alias vi='vim'
-alias vimdiff='vim -d'
+# alias vi='vim'
+# alias vimdiff='vim -d'
 
-alias vim-geeknote='vim -c Geeknote'
-alias geeknote-vim='vim -c Geeknote'
+alias vim-geeknote='vi -c Geeknote'
+alias geeknote-vim='vi -c Geeknote'
 
 # Aliases for vim Vundle
-# alias vim-install='vim +PluginInstall +qall'
-# alias vim-update='vim +PluginUpdate +qall'
-# alias vim-clean='vim +PluginClean +qall'
+# alias vim-install='vi +PluginInstall +qall'
+# alias vim-update='vi +PluginUpdate +qall'
+# alias vim-clean='vi +PluginClean +qall'
 
 # Aliases for vim-plug
-alias vim-install='vim +PlugInstall +qall'
-alias vim-update='vim +PlugUpdate +PlugUpgrade +qall'
-alias vim-clean='vim +PlugClean! +qall'
+alias vim-install='vi +PlugInstall +qall'
+alias vim-update='vi +PlugUpdate +PlugUpgrade +qall'
+alias vim-clean='vi +PlugClean! +qall'
 
-alias gitv='vim +GV -c tabonly'
-# alias Gitv='vim "$(git rev-parse --show-toplevel)"/.git/index -c "Gitv --all" -c "tabonly"'
+alias gitv='vi +GV -c tabonly'
+# alias Gitv='vi "$(git rev-parse --show-toplevel)"/.git/index -c "Gitv --all" -c "tabonly"'
 
 # Codi
 # Usage: codi [filetype] [filename]
 function codi() {
   local syntax="${1:-python}"
   shift
-  vim -c "Codi $syntax" "$@"
+  vi -c "Codi $syntax" "$@"
 }
 
 # Json aliases

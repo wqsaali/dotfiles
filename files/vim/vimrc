@@ -113,6 +113,12 @@ endif
   Plug 'andrewstuart/vim-kubernetes'
   Plug 'chr4/nginx.vim'
   Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+  if has('nvim')
+    Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app & yarn install'  }
+  else
+    Plug 'iamcco/mathjax-support-for-mkdp', { 'for': 'markdown' }
+    Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+  endif
   Plug 'tell-k/vim-autopep8', {'for': 'python'}
   Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
   Plug 'pearofducks/ansible-vim'

@@ -1,3 +1,4 @@
+# yq
 BlastRadius
 Pygments
 ansible
@@ -16,6 +17,7 @@ kube-shell
 kubernetes
 mdv
 molecule
+neovim
 pip
 pre-commit
 pterraform
@@ -32,4 +34,3 @@ sshuttle
 terrafile
 thefuck
 tomorrow
-# yq
