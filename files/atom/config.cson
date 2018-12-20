@@ -2,6 +2,7 @@
   Termrk: {}
   "activate-power-mode":
     autoToggle: false
+  "ansible-vault": {}
   "atom-fuzzy-grep": {}
   "atom-ide-ui":
     use: {}
