@@ -410,6 +410,7 @@ installDotFiles() {
   installTmuxConf
   installBashConf
   installGitConf
+  installScripts
   installKubeFZF
 
   mkdir -p ${HOME}/.ptpython
