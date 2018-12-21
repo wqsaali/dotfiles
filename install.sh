@@ -192,6 +192,38 @@ installGoPkgs() {
   rm -rf ${GOPATH}/.cache
 }
 
+installhelmPlugins() {
+  if ! [ -x "$(command -v helm)" ]; then
+    if [[ "$OSTYPE" != "darwin"* ]]; then
+      sudo apt-get install helm
+    else
+      brew install kubernetes-helm
+    fi
+  fi
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    helm plugin install "${PKG}"
+  done < files/helm.lst
+}
+
+installVagrantPlugins() {
+  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
+  if ! [ -x "$(command -v vagrant)" ]; then
+    if [[ "$OSTYPE" != "darwin"* ]]; then
+      sudo apt-get install vagrant
+    else
+      brew cask install vagrant --appdir=/Applications
+      brew install vagrant-completion
+    fi
+  fi
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    vagrant plugin install "${PKG}"
+  done < files/vagrant.lst
+}
+
 installScripts() {
   mkdir -p ${HOME}/.local/bin/
   cp -r files/scripts/* ${HOME}/.local/bin/
@@ -248,23 +280,6 @@ installTmuxConf() {
   fi
 }
 
-installVagrantPlugins() {
-  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
-  if ! [ -x "$(command -v vagrant)" ]; then
-    if [[ "$OSTYPE" != "darwin"* ]]; then
-      sudo apt-get install vagrant
-    else
-      brew cask install vagrant --appdir=/Applications
-      brew install vagrant-completion
-    fi
-  fi
-  while read -r PKG; do
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    vagrant plugin install "${PKG}"
-  done < files/vagrant.lst
-}
-
 installVimPlugins() {
   mkdir -p ${HOME}/.vim/ftdetect/
   mkdir -p ${HOME}/.vim/ftplugin/
@@ -299,21 +314,6 @@ installVimPlugins() {
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
   vim +PlugInstall +qall
-}
-
-installhelmPlugins() {
-  if ! [ -x "$(command -v helm)" ]; then
-    if [[ "$OSTYPE" != "darwin"* ]]; then
-      sudo apt-get install helm
-    else
-      brew install kubernetes-helm
-    fi
-  fi
-  while read -r PKG; do
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    helm plugin install "${PKG}"
-  done < files/helm.lst
 }
 
 installGitConf() {
@@ -469,7 +469,6 @@ installAll() {
       installPips
       installNpms
     fi
-    installScripts
     installChefGems
     installChefVM
     installVagrantPlugins
@@ -477,12 +476,9 @@ installAll() {
     installVscodePackages
     installGoss
     installEls
-  fi
-    installVimPlugins
-    installTmuxConf
-    installDotFiles
-    installKubeFZF
     installhelmPlugins
+  fi
+    installDotFiles
 }
 
 case "$1" in
@@ -501,17 +497,14 @@ case "$1" in
   "go" | "gopkgs")
     installGoPkgs
     ;;
-  "vagrant" | "VagrantPlugins")
-    installVagrantPlugins
+  "dotfiles")
+    installDotFiles
+    ;;
+  "scripts")
+    installScripts
     ;;
   "vimplugins" | "vim")
     installVimPlugins
-    ;;
-  "tmuxconf" | "tmux")
-    installTmuxConf
-    ;;
-  "dotfiles")
-    installDotFiles
     ;;
   "atompackages" | "apkgs" | "atom" | "apm")
     installAtomPackages
@@ -519,14 +512,14 @@ case "$1" in
   "vscodepackages" | "vscode" | "vspkgs")
     installVscodePackages
     ;;
-  "scripts")
-    installScripts
+  "vagrant" | "VagrantPlugins")
+    installVagrantPlugins
     ;;
-  "minikube")
-    installMinikube
+  "goss")
+    installGoss
     ;;
-  "kube-fzf")
-    installKubeFZF
+  "awless")
+    installAwless
     ;;
   "dcos"|"dcos-cli"|"dcoscli")
     installDCOScli
@@ -538,11 +531,11 @@ case "$1" in
       installDepcon 'linux' '64'
     fi
     ;;
-  "goss")
-    installGoss
+  "minikube")
+    installMinikube
     ;;
-  "awless")
-    installAwless
+  "kube-fzf")
+    installKubeFZF
     ;;
   "kubetail")
     installKubetail
