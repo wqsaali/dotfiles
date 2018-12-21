@@ -301,6 +301,21 @@ installVimPlugins() {
   vim +PlugInstall +qall
 }
 
+installhelmPlugins() {
+  if ! [ -x "$(command -v helm)" ]; then
+    if [[ "$OSTYPE" != "darwin"* ]]; then
+      sudo apt-get install helm
+    else
+      brew install kubernetes-helm
+    fi
+  fi
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    helm plugin install "${PKG}"
+  done < files/helm.lst
+}
+
 installGitConf() {
   source config.sh
   #read -p "Please enter your name (for gitconfig):" NAME
@@ -467,6 +482,7 @@ installAll() {
     installTmuxConf
     installDotFiles
     installKubeFZF
+    installhelmPlugins
 }
 
 case "$1" in
