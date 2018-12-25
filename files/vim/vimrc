@@ -42,6 +42,7 @@ endif
   "Plug 'tpope/vim-flagship'
   Plug 'airblade/vim-gitgutter'
   "Plug 'miyakogi/conoline.vim'
+  Plug 'RRethy/vim-illuminate'
   "Plug 'mhinz/vim-signify'
   Plug 'tpope/vim-fugitive'
   Plug 'gregsexton/gitv'
