@@ -16,8 +16,14 @@ if [[ $(tty) == "/dev/tty"* ]] && [[ "$OSTYPE" == "linux-gnu" ]]; then
   setfont ter-powerline-v16b.psf.gz
 fi
 
-export EDITOR=vim
-export VISUAL=vim
+if [ -x "$(command -v nvim)" ]; then
+  export EDITOR=nvim
+  export VISUAL=nvim
+else
+  export EDITOR=vim
+  export VISUAL=vim
+fi
+
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   export TERMINAL=/usr/bin/gnome-terminal
 fi

@@ -351,6 +351,8 @@ endif
   "   let g:conoline_auto_enable = 1
   " endif
 
+  let g:Illuminate_ftblacklist = ['nerdtree']
+
   "Ack
   for command in ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
     exe 'command ' . substitute(command, 'Ack', 'Ag', "") . ' ' . command

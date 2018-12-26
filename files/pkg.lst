@@ -20,6 +20,7 @@ dash
 diffutils
 dnsutils
 dpkg
+exa
 fd
 file
 findutils
@@ -36,6 +37,7 @@ grep
 htop
 jq
 jsoncpp
+krb5
 ldns
 less
 libandroid-glob
@@ -49,6 +51,7 @@ libcroco
 libcrypt
 libcrypt-dev
 libcurl
+libdb
 libedit
 libevent
 libexpat

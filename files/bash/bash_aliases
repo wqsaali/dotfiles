@@ -50,14 +50,15 @@ function gn_sync_all() {
 }
 
 # Vim aliases
-# Use neovim
-alias vi='nvim'
-alias vim='nvim'
-alias vimdiff='nvim -d'
-
-# Use vim
-# alias vi='vim'
-# alias vimdiff='vim -d'
+# Use neovim if available
+if [ -x "$(command -v nvim)" ]; then
+  alias vi='nvim'
+  alias vim='nvim'
+  alias vimdiff='nvim -d'
+else
+  alias vi='vim'
+  alias vimdiff='vim -d'
+fi
 
 alias vim-geeknote='vi -c Geeknote'
 alias geeknote-vim='vi -c Geeknote'
