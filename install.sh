@@ -172,6 +172,7 @@ cleanGoPkgs() {
   rm -rf ${GOPATH}/src/*
   rm -rf ${GOPATH}/pkg/*
   rm -rf ${GOPATH}/.cache
+  rm -rf ${HOME}/.cache/go-build/
 }
 
 installGoPkgs() {

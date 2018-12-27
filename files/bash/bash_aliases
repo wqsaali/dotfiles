@@ -441,18 +441,21 @@ if [[ "$OSTYPE" == *"android"* ]]; then
   alias npm='proot --link2symlink npm'
 fi
 
-# go aliases
+# Go aliases
 function goclean() {
   rm -rf ~/.glide/
   rm -rf ~/go/.cache/
   rm -rf ~/go/pkg/*
   rm -rf ~/go/src/*
+  rm -rf ~/.cache/go-build/
 }
+alias go-clean='goclean'
 
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip install -U'
 alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip3 install -U'
 alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip2 install -U'
+alias pip-clean='rm -rf ~/.cache/pip/'
 
 # apt aliases
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
