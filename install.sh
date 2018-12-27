@@ -167,6 +167,13 @@ installNpms() {
   done < files/npm.lst
 }
 
+cleanGoPkgs() {
+  rm -rf ${HOME}/.glide/*
+  rm -rf ${GOPATH}/src/*
+  rm -rf ${GOPATH}/pkg/*
+  rm -rf ${GOPATH}/.cache
+}
+
 installGoPkgs() {
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
@@ -175,10 +182,7 @@ installGoPkgs() {
     go get -u "${PKG}"
   done < files/go.lst
   cd ${INSTALLDIR}
-  rm -rf ${HOME}/.glide/*
-  rm -rf ${GOPATH}/src/*
-  rm -rf ${GOPATH}/pkg/*
-  rm -rf ${GOPATH}/.cache
+  cleanGoPkgs
   echo ">>> helm"
   go get -d -u k8s.io/helm/cmd/helm
   cd ${GOPATH}/src/k8s.io/helm/
@@ -186,10 +190,7 @@ installGoPkgs() {
   mv bin/* ${GOPATH}/bin/
   echo ">>> Cleanup go sources"
   cd ${INSTALLDIR}
-  rm -rf ${HOME}/.glide/*
-  rm -rf ${GOPATH}/src/*
-  rm -rf ${GOPATH}/pkg/*
-  rm -rf ${GOPATH}/.cache
+  cleanGoPkgs
 }
 
 installhelmPlugins() {
