@@ -352,7 +352,12 @@ endif
   "   let g:conoline_auto_enable = 1
   " endif
 
-  let g:Illuminate_ftblacklist = ['nerdtree']
+  " vim-illuminate
+  let g:Illuminate_ftblacklist = ['nerdtree', 'vim-plug', 'sixpack', '', 'qf']
+  " let g:Illuminate_ftHighlightGroups = {
+  "     \ 'vim': ['', 'Function', 'Constant', 'vimVar'],
+  "     \ 'cpp': ['', 'Function', 'Constant']
+  "     \ }
 
   "Ack
   for command in ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
@@ -596,6 +601,14 @@ if has('autocmd')
   au BufWritePre * :call TrimWhitespace()
   au BufWritePre * if &filetype == 'terraform' | :call terraform#fmt() | endif
 endif
+
+nmap <leader>sp :call <SID>SynStack()<CR>
+fun! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfun
 
 " this machine config
 if filereadable(expand("~/.vimrc.local"))
