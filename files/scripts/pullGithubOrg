@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# Colors
+ESC_SEQ="\x1b["
+COL_RESET=$ESC_SEQ"39;49;00m"
+COL_RED=$ESC_SEQ"31;01m"
+COL_GREEN=$ESC_SEQ"32;01m"
+COL_YELLOW=$ESC_SEQ"33;01m"
+COL_BLUE=$ESC_SEQ"34;01m"
+COL_MAGENTA=$ESC_SEQ"35;01m"
+COL_CYAN=$ESC_SEQ"36;01m"
+COL_GREY=$ESC_SEQ"38;5;245m"
+
+TOKEN=${1}
+if [[ ! -z $TOKEN ]]; then
+  TOKEN="?access_token=${TOKEN}"
+fi
+ORG=$(basename $(pwd))
+
+# repos=$(curl -s https://api.github.com/orgs/${ORG}/repos${TOKEN} | jq -r '.[].name')
+# Github uses headers for pagination, headers go into response-1.txt and the response body goes into the response-2.txt file
+curl -si "https://api.github.com/orgs/${ORG}/repos${TOKEN}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
+repos=$(jq -r '.[].name' response-2.txt)
+next=$(grep -io '<https://api.github.com/organizations/.*/repos?access_.*>; rel="next",' response-1.txt| sed -e 's/^.* rel="prev",//' | cut -d';'  -f1 | tr -d '<>;')
+
+while [ ! -z "${repos}" ]; do
+  for repo in $repos; do
+    upstream=''
+    fork=$(jq -r ".[] | select(.name == \"${repo}\")| .fork" response-2.txt)
+    if [ ${fork} == "true" ]; then
+      upstream=$(curl -s "https://api.github.com/repos/${ORG}/${repo}${TOKEN}" | jq -r '.parent.ssh_url')
+    fi
+    if [ ! -d ${repo} ]; then
+      echo -e "${COL_RED}>>>${COL_RESET} Found new repo ${upstream}"
+      url=$(jq -r ".[] | select(.name == \"${repo}\")| .ssh_url" response-2.txt)
+      git clone ${url}
+      if [[ ! -z $upstream ]]; then
+        cd ${repo}
+        echo -e "${COL_YELLOW}>>>${COL_RESET} Adding remote upstream ${upstream}"
+        git remote add upstream ${upstream}
+        git fetch --all
+        cd ..
+      fi
+    else
+      echo -e "${COL_YELLOW}>>>${COL_RESET} Updating ${repo}"
+      cd ${repo}
+      if [[ ! -z $upstream ]]; then
+        if ! git remote | grep -qv 'upstream' &> /dev/null; then
+          echo -e "${COL_YELLOW}>>>${COL_RESET} Adding remote upstream ${upstream}"
+          git remote add upstream ${upstream}
+        fi
+      fi
+      echo -ne "$COL_GREY"
+      git pull --all
+      echo -ne "$COL_RESET"
+      cd ..
+    fi
+    if [[ ! -z $upstream ]]; then
+      cd ${repo}
+      echo -e "${COL_BLUE}>>>${COL_RESET} Status:"
+      AHEAD=$(git rev-list upstream/master..origin/master --count)
+      BEHIND=$(git rev-list origin/master..upstream/master --count)
+      echo -e "    This branch is ${COL_YELLOW}${AHEAD}${COL_RESET} commits ahead and ${COL_RED}${BEHIND}${COL_RESET} commits behind of Upstream."
+      if [ ${BEHIND} -ne 0 ]; then
+        echo -e "    ${COL_RED}This branch needs rebasing${COL_RESET}"
+        if [ ${AHEAD} -eq 0 ]; then
+          echo -e "    ${COL_YELLOW}Automatic rebasing...${COL_RESET}"
+          git rebase upstream/master
+          git push
+        fi
+      fi
+      echo ''
+      cd ..
+    fi
+    sleep 1
+  done
+  rm response-*
+  if [ -z "${next}" ]; then break; fi
+  curl -si "${next}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
+  repos=$(jq -r '.[].name' response-2.txt)
+  next=$(grep -io '<https://api.github.com/organizations/.*/repos?access_.*>; rel="next",' response-1.txt| sed -e 's/^.* rel="prev",//' | cut -d';'  -f1 | tr -d '<>;')
+done
+
+if [ -f response-1.txt ]; then
+  rm response-*
+fi
