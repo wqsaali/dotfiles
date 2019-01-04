@@ -62,7 +62,7 @@
     endif
   endfunction
   Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
-  Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
+  " Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
   "Plug 'davidhalter/jedi-vim.git'
   Plug 'ervandew/supertab'
   "Plug 'sjl/gundo.vim'
