@@ -141,7 +141,7 @@ function backupHomeDir() {
     echo "$1 is not a valid directory"
   fi
   FOLDER=$(echo "$1"|sed 's/\/$//g')
-  sudo rsync -aP --exclude-from=rsync-homedir-excludes.txt ${HOME}/ $FOLDER/
+  sudo rsync -aP --exclude-from=files/rsync-homedir-excludes.txt ${HOME}/ $FOLDER/
 }
 
 function restoreRepos() {

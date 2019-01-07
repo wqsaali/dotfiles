@@ -5,6 +5,7 @@
   default = simple
 [fetch]
   prune = true
+  pruneTags = true
 [log]
   date = relative
 [format]
