@@ -325,14 +325,14 @@ installGitConf() {
   #read -p "Please enter your name (for gitconfig):" NAME
   #read -p "Please enter your email address (for gitconfig):" EMAIL
 
-  # cp files/gitconfig ${HOME}/.gitconfig
+  # cp files/git/gitconfig ${HOME}/.gitconfig
   sedcmd=''
   for var in NAME EMAIL; do
     printf -v sc 's|${%s}|%s|;' ${var} "${!var//\//\\/}"
     sedcmd+="${sc}"
   done
-  cat files/gitconfig | sed -e "${sedcmd}" > ${HOME}/.gitconfig
-  cp files/gitexcludes ${HOME}/.gitexcludes
+  cat files/git/gitconfig | sed -e "${sedcmd}" > ${HOME}/.gitconfig
+  cp files/git/gitexcludes ${HOME}/.gitexcludes
 }
 
 installBashConf() {
