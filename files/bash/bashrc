@@ -28,13 +28,6 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   export TERMINAL=/usr/bin/gnome-terminal
 fi
 
-# CDPATH
-export CDPATH='.:~:~/workingCopies:~/workingCopies/code:~/workingCopies/code/github:~/workingCopies/code/bitbucket:~/workingCopies/code/gitlab'
-
-# GOPATH
-export GOPATH="${HOME}/go"
-export PATH="$PATH:$GOPATH/bin"
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups
@@ -52,7 +45,6 @@ PROMPT_COMMAND="history -a; history -c; history -r; "'echo "$(history 1)" >> ~/.
 # CTRL+R Alternatives
 
 # Fuzzy Find
-
 if [ -x "$(command -v fzf)" ]; then
 
 __ehc() {
@@ -78,7 +70,6 @@ bind '"\C-r": "\C-x1\e^\er"'
 bind -x '"\C-x1": __fzf_history';
 
 # HH
-
 elif [ -x "$(command -v hh)" ]; then
 
   # hh configuration:
@@ -252,9 +243,9 @@ fi
 # GIT_PROMPT_STATUS_COMMAND=gitstatus_pre-1.7.10.sh # uncomment to support Git older than 1.7.10
 # GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
 # GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
-GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
 # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
 # GIT_PROMPT_THEME=Single_line_Ubuntu
+GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
 source ~/.bash/bash-git-prompt/gitprompt.sh
 source ~/.bash/kube-ps1/kube-ps1.sh
 

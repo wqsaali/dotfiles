@@ -8,6 +8,9 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# CDPATH
+CDPATH='.:~:~/workingCopies:~/workingCopies/code:~/workingCopies/code/github:~/workingCopies/code/bitbucket:~/workingCopies/code/gitlab'
+
 if [ -d "/usr/local/sbin" ] ; then
   PATH="/usr/local/sbin:$PATH"
 fi
@@ -49,6 +52,10 @@ fi
 if [ -d "$HOME/.linuxbrew/share/info:$INFOPATH" ]; then
   INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 fi
+
+# GOPATH
+GOPATH="${HOME}/go"
+PATH="$PATH:$GOPATH/bin"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
