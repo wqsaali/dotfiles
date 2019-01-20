@@ -64,6 +64,7 @@ libgcrypt
 libgmp
 libgnustl
 libgpg-error
+libicu
 libidn
 libksba
 libllvm
@@ -141,3 +142,4 @@ vim-runtime
 w3m
 wget
 xz-utils
+yarn
