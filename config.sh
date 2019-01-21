@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 NAME='Luis Davim'
-EMAIL='ldavim@ptc.com'
+EMAIL='luis.davim@jet.com'
 
 WORKINGCOPIES='${HOME}/workingCopies'
 CODE='${HOME}/workingCopies/code'

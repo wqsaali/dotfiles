@@ -1,3 +1,4 @@
+homebrew/cask-versions
 browsh-org/homebrew-browsh
 buo/cask-upgrade
 caskroom/cask
@@ -13,6 +14,7 @@ homebrew/command-not-found
 homebrew/services
 knes1/tap
 knqyf263/pet
+koekeishiya/formulae
 kontena/chpharos
 neovim/neovim
 reactiveops/tap

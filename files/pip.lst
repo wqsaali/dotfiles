@@ -28,6 +28,7 @@ pyhcl
 pyinstaller
 pyobjc
 python-language-server
+pyvmomi
 setuptools
 shutit
 sshuttle

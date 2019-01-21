@@ -17,7 +17,6 @@ bfg
 binutils
 bosh-cli
 bosh-init
-brew-cask
 brew-cask-completion
 brew-pip
 browsh
@@ -115,8 +114,11 @@ rust
 s3cmd
 shellcheck
 siege
+skhd
 socat
+sops
 source-highlight
+stern
 telepresence
 telnet
 terraform

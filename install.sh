@@ -202,6 +202,7 @@ installhelmPlugins() {
       brew install kubernetes-helm
     fi
   fi
+  helm init --client-only
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
@@ -482,7 +483,8 @@ installAll() {
     installEls
     installhelmPlugins
   fi
-    installDotFiles
+  # installWebApps
+  installDotFiles
 }
 
 case "$1" in
@@ -567,6 +569,9 @@ case "$1" in
       ./android.sh "${@}"
     else
       ./linux.sh "${@}"
+    fi
+    if [ -z "${1}" ]; then
+      installAll
     fi
     ;;
 esac

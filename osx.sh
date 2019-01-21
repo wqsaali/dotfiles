@@ -52,6 +52,8 @@ brew_is_upgradable() {
 }
 
 brew_tap() {
+  fancy_echo "Adding Tap: $1 ..."
+  brew tap $1
   brew tap $1 --repair 2> /dev/null
 }
 
@@ -101,7 +103,7 @@ osConfigs() {
   killall Dock
 
   # Reduce Transparency
-  defaults write com.apple.universalaccess reduceTransparency -bool true
+  # defaults write com.apple.universalaccess reduceTransparency -bool true
 
   # Enable Develop Menu and Web Inspector in Safari
   defaults write com.apple.Safari IncludeInternalDebugMenu -bool true && \
@@ -112,7 +114,10 @@ osConfigs() {
 }
 
 installHomebrew() {
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  if [ ! -x "$(command -v brew)" ]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
+  fi
 }
 
 installPackages() {
@@ -122,7 +127,7 @@ installPackages() {
     exit 1
   fi
   sudo spctl --master-disable
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  installHomebrew
 
   while read -r TAP; do
     [[ "${TAP}" =~ ^#.*$ ]] && continue
@@ -131,20 +136,19 @@ installPackages() {
   done < files/tap.lst
 
   brew update
-
-  /bin/bash "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
-
-  while read -r PKG; do
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    brew_install_or_upgrade "${PKG}"
-  done < files/brew.lst
+  brew_install_or_upgrade cask
 
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     cask_install "${PKG}"
   done < files/cask.lst
+
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    brew_install_or_upgrade "${PKG}"
+  done < files/brew.lst
 
   echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells > /dev/null
   chsh -s $(brew --prefix)/bin/bash
@@ -243,8 +247,8 @@ installDotFiles() {
 installAll() {
   installPackages
   installFonts
-  installIterm
   installDotFiles
+  # installIterm
   osConfigs
 }
 
