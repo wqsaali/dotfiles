@@ -1,11 +1,16 @@
 # k8s.io/helm/cmd/helm
 github.com/cloudposse/slack-notifier
 github.com/gardener/gardenctl
+github.com/golang/lint/golint
 github.com/hashicorp/terraform
 github.com/kubicorn/kubicorn
 github.com/liggitt/audit2rbac
+github.com/pkg/errors
 github.com/reactiveops/rbac-lookup
+github.com/spf13/viper
 github.com/uber/astro/astro/cli/astro
 github.com/wagoodman/dive
 github.com/zegl/kube-score
+golang.org/x/tools/cmd/godoc
+golang.org/x/tools/cmd/goimports
 k8s.io/kubernetes/cmd/kubectl
