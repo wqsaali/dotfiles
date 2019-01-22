@@ -12,6 +12,8 @@ case $- in
       *) return;;
 esac
 
+export TERM='xterm-256color'
+
 if [[ $(tty) == "/dev/tty"* ]] && [[ "$OSTYPE" == "linux-gnu" ]]; then
   setfont ter-powerline-v16b.psf.gz
 fi
@@ -277,7 +279,7 @@ source ~/.bash/kube-ps1/kube-ps1.sh
 CONFIGURED="true"
 
 if command -v tmux>/dev/null; then
-    [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+    [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && tmux
 fi
 
 if [[ -f $HOME/.bash_variables ]]; then
