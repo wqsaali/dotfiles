@@ -20,6 +20,10 @@ cmd + shift - return : ~/Scripts/qtb.sh
 # open mpv
 cmd - m : open -na /Applications/mpv.app $(pbpaste)
 
+# lock screeen
+# cmd - l : /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
+cmd - l : pmset displaysleepnow
+
 # ############ #
 # Window focus #
 # ############ #
