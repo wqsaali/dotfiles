@@ -9,7 +9,7 @@ fi
 # If not running interactively, don't do anything
 case $- in
     *i*)
-      [ -x $(command -v tmux > /dev/null) ] && [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && tmux
+      [ -x "$(command -v tmux)" ] && [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && tmux
       ;;
       *) return;;
 esac
