@@ -32,27 +32,51 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   export TERMINAL=/usr/bin/gnome-terminal
 fi
 
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+# shopt -s globstar
+
+# Use extra globing features. See man bash, search extglob.
+# shopt -s extglob
+
+# Include .files when globbing.
+# shopt -s dotglob
+
+# When a glob expands to nothing,
+# make it an empty string instead of the literal characters.
+# shopt -s nullglob
+
+# Fix spelling errors for cd, only in interactive shell
+# shopt -s cdspell
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# vi mode
+# set -o vi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups:ignorespace
 export HISTIGNORE="&:ls:bg:fg:cd"
-
-# append to the history file, don't overwrite it
-shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTSIZE=10000
 export HISTFILESIZE=200000
 export HISTTIMEFORMAT="%d-%m-%Y %H:%M:%S "
 
-_bash_history_sync() {
+__bash_history_sync() {
   builtin history -a
   builtin history -c
   builtin history -r
 }
 
 history() {
-  _bash_history_sync
+  __bash_history_sync
   builtin history "$@"
 }
 
@@ -97,29 +121,6 @@ elif [ -x "$(command -v hh)" ]; then
   if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
 
 fi
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-# shopt -s globstar
-
-# Use extra globing features. See man bash, search extglob.
-# shopt -s extglob
-
-# Include .files when globbing.
-# shopt -s dotglob
-
-# When a glob expands to nothing, make it an empty string instead of the literal characters.
-# shopt -s nullglob
-
-# Fix spelling errors for cd, only in interactive shell
-# shopt -s cdspell
-
-# vi mode
-# set -o vi
 
 # Ubuntu’s command-not-found equivalent for Homebrew on OSX
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -250,9 +251,9 @@ fi
 #   fi
 # fi
 
-if [ -x "$(command -v kontena)" ]; then
-  source "$(kontena whoami --bash-completion-path)"
-fi
+# if [ -x "$(command -v kontena)" ]; then
+#   source "$(kontena whoami --bash-completion-path)"
+# fi
 
 if [ -f /usr/local/opt/chpharos/share/chpharos/chpharos.sh ]; then
   source /usr/local/opt/chpharos/share/chpharos/chpharos.sh
