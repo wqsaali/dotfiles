@@ -156,12 +156,12 @@ addExtraRepos() {
 installPackages() {
   addExtraRepos
   sudo apt update
-  cat files/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
-  sudo apt-mark manual $(cat files/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
+  cat files/pkgs/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
+  sudo apt-mark manual $(cat files/pkgs/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
 
   # You might need some extra PPAs for these
-  cat files/apt-extra.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
-  sudo apt-mark manual $(cat files/apt-extra.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
+  cat files/pkgs/apt-extra.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
+  sudo apt-mark manual $(cat files/pkgs/apt-extra.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
 
   if ! [ -x "$(command -v cerebro)" ]; then
     installCerebro

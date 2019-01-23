@@ -31,7 +31,7 @@ function backupDotFiles() {
 }
 
 function backupTermux() {
-  pkg list-installed | cut -d '/' -f1 | grep -v '\.\.\.'| sort -u > files/pkg.lst
+  pkg list-installed | cut -d '/' -f1 | grep -v '\.\.\.'| sort -u > files/pkgs/pkg.lst
   cp -r ${HOME}/.termux/* files/termux/
 }
 
@@ -78,7 +78,7 @@ function importItermColors() {
 }
 
 function backupAtomPackages() {
-  apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/atom-packages.lst
+  apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/pkgs/atom-packages.lst
   cp ${HOME}/.atom/*.cson files/atom/
   cp ${HOME}/.atom/*.coffee files/atom/
   cp ${HOME}/.atom/*.less files/atom/
@@ -86,7 +86,7 @@ function backupAtomPackages() {
 }
 
 function backupVscode() {
-  code --list-extensions > files/vscode-packages.lst
+  code --list-extensions > files/pkgs/vscode-packages.lst
   settings="$HOME/.config/Code/User"
   if [[ "$OSTYPE" == "darwin"* ]]; then
     settings="$HOME/Library/Application Support/Code/User"
@@ -116,8 +116,8 @@ function backupPPAs() {
 
 function backupPackages() {
   # Get list of installed packages
-  apt-mark showauto > files/pkgs_auto.lst
-  apt-mark showmanual > files/pkgs_manual.lst
+  apt-mark showauto > files/pkgs/pkgs_auto.lst
+  apt-mark showmanual > files/pkgs/pkgs_manual.lst
 }
 
 function backupAll() {
@@ -131,9 +131,9 @@ function backupAll() {
 
 function restorePackages() {
   sudo apt-get update
-  cat files/pkgs_manual.lst | tr '\n' ' ' | xargs sudo apt-get install -y
-  sudo apt-mark auto $(cat files/pkgs_auto.lst | tr '\n' ' ')
-  sudo apt-mark manual $(cat files/pkgs_manual.lst | tr '\n' ' ')
+  cat files/pkgs/pkgs_manual.lst | tr '\n' ' ' | xargs sudo apt-get install -y
+  sudo apt-mark auto $(cat files/pkgs/pkgs_auto.lst | tr '\n' ' ')
+  sudo apt-mark manual $(cat files/pkgs/pkgs_manual.lst | tr '\n' ' ')
 }
 
 function backupHomeDir() {

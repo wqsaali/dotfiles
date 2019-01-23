@@ -133,7 +133,7 @@ installPackages() {
     [[ "${TAP}" =~ ^#.*$ ]] && continue
     [[ "${TAP}" =~ ^\\s*$ ]] && continue
     brew_tap "${TAP}"
-  done < files/tap.lst
+  done < files/pkgs/tap.lst
 
   brew update
   brew_install_or_upgrade cask
@@ -142,13 +142,13 @@ installPackages() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     cask_install "${PKG}"
-  done < files/cask.lst
+  done < files/pkgs/cask.lst
 
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     brew_install_or_upgrade "${PKG}"
-  done < files/brew.lst
+  done < files/pkgs/brew.lst
 
   echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells > /dev/null
   chsh -s $(brew --prefix)/bin/bash

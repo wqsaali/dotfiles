@@ -25,7 +25,7 @@ The install script supports macOS, Linux (Ubuntu) and Android ([Termux](https://
 ./install fonts # will install some powerline patched fonts
 ./install vimplugins # will install the vim plugins from the vimrc
 ./install atompackages # will install the atom plugins and configuration
-./install packages # will install the packages listed in files/apt.lst (or brew.lst and cask.lst if running on macOS)
+./install packages # will install the packages listed in files/pkgs/apt.lst (or brew.lst and cask.lst if running on macOS)
 ./install i3 # will install and configure i3
 ```
 

@@ -132,7 +132,7 @@ installCargo() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     cargo install "${PKG}"
-  done < files/cargo.lst
+  done < files/pkgs/cargo.lst
 }
 
 installGems() {
@@ -140,7 +140,7 @@ installGems() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     gem_install_or_update "${PKG}"
-  done < files/gem.lst
+  done < files/pkgs/gem.lst
 }
 
 installChefGems() {
@@ -148,7 +148,7 @@ installChefGems() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     chef gem install "${PKG}"
-  done < files/chef_gem.lst
+  done < files/pkgs/chef_gem.lst
 }
 
 installPips() {
@@ -156,7 +156,7 @@ installPips() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     pip install -U "${PKG}"
-  done < files/pip.lst
+  done < files/pkgs/pip.lst
 }
 
 installNpms() {
@@ -164,7 +164,7 @@ installNpms() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     npm install -g "${PKG}"
-  done < files/npm.lst
+  done < files/pkgs/npm.lst
 }
 
 cleanGoPkgs() {
@@ -181,7 +181,7 @@ installGoPkgs() {
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     echo ">>> ${PKG}"
     go get -u "${PKG}"
-  done < files/go.lst
+  done < files/pkgs/go.lst
   cd ${INSTALLDIR}
   cleanGoPkgs
   echo ">>> helm"
@@ -207,7 +207,7 @@ installhelmPlugins() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     helm plugin install "${PKG}"
-  done < files/helm.lst
+  done < files/pkgs/helm.lst
 }
 
 installVagrantPlugins() {
@@ -224,7 +224,7 @@ installVagrantPlugins() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     vagrant plugin install "${PKG}"
-  done < files/vagrant.lst
+  done < files/pkgs/vagrant.lst
 }
 
 installScripts() {
@@ -252,7 +252,7 @@ installAtomPackages() {
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* ${HOME}/.atom/
-  apm install --packages-file files/atom-packages.lst
+  apm install --packages-file files/pkgs/atom-packages.lst
 }
 
 installVscodePackages() {
@@ -266,7 +266,7 @@ installVscodePackages() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     code --install-extension "${PKG}"
-  done < files/vscode-packages.lst
+  done < files/pkgs/vscode-packages.lst
 }
 
 installTmuxConf() {
