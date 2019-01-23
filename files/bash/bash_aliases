@@ -363,6 +363,9 @@ function kgy() {
 alias kube='kubectl'
 alias kctl='kubectl'
 
+# Helm aliases
+alias helm-plugin-update="helm plugin list | awk '!/NAME/ {print $1}' | xargs -n 1 helm plugin update"
+
 # Gardener aliases
 alias gctl='gardenctl'
 alias gk='gardenctl kubectl --'

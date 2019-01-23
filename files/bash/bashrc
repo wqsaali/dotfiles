@@ -80,7 +80,7 @@ history() {
   builtin history "$@"
 }
 
-export PROMPT_COMMAND='echo "$(history 1)" >> ~/.bash_eternal_history'"; _bash_history_sync ${PROMPT_COMMAND}"
+export PROMPT_COMMAND='echo "$(history 1)" >> ~/.bash_eternal_history'"; __bash_history_sync ${PROMPT_COMMAND}"
 
 # CTRL+R Alternatives
 
