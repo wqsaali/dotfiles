@@ -3,6 +3,7 @@ github.com/cloudposse/slack-notifier
 github.com/gardener/gardenctl
 github.com/golang/lint/golint
 github.com/hashicorp/terraform
+github.com/kubernauts/tk8
 github.com/kubicorn/kubicorn
 github.com/liggitt/audit2rbac
 github.com/pkg/errors
