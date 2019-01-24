@@ -289,9 +289,9 @@ source ~/.bash/kube-ps1/kube-ps1.sh
 #     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 # fi
 
-CONFIGURED="true"
-
 if [[ -f $HOME/.bash_variables ]]; then
   source $HOME/.bash_variables
 fi
+
+CONFIGURED="true"
 

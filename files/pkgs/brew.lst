@@ -15,6 +15,7 @@ bat
 bbl
 bfg
 binutils
+blackbox
 bosh-cli
 bosh-init
 brew-cask-completion
