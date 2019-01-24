@@ -33,6 +33,7 @@ cmake
 coffeescript
 colordiff
 compose2kube
+conjure-up
 consul-template
 cookiecutter
 coreutils
