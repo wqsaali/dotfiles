@@ -176,6 +176,7 @@ cleanGoPkgs() {
 }
 
 installGoPkgs() {
+  cleanGoPkgs
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
