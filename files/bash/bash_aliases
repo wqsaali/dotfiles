@@ -362,6 +362,8 @@ function kgy() {
 
 alias kube='kubectl'
 alias kctl='kubectl'
+alias kctx='kubectx'
+alias kns='kubens'
 
 # Helm aliases
 alias helm-plugin-update="helm plugin list | awk '!/NAME/ {print $1}' | xargs -n 1 helm plugin update"

@@ -236,7 +236,7 @@ installDotFiles() {
   fi
 
   cp -r files/kitty ~/.config/
-  ln -s ~/.config/kitty ~/Library/Preferences/
+  # ln -s ~/.config/kitty ~/Library/Preferences/
 
   sudo cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh

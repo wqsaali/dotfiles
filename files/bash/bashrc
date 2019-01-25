@@ -183,9 +183,7 @@ bind Space:magic-space
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+[ -f $HOME/.bash_aliases ] && source ~/.bash_aliases
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -237,26 +235,20 @@ fi
 #   source "$(kontena whoami --bash-completion-path)"
 # fi
 
-if [ -f /usr/local/opt/chpharos/share/chpharos/chpharos.sh ]; then
-  source /usr/local/opt/chpharos/share/chpharos/chpharos.sh
-fi
+# if [ -f /usr/local/opt/chpharos/share/chpharos/chpharos.sh ]; then
+#   source /usr/local/opt/chpharos/share/chpharos/chpharos.sh
+# fi
 
 if [ -x "$(command -v pyenv)" ]; then
 eval "$(pyenv init -)"
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 fi
 
-if [ -x "$(command -v thefuck)" ]; then
- eval $(thefuck --alias)
-fi
+[ -x "$(command -v thefuck)" ] && eval $(thefuck --alias)
 
-if [ -x ~/.chefvm/bin/chefvm ]; then
-  eval "$(~/.chefvm/bin/chefvm init -)"
-fi
+[ -x ~/.chefvm/bin/chefvm ] && eval "$(~/.chefvm/bin/chefvm init -)"
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  source /etc/profile.d/vte-2.91.sh
-fi
+[ "$OSTYPE" == "linux-gnu" ] && source /etc/profile.d/vte-2.91.sh
 
 [ -f ~/.kube-fzf/kube-fzf.sh ] && source ~/.kube-fzf/kube-fzf.sh
 
@@ -289,9 +281,7 @@ source ~/.bash/kube-ps1/kube-ps1.sh
 #     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 # fi
 
-if [[ -f $HOME/.bash_variables ]]; then
-  source $HOME/.bash_variables
-fi
+[ -f $HOME/.bash_variables ] && source $HOME/.bash_variables
 
 CONFIGURED="true"
 
