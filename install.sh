@@ -169,9 +169,9 @@ installNpms() {
 
 cleanGoPkgs() {
   rm -rf ${HOME}/.glide/*
-  rm -rf ${GOPATH}/src/*
-  rm -rf ${GOPATH}/pkg/*
-  rm -rf ${GOPATH}/.cache
+  rm -rf ${GOPATH/:*}/src/*
+  rm -rf ${GOPATH/:*}/pkg/*
+  rm -rf ${GOPATH/:*}/.cache
   rm -rf ${HOME}/.cache/go-build/
 }
 
@@ -187,9 +187,9 @@ installGoPkgs() {
   cleanGoPkgs
   echo ">>> helm"
   go get -d -u k8s.io/helm/cmd/helm
-  cd ${GOPATH}/src/k8s.io/helm/
+  cd ${GOPATH/:*}/src/k8s.io/helm/
   make bootstrap build
-  mv bin/* ${GOPATH}/bin/
+  mv bin/* ${GOPATH/:*}/bin/
   echo ">>> Cleanup go sources"
   cd ${INSTALLDIR}
   cleanGoPkgs
@@ -419,6 +419,7 @@ createSkeleton() {
   for d in $(envsubst <<< ${dirs}); do
     mkdir -p "${d}"
   done
+  [ -d ${HOME}/workingCopies/code ] || ln -s ${HOME}/workingCopies/src ${HOME}/workingCopies/code
 }
 
 installDotFiles() {

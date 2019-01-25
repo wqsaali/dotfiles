@@ -9,7 +9,7 @@
 #umask 022
 
 # CDPATH
-CDPATH='.:~:~/workingCopies:~/workingCopies/code:~/workingCopies/code/github:~/workingCopies/code/bitbucket:~/workingCopies/code/gitlab'
+CDPATH='.:~:~/workingCopies:~/workingCopies/src:~/workingCopies/src/github.com:~/workingCopies/src/bitbucket.org:~/workingCopies/src/gitlab.com'
 
 if [ -d "/usr/local/sbin" ] ; then
   PATH="/usr/local/sbin:$PATH"
@@ -54,8 +54,9 @@ if [ -d "$HOME/.linuxbrew/share/info:$INFOPATH" ]; then
 fi
 
 # GOPATH
-GOPATH="${HOME}/go"
-PATH="$PATH:$GOPATH/bin"
+GOPATH="${HOME}/go:${HOME}/workingCopies"
+GOBIN="${GOPATH/:*}/bin"
+PATH="$PATH:${GOBIN}"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
