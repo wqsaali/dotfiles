@@ -240,6 +240,9 @@ installScripts() {
   curl -sLo bashmarks.sh https://raw.githubusercontent.com/huyng/bashmarks/master/bashmarks.sh
   chmod +x bashmarks.sh
   mv bashmarks.sh ${HOME}/.local/bin/
+  curl -sLo goclone https://raw.githubusercontent.com/ahmetb/goclone/master/goclone
+  chmod +x goclone
+  mv goclone ${HOME}/.local/bin/
 }
 
 installChefVM() {
