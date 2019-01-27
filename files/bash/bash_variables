@@ -32,5 +32,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 # Colored GCC warnings and errors
 # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# export FLAGS_GETOPT_CMD="$(brew --prefix gnu-getopt)/bin/getopt"
 
 export KITTY_CONFIG_DIRECTORY='~/.config/kitty/'

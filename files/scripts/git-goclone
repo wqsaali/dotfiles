@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+# git sub-command to clone a repo into a go workspace
+# Note that this scrip depends on the gnu version of getopt
+# in macOS you can get it with brew install gnu-getopt
+# and setting your path to PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+
+# Possible url formats:
+# url="git://github.com/some-user/my-repo.git"
+# url="https://github.com/some-user/my-repo.git"
+# url="git@github.com:some-user/my-repo.git"
+
+TEMP=`getopt -o dw: --long debug,workspace: -n 'git-goclone' -- "$@"`
+
+if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+
+eval set -- "$TEMP"
+
+w=-1
+workspace="${GOPATH##*:}"
+DEBUG=false
+
+while true; do
+  case "$1" in
+    -d | --debug ) DEBUG=true; shift ;;
+    -w | --workspace ) w="$2"; shift 2 ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+url=${1}
+
+# Breack down the url into components
+re='^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)(.git)?$'
+if [[ $url =~ $re ]]; then
+  protocol=${BASH_REMATCH[1]}
+  separator=${BASH_REMATCH[2]}
+  hostname=${BASH_REMATCH[3]}
+  user=${BASH_REMATCH[4]}
+  repo=${BASH_REMATCH[5]}
+fi
+
+path=${workspace}/src/$(echo "${hostname}/${user}/${repo}" | sed -e 's/\.git$//g')
+
+# Check if the workspace passed by the user is a number
+# and get the corresponding workspce from GOPATH
+re='^[+-]?[0-9]+([.][0-9]+)?$'
+if [[ $w =~ $re ]] ; then
+  saveIFS=$IFS
+  IFS=":"
+  workspace=($GOPATH)
+  IFS=$saveIFS
+  workspace=${workspace[${w}]}
+else
+  workspace=$w
+fi
+
+if [[ "${DEBUG}" == "true" ]]; then
+  echo "Cloning into: ${path}"
+fi
+
+mkdir -p "${path}"
+git clone ${url} "${path}"
