@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# git sub-command to perform git action recusively accross multiple repos
+
 _help(){
   echo -e "Runs git commands recusively by looking for git repos under the current directory."
   echo -e "  git recursive [CMD]."
