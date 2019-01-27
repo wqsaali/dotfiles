@@ -10,9 +10,24 @@
 # url="https://github.com/some-user/my-repo.git"
 # url="git@github.com:some-user/my-repo.git"
 
-TEMP=`getopt -o dw: --long debug,workspace: -n 'git-goclone' -- "$@"`
+function usage {
+  echo "Usage: $(basename $0) <url> [<flags>]"
+  echo ''
+  echo 'Flags:'
+  echo '  -h, --help                      display help'
+  echo '  -d, --debug                     enable debug output'
+  echo '  -w, --workspace <workspace>     either a number or a valid go workspace path'
+  echo ''
+  echo 'If you pass a number for workspace a path will be fetched from $GOPATH'
+  echo 'where the number is the position of the workspace in the GOPATH environment varialbe'
+  echo 'by default the last workspace defined in the GOPATH environment varialbe will be used'
+  echo ''
+  exit 1
+}
 
-if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+TEMP=`getopt -o hdw: --long debug,workspace: -n 'git-goclone' -- "$@"`
+
+if [ $? != 0 ] ; then echo -e "Terminating...\n" >&2 ; usage ; exit 1 ; fi
 
 eval set -- "$TEMP"
 
@@ -22,6 +37,7 @@ DEBUG=false
 
 while true; do
   case "$1" in
+    -h | --help ) usage ;;
     -d | --debug ) DEBUG=true; shift ;;
     -w | --workspace ) w="$2"; shift 2 ;;
     -- ) shift; break ;;
@@ -31,20 +47,24 @@ done
 
 url=${1}
 
-# Breack down the url into components
-re='^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)(.git)?$'
+if [ -z $url ] ; then echo -e "You need to provide a repo URL.\nTerminating...\n" >&2 ; usage ; exit 1 ; fi
+
+# Break down the url into components
+re='^(https|(ssh:\/\/)?git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)(.git)?$'
 if [[ $url =~ $re ]]; then
   protocol=${BASH_REMATCH[1]}
-  separator=${BASH_REMATCH[2]}
-  hostname=${BASH_REMATCH[3]}
-  user=${BASH_REMATCH[4]}
-  repo=${BASH_REMATCH[5]}
+  separator=${BASH_REMATCH[3]}
+  hostname=${BASH_REMATCH[4]}
+  user=${BASH_REMATCH[5]}
+  repo=${BASH_REMATCH[6]}
+else
+  echo -e "Invalid repo URL.\nTerminating..." >&2 ; exit 1
 fi
 
 path=${workspace}/src/$(echo "${hostname}/${user}/${repo}" | sed -e 's/\.git$//g')
 
 # Check if the workspace passed by the user is a number
-# and get the corresponding workspce from GOPATH
+# and get the corresponding workspace from GOPATH
 re='^[+-]?[0-9]+([.][0-9]+)?$'
 if [[ $w =~ $re ]] ; then
   saveIFS=$IFS
@@ -57,7 +77,7 @@ else
 fi
 
 if [[ "${DEBUG}" == "true" ]]; then
-  echo "Cloning into: ${path}"
+  echo "Cloning ${url} into: ${path}"
 fi
 
 mkdir -p "${path}"
