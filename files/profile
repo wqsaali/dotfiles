@@ -9,7 +9,7 @@
 #umask 022
 
 # CDPATH
-CDPATH='.:~:~/workingCopies:~/workingCopies/src:~/workingCopies/src/github.com:~/workingCopies/src/bitbucket.org:~/workingCopies/src/gitlab.com'
+CDPATH=".:~:~/workingCopies:~/workingCopies/src:$(ls -1d ~/workingCopies/src/*/ | tr '\n' ':')"
 
 if [ -d "/usr/local/sbin" ] ; then
   PATH="/usr/local/sbin:$PATH"
@@ -30,6 +30,9 @@ if [ -d "/usr/local/opt/gnu-tar/libexec/gnubin" ]; then
 fi
 if [ -d "/usr/local/opt/gnu-getopt/bin" ]; then
   PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+fi
+if [ -d "/usr/local/opt/gnu-sed/libexec/gnubin" ]; then
+  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 fi
 
 # Use brew python

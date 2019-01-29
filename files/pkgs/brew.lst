@@ -62,7 +62,9 @@ git
 git-quick-stats
 git-secrets
 gnu-getopt
+gnu-sed
 godep
+goreleaser
 gotty
 graphicsmagick
 graphviz
@@ -89,6 +91,7 @@ kubectx
 kubernetes-cli
 kubernetes-helm
 legit
+lesspipe
 mas
 molecule
 moreutils
