@@ -38,9 +38,23 @@ installFromGithub() {
   arch="${3:-64}"
   name="${4:-$(basename ${project})}"
   url=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[] | select(.name | test(\"${os}.*${arch}\")) | .browser_download_url")
-  curl -Lo $name $url
-  chmod +x $name
-  mv $name ~/.local/bin/
+  artifact=$(basename ${url})
+  re='^(.*)\.(tar.gz|tgz)$'
+  if [[ ${artifact} =~ $re ]]; then
+    artifact_name=${BASH_REMATCH[1]}
+    artifact_ext=${BASH_REMATCH[2]}
+  fi
+  if [ ! -z ${artifact_name} ]; then
+    curl -Lo ${artifact} ${url}
+    tar -zxvf ${artifact} --one-top-level # gnu-tar is needed for this one
+    mv $(find ./${artifact_name} -type f -name ${name}) ${name}
+    rm ${artifact}
+    rm -rf ${artifact_name}
+  else
+    curl -Lo ${name} ${url}
+  fi
+  chmod +x ${name}
+  mv ${name} ~/.local/bin/
 }
 
 getNerdFont() {
@@ -125,6 +139,14 @@ installGoss() {
 
 installDepcon() {
   installFromGithub 'ContainX/depcon' ${1} ${2}
+}
+
+installKubebuilder() {
+  installFromGithub 'kubernetes-sigs/kubebuilder' ${1} ${2}
+}
+
+installHelmsman() {
+  installFromGithub 'Praqma/helmsman' ${1} ${2}
 }
 
 installCargo() {
@@ -540,6 +562,20 @@ case "$1" in
       installDepcon 'osx' '64'
     else
       installDepcon 'linux' '64'
+    fi
+    ;;
+  "kubebuilder")
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      installKubebuilder 'darwin' '64'
+    else
+      installKubebuilder 'linux' '64'
+    fi
+    ;;
+  "helmsman")
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      installHelmsman 'darwin' '64'
+    else
+      installHelmsman 'linux' '64'
     fi
     ;;
   "minikube")

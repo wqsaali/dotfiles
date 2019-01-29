@@ -63,6 +63,7 @@ git-quick-stats
 git-secrets
 gnu-getopt
 gnu-sed
+gnu-tar
 godep
 goreleaser
 gotty
