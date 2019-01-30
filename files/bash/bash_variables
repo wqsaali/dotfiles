@@ -37,3 +37,5 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export FZF_DEFAULT_OPTS='--height 10'
 
 export KITTY_CONFIG_DIRECTORY='~/.config/kitty/'
+
+export SLACK_THEME_SHELL_PROFILE='~/.profile'
