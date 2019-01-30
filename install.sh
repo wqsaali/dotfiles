@@ -39,12 +39,11 @@ installFromGithub() {
   name="${4:-$(basename ${project})}"
   url=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[] | select(.name | test(\"${os}.*${arch}\")) | .browser_download_url")
   artifact=$(basename ${url})
-  re='^(.*)\.(tar.gz|tgz)$'
+  re='^(.*)\.(tar\.gz|tgz)$'
   if [[ ${artifact} =~ $re ]]; then
     artifact_name=${BASH_REMATCH[1]}
     artifact_ext=${BASH_REMATCH[2]}
-  fi
-  if [ ! -z ${artifact_name} ]; then
+    echo "${artifact_name} is a tarball (${artifact_ext})"
     curl -Lo ${artifact} ${url}
     tar -zxvf ${artifact} --one-top-level # gnu-tar is needed for this one
     mv $(find ./${artifact_name} -type f -name ${name}) ${name}
@@ -143,6 +142,7 @@ installDepcon() {
 
 installKubebuilder() {
   installFromGithub 'kubernetes-sigs/kubebuilder' ${1} ${2}
+  installFromGithub 'kubernetes-sigs/kustomize' ${1} ${2}
 }
 
 installHelmsman() {
@@ -259,12 +259,15 @@ installScripts() {
   curl -sLo testssl testssl.sh
   chmod +x testssl
   mv testssl ${HOME}/.local/bin/
-  curl -sLo bashmarks.sh https://raw.githubusercontent.com/huyng/bashmarks/master/bashmarks.sh
+  curl -sLO https://raw.githubusercontent.com/huyng/bashmarks/master/bashmarks.sh
   chmod +x bashmarks.sh
   mv bashmarks.sh ${HOME}/.local/bin/
-  curl -sLo goclone https://raw.githubusercontent.com/ahmetb/goclone/master/goclone
+  curl -sLO https://raw.githubusercontent.com/ahmetb/goclone/master/goclone
   chmod +x goclone
   mv goclone ${HOME}/.local/bin/
+  curl -sLO https://raw.githubusercontent.com/mykeels/slack-theme-cli/master/slack-theme
+  chmod +x slack-theme
+  mv slack-theme ${HOME}/.local/bin/
 }
 
 installChefVM() {
