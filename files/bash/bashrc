@@ -122,11 +122,6 @@ elif [ -x "$(command -v hh)" ]; then
 
 fi
 
-# Ubuntu’s command-not-found equivalent for Homebrew on OSX
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
-fi
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x "$(command -v lesspipe)" ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -201,6 +196,9 @@ if ! shopt -oq posix; then
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Ubuntu’s command-not-found equivalent for Homebrew on OSX
+  eval "$(brew command-not-found-init)"
+
   # export RBENV_ROOT="$(brew --prefix rbenv)"
   # export GEM_HOME="$(brew --prefix)/opt/gems"
   # export GEM_PATH="$(brew --prefix)/opt/gems"
@@ -240,8 +238,8 @@ fi
 # fi
 
 if [ -x "$(command -v pyenv)" ]; then
-eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+  eval "$(pyenv init -)"
+  [ -x "$(command -v pyenv-virtualenv-init)" ] && eval "$(pyenv virtualenv-init -)"
 fi
 
 [ -x "$(command -v thefuck)" ] && eval $(thefuck --alias)
