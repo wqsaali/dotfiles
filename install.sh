@@ -145,6 +145,10 @@ installKubebuilder() {
   installFromGithub 'kubernetes-sigs/kustomize' ${1} ${2}
 }
 
+installOperatorSdk() {
+  installFromGithub 'operator-framework/operator-sdk' ${1} ${2}
+}
+
 installHelmsman() {
   installFromGithub 'Praqma/helmsman' ${1} ${2}
 }
@@ -574,11 +578,18 @@ case "$1" in
       installKubebuilder 'linux' '64'
     fi
     ;;
+  "operator-sdk")
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      installOperatorSdk 'darwin' '64'
+    else
+      installOperatorSdk 'linux' '64'
+    fi
+    ;;
   "helmsman")
     if [[ "$OSTYPE" == "darwin"* ]]; then
-      installHelmsman 'darwin' '64'
+      installHelmsman '64' 'darwin'
     else
-      installHelmsman 'linux' '64'
+      installHelmsman '64' 'linux'
     fi
     ;;
   "minikube")
