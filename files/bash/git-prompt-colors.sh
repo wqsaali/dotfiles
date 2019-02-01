@@ -3,6 +3,12 @@
 # These are the defaults from the "Default" theme
 # You just need to override what you want to have changed
 override_git_prompt_colors() {
+  GIT_PROMPT_THEME_NAME="Custom"
+  Time12a="\$(date +%H:%M:%S)"
+  PathShort="\w";
+
+  PROMPT_DIRTRIM=2
+
   KUBE_PS1_PREFIX=""
   KUBE_PS1_SUFFIX=""
   KUBE_PS1_CTX_COLOR="blue"
@@ -10,18 +16,13 @@ override_git_prompt_colors() {
   KUBE_PS1_NS_ENABLE=false
   KUBE_PS1_SEPARATOR=""
 
-  GIT_PROMPT_THEME_NAME="Custom"
-  PROMPT_DIRTRIM=2
-  Time12a="\$(date +%H:%M:%S)"
-  # PathShort="\w";
-
   ## These are the color definitions used by gitprompt.sh
   GIT_PROMPT_PREFIX="("                 # start of the git info string
   GIT_PROMPT_SUFFIX=")"                 # the end of the git info string
   # GIT_PROMPT_SEPARATOR="|"              # separates each item
 
   GIT_PROMPT_BRANCH="${White}"        # the git branch that is active in the current directory
-  GIT_PROMPT_MASTER_BRANCH="${GIT_PROMPT_BRANCH}" # used if the git branch that is active in the current directory is $GIT_PROMPT_MASTER_BRANCHES
+  GIT_PROMPT_MASTER_BRANCH="${BoldWhite}" # used if the git branch that is active in the current directory is $GIT_PROMPT_MASTER_BRANCHES
   GIT_PROMPT_STAGED="${Red}● "           # the number of staged files/directories
   GIT_PROMPT_CONFLICTS="${Red}✖ "       # the number of files in conflict
   GIT_PROMPT_CHANGED="${Yellow}✚ "        # the number of changed files
