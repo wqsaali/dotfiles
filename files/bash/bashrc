@@ -173,6 +173,15 @@ bind '"\e[B"':history-search-forward
 bind '"\C-\e[B"':"\"\C-k\C-ahistory | grep '^ *[0-9]* *\C-e.'\C-m\""
 bind Space:magic-space
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Ubuntu’s command-not-found equivalent for Homebrew on OSX
+  eval "$(brew command-not-found-init)"
+
+  # export RBENV_ROOT="$(brew --prefix rbenv)"
+  # export GEM_HOME="$(brew --prefix)/opt/gems"
+  # export GEM_PATH="$(brew --prefix)/opt/gems"
+fi
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -192,27 +201,13 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   elif [ -f /usr/local/etc/bash_completion ]; then
     . /usr/local/etc/bash_completion
+  elif [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+    export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+    . /usr/local/etc/profile.d/bash_completion.sh
   fi
 fi
 
-export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # Ubuntu’s command-not-found equivalent for Homebrew on OSX
-  eval "$(brew command-not-found-init)"
-
-  # export RBENV_ROOT="$(brew --prefix rbenv)"
-  # export GEM_HOME="$(brew --prefix)/opt/gems"
-  # export GEM_PATH="$(brew --prefix)/opt/gems"
-  if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    source $(brew --prefix)/etc/bash_completion
-  fi
-fi
-
-if [ -x "$(command -v aws_completer)" ]; then
-  complete -C 'aws_completer' aws
-fi
+[ -x "$(command -v aws_completer)" ] && complete -C 'aws_completer' aws
 
 [ -x "$(command -v awless)" ] && source <(awless completion bash)
 
