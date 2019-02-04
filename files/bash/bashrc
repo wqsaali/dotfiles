@@ -195,6 +195,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # Ubuntu’s command-not-found equivalent for Homebrew on OSX
   eval "$(brew command-not-found-init)"
@@ -211,14 +214,10 @@ if [ -x "$(command -v aws_completer)" ]; then
   complete -C 'aws_completer' aws
 fi
 
-if [ -x "$(command -v awless)" ]; then
-  if [ -f ~/.bash/awless.completion.sh ]; then
-    source ~/.bash/awless.completion.sh
-  else
-    awless completion bash >> ~/.bash/awless.completion.sh
-    source ~/.bash/awless.completion.sh
-  fi
-fi
+[ -x "$(command -v awless)" ] && source <(awless completion bash)
+
+[ -x "$(command -v kubectl)" ] && source <(kubectl completion bash)
+[ -x "$(command -v kops)" ] && source <(kops completion bash)
 
 # if [ -x "$(command -v azure)" ]; then
 #   if [ -f ~/.bash/azure.completion.sh ]; then

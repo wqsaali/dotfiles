@@ -275,7 +275,7 @@ installScripts() {
 }
 
 installChefVM() {
-  git clone git@github.com:trobrock/chefvm.git ~/.chefvm
+  git clone https://github.com/trobrock/chefvm.git ~/.chefvm
   ~/.chefvm/bin/chefvm init
 }
 
@@ -452,6 +452,8 @@ createSkeleton() {
     mkdir -p "${d}"
   done
   [ -d ${HOME}/workingCopies/code ] || ln -s ${HOME}/workingCopies/src ${HOME}/workingCopies/code
+  mkdir -p ~/.local/bin/
+  mkdir -p ~/.local/share/bash-completion
 }
 
 installDotFiles() {
@@ -475,7 +477,7 @@ installDotFiles() {
   mkdir -p ${HOME}/.ranger_plugins/
   cd ${HOME}/.ranger_plugins/
   if [ ! -d ${HOME}/.ranger_plugins/ranger_devicons ]; then
-    git clone git@github.com:alexanderjeurissen/ranger_devicons.git
+    git clone https://github.com/alexanderjeurissen/ranger_devicons.git
   fi
   cd ranger_devicons
   git pull

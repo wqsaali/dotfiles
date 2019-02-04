@@ -10,7 +10,7 @@ aws-shell
 awscli
 azure-cli
 bash
-bash-completion
+bash-completion@2
 bat
 bbl
 bfg

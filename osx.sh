@@ -238,11 +238,11 @@ installDotFiles() {
   cp -r files/kitty ~/.config/
   # ln -s ~/.config/kitty ~/Library/Preferences/
 
-  sudo cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
+  cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
-  sudo mv knife_autocomplete /usr/local/etc/bash_completion.d/
+  mv knife_autocomplete /usr/local/etc/bash_completion.d/
   curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
-  sudo mv kitchen-completion /usr/local/etc/bash_completion.d/
+  mv kitchen-completion /usr/local/etc/bash_completion.d/
 
   cd ${INSTALLDIR}
 }
