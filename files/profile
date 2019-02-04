@@ -48,6 +48,11 @@ if [ -d '/usr/local/opt/ruby/bin' ]; then
   # PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
 fi
 
+if [ -x "$(command -v ruby)" ] && [ -x "$(command -v gem)" ]; then
+    PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
+    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
 # Linuxbrew paths
 if [ -d "$HOME/.linuxbrew/bin:$PATH" ]; then
   PATH="$HOME/.linuxbrew/bin:$PATH"
