@@ -80,7 +80,7 @@ fi
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
   # include .bashrc if it exists
-  if [ -f "$HOME/.bashrc" ] && [ "$CONFIGURED" != "true" ]; then
+  if [ -f "$HOME/.bashrc" ] && [[ "$CONFIGURED" != "true" ]]; then
     . "$HOME/.bashrc"
   fi
 fi
