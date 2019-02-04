@@ -22,5 +22,7 @@ _kubectl-enter() {
 }
 complete -F _kubectl-enter kubectl-enter
 
-complete -F _complete_alias kctl
-complete -F _complete_alias kube
+if type _completion_loader &> /dev/null; then
+  complete -F _complete_alias kctl
+  complete -F _complete_alias kube
+fi
