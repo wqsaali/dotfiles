@@ -365,6 +365,8 @@ alias kctl='kubectl'
 alias kctx='kubectx'
 alias kns='kubens'
 
+alias kctl-clean='kubectl get po --all-namespaces --no-headers | grep -v Running | awk '\''{print $2 " -n " $1}'\'' | xargs kubectl delete po'
+
 # Helm aliases
 alias helm-plugin-update="helm plugin list | awk '!/NAME/ {print $1}' | xargs -n 1 helm plugin update"
 
