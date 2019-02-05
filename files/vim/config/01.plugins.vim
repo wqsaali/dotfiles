@@ -18,6 +18,7 @@
 
   Plug 'tpope/vim-sensible'
   Plug 'editorconfig/editorconfig-vim'
+  Plug 'wincent/terminus'
   "Plug 'edkolev/promptline.vim'
   "Plug 'edkolev/tmuxline.vim'
   Plug 'vim-airline/vim-airline'

@@ -69,6 +69,10 @@
   "     \ 'cpp': ['', 'Function', 'Constant']
   "     \ }
 
+  " GitGutter
+  let g:gitgutter_max_signs = 500
+  " let g:gitgutter_highlight_lines = 1
+
   "Ack
   for command in ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
     exe 'command ' . substitute(command, 'Ack', 'Ag', "") . ' ' . command
