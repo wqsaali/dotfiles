@@ -207,7 +207,7 @@ alias colorcat='pygmentize -g'
 # alias Cat='source-highlight --out-format=esc -o STDOUT -i'
 # alias PCat='source-highlight --out-format=esc -o STDOUT'
 if [ -x "$(command -v bat)" ]; then
-  BAT_THEME='DarkNeon'
+  export BAT_THEME='Tomorrow-Night-Bright'
   alias Cat="bat --theme $BAT_THEME"
   alias cat="bat --theme $BAT_THEME --plain"
 else
