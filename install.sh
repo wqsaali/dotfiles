@@ -494,7 +494,7 @@ installDotFiles() {
 
   if [ -x "$(command -v bat)" ] && [ ! -d "$(bat cache --config-dir)/themes/sublime-tomorrow-theme" ]; then
     mkdir -p "$(bat cache --config-dir)/themes"
-    git clone https://giithub.com/theymaybecoders/sublime-tomorrow-theme.git "$(bat cache --config-dir)/themes/sublime-tomorrow-theme"
+    git clone https://github.com/theymaybecoders/sublime-tomorrow-theme.git "$(bat cache --config-dir)/themes/sublime-tomorrow-theme"
     bat cache --init
   fi
 }
