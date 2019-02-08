@@ -92,8 +92,10 @@ kube-aws
 kubectx
 kubernetes-cli
 kubernetes-helm
+kustomize
 legit
 lesspipe
+make
 mas
 molecule
 moreutils
@@ -113,11 +115,13 @@ prettyping
 pyenv
 pyenv-virtualenv
 python
+rancher-cli
 ranger
 rbac-lookup
 reattach-to-user-namespace
 remarshal
 rename
+rke
 rust
 s3cmd
 shellcheck

@@ -1,6 +1,6 @@
 {
     "vim.disableAnnoyingNeovimMessage": true,
-    "workbench.colorTheme": "Tomorrow Night (Sublime)",
+    "workbench.colorTheme": "Tomorrow Night Bright (Sublime)",
     "atomKeymap.promptV3Features": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.formatOnPaste": true,
@@ -32,5 +32,6 @@
     "gitlens.codeLens.enabled": false,
     "diffEditor.originalEditable": true,
     "gitlens.views.fileHistory.enabled": true,
-    "gitlens.views.lineHistory.enabled": true
+    "gitlens.views.lineHistory.enabled": true,
+    "window.zoomLevel": 0
 }

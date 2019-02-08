@@ -1,8 +1,10 @@
 # k8s.io/helm/cmd/helm
+github.com/anacrolix/torrent/cmd/...
 github.com/cloudposse/slack-notifier
 github.com/gardener/gardenctl
 github.com/golang/lint/golint
 github.com/hashicorp/terraform
+github.com/ivanilves/lstags
 github.com/kubernauts/tk8
 github.com/kubicorn/kubicorn
 github.com/liggitt/audit2rbac
