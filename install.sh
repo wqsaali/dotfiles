@@ -272,6 +272,7 @@ installScripts() {
   curl -sLO https://raw.githubusercontent.com/mykeels/slack-theme-cli/master/slack-theme
   chmod +x slack-theme
   mv slack-theme ${HOME}/.local/bin/
+  installKubetail
 }
 
 installChefVM() {
