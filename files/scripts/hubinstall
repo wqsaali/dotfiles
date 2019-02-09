@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# Script to install binaries and scripts from Github
+# It supports getting files for releases
+# or directly from the repo source tree
+# Examples:
+#    hubinstall -r johanhaleby/kubetail
+#    hubinstall kubernetes-sigs/kubebuilder
+#    hubinstall kubernetes-sigs/kubebuilder
+
 # Defaults
 install_to="${HOME}/.local/bin/"
 tag="master"
@@ -7,6 +15,10 @@ RAW=false
 DEBUG=false
 
 function usage {
+  if ! [ -z "${1}" ] ; then
+    echo -e "${1}"
+    echo ''
+  fi
   echo "Usage: $(basename $0) <project> [<os>] [<arch>] [<binary>] [<flags>]"
   echo ''
   echo 'Flags:'
@@ -77,7 +89,7 @@ function installFromRawGithub() {
 
 TEMP=$(getopt -o hdrt:i: --long debug,install-to: -n "$(basename $0)" -- "$@")
 
-if [ $? != 0 ] ; then echo -e "Terminating...\n" >&2 ; usage ; exit 1 ; fi
+if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
 eval set -- "$TEMP"
 
@@ -97,8 +109,7 @@ done
 if [ "$0" = "$BASH_SOURCE" ] ; then
   project="${1}"
   if [ -z ${project} ] ; then
-    echo -e "You need to provide a project.\nTerminating...\n" >&2
-    usage
+    usage "You need to provide a project.\nTerminating...\n" >&2
   fi
 
   if [[ "${RAW}" == "true" ]]; then

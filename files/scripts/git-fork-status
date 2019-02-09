@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Colors
 export ESC_SEQ="\x1b["
 export COL_RESET=$ESC_SEQ"39;49;00m"

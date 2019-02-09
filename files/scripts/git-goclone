@@ -11,6 +11,10 @@
 # url="git@github.com:some-user/my-repo.git"
 
 function usage {
+  if ! [ -z "${1}" ] ; then
+    echo -e "${1}"
+    echo ''
+  fi
   echo "Usage: $(basename $0) <url> [<flags>]"
   echo ''
   echo 'Flags:'
@@ -27,7 +31,7 @@ function usage {
 
 TEMP=$(getopt -o hdw: --long debug,workspace: -n "$(basename $0)" -- "$@")
 
-if [ $? != 0 ] ; then echo -e "Terminating...\n" >&2 ; usage ; exit 1 ; fi
+[ $? != 0 ] && usage "Terminating..." >&2
 
 eval set -- "$TEMP"
 
@@ -47,9 +51,10 @@ done
 
 url=${1}
 
+if [[ "$url" == "help" ]]; then usage ; fi
+
 if [ -z $url ] ; then
-  echo -e "You need to provide a repo URL.\nTerminating...\n" >&2
-  usage
+  usage "You need to provide a repo URL.\nTerminating...\n" >&2
 fi
 
 # Break down the url into components
