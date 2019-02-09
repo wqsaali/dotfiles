@@ -3,6 +3,8 @@
 INSTALLDIR=$(pwd)
 dotfiles_dir="$(dirname $0)"
 
+source ${dotfiles_dir}/files/scripts/hubinstall
+
 path() {
   mkdir -p "$(dirname "$1")"
   echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
@@ -31,43 +33,12 @@ gem_install_or_update() {
   fi
 }
 
-installFromGithub() {
-  mkdir -p ~/.local/bin/
-  project="${1}"
-  os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
-  arch="${3:-64}"
-  name="${4:-$(basename ${project})}"
-  url=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[] | select(.name | test(\"${os}.*${arch}\")) | .browser_download_url")
-  artifact=$(basename ${url})
-  re='^(.*)\.(tar\.gz|tgz)$'
-  if [[ ${artifact} =~ $re ]]; then
-    artifact_name=${BASH_REMATCH[1]}
-    artifact_ext=${BASH_REMATCH[2]}
-    echo "${artifact_name} is a tarball (${artifact_ext})"
-    curl -Lo ${artifact} ${url}
-    tar -zxvf ${artifact} --one-top-level # gnu-tar is needed for this one
-    mv $(find ./${artifact_name} -type f -name ${name}) ${name}
-    rm ${artifact}
-    rm -rf ${artifact_name}
-  else
-    curl -Lo ${name} ${url}
-  fi
-  chmod +x ${name}
-  mv ${name} ~/.local/bin/
-}
-
 getNerdFont() {
-  project='ryanoasis/nerd-fonts/'
-  tag=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r '.tag_name' | tr -d 'v' )
-  url="https://raw.githubusercontent.com/${project}/${tag}/patched-fonts/${1// /%20}"
-  curl -fLo "${1}" "${url}"
+  getFromRawGithub 'ryanoasis/nerd-fonts/' "patched-fonts/${1}" 'latest'
 }
 
 installEls() {
-  mkdir -p ~/.local/bin/
-  curl -O https://raw.githubusercontent.com/AnthonyDiGirolamo/els/master/els
-  chmod +x els
-  mv els ~/.local/bin/
+  installFromRawGithub 'AnthonyDiGirolamo/els'
 }
 
 installAwless() {
@@ -108,10 +79,7 @@ installMinikube() {
 }
 
 installKubetail() {
-  mkdir -p ~/.local/bin/
-  curl -Lo kubetail https://raw.githubusercontent.com/johanhaleby/kubetail/master/kubetail
-  chmod +x kubetail
-  mv kubetail ~/.local/bin/
+  installFromRawGithub 'johanhaleby/kubetail'
 }
 
 installKubeFZF() {
@@ -263,15 +231,9 @@ installScripts() {
   curl -sLo testssl testssl.sh
   chmod +x testssl
   mv testssl ${HOME}/.local/bin/
-  curl -sLO https://raw.githubusercontent.com/huyng/bashmarks/master/bashmarks.sh
-  chmod +x bashmarks.sh
-  mv bashmarks.sh ${HOME}/.local/bin/
-  curl -sLO https://raw.githubusercontent.com/ahmetb/goclone/master/goclone
-  chmod +x goclone
-  mv goclone ${HOME}/.local/bin/
-  curl -sLO https://raw.githubusercontent.com/mykeels/slack-theme-cli/master/slack-theme
-  chmod +x slack-theme
-  mv slack-theme ${HOME}/.local/bin/
+  installFromRawGithub 'huyng/bashmarks' 'bashmarks.sh'
+  installFromRawGithub 'ahmetb/goclone'
+  installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
   installKubetail
 }
 
@@ -493,10 +455,10 @@ installDotFiles() {
     ./linux.sh dotfiles
   fi
 
-  if [ -x "$(command -v bat)" ] && [ ! -d "$(bat cache --config-dir)/themes/sublime-tomorrow-theme" ]; then
-    mkdir -p "$(bat cache --config-dir)/themes"
-    git clone https://github.com/theymaybecoders/sublime-tomorrow-theme.git "$(bat cache --config-dir)/themes/sublime-tomorrow-theme"
-    bat cache --init
+  if [ -x "$(command -v bat)" ] && [ ! -d "${HOME}/.config/bat/themes/sublime-tomorrow-theme" ]; then
+    mkdir -p "${HOME}/.config/bat/themes"
+    git clone https://github.com/theymaybecoders/sublime-tomorrow-theme.git "${HOME}/.config/bat/themes/sublime-tomorrow-theme"
+    bat cache --build
   fi
 }
 

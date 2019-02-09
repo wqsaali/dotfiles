@@ -25,7 +25,7 @@ function usage {
   exit 1
 }
 
-TEMP=`getopt -o hdw: --long debug,workspace: -n 'git-goclone' -- "$@"`
+TEMP=$(getopt -o hdw: --long debug,workspace: -n "$(basename $0)" -- "$@")
 
 if [ $? != 0 ] ; then echo -e "Terminating...\n" >&2 ; usage ; exit 1 ; fi
 
@@ -47,7 +47,10 @@ done
 
 url=${1}
 
-if [ -z $url ] ; then echo -e "You need to provide a repo URL.\nTerminating...\n" >&2 ; usage ; exit 1 ; fi
+if [ -z $url ] ; then
+  echo -e "You need to provide a repo URL.\nTerminating...\n" >&2
+  usage
+fi
 
 # Break down the url into components
 re='^(https|(ssh:\/\/)?git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)(.git)?$'

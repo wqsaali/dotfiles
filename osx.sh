@@ -175,8 +175,8 @@ installItermColors() {
 
 function installIterm() {
   cask_install "iterm2"
-  cp files/iterm/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
-  plutil -convert binary1 ~/Library/Preferences/com.googlecode.iterm2.plist
+  cp files/iterm/com.googlecode.iterm2.plist ${HOME}/Library/Preferences/com.googlecode.iterm2.plist
+  plutil -convert binary1 ${HOME}/Library/Preferences/com.googlecode.iterm2.plist
   defaults read com.googlecode.iterm2
 }
 
@@ -235,8 +235,8 @@ installDotFiles() {
     cd ${INSTALLDIR}
   fi
 
-  cp -r files/kitty ~/.config/
-  # ln -s ~/.config/kitty ~/Library/Preferences/
+  cp -r files/kitty ${HOME}/.config/
+  # ln -s ${HOME}/.config/kitty ${HOME}/Library/Preferences/
 
   cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
