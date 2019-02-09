@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 
-# for repo in $(bb list -e '^dcos-.*' | grep 'thingworx' | awk '{print $3}'); do
-#   if [ ! -d "$(basename ${repo})" ]; then
-#     git clone git@bitbucket.org:${repo}.git
-#   else
-#     cd $(basename ${repo})
-#     git pull
-#     cd ..
-#   fi
-# done
+# Script to clone or update all the repos
+# from a Bitbucket project
 
 # Colors
 ESC_SEQ="\x1b["
@@ -22,12 +15,16 @@ COL_CYAN=$ESC_SEQ"36;01m"
 COL_GREY=$ESC_SEQ"38;5;245m"
 
 proj="${1:non-existing-repo}"
+team="${2:non-existing-repo}"
+
 cdir=$(pwd)
 page=1
+
 user=$(awk -F "=" '/username/ {print $2}' ~/.bitbucket | tr -d " ")
 pass=$(awk -F "=" '/password/ {print $2}' ~/.bitbucket | tr -d " ")
+
+url="https://api.bitbucket.org/2.0/repositories/${team}/?q=project.key=\"${proj}\""
 #repos=$(curl -s -u "${user}:${pass}" "${url}&page=${page}" | jq -r '.values[].links.clone[].href | select(contains("http") | not)')
-url="https://api.bitbucket.org/2.0/repositories/thingworx-ondemand/?q=project.key=\"${proj}\""
 repos=$(curl -s -u "${user}:${pass}" "${url}&page=${page}" | jq -r '.values[].links.clone[] | select(.name | contains("ssh")) | .href')
 
 while [ ! -z "${repos}" ]; do

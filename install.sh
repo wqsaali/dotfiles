@@ -42,8 +42,7 @@ installEls() {
 }
 
 installAwless() {
-  mkdir -p ~/.local/bin/
-  curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
+  pipeBashFromRawGithub 'wallix/awless/master' 'getawless.sh'
   mv awless ~/.local/bin/
 }
 
@@ -312,7 +311,7 @@ installVimPlugins() {
 
   # Using vim-plug
   if [ ! -f ~/.vim/autoload/plug.vim ]; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -sLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
   vim +PlugInstall +qall
 }
@@ -411,12 +410,14 @@ installFish() {
 
 createSkeleton() {
   dirs=$(cat config.sh | awk -F\' '{print $2}' | grep 'HOME')
-  for d in $(envsubst <<< ${dirs}); do
+  for d in $(envsubst <<< "${dirs}"); do
     mkdir -p "${d}"
   done
+
   [ -d ${HOME}/workingCopies/code ] || ln -s ${HOME}/workingCopies/src ${HOME}/workingCopies/code
-  mkdir -p ~/.local/bin/
-  mkdir -p ~/.local/share/bash-completion
+
+  mkdir -p ${HOME}/.local/bin/
+  mkdir -p ${HOME}/.local/share/bash-completion
 }
 
 installDotFiles() {
@@ -424,6 +425,7 @@ installDotFiles() {
     echo 'You need to install git!' >&2
     exit 1
   fi
+
   createSkeleton
   installVimPlugins
   installTmuxConf

@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# Script to clone or update all the repos
+# from a Github organization
+# it also detects if the repo is a fork and automaticaly:
+#  - adds the upstream as a remote
+#  - checks the drift from upstream (commits ahead/behind)
+#  - syncs the reppo with the upstream (if possible)
+
 # Colors
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"

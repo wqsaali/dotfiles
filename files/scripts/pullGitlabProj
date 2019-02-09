@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
+# Script to clone or update all the repos
+# from all Gitlab projects that you own
+
 token=${1}
 cdir=$(pwd)
 page=1
 
+url='https://gitlab.com'
+
 test -z $token && echo "Token is required." 1>&2 && exit 1
 
-repos=$(curl -s --header "PRIVATE-TOKEN: $token" "http://gitlab.production.smartbox.com/api/v3/projects/owned?per_page=100&page=$page" | jq .[].ssh_url_to_repo | tr -d '"')
+repos=$(curl -s --header "PRIVATE-TOKEN: $token" "${url}/api/v3/projects/owned?per_page=100&page=$page" | jq .[].ssh_url_to_repo | tr -d '"')
 
 while [ ! -z "$repos" ]; do
   for repo in  $(echo $repos); do
@@ -24,5 +29,5 @@ while [ ! -z "$repos" ]; do
     fi
   done
   page=$((page+1))
-  repos=$(curl -s --header "PRIVATE-TOKEN: $token" "http://gitlab.production.smartbox.com/api/v3/projects/owned?per_page=100&page=$page" | jq .[].ssh_url_to_repo | tr -d '"')
+  repos=$(curl -s --header "PRIVATE-TOKEN: $token" "${url}/api/v3/projects/owned?per_page=100&page=$page" | jq .[].ssh_url_to_repo | tr -d '"')
 done

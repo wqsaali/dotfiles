@@ -34,8 +34,10 @@ function usage {
 }
 
 function install() {
-  chmod +x ${1}
-  mv ${1} ${install_to}
+  if [ -f "${!}" ]; then
+    chmod +x ${1}
+    mv ${1} ${install_to}
+  fi
 }
 
 function installFromGithub() {
@@ -85,6 +87,15 @@ function installFromRawGithub() {
   tag="${3:-master}"
   getFromRawGithub "${project}" "${name}" "${tag}"
   install "${name}"
+}
+
+function pipeBashFromRawGithub() {
+  project="${1}"
+  name="${2:-$(basename ${project})}"
+  tag="${3:-master}"
+  getFromRawGithub "${project}" "${name}" "${tag}"
+  bash ${name}
+  rm ${name}
 }
 
 TEMP=$(getopt -o hdrt:i: --long debug,install-to: -n "$(basename $0)" -- "$@")
