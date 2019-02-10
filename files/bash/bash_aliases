@@ -452,7 +452,7 @@ alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'
 alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip2 install -U'
 alias pip-clean='rm -rf ~/.cache/pip/'
 
-# apt aliases
+# apt & brew aliases
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   if ! [ -x "$(command -v brew)" ]; then
     alias brew='apt'
@@ -518,9 +518,24 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     brew cleanup
   }
 
+  check-keg_only() {
+    kegs=$(brew info --installed --json | jq -r 'map(select(.keg_only == true and .linked_keg == null)) | "/usr/local/opt/" + .[].name + "/bin"')
+    for keg in $kegs; do
+      if ! [[ ":$PATH:" == *":${keg}:"* ]] && [ -d "$keg" ]; then
+        echo -e "\n# WARNING: ${keg} is not in your PATH"
+        echo '# add the following to your profile to fix it'
+        cat << EOF
+if [ -d '${keg}' ]; then
+  PATH="${keg}:\$PATH"
+fi
+EOF
+      fi
+    done
+  }
+
   alias cask-upgrade='brew-cask-upgrade'
   alias brew-cleanup='brew cleanup'
-  alias brew-upgrade='brew update && brew upgrade && brew cleanup'
+  alias brew-upgrade='brew update && brew upgrade && brew cleanup && check-keg_only'
   alias dist-upgrade='brew-upgrade && brew-cask-upgrade -y'
 elif [[ "$OSTYPE" == *"android"* ]]; then
   alias apt-upgrade='apt update; apt full-upgrade'

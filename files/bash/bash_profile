@@ -1,5 +1,5 @@
 # if [ -f "$HOME/.profile" ] && [[ "$CONFIGURED" != "true" ]]; then
-if [ -f "$HOME/.profile" ] && ([[ ! ":$PATH:" =~ *":$HOME/.local/bin:"* ]] || [[ "$CONFIGURED" != "true" ]]); then
+if [ -f "$HOME/.profile" ] && ([[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]] || [[ "$CONFIGURED" != "true" ]]); then
   . "$HOME/.profile"
   export $(grep '^[ a-zA-Z0-9]*=' ~/.profile | tr -d '[:blank:]' | cut -d= -f1 | sort -u)
 fi

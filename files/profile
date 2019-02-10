@@ -28,11 +28,34 @@ fi
 if [ -d "/usr/local/opt/gnu-tar/libexec/gnubin" ]; then
   PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
 fi
+if [ -d '/usr/local/opt/gnu-sed/libexec/gnubin' ]; then
+  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+fi
 if [ -d "/usr/local/opt/gnu-getopt/bin" ]; then
   PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 fi
-if [ -d "/usr/local/opt/gnu-sed/libexec/gnubin" ]; then
-  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# The following are keg only formulas
+if [ -d '/usr/local/opt/binutils/bin' ]; then
+  PATH="/usr/local/opt/binutils/bin:$PATH"
+fi
+if [ -d '/usr/local/opt/curl/bin' ]; then
+  PATH="/usr/local/opt/curl/bin:$PATH"
+fi
+if [ -d '/usr/local/opt/icu4c/bin' ]; then
+  PATH="/usr/local/opt/icu4c/bin:$PATH"
+fi
+if [ -d '/usr/local/opt/libarchive/bin' ]; then
+  PATH="/usr/local/opt/libarchive/bin:$PATH"
+fi
+if [ -d '/usr/local/opt/ncurses/bin' ]; then
+  PATH="/usr/local/opt/ncurses/bin:$PATH"
+fi
+if [ -d '/usr/local/opt/openssl/bin' ]; then
+  PATH="/usr/local/opt/openssl/bin:$PATH"
+fi
+if [ -d '/usr/local/opt/sqlite/bin' ]; then
+  PATH="/usr/local/opt/sqlite/bin:$PATH"
 fi
 
 # Use brew python
@@ -54,13 +77,13 @@ if [ -x "$(command -v ruby)" ] && [ -x "$(command -v gem)" ]; then
 fi
 
 # Linuxbrew paths
-if [ -d "$HOME/.linuxbrew/bin:$PATH" ]; then
+if [ -d "$HOME/.linuxbrew/bin" ]; then
   PATH="$HOME/.linuxbrew/bin:$PATH"
 fi
-if [ -d "$HOME/.linuxbrew/share/man:$MANPATH" ]; then
+if [ -d "$HOME/.linuxbrew/share/man" ]; then
   MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 fi
-if [ -d "$HOME/.linuxbrew/share/info:$INFOPATH" ]; then
+if [ -d "$HOME/.linuxbrew/share/info" ]; then
   INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 fi
 

@@ -34,7 +34,7 @@ function usage {
 }
 
 function install() {
-  if [ -f "${!}" ]; then
+  if [ -f "${1}" ]; then
     chmod +x ${1}
     mv ${1} ${install_to}
   fi
