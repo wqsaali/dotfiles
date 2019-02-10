@@ -11,6 +11,7 @@ github.com/liggitt/audit2rbac
 github.com/pkg/errors
 github.com/reactiveops/rbac-lookup
 github.com/spf13/viper
+github.com/sqs/goreturns
 github.com/uber/astro/astro/cli/astro
 github.com/wagoodman/dive
 github.com/zegl/kube-score
