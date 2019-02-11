@@ -12,6 +12,10 @@
     syntax enable
   endif
 
+  " Enable filetype plugins
+  filetype plugin on
+  filetype indent on
+
   " GUI options:
   "set guioptions-=m  "remove menu bar
   set guioptions-=T  "remove toolbar
@@ -62,6 +66,7 @@
   set number
   set incsearch
   set hlsearch
+  set infercase
   set ignorecase
   set smartcase
 

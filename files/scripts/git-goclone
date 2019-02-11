@@ -20,6 +20,7 @@ function usage {
   echo 'Flags:'
   echo '  -h, --help                      display help'
   echo '  -d, --debug                     enable debug output'
+  echo '  -u, --update                    update if it already exists'
   echo '  -w, --workspace <workspace>     either a number or a valid go workspace path'
   echo ''
   echo 'If you pass a number for workspace a path will be fetched from $GOPATH'
@@ -29,20 +30,23 @@ function usage {
   exit 1
 }
 
-TEMP=$(getopt -o hdw: --long debug,workspace: -n "$(basename $0)" -- "$@")
+TEMP=$(getopt -o hduw: --long help,debug,workspace: -n "$(basename $0)" -- "$@")
 
 [ $? != 0 ] && usage "Terminating..." >&2
 
 eval set -- "$TEMP"
 
 w=-1
+cdir=$(pwd)
 workspace="${GOPATH##*:}"
 DEBUG=false
+UPDATE=false
 
 while true; do
   case "$1" in
     -h | --help ) usage ;;
     -d | --debug ) DEBUG=true; shift ;;
+    -u | --update ) UPDATE=true; shift ;;
     -w | --workspace ) w="$2"; shift 2 ;;
     -- ) shift; break ;;
     * ) break ;;
@@ -88,5 +92,11 @@ if [[ "${DEBUG}" == "true" ]]; then
   echo "Cloning ${url} into: ${path}"
 fi
 
-mkdir -p "${path}"
-git clone ${url} "${path}"
+if [ -d "${path}" ] && [[ "${UPDATE}" == "true" ]]; then
+  cd "${path}"
+  git pull
+  cd "${cdir}"
+else
+  mkdir -p "${path}"
+  git clone ${url} "${path}"
+fi

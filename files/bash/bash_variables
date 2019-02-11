@@ -41,3 +41,4 @@ export KITTY_CONFIG_DIRECTORY='~/.config/kitty/'
 export SLACK_THEME_SHELL_PROFILE='~/.profile'
 
 export BASH_COMPLETION_USER_DIR='~/.local/share/bash-completion'
+

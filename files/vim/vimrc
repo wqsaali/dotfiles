@@ -20,6 +20,8 @@ endfor
   command! PU PlugUpdate | PlugUpgrade
   "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
+  " :W sudo saves the file
+  " (useful for handling the permission-denied error)
   command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
   fun! DiffToggle()
@@ -58,7 +60,7 @@ endfor
   endfun
 " }}}
 
-" this machine config
+" this machine's config
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif

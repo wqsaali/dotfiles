@@ -1,4 +1,3 @@
-homebrew/cask-versions
 browsh-org/homebrew-browsh
 buo/cask-upgrade
 caskroom/cask
@@ -10,6 +9,7 @@ crisidev/homebrew-chunkwm
 datawire/blackbird
 egison/egison
 habitat-sh/habitat
+homebrew/cask-versions
 homebrew/command-not-found
 homebrew/services
 knes1/tap
@@ -21,3 +21,5 @@ reactiveops/tap
 wagoodman/dive
 wallix/awless
 yudai/gotty
+zaquestion/tap
+derailed/k9s

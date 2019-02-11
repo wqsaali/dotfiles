@@ -121,6 +121,12 @@ alias git-pull-recursive='git recursive pull'
 alias git-pull-all='git recursive pull'
 alias git-clean-all='git recursive clean'
 
+# if [ -x "$(command -v lab)" ]; then
+#   alias git=lab
+# elif [ -x "$(command -v hub)" ]; then
+#   alias git=hub
+# fi
+
 function git-status() {
   UNCOMMITED=$(git status -s)
   LOCAL=$(git rev-parse @)

@@ -86,6 +86,7 @@ jq
 jruby
 jsmin
 jsonnet
+k9s
 kompose
 kops
 kube-aws
@@ -93,6 +94,7 @@ kubectx
 kubernetes-cli
 kubernetes-helm
 kustomize
+lab
 legit
 lesspipe
 make

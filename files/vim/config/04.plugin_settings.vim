@@ -5,42 +5,52 @@
     au FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=AL
   endif
 
-  " vim-resize
+  " vim-resize {{{
   let g:vim_resize_disable_auto_mappings = 1
   nnoremap <silent> <S-Left> :CmdResizeLeft<cr>
   nnoremap <silent> <S-Down> :CmdResizeDown<cr>
   nnoremap <silent> <S-Up> :CmdResizeUp<cr>
   nnoremap <silent> <S-Right> :CmdResizeRight<cr>
+  " }}}
 
-  " vim-choosewin
+  " vim-choosewin {{{
   let g:choosewin_overlay_enable = 1
   nmap - <Plug>(choosewin)
+  " }}}
 
-  " matchparen
+  " matchparen {{{
   let g:matchparen_timeout = 2
   let g:matchparen_insert_timeout = 2
+  " }}}
 
-  " GeekNote
+  " GeekNote {{{
   "let g:GeeknoteFormat="markdown"
+  " }}}
 
-  " Syntastic
+  " Syntastic {{{
   let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
+  let g:syntastic_aggregate_errors = 1
+  let g:syntastic_always_populate_loc_list = 0
+  let g:syntastic_auto_loc_list = 1
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
   let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 
   noremap <C-w>e :SyntasticCheck<CR>
   noremap <C-w>f :SyntasticToggleMode<CR>
+  " }}}
 
-  " Gundu
+  " Gundu {{{
   " let g:gundo_width = 60
   " let g:gundo_preview_height = 40
   " let g:gundo_right = 1
+  " }}}
 
-  " MinMap
+  " MinMap {{{
   let g:minimap_highlight='Visual'
+  " }}}
 
-  " IndentLine
+  " IndentLine {{{
   let g:indentLine_enabled = 0
   let g:indentLine_faster = 1
   if g:indentLine_faster == 0
@@ -60,24 +70,28 @@
   " none X terminal
   let g:indentLine_color_tty_light = 7 " (default: 4)
   let g:indentLine_color_dark = 1 " (default: 2)'
+  " }}}
 
-  " Conoline
+  " Conoline {{{
   " if !&diff
   "   let g:conoline_auto_enable = 1
   " endif
+  " }}}
 
-  " vim-illuminate
+  " vim-illuminate {{{
   let g:Illuminate_ftblacklist = ['nerdtree', 'vim-plug', 'sixpack', '', 'qf']
   " let g:Illuminate_ftHighlightGroups = {
   "     \ 'vim': ['', 'Function', 'Constant', 'vimVar'],
   "     \ 'cpp': ['', 'Function', 'Constant']
   "     \ }
+  " }}}
 
-  " GitGutter
+  " GitGutter {{{
   let g:gitgutter_max_signs = 500
   " let g:gitgutter_highlight_lines = 1
+  " }}}
 
-  "Ack
+  " Ack {{{
   for command in ['Ack', 'AckAdd', 'AckFromSearch', 'LAck', 'LAckAdd', 'AckFile', 'AckHelp', 'LAckHelp', 'AckWindow', 'LAckWindow']
     exe 'command ' . substitute(command, 'Ack', 'Ag', "") . ' ' . command
   endfor
@@ -85,8 +99,9 @@
   if executable('ag')
     let g:ackprg = 'ag --vimgrep'
   endif
+  " }}}
 
-  " CtrlP
+  " CtrlP {{{
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
   " NOTE: The following should make CtrlP faster
   "let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -103,14 +118,17 @@
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
+  " }}}
 
-  " Ultisnip
+  " Ultisnip {{{
   " NOTE: <f1> otherwise it overrides <tab> forever
   let g:UltiSnipsExpandTrigger = "<C-tab>"
   let g:UltiSnipsJumpForwardTrigger = "<C-tab>"
   let g:UltiSnipsJumpBackwardTrigger = "<C-S-tab>"
   let g:did_UltiSnips_vim_after = 1
+  " }}}
 
+  " YouCompleteMe {{{
   " make YCM compatible with UltiSnips (using supertab)
   let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
   let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -131,14 +149,18 @@
   imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
   smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
   imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+  " }}}
 
+  " AutoPairs {{{
   let g:AutoPairs = {'[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
   inoremap <buffer><silent> ) <C-R>=AutoPairsInsert(')')<CR>
+  " }}}
 
-  " Brackets
+  " Brackets {{{
   let g:usemarks = 0
+  " }}}
 
-  " Vim-go
+  " Vim-go {{{
   let g:go_fmt_autosave = 1
   let g:go_fmt_command = "goimports"
 
@@ -153,8 +175,9 @@
   " au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
   " au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
   " au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
+  " }}}
 
-  " Codi
+  " Codi {{{
   " Use pry instead of irb
   " let g:codi#interpreters = {
   " \ 'ruby': {
@@ -162,8 +185,9 @@
   "     \ 'prompt': '^[\d\+] pry(\w\+). ',
   "     \ },
   " \ }
+  " }}}
 
-  " vim-airline
+  " vim-airline {{{
   " let g:airline_extensions = ['branch', 'tabline', 'whitespace']
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_min_count = 1
@@ -171,4 +195,6 @@
   let g:airline#extensions#whitespace#skip_indent_check_ft = {'go': ['mixed-indent-file']}
   let g:airline_powerline_fonts = 1
   let g:airline_theme='term'
+  " }}}
+
 " }}}

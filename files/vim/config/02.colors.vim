@@ -3,7 +3,7 @@
   set background=dark
   set t_Co=256
 
-  " Overrides
+  " Overrides {{{
   if has('autocmd')
     au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
     au ColorScheme * hi! Conceal ctermbg=none ctermfg=239  guibg=NONE guifg=#4e4e4e
@@ -18,6 +18,7 @@
     endif
     au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none
   endif
+  " }}}
 
   " Use GIU colors
   " if (has("nvim"))

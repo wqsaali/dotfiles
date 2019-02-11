@@ -98,7 +98,7 @@ function pipeBashFromRawGithub() {
   rm ${name}
 }
 
-TEMP=$(getopt -o hdrt:i: --long debug,install-to: -n "$(basename $0)" -- "$@")
+TEMP=$(getopt -o hdrt:i: --long help,debug,raw,tag:,install-to: -n "$(basename $0)" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
