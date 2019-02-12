@@ -37,6 +37,8 @@ function install() {
   if [ -f "${1}" ]; then
     chmod +x ${1}
     mv ${1} ${install_to}
+  else
+    echo "Error: ${1} not found"
   fi
 }
 
@@ -57,8 +59,8 @@ function installFromGithub() {
     artifact_ext=${BASH_REMATCH[2]}
     echo "${artifact_name} is a tarball (${artifact_ext})"
     curl -sLo ${artifact} ${url}
-    tar -zxvf ${artifact} --one-top-level # gnu-tar is needed for this one
-    mv $(find ./${artifact_name} -type f -name ${name}) ${name}
+    tar -xzf ${artifact} --one-top-level=${artifact_name} # gnu-tar is needed for this one
+    mv $(find ./${artifact_name} -type f -name ${name}*) ${name}
     rm ${artifact}
     rm -rf ${artifact_name}
   else

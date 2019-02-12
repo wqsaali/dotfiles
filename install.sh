@@ -77,11 +77,14 @@ installMinikube() {
   mv minikube ~/.local/bin/
 }
 
-installKubetail() {
+installKubeScripts() {
+  installFromGithub 'Praqma/helmsman' ${1} ${2}
+  installFromGithub 'kubernetes-sigs/kubebuilder' ${1} ${2}
+  installFromGithub 'kubernetes-sigs/kustomize' ${1} ${2}
+  installFromGithub 'operator-framework/operator-sdk' ${1} ${2}
   installFromRawGithub 'johanhaleby/kubetail'
-}
+  installFromRawGithub 'ctron/kill-kube-ns'
 
-installKubeFZF() {
   if [ ! -d  ${HOME}/.kube-fzf ]; then
     git clone https://github.com/arunvelsriram/kube-fzf.git ${HOME}/.kube-fzf
   else
@@ -105,19 +108,6 @@ installGoss() {
 
 installDepcon() {
   installFromGithub 'ContainX/depcon' ${1} ${2}
-}
-
-installKubebuilder() {
-  installFromGithub 'kubernetes-sigs/kubebuilder' ${1} ${2}
-  installFromGithub 'kubernetes-sigs/kustomize' ${1} ${2}
-}
-
-installOperatorSdk() {
-  installFromGithub 'operator-framework/operator-sdk' ${1} ${2}
-}
-
-installHelmsman() {
-  installFromGithub 'Praqma/helmsman' ${1} ${2}
 }
 
 installCargo() {
@@ -233,7 +223,11 @@ installScripts() {
   installFromRawGithub 'huyng/bashmarks' 'bashmarks.sh'
   installFromRawGithub 'ahmetb/goclone'
   installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
-  installKubetail
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    installKubeScripts 'darwin' '64'
+  else
+    installKubeScripts 'linux' '64'
+  fi
 }
 
 installChefVM() {
@@ -432,7 +426,6 @@ installDotFiles() {
   installBashConf
   installGitConf
   installScripts
-  installKubeFZF
 
   mkdir -p ${HOME}/.ptpython
   cp files/ptpython.py ${HOME}/.ptpython/config.py
@@ -544,35 +537,8 @@ case "$1" in
       installDepcon 'linux' '64'
     fi
     ;;
-  "kubebuilder")
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      installKubebuilder 'darwin' '64'
-    else
-      installKubebuilder 'linux' '64'
-    fi
-    ;;
-  "operator-sdk")
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      installOperatorSdk 'darwin' '64'
-    else
-      installOperatorSdk 'linux' '64'
-    fi
-    ;;
-  "helmsman")
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      installHelmsman '64' 'darwin'
-    else
-      installHelmsman '64' 'linux'
-    fi
-    ;;
   "minikube")
     installMinikube
-    ;;
-  "kube-fzf")
-    installKubeFZF
-    ;;
-  "kubetail")
-    installKubetail
     ;;
   "fission")
     installFission

@@ -213,9 +213,8 @@ alias colorcat='pygmentize -g'
 # alias Cat='source-highlight --out-format=esc -o STDOUT -i'
 # alias PCat='source-highlight --out-format=esc -o STDOUT'
 if [ -x "$(command -v bat)" ]; then
-  export BAT_THEME='Tomorrow-Night-Bright'
-  alias Cat="bat --theme $BAT_THEME"
-  alias cat="bat --theme $BAT_THEME --plain"
+  alias Cat="bat --theme ${BAT_THEME:-DarkNeon}"
+  alias cat="bat --theme ${BAT_THEME:-DarkNeon} --plain"
 else
   alias Cat='colorcat'
 fi
@@ -364,7 +363,7 @@ function kube-remote-shell() {
 alias kube-shell='kube-remote-shell'
 
 function kgy() {
-  kubectl get ${@} -o yaml | bat --theme $BAT_THEME -l yaml
+  kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
 }
 
 alias kube='kubectl'
@@ -373,6 +372,7 @@ alias kctx='kubectx'
 alias kns='kubens'
 
 alias kctl-clean='kubectl get po --all-namespaces --no-headers | grep -v Running | awk '\''{print $2 " -n " $1}'\'' | xargs kubectl delete po'
+alias kube-clean='kctl-clean'
 
 # Helm aliases
 alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -n 1 helm plugin update'

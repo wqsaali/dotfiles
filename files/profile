@@ -12,26 +12,6 @@ if [ -d "/usr/local/sbin" ] ; then
   PATH="/usr/local/sbin:$PATH"
 fi
 
-# Use GNU utils instead of the default ones on MacOS
-if [ -d '/usr/local/opt/findutils/libexec/gnubin' ]; then
-  PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-fi
-if [ -d '/usr/local/opt/coreutils/libexec/gnubin' ]; then
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-fi
-if [ -d '/usr/local/opt/make/libexec/gnubin' ];then
-  PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
-fi
-if [ -d "/usr/local/opt/gnu-tar/libexec/gnubin" ]; then
-  PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
-fi
-if [ -d '/usr/local/opt/gnu-sed/libexec/gnubin' ]; then
-  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-fi
-if [ -d "/usr/local/opt/gnu-getopt/bin" ]; then
-  PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
-fi
-
 # The following are keg only formulas
 if [ -d '/usr/local/opt/binutils/bin' ]; then
   PATH="/usr/local/opt/binutils/bin:$PATH"
@@ -53,6 +33,26 @@ if [ -d '/usr/local/opt/openssl/bin' ]; then
 fi
 if [ -d '/usr/local/opt/sqlite/bin' ]; then
   PATH="/usr/local/opt/sqlite/bin:$PATH"
+fi
+
+# Use GNU utils instead of the default ones on MacOS
+if [ -d '/usr/local/opt/findutils/libexec/gnubin' ]; then
+  PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+fi
+if [ -d '/usr/local/opt/coreutils/libexec/gnubin' ]; then
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi
+if [ -d '/usr/local/opt/make/libexec/gnubin' ];then
+  PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+fi
+if [ -d "/usr/local/opt/gnu-tar/libexec/gnubin" ]; then
+  PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+fi
+if [ -d '/usr/local/opt/gnu-sed/libexec/gnubin' ]; then
+  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+fi
+if [ -d "/usr/local/opt/gnu-getopt/bin" ]; then
+  PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 fi
 
 # Use brew python
