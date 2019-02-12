@@ -185,7 +185,7 @@ installFonts() {
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/1.0.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
   mv *.otf ${HOME}/Library/Fonts
-  wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+  curl -sfLO https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
   sudo mv PowerlineSymbols.otf ${HOME}/Library/Fonts/
   if ! [ -d ${HOME}/Library/Fonts/ubuntu-mono-powerline-ttf ]; then
     git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/Library/Fonts/ubuntu-mono-powerline-ttf

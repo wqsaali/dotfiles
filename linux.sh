@@ -8,6 +8,8 @@ fi
 
 INSTALLDIR=$(pwd)
 
+source ${dotfiles_dir}/files/scripts/hubinstall
+
 fancy_echo() {
   # red=`tput setaf 1`
   # green=`tput setaf 2`
@@ -52,7 +54,9 @@ installHashicorp() {
     return
   fi
   # Get URLs for most recent versions:
-  url=$(curl -s https://releases.hashicorp.com/index.json | jq "{$1}" | grep 'url' | egrep -i "$(uname -s).*$(uname -m | cut -d'_' -f2)" | sort -h | tail -1 | awk -F[\"] '{print $4}')
+  os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
+  arch="${3:-64}"
+  url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.${1}.versions| .[]][-1].builds[] | select(.url | test(\"${os}.*${arch}\")) | .url")
   cd ${HOME}/.local/bin/
   curl -o package.zip $url
   unzip package.zip
@@ -61,15 +65,9 @@ installHashicorp() {
 }
 
 installTerragrunt() {
-  mkdir -p ~/.local/bin/
-  project='gruntwork-io/terragrunt'
-  name=$(basename ${project})
-  arch='amd64'
-  os=$(uname -s | tr '[:upper:]' '[:lower:]')
-  url=$(curl -s https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[] | select(.name | test(\"${os}_${arch}\")) | .browser_download_url")
-  curl -Lo $name $url
-  chmod +x $name
-  mv $name ~/.local/bin/
+  os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
+  arch="${3:-64}"
+  installFromGithub 'gruntwork-io/terragrunt' ${os} ${arch}
 }
 
 installKubernetes() {
