@@ -9,6 +9,7 @@ fi
 INSTALLDIR=$(pwd)
 
 source ${dotfiles_dir}/files/scripts/hubinstall
+source ${dotfiles_dir}/files/scripts/hashinstall
 
 fancy_echo() {
   # red=`tput setaf 1`
@@ -40,28 +41,6 @@ installDocker() {
   sudo apt install -y docker-ce
   sudo service docker start
   sudo usermod -aG docker ${USER}
-}
-
-installHashicorp() {
-  # this is not Linux specific and it would work on macOS but there we can use brew to install all of these and that makes it easier to keep things up to date.
-  if [[ "$1" == "vagrant" ]]; then
-    ./install.sh vagrant
-    return
-  fi
-  if [[ "$1" == "list" ]]; then
-    # List available packages:
-    curl --silent https://releases.hashicorp.com/index.json | jq 'keys[]'
-    return
-  fi
-  # Get URLs for most recent versions:
-  os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
-  arch="${3:-64}"
-  url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.${1}.versions| .[]][-1].builds[] | select(.url | test(\"${os}.*${arch}\")) | .url")
-  cd ${HOME}/.local/bin/
-  curl -o package.zip $url
-  unzip package.zip
-  rm package.zip
-  cd ${INSTALLDIR}
 }
 
 installTerragrunt() {

@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+
+# Script to install Hashicorm binaries
+
+# Defaults
+install_to="${HOME}/.local/bin/"
+version=-1
+DEBUG=false
+
+function usage {
+  if ! [ -z "${1}" ] ; then
+    echo -e "${1}"
+    echo ''
+  fi
+  echo "Usage: $(basename $0) [<product>|lsit] [<os>] [<arch>] [<flags>]"
+  echo ''
+  echo 'Flags:'
+  echo '  -h, --help                            display help'
+  echo '  -d, --debug                           enable debug output'
+  echo "  -i, --install-to <installation path>  where to install; default: ${install_to}"
+  echo "  -v, --version <version>               version to install; default: latest"
+  echo ''
+  echo 'Set --tag to latest to automatically discover the latest tag'
+  echo ''
+  exit 1
+}
+
+function installVagrantPlugins() {
+  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
+  if ! [ -x "$(command -v vagrant)" ]; then
+    if [[ "$OSTYPE" != "darwin"* ]]; then
+      sudo apt-get install vagrant
+    else
+      brew cask install vagrant --appdir=/Applications
+      brew install vagrant-completion
+    fi
+  fi
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    vagrant plugin install "${PKG}"
+  done < files/pkgs/vagrant.lst
+}
+
+function installHashicorp() {
+  if [[ ${version} == "latest" ]]; then
+    version=-1
+  fi
+
+  if [[ "$1" == "vagrant" ]]; then
+    installVagrantPlugins
+    return
+  fi
+
+  if [[ "$1" == "list" ]]; then
+    # List available packages:
+    curl -s https://releases.hashicorp.com/index.json | jq 'keys[]'
+    return
+  fi
+
+  # Get URLs for most recent versions:
+  cdir=$(pwd)
+  os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
+  arch="${3:-64}"
+  if [ $version -ne -1 ]; then
+    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r ".${1}.versions.\"${version}\" | .builds[] | select(.url | test(\"${os}.*${arch}\")) | .url")
+  else
+    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.${1}.versions| .[]][${version}].builds[] | select(.url | test(\"${os}.*${arch}\")) | .url")
+  fi
+
+  mkdir -p ${install_to}
+  cd ${install_to}
+  curl -o package.zip $url
+  unzip package.zip
+  rm package.zip
+  cd ${cdir}
+}
+
+TEMP=$(getopt -o hdv:i: --long help,debug,version:,install-to: -n "$(basename $0)" -- "$@")
+
+if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+
+eval set -- "$TEMP"
+
+while true; do
+  case "$1" in
+    -h | --help ) usage ;;
+    -d | --debug ) DEBUG=true; shift ;;
+    -i | --install-to ) install_to="$2"; shift 2 ;;
+    -v | --version ) version="$2"; shift 2 ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+# Allow the file to be sourced without excuting this part
+if [ "$0" = "$BASH_SOURCE" ] ; then
+  product="${1}"
+  if [ -z ${product} ] ; then
+    product='list'
+  fi
+
+  os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
+  arch="${3:-64}"
+  installHashicorp "${product}" "${os}" "${arch}"
+fi

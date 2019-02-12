@@ -4,6 +4,7 @@ INSTALLDIR=$(pwd)
 dotfiles_dir="$(dirname $0)"
 
 source ${dotfiles_dir}/files/scripts/hubinstall
+source ${dotfiles_dir}/files/scripts/hashinstall
 
 path() {
   mkdir -p "$(dirname "$1")"
@@ -192,23 +193,6 @@ installhelmPlugins() {
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     helm plugin install "${PKG}"
   done < files/pkgs/helm.lst
-}
-
-installVagrantPlugins() {
-  # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
-  if ! [ -x "$(command -v vagrant)" ]; then
-    if [[ "$OSTYPE" != "darwin"* ]]; then
-      sudo apt-get install vagrant
-    else
-      brew cask install vagrant --appdir=/Applications
-      brew install vagrant-completion
-    fi
-  fi
-  while read -r PKG; do
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    vagrant plugin install "${PKG}"
-  done < files/pkgs/vagrant.lst
 }
 
 installScripts() {
