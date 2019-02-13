@@ -11,6 +11,7 @@
 [format]
   pretty = format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(7,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
 [alias]
+  patch = !git --no-pager diff
   cleanup = "!git clean -fdX && git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
   remove-untacked = "!git sb | grep '??' | awk '{print $2}' | xargs rm"
   switch = !legit switch
@@ -40,10 +41,24 @@
   editor = vim
   excludesfile = ~/.gitexcludes
 [pager]
-  diff = diff-so-fancy | less --tabs=1,5 -RFX
-  show = diff-so-fancy | less --tabs=1,5 -RFX
+  diff = diff-so-fancy | less --tabs=2 -RFX --pattern '^(Date|added|deleted|modified): '
+  show = diff-so-fancy | less --tabs=2 -RFX
 [diff-so-fancy]
   markEmptyLines = true
   changeHunkIndicators = true
   stripLeadingSymbols = true
   useUnicodeRuler = true
+[color]
+  ui = true
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+[color "diff"]
+  meta = yellow
+  frag = magenta bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse

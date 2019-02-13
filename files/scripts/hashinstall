@@ -2,7 +2,10 @@
 
 # Script to install Hashicorm binaries
 # Examples:
+#    hashinstall list
+#    hashinstall list terraform
 #    hashinstall terraform
+#    hashinstall terraform -v 0.9.9
 
 # Defaults
 install_to="${HOME}/.local/bin/"
@@ -14,7 +17,7 @@ function usage {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<product>|lsit] [<os>] [<arch>] [<flags>]"
+  echo "Usage: $(basename $0) [lsit] [<product>] [<os>] [<arch>] [<flags>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -55,10 +58,16 @@ function installHashicorp() {
     return
   fi
 
-  if [[ "$1" == "list" ]]; then
-    echo 'Available packages:'
-    # List available packages:
-    curl -s https://releases.hashicorp.com/index.json | jq 'keys[]'
+  if [ -z "$1" ] || [[ "$1" == "list" ]]; then
+    if [ ! -z "${2}" ]; then
+      echo 'Available versions:'
+      # List available packages:
+      curl -s https://releases.hashicorp.com/index.json | jq ".${2}.versions | keys[]"
+    else
+      echo 'Available packages:'
+      # List available packages:
+      curl -s https://releases.hashicorp.com/index.json | jq 'keys[]'
+    fi
     return
   fi
 
@@ -66,6 +75,8 @@ function installHashicorp() {
   cdir=$(pwd)
   os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
   arch="${3:-64}"
+
+  # TODO: ensure proper version sorting
   if [ $version -ne -1 ]; then
     url=$(curl -s https://releases.hashicorp.com/index.json | jq -r ".${1}.versions.\"${version}\" | .builds[] | select(.url | test(\"${os}.*${arch}\")) | .url")
   else
@@ -101,7 +112,11 @@ done
 if [ "$0" = "$BASH_SOURCE" ] ; then
   product="${1:-list}"
 
-  os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
-  arch="${3:-64}"
-  installHashicorp "${product}" "${os}" "${arch}"
+  if [[ "$product" != "list" ]]; then
+    os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
+    arch="${3:-64}"
+    installHashicorp "${product}" "${os}" "${arch}"
+  else
+    installHashicorp $@
+  fi
 fi

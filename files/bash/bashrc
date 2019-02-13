@@ -127,6 +127,7 @@ fi
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x "$(command -v lesspipe)" ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x "$(command -v lesspipe.sh)" ] && eval "$(SHELL=/bin/sh lesspipe.sh)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then

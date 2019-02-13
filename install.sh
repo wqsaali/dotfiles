@@ -79,10 +79,10 @@ installMinikube() {
 }
 
 installKubeScripts() {
-  installFromGithub 'Praqma/helmsman' ${1} ${2}
-  installFromGithub 'kubernetes-sigs/kubebuilder' ${1} ${2}
-  installFromGithub 'kubernetes-sigs/kustomize' ${1} ${2}
-  installFromGithub 'operator-framework/operator-sdk' ${1} ${2}
+  installFromGithub 'Praqma/helmsman' "${1}" "${2}"
+  installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
+  installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
+  installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
   installFromRawGithub 'johanhaleby/kubetail'
   installFromRawGithub 'ctron/kill-kube-ns'
 
