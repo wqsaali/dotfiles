@@ -9,7 +9,7 @@ function backupDotFiles() {
   cp ${HOME}/.bash_variables files/bash/bash_variables
   cp ${HOME}/.git-prompt-colors.sh files/bash/git-prompt-colors.sh
   cp /etc/bash_completion.d/bash_aliases_completion files/bash/bash_aliases_completion
-  cp ${HOME}/.profile files/profile
+  cp ${HOME}/.profile files/bash/profile
   cp ${HOME}/.tmux.conf.local files/tmux.conf.local
   cp ${HOME}/.screenrc files/screenrc
   cp ${HOME}/.vimrc files/vim/vimrc

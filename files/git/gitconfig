@@ -1,3 +1,4 @@
+# vim:set filetype=gitconfig:
 [user]
   email = ${EMAIL}
   name = ${NAME}
@@ -41,7 +42,8 @@
   editor = vim
   excludesfile = ~/.gitexcludes
 [pager]
-  diff = diff-so-fancy | less --tabs=2 -RFX --pattern '^(Date|added|deleted|modified): '
+  # diff = diff-so-fancy | less --tabs=2 -RFX --pattern '^(Date|added|deleted|modified): '
+  diff = diff-so-fancy | less --tabs=2 -RFX
   show = diff-so-fancy | less --tabs=2 -RFX
 [diff-so-fancy]
   markEmptyLines = true

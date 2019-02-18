@@ -1,5 +1,15 @@
 # This is the custom theme template for gitprompt.sh
 
+get_k8s_name(){
+  echo "$1"
+}
+
+get_k8s_ns(){
+  if [[ "$1" != "default" ]]; then
+    echo ":$1"
+  fi
+}
+
 # These are the defaults from the "Default" theme
 # You just need to override what you want to have changed
 override_git_prompt_colors() {
@@ -13,8 +23,11 @@ override_git_prompt_colors() {
   KUBE_PS1_SUFFIX=""
   KUBE_PS1_CTX_COLOR="blue"
   KUBE_PS1_NS_COLOR="cyan"
-  KUBE_PS1_NS_ENABLE=false
+  KUBE_PS1_NS_ENABLE=true
   KUBE_PS1_SEPARATOR=""
+  KUBE_PS1_DIVIDER=""
+  KUBE_PS1_CLUSTER_FUNCTION=get_k8s_name
+  KUBE_PS1_NAMESPACE_FUNCTION=get_k8s_ns
 
   ## These are the color definitions used by gitprompt.sh
   GIT_PROMPT_PREFIX="("                 # start of the git info string
