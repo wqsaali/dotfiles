@@ -5,12 +5,9 @@ shift + ctrl - r : brew services restart skhd; brew services restart chunkwm
 # App shortcuts #
 # ############# #
 
-# open terminal, blazingly fast compared to iTerm/Hyper
-# cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
-# cmd - return : /Applications/iTerm.app/Contents/MacOS/iTerm2
-# cmd - return : osascript -e 'tell application "iTerm2" to create window with default profile'
 # cmd + alt - return : open -na /Applications/iTerm.app
-cmd + alt - return : open -na /Applications/Alacritty.app
+# cmd + alt - return : open -na /Applications/Alacritty.app
+cmd + alt - return : open -na /Applications/Kitty.app
 
 # open finder
 cmd + alt - f : open -na Finder

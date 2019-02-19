@@ -114,6 +114,8 @@ osConfigs() {
     defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true && \
     defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true && \
     defaults write -g WebKitDeveloperExtras -bool true
+
+  echo 'You may need to restart for some changes to take effect!'
 }
 
 installHomebrew() {
