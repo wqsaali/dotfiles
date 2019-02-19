@@ -87,6 +87,9 @@ osConfigs() {
   defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
   defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
+  # Font rendering (requires restart)
+  defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+
   # Dock
   # Add a Stack with Recent Applications
   # defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 1; }; "tile-type" = "recents-tile"; }'
@@ -235,8 +238,12 @@ installDotFiles() {
     cd ${INSTALLDIR}
   fi
 
+  mkdir -p ${HOME}/.config
   cp -r files/kitty ${HOME}/.config/
   # ln -s ${HOME}/.config/kitty ${HOME}/Library/Preferences/
+
+  mkdir -p ${HOME}/.config/alacritty
+  cp files/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
 
   cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh

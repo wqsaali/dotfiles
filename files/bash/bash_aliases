@@ -491,6 +491,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias apt='brew'
   alias cask='brew cask'
   alias tap='brew tap'
+  alias service='brew services'
 
   brew-cask-upgrade() {
     if [ "$1" != '--continue' ]; then

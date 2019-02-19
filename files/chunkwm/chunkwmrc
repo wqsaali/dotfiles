@@ -49,11 +49,11 @@ chunkc set custom_bar_offset_left        0
 chunkc set custom_bar_offset_right       0
 
 chunkc set global_desktop_mode           bsp
-chunkc set global_desktop_offset_top     3
-chunkc set global_desktop_offset_bottom  3
-chunkc set global_desktop_offset_left    3
-chunkc set global_desktop_offset_right   3
-chunkc set global_desktop_offset_gap     3
+chunkc set global_desktop_offset_top     10
+chunkc set global_desktop_offset_bottom  10
+chunkc set global_desktop_offset_left    10
+chunkc set global_desktop_offset_right   10
+chunkc set global_desktop_offset_gap     10
 
 #
 # NOTE: syntax for desktop-specific settings
@@ -128,10 +128,10 @@ chunkc set ffm_standby_on_float          1
 # NOTE: specify plugins to load when chunkwm starts.
 #
 
-chunkc core::load border.so
+# chunkc core::load border.so
+# chunkc core::load blur.so
 chunkc core::load tiling.so
 chunkc core::load ffm.so
-chunkc core::load blur.so
 chunkc core::load purify.so
 
 #

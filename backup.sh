@@ -28,6 +28,8 @@ function backupDotFiles() {
   cp ${HOME}/.chunkwmrc files/chunkwm/chunkwmrc
   cp ${HOME}/.skhdrc files/chunkwm/skhdrc
   cp ${HOME}/.ptpython/config.py files/ptpython.py
+  cp -r ${HOME}/.config/kitty/* files/kitty/
+  cp ${HOME}/.config/alacritty/alacritty.yml files/alacritty.yml
 }
 
 function backupTermux() {
