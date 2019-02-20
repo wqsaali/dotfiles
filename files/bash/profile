@@ -59,6 +59,12 @@ fi
 if [ -d '/usr/local/opt/python/libexec/bin' ]; then
   PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
+if [ -d '/usr/local/lib/python2.7/site-packages' ]; then
+  PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+fi
+if [ -d '/usr/local/lib/python3.7/site-packages' ]; then
+  PYTHONPATH="/usr/local/lib/python3.7/site-packages:$PYTHONPATH"
+fi
 
 # Use brew ruby
 if [ -d '/usr/local/opt/ruby/bin' ]; then
@@ -89,6 +95,8 @@ GOPATH="${HOME}/go:${HOME}/workingCopies"
 GOBIN="${GOPATH/:*}/bin"
 PATH="$PATH:${GOBIN}"
 
+PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
   PATH="$HOME/.local/bin:$PATH"
@@ -96,6 +104,9 @@ fi
 if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
 fi
+
+# Avoid duplicates
+PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then

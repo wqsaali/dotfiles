@@ -78,6 +78,15 @@ installMinikube() {
   mv minikube ~/.local/bin/
 }
 
+installKrew() {
+  mkdir -p ${HOME}/.krew/bin
+  cd "$(mktemp -d)" &&
+  curl -fsSLO "https://storage.googleapis.com/krew/latest/krew.{tar.gz,yaml}" &&
+  tar zxvf krew.tar.gz &&
+  ./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" install --manifest=krew.yaml --archive=krew.tar.gz
+  cd ${INSTALLDIR}
+}
+
 installKubeScripts() {
   installFromGithub 'Praqma/helmsman' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
@@ -85,6 +94,7 @@ installKubeScripts() {
   installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
   installFromRawGithub 'johanhaleby/kubetail'
   installFromRawGithub 'ctron/kill-kube-ns'
+  installKrew
 
   if [ ! -d  ${HOME}/.kube-fzf ]; then
     git clone https://github.com/arunvelsriram/kube-fzf.git ${HOME}/.kube-fzf
