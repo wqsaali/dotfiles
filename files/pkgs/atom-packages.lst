@@ -33,7 +33,7 @@ git-diff-details
 git-history
 git-log
 git-plus
-git-projects
+# git-projects
 git-status
 git-time-machine
 highlight-line

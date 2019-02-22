@@ -59,12 +59,12 @@ fi
 if [ -d '/usr/local/opt/python/libexec/bin' ]; then
   PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
-if [ -d '/usr/local/lib/python2.7/site-packages' ]; then
-  PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
-fi
-if [ -d '/usr/local/lib/python3.7/site-packages' ]; then
-  PYTHONPATH="/usr/local/lib/python3.7/site-packages:$PYTHONPATH"
-fi
+# if [ -d '/usr/local/lib/python2.7/site-packages' ]; then
+#   PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
+# fi
+# if [ -d '/usr/local/lib/python3.7/site-packages' ]; then
+#   PYTHONPATH="/usr/local/lib/python3.7/site-packages:$PYTHONPATH"
+# fi
 
 # Use brew ruby
 if [ -d '/usr/local/opt/ruby/bin' ]; then
