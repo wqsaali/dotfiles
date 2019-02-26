@@ -89,6 +89,7 @@ installKrew() {
 
 installKubeScripts() {
   installFromGithub 'Praqma/helmsman' "${1}" "${2}"
+  installFromGithub 'shyiko/kubesec' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
   installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"

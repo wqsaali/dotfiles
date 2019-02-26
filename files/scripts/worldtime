@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+#
+# Print the specified (or current) time from base time in other time zones
+# and the converse
+#
+# Examples:
+# worldtime -r -t US/Pacific 7:30 # convert from US/Pacific 7:30 to local time
+# worldtime -t US/Pacific 7:30 # convert 7:30 localtime to US/Pacific
+# worldtime -t US/Pacific # convert current localtime to US/Pacific
+
+function usage {
+  if ! [ -z "${1}" ] ; then
+    echo -e "${1}"
+    echo ''
+  fi
+  echo "Usage: $(basename $0) <url> [<flags>]"
+  echo ''
+  echo 'Flags:'
+  echo '  -h, --help                    display help'
+  echo '  -d, --debug                   enable debug output'
+  echo '  -r, --reverse                 reverse the time translation'
+  echo '  -t, --timezone <timezone>     target time zone'
+  echo ''
+  echo "  timezone can also be a list of time zones default is '${TZONES}' (mind the quotes)"
+  echo ''
+  exit 1
+}
+
+# Get local time zone from the OS
+function getlocaltz {
+  TZONE=''
+
+  if [ -f /etc/timezone ]; then
+    TZONE=$(cat /etc/timezone)
+  elif [ -h /etc/localtime ]; then
+    TZONE=$(readlink /etc/localtime | sed 's/^.*\/zoneinfo\///g')
+  else
+    TZONE='Europe/Dublin'
+  fi
+
+  echo $TZONE
+}
+
+# Show the time from the specified input time zone in the specified output
+# time zone
+function showtime {
+  if [[ $REVERSE == "false" ]]; then
+    TZIN=$1
+    TZOUT=$2
+  else
+    TZIN=$2
+    TZOUT=$1
+  fi
+
+  time=$3
+
+  TZ=$TZOUT date --date='TZ="'$TZIN'"'" $time" +"$time $TZIN is $TZOUT $FORMAT"
+}
+
+# Defaults
+# Base time zone from/to which to convert
+TZBASE=$(getlocaltz)
+
+# Time zones to display
+# See /usr/share/zoneinfo/ (/var/db/timezone/zoneinfo/ on macOS) for more names
+TZONES='UTC US/Eastern US/Central US/Mountain US/Pacific'
+
+# Display format
+FORMAT='%H:%M (%p) %Z %a %d %b %Y'
+
+REVERSE=false
+
+TEMP=$(getopt -o hrt: --long help,reverse,timezone: -n "$(basename $0)" -- "$@")
+
+[ $? != 0 ] && usage "Terminating..." >&2
+
+eval set -- "$TEMP"
+
+while true; do
+  case "$1" in
+    -h | --help ) usage ;;
+    -d | --debug ) DEBUG=true; shift ;;
+    -r | --update ) REVERSE=true; shift ;;
+    -t | --workspace ) TZONES="$2"; shift 2 ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+# Main
+
+if [ "$1" ] ; then
+  time="$1"
+else
+  time=`date +%T`
+fi
+
+for tz in $TZONES ; do
+  showtime $TZBASE $tz $time
+done
+
+echo
