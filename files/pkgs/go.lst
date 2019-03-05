@@ -18,3 +18,4 @@ github.com/zegl/kube-score
 golang.org/x/tools/cmd/godoc
 golang.org/x/tools/cmd/goimports
 k8s.io/kubernetes/cmd/kubectl
+sigs.k8s.io/kind
