@@ -113,5 +113,5 @@
   set noswapfile
   set fileformats=unix,dos,mac
 
-  set completeopt=menuone,longest,preview
+  set completeopt=menuone,longest
 " }}}

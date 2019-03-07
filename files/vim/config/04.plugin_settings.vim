@@ -140,15 +140,16 @@
   let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
   let g:ycm_complete_in_comments = 1 " Completion in comments
   let g:ycm_complete_in_strings = 1 " Completion in string
+  let g:ycm_add_preview_to_completeopt = 0
   let g:ycm_autoclose_preview_window_after_completion = 1
   let g:ycm_autoclose_preview_window_after_insertion = 1
 
   let g:complete_parameter_use_ultisnips_mapping = 1
-  inoremap <silent><expr> ( complete_parameter#pre_complete("()")
-  smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-  imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-  smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-  imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+  "inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+  "smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+  "imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+  "smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+  "imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
   " }}}
 
   " AutoPairs {{{
