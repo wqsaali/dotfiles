@@ -276,8 +276,11 @@ tmux_conf_copy_to_os_clipboard=true
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
 
+# faster key repetition
+set-option -s escape-time 10
+
 # increase history size
-set -g history-limit 100000
+# set -g history-limit 100000
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
