@@ -1,0 +1,15 @@
+bulk-action
+ca-cert
+debug-shell
+exec-all
+get-all
+krew
+mtail
+pod-logs
+pod-shell
+rbac-lookup
+rbac-view
+resource-capacity
+sniff
+view-secret
+view-utilization

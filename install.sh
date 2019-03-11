@@ -85,6 +85,13 @@ installKrew() {
   tar zxvf krew.tar.gz &&
   ./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" install --manifest=krew.yaml --archive=krew.tar.gz
   cd ${INSTALLDIR}
+
+  # install krew packages
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    kubectl krew install "${PKG}"
+  done < files/pkgs/krew.lst
 }
 
 installKubeScripts() {
@@ -209,19 +216,14 @@ installhelmPlugins() {
 installScripts() {
   mkdir -p ${HOME}/.local/bin/
   cp -r files/scripts/* ${HOME}/.local/bin/
-  if [[ "$OSTYPE" == *"android"* ]]; then
-    termux-fix-shebang ${HOME}/.local/bin/*
-  fi
   curl -sLo testssl testssl.sh
   chmod +x testssl
   mv testssl ${HOME}/.local/bin/
   installFromRawGithub 'huyng/bashmarks' 'bashmarks.sh'
   installFromRawGithub 'ahmetb/goclone'
   installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    installKubeScripts 'darwin' '64'
-  else
-    installKubeScripts 'linux' '64'
+  if [[ "$OSTYPE" == *"android"* ]]; then
+    termux-fix-shebang ${HOME}/.local/bin/*
   fi
 }
 
@@ -476,6 +478,11 @@ installAll() {
     installVscodePackages
     installGoss
     installEls
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      installKubeScripts 'darwin' '64'
+    else
+      installKubeScripts 'linux' '64'
+    fi
     installhelmPlugins
   fi
   # installWebApps
