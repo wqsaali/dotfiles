@@ -39,6 +39,7 @@ cookiecutter
 coreutils
 credhub-cli
 csvkit
+ctags
 curl
 dark-mode
 dateutils

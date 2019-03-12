@@ -14,11 +14,6 @@ case $- in
       *) return;;
 esac
 
-[ -f $HOME/.bash_variables ] && source $HOME/.bash_variables
-
-#CDPATH
-export CDPATH=".:~:~/workingCopies:~/workingCopies/src:$(ls -1d ~/workingCopies/src/*/ | tr '\n' ':')"
-
 export TERM='xterm-256color'
 
 if [[ $(tty) == "/dev/tty"* ]] && [[ "$OSTYPE" == "linux-gnu" ]]; then

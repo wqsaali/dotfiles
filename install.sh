@@ -87,6 +87,7 @@ installKrew() {
   cd ${INSTALLDIR}
 
   # install krew packages
+  kubectl krew update
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue

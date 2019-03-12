@@ -8,6 +8,11 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+[ -f $HOME/.bash_variables ] && source $HOME/.bash_variables
+
+#CDPATH
+CDPATH=".:~:~/workingCopies:~/workingCopies/src:$(ls -1d ~/workingCopies/src/*/ | tr '\n' ':')"
+
 if [ -d "/usr/local/sbin" ] ; then
   PATH="/usr/local/sbin:$PATH"
 fi

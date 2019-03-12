@@ -1,5 +1,6 @@
 # k8s.io/helm/cmd/helm
 github.com/anacrolix/torrent/cmd/...
+github.com/azer/yolo
 github.com/cloudposse/slack-notifier
 github.com/gardener/gardenctl
 github.com/golang/lint/golint
