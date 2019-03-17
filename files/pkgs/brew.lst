@@ -114,6 +114,7 @@ pet
 pipenv
 pre-commit
 prettyping
+pulumi
 pyenv
 pyenv-virtualenv
 python
