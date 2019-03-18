@@ -9,7 +9,7 @@ fi
 # If not running interactively, don't do anything
 case $- in
     *i*)
-      [ -x "$(command -v tmux)" ] && [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+      [ -x "$(command -v tmux)" ] && [[ ! $TERM =~ screen ]] && [ -z $TMUX ]  && [ -z $VIMRUNTIME ]&& exec tmux
       ;;
       *) return;;
 esac
@@ -259,5 +259,5 @@ source ~/.bash/kube-ps1/kube-ps1.sh
 #     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 # fi
 
-export CONFIGURED="true"
+CONFIGURED="true"
 

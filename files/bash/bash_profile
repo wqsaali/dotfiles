@@ -1,8 +1,7 @@
-# if [ -f "$HOME/.profile" ] && [[ "$CONFIGURED" != "true" ]]; then
-if [ -f "$HOME/.bashrc" ] && [[ "$CONFIGURED" != "true" ]]; then
-   source ~/.bashrc
-fi
 if [ -f "$HOME/.profile" ] && ([[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]] || [[ "$CONFIGURED" != "true" ]]); then
   source "$HOME/.profile"
   export $(grep '^[ a-zA-Z0-9]*=' ~/.profile | tr -d '[:blank:]' | cut -d= -f1 | sort -u)
+fi
+if [ -f "$HOME/.bashrc" ] && [[ "$CONFIGURED" != "true" ]]; then
+   source ~/.bashrc
 fi
