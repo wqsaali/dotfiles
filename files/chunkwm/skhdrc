@@ -6,8 +6,8 @@ shift + ctrl - r : brew services restart skhd; brew services restart chunkwm
 # ############# #
 
 # cmd + alt - return : open -na /Applications/iTerm.app
-cmd + alt - return : open -na /Applications/Alacritty.app
-# cmd + alt - return : open -na /Applications/Kitty.app
+# cmd + alt - return : open -na /Applications/Alacritty.app
+cmd + alt - return : open -na /Applications/Kitty.app
 
 # open finder
 cmd + alt - f : open -na Finder

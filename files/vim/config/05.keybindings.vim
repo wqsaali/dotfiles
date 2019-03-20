@@ -1,5 +1,8 @@
 " Shortcuts {{{
 
+  " Easier to exit terminal mode
+  tnoremap <Esc> <C-\><C-n>
+
   " Don't use Ex mode, use Q for formatting
   map Q gq
 

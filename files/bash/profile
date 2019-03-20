@@ -95,6 +95,11 @@ if [ -d "$HOME/.linuxbrew/share/info" ]; then
   INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 fi
 
+# K8s stuff
+if [ -d "/usr/local/kubebuilder/bin" ]; then
+  PATH="$PATH:/usr/local/kubebuilder/bin"
+fi
+
 # GOPATH
 GOPATH="${HOME}/go:${HOME}/workingCopies"
 GOBIN="${GOPATH/:*}/bin"
