@@ -125,6 +125,7 @@ rbac-lookup
 reattach-to-user-namespace
 remarshal
 rename
+ripgrep
 rke
 rust
 s3cmd
