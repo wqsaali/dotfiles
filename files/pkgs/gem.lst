@@ -6,6 +6,7 @@ pry
 racker
 ripl
 rubocop
+rubocop-performance
 slack-notifier
 terminal-table
 terraform_landscape
