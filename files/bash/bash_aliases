@@ -151,8 +151,8 @@ alias git-status-sb='git status -sb'
 alias git-logbranches='git for-each-ref --sort=-committerdate refs/heads/ --format="%(color:red)%(refname:short)%(color:reset)   %(subject)"'
 alias git-unpushed-commits='git for-each-ref --format="%(push:track)" refs/heads'
 alias git-prune-branches='git remote prune origin'
-alias git-prune-merged='git branch -r --merged | grep -v master | sed '\''s/origin\///'\'' | xargs -n 1 git push --delete origin'
-alias git-purge-branches='git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '\''{ print $1 }'\'' | xargs -n 1 git branch -d'
+alias git-prune-merged='git branch -r --merged | grep -v master | sed '\''s/origin\///'\'' | xargs -n 1 -r git push --delete origin'
+alias git-purge-branches='git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '\''{ print $1 }'\'' | xargs -n 1 -r git branch -d'
 alias git-current-tag='git name-rev --tags --name-only $(git rev-parse HEAD)'
 alias git-reset='git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx'
 alias git-tags='git for-each-ref --format "%(refname) %09 %(taggerdate) %(subject) %(taggeremail)" refs/tags  --sort=taggerdate'
@@ -272,7 +272,7 @@ function chef-env-compare-versions() {
 function knife-promote-all() {
   cdir=$(pwd)
   cd chef/environments
-  grep -E '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $2 --remote --yes
+  grep -E '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -r -I{} knife spork promote {} $1 -v $2 --remote --yes
   cd $cdir
 }
 
@@ -281,7 +281,7 @@ function knife-promote-all() {
 function knife-promote-eq() {
   cdir=$(pwd)
   cd chef/environments
-  grep -E '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -I{} knife spork promote {} $1 -v $3 --remote --yes
+  grep -E '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -r -I{} knife spork promote {} $1 -v $3 --remote --yes
   cd $cdir
 }
 
@@ -374,11 +374,11 @@ alias kctl='kubectl'
 alias kctx='kubectx'
 alias kns='kubens'
 
-alias kctl-clean='kubectl get po --all-namespaces --no-headers | grep -v Running | awk '\''{print $2 " -n " $1}'\'' | xargs kubectl delete po'
+alias kctl-clean='kubectl get po --all-namespaces --no-headers | grep -v Running | awk '\''{print $2 " -n " $1}'\'' | xargs -r kubectl delete po'
 alias kube-clean='kctl-clean'
 
 # Helm aliases
-alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -n 1 helm plugin update'
+alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -n 1 -r helm plugin update'
 
 # microk8s aliases
 alias microk8s.install='multipass exec microk8s-vm -- sudo snap install microk8s --classic && multipass exec microk8s-vm -- sudo iptables -P FORWARD ACCEPT'
@@ -471,9 +471,9 @@ function goclean() {
 alias go-clean='goclean'
 
 # PIP aliases
-alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip install -U'
-alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip3 install -U'
-alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs pip2 install -U'
+alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip install -U'
+alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip3 install -U'
+alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip2 install -U'
 alias pip-clean='rm -rf ~/.cache/pip/'
 
 # apt & brew aliases
@@ -658,7 +658,7 @@ fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
-alias no-trail="ag --print0 -l '[ \t]+$' | xargs -0 -n1 perl -pi -e 's/[ \t]+$//'"
+alias no-trail="ag --print0 -l '[ \t]+$' | xargs -0 -n1 -r perl -pi -e 's/[ \t]+$//'"
 
 # Deduplicate path variables
 get_var () {
