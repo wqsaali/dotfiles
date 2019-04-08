@@ -14,8 +14,8 @@ COL_MAGENTA=$ESC_SEQ"35;01m"
 COL_CYAN=$ESC_SEQ"36;01m"
 COL_GREY=$ESC_SEQ"38;5;245m"
 
-proj="${1:non-existing-repo}"
-team="${2:non-existing-repo}"
+proj="${1:-non-existing-repo}"
+team="${2:-non-existing-repo}"
 
 cdir=$(pwd)
 page=1

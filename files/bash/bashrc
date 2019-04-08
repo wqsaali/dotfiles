@@ -224,6 +224,10 @@ fi
 
 [ -f ~/.kube-fzf/kube-fzf.sh ] && source ~/.kube-fzf/kube-fzf.sh
 
+[ -f $HOME/.kbenv/kbenv.sh ] && source $HOME/.kbenv/kbenv.sh
+
+[ -f $HOME/.helmenv/helmenv.sh ] && source $HOME/.helmenv/helmenv.sh
+
 [ "$OSTYPE" == "linux-gnu" ] && source /etc/profile.d/vte-2.91.sh
 
 # gitprompt configuration
@@ -258,6 +262,8 @@ source ~/.bash/kube-ps1/kube-ps1.sh
 # if [ "$TERM" != "linux" ]; then
 #     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 # fi
+
+export PS1
 
 CONFIGURED="true"
 

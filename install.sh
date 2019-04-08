@@ -112,6 +112,22 @@ installKubeScripts() {
     git pull
     cd ${INSTALLDIR}
   fi
+
+  if [ ! -d  ${HOME}/.kbenv ]; then
+    git clone https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
+  else
+    cd ${HOME}/.kbenv/
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
+  if [ ! -d  ${HOME}/.helmenv ]; then
+    git clone https://github.com/alexppg/helmenv.git ${HOME}/.helmenv
+  else
+    cd ${HOME}/.helmenv/
+    git pull
+    cd ${INSTALLDIR}
+  fi
 }
 
 installDCOScli() {
@@ -410,6 +426,7 @@ createSkeleton() {
 
   mkdir -p ${HOME}/.local/bin/
   mkdir -p ${HOME}/.local/share/bash-completion
+  [ -d ${HOME}/.bin ] || ln -s ${HOME}/.local/bin ${HOME}/.bin
 }
 
 installDotFiles() {
