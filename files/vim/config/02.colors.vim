@@ -40,6 +40,7 @@
   color Tomorrow-Night-Bright
   " color one
   " color dracula
+  " color github
   " hi link illuminatedWord Visual
   hi link illuminatedWord CursorLine
 " }}}

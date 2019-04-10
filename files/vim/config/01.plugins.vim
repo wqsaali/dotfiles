@@ -35,7 +35,7 @@
   Plug 'tpope/vim-fugitive'
   Plug 'gregsexton/gitv'
   Plug 'junegunn/gv.vim'
-  " Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+  "Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
   Plug 'chrisbra/vim-diff-enhanced'
   "Plug 'gcmt/breeze.vim'
   Plug 'ctrlpvim/ctrlp.vim'
@@ -64,7 +64,7 @@
     endif
   endfunction
   Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
-  " Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
+  "Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
   "Plug 'davidhalter/jedi-vim.git'
   Plug 'ervandew/supertab'
   "Plug 'sjl/gundo.vim'
@@ -87,7 +87,7 @@
   Plug 'Raimondi/delimitMate'
   "Plug 'Townk/vim-autoclose'
   Plug 'tpope/vim-endwise'
-  " Plug 'godlygeek/tabular'
+  "Plug 'godlygeek/tabular'
   "Plug 'neilagabriel/vim-geeknote'
   "Plug 'kopischke/vim-stay'
   "Plug 'kopischke/vim-fetch'
@@ -95,11 +95,12 @@
   Plug 'luisdavim/pretty-folds'
   Plug 'scrooloose/syntastic'
   Plug 'metakirby5/codi.vim'
+  Plug 'flazz/vim-colorschemes'
   "Plug 'lilydjwg/colorizer'
   "Plug 'chriskempson/base16-vim'
-  Plug 'flazz/vim-colorschemes'
-  Plug 'dracula/vim'
-  " Plug 'rakr/vim-one'
+  "Plug 'dracula/vim'
+  "Plug 'rakr/vim-one'
+  "Plug 'cormacrelf/vim-colors-github'
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'
