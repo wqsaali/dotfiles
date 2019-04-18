@@ -332,19 +332,6 @@ function docker-enter() {
   docker exec -i -t $1 /bin/sh
 }
 
-# function docker-retag() {
-#   docker_host='docker.for.mac.host.internal'
-#   for repository in $(curl -s http://${docker_host}:5000/v2/_catalog | jq -r '.repositories[]'); do
-#     for image in $(curl -s http://${docker_host}:5000/v2/${repository}/tags/list | jq -r '(.name + ":" + .tags[])')
-#       docker image pull ${docker_host}:5000/${image}
-#       docker image tag ${docker_host}:5000/${image} ${1}/${image}
-#       docker image push ${1}/${image}
-#       # if you need some cleanup
-#       # docker image rm ${docker_host}:5000/${image} ${1}/${image}
-#     done
-#   done
-# }
-
 function docker-retag() {
   for image in $(docker images | grep "${1}" | awk '{print $1}'); do
     image2=$(echo ${image} | sed -e "s/${1}/${2}/")
@@ -386,20 +373,22 @@ alias kube-clean='kctl-clean'
 # Helm aliases
 alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -n 1 -r helm plugin update'
 
-# microk8s aliases
-alias microk8s.install='multipass exec microk8s-vm -- sudo snap install microk8s --classic && multipass exec microk8s-vm -- sudo iptables -P FORWARD ACCEPT'
-alias microk8s.setup='multipass exec microk8s-vm -- /snap/bin/microk8s.enable dns storage ingress metrics-server dashboard registry'
-alias microk8s.new='multipass launch --name microk8s-vm --mem 4G --disk 40G && microk8s.install && microk8s.setup'
-alias microk8s.start='multipass start microk8s-vm'
-alias microk8s.stop='multipass stop microk8s-vm'
-alias microk8s.delete='multipass delete microk8s-vm && multipass purge'
-alias microk8s.ip='multipass list | grep microk8s-vm | awk '\''{print $3}'\'''
-alias microk8s.shell='multipass shell microk8s-vm'
-alias microk8s.status='multipass exec microk8s-vm -- /snap/bin/microk8s.status'
-alias microk8s.enable='multipass exec microk8s-vm -- /snap/bin/microk8s.enable'
-alias microk8s.config='multipass exec microk8s-vm -- /snap/bin/microk8s.config'
-alias microk8s.docker='multipass exec microk8s-vm -- /snap/bin/microk8s.docker'
-alias microk8s.kubectl='multipass exec microk8s-vm -- /snap/bin/microk8s.kubectl'
+# microk8s aliases for macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias microk8s.install='multipass exec microk8s-vm -- sudo snap install microk8s --classic && multipass exec microk8s-vm -- sudo iptables -P FORWARD ACCEPT'
+  alias microk8s.setup='multipass exec microk8s-vm -- /snap/bin/microk8s.enable dns storage ingress metrics-server dashboard registry'
+  alias microk8s.new='multipass launch --name microk8s-vm --mem 4G --disk 40G && microk8s.install && microk8s.setup'
+  alias microk8s.start='multipass start microk8s-vm'
+  alias microk8s.stop='multipass stop microk8s-vm'
+  alias microk8s.delete='multipass delete microk8s-vm && multipass purge'
+  alias microk8s.ip='multipass list | grep microk8s-vm | awk '\''{print $3}'\'''
+  alias microk8s.shell='multipass shell microk8s-vm'
+  alias microk8s.status='multipass exec microk8s-vm -- /snap/bin/microk8s.status'
+  alias microk8s.enable='multipass exec microk8s-vm -- /snap/bin/microk8s.enable'
+  alias microk8s.config='multipass exec microk8s-vm -- /snap/bin/microk8s.config'
+  alias microk8s.docker='multipass exec microk8s-vm -- /snap/bin/microk8s.docker'
+  alias microk8s.kubectl='multipass exec microk8s-vm -- /snap/bin/microk8s.kubectl'
+fi
 
 # Gardener aliases
 alias gctl='gardenctl'
