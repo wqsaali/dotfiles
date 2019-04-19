@@ -10,3 +10,4 @@ rubocop-performance
 slack-notifier
 terminal-table
 terraform_landscape
+iStats
