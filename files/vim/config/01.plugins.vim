@@ -39,6 +39,7 @@
   Plug 'chrisbra/vim-diff-enhanced'
   "Plug 'gcmt/breeze.vim'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'fisadev/vim-ctrlp-cmdpalette'
   Plug 'mileszs/ack.vim'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'ryanoasis/vim-devicons'
