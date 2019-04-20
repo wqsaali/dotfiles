@@ -255,7 +255,8 @@ installAtomPackages() {
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* ${HOME}/.atom/
-  apm install --packages-file files/pkgs/atom-packages.lst
+  # apm install --packages-file files/pkgs/atom-packages.lst
+  cat files/pkgs/atom-packages.lst | grep -Ev '\s*#' | xargs -L1 apm install
 }
 
 installVscodePackages() {

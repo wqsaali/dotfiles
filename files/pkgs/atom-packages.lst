@@ -1,3 +1,4 @@
+# git-projects
 activate-power-mode
 alias-command
 ansible-snippets
@@ -33,7 +34,6 @@ git-diff-details
 git-history
 git-log
 git-plus
-# git-projects
 git-status
 git-time-machine
 highlight-line
@@ -84,6 +84,7 @@ one-sharp-syntax
 open-this
 pain-split
 paner
+python-import-magic
 quick-query
 quick-query-mssql
 quick-query-sqlite

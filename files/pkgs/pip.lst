@@ -12,7 +12,9 @@ docker
 dreampie
 glances
 howdoi
+importmagic
 ipython
+isort
 k8s-handle
 kube-shell
 kubernetes
@@ -24,9 +26,11 @@ pre-commit
 pterraform
 ptpython
 pycodestyle
+pyflakes
 pygments-style-tomorrownightbright
 pyhcl
 pyinstaller
+pylint
 pyobjc
 python-language-server
 pyvmomi
