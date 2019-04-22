@@ -4,6 +4,7 @@ ansible
 ansible-lint
 archivemount
 asciinema
+autopep8
 avfs
 awless
 aws-shell
