@@ -644,7 +644,10 @@ alias lstcp='lsof -nP | grep TCP | grep LISTEN'
 alias lsudp='lsof -nP | grep UDP | grep LISTEN'
 alias lsservers='lsof -nP | grep LISTEN'
 
-alias netdata='docker run --cap-add SYS_PTRACE -v /proc:/host/proc:ro -v /sys:/host/sys:ro -p 19999:19999 titpetric/netdata'
+alias netdata='docker run --rm --cap-add SYS_PTRACE -v /proc:/host/proc:ro -v /sys:/host/sys:ro -p 19999:19999 titpetric/netdata'
+
+# Start a local grafana for dashboard development
+aliaas grafana='docker run --rm -p 3000:3000 -e "GF_SECURITY_ADMIN_PASSWORD=secret" grafana/grafana'
 
 function hgrep() {
   if [ ! -z "$1" ]; then
