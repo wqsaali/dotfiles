@@ -25,6 +25,7 @@ npm-compare
 npmrc
 organize-cli
 parse-columns-cli
+proxy-pac-proxy
 ramda-cli
 shrinkpack
 tiny-care-terminal
