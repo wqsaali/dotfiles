@@ -62,7 +62,6 @@ libffi-dev
 libgc
 libgcrypt
 libgmp
-libgnustl
 libgpg-error
 libicu
 libidn
@@ -82,7 +81,6 @@ libtalloc
 libtermkey
 libunibilium
 libunistring
-libutil
 libuuid
 libuv
 libvterm
@@ -96,7 +94,6 @@ ncdu
 ncurses
 ncurses-ui-libs
 ncurses-utils
-ndk-stl
 ndk-sysroot
 neofetch
 neovim
@@ -122,6 +119,7 @@ ranger
 readline
 resolv-conf
 rhash
+ripgrep
 ruby
 ruby-dev
 science-repo
