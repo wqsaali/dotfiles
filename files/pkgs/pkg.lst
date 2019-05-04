@@ -26,6 +26,7 @@ fd
 file
 findutils
 fzf
+game-repo
 gawk
 gdbm
 gettext
@@ -123,6 +124,7 @@ resolv-conf
 rhash
 ruby
 ruby-dev
+science-repo
 screenfetch
 silversearcher-ag
 tar
@@ -131,6 +133,7 @@ termux-api
 termux-auth
 termux-elf-cleaner
 termux-exec
+termux-keyring
 termux-tools
 tmux
 tracepath
@@ -142,3 +145,4 @@ w3m
 wget
 xz-utils
 yarn
+zlib
