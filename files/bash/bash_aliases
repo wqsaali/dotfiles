@@ -345,12 +345,14 @@ function docker-retag() {
 function kubectl-enter() {
   kubectl exec -ti ${@} -- sh
 }
+alias kctl-enter='kubectl-enter'
 alias kexec='kubectl-enter'
 
 function kube-remote-shell() {
   kubectl ${@} run --restart=Never --rm -i --tty alpine --image=alpine -- sh
 }
 alias kube-shell='kube-remote-shell'
+alias kctl-shell='kube-remote-shell'
 
 function kgy() {
   kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
@@ -369,6 +371,8 @@ alias kns='kubens'
 
 alias kctl-clean='kubectl get po --all-namespaces --no-headers | grep -v Running | awk '\''{print $2 " -n " $1}'\'' | xargs -L1 -r kubectl delete po'
 alias kube-clean='kctl-clean'
+
+alias kctl-list_images='kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s "[[:space:]]" "\n" | sort | uniq -c'
 
 # Helm aliases
 alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -n 1 -r helm plugin update'
@@ -594,12 +598,14 @@ fi
 alias cygstart='open'
 
 # Get all records from a domain
-alias dig-all="dig +nocmd +multiline +noall +answer any"
+alias dig-all='dig +nocmd +multiline +noall +answer any'
 
-alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
 alias sysState="top -l 1 -s 0 | awk ' /Processes/ || /PhysMem/ || /Load Avg/{print}'"
 
-alias cls="clear"
+alias cls='clear'
+
+alias gr='rg'
 
 # Fix window title after ssh
 function ssh() {

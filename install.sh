@@ -561,6 +561,9 @@ case "$1" in
   "minikube")
     installMinikube
     ;;
+  "helm" | "helmplugins")
+    installhelmPlugins
+    ;;
   "fission")
     installFission
     ;;

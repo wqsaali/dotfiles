@@ -21,6 +21,7 @@ kubernetes
 mdv
 molecule
 neovim
+parallel-ssh
 pip
 pre-commit
 pterraform
