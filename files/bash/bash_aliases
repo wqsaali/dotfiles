@@ -346,7 +346,12 @@ function kubectl-enter() {
   kubectl exec -ti ${@} -- sh
 }
 alias kctl-enter='kubectl-enter'
-alias kexec='kubectl-enter'
+
+function kexec(){ pod=$1; shift; kubectl exec -it $pod -- $@; }
+alias kctl-exec='kexec'
+
+function krun() { name=$1; shift; image=$1; shift; kubectl run -it --generator=run-pod/v1 --image $image $name -- $@; }
+alias kctl-run='krun'
 
 function kube-remote-shell() {
   kubectl ${@} run --restart=Never --rm -i --tty alpine --image=alpine -- sh

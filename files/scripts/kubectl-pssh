@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+# Script to execute commands on k8s nodes over ssh using pssh
+# You need to have pssh and jq installed
+# Examples:
+#    kubectl-pssh 'sudo docker system prune -a -f'
+#    kubectl-pssh -u myUser 'sudo docker system prune -a -f'
+#    kubectl-pssh -f ko 'sudo systemctl restart docker'
+
+# Defaults
+DEBUG=false
+NODES=all
+USER=app
+IP=InternalIP
+
+function usage {
+  if ! [ -z "${1}" ] ; then
+    echo -e "${1}"
+    echo ''
+  fi
+  echo "Usage: $(basename $0) [<flags>] <command>"
+  echo ''
+  echo 'Flags:'
+  echo '  -h, --help                            display help'
+  echo '  -d, --debug                           enable debug output'
+  echo '  -e, --external-ip                     use the external IP'
+  echo "  -f, --filter <all|healthy|unhealthy>  Filter nodes by their state default: ${NODES}"
+  echo "  -u, --user <user>                     ssh user default: ${USER}"
+  echo ''
+  exit 1
+}
+
+function inventory() {
+  ip='ip:(.status.addresses[] | select(.type=="'${IP}'")| .address)'
+  status='status:(.status.conditions[] | select(.type=="Ready") | .status)'
+  query="[.items[] | {name:.metadata.name, ${ip}, ${status}}]"
+  nodes=$(kubectl get no -o json | jq -r "${query}")
+
+  case "${NODES,,}" in
+    "healthy" | "ok" | "ready")
+      nodes=$(echo "$nodes" | jq -r '.[] | select(.status=="True") | "app@"+.ip')
+      ;;
+    "unhealthy" | "ko" | "notready")
+      nodes=$(echo "$nodes" | jq -r '.[] | select(.status!="True") | "app@"+.ip')
+      ;;
+    *)
+      nodes=$(echo "$nodes" | jq -r '.[] | "app@"+.ip')
+      ;;
+  esac
+  echo -e ${nodes} | tr -s '[[:space:]]' '\n'
+}
+
+TEMP=$(getopt -o hdef:u: --long help,debug,external-ip,filter:,user: -n "$(basename $0)" -- "$@")
+
+if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+
+eval set -- "$TEMP"
+
+while true; do
+  case "$1" in
+    -h | --help ) usage ;;
+    -d | --debug ) DEBUG=true; shift ;;
+    -e | --external-ip ) IP=ExternalIP; shift ;;
+    -f | --filter ) NODES="$2"; shift 2 ;;
+    -u | --user ) USER="$2"; shift 2 ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+# Allow the file to be sourced without excuting this part
+if [ "$0" = "$BASH_SOURCE" ] ; then
+  CMD="${1}"
+  if [ -z "${CMD}" ] ; then
+    usage "You need to provide a command.\nTerminating...\n" >&2
+  fi
+
+  if ! [ -x "$(command -v jq)" ]; then
+    echo -e "You need jq.\nTerminating...\n" >&2
+    exit 1
+  fi
+  if ! [ -x "$(command -v pssh)" ]; then
+    echo -e "You need pssh.\nTerminating...\n" >&2
+    exit 1
+  fi
+
+  inventory > hosts.lst
+  sed -i '/^[[:blank:]]*$/ d' hosts.lst
+  if [[ "${DEBUG}" == "true" ]]; then
+    echo "Hosts list:"
+    cat hosts.lst
+    echo ''
+  fi
+  if ! [ -s hosts.lst ]; then
+    echo -e "No hosts found!\n" >&2
+    exit 1
+  fi
+  pssh -O StrictHostKeyChecking=no -i -h hosts.lst "${CMD}"
+  rm hosts.lst
+fi
