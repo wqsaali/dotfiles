@@ -6,6 +6,8 @@ dotfiles_dir="$(dirname $0)"
 source ${dotfiles_dir}/files/scripts/hubinstall
 source ${dotfiles_dir}/files/scripts/hashinstall
 
+isFunction() { declare -F -- "$@" >/dev/null; }
+
 path() {
   mkdir -p "$(dirname "$1")"
   echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
@@ -399,6 +401,8 @@ installBashConf() {
     git pull
     cd ${INSTALLDIR}
   fi
+
+  source ${HOME}/.bash_profile
 }
 
 installFish() {
@@ -508,6 +512,14 @@ installAll() {
   installDotFiles
 }
 
+if isFunction "${1}"; then
+  $1
+  exit $?
+elif isFunction "install${1}"; then
+  "install$1"
+  exit $?
+fi
+
 case "$1" in
   "gems" | "gem")
     installGems
@@ -542,33 +554,8 @@ case "$1" in
   "vagrant" | "VagrantPlugins")
     installVagrantPlugins
     ;;
-  "goss")
-    installGoss
-    ;;
-  "awless")
-    installAwless
-    ;;
-  "dcos"|"dcos-cli"|"dcoscli")
-    installDCOScli
-    ;;
-  "depcon")
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      installDepcon 'osx' '64'
-    else
-      installDepcon 'linux' '64'
-    fi
-    ;;
-  "minikube")
-    installMinikube
-    ;;
   "helm" | "helmplugins")
     installhelmPlugins
-    ;;
-  "fission")
-    installFission
-    ;;
-  "fish")
-   installFish
     ;;
   "all")
     if [[ "$OSTYPE" == "darwin"* ]]; then
