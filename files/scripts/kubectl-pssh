@@ -47,7 +47,7 @@ function inventory() {
       nodes=$(echo "$nodes" | jq -r '.[] | "app@"+.ip')
       ;;
   esac
-  echo -e ${nodes} | tr -s '[[:space:]]' '\n'
+  echo -ne ${nodes} | tr -s '[[:space:]]' '\n'
 }
 
 TEMP=$(getopt -o hdef:u: --long help,debug,external-ip,filter:,user: -n "$(basename $0)" -- "$@")
@@ -70,9 +70,10 @@ done
 
 # Allow the file to be sourced without excuting this part
 if [ "$0" = "$BASH_SOURCE" ] ; then
-  CMD="${1}"
+  CMD="${@}"
   if [ -z "${CMD}" ] ; then
     usage "You need to provide a command.\nTerminating...\n" >&2
+    exit 1
   fi
 
   if ! [ -x "$(command -v jq)" ]; then

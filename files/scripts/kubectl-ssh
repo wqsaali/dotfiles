@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+# Script to execute commands on k8s nodes over ssh using pssh
+# You need to have jq installed
+# Examples:
+#    kubectl-ssh -u myUser workernode-01
+#    kubectl-ssh master-k8-01 uptime
+
+# Defaults
+DEBUG=false
+USER=app
+IP=InternalIP
+
+function usage {
+  if ! [ -z "${1}" ] ; then
+    echo -e "${1}"
+    echo ''
+  fi
+  echo "Usage: $(basename $0) [<flags>] <node>"
+  echo ''
+  echo 'Flags:'
+  echo '  -h, --help                            display help'
+  echo '  -d, --debug                           enable debug output'
+  echo '  -e, --external-ip                     use the external IP'
+  echo "  -u, --user <user>                     ssh user default: ${USER}"
+  echo ''
+  exit 1
+}
+
+function nodeIP() {
+  kubectl get no "${1}" -o json | jq -r '.status.addresses[] | select(.type=="'${IP}'") | .address'
+}
+
+TEMP=$(getopt -o hdeu: --long help,debug,external-ip,user: -n "$(basename $0)" -- "$@")
+
+if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+
+eval set -- "$TEMP"
+
+while true; do
+  case "$1" in
+    -h | --help ) usage ;;
+    -d | --debug ) DEBUG=true; shift ;;
+    -e | --external-ip ) IP=ExternalIP; shift ;;
+    -u | --user ) USER="$2"; shift 2 ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+# Allow the file to be sourced without excuting this part
+if [ "$0" = "$BASH_SOURCE" ] ; then
+
+  if ! [ -x "$(command -v jq)" ]; then
+    echo -e "You need jq.\nTerminating...\n" >&2
+    exit 1
+  fi
+
+  NODE="${1}"
+  if [[ -z "$NODE" ]] && [[ -t 1 && -z ${IGNORE_FZF:-} && "$(type fzf &>/dev/null; echo $?)" -eq 0 ]]; then
+    NODE=$(echo $(kubectl get no --no-headers | fzf) | awk '{print $1}')
+  fi
+  if [ -z "${NODE}" ] ; then
+    usage "You need to provide a node.\nTerminating...\n" >&2
+    exit 1
+  fi
+  shift
+
+  NODE=$(nodeIP "${NODE}")
+
+  if [[ "${DEBUG}" == "true" ]]; then
+    echo 'Executing: ssh -o StrictHostKeyChecking=no -l "'${USER}'" "'${NODE}'"' "${@}"
+  fi
+  ssh -o StrictHostKeyChecking=no -l "${USER}" "${NODE}" ${@}
+fi
