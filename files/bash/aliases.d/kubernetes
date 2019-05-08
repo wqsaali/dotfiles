@@ -1,0 +1,114 @@
+# vim:set filetype=sh:
+
+# Kubernetes aliases
+function kubectl-enter() {
+  kubectl exec -ti ${@} -- sh
+}
+alias kctl-enter='kubectl-enter'
+
+function kexec(){ pod=$1; shift; kubectl exec -it $pod -- $@; }
+alias kctl-exec='kexec'
+
+function krun() { name=$1; shift; image=$1; shift; kubectl run -it --generator=run-pod/v1 --image $image $name -- $@; }
+alias kctl-run='krun'
+
+function kube-remote-shell() {
+  kubectl ${@} run --restart=Never --rm -i --tty alpine --image=alpine -- sh
+}
+alias kube-shell='kube-remote-shell'
+alias kctl-shell='kube-remote-shell'
+
+function kgy() {
+  kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
+}
+
+function kube-purge-crd() {
+  kubectl get ${1} --all-namespaces --no-headers | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl patch -p '{"metadata":{"finalizers": []}}' --type=merge ${1};
+  kubectl get ${1} --all-namespaces --no-headers | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete ${1};
+  kubectl api-resources -o name | grep "${1}" | awk '{print $1}' | xargs -r kubectl delete crd
+}
+
+alias kube='kubectl'
+alias kctl='kubectl'
+alias kctx='kubectx'
+alias kns='kubens'
+
+alias kctl-clean='kubectl get po --all-namespaces --no-headers | grep -v Running | awk '\''{print $2 " -n " $1}'\'' | xargs -L1 -r kubectl delete po'
+alias kube-clean='kctl-clean'
+
+alias kctl-list_images='kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s "[[:space:]]" "\n" | sort | uniq -c'
+
+# Helm aliases
+alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -n 1 -r helm plugin update'
+
+# microk8s aliases for macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias microk8s.install='multipass exec microk8s-vm -- sudo snap install microk8s --classic && multipass exec microk8s-vm -- sudo iptables -P FORWARD ACCEPT'
+  alias microk8s.setup='multipass exec microk8s-vm -- /snap/bin/microk8s.enable dns storage ingress metrics-server dashboard registry'
+  alias microk8s.new='multipass launch --name microk8s-vm --mem 4G --disk 40G && microk8s.install && microk8s.setup'
+  alias microk8s.start='multipass start microk8s-vm'
+  alias microk8s.stop='multipass stop microk8s-vm'
+  alias microk8s.delete='multipass delete microk8s-vm && multipass purge'
+  alias microk8s.ip='multipass list | grep microk8s-vm | awk '\''{print $3}'\'''
+  alias microk8s.shell='multipass shell microk8s-vm'
+  alias microk8s.status='multipass exec microk8s-vm -- /snap/bin/microk8s.status'
+  alias microk8s.enable='multipass exec microk8s-vm -- /snap/bin/microk8s.enable'
+  alias microk8s.config='multipass exec microk8s-vm -- /snap/bin/microk8s.config'
+  alias microk8s.docker='multipass exec microk8s-vm -- /snap/bin/microk8s.docker'
+  alias microk8s.kubectl='multipass exec microk8s-vm -- /snap/bin/microk8s.kubectl'
+fi
+
+# Gardener aliases
+alias gctl='gardenctl'
+alias gk='gardenctl kubectl --'
+
+# Target a shoot in a graden
+# shoot <garden> <shoot>
+function shoot() {
+  if [[ "${1}" == "ls" ]]; then
+    for g in $(garden ls | grep name | cut -d' ' -f3); do
+      echo -n "${g} "
+      shoot ${g} ls
+      echo ''
+    done
+    return
+  fi
+  gardenctl target garden ${1} > /dev/null
+  case ${2} in
+    "ls") gardenctl ls shoots;;
+    *)
+      export $(gardenctl target shoot ${2})
+      echo "KUBECONFIG=${KUBECONFIG}"
+      ;;
+  esac
+}
+
+function seed() {
+  if [[ "${1}" == "ls" ]]; then
+    for g in $(garden ls | grep name | cut -d' ' -f3); do
+      echo -n "${g} "
+      seed ${g} ls
+      echo ''
+    done
+    return
+  fi
+  gardenctl target garden ${1} > /dev/null
+  case ${2} in
+    "ls") gardenctl ls seeds;;
+    *)
+      export $(gardenctl target seed ${2})
+      echo "KUBECONFIG=${KUBECONFIG}"
+      ;;
+  esac
+}
+
+function garden() {
+  case ${1} in
+    "ls") gardenctl ls gardens;;
+    *)
+      export $(gardenctl target garden ${1})
+      echo "KUBECONFIG=${KUBECONFIG}"
+      ;;
+  esac
+}
+

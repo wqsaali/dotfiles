@@ -361,6 +361,7 @@ installBashConf() {
   cp files/bash/bash_variables ${HOME}/.bash_variables
   cp files/bash/bash_profile ${HOME}/.bash_profile
   cp files/bash/profile ${HOME}/.profile
+  cp -r files/bash/aliases.d $HOME/.bash/
 
   #cp files/bash/bash_aliases ${HOME}/.bash_aliases
   sedcmd=''

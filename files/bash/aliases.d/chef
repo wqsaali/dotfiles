@@ -1,0 +1,86 @@
+# vim:set filetype=sh:
+
+# Knife and chef aliases
+
+alias setChef='eval "$(chef shell-init bash)"'
+alias useChef='setChef'
+
+function chef-env-list-versions() {
+  cdir=$(pwd)
+  cd chef/environments
+  grep -E '".*":\s*"= .*"' * | tr -s " " | tr -d ','| cut -d ':' -f2,3 | sort -u
+  cd $cdir
+}
+
+function knife-env-list-versions() {
+  cdir=$(pwd)
+  cd chef/environments
+  for f in *.json; do echo ">>> $f"; jq '.cookbook_versions' $f; echo ''; done
+  cd $cdir
+}
+
+function knife-prune-nodes() {
+  env=${1}
+  if [ -z "${env}" ]; then
+    env="*"
+  fi
+  for node in $(knife search node "chef_environment:${env} AND ohai_time:[* TO $(date +%s -d '25hours ago')]" -i); do
+    knife client delete -y $node
+    knife node delete -y $node
+  done
+}
+
+# Compares two environments in terms of pinned cookbook versions
+# Usage: chef-env-compare-versions env-a env-b
+function chef-env-compare-versions() {
+  cdir=$(pwd)
+  cd chef/environments
+  json-diff -y ${1}.json ${2}.json ".cookbook_versions"
+  cd $cdir
+}
+
+# Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a different version
+# Usage: chef-promot-all <cookbook> <version>
+function knife-promote-all() {
+  cdir=$(pwd)
+  cd chef/environments
+  grep -E '".*":\s*"= .*"' * | grep $1 | grep -v "= $2" | cut -d'.' -f1 | xargs -n1 -r -I{} knife spork promote {} $1 -v $2 --remote --yes
+  cd $cdir
+}
+
+# Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to a specific version
+# Usage: chef-promot-eq <cookbook> <version_old> <version_new>
+function knife-promote-eq() {
+  cdir=$(pwd)
+  cd chef/environments
+  grep -E '".*":\s*"= .*"' * | grep $1 | grep "= $2" | cut -d'.' -f1 | xargs -n1 -r -I{} knife spork promote {} $1 -v $3 --remote --yes
+  cd $cdir
+}
+
+# Promotes a specific version of a cookbook to all environments that have a version of that cookbok pinned to an older version
+# Usage: chef-promot-lt <cookbook> <version>
+function knife-promote-lt() {
+  cdir=$(pwd)
+  cd chef/environments
+  for environment in $(grep -E '".*":\s*"= .*"' * | grep $1 | tr -d ' '| grep -v "$2"); do
+    version=$(echo $environment | cut -d \" -f4 | tr -d '=')
+    environment=$(echo $environment | cut -d \. -f1)
+    if [ "$version" = "$(echo -e "$version\n$2" | sort -V | head -n1)" ]; then
+      echo "Promoting $1 from $version to $2 on $environment"
+      knife spork promote $environment $1 -v $2 --remote --yes
+    fi
+  done
+  cd $cdir
+}
+
+function knife-ciphertext() {
+  sed -e "s/knife\[\:secret_file\]/\#knife\[\:secret_file\]/" -i.bak ~/.chef/config.rb
+  knife $@ --format=json
+  mv ~/.chef/config.rb.bak ~/.chef/config.rb
+}
+
+# Usage knife-delete-attr 'name:some-server' default some_attribute
+function knife-delete-attr() {
+  knife exec -E "nodes.transform(\"$1\") { |n| n.$2_attrs.delete(\"$3\"); n.save() }"
+}
+

@@ -1,0 +1,46 @@
+# vim:set filetype=sh:
+
+# Geeknote alias
+function gn_sync_notebook() {
+  gnsync --path ~/Evernote/$1 --logpath ~/.log/geeknote$1.log --format markdown --notebook "$1" --two-way TWO_WAY
+}
+
+function gn_sync_all() {
+  for D in *; do gn_sync_notebook $D; done
+}
+
+# Vim aliases
+# Use neovim if available
+if [ -x "$(command -v nvim)" ]; then
+  alias vi='nvim'
+  alias vim='nvim'
+  alias vimdiff='nvim -d'
+else
+  alias vi='vim'
+  alias vimdiff='vim -d'
+fi
+
+alias vim-geeknote='vi -c Geeknote'
+alias geeknote-vim='vi -c Geeknote'
+
+# Aliases for vim Vundle
+# alias vim-install='vi +PluginInstall +qall'
+# alias vim-update='vi +PluginUpdate +qall'
+# alias vim-clean='vi +PluginClean +qall'
+
+# Aliases for vim-plug
+alias vim-install='vi +PlugInstall +qall'
+alias vim-update='vi +PlugUpdate +PlugUpgrade +qall'
+alias vim-clean='vi +PlugClean! +qall'
+
+alias gitv='vi +GV -c tabonly'
+# alias Gitv='vi "$(git rev-parse --show-toplevel)"/.git/index -c "Gitv --all" -c "tabonly"'
+
+# Codi
+# Usage: codi [filetype] [filename]
+function codi() {
+  local syntax="${1:-python}"
+  shift
+  vi -c "Codi $syntax" "$@"
+}
+
