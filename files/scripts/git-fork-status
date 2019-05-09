@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This scritp can be used as a git plugin
 
 # Colors
 export ESC_SEQ="\x1b["

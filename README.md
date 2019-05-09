@@ -3,6 +3,7 @@
 ### What's included:
 - a bashrc file
 - a set of bash aliases
+- some useful scripts
 - installs https://github.com/magicmonty/bash-git-prompt.git
 - installs https://github.com/jonmosco/kube-ps1
 - a custom theme for bash-git-prompt that includes kube-ps1
@@ -11,11 +12,11 @@
 - a vimrc file
 - Atom configuration including list of installed packages
 - VSCode configuration including list of installed packages
-- a bash_alias file
 - i3 and compton configuration files
 - i3blocks scripts
 - iTerm profile
 - Hammerspoon configuration scripts
+- Some kubectl plugins
 
 ### The install script
 The install script supports macOS, Linux (Ubuntu) and Android ([Termux](https://termux.com)) and will install my custom dotfiles but also some extra packages and fonts, you can select what to install by passing an argument to the install script:

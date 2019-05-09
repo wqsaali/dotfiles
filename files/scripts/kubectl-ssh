@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-# Script to execute commands on k8s nodes over ssh using pssh
+# Script to use ssh with k8s nodes
 # You need to have jq installed
 # Examples:
 #    kubectl-ssh -u myUser workernode-01
 #    kubectl-ssh master-k8-01 uptime
+# This scritp can be used as a kubectl plugin and invoked as a sub-command
+#    kubectl ssh master-k8-01 uptime
 
 # Defaults
 DEBUG=false
@@ -58,7 +60,8 @@ if [ "$0" = "$BASH_SOURCE" ] ; then
 
   NODE="${1}"
   if [[ -z "$NODE" ]] && [[ -t 1 && -z ${IGNORE_FZF:-} && "$(type fzf &>/dev/null; echo $?)" -eq 0 ]]; then
-    NODE=$(echo $(kubectl get no --no-headers | fzf) | awk '{print $1}')
+    echo 'Please select a node:'
+    NODE=$(echo $(kubectl get no | fzf --header-lines=1) | awk '{print $1}')
   fi
   if [ -z "${NODE}" ] ; then
     usage "You need to provide a node.\nTerminating...\n" >&2

@@ -18,6 +18,9 @@ function kube-remote-shell() {
 alias kube-shell='kube-remote-shell'
 alias kctl-shell='kube-remote-shell'
 
+alias kssh='kubectl-ssh'
+alias kpssh='kubectl-pssh'
+
 function kgy() {
   kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
 }
