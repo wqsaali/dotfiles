@@ -1,4 +1,5 @@
-#hab
+# pingplotter
+# hab
 alacritty
 alfred
 android-file-transfer
@@ -34,7 +35,6 @@ minishift
 multipass
 oni
 osxfuse
-pingplotter
 powershell
 quicklook-json
 skype
@@ -50,5 +50,6 @@ visual-studio-code
 webex-nbr-player
 webex-wrf-player
 whatsapp
+wireshark
 zoomus
 zoomus-outlook-plugin
