@@ -1,12 +1,12 @@
 # This is the custom theme template for gitprompt.sh
 
 get_k8s_name(){
-  echo "$1"
+  echo -n "${1%@*}"
 }
 
 get_k8s_ns(){
   if [[ "$1" != "default" ]]; then
-    echo ":$1"
+    echo -n ":$1"
   fi
 }
 
@@ -21,13 +21,13 @@ override_git_prompt_colors() {
 
   PROMPT_DIRTRIM=2
 
-  KUBE_PS1_PREFIX=""
-  KUBE_PS1_SUFFIX=""
-  KUBE_PS1_CTX_COLOR="blue"
-  KUBE_PS1_NS_COLOR="cyan"
+  KUBE_PS1_PREFIX=''
+  KUBE_PS1_SUFFIX=''
+  KUBE_PS1_CTX_COLOR='blue'
+  KUBE_PS1_NS_COLOR='cyan'
   KUBE_PS1_NS_ENABLE=true
-  KUBE_PS1_SEPARATOR=""
-  KUBE_PS1_DIVIDER=""
+  KUBE_PS1_SEPARATOR=''
+  KUBE_PS1_DIVIDER=''
   KUBE_PS1_CLUSTER_FUNCTION=get_k8s_name
   KUBE_PS1_NAMESPACE_FUNCTION=get_k8s_ns
 
@@ -82,7 +82,7 @@ override_git_prompt_colors() {
   # To specify multiple branches, use
   #   shopt -s extglob
   #   GIT_PROMPT_MASTER_BRANCHES='@(master|production)'
-  GIT_PROMPT_MASTER_BRANCHES="master"
+  GIT_PROMPT_MASTER_BRANCHES='master'
 }
 
-reload_git_prompt_colors "Custom"
+reload_git_prompt_colors 'Custom'
