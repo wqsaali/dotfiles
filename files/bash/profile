@@ -39,6 +39,9 @@ fi
 if [ -d '/usr/local/opt/sqlite/bin' ]; then
   PATH="/usr/local/opt/sqlite/bin:$PATH"
 fi
+if [ -d '/usr/local/opt/libpcap/bin' ]; then
+  PATH="/usr/local/opt/libpcap/bin:$PATH"
+fi
 
 # Use GNU utils instead of the default ones on MacOS
 if [ -d '/usr/local/opt/findutils/libexec/gnubin' ]; then
