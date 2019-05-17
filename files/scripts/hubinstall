@@ -106,11 +106,11 @@ function pipeBashFromRawGithub() {
   rm ${name}
 }
 
-TEMP=$(getopt -o hdrt:i: --long help,debug,raw,tag:,install-to: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdrt:i: --long help,debug,raw,tag:,install-to: -n "$(basename $0)" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
-eval set -- "$TEMP"
+eval set -- "$OPTS"
 
 while true; do
   case "$1" in

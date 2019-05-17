@@ -9,6 +9,7 @@ github.com/hashicorp/terraform
 github.com/ivanilves/lstags
 github.com/kubernauts/tk8
 github.com/kubicorn/kubicorn
+github.com/kyoh86/richgo
 github.com/liggitt/audit2rbac
 github.com/pkg/errors
 github.com/rancher/k3d

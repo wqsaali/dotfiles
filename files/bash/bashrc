@@ -236,6 +236,9 @@ fi
 
 [ "$OSTYPE" == "linux-gnu" ] && source /etc/profile.d/vte-2.91.sh
 
+[ -f /etc/grc.bashrc ] && source /etc/grc.bashrc
+[ -f /usr/local/etc/grc.bashrc ] && source /usr/local/etc/grc.bashrc
+
 # gitprompt configuration
 
 function get_k8s_name(){

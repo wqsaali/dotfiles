@@ -14,6 +14,7 @@ DEBUG=false
 NODES=all
 USER=app
 IP=InternalIP
+TIMEOUT=0
 
 function usage {
   if ! [ -z "${1}" ] ; then
@@ -28,6 +29,8 @@ function usage {
   echo '  -e, --external-ip                     use the external IP'
   echo "  -f, --filter <all|healthy|unhealthy>  Filter nodes by their state default: ${NODES}"
   echo "  -u, --user <user>                     ssh user default: ${USER}"
+  echo "  -t, --timeout <seconds>               kill ssh process after <seconds> default: ${TIMEOUT}"
+  echo '                                        setting timeout to 0 disables it'
   echo ''
   exit 1
 }
@@ -52,11 +55,11 @@ function inventory() {
   echo -ne ${nodes} | tr -s '[[:space:]]' '\n'
 }
 
-TEMP=$(getopt -o hdef:u: --long help,debug,external-ip,filter:,user: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdef:u:t: --long help,debug,external-ip,filter:,user:,timeout: -n "$(basename $0)" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
-eval set -- "$TEMP"
+eval set -- "$OPTS"
 
 while true; do
   case "$1" in
@@ -65,6 +68,7 @@ while true; do
     -e | --external-ip ) IP=ExternalIP; shift ;;
     -f | --filter ) NODES="$2"; shift 2 ;;
     -u | --user ) USER="$2"; shift 2 ;;
+    -t | --timeout ) TIMEOUT="$2"; shift 2 ;;
     -- ) shift; break ;;
     * ) break ;;
   esac
@@ -98,6 +102,6 @@ if [ "$0" = "$BASH_SOURCE" ] ; then
     echo -e "No hosts found!\n" >&2
     exit 1
   fi
-  pssh -O StrictHostKeyChecking=no -i -h hosts.lst "${CMD}"
+  pssh -O StrictHostKeyChecking=no -t ${TIMEOUT} -i -h hosts.lst "${CMD}"
   rm hosts.lst
 fi

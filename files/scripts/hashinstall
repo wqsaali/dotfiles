@@ -91,11 +91,11 @@ function installHashicorp() {
   cd ${cdir}
 }
 
-TEMP=$(getopt -o hdv:i: --long help,debug,version:,install-to: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdv:i: --long help,debug,version:,install-to: -n "$(basename $0)" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
-eval set -- "$TEMP"
+eval set -- "$OPTS"
 
 while true; do
   case "$1" in

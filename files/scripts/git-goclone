@@ -30,11 +30,11 @@ function usage {
   exit 1
 }
 
-TEMP=$(getopt -o hduw: --long help,debug,workspace: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hduw: --long help,debug,workspace: -n "$(basename $0)" -- "$@")
 
 [ $? != 0 ] && usage "Terminating..." >&2
 
-eval set -- "$TEMP"
+eval set -- "$OPTS"
 
 w=-1
 cdir=$(pwd)

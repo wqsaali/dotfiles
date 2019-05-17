@@ -33,11 +33,11 @@ function nodeIP() {
   kubectl get no "${1}" -o json | jq -r '.status.addresses[] | select(.type=="'${IP}'") | .address'
 }
 
-TEMP=$(getopt -o hdeu: --long help,debug,external-ip,user: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdeu: --long help,debug,external-ip,user: -n "$(basename $0)" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
-eval set -- "$TEMP"
+eval set -- "$OPTS"
 
 while true; do
   case "$1" in

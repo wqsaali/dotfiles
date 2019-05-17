@@ -70,11 +70,11 @@ FORMAT='%H:%M (%p) %Z %a %d %b %Y'
 
 REVERSE=false
 
-TEMP=$(getopt -o hrt: --long help,reverse,timezone: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hrt: --long help,reverse,timezone: -n "$(basename $0)" -- "$@")
 
 [ $? != 0 ] && usage "Terminating..." >&2
 
-eval set -- "$TEMP"
+eval set -- "$OPTS"
 
 while true; do
   case "$1" in

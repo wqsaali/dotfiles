@@ -53,6 +53,19 @@ alias kctl-list_images='kubectl get pods --all-namespaces -o jsonpath="{..image}
 # Helm aliases
 alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -n 1 -r helm plugin update'
 
+function helm-clean() {
+  NS=${1:-kube-system}
+  if [[ "${NS}" == "all" ]]; then
+    NS=$(kubectl get ns --no-headers -o custom-columns='NAME:.metadata.name')
+  fi
+  for N in ${NS}; do
+    echo "Looking for ConfigMaps in ${N}:"
+    kubectl delete cm -n ${N} -l 'OWNER=TILLER' -l 'STATUS in (FAILED,SUPERSEDED,DELETED)'
+    echo "Looking for Secrets in ${N}:"
+    kubectl delete secrets -n ${N} -l 'OWNER=TILLER' -l 'STATUS in (FAILED,SUPERSEDED,DELETED)'
+  done
+}
+
 # microk8s aliases for macOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
   alias microk8s.install='multipass exec microk8s-vm -- sudo snap install microk8s --classic && multipass exec microk8s-vm -- sudo iptables -P FORWARD ACCEPT'
