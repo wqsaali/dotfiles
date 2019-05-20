@@ -103,6 +103,7 @@ installKubeScripts() {
   installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
   installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
+  installFromGithub 'k14s/ytt' "${1}" "${2}"
   installFromRawGithub 'johanhaleby/kubetail'
   installFromRawGithub 'ctron/kill-kube-ns'
   installKrew
@@ -233,7 +234,7 @@ installhelmPlugins() {
 }
 
 installScripts() {
-  mkdir -p ${HOME}/.local/bin/
+  mkdir -p ~/.local/bin/
   cp -r files/scripts/* ${HOME}/.local/bin/
   curl -sLo testssl testssl.sh
   chmod +x testssl
@@ -252,7 +253,7 @@ installChefVM() {
 }
 
 installAtomPackages() {
-  mkdir -p ${HOME}/.atom/
+  mkdir -p ~/.atom/
   cd ${INSTALLDIR}
   # Backup package list with:
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
@@ -266,8 +267,8 @@ installVscodePackages() {
   if [[ "$OSTYPE" == "darwin"* ]]; then
     settings="$HOME/Library/Application Support/Code/User"
   fi
-  mkdir -p $settings
-  cp -r files/vscode/* $settings/
+  mkdir -p "$settings"
+  cp -r files/vscode/* "$settings/"
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
@@ -290,12 +291,12 @@ installTmuxConf() {
 }
 
 installVimPlugins() {
-  mkdir -p ${HOME}/.vim/config/
-  mkdir -p ${HOME}/.vim/ftdetect/
-  mkdir -p ${HOME}/.vim/ftplugin/
-  mkdir -p ${HOME}/.vim/autoload/
-  mkdir -p ${HOME}/.vim/bundle/
-  mkdir -p ${HOME}/.config/nvim/
+  mkdir -p "${HOME}/.vim/config/"
+  mkdir -p "${HOME}/.vim/ftdetect/"
+  mkdir -p "${HOME}/.vim/ftplugin/"
+  mkdir -p "${HOME}/.vim/autoload/"
+  mkdir -p "${HOME}/.vim/bundle/"
+  mkdir -p "${HOME}/.config/nvim/"
 
   cd ${INSTALLDIR}
 
@@ -343,7 +344,7 @@ installGitConf() {
 }
 
 installBashConf() {
-  if [[ -z "${SHELLVARS}" ]]; then
+  if [ -z "${SHELLVARS}" ]; then
     SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
     source config.sh
     CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
@@ -486,15 +487,10 @@ installWebApps() {
 
 installAll() {
   if [[ "$OSTYPE" != *"android"* ]]; then
-    if [[ "$OSTYPE" == "linux-gnu" ]]; then
-      sudo installGems
-      sudo installPips
-      sudo installNpms
-    else
-      installGems
-      installPips
-      installNpms
-    fi
+    installGems
+    installPips
+    installNpms
+
     installChefGems
     installChefVM
     installVagrantPlugins
@@ -558,16 +554,6 @@ case "$1" in
   "helm" | "helmplugins")
     installhelmPlugins
     ;;
-  "all")
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      ./osx.sh
-    elif [[ "$OSTYPE" == *"android"* ]]; then
-      ./android.sh
-    else
-      ./linux.sh
-    fi
-    installAll
-    ;;
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then
       ./osx.sh "${@}"
@@ -576,7 +562,7 @@ case "$1" in
     else
       ./linux.sh "${@}"
     fi
-    if [ -z "${1}" ]; then
+    if [ -z "${1}" ] || [[ "${1}" == "all" ]]; then
       installAll
     fi
     ;;

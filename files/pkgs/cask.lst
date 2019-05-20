@@ -1,12 +1,12 @@
 # pingplotter
 # hab
 alacritty
-alfred
+#alfred
 android-file-transfer
 applepi-baker
 atom
-cakebrew
-cerebro
+#cakebrew
+#cerebro
 chefdk
 clipy
 docker-edge
@@ -33,7 +33,7 @@ magicprefs
 minikube
 minishift
 multipass
-oni
+#oni
 osxfuse
 powershell
 quicklook-json
