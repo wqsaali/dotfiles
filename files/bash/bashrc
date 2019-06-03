@@ -190,12 +190,6 @@ fi
 
 [ -f $HOME/.bash_aliases ] && source ~/.bash_aliases
 
-for f in $HOME/.bash/aliases.d/*; do
-  if [ -f "$f" ]; then
-    source "$f"
-  fi
-done
-
 # Auto completion
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

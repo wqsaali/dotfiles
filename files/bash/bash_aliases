@@ -1,5 +1,12 @@
 # vim:set filetype=sh:
 
+# Extra aliases
+for f in $HOME/.bash/aliases.d/*; do
+  if [ -f "$f" ]; then
+    source "$f"
+  fi
+done
+
 # enable color support of ls and also add handy aliases
 if [ -x "$(command -v dircolors)" ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -365,3 +372,4 @@ function explain-shell() {
   response=$(w3m -dump 'http://explainshell.com/explain?cmd='$(echo $@ | tr ' ' '+'}))
   cat -s <(grep -v -e explainshell -e • -e □ -e 'source manpages' <<< "$response")
 }
+
