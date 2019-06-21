@@ -209,14 +209,11 @@ installDotFiles() {
     exit 1
   fi
 
-  mkdir -p ${HOME}/.atom/
   mkdir -p ${HOME}/.hammerspoon/
   mkdir -p $HOME/.hammerspoon/hs
 
   cd ${INSTALLDIR}
 
-  cp files/screenrc ${HOME}/.screenrc
-  cp files/atom/* ${HOME}/.atom/
   cp files/slate/slate ${HOME}/.slate
   cp files/slate/slate.js ${HOME}/.slate.js
   cp files/chunkwm/chunkwmrc ${HOME}/.chunkwmrc
@@ -240,12 +237,7 @@ installDotFiles() {
     cd ${INSTALLDIR}
   fi
 
-  mkdir -p ${HOME}/.config
-  cp -r files/kitty ${HOME}/.config/
   # ln -s ${HOME}/.config/kitty ${HOME}/Library/Preferences/
-
-  mkdir -p ${HOME}/.config/alacritty
-  cp files/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
 
   cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh

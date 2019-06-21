@@ -196,7 +196,6 @@ installDotFiles() {
     sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt update && sudo apt install hh
   fi
 
-  mkdir -p ${HOME}/.atom/
   mkdir -p ${HOME}/.config/terminator/
   mkdir -p ${HOME}/.config/i3/
 
@@ -212,9 +211,6 @@ installDotFiles() {
   if ! [ -s  ${HOME}/.config/terminator/config ]; then
     ln -s ${HOME}/.config/terminator/terminator.config ${HOME}/.config/terminator/config
   fi
-
-  cp files/screenrc ${HOME}/.screenrc
-  cp files/atom/* ${HOME}/.atom/
 
   sudo cp files/bash/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh

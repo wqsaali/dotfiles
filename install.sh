@@ -434,6 +434,11 @@ createSkeleton() {
   mkdir -p ${HOME}/.local/bin/
   mkdir -p ${HOME}/.local/share/bash-completion
   [ -d ${HOME}/.bin ] || ln -s ${HOME}/.local/bin ${HOME}/.bin
+
+  mkdir -p ${HOME}/.ptpython
+  mkdir -p ${HOME}/.atom/
+  mkdir -p ${HOME}/.config
+  mkdir -p ${HOME}/.config/alacritty
 }
 
 instrallRangerPlugins() {
@@ -457,13 +462,15 @@ installDotFiles() {
   fi
 
   createSkeleton
-  installVimPlugins
   installTmuxConf
   installBashConf
   installGitConf
   installScripts
 
-  mkdir -p ${HOME}/.ptpython
+  cp files/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
+  cp -r files/kitty ${HOME}/.config/
+  cp files/screenrc ${HOME}/.screenrc
+  cp files/atom/* ${HOME}/.atom/
   cp files/ptpython.py ${HOME}/.ptpython/config.py
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -474,6 +481,8 @@ installDotFiles() {
     ./linux.sh dotfiles
   fi
 
+  installVimPlugins
+  installVscodePackages
   instrallRangerPlugins
 
   if [ -x "$(command -v bat)" ] && [ ! -d "${HOME}/.config/bat/themes/sublime-tomorrow-theme" ]; then
