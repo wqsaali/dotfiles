@@ -150,10 +150,10 @@ tmux_conf_theme_window_status_last_attr='none'
 #tmux_conf_theme_left_separator_sub='|'
 #tmux_conf_theme_right_separator_main=''
 #tmux_conf_theme_right_separator_sub='|'
-tmux_conf_theme_left_separator_main=''  # /!\ you don't need to install Powerline
-tmux_conf_theme_left_separator_sub=''   #   you only need fonts patched with
-tmux_conf_theme_right_separator_main='' #   Powerline symbols or the standalone
-tmux_conf_theme_right_separator_sub=''  #   PowerlineSymbols.otf font
+tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
+tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
+tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
+tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
 
 # status left/right content:
 #   - separate main sections with '|'
@@ -180,7 +180,7 @@ tmux_conf_theme_right_separator_sub=''  #   PowerlineSymbols.otf font
 #     - #{username_ssh}
 #   - #(curl wttr.in?format=4)
 tmux_conf_theme_status_left=' #S | ↑#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} '
-tmux_conf_theme_status_right='#{prefix} #{pairing} #{synchronized} #{?battery_status, #{battery_status},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
+tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #{?battery_status, #{battery_status},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} '
 
 # status left style
 tmux_conf_theme_status_left_fg='#000000,#b9ca4a,#000000'  # black, green, black
@@ -258,7 +258,8 @@ tmux_conf_battery_status_discharging=' '  # U+1F50B
 #tmux_conf_battery_status_charging='🔌 '    # U+1F50C
 #tmux_conf_battery_status_discharging='🔋 ' # U+1F50B
 
-# clock style
+# clock style (when you hit <prefix> + t)
+# you may want to use %I:%M %p in place of %R in tmux_conf_theme_status_right
 tmux_conf_theme_clock_colour='#b9ca4a'  # green
 tmux_conf_theme_clock_style='24'
 
@@ -268,7 +269,7 @@ tmux_conf_theme_clock_style='24'
 # in copy mode, copying selection also copies to the OS clipboard
 #   - true
 #   - false (default)
-# on macOS, this require installing reattach-to-user-namespace, see README.md
+# on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel or xclip
 tmux_conf_copy_to_os_clipboard=true
 
@@ -280,7 +281,10 @@ tmux_conf_copy_to_os_clipboard=true
 set-option -s escape-time 10
 
 # increase history size
-# set -g history-limit 100000
+#set -g history-limit 10000
+
+# start with mouse mode enabled
+#set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual

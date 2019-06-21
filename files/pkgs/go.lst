@@ -5,6 +5,7 @@ github.com/cloudposse/slack-notifier
 github.com/gardener/gardenctl
 github.com/go-swagger/go-swagger/cmd/swagger
 github.com/golang/lint/golint
+github.com/gregoryv/uncover/...
 github.com/hashicorp/terraform
 github.com/ivanilves/lstags
 github.com/kubernauts/tk8

@@ -31,7 +31,7 @@
   "   set termguicolors
   " endif
 
-  set guifont=Droid\ Sans\ Mono\ for\ Powerline:h12
+  set guifont=FuraCode\ Nerd\ Font\ Mono:h12
 
   if has('gui_macvim')
     set transparency=5

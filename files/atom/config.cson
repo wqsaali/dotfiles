@@ -36,6 +36,7 @@
     titleBar: "custom"
   editor:
     fontSize: 11
+    fontFamily: "FuraCode Nerd Font Mono"
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true

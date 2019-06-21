@@ -436,6 +436,20 @@ createSkeleton() {
   [ -d ${HOME}/.bin ] || ln -s ${HOME}/.local/bin ${HOME}/.bin
 }
 
+instrallRangerPlugins() {
+  rm -f ~/.config/ranger/*.{sh,py}
+  ranger --copy-config=all
+  mkdir -p ${HOME}/.ranger_plugins/
+  cd ${HOME}/.ranger_plugins/
+  if [ ! -d ${HOME}/.ranger_plugins/ranger_devicons ]; then
+    git clone https://github.com/alexanderjeurissen/ranger_devicons.git
+  fi
+  cd ranger_devicons
+  git pull
+  make install
+  cd ${INSTALLDIR}
+}
+
 installDotFiles() {
   if ! [ -x "$(command -v git)" ]; then
     echo 'You need to install git!' >&2
@@ -452,18 +466,6 @@ installDotFiles() {
   mkdir -p ${HOME}/.ptpython
   cp files/ptpython.py ${HOME}/.ptpython/config.py
 
-  rm -f ~/.config/ranger/*.{sh,py}
-  ranger --copy-config=all
-  mkdir -p ${HOME}/.ranger_plugins/
-  cd ${HOME}/.ranger_plugins/
-  if [ ! -d ${HOME}/.ranger_plugins/ranger_devicons ]; then
-    git clone https://github.com/alexanderjeurissen/ranger_devicons.git
-  fi
-  cd ranger_devicons
-  git pull
-  make install
-  cd ${INSTALLDIR}
-
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh dotfiles
   elif [[ "$OSTYPE" == *"android"* ]]; then
@@ -471,6 +473,8 @@ installDotFiles() {
   else
     ./linux.sh dotfiles
   fi
+
+  instrallRangerPlugins
 
   if [ -x "$(command -v bat)" ] && [ ! -d "${HOME}/.config/bat/themes/sublime-tomorrow-theme" ]; then
     mkdir -p "${HOME}/.config/bat/themes"

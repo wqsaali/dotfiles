@@ -8,8 +8,8 @@
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": true,
     "editor.minimap.renderCharacters": false,
-    "editor.fontFamily": "'DroidSansMono Nerd Font', Menlo, Monaco, 'Courier New', monospace",
-    "terminal.integrated.fontFamily": "'DroidSansMono Nerd Font', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "'FuraCode Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "'FuraCode Nerd Font Mono', Menlo, Monaco, 'Courier New', monospace",
     "workbench.sideBar.location": "left",
     "gitlens.advanced.messages": {
         "suppressCommitHasNoPreviousCommitWarning": false,
