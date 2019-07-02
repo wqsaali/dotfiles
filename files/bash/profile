@@ -64,9 +64,9 @@ if [ -d "/usr/local/opt/gnu-getopt/bin" ]; then
 fi
 
 # Use brew python
-# if [ -d '/usr/local/opt/python/libexec/bin' ]; then
-#   PATH="/usr/local/opt/python/libexec/bin:$PATH"
-# fi
+if [ -d '/usr/local/opt/python/libexec/bin' ]; then
+  PATH="/usr/local/opt/python/libexec/bin:$PATH"
+fi
 # if [ -d '/usr/local/lib/python2.7/site-packages' ]; then
 #   PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 # fi

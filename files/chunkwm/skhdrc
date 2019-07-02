@@ -40,11 +40,19 @@ alt - down  : chunkc tiling::window --focus south
 alt - up    : chunkc tiling::window --focus north
 alt - right : chunkc tiling::window --focus east
 
+alt - left  : yabai -m window --focus west
+alt - down  : yabai -m window --focus south
+alt - up    : yabai -m window --focus north
+alt - right : yabai -m window --focus east
+
 # cmd - j : chunkc tiling::window --focus prev
 # cmd - k : chunkc tiling::window --focus next
 
 cmd - left  : chunkc tiling::window --focus prev
 cmd - right : chunkc tiling::window --focus next
+
+cmd - left  : yabai -m window --focus prev
+cmd - right : yabai -m window --focus next
 
 # swap window
 # shift + alt - h : chunkc tiling::window --swap west
@@ -56,6 +64,11 @@ ctrl + alt - left  : chunkc tiling::window --swap west
 ctrl + alt - down  : chunkc tiling::window --swap south
 ctrl + alt - up    : chunkc tiling::window --swap north
 ctrl + alt - right : chunkc tiling::window --swap east
+
+ctrl + alt - left  : yabai -m window --swap west
+ctrl + alt - down  : yabai -m window --swap south
+ctrl + alt - up    : yabai -m window --swap north
+ctrl + alt - right : yabai -m window --swap east
 
 # focus desktop
 cmd + alt - z : chunkc tiling::desktop --focus prev
@@ -97,6 +110,11 @@ cmd + alt - left  : chunkc tiling::window --warp west
 cmd + alt - down  : chunkc tiling::window --warp south
 cmd + alt - up    : chunkc tiling::window --warp north
 cmd + alt - right : chunkc tiling::window --warp east
+
+cmd + alt - left  : yabai -m window --warp west
+cmd + alt - down  : yabai -m window --warp south
+cmd + alt - up    : yabai -m window --warp north
+cmd + alt - right : yabai -m window --warp east
 
 # destroy desktop
 cmd + alt - w : chunkc tiling::desktop --annihilate

@@ -28,8 +28,9 @@ certbot
 cf-cli
 cfssl
 chpharos
-chunkwm
-chunkwm-blur
+# chunkwm
+# chunkwm-blur
+yabai
 cmake
 coffeescript
 colordiff

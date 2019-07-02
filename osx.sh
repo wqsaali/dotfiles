@@ -26,8 +26,12 @@ brew_install_or_upgrade() {
 }
 
 cask_install() {
+  if cask_is_installed "$1"; then
+    fancy_echo "$1 is already installed!"
+  else
     fancy_echo "Installing $1 ..."
     brew cask install ${@} --appdir=/Applications
+  fi
 }
 
 brew_is_installed() {
@@ -217,6 +221,7 @@ installDotFiles() {
   cp files/slate/slate ${HOME}/.slate
   cp files/slate/slate.js ${HOME}/.slate.js
   cp files/chunkwm/chunkwmrc ${HOME}/.chunkwmrc
+  cp files/chunkwm/yabairc ${HOME}/.yabairc
   cp files/chunkwm/skhdrc ${HOME}/.skhdrc
 
   if [ ! -d  ${HOME}/.hammerspoon/hs/tiling ]; then
