@@ -2,6 +2,7 @@
 
 INSTALLDIR=$(pwd)
 dotfiles_dir="$(dirname $0)"
+CMD="${1:-all}"
 
 source ${dotfiles_dir}/files/scripts/hubinstall
 source ${dotfiles_dir}/files/scripts/hashinstall
@@ -522,15 +523,15 @@ installAll() {
   installDotFiles
 }
 
-if isFunction "${1}"; then
+if isFunction "${CMD}"; then
   $1
   exit $?
-elif isFunction "install${1}"; then
-  "install$1"
+elif isFunction "install${CMD}"; then
+  "install${CMD}"
   exit $?
 fi
 
-case "$1" in
+case "$CMD" in
   "gems" | "gem")
     installGems
     ;;
@@ -569,13 +570,13 @@ case "$1" in
     ;;
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then
-      ./osx.sh "${@}"
+      ./osx.sh "${CMD}"
     elif [[ "$OSTYPE" == *"android"* ]]; then
-      ./android.sh "${@}"
+      ./android.sh "${CMD}"
     else
-      ./linux.sh "${@}"
+      ./linux.sh "${CMD}"
     fi
-    if [ -z "${1}" ] || [[ "${1}" == "all" ]]; then
+    if [ -z "${CMD}" ] || [[ "${CMD}" == "all" ]]; then
       installAll
     fi
     ;;
