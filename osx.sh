@@ -220,9 +220,10 @@ installDotFiles() {
 
   cp files/slate/slate ${HOME}/.slate
   cp files/slate/slate.js ${HOME}/.slate.js
-  cp files/chunkwm/chunkwmrc ${HOME}/.chunkwmrc
-  cp files/chunkwm/yabairc ${HOME}/.yabairc
-  cp files/chunkwm/skhdrc ${HOME}/.skhdrc
+  # cp files/chunkwm/chunkwmrc ${HOME}/.chunkwmrc
+  # cp files/chunkwm/skhdrc ${HOME}/.skhdrc
+  cp files/yabai/yabairc ${HOME}/.yabairc
+  cp files/yabai/skhdrc ${HOME}/.skhdrc
 
   if [ ! -d  ${HOME}/.hammerspoon/hs/tiling ]; then
     git clone https://github.com/dsanson/hs.tiling $HOME/.hammerspoon/hs/tiling

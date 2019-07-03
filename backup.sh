@@ -28,8 +28,8 @@ function backupDotFiles() {
   cp ${HOME}/.slate files/slate/slate
   cp ${HOME}/.slate.js files/slate/slate.js
   cp ${HOME}/.chunkwmrc files/chunkwm/chunkwmrc
-  cp ${HOME}/.yabairc files/chunkwm/yabairc
-  cp ${HOME}/.skhdrc files/chunkwm/skhdrc
+  cp ${HOME}/.yabairc files/yabai/yabairc
+  cp ${HOME}/.skhdrc files/yabai/skhdrc
   cp ${HOME}/.ptpython/config.py files/ptpython.py
   cp -r ${HOME}/.config/kitty/* files/kitty/
   cp ${HOME}/.config/alacritty/alacritty.yml files/alacritty.yml
