@@ -7,11 +7,13 @@ chef/chef
 cloudfoundry/tap
 crisidev/homebrew-chunkwm
 datawire/blackbird
+derailed/k9s
 egison/egison
 habitat-sh/habitat
 homebrew/cask-versions
 homebrew/command-not-found
 homebrew/services
+jesseduffield/lazydocker
 knes1/tap
 knqyf263/pet
 koekeishiya/formulae
@@ -22,4 +24,3 @@ wagoodman/dive
 wallix/awless
 yudai/gotty
 zaquestion/tap
-derailed/k9s

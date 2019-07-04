@@ -1,3 +1,5 @@
+# chunkwm
+# chunkwm-blur
 # macvim
 ack
 ansible
@@ -28,14 +30,9 @@ certbot
 cf-cli
 cfssl
 chpharos
-# chunkwm
-# chunkwm-blur
-yabai
 cmake
 coffeescript
 colordiff
-compose2kube
-conjure-up
 consul-template
 cookiecutter
 coreutils
@@ -100,6 +97,7 @@ kubernetes-cli
 kubernetes-helm
 kustomize
 lab
+lazydocker
 legit
 lesspipe
 make
@@ -163,5 +161,6 @@ watch
 wget
 whois
 xhyve
+yabai
 yarn
 yq
