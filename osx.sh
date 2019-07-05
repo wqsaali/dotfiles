@@ -147,28 +147,28 @@ installPackages() {
   brew update
   brew_install_or_upgrade cask
 
-  while read -r PKG; do
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    cask_install "${PKG}"
-  done < files/pkgs/cask.lst
-
+  # Install brew pkgs
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     brew_install_or_upgrade "${PKG}"
   done < files/pkgs/brew.lst
 
+  # Install cask pkgs
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    cask_install "${PKG}"
+  done < files/pkgs/cask.lst
+
+  # Set bash as the login shell
   echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells > /dev/null
   chsh -s $(brew --prefix)/bin/bash
-
-  # sudo npm install -g coffee-scrip
-  # sudo npm install -g azure-cli
 
   # gettext is installed as a dependency but it's not linked
   brew link gettext --force
 
-  fancy_echo "Cleaning up old Homebrew formulae ..."
+  fancy_echo "Cleaning old Homebrew formulae ..."
   brew cleanup
   # brew cask cleanup
 }

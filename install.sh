@@ -99,16 +99,6 @@ installKrew() {
 }
 
 installKubeScripts() {
-  installFromGithub 'Praqma/helmsman' "${1}" "${2}"
-  installFromGithub 'shyiko/kubesec' "${1}" "${2}"
-  installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
-  installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
-  installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
-  installFromGithub 'k14s/ytt' "${1}" "${2}"
-  installFromRawGithub 'johanhaleby/kubetail'
-  installFromRawGithub 'ctron/kill-kube-ns'
-  installKrew
-
   if [ ! -d  ${HOME}/.kube-fzf ]; then
     git clone https://github.com/arunvelsriram/kube-fzf.git ${HOME}/.kube-fzf
   else
@@ -132,6 +122,16 @@ installKubeScripts() {
     git pull
     cd ${INSTALLDIR}
   fi
+
+  installFromGithub 'Praqma/helmsman' "${1}" "${2}"
+  installFromGithub 'shyiko/kubesec' "${1}" "${2}"
+  installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
+  installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
+  installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
+  installFromGithub 'k14s/ytt' "${1}" "${2}"
+  installFromRawGithub 'johanhaleby/kubetail'
+  installFromRawGithub 'ctron/kill-kube-ns'
+  installKrew
 }
 
 installDCOScli() {
@@ -218,7 +218,7 @@ installGoPkgs() {
   cleanGoPkgs
 }
 
-installhelmPlugins() {
+installHelmPlugins() {
   if ! [ -x "$(command -v helm)" ]; then
     if [[ "$OSTYPE" != "darwin"* ]]; then
       sudo apt-get install helm
@@ -517,7 +517,7 @@ installAll() {
     else
       installKubeScripts 'linux' '64'
     fi
-    installhelmPlugins
+    installHelmPlugins
   fi
   # installWebApps
   installDotFiles
@@ -566,7 +566,7 @@ case "$CMD" in
     installVagrantPlugins
     ;;
   "helm" | "helmplugins")
-    installhelmPlugins
+    installHelmPlugins
     ;;
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then
