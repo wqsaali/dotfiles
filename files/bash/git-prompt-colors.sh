@@ -28,11 +28,12 @@ override_git_prompt_colors() {
   KUBE_PS1_NS_ENABLE=true
   KUBE_PS1_SEPARATOR=''
   KUBE_PS1_DIVIDER=''
+  KUBE_PS1_SYMBOL='⎈'
   KUBE_PS1_CLUSTER_FUNCTION=get_k8s_name
   KUBE_PS1_NAMESPACE_FUNCTION=get_k8s_ns
 
   ## These are the color definitions used by gitprompt.sh
-  GIT_PROMPT_PREFIX="("                 # start of the git info string
+  GIT_PROMPT_PREFIX="( "                 # start of the git info string
   GIT_PROMPT_SUFFIX=")"                 # the end of the git info string
   # GIT_PROMPT_SEPARATOR="|"              # separates each item
 

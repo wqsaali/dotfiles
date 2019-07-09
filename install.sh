@@ -263,13 +263,18 @@ installAtomPackages() {
   cat files/pkgs/atom-packages.lst | grep -Ev '\s*#' | xargs -L1 apm install
 }
 
-installVscodePackages() {
+installVscodeConfig() {
   settings="$HOME/.config/Code/User"
   if [[ "$OSTYPE" == "darwin"* ]]; then
     settings="$HOME/Library/Application Support/Code/User"
   fi
   mkdir -p "$settings"
   cp -r files/vscode/* "$settings/"
+}
+
+installVscodePackages() {
+  installVscodeConfig
+
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
@@ -482,8 +487,8 @@ installDotFiles() {
     ./linux.sh dotfiles
   fi
 
+  installVscodeConfig
   installVimPlugins
-  installVscodePackages
   instrallRangerPlugins
 
   if [ -x "$(command -v bat)" ] && [ ! -d "${HOME}/.config/bat/themes/sublime-tomorrow-theme" ]; then
