@@ -207,6 +207,20 @@ EOF
     done
   }
 
+  reload-yabai() {
+    # stop, upgrade, start yabai
+    brew services stop yabai
+    brew upgrade yabai
+    brew services start yabai
+
+    # reinstall the scripting addition
+    sudo yabai --uninstall-sa
+    sudo yabai --install-sa
+
+    # load the scripting addition
+    killall Dock
+  }
+
   alias cask-upgrade='brew-cask-upgrade'
   alias brew-cleanup='brew cleanup'
   alias brew-upgrade='brew update && brew upgrade && brew cleanup && check-keg_only'
