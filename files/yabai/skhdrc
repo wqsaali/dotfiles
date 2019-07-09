@@ -1,5 +1,24 @@
-# open terminal
-cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
+# reload config
+shift + ctrl - r : brew services restart skhd; brew services restart yabai
+
+# App shortcuts
+
+# cmd + alt - return : open -na /Applications/iTerm.app
+cmd + alt - return : open -na /Applications/Alacritty.app
+# cmd + alt - return : open -na /Applications/Kitty.app
+
+# open finder
+cmd + alt - f : open -na Finder
+
+# open qutebrowser
+cmd + shift - return : ~/Scripts/qtb.sh
+
+# open mpv
+cmd - m : open -na /Applications/mpv.app $(pbpaste)
+
+# lock screeen
+# cmd - l : /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
+cmd - l : pmset displaysleepnow
 
 # focus window
 alt - h : yabai -m window --focus west
