@@ -3,6 +3,8 @@
 INSTALLDIR=$(pwd)
 dotfiles_dir="$(dirname $0)"
 CMD="${1:-all}"
+shift
+ARGS="${@}"
 
 source ${dotfiles_dir}/files/scripts/hubinstall
 source ${dotfiles_dir}/files/scripts/hashinstall
@@ -529,10 +531,10 @@ installAll() {
 }
 
 if isFunction "${CMD}"; then
-  $1
+  $CMD "${ARGS}"
   exit $?
 elif isFunction "install${CMD}"; then
-  "install${CMD}"
+  "install${CMD}" "${ARGS}"
   exit $?
 fi
 
@@ -575,11 +577,11 @@ case "$CMD" in
     ;;
   *)
     if [[ "$OSTYPE" == "darwin"* ]]; then
-      ./osx.sh "${CMD}"
+      ./osx.sh "${CMD}" "${ARGS}"
     elif [[ "$OSTYPE" == *"android"* ]]; then
-      ./android.sh "${CMD}"
+      ./android.sh "${CMD}" "${ARGS}"
     else
-      ./linux.sh "${CMD}"
+      ./linux.sh "${CMD}" "${ARGS}"
     fi
     if [ -z "${CMD}" ] || [[ "${CMD}" == "all" ]]; then
       installAll
