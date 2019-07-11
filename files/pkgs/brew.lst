@@ -44,6 +44,7 @@ dark-mode
 dateutils
 dep
 dive
+dnscrypt-proxy
 docker-completion
 docker-compose-completion
 docker-ls
