@@ -3,8 +3,58 @@
 # Kubectl aliases
 alias kube='kubectl'
 alias kctl='kubectl'
-alias kctx='kubectx'
 alias kns='kubens'
+
+function kctx() {
+  CFG_DIR=~/.kube/config.d
+  if [ -d "${CFG_DIR}" ] && [[ "$KUBECONFIG" != "~/.kube/config" ]]; then
+    if [ -n "$1" ]; then
+      export KUBECONFIG="${CFG_DIR}/${1}"
+      return
+    else
+      CTX=$(ls -1 ${CFG_DIR}/ | fzf)
+      export KUBECONFIG="${CFG_DIR}/${CTX}"
+      return
+    fi
+  fi
+  kubectx "${@}"
+}
+
+function kcfg() {
+  CFG=${KUBECONFIG:-~/.kube/config}
+  CFG_DIR=~/.kube/config.d
+  case "$1" in
+    split)
+      mkdir -p "${CFG_DIR}"
+      for ctx in $(kubectl config get-contexts -o name); do
+        kubectl config view --minify --context=${ctx} > "${CFG_DIR}/${ctx}"
+      done
+      if [[ "$2" == "-p" ]] || [[ "$2" == "--purge" ]]; then
+        rm "${CFG}"
+      fi
+      ;;
+    merge)
+      DST=${3:-~/.kube/config}
+      if [ -z "$2" ]; then
+        echo 'Usage:'
+        echo 'kcfg merge <source_cfg> [<dest_cfg>]'
+        return 1
+      fi
+      if [[ "$2" == "all" ]]; then
+        for CTX in $(ls -1 ${CFG_DIR}); do
+          KUBECONFIG="${DST}:${CFG_DIR}/${CTX}" kubectl config view --flatten >> ${DST}
+        done
+      else
+        KUBECONFIG="${DST}:${2}" kubectl config view --flatten >> ${DST}
+      fi
+      ;;
+    *)
+      echo -e "Unknown command!\n  Available commands are:"
+      echo -e "\tsplit\tSplit ${CFG} into separate files under ${CFG_DIR}/ (-p to delete ${CFG} in the end)"
+      echo -e "\tmerge\tMerge two kubectl config files (kcfg merge <source_cfg> [<dest_cfg>])"
+      ;;
+  esac
+}
 
 function kgy() {
   kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
