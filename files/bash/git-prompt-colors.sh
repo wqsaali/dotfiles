@@ -17,11 +17,11 @@ override_git_prompt_colors() {
 
   Time12a="\$(date +%H:%M:%S)"
   PathShort="\w";
-  kube_ps1=" \$(kube_ps1)"
+  kube_ps1="\$(kube_ps1)"
 
   PROMPT_DIRTRIM=2
 
-  KUBE_PS1_PREFIX=''
+  KUBE_PS1_PREFIX=' '
   KUBE_PS1_SUFFIX=''
   KUBE_PS1_CTX_COLOR='blue'
   KUBE_PS1_NS_COLOR='cyan'
