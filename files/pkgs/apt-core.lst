@@ -14,6 +14,7 @@ cmake
 colordiff
 command-not-found
 curl
+direnv
 exuberant-ctags
 fabric
 fonts-font-awesome

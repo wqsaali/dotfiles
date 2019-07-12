@@ -43,6 +43,7 @@ curl
 dark-mode
 dateutils
 dep
+direnv
 dive
 dnscrypt-proxy
 docker-completion
