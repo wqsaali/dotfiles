@@ -26,8 +26,8 @@ function kcfg() {
   case "$1" in
     split)
       mkdir -p "${CFG_DIR}"
-      for ctx in $(kubectl config get-contexts -o name); do
-        kubectl config view --minify --context=${ctx} > "${CFG_DIR}/${ctx}"
+      for ctx in $(kubectl --kubeconfig="${CFG}" config get-contexts -o name); do
+        kubectl --kubeconfig="${CFG}" config view --minify --context=${ctx} > "${CFG_DIR}/${ctx}"
       done
       if [[ "$2" == "-p" ]] || [[ "$2" == "--purge" ]]; then
         rm "${CFG}"

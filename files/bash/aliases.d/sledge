@@ -1,0 +1,48 @@
+# vim:set filetype=sh:
+
+alias slg='sledge'
+
+function slg-login() {
+  if [ -z "$1" ]; then
+    CTX=$(kubectl config current-context)
+  else
+    CTX=${1}
+  fi
+  if [ -z "${CTX}" ]; then
+    return 1
+  fi
+  sledge connect ${CTX}
+}
+
+function slg-setup() {
+  CFG_DIR=~/.kube/config.d
+  SPLIT=FALSE
+
+  if [[ "$1" == "-s" ]] || [[ "$1" == "--split" ]]; then
+    SPLIT=TRUE
+    mkdir -p "${CFG_DIR}"
+  fi
+
+  for CTX in $(sledge get cluster | jq -r '.[].clusterID'); do
+    if [[ "${SPLIT}" == "TRUE" ]]; then
+      export KUBECONFIG="${CFG_DIR}/${CTX}"
+    fi
+    sledge connect "${CTX}"
+  done
+}
+
+function slg-context() {
+  CFG_DIR=~/.kube/config.d
+  CTX=$1
+  if [ -d "${CFG_DIR}" ] && [[ "$KUBECONFIG" != "~/.kube/config" ]]; then
+    if [ -z "${CTX}" ]; then
+      CTX=$(ls -1 ${CFG_DIR}/ | fzf)
+    fi
+    export KUBECONFIG="${CFG_DIR}/${CTX}"
+  fi
+  if [ -z "${CTX}" ]; then
+    CTX=$(sledge get cluster | jq -r '.[].clusterID' | fzf)
+  fi
+  sledge connect "${CTX}"
+}
+alias sctx='sledge-context'
