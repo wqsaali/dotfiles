@@ -45,4 +45,4 @@ function slg-context() {
   fi
   sledge connect "${CTX}"
 }
-alias sctx='sledge-context'
+alias sctx='slg-context'
