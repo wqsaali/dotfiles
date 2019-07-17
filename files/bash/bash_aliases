@@ -26,8 +26,8 @@ if [ -x "$(command -v els)" ]; then
   # alias ls='els --els-icons=fontawesome'
 fi
 if [ -x "$(command -v exa)" ]; then
-  alias ls='exa'
-  alias tree='exa -T'
+  alias ls='exa --color-scale'
+  alias tree='exa -T --color-scale --icons'
 fi
 alias lc='colorls'
 alias ll='ls -alF'
