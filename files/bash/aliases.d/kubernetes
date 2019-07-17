@@ -5,6 +5,15 @@ alias kube='kubectl'
 alias kctl='kubectl'
 alias kns='kubens'
 
+function kubectl-events() {
+  FILTER=""
+  if [ -n "$1" ]; then
+    FILTER="--field-selector involvedObject.name=${@}"
+  fi
+  kubectl get event ${FILTER}
+}
+alias kctl-events='kubectl-events'
+
 function kctx() {
   CFG_DIR=~/.kube/config.d
   if [ -d "${CFG_DIR}" ] && [[ "$KUBECONFIG" != "~/.kube/config" ]]; then
@@ -70,6 +79,8 @@ alias kctl-exec='kexec'
 
 function krun() { name=$1; shift; image=$1; shift; kubectl run -it --generator=run-pod/v1 --image $image $name -- $@; }
 alias kctl-run='krun'
+
+alias kctl-httpie='kubectl run --restart=Never --rm -i --tty httpie-tmp --image=alpine/httpie'
 
 function kubectl-remote_shell() {
   kubectl ${@} run --restart=Never --rm -i --tty alpine --image=alpine -- sh
