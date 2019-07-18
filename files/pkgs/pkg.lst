@@ -62,7 +62,9 @@ libffi-dev
 libgc
 libgcrypt
 libgmp
+libgnustl
 libgpg-error
+libiconv
 libicu
 libidn
 libksba
@@ -81,6 +83,7 @@ libtalloc
 libtermkey
 libunibilium
 libunistring
+libutil
 libuuid
 libuv
 libvterm
@@ -94,6 +97,7 @@ ncdu
 ncurses
 ncurses-ui-libs
 ncurses-utils
+ndk-stl
 ndk-sysroot
 neofetch
 neovim
@@ -132,6 +136,7 @@ termux-auth
 termux-elf-cleaner
 termux-exec
 termux-keyring
+termux-licenses
 termux-tools
 tmux
 tracepath
