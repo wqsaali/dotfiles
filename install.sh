@@ -470,8 +470,8 @@ installDotFiles() {
   fi
 
   createSkeleton
-  installTmuxConf
   installBashConf
+  installTmuxConf
   installGitConf
   installScripts
 
