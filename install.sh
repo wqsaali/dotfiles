@@ -193,6 +193,7 @@ installNpms() {
 }
 
 cleanGoPkgs() {
+  go clean -modcache
   rm -rf ${HOME}/.glide/*
   rm -rf ${GOPATH/:*}/src/*
   rm -rf ${GOPATH/:*}/pkg/*

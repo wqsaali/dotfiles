@@ -107,6 +107,7 @@ fi
 
 # Go aliases
 function goclean() {
+  go clean -modcache
   rm -rf ~/.glide/
   rm -rf ~/go/.cache/
   rm -rf ~/go/pkg/*
