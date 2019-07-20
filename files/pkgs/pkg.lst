@@ -62,7 +62,7 @@ libffi-dev
 libgc
 libgcrypt
 libgmp
-libgnustl
+# libgnustl
 libgpg-error
 libiconv
 libicu
@@ -83,7 +83,7 @@ libtalloc
 libtermkey
 libunibilium
 libunistring
-libutil
+# libutil
 libuuid
 libuv
 libvterm
@@ -97,7 +97,7 @@ ncdu
 ncurses
 ncurses-ui-libs
 ncurses-utils
-ndk-stl
+# ndk-stl
 ndk-sysroot
 neofetch
 neovim
