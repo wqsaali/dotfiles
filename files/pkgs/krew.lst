@@ -5,6 +5,7 @@ exec-all
 get-all
 krew
 mtail
+tail
 pod-logs
 pod-shell
 rbac-lookup

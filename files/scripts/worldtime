@@ -63,7 +63,7 @@ TZBASE=$(getlocaltz)
 
 # Time zones to display
 # See /usr/share/zoneinfo/ (/var/db/timezone/zoneinfo/ on macOS) for more names
-TZONES='UTC US/Eastern US/Central US/Mountain US/Pacific'
+TZONES='UTC US/Eastern US/Central US/Mountain US/Pacific Asia/Calcutta'
 
 # Display format
 FORMAT='%H:%M (%p) %Z %a %d %b %Y'
