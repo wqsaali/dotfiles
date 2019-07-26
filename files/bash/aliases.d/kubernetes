@@ -2,8 +2,23 @@
 
 # Kubectl aliases
 alias kube='kubectl'
-alias kctl='kubectl'
 alias kns='kubens'
+
+function kctl() {
+  CMD=${1}
+  shift
+
+  if declare -F -- "kubectl-${CMD}" >/dev/null; then
+    "kubectl-${CMD}" ${@}
+    return $?
+  fi
+  kubectl ${CMD} ${@}
+}
+alias k='kctl'
+
+function kgy() {
+  kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
+}
 
 function kubectl-events() {
   FILTER=""
@@ -14,7 +29,7 @@ function kubectl-events() {
 }
 alias kctl-events='kubectl-events'
 
-function kctx() {
+function kubectl-ctx() {
   CFG_DIR=~/.kube/config.d
   if [ -d "${CFG_DIR}" ] && [[ "$KUBECONFIG" != "~/.kube/config" ]]; then
     if [ -n "$1" ]; then
@@ -28,8 +43,9 @@ function kctx() {
   fi
   kubectx "${@}"
 }
+alias kctx='kubectl-ctx'
 
-function kcfg() {
+function kubectl-cfg() {
   CFG=${KUBECONFIG:-~/.kube/config}
   CFG_DIR=~/.kube/config.d
   case "$1" in
@@ -64,10 +80,7 @@ function kcfg() {
       ;;
   esac
 }
-
-function kgy() {
-  kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
-}
+alias kcfg='kubectl-cfg'
 
 function kubectl-enter() {
   kubectl exec -ti ${@} -- sh

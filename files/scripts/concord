@@ -75,6 +75,16 @@ _get_token() {
   echo $CONCORD_TOKEN
 }
 
+_open() {
+  if [ -x "$(command -v open)" ]; then
+    open $@
+  elif [ -x "$(command -v xdg-open)" ]; then
+    xdg-open $@
+  else
+    cygstart $@
+  fi
+}
+
 # run: trigger a concord flow from the current PWD
 function run() {
   ENTRY_POINT="${1:-deploy}"
@@ -104,14 +114,7 @@ function run() {
 
   url="https://${SERVER_ADDR}/#/process/${INSTANCE_ID}/log"
   echo $url
-
-  if [ -x "$(command -v open)" ]; then
-    open $url
-  elif [ -x "$(command -v xdg-open)" ]; then
-    xdg-open $url
-  else
-    cygstart $url
-  fi
+  _open "$url"
 
   if [[ "${CLEAN_UP}" == "true" ]]; then
     rm -rf target/ filelist
@@ -157,6 +160,27 @@ function list_clusters() {
   else
     echo $CLUSTERS | tr -s '[[:space:]]' '\n'
   fi
+}
+
+# get_vcenter: get the vsphere url for a cluster
+function get_vcenter() {
+  CLUSTER=$1
+  FIELDS=${2}
+  QUERY='.'
+
+  if [ -z "$CLUSTER" ]; then
+    echo 'Select a cluster:'
+    CLUSTER=$(list_clusters | fzf)
+  fi
+
+  if [ -z "$CLUSTER" ]; then
+    echo "You must provide a cluster id"
+    exit 1
+  fi
+
+  VCENTER="https://$(find_clusters ${CLUSTER} | jq -r '.knobs.ipmi.vsphere_endpoint')"
+  echo "${VCENTER}"
+  _open "${VCENTER}"
 }
 
 # list_hosts: List hosts from a cluster in Concord inventory

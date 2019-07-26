@@ -1,7 +1,5 @@
 # vim:set filetype=sh:
 
-alias slg='sledge'
-
 function slg-login() {
   if [ -z "$1" ]; then
     CTX=$(kubectl config current-context)
@@ -31,7 +29,7 @@ function slg-setup() {
   done
 }
 
-function slg-context() {
+function slg-ctx() {
   CFG_DIR=~/.kube/config.d
   CTX=$1
   if [ -d "${CFG_DIR}" ] && [[ "$KUBECONFIG" != "~/.kube/config" ]]; then
@@ -45,4 +43,15 @@ function slg-context() {
   fi
   sledge connect "${CTX}"
 }
-alias sctx='slg-context'
+alias sctx='slg-ctx'
+
+function slg() {
+  CMD=${1}
+  shift
+
+  if declare -F -- "slg-${CMD}" >/dev/null; then
+    "slg-${CMD}" ${@}
+    return $?
+  fi
+  sledge ${CMD} ${@}
+}

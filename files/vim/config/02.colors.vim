@@ -44,3 +44,28 @@
   " hi link illuminatedWord Visual
   hi link illuminatedWord CursorLine
 " }}}
+
+" typographic ligatures {{{
+" from: https://maximewack.com/post/emulating_ligatures/
+"  if has('conceal')
+"    syntax match customOperator '//' conceal cchar=÷
+"    syntax match customOperator '*' conceal cchar=×
+"    syntax match customOperator '==' conceal cchar=≣
+"    syntax match customOperator '!=' conceal cchar=≠
+"    syntax match customOperator '>=' conceal cchar=≥
+"    syntax match customOperator '<=' conceal cchar=≤
+"    syntax match customOperator '->' conceal cchar=→
+"    syntax match customOperator '|>' conceal cchar=⊳
+"    syntax match customOperator '<|' conceal cchar=⊲
+"    syntax match customOperator '>>' conceal cchar=»
+"    syntax match customOperator '<<' conceal cchar=«
+"    syntax match customOperator '\\' conceal cchar=λ
+"    syntax match customOperator '::' conceal cchar=∷
+"    syntax match customOperator '|=' conceal cchar=⊧
+"    syntax match customOperator '|.' conceal cchar=⊦
+"    syntax match customOperator '/=' conceal cchar=≠
+"
+"    hi link customOperator Operator
+"    hi! link Conceal Operator
+"  endif
+" }}}

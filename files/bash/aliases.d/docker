@@ -1,5 +1,7 @@
 # vim:set filetype=sh:
 
+alias dkr='docker'
+
 # Docker aliases
 alias docker-killall='docker ps -a -q | xargs -r docker kill'
 alias docker-rm-all='docker ps -a -q | xargs -r docker rm'

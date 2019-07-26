@@ -276,6 +276,8 @@ function ssh() {
   fi
 }
 
+alias fzkill='kill $(ps -ef|fzf --header-lines 1)'
+
 # key management aliases: fingerprint a pubkey and retrieve pubkey from a private key
 alias fingerprint='ssh-keygen -lf'
 alias pubkey='ssh-keygen -y -f'

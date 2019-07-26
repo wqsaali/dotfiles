@@ -1,5 +1,8 @@
 source ${HOME}/.bash/complete-alias/bash_completion.sh
 
+# complete -F __start_kubectl kctl
+# source <(kubectl completion bash | sed 's/kubectl/kctl/g')
+
 # _code() {
 #   local cur=${COMP_WORDS[COMP_CWORD]};
 #   local code=$(code; ls -1)

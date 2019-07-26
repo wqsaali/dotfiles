@@ -164,6 +164,7 @@
   " Vim-go {{{
   let g:go_fmt_autosave = 1
   let g:go_fmt_command = "goimports"
+  " let g:go_fmt_options = '-w'
 
   " turn highlighting on
   let g:go_highlight_functions = 1
