@@ -57,7 +57,7 @@ function installFromGithub() {
   fi
   artifact=$(basename ${url})
 
-  re='^(.*)\.(tar\.gz|tgz)$'
+  re='^(.*)\.(tar\.gz|tgz|zip)$'
   if [[ ${artifact} =~ $re ]]; then
     artifact_name=${BASH_REMATCH[1]}
     artifact_ext=${BASH_REMATCH[2]}
@@ -65,7 +65,11 @@ function installFromGithub() {
       echo "Artifact ${artifact_name} is a tarball (${artifact_ext})"
     fi
     curl -sLo ${artifact} ${url}
-    tar -xzf ${artifact} --one-top-level=${artifact_name} # gnu-tar is needed for this one
+    if [[ "$artifact_ext" == "zip" ]]; then
+      unzip ${artifact} -d ${artifact_name}
+    else
+      tar -xzf ${artifact} --one-top-level=${artifact_name} # gnu-tar is needed for this one
+    fi
     mv $(find ./${artifact_name}/ -type f -name "${name}*") ${name}
     rm ${artifact}
     rm -rf ${artifact_name}
