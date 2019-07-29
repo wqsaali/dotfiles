@@ -59,6 +59,10 @@ export BAT_THEME='Tomorrow-Night-Bright'
 # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # export FLAGS_GETOPT_CMD="$(brew --prefix gnu-getopt)/bin/getopt"
 
+# GO config
+GOPROXY=https://proxy.golang.org
+GO111MODULE=on
+
 # fzf config
 # Use ag for feeding into fzf for searching files.
 export FZF_DEFAULT_COMMAND='ag -U --hidden --ignore .git -g ""'

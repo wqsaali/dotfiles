@@ -3,18 +3,22 @@
 # Kubectl aliases
 alias kube='kubectl'
 alias kns='kubens'
+alias k='kubectl'
 
 function kctl() {
   CMD=${1}
   shift
+  COLOR=""
+  if type grc &> /dev/null && [[ "$CMD" != "edit" ]]; then
+    COLOR="grc -es --colour=auto"
+  fi
 
   if declare -F -- "kubectl-${CMD}" >/dev/null; then
     "kubectl-${CMD}" ${@}
     return $?
   fi
-  kubectl ${CMD} ${@}
+  ${COLOR} kubectl ${CMD} ${@}
 }
-alias k='kctl'
 
 function kgy() {
   kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
@@ -75,8 +79,8 @@ function kubectl-cfg() {
       ;;
     *)
       echo -e "Unknown command!\n  Available commands are:"
-      echo -e "\tsplit\tSplit ${CFG} into separate files under ${CFG_DIR}/ (-p to delete ${CFG} in the end)"
-      echo -e "\tmerge\tMerge two kubectl config files (kcfg merge <source_cfg> [<dest_cfg>])"
+      echo -e " split\tSplit ${CFG} into separate files under ${CFG_DIR}/ (-p to delete ${CFG} in the end)"
+      echo -e " merge\tMerge two kubectl config files (kcfg merge <source_cfg> [<dest_cfg>])"
       ;;
   esac
 }
@@ -121,6 +125,11 @@ function kubectl-clean() {
   kubectl get job --all-namespaces --no-headers --selector 'status.succeeded!=0' | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete job
 }
 alias kctl-clean='kubectl-clean'
+
+function kubectl-killall() {
+  kubectl get po --all-namespaces --no-headers | grep ${1} | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete po
+}
+alias kctl-killall='kubectl-killall'
 
 alias kctl-list_images='kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s "[[:space:]]" "\n" | sort | uniq -c'
 
