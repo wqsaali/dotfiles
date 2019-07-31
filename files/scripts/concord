@@ -9,6 +9,7 @@
 # concord find_clusters scus cluster_id,ingress
 # concord list_hosts us05260-vsp1 instanceName,ipaddress
 # concord run deploy
+# concord push_secret "${CLUSTER_ID}_worker_join_token" "/etc/kubernetes/pki/worker-join-token"
 
 # Defaults
 DEBUG=false
@@ -82,6 +83,41 @@ _open() {
     xdg-open $@
   else
     cygstart $@
+  fi
+}
+
+# push_secret: Push a secret to concord
+function push_secret() {
+  if [ -s "$2" ]; then
+    echo "pushing secret: $1"
+    curl -q -s -k \
+      -H "Authorization: ${CONCORD_TOKEN}" \
+      -H "Content-Type: multipart/form-data" \
+      -F storePassword="${CONCORD_TOKEN}" \
+      -F type=data \
+      -F name="$1" \
+      -F data=@"$2" \
+      "https://${SERVER_ADDR}/api/v1/org/Default/secret"
+  else
+    echo "ERROR: Unable to push secret: $1 "
+    echo "$2 is empty or doesn't exist"
+  fi
+}
+
+# push_public_secret: Push a public secret to concord
+function push_public_secret() {
+  if [ -s "$2" ]; then
+    echo "pushing secret: $1"
+    curl -q -s -k \
+      -H "Authorization: ${CONCORD_TOKEN}" \
+      -H "Content-Type: multipart/form-data" \
+      -F type=data \
+      -F name="$1" \
+      -F data=@"$2" \
+      "https://${SERVER_ADDR}/api/v1/org/Default/secret"
+  else
+    echo "ERROR: Unable to push secret: $1 "
+    echo "$2 is empty or doesn't exist"
   fi
 }
 

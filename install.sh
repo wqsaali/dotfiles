@@ -109,6 +109,14 @@ installKubeScripts() {
     cd ${INSTALLDIR}
   fi
 
+  if [ ! -d ${HOME}/.fubectl ]; then
+    git clone https://github.com/kubermatic/fubectl.git ${HOME}/.fubectl
+  else
+    cd ${HOME}/.fubectl/
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
   if [ ! -d  ${HOME}/.kbenv ]; then
     git clone https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
   else
@@ -130,6 +138,7 @@ installKubeScripts() {
   installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
   installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
+  installFromGithub 'kubermatic/kubeone' "${1}" "${2}"
   installFromGithub 'k14s/ytt' "${1}" "${2}"
   installFromRawGithub 'johanhaleby/kubetail'
   installFromRawGithub 'ctron/kill-kube-ns'

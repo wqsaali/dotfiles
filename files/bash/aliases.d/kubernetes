@@ -3,13 +3,12 @@
 # Kubectl aliases
 alias kube='kubectl'
 alias kns='kubens'
-alias k='kubectl'
 
 function kctl() {
   CMD=${1}
   shift
   COLOR=""
-  if type grc &> /dev/null && [[ "$CMD" != "edit" ]]; then
+  if type grc &> /dev/null && [[ "$CMD" != "edit" ]] && [[ "$CMD" != "exec" ]]; then
     COLOR="grc -es --colour=auto"
   fi
 

@@ -188,7 +188,7 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-[ -f $HOME/.bash_aliases ] && source ~/.bash_aliases
+[ -f $HOME/.bash_aliases ] && source ${HOME}/.bash_aliases
 
 # Auto completion
 # enable programmable completion features (you don't need to enable
@@ -213,20 +213,22 @@ fi
 #   source /usr/local/opt/chpharos/share/chpharos/chpharos.sh
 # fi
 
+[ -x "$(command -v thefuck)" ] && eval $(thefuck --alias)
+
+[ -f ${HOME}/.kube-fzf/kube-fzf.sh ] && source ${HOME}/.kube-fzf/kube-fzf.sh
+
+[ -f ${HOME}/.fubectl/fubectl.source ] && source ${HOME}/.fubectl/fubectl.source
+
+[ -f $HOME/.kbenv/kbenv.sh ] && source $HOME/.kbenv/kbenv.sh
+
+[ -f $HOME/.helmenv/helmenv.sh ] && source $HOME/.helmenv/helmenv.sh
+
 if [ -x "$(command -v pyenv)" ]; then
   eval "$(pyenv init -)"
   [ -x "$(command -v pyenv-virtualenv-init)" ] && eval "$(pyenv virtualenv-init -)"
 fi
 
-[ -x ~/.chefvm/bin/chefvm ] && eval "$(~/.chefvm/bin/chefvm init -)"
-
-[ -x "$(command -v thefuck)" ] && eval $(thefuck --alias)
-
-[ -f ~/.kube-fzf/kube-fzf.sh ] && source ~/.kube-fzf/kube-fzf.sh
-
-[ -f $HOME/.kbenv/kbenv.sh ] && source $HOME/.kbenv/kbenv.sh
-
-[ -f $HOME/.helmenv/helmenv.sh ] && source $HOME/.helmenv/helmenv.sh
+[ -x ${HOME}/.chefvm/bin/chefvm ] && eval "$(${HOME}/.chefvm/bin/chefvm init -)"
 
 [ "$OSTYPE" == "linux-gnu" ] && source /etc/profile.d/vte-2.91.sh
 
@@ -249,8 +251,8 @@ function get_k8s_ns(){
 export KUBE_PS1_NAMESPACE_FUNCTION=get_k8s_ns
 # bash-git-prompt configuration - https://github.com/magicmonty/bash-git-prompt:
 GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
-source ~/.bash/bash-git-prompt/gitprompt.sh
-source ~/.bash/kube-ps1/kube-ps1.sh
+source ${HOME}/.bash/bash-git-prompt/gitprompt.sh
+source ${HOME}/.bash/kube-ps1/kube-ps1.sh
 
 # source ~/.bash/git_prompt.sh
 
