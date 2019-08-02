@@ -101,13 +101,13 @@ tabspaces: 2
 # Font configuration (changes require restart)
 font:
   normal:
-    family: FuraCode Nerd Font Mono
-    style: Regular
+    family: "TerminessTTF Nerd Font"
+    style: Medium
   bold:
-    family: FuraCode Nerd Font Mono
+    family: "TerminessTTF Nerd Font"
     style: Bold
   italic:
-    family: FuraCode Nerd Font Mono
+    family: "TerminessTTF Nerd Font"
     style: Italic
 
   # Normal (roman) font face
@@ -146,7 +146,7 @@ font:
     #style: Italic
 
   # Point size
-  size: 12.0
+  size: 14.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
