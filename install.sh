@@ -133,16 +133,18 @@ installKubeScripts() {
     cd ${INSTALLDIR}
   fi
 
-  installFromGithub 'Praqma/helmsman' "${1}" "${2}"
-  installFromGithub 'shyiko/kubesec' "${1}" "${2}"
-  installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
-  installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
-  installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
-  installFromGithub 'kubermatic/kubeone' "${1}" "${2}"
-  installFromGithub 'k14s/ytt' "${1}" "${2}"
+  installKrew
+
   installFromRawGithub 'johanhaleby/kubetail'
   installFromRawGithub 'ctron/kill-kube-ns'
-  installKrew
+
+  installFromGithub 'Praqma/helmsman' "${1}" "${2}"
+  installFromGithub 'shyiko/kubesec' "${1}" "${2}"
+  installFromGithub 'kubermatic/kubeone' "${1}" "${2}"
+  installFromGithub 'k14s/ytt' "${1}" "${2}"
+  installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
+  installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
+  installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
 }
 
 installDCOScli() {
