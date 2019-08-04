@@ -7,8 +7,8 @@ bat
 binutils
 binutils-gold
 boost
-boost-dev
 busybox
+bzip2
 c-ares
 ca-certificates
 clang
@@ -36,6 +36,7 @@ gnupg
 golang
 gpgv
 grep
+gzip
 htop
 inetutils
 jq
@@ -51,18 +52,15 @@ libbz2
 libc++
 libcroco
 libcrypt
-libcrypt-dev
 libcurl
 libdb
 libedit
 libevent
 libexpat
 libffi
-libffi-dev
 libgc
 libgcrypt
 libgmp
-# libgnustl
 libgpg-error
 libiconv
 libicu
@@ -83,7 +81,6 @@ libtalloc
 libtermkey
 libunibilium
 libunistring
-# libutil
 libuuid
 libuv
 libvterm
@@ -97,7 +94,6 @@ ncdu
 ncurses
 ncurses-ui-libs
 ncurses-utils
-# ndk-stl
 ndk-sysroot
 neofetch
 neovim
@@ -107,7 +103,6 @@ nmap
 nodejs-lts
 openssh
 openssl
-openssl-dev
 openssl-tool
 pcre
 pcre2
@@ -116,18 +111,16 @@ pinentry
 procps
 proot
 python
-python-dev
 python2
-python2-dev
 ranger
 readline
 resolv-conf
 rhash
 ripgrep
 ruby
-ruby-dev
 science-repo
 screenfetch
+sed
 silversearcher-ag
 tar
 termux-am
