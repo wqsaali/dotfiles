@@ -1,3 +1,4 @@
+asar
 asciicast2gif
 check-dependencies
 cli-github
@@ -23,6 +24,7 @@ nesh
 npm-check
 npm-compare
 npmrc
+npx
 organize-cli
 parse-columns-cli
 proxy-pac-proxy

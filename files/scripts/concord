@@ -280,6 +280,28 @@ function host_by_ip() {
   fi
 }
 
+# get_kubecfg: Fetch the kubectl config from the first master in the inventory
+function get_kubecfg() {
+  CLUSTER="$1"
+  CMD='sudo cat /etc/kubernetes/admin.conf'
+
+  if [ -z "${CLUSTER}" ]; then
+    echo 'Select a cluster:'
+    CLUSTER=$(list_clusters | fzf)
+  fi
+
+  if [ -z "${CLUSTER}" ]; then
+    echo "You must provide a cluster id or CLUSTER address"
+    exit 1
+  fi
+
+  MASTER=$(list_hosts "${CLUSTER}" | jq -r '[.[]|select(.type[]|contains("cp"))]|.[0]|.ipaddress')
+  if [[ "$DEBUG" == "true" ]]; then
+    echo "ssh -l ${SSH_USER} ${MASTER} ${CMD}"
+  fi
+  command ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -l "${SSH_USER}" "${MASTER}" "${CMD}"
+}
+
 # ssh: Run ssh commands against hosts from a cluster
 function ssh() {
   IP="$1"

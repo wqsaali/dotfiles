@@ -257,6 +257,7 @@ installScripts() {
   installFromRawGithub 'huyng/bashmarks' 'bashmarks.sh'
   installFromRawGithub 'ahmetb/goclone'
   installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
+  installFromRawGithub 'smitt04/slack-dark-theme' 'darkSlack.sh'
   if [[ "$OSTYPE" == *"android"* ]]; then
     termux-fix-shebang ${HOME}/.local/bin/*
   fi
