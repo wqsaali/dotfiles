@@ -20,7 +20,9 @@ curl
 dash
 diffutils
 dnsutils
+dos2unix
 dpkg
+ed
 exa
 fd
 file
@@ -104,12 +106,14 @@ nodejs-lts
 openssh
 openssl
 openssl-tool
+patch
 pcre
 pcre2
 perl
 pinentry
 procps
 proot
+psmisc
 pv
 python
 python2
@@ -135,6 +139,7 @@ termux-tools
 tmux
 tracepath
 tree
+unzip
 util-linux
 vim-python
 vim-runtime
