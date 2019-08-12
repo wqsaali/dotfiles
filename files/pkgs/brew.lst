@@ -116,6 +116,7 @@ openshift-cli
 openssl
 operator-sdk
 packer
+pdsh
 pet
 pipenv
 pre-commit
