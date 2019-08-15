@@ -5,8 +5,8 @@
 # Examples:
 # concord ssh us_us06971c1 uptime
 # concord ssh us_us06971c1
-# concord find_clusters 05260
-# concord find_clusters scus cluster_id,ingress
+# concord get_clusters 05260
+# concord get_clusters scus cluster_id,ingress
 # concord list_hosts us05260-vsp1 instanceName,ipaddress
 # concord run deploy
 # concord push_secret "${CLUSTER_ID}_worker_join_token" "/etc/kubernetes/pki/worker-join-token"
@@ -157,8 +157,8 @@ function run() {
   fi
 }
 
-# find_clusters: Lookup clusters in the Concord Inventory
-function find_clusters() {
+# get_clusters: Lookup clusters in the Concord Inventory
+function get_clusters() {
   FILTER=${1}
   FIELDS=${2}
   QUERY='.[] | select(.cluster_id | contains("'${FILTER}'"))'
@@ -188,10 +188,10 @@ function find_clusters() {
 
 # list_clusters: List cluster names in Concord inventory
 function list_clusters() {
-  CLUSTERS=$(find_clusters | jq -r '.name')
+  CLUSTERS=$(get_clusters | jq -r '.name')
 
   if [ -z "${CLUSTERS}" ]; then
-    echo "Failed to get server list"
+    echo "Failed to get cluster list"
     return 1
   else
     echo $CLUSTERS | tr -s '[[:space:]]' '\n'
@@ -214,13 +214,13 @@ function get_vcenter() {
     exit 1
   fi
 
-  VCENTER="https://$(find_clusters ${CLUSTER} | jq -r '.knobs.ipmi.vsphere_endpoint')"
+  VCENTER="https://$(get_clusters ${CLUSTER} | jq -r '.knobs.ipmi.vsphere_endpoint')"
   echo "${VCENTER}"
   _open "${VCENTER}"
 }
 
-# list_hosts: List hosts from a cluster in Concord inventory
-function list_hosts() {
+# get_hosts: Lookup hosts from a cluster in Concord inventory
+function get_hosts() {
   CLUSTER=$1
   FIELDS=${2}
   QUERY='.'
@@ -251,6 +251,30 @@ function list_hosts() {
     return 1
   else
     echo $HOSTS | jq -r .
+  fi
+}
+
+# list_hosts: List host names in Concord inventory
+function list_hosts() {
+  CLUSTER=$1
+
+  if [ -z "$CLUSTER" ]; then
+    echo 'Select a cluster:'
+    CLUSTER=$(list_clusters | fzf)
+  fi
+
+  if [ -z "$CLUSTER" ]; then
+    echo "You must provide a cluster id"
+    exit 1
+  fi
+
+  HOSTS=$(get_hosts "$CLUSTER" 'hostname' | jq -r '.[]|.hostname')
+
+  if [ -z "${HOSTS}" ]; then
+    echo "Failed to get server list"
+    return 1
+  else
+    echo $HOSTS | tr -s '[[:space:]]' '\n'
   fi
 }
 
@@ -295,7 +319,7 @@ function get_kubecfg() {
     exit 1
   fi
 
-  MASTER=$(list_hosts "${CLUSTER}" | jq -r '[.[]|select(.type[]|contains("cp"))]|.[0]|.ipaddress')
+  MASTER=$(get_hosts "${CLUSTER}" | jq -r '[.[]|select(.type[]|contains("cp"))]|.[0]|.ipaddress')
   if [[ "$DEBUG" == "true" ]]; then
     echo "ssh -l ${SSH_USER} ${MASTER} ${CMD}"
   fi
@@ -326,7 +350,7 @@ function ssh() {
     exit 1
   fi
 
-  IPS=$(list_hosts "${IP}" | jq -r '.[] | .ipaddress' | sed -e "s/^/${SSH_USER}@/g")
+  IPS=$(get_hosts "${IP}" | jq -r '.[] | .ipaddress' | sed -e "s/^/${SSH_USER}@/g")
 
   if [ -z "$CMD" ]; then
     echo 'Select a host:'
