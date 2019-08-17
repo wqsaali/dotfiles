@@ -44,6 +44,7 @@ dark-mode
 dateutils
 dep
 direnv
+displayplacer
 dive
 dnscrypt-proxy
 docker-completion
