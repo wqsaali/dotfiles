@@ -88,170 +88,7 @@ function cless() {
   fi
 }
 
-# Screen aliases
-alias screen-killall='for sess in $(screen -ls); do $ screen -X -S $sess quit'
-
-# Vagrant aliases
-alias vagrant-clean='vagrant nuke && vagrant global-status --prune'
-
-# Gem aliases
-# alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'
-alias gem-upgrade='gem update && gem cleanup'
-
-# npm aliases
-alias npm-upgrade='npm upgrade -g'
-
-if [[ "$OSTYPE" == *"android"* ]]; then
-  alias npm='proot --link2symlink npm'
-fi
-
-# Go aliases
-function goclean() {
-  go clean -modcache
-  rm -rf ~/.glide/
-  rm -rf ~/go/.cache/
-  rm -rf ~/go/pkg/*
-  rm -rf ~/go/src/*
-  rm -rf ~/.cache/go-build/
-}
-alias go-clean='goclean'
-
-# Python aliases
-alias python='python3'
-alias pip='pip3'
-
-# PIP aliases
-alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip install -U'
-alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip3 install -U'
-alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip2 install -U'
-alias pip-clean='rm -rf ~/.cache/pip/'
-
-# apt & brew aliases
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  if ! [ -x "$(command -v brew)" ]; then
-    alias brew='apt'
-  fi
-
-# if user is not root, pass all commands via sudo #
-  if [ $(id -u) -ne 0 ]; then
-    alias apt='sudo apt'
-    alias apt-get='sudo apt-get'
-    alias aptitude='sudo aptitude'
-    alias gem='sudo -H gem'
-    alias pip='sudo -H pip'
-  fi
-
-  function apt-cleanup() {
-    ls /boot/ | grep vmlinuz | sed 's@vmlinuz-@linux-image-@g' | sed 's@\.efi\.signed@@g' | grep -v $(uname -r) | sort -Vru | tail -n +2 | xargs -r sudo aptitude purge -y
-    sudo apt autoremove
-    sudo aptitude autoclean
-    sudo apt-get clean
-    dpkg --list | grep "^rc" | cut -d " " -f 3 | xargs -r sudo dpkg --purge
-  }
-
-  alias apt-upgrade='sudo apt update; sudo apt full-upgrade; apt-cleanup'
-  alias dist-upgrade=apt-upgrade
-
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  alias apt='brew'
-  alias cask='brew cask'
-  alias tap='brew tap'
-  alias service='brew services'
-
-  brew-cask-upgrade() {
-    if [ "$1" != '--continue' ]; then
-      echo "Removing brew cache"
-      rm -rf "$(brew --cache)"
-      echo "Running brew update"
-      brew update
-    fi
-    for c in $(brew cask list); do
-      installed=$(ls $(brew --prefix)/Caskroom/$c)
-      info=$(brew cask info $c)
-      installed_version=$(echo $installed)
-      info_version=$(echo $info | grep "$c: " | cut -d ' ' -f2)
-      if [[ "$installed_version" != "$info_version" ]]; then
-        echo -e "\n\nInstalled versions of $c:"
-        echo "$installed"
-        echo -e "\nCask info for $c:"
-        echo "$info"
-        if [ "$1" != '-y' ]; then
-          select ynx in "Yes" "No" "Exit"; do
-            case $ynx in
-              "Yes") echo "Re-installing $c"; brew cask reinstall "$c"; break;;
-              "No") echo "Skipping $c"; break;;
-              "Exit") echo "Exiting brew-cask-upgrade"; return;;
-            esac
-          done
-        else
-          echo -e "${COL_YELLOW}>>>${COL_RESET} Re-installing $c"; brew cask reinstall "$c"
-        fi
-      else
-          echo -e "${COL_BLUE}>>>${COL_RESET} $c is up to date"
-      fi
-    done
-    brew cleanup
-  }
-
-  check-keg_only() {
-    kegs=$(brew info --installed --json | jq -r 'map(select(.keg_only == true and .linked_keg == null)) | "/usr/local/opt/" + .[].name + "/bin"')
-    for keg in $kegs; do
-      if ! [[ ":$PATH:" == *":${keg}:"* ]] && [ -d "$keg" ]; then
-        echo -e "\n# WARNING: ${keg} is not in your PATH"
-        echo '# add the following to your profile to fix it'
-        cat << EOF
-if [ -d '${keg}' ]; then
-  PATH="${keg}:\$PATH"
-fi
-EOF
-      fi
-    done
-  }
-
-  reload-yabai() {
-    # stop, upgrade, start yabai
-    brew services stop yabai
-    brew upgrade yabai
-    brew services start yabai
-
-    # reinstall the scripting addition
-    sudo yabai --uninstall-sa
-    sudo yabai --install-sa
-
-    # load the scripting addition
-    killall Dock
-  }
-
- alias display_h='displayplacer "id:911709B0-AC89-44B4-22B8-B2DD16CE38C0 res:1920x1200 color_depth:4 scaling:on origin:(0,0) degree:0" "id:CBA6DBB6-02A8-41E2-7E75-791B87F0336D res:1920x1080 hz:60 color_depth:8 scaling:off origin:(1920,0) degree:0"'
- alias display_v='displayplacer "id:911709B0-AC89-44B4-22B8-B2DD16CE38C0 res:1920x1200 color_depth:4 scaling:on origin:(0,0) degree:0" "id:CBA6DBB6-02A8-41E2-7E75-791B87F0336D res:1080x1920 hz:60 color_depth:8 scaling:off origin:(1920,-780) degree:90"'
-
-  alias cask-upgrade='brew-cask-upgrade'
-  alias brew-cleanup='brew cleanup'
-  alias brew-upgrade='brew update && brew upgrade && brew cleanup && check-keg_only'
-  alias dist-upgrade='brew-upgrade && brew-cask-upgrade -y'
-elif [[ "$OSTYPE" == *"android"* ]]; then
-  alias apt-upgrade='apt update; apt full-upgrade'
-  alias dist-upgrade=apt-upgrade
-fi
-
-function update-all-things() {
-  npm-upgrade; gem-upgrade; pip3-upgrade; dist-upgrade; vim-update
-  # if [ -x "$(command -v go)" ]; then
-  #   go get -u all
-  # fi
-  if [ -x "$(command -v apm)" ]; then
-    apm upgrade --no-confirm
-  fi
-  if [ -x "$(command -v mas)" ]; then
-    mas upgrade
-  fi
-  if [ -x "$(command -v softwareupdate)" ]; then
-    softwareupdate --install -a
-  fi
-  if [ -x "$(command -v vagrant)" ]; then
-    vagrant plugin update
-  fi
-}
+alias cls='clear'
 
 # Make open and xdg-open work on all plaforms
 if ! [ -x "$(command -v open)" ]; then
@@ -260,14 +97,6 @@ elif ! [ -x "$(command -v xdg-open)" ]; then
   alias xdg-open='open'
 fi
 alias cygstart='open'
-
-# Get all records from a domain
-alias dig-all='dig +nocmd +multiline +noall +answer any'
-
-alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
-alias sysState="top -l 1 -s 0 | awk ' /Processes/ || /PhysMem/ || /Load Avg/{print}'"
-
-alias cls='clear'
 
 # Fix window title after ssh
 function ssh() {
@@ -279,24 +108,40 @@ function ssh() {
   fi
 }
 
+# Screen aliases
+alias screen-killall='for sess in $(screen -ls); do $ screen -X -S $sess quit'
+
+# Vagrant aliases
+alias vagrant-clean='vagrant nuke && vagrant global-status --prune'
+
+# Rotate AOC usb-c screen (macOS)
+if [ -x "$(command -v displayplacer)" ]; then
+  alias aoc_h='displayplacer "id:911709B0-AC89-44B4-22B8-B2DD16CE38C0 res:1920x1200 color_depth:4 scaling:on origin:(0,0) degree:0" "id:CBA6DBB6-02A8-41E2-7E75-791B87F0336D res:1920x1080 hz:60 color_depth:8 scaling:off origin:(1920,0) degree:0"'
+  alias aoc_v='displayplacer "id:911709B0-AC89-44B4-22B8-B2DD16CE38C0 res:1920x1200 color_depth:4 scaling:on origin:(0,0) degree:0" "id:CBA6DBB6-02A8-41E2-7E75-791B87F0336D res:1080x1920 hz:60 color_depth:8 scaling:off origin:(1920,-780) degree:90"'
+fi
+
+alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
+alias sysState="top -l 1 -s 0 | awk ' /Processes/ || /PhysMem/ || /Load Avg/{print}'"
+
+alias lstcp='lsof -nP | grep TCP | grep LISTEN'
+alias lsudp='lsof -nP | grep UDP | grep LISTEN'
+alias lsservers='lsof -nP | grep LISTEN'
+
 alias fzkill='kill $(ps -ef|fzf --header-lines 1)'
 
 # key management aliases: fingerprint a pubkey and retrieve pubkey from a private key
 alias fingerprint='ssh-keygen -lf'
 alias pubkey='ssh-keygen -y -f'
 
+# Get all records from a domain
+alias dig-all='dig +nocmd +multiline +noall +answer any'
+
 alias headers='curl -ISs'
 
-#Bash calculator.
-function calc() {
-  bc -l <<< "${1}";
+# get TLS cert info
+function certinfo() {
+  echo | openssl s_client -showcerts -servername ${1} -connect ${1}:443 2>/dev/null | openssl x509 -inform pem -noout -text
 }
-
-# Bash weather app
-function wttr() {
-  curl "wttr.in/${1}"
-}
-alias wttr_moon='curl wttr.in/Moon'
 
 # get external ip address
 function ipinfo() {
@@ -306,17 +151,8 @@ function ipinfo() {
   ping -c 1 google.com >/dev/null 2>&1 && echo -e "Connection: ${COL_GREEN}✔${COL_RESET}" || echo -e "Connection: ${COL_RED}✘${COL_RESET}"
 }
 
-# get TLS cert info
-function certinfo() {
-  echo | openssl s_client -showcerts -servername ${1} -connect ${1}:443 2>/dev/null | openssl x509 -inform pem -noout -text
-}
-
 # get internet speed
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
-
-alias lstcp='lsof -nP | grep TCP | grep LISTEN'
-alias lsudp='lsof -nP | grep UDP | grep LISTEN'
-alias lsservers='lsof -nP | grep LISTEN'
 
 alias netdata='docker run --rm --cap-add SYS_PTRACE -v /proc:/host/proc:ro -v /sys:/host/sys:ro -p 19999:19999 titpetric/netdata'
 
@@ -355,6 +191,23 @@ dedup_pathvar () {
   set_var "$pathvar_name" "$deduped_path"
 }
 
+# https://github.com/idank/explainshell/issues/4#issuecomment-354709120
+function explain-shell() {
+  response=$(w3m -dump 'http://explainshell.com/explain?cmd='$(echo $@ | tr ' ' '+'}))
+  cat -s <(grep -v -e explainshell -e • -e □ -e 'source manpages' <<< "$response")
+}
+
+# Bash calculator.
+function calc() {
+  bc -l <<< "${1}";
+}
+
+# Bash weather app
+function wttr() {
+  curl "wttr.in/${1}"
+}
+alias wttr_moon='curl wttr.in/Moon'
+
 # Simplified archive extraction
 function extract() {
   if [ -z "$1" ]; then
@@ -386,10 +239,3 @@ function extract() {
     fi
   fi
 }
-
-# https://github.com/idank/explainshell/issues/4#issuecomment-354709120
-function explain-shell() {
-  response=$(w3m -dump 'http://explainshell.com/explain?cmd='$(echo $@ | tr ' ' '+'}))
-  cat -s <(grep -v -e explainshell -e • -e □ -e 'source manpages' <<< "$response")
-}
-

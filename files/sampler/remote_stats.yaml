@@ -1,0 +1,21 @@
+variables:
+  host: user@1.2.3.4
+  sshconnection: ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+textboxes:
+  - title: SSH
+    pty: true
+    init: $sshconnection $host
+    sample: top
+sparklines:
+  - title: CPU usage
+    pty: true
+    init: $sshconnection $host
+    rate-ms: 200
+    scale: 0
+    sample: ps -A -o %cpu | awk '{s+=$1} END {print s}'
+  - title: Free memory pages
+    pty: true
+    init: $sshconnection $host
+    rate-ms: 200
+    scale: 0
+    sample: free | grep 'Mem:' | awk '{print $4}'

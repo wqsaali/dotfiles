@@ -101,22 +101,18 @@ function backupVscode() {
 
 function backupPPAs() {
   # Get list of PPAs
-  echo '#!/usr/bin/env bash' > restore-ppas.sh
-  echo '#!/usr/bin/env bash' > restore-repos.sh
   for APT in `find /etc/apt/ -name \*.list`; do
       grep -Po "(?<=^deb\s).*?(?=#|$)" $APT | while read ENTRY ; do
           HOST=`echo $ENTRY | cut -d/ -f3`
           USER=`echo $ENTRY | cut -d/ -f4`
           PPA=`echo $ENTRY | cut -d/ -f5`
           if [ "ppa.launchpad.net" = "$HOST" ]; then
-              echo "sudo apt-add-repository ppa:$USER/$PPA" >> restore-ppas.sh
+              echo "ppa:$USER/$PPA" >> files/pkgs/ppa.lst
           else
-              echo "sudo apt-add-repository \"${ENTRY}\"" >> restore-repos.sh
+              echo "\"${ENTRY}\"" >> files/pkgs/apt-repo.lst
           fi
       done
   done
-  echo 'sudo apt update' >> restore-ppas.sh
-  echo 'sudo apt update' >> restore-repos.sh
 }
 
 function backupPackages() {
@@ -150,8 +146,15 @@ function backupHomeDir() {
 }
 
 function restoreRepos() {
-  bash restore-repos.sh
-  bash restore-ppas.sh
+  LISTS=('files/pkgs/ppa.lst' 'files/pkgs/apt-repo.lst')
+  for LST in ${LISTS[@]}; do
+    while read -r REPO; do
+      [[ "${REPO}" =~ ^#.*$ ]] && continue
+      [[ "${REPO}" =~ ^\\s*$ ]] && continue
+      sudo apt-add-repository "${REPO}"
+    done < files/pkgs/${LST}
+  done
+  sudo apt update
 }
 
 function restoreDotfiles() {
