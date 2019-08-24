@@ -35,8 +35,8 @@
     ]
     titleBar: "custom"
   editor:
-    fontSize: 11
     fontFamily: "FuraCode Nerd Font Mono"
+    fontSize: 11
     invisibles: {}
     showIndentGuide: true
     showInvisibles: true
@@ -61,7 +61,6 @@
   "markdown-preview":
     useGitHubStyle: true
   "markdown-preview-plus": {}
-  metrics: false
   minimap:
     plugins:
       cursorline: true
