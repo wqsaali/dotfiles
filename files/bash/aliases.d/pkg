@@ -139,7 +139,14 @@ elif [[ "$OSTYPE" == *"android"* ]]; then
 fi
 
 function update-all-things() {
-  npm-upgrade; gem-upgrade; pip3-upgrade; dist-upgrade; vim-update
+  npm-upgrade
+  gem-upgrade
+  pip3-upgrade
+  dist-upgrade
+
+  # vim-update
+  vi +PlugUpdate +PlugUpgrade +qall
+
   # if [ -x "$(command -v go)" ]; then
   #   go get -u all
   # fi
