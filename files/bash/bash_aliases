@@ -114,12 +114,6 @@ alias screen-killall='for sess in $(screen -ls); do $ screen -X -S $sess quit'
 # Vagrant aliases
 alias vagrant-clean='vagrant nuke && vagrant global-status --prune'
 
-# Rotate AOC usb-c screen (macOS)
-if [ -x "$(command -v displayplacer)" ]; then
-  alias aoc_h='displayplacer "id:911709B0-AC89-44B4-22B8-B2DD16CE38C0 res:1920x1200 color_depth:4 scaling:on origin:(0,0) degree:0" "id:CBA6DBB6-02A8-41E2-7E75-791B87F0336D res:1920x1080 hz:60 color_depth:8 scaling:off origin:(1920,0) degree:0"'
-  alias aoc_v='displayplacer "id:911709B0-AC89-44B4-22B8-B2DD16CE38C0 res:1920x1200 color_depth:4 scaling:on origin:(0,0) degree:0" "id:CBA6DBB6-02A8-41E2-7E75-791B87F0336D res:1080x1920 hz:60 color_depth:8 scaling:off origin:(1920,-780) degree:90"'
-fi
-
 alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
 alias sysState="top -l 1 -s 0 | awk ' /Processes/ || /PhysMem/ || /Load Avg/{print}'"
 
