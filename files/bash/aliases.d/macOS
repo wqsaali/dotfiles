@@ -3,11 +3,15 @@
 if [[ "$OSTYPE" == "darwin"* ]]; then
 
   proxyOFF() {
-    sudo networksetup -setstreamingproxystate wi-fi off
-    sudo networksetup -setsocksfirewallproxystate wi-fi off
-    sudo networksetup -setwebproxystate wi-fi off
+    while read -r device; do
+      echo "Disabling proxies for '$device'"
+      sudo networksetup -setstreamingproxystate "$device" off
+      sudo networksetup -setsocksfirewallproxystate "$device" off
+      sudo networksetup -setwebproxystate "$device" off
+      sudo networksetup -setproxyautodiscovery "$device" off
 
-    networksetup -getwebproxy wi-fi
+      networksetup -getwebproxy "$device"
+    done < <(networksetup -listallnetworkservices | grep -v '*')
   }
 
   reload-yabai() {
