@@ -24,6 +24,7 @@ bosh-init
 brew-cask-completion
 brew-pip
 browsh
+calicoctl
 cask
 ccat
 certbot
