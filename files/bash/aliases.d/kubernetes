@@ -121,7 +121,13 @@ alias kctl-clean_crd='kubectl-purge_crd'
 function kubectl-clean() {
   kubectl get po --all-namespaces --no-headers | grep -v Running | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete po
 # kubectl get po --all-namespaces --no-headers --field-selector=status.phase!=Running | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete po
-  kubectl get job --all-namespaces --no-headers --selector 'status.succeeded!=0' | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete job
+  kubectl get job --all-namespaces -o=go-template='{{range .items}}{{if or .status.succeeded .status.failed}}{{.metadata.name}} -n {{.metadata.namespace}}{{"\n"}}{{end}}{{end}}' | xargs -L1 -r kubectl delete job
+  if [[ "$1" == "--all" ]] && [ -x "$(command -v kubectl-pssh)" ]; then
+    kubectl pssh 'sudo docker system prune -a -f'
+    kubectl pssh 'sudo sh -c "truncate -s 0 /var/lib/docker/containers/*/*-json.log"'
+    kubectl pssh 'sudo rm /var/log/*.gz'
+    kubectl pssh 'sudo rm /var/log/*.1'
+  fi
 }
 alias kctl-clean='kubectl-clean'
 
@@ -146,6 +152,13 @@ function helm-clean() {
     echo "Looking for Secrets in ${N}:"
     kubectl delete secrets -n ${N} -l 'OWNER=TILLER' -l 'STATUS in (FAILED,SUPERSEDED,DELETED)'
   done
+}
+
+function helm-getSecrets() {
+  HELM_HOME="${HELM_HOME:-~/.helm}"
+  kubectl get secret -n kube-system tiller-secret -o go-template='{{index .data "ca.crt"| base64decode}}' > $HELM_HOME/ca.pem
+  kubectl get secret -n kube-system tiller-secret -o go-template='{{index .data "tls.crt"| base64decode}}' > $HELM_HOME/cert.pem
+  kubectl get secret -n kube-system tiller-secret -o go-template='{{index .data "tls.key"| base64decode}}' > $HELM_HOME/key.pem
 }
 
 # microk8s aliases for macOS
