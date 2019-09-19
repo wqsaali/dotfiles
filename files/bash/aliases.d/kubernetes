@@ -4,6 +4,7 @@
 alias kube='kubectl'
 alias kns='kubens'
 alias kc='kubectl'
+alias krew='kubectl krew'
 
 function kctl() {
   CMD=${1}

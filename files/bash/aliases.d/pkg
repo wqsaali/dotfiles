@@ -130,6 +130,13 @@ function update-all-things() {
   pip3-upgrade
   dist-upgrade
 
+  if [ -x "$(command -v mas)" ]; then
+    mas upgrade
+  fi
+  if [ -x "$(command -v softwareupdate)" ]; then
+    softwareupdate --install -a
+  fi
+
   # vim-update
   vi +PlugUpdate +PlugUpgrade +qall
 
@@ -139,11 +146,9 @@ function update-all-things() {
   if [ -x "$(command -v apm)" ]; then
     apm upgrade --no-confirm
   fi
-  if [ -x "$(command -v mas)" ]; then
-    mas upgrade
-  fi
-  if [ -x "$(command -v softwareupdate)" ]; then
-    softwareupdate --install -a
+  if [ -x "$(command -v kubectl-krew)" ]; then
+    kubectl krew update
+    kubectl krew upgrade
   fi
   if [ -x "$(command -v vagrant)" ]; then
     vagrant plugin update
