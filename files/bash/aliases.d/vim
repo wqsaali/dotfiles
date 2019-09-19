@@ -1,5 +1,7 @@
 # vim:set filetype=sh:
 
+alias :q='exit'
+
 # Geeknote alias
 function gn_sync_notebook() {
   gnsync --path ~/Evernote/$1 --logpath ~/.log/geeknote$1.log --format markdown --notebook "$1" --two-way TWO_WAY
