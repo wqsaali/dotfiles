@@ -93,6 +93,7 @@ jq
 jruby
 jsmin
 jsonnet
+jwt-cli
 k9s
 kompose
 kops
