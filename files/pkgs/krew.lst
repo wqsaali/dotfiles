@@ -5,12 +5,13 @@ exec-all
 get-all
 krew
 mtail
-tail
+neat
 pod-logs
 pod-shell
 rbac-lookup
 rbac-view
 resource-capacity
 sniff
+tail
 view-secret
 view-utilization

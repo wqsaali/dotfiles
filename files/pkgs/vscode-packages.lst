@@ -1,6 +1,7 @@
 brainfit.vscode-importmagic
 castwide.solargraph
 casualjim.gotemplate
+chef-software.chef
 DavidAnson.vscode-markdownlint
 dbaeumer.vscode-eslint
 DotJoshJohnson.xml
@@ -31,7 +32,6 @@ ms-vscode.azurecli
 ms-vscode.Go
 nhoizey.gremlins
 p1c2u.docker-compose
-Pendrica.chef
 rebornix.ruby
 redhat.vscode-yaml
 ryu1kn.partial-diff
