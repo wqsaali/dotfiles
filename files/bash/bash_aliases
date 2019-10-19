@@ -48,7 +48,7 @@ alias .....='cd ../../../../'
 alias back='cd $OLDPWD'
 
 # Grep aliases
-alias gr='rg'
+alias gr='rg -g "!*vendor/*"'
 
 alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 

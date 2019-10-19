@@ -33,5 +33,5 @@
     "gitlens.views.fileHistory.enabled": true,
     "gitlens.views.lineHistory.enabled": true,
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Tomorrow Night Bright (Sublime)"
+    "workbench.colorTheme": "Night Wolf [black] (No Italics)"
 }

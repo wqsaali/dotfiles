@@ -122,6 +122,7 @@ openssl
 operator-sdk
 packer
 pdsh
+peco
 pet
 pipenv
 pre-commit
@@ -176,3 +177,4 @@ xhyve
 yabai
 yarn
 yq
+zsh
