@@ -442,8 +442,13 @@ installFish() {
   curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
   curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
   fisher fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
-  omf install chain
   fisher teapot
+
+  while read -r PKG; do
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    omf install "${PKG}"
+  done < files/pkgs/omf.lst
 }
 
 createSkeleton() {
