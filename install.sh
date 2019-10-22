@@ -451,6 +451,23 @@ installFish() {
   done < files/pkgs/omf.lst
 }
 
+installZsh() {
+  ZSH=${ZSH:-${HOME}/.oh-my-zsh}
+  ZSH_CUSTOM=${ZSH_CUSTOM:-${ZSH}/custom}
+  if [ ! -d  ${HOME}/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  fi
+  if [ ! -d ${ZSH_CUSTOM}/themes/spaceship-prompt ]; then
+    git clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
+    ln -s "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${ZSH_CUSTOM}/themes/spaceship.zsh-theme"
+  else
+    cd $ZSH_CUSTOM/themes/spaceship-prompt
+    git pull
+    cd ${INSTALLDIR}
+  fi
+  cp files/zsh/zshrc ${HOME}/.zshrc
+}
+
 createSkeleton() {
   dirs=$(cat config.sh | awk -F\' '{print $2}' | grep 'HOME')
   for d in $(envsubst <<< "${dirs}"); do
@@ -491,6 +508,7 @@ installDotFiles() {
 
   createSkeleton
   installBashConf
+  installZsh
   installTmuxConf
   installGitConf
   installScripts

@@ -9,6 +9,7 @@ function backupDotFiles() {
   cp ${HOME}/.bash_variables files/bash/bash_variables
   cp ${HOME}/.bash_aliases files/bash/bash_aliases
   cp -r $HOME/.bash/aliases.d/* files/bash/aliases.d/
+  cp ${HOME}/.zshrc files/zsh/zshrc
   cp /etc/bash_completion.d/bash_aliases_completion files/bash/bash_aliases_completion
   cp ${HOME}/.profile files/bash/profile
   cp ${HOME}/.git-prompt-colors.sh files/bash/git-prompt-colors.sh
