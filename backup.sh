@@ -10,6 +10,7 @@ function backupDotFiles() {
   cp ${HOME}/.bash_aliases files/bash/bash_aliases
   cp -r $HOME/.bash/aliases.d/* files/bash/aliases.d/
   cp ${HOME}/.zshrc files/zsh/zshrc
+  cp ${HOME}/.p10k.zsh files/zsh/p10k.zsh
   cp /etc/bash_completion.d/bash_aliases_completion files/bash/bash_aliases_completion
   cp ${HOME}/.profile files/bash/profile
   cp ${HOME}/.git-prompt-colors.sh files/bash/git-prompt-colors.sh
@@ -34,6 +35,7 @@ function backupDotFiles() {
   cp ${HOME}/.ptpython/config.py files/ptpython.py
   cp -r ${HOME}/.config/kitty/* files/kitty/
   cp ${HOME}/.config/alacritty/alacritty.yml files/alacritty.yml
+  cp ${HOME}/.config/starship.toml files/starship.toml
 }
 
 function backupTermux() {

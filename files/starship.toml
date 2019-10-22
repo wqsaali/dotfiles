@@ -1,0 +1,47 @@
+[time]
+disabled=false
+
+[env_var]
+disabled=true
+
+[username]
+disabled = true
+
+[hostname]
+disabled = true
+
+[battery]
+disabled = true
+
+[kubernetes]
+disabled=false
+
+[aws]
+disabled=true
+
+[golang]
+disabled=true
+
+[conda]
+disabled=true
+
+[dotnet]
+disabled=true
+
+[java]
+disabled=true
+
+[nodejs]
+disabled=true
+
+[python]
+disabled=true
+
+[ruby]
+disabled=true
+
+[rust]
+disabled=true
+
+[nix_shell]
+disabled=true

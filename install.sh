@@ -454,9 +454,11 @@ installFish() {
 installZsh() {
   ZSH=${ZSH:-${HOME}/.oh-my-zsh}
   ZSH_CUSTOM=${ZSH_CUSTOM:-${ZSH}/custom}
+
   if [ ! -d  ${HOME}/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   fi
+
   if [ ! -d ${ZSH_CUSTOM}/themes/spaceship-prompt ]; then
     git clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
     ln -s "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${ZSH_CUSTOM}/themes/spaceship.zsh-theme"
@@ -465,7 +467,16 @@ installZsh() {
     git pull
     cd ${INSTALLDIR}
   fi
+
+  if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
+    git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  else
+    cd $ZSH_CUSTOM/themes/powerlevel10k
+    git pull
+    cd ${INSTALLDIR}
+  fi
   cp files/zsh/zshrc ${HOME}/.zshrc
+  cp files/zsh/p10k.zsh ${HOME}/.p10k.zsh
 }
 
 createSkeleton() {
@@ -518,6 +529,7 @@ installDotFiles() {
   cp files/screenrc ${HOME}/.screenrc
   cp files/atom/* ${HOME}/.atom/
   cp files/ptpython.py ${HOME}/.ptpython/config.py
+  cp files/starship.toml ${HOME}/.config/starship.toml
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh dotfiles

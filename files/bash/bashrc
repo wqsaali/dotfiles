@@ -270,5 +270,7 @@ source ${HOME}/.bash/kube-ps1/kube-ps1.sh
 
 export PS1
 
+# eval "$(starship init bash)"
+
 CONFIGURED="true"
 
