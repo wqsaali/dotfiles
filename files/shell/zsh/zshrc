@@ -70,12 +70,31 @@ export ZSH_TMUX_AUTOSTART_ONCE=true
 export ZSH_TMUX_AUTOQUIT=true
 export ZSH_TMUX_AUTOCONNECT=false
 
+export GIT_AUTO_FETCH_INTERVAL=60 #in seconds
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(ssh-agent git tmux thefuck kube-ps1 colorize colored-man-pages command-not-found cp extract web-search)
+plugins=(
+  ssh-agent
+  git
+  git-auto-fetch
+  tmux
+  thefuck
+  kube-ps1
+  colorize
+  colored-man-pages
+  command-not-found
+  cp
+  extract
+  web-search
+  zsh-syntax-highlighting
+  zsh-completions
+  zsh-autosuggestions
+  zsh-history-substring-search
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -121,4 +140,10 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[ -f $HOME/.aliases ] && source ${HOME}/.aliases
+
+[[ ! -f ~/.profile ]] || source ~/.profile
+[[ ! -f ~/.aliases ]] || source ~/.aliases
+[[ ! -f /etc/grc.zsh ]] || source /etc/grc.zsh
+[[ ! -f /usr/local/etc/grc.zsh ]] || source /usr/local/etc/grc.zsh
+[[ ! -f /usr/local/opt/fzf/shell/key-bindings.zsh ]] || source /usr/local/opt/fzf/shell/key-bindings.zsh
+

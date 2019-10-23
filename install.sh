@@ -475,6 +475,39 @@ installZsh() {
     git pull
     cd ${INSTALLDIR}
   fi
+
+  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-autosuggestions ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+  else
+    cd $ZSH_CUSTOM/plugins/zsh-autosuggestions
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
+  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+  else
+    cd $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
+  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-completions ]; then
+    git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM}/plugins/zsh-completions
+  else
+    cd $ZSH_CUSTOM/plugins/zsh-completions
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
+  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-history-substring-search ]; then
+    git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM}/plugins/zsh-history-substring-search
+  else
+    cd $ZSH_CUSTOM/plugins/zsh-history-substring-search
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
   cp files/shell/zsh/zshrc ${HOME}/.zshrc
   cp files/shell/zsh/p10k.zsh ${HOME}/.p10k.zsh
 }

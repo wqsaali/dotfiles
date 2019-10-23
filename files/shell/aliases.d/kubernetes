@@ -6,6 +6,14 @@ alias kns='kubens'
 alias kc='kubectl'
 alias krew='kubectl krew'
 
+function _isFunction() {
+  check='declare -F --'
+  if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
+    check='print -l ${(ok)functions} | grep'
+  fi
+  eval "$check $1" >/dev/null
+}
+
 function kctl() {
   CMD=${1}
   shift
@@ -14,12 +22,13 @@ function kctl() {
     COLOR="grc -es --colour=auto"
   fi
 
-  if declare -F -- "kubectl-${CMD}" >/dev/null; then
+  if _isFunction "kubectl-${CMD}"; then
     "kubectl-${CMD}" ${@}
     return $?
   fi
-  ${COLOR} kubectl ${CMD} ${@}
+  eval "${COLOR} kubectl ${CMD} ${@}"
 }
+alias k='kctl'
 
 function kgy() {
   kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
