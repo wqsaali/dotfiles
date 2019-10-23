@@ -14,8 +14,8 @@ function backupDotFiles() {
   cp /etc/bash_completion.d/bash_aliases_completion files/shell/bash/bash_aliases_completion
   cp ${HOME}/.profile files/shell/profile
   cp ${HOME}/.git-prompt-colors.sh files/shell/bash/git-prompt-colors.sh
-  cp ${HOME}/.tmux.conf.local files/tmux.conf.local
-  cp ${HOME}/.screenrc files/screenrc
+  cp ${HOME}/.tmux.conf.local files/shell/tmux.conf.local
+  cp ${HOME}/.screenrc files/shell/screenrc
   cp ${HOME}/.vimrc files/vim/vimrc
   cp ${HOME}/.vimrc.local files/vim/vimrc.local
   cp -r ${HOME}/.vim/ft* files/vim/

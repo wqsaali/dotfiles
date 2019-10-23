@@ -89,7 +89,6 @@ plugins=(
   command-not-found
   cp
   extract
-  web-search
   zsh-syntax-highlighting
   zsh-completions
   zsh-autosuggestions

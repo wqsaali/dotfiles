@@ -1,4 +1,4 @@
-# Bash configuration
+# Shell configuration
 
 Includes some aliases and functions (with auto completion) to make your life easier.
 

@@ -300,7 +300,7 @@ installVscodePackages() {
 }
 
 installTmuxConf() {
-  cp files/tmux.conf.local ${HOME}/.tmux.conf.local
+  cp files/shell/tmux.conf.local ${HOME}/.tmux.conf.local
   if [ ! -d  ${HOME}/.tmux ]; then
     git clone https://github.com/gpakosz/.tmux.git ${HOME}/.tmux
   else
@@ -559,7 +559,7 @@ installDotFiles() {
 
   cp files/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
   cp -r files/kitty ${HOME}/.config/
-  cp files/screenrc ${HOME}/.screenrc
+  cp files/shell/screenrc ${HOME}/.screenrc
   cp files/atom/* ${HOME}/.atom/
   cp files/ptpython.py ${HOME}/.ptpython/config.py
   cp files/shell/starship.toml ${HOME}/.config/starship.toml
