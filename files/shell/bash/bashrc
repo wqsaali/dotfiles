@@ -185,10 +185,10 @@ fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
+# ~/.aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-[ -f $HOME/.bash_aliases ] && source ${HOME}/.bash_aliases
+[ -f $HOME/.aliases ] && source ${HOME}/.aliases
 
 # Auto completion
 # enable programmable completion features (you don't need to enable
@@ -236,16 +236,6 @@ fi
 [ -f /usr/local/etc/grc.bashrc ] && source /usr/local/etc/grc.bashrc
 
 # gitprompt configuration
-
-function get_k8s_name(){
-  echo "$1"
-}
-
-function get_k8s_ns(){
-  if [[ "$1" != "default" ]]; then
-    echo ":$1"
-  fi
-}
 
 # export KUBE_PS1_CLUSTER_FUNCTION=get_k8s_name
 export KUBE_PS1_NAMESPACE_FUNCTION=get_k8s_ns

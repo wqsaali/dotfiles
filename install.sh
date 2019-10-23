@@ -378,22 +378,22 @@ installBashConf() {
 
   cd ${INSTALLDIR}
 
-  cp files/bash/git_prompt.sh ${HOME}/.bash/
-  cp files/bash/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
-  cp files/bash/shell_prompt.sh ${HOME}/.bash/
-  cp files/bash/bashrc ${HOME}/.bashrc
-  cp files/bash/bash_variables ${HOME}/.bash_variables
-  cp files/bash/bash_profile ${HOME}/.bash_profile
-  cp files/bash/profile ${HOME}/.profile
-  cp -r files/bash/aliases.d $HOME/.bash/
+  cp files/shell/bash/git_prompt.sh ${HOME}/.bash/
+  cp files/shell/bash/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
+  cp files/shell/bash/shell_prompt.sh ${HOME}/.bash/
+  cp files/shell/bash/bashrc ${HOME}/.bashrc
+  cp files/shell/variables ${HOME}/.variables
+  cp files/shell/bash/bash_profile ${HOME}/.bash_profile
+  cp files/shell/profile ${HOME}/.profile
+  cp -r files/shell/aliases.d $HOME/.aliases.d
 
-  #cp files/bash/bash_aliases ${HOME}/.bash_aliases
+  #cp files/shell/aliases ${HOME}/.aliases
   sedcmd=''
   for var in $(echo ${CONF}); do
     printf -v sc 's|${%s}|%s|;' ${var} "${!var//\//\\/}"
     sedcmd+="${sc}"
   done
-  cat files/bash/bash_aliases | sed -e "${sedcmd}" > ${HOME}/.bash_aliases
+  cat files/shell/aliases | sed -e "${sedcmd}" > ${HOME}/.aliases
 
   if [ ! -d  ${HOME}/.bash/complete-alias ]; then
     git clone https://github.com/cykerway/complete-alias.git ${HOME}/.bash/complete-alias
@@ -475,8 +475,8 @@ installZsh() {
     git pull
     cd ${INSTALLDIR}
   fi
-  cp files/zsh/zshrc ${HOME}/.zshrc
-  cp files/zsh/p10k.zsh ${HOME}/.p10k.zsh
+  cp files/shell/zsh/zshrc ${HOME}/.zshrc
+  cp files/shell/zsh/p10k.zsh ${HOME}/.p10k.zsh
 }
 
 createSkeleton() {
@@ -529,7 +529,7 @@ installDotFiles() {
   cp files/screenrc ${HOME}/.screenrc
   cp files/atom/* ${HOME}/.atom/
   cp files/ptpython.py ${HOME}/.ptpython/config.py
-  cp files/starship.toml ${HOME}/.config/starship.toml
+  cp files/shell/starship.toml ${HOME}/.config/starship.toml
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh dotfiles

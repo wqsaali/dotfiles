@@ -1,7 +1,7 @@
 # vim:set filetype=sh:
 
 # Extra aliases
-for f in $HOME/.bash/aliases.d/*; do
+for f in $HOME/.aliases.d/*; do
   if [ -f "$f" ]; then
     source "$f"
   fi
@@ -54,11 +54,17 @@ alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 
 # Usage: df -h|fawk 2 ; replaces: df -h | awk '{print $2}'
 function fawk() {
-    first="awk '{print "
-    last="}' $2"
-    cmd="${first}\$${1}${last}"
-    echo $cmd
-    eval $cmd
+  local ARGS=( "$@" ); ARGS=( "${ARGS[@]:1}" )
+  local first="awk '{print "
+  local last="}' $ARGS"
+  local fields=""
+  local cmd=""
+  for i in ${1//,/ }; do
+    fields="${fields}\$${i},"
+  done
+  fields=${fields%%,}
+  cmd="${first}${fields}${last}"
+  eval $cmd
 }
 
 # Colored diffs
@@ -163,31 +169,42 @@ function hgrep() {
 alias histg='hgrep'
 
 # fh - repeat history
-fh() {
+function fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
 alias no-trail="ag --print0 -l '[ \t]+$' | xargs -0 -n1 -r perl -pi -e 's/[ \t]+$//'"
 
 # Deduplicate path variables
-get_var () {
+function get_var() {
   eval 'printf "%s\n" "${'"$1"'}"'
 }
 
-set_var () {
+function set_var() {
   eval "$1=\"\$2\""
 }
 
-dedup_pathvar () {
+function dedup_pathvar() {
   pathvar_name="$1"
   pathvar_value="$(get_var "$pathvar_name")"
   deduped_path="$(perl -e 'print join(":",grep { not $seen{$_}++ } split(/:/, $ARGV[0]))' "$pathvar_value")"
   set_var "$pathvar_name" "$deduped_path"
 }
 
+function trim() {
+    local trimmed="$1"
+
+    # Strip leading space.
+    trimmed="${trimmed## }"
+    # Strip trailing space.
+    trimmed="${trimmed%% }"
+
+    echo "$trimmed"
+}
+
 # https://github.com/idank/explainshell/issues/4#issuecomment-354709120
 function explain-shell() {
-  response=$(w3m -dump 'http://explainshell.com/explain?cmd='$(echo $@ | tr ' ' '+'}))
+  response=$(w3m -dump 'http://explainshell.com/explain?cmd='$(echo $@ | tr ' ' '+'))
   cat -s <(grep -v -e explainshell -e • -e □ -e 'source manpages' <<< "$response")
 }
 
@@ -209,7 +226,7 @@ function extract() {
     echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
   else
     if [ -f "$1" ] ; then
-      local nameInLowerCase=`echo "${1}" | awk '{print tolower($0)}'`
+      local nameInLowerCase=$(echo "${1}" | awk '{print tolower($0)}')
       case "$nameInLowerCase" in
         *.tar.bz2)   tar xvjf ./"$1"    ;;
         *.tar.gz)    tar xvzf ./"$1"    ;;

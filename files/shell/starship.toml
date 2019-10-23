@@ -1,0 +1,81 @@
+add_newline = true
+
+prompt_order = [
+    "username",
+    "hostname",
+    "kubernetes",
+    "directory",
+    "git_branch",
+    "git_state",
+    "git_status",
+    "package",
+    "dotnet",
+    "golang",
+    "java",
+    "nodejs",
+    "python",
+    "ruby",
+    "rust",
+    "nix_shell",
+    "conda",
+    "memory_usage",
+    "aws",
+    "env_var",
+    "cmd_duration",
+    "line_break",
+    "jobs",
+    "battery",
+    "time",
+    "character",
+]
+
+[character]
+symbol = "▷"
+
+[time]
+disabled=false
+
+[env_var]
+disabled=true
+
+[username]
+disabled = true
+
+[hostname]
+disabled = true
+
+[battery]
+disabled = true
+
+[kubernetes]
+disabled=false
+
+[aws]
+disabled=true
+
+[golang]
+disabled=true
+
+[conda]
+disabled=true
+
+[dotnet]
+disabled=true
+
+[java]
+disabled=true
+
+[nodejs]
+disabled=true
+
+[python]
+disabled=true
+
+[ruby]
+disabled=true
+
+[rust]
+disabled=true
+
+[nix_shell]
+disabled=true

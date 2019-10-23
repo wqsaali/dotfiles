@@ -212,7 +212,7 @@ installDotFiles() {
     ln -s ${HOME}/.config/terminator/terminator.config ${HOME}/.config/terminator/config
   fi
 
-  sudo cp files/bash/bash_aliases_completion /etc/bash_completion.d/
+  sudo cp files/shell/bash/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   sudo mv knife_autocomplete /etc/bash_completion.d/
   curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash

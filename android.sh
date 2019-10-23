@@ -24,7 +24,7 @@ installDotFiles() {
 
   cp -r files/termux/* ${HOME}/.termux/
 
-  cp files/bash/bash_aliases_completion ${PREFIX}/etc/bash_completion.d/
+  cp files/shell/bash/bash_aliases_completion ${PREFIX}/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   mv knife_autocomplete ${PREFIX}/etc/bash_completion.d/
   curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash

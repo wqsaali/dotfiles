@@ -2,18 +2,18 @@
 
 function backupDotFiles() {
   mkdir -p files
-  cp ${HOME}/.bash/git_prompt.sh files/bash/git_prompt.sh
-  cp ${HOME}/.bash/shell_prompt.sh files/bash/shell_prompt.sh
-  cp ${HOME}/.bashrc files/bash/bashrc
-  cp ${HOME}/.bash_profile files/bash/bash_profile
-  cp ${HOME}/.bash_variables files/bash/bash_variables
-  cp ${HOME}/.bash_aliases files/bash/bash_aliases
-  cp -r $HOME/.bash/aliases.d/* files/bash/aliases.d/
-  cp ${HOME}/.zshrc files/zsh/zshrc
-  cp ${HOME}/.p10k.zsh files/zsh/p10k.zsh
-  cp /etc/bash_completion.d/bash_aliases_completion files/bash/bash_aliases_completion
-  cp ${HOME}/.profile files/bash/profile
-  cp ${HOME}/.git-prompt-colors.sh files/bash/git-prompt-colors.sh
+  cp ${HOME}/.bash/git_prompt.sh files/shell/bash/git_prompt.sh
+  cp ${HOME}/.bash/shell_prompt.sh files/shell/bash/shell_prompt.sh
+  cp ${HOME}/.bashrc files/shell/bash/bashrc
+  cp ${HOME}/.bash_profile files/shell/bash/bash_profile
+  cp ${HOME}/.variables files/shell/variables
+  cp ${HOME}/.aliases files/shell/aliases
+  cp -r $HOME/.aliases.d/* files/shell/aliases.d/
+  cp ${HOME}/.zshrc files/shell/zsh/zshrc
+  cp ${HOME}/.p10k.zsh files/shell/zsh/p10k.zsh
+  cp /etc/bash_completion.d/bash_aliases_completion files/shell/bash/bash_aliases_completion
+  cp ${HOME}/.profile files/shell/profile
+  cp ${HOME}/.git-prompt-colors.sh files/shell/bash/git-prompt-colors.sh
   cp ${HOME}/.tmux.conf.local files/tmux.conf.local
   cp ${HOME}/.screenrc files/screenrc
   cp ${HOME}/.vimrc files/vim/vimrc
@@ -35,7 +35,7 @@ function backupDotFiles() {
   cp ${HOME}/.ptpython/config.py files/ptpython.py
   cp -r ${HOME}/.config/kitty/* files/kitty/
   cp ${HOME}/.config/alacritty/alacritty.yml files/alacritty.yml
-  cp ${HOME}/.config/starship.toml files/starship.toml
+  cp ${HOME}/.config/starship.toml files/shell/starship.toml
 }
 
 function backupTermux() {

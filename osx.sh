@@ -161,8 +161,9 @@ installPackages() {
     cask_install "${PKG}"
   done < files/pkgs/cask.lst
 
-  # Set bash as the login shell
+  echo $(brew --prefix)/bin/zsh | sudo tee -a /etc/shells > /dev/null
   echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells > /dev/null
+  # Set bash as the login shell
   chsh -s $(brew --prefix)/bin/bash
 
   # gettext is installed as a dependency but it's not linked
@@ -245,7 +246,7 @@ installDotFiles() {
 
   # ln -s ${HOME}/.config/kitty ${HOME}/Library/Preferences/
 
-  cp files/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
+  cp files/shell/bash/bash_aliases_completion /usr/local/etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
   mv knife_autocomplete /usr/local/etc/bash_completion.d/
   curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash

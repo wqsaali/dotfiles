@@ -8,7 +8,7 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-[ -f $HOME/.bash_variables ] && source $HOME/.bash_variables
+[ -f $HOME/.variables ] && source $HOME/.variables
 
 #CDPATH
 CDPATH=".:~:~/workingCopies:~/workingCopies/src:$(ls -1d ${HOME}/workingCopies/src/*/ | tr '\n' ':')"
