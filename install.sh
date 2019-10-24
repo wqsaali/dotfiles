@@ -455,8 +455,12 @@ installZsh() {
   ZSH=${ZSH:-${HOME}/.oh-my-zsh}
   ZSH_CUSTOM=${ZSH_CUSTOM:-${ZSH}/custom}
 
-  if [ ! -d  ${HOME}/.oh-my-zsh ]; then
+  if [ ! -d ${HOME}/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  else
+    cd ${HOME}/.oh-my-zsh
+    git pull
+    cd ${INSTALLDIR}
   fi
 
   if [ ! -d ${ZSH_CUSTOM}/themes/spaceship-prompt ]; then
@@ -504,6 +508,14 @@ installZsh() {
     git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM}/plugins/zsh-history-substring-search
   else
     cd $ZSH_CUSTOM/plugins/zsh-history-substring-search
+    git pull
+    cd ${INSTALLDIR}
+  fi
+
+  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-autopair ]; then
+    git clone https://github.com/hlissner/zsh-autopair.git ${ZSH_CUSTOM}/plugins/zsh-autopair
+  else
+    cd ${ZSH_CUSTOM}/plugins/zsh-autopair
     git pull
     cd ${INSTALLDIR}
   fi

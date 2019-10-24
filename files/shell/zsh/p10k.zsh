@@ -336,14 +336,16 @@
 
     if (( $1 )); then
       # Styling for up-to-date Git status.
+      local       base='%20F'   # delemitors foreground
       local       meta='%f'     # default foreground
-      local      clean='%71F'   # green foreground
-      local     staged='%92F'  # grey foreground
+      local      clean='%150F'  # green foreground
+      local     staged='%92F'   # grey foreground
       local   modified='%178F'  # yellow foreground
       local  untracked='%44F'   # blue foreground
-      local conflicted='%160gF'  # red foreground
+      local conflicted='%160F'  # red foreground
     else
       # Styling for incomplete and stale Git status.
+      local       base='%244F'  # grey foreground
       local       meta='%244F'  # grey foreground
       local      clean='%244F'  # grey foreground
       local     staged='%244F'  # grey foreground
@@ -352,7 +354,12 @@
       local conflicted='%244F'  # grey foreground
     fi
 
-    local res
+    # Delemitors
+    local sep="${base}|"
+    local start="${base}("
+    local finish="${base})"
+
+    local res    # final result
     local where  # branch name, tag or commit
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       res+="${clean}${POWERLEVEL9K_VCS_BRANCH_ICON}"
@@ -380,26 +387,26 @@
     fi
 
     # ⇣42 if behind the remote.
-    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
+    (( VCS_STATUS_COMMITS_BEHIND )) && res+="${sep}${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
     # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
-    (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
+    (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=${sep}
     (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
     # *42 if have stashes.
-    (( VCS_STATUS_STASHES        )) && res+=" ${clean}*${VCS_STATUS_STASHES}"
+    (( VCS_STATUS_STASHES        )) && res+="${sep}${clean}*${VCS_STATUS_STASHES}"
     # 'merge' if the repo is in an unusual state.
-    [[ -n $VCS_STATUS_ACTION     ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
+    [[ -n $VCS_STATUS_ACTION     ]] && res+="${sep}${conflicted}${VCS_STATUS_ACTION}"
     # ~42 if have merge conflicts.
-    (( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
+    (( VCS_STATUS_NUM_CONFLICTED )) && res+="${sep}${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
     # +42 if have staged changes.
-    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${staged}+${VCS_STATUS_NUM_STAGED}"
+    (( VCS_STATUS_NUM_STAGED     )) && res+="${sep}${staged}+${VCS_STATUS_NUM_STAGED}"
     # !42 if have unstaged changes.
-    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
+    (( VCS_STATUS_NUM_UNSTAGED   )) && res+="${sep}${modified}!${VCS_STATUS_NUM_UNSTAGED}"
     # ?42 if have untracked files. It's really a question mark, your font isn't broken.
     # See POWERLEVEL9K_VCS_UNTRACKED_ICON above if you want to use a different icon.
     # Remove the next line if you don't want to see untracked files at all.
-    (( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}${POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
+    (( VCS_STATUS_NUM_UNTRACKED  )) && res+="${sep}${untracked}${POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
 
-    typeset -g my_git_format=$res
+    typeset -g my_git_format="${start}${res}${finish}"
   }
   functions -M my_git_formatter 2>/dev/null
 
@@ -675,7 +682,7 @@
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
       '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=116
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=74
   # typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
