@@ -366,6 +366,24 @@ installGitConf() {
   cp files/git/gitexcludes ${HOME}/.gitexcludes
 }
 
+installShellConf() {
+  cp files/shell/variables ${HOME}/.variables
+  cp files/shell/profile ${HOME}/.profile
+  cp -r files/shell/aliases.d $HOME/.aliases.d
+
+  #cp files/shell/aliases ${HOME}/.aliases
+  sedcmd=''
+  for var in $(echo ${CONF}); do
+    printf -v sc 's|${%s}|%s|;' ${var} "${!var//\//\\/}"
+    sedcmd+="${sc}"
+  done
+  cat files/shell/aliases | sed -e "${sedcmd}" > ${HOME}/.aliases
+
+  installBashConf
+  installZshConf
+  # installFishConf
+}
+
 installBashConf() {
   if [ -z "${SHELLVARS}" ]; then
     SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
@@ -382,18 +400,7 @@ installBashConf() {
   cp files/shell/bash/git-prompt-colors.sh ${HOME}/.git-prompt-colors.sh
   cp files/shell/bash/shell_prompt.sh ${HOME}/.bash/
   cp files/shell/bash/bashrc ${HOME}/.bashrc
-  cp files/shell/variables ${HOME}/.variables
   cp files/shell/bash/bash_profile ${HOME}/.bash_profile
-  cp files/shell/profile ${HOME}/.profile
-  cp -r files/shell/aliases.d $HOME/.aliases.d
-
-  #cp files/shell/aliases ${HOME}/.aliases
-  sedcmd=''
-  for var in $(echo ${CONF}); do
-    printf -v sc 's|${%s}|%s|;' ${var} "${!var//\//\\/}"
-    sedcmd+="${sc}"
-  done
-  cat files/shell/aliases | sed -e "${sedcmd}" > ${HOME}/.aliases
 
   if [ ! -d  ${HOME}/.bash/complete-alias ]; then
     git clone https://github.com/cykerway/complete-alias.git ${HOME}/.bash/complete-alias
@@ -430,7 +437,7 @@ installBashConf() {
   source ${HOME}/.bash_profile
 }
 
-installFish() {
+installFishConf() {
   if [[ "$OSTYPE" != "darwin"* ]]; then
     sudo apt-add-repository ppa:fish-shell/release-2
     sudo apt-get update
@@ -451,7 +458,7 @@ installFish() {
   done < files/pkgs/omf.lst
 }
 
-installZsh() {
+installZshConf() {
   ZSH=${ZSH:-${HOME}/.oh-my-zsh}
   ZSH_CUSTOM=${ZSH_CUSTOM:-${ZSH}/custom}
 
@@ -563,8 +570,7 @@ installDotFiles() {
   fi
 
   createSkeleton
-  installBashConf
-  installZsh
+  installShellConf
   installTmuxConf
   installGitConf
   installScripts
