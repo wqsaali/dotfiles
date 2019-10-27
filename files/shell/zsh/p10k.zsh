@@ -336,7 +336,7 @@
 
     if (( $1 )); then
       # Styling for up-to-date Git status.
-      local       base='%20F'   # delemitors foreground
+      local       base='%66F'   # delemitors foreground
       local       meta='%f'     # default foreground
       local      clean='%150F'  # green foreground
       local     staged='%92F'   # grey foreground

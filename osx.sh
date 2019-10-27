@@ -164,7 +164,7 @@ installPackages() {
   echo $(brew --prefix)/bin/zsh | sudo tee -a /etc/shells > /dev/null
   echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells > /dev/null
   # Set bash as the login shell
-  chsh -s $(brew --prefix)/bin/bash
+  # chsh -s $(brew --prefix)/bin/bash
 
   # gettext is installed as a dependency but it's not linked
   brew link gettext --force

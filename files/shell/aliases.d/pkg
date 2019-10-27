@@ -137,6 +137,11 @@ function update-all-things() {
     softwareupdate --install -a
   fi
 
+  # Update oh my zsh
+  if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
+    upgrade_oh_my_zsh
+  fi
+
   # vim-update
   vi +PlugUpdate +PlugUpgrade +qall
 
