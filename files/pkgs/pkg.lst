@@ -88,6 +88,7 @@ libuv
 libvterm
 libxml2
 libyaml
+luv
 make
 man
 mlocate
@@ -149,3 +150,4 @@ wget
 xz-utils
 yarn
 zlib
+zsh
