@@ -159,20 +159,6 @@ alias netdata='docker run --rm --cap-add SYS_PTRACE -v /proc:/host/proc:ro -v /s
 # Start a local grafana for dashboard development
 alias grafana='docker run --rm -p 3000:3000 -e "GF_SECURITY_ADMIN_PASSWORD=secret" grafana/grafana'
 
-function hgrep() {
-  if [ ! -z "$1" ]; then
-    grep "${1}" ~/.bash_eternal_history
-  else
-    history
-  fi
-}
-alias histg='hgrep'
-
-# fh - repeat history
-function fh() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
-}
-
 alias no-trail="ag --print0 -l '[ \t]+$' | xargs -0 -n1 -r perl -pi -e 's/[ \t]+$//'"
 
 # Deduplicate path variables
