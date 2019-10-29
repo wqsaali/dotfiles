@@ -8,6 +8,10 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+if [[ "$CONFIGURED" == "true" ]]; then
+  return
+fi
+
 [ -f $HOME/.variables ] && source $HOME/.variables
 
 #CDPATH

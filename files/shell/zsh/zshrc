@@ -1,3 +1,7 @@
+if [[ "$CONFIGURED" == "true" ]]; then
+  return
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -152,3 +156,5 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
 
 [[ ! -f $HOME/.kbenv/kbenv.sh ]] || source $HOME/.kbenv/kbenv.sh
 [[ ! -f $HOME/.helmenv/helmenv.sh ]] || source $HOME/.helmenv/helmenv.sh
+
+export CONFIGURED="true"

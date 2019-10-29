@@ -1,5 +1,13 @@
 # vim:set filetype=sh:
 
+function _isFunction() {
+  check='declare -F --'
+  if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
+    check='print -l ${(ok)functions} | grep'
+  fi
+  eval "$check $1" >/dev/null
+}
+
 function slg-login() {
   if [ -z "$1" ]; then
     CTX=$(kubectl config current-context)
@@ -49,7 +57,7 @@ function slg() {
   CMD=${1}
   shift
 
-  if declare -F -- "slg-${CMD}" >/dev/null; then
+  if _isFunction "slg-${CMD}"; then
     "slg-${CMD}" ${@}
     return $?
   fi
