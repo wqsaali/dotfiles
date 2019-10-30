@@ -148,7 +148,11 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-[[ ! -f ~/.profile ]] || source ~/.profile
+if [[ -f ~/.profile ]]; then
+  source ~/.profile
+  export $(grep '^[ a-zA-Z0-9]*=' ~/.profile | tr -d '[:blank:]' | cut -d= -f1 | sort -u)
+fi
+
 [[ ! -f ~/.aliases ]] || source ~/.aliases
 [[ ! -f /etc/grc.zsh ]] || source /etc/grc.zsh
 [[ ! -f /usr/local/etc/grc.zsh ]] || source /usr/local/etc/grc.zsh
