@@ -33,5 +33,9 @@
     "gitlens.views.fileHistory.enabled": true,
     "gitlens.views.lineHistory.enabled": true,
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Night Wolf [black] (No Italics)"
+    "workbench.colorTheme": "Night Wolf [black] (No Italics)",
+    "vsicons.dontShowNewVersionMessage": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.enableNeovim": true,
+    "vim.useSystemClipboard": true
 }

@@ -35,6 +35,9 @@ git-log
 git-plus
 git-status
 git-time-machine
+go-debug
+go-plus
+go-signature-statusbar
 highlight-line
 hyperclick
 ide-css

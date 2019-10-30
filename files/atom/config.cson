@@ -5,7 +5,11 @@
   "ansible-vault": {}
   "atom-fuzzy-grep": {}
   "atom-ide-ui":
+    "atom-ide-code-format":
+      formatOnSave: true
     use: {}
+  "atom-package-deps":
+    ignored: []
   "atom-terminal-panel": {}
   autocomplete:
     includeCompletionsFromAllBuffers: true

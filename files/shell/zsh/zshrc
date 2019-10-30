@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh 
+
 if [[ "$CONFIGURED" == "true" ]]; then
   return
 fi
