@@ -369,7 +369,7 @@ installGitConf() {
 installShellConf() {
   cp files/shell/variables ${HOME}/.variables
   cp files/shell/profile ${HOME}/.profile
-  cp -r files/shell/aliases.d $HOME/.aliases.d
+  cp -r files/shell/aliases.d/* $HOME/.aliases.d
 
   #cp files/shell/aliases ${HOME}/.aliases
   sedcmd=''
@@ -547,6 +547,7 @@ createSkeleton() {
   mkdir -p ${HOME}/.atom/
   mkdir -p ${HOME}/.config
   mkdir -p ${HOME}/.config/alacritty
+  mkdir -p ${HOME}/.config/lf
 }
 
 instrallRangerPlugins() {
@@ -576,11 +577,12 @@ installDotFiles() {
   installScripts
 
   cp files/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
-  cp -r files/kitty ${HOME}/.config/
+  cp -r files/kitty/* ${HOME}/.config/
   cp files/shell/screenrc ${HOME}/.screenrc
   cp files/atom/* ${HOME}/.atom/
   cp files/ptpython.py ${HOME}/.ptpython/config.py
   cp files/shell/starship.toml ${HOME}/.config/starship.toml
+  cp files/lfrc ${HOME}/.config/lf/lfrc
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh dotfiles

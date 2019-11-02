@@ -22,6 +22,7 @@ else
   alias vimdiff='vim -d'
 fi
 
+alias fzvi='vi "$(rg -g "!*vendor/*" -l . | fzf --height=100% --preview='\''pistol {}'\'')"'
 alias vim-geeknote='vi -c Geeknote'
 alias geeknote-vim='vi -c Geeknote'
 

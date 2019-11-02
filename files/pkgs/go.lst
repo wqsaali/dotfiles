@@ -2,6 +2,7 @@
 github.com/anacrolix/torrent/cmd/...
 github.com/azer/yolo
 github.com/cloudposse/slack-notifier
+github.com/doronbehar/pistol/cmd/pistol
 github.com/fiatjaf/jiq/cmd/jiq
 github.com/gardener/gardenctl
 github.com/go-swagger/go-swagger/cmd/swagger

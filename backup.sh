@@ -36,6 +36,7 @@ function backupDotFiles() {
   cp -r ${HOME}/.config/kitty/* files/kitty/
   cp ${HOME}/.config/alacritty/alacritty.yml files/alacritty.yml
   cp ${HOME}/.config/starship.toml files/shell/starship.toml
+  cp ${HOME}/.config/lf/lfrc files
 }
 
 function backupTermux() {
