@@ -20,6 +20,7 @@ github.com/rancher/k3d
 github.com/reactiveops/rbac-lookup
 github.com/spf13/viper
 github.com/sqs/goreturns
+github.com/talos-systems/conform
 github.com/testfabric/ypath
 github.com/uber/astro/astro/cli/astro
 github.com/wagoodman/dive

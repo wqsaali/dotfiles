@@ -23,9 +23,14 @@ function backupDotFiles() {
   cp ${HOME}/.atom/*.coffee files/atom/
   cp ${HOME}/.atom/*.less files/atom/
   cp ${HOME}/.atom/*.json files/atom/
-  cp ${HOME}/.config/tilda/config_0 files/tilda
-  cp ${HOME}/.config/terminator/terminator.config files/terminator.config
-  cp -r ${HOME}/.config/i3/* files/i3/
+  cp ${HOME}/.config/tilda/config_0 files/config/tilda/config_0
+  cp ${HOME}/.config/terminator/config files/config/terminator/config
+  cp ${HOME}/.config/alacritty/alacritty.yml files/config/alacritty.yml
+  cp ${HOME}/.config/starship.toml files/config/starship.toml
+  cp -r ${HOME}/.config/pistol files/config/
+  cp -r ${HOME}/.config/kitty/* files/config/kitty/
+  cp -r ${HOME}/.config/lf/* files/config/lf/
+  cp -r ${HOME}/.config/i3/* files/config/i3/
   cp -r ${HOME}/.hammerspoon/* files/hammerspoon/
   cp ${HOME}/.slate files/slate/slate
   cp ${HOME}/.slate.js files/slate/slate.js
@@ -33,10 +38,6 @@ function backupDotFiles() {
   cp ${HOME}/.yabairc files/yabai/yabairc
   cp ${HOME}/.skhdrc files/yabai/skhdrc
   cp ${HOME}/.ptpython/config.py files/ptpython.py
-  cp -r ${HOME}/.config/kitty/* files/kitty/
-  cp ${HOME}/.config/alacritty/alacritty.yml files/alacritty.yml
-  cp ${HOME}/.config/starship.toml files/shell/starship.toml
-  cp ${HOME}/.config/lf/lfrc files
 }
 
 function backupTermux() {

@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh 
+#!/usr/bin/env zsh
 
 if [[ "$CONFIGURED" == "true" ]]; then
   return
@@ -137,7 +137,6 @@ alias -s {yml,yaml}=nvim
 # Bash like CDPATH
 typeset -U path cdpath fpath
 setopt auto_cd autocd
-cdpath=(${HOME} ${HOME}/workingCopies ${HOME}/workingCopies/src $(ls -1d ${HOME}/workingCopies/src/*/ | tr '\n' ' '))
 
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format %d

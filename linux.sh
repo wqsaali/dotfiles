@@ -77,7 +77,7 @@ installi3wm() {
   fi
 
   mkdir -p ${HOME}/.config/i3
-  cp -r files/i3/* ${HOME}/.config/i3/
+  cp -r files/config/i3/* ${HOME}/.config/i3/
 
   # if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
   #   sudo cp files/nautilus-i3 /usr/bin/
@@ -196,21 +196,17 @@ installDotFiles() {
     sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt update && sudo apt install hh
   fi
 
-  mkdir -p ${HOME}/.config/terminator/
-  mkdir -p ${HOME}/.config/i3/
+  mkdir -p ${HOME}/.config
 
   cd ${INSTALLDIR}
 
-  cp -r files/i3/* ${HOME}/.config/i3/
+  cp -r files/config/i3/* ${HOME}/.config/i3/
   if [ ! -s ${HOME}/.i3 ]; then
     ln -s ${HOME}/.config/i3 ${HOME}/.i3
   fi
 
-  cp files/tilda ${HOME}/.config/tilda/config_0
-  cp files/terminator.config ${HOME}/.config/terminator/
-  if ! [ -s  ${HOME}/.config/terminator/config ]; then
-    ln -s ${HOME}/.config/terminator/terminator.config ${HOME}/.config/terminator/config
-  fi
+  cp -r files/config/tilda/* ${HOME}/.config/tilda/
+  cp -r files/config/terminator/* ${HOME}/.config/terminator/
 
   sudo cp files/shell/bash/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh

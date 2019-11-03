@@ -537,6 +537,8 @@ createSkeleton() {
     mkdir -p "${d}"
   done
 
+  for dir in $(ls -1d files/config/*/); do mkdir -p ${HOME}/.config/${dir##*/}; done
+
   [ -d ${HOME}/workingCopies/code ] || ln -s ${HOME}/workingCopies/src ${HOME}/workingCopies/code
 
   mkdir -p ${HOME}/.local/bin/
@@ -545,13 +547,10 @@ createSkeleton() {
 
   mkdir -p ${HOME}/.ptpython
   mkdir -p ${HOME}/.atom/
-  mkdir -p ${HOME}/.config
-  mkdir -p ${HOME}/.config/alacritty
-  mkdir -p ${HOME}/.config/lf
 }
 
 instrallRangerPlugins() {
-  rm -f ~/.config/ranger/*.{sh,py}
+  rm -f ${HOME}/.config/ranger/*.{sh,py}
   ranger --copy-config=all
   mkdir -p ${HOME}/.ranger_plugins/
   cd ${HOME}/.ranger_plugins/
@@ -576,13 +575,14 @@ installDotFiles() {
   installGitConf
   installScripts
 
-  cp files/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
-  cp -r files/kitty/* ${HOME}/.config/
+  for dir in $(ls -1d files/config/*/); do
+    cp -r files/config/${dir##*/}/* ${HOME}/.config/${dir##*/}/
+  done
+
+  cp files/config/starship.toml ${HOME}/.config/starship.toml
   cp files/shell/screenrc ${HOME}/.screenrc
   cp files/atom/* ${HOME}/.atom/
   cp files/ptpython.py ${HOME}/.ptpython/config.py
-  cp files/shell/starship.toml ${HOME}/.config/starship.toml
-  cp files/lfrc ${HOME}/.config/lf/lfrc
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh dotfiles

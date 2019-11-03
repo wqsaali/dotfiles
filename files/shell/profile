@@ -15,7 +15,7 @@ fi
 [ -f $HOME/.variables ] && source $HOME/.variables
 
 #CDPATH
-CDPATH=".:~:~/workingCopies:~/workingCopies/src:$(ls -1d ${HOME}/workingCopies/src/*/ | tr '\n' ':')"
+CDPATH=".:${HOME}:${HOME}/workingCopies:${HOME}/workingCopies/src:$(ls -1d ${HOME}/workingCopies/src/*/ | tr '\n' ':')"
 
 if [ -d "/usr/local/sbin" ] ; then
   PATH="/usr/local/sbin:$PATH"

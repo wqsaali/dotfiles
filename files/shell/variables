@@ -175,6 +175,7 @@ ex=:\
 "
 
 export BAT_THEME='DarkNeon'
+export PISTOL_CHROMA_FORMATTER=terminal256
 
 # Colored less
 export LESS='-R'
