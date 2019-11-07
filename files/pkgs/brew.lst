@@ -100,6 +100,7 @@ k9s
 kompose
 kops
 kube-aws
+kubebuilder
 kubectx
 kubernetes-cli
 kubernetes-helm
