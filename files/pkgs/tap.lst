@@ -1,5 +1,4 @@
 browsh-org/homebrew-browsh
-mike-engel/jwt-cli
 buo/cask-upgrade
 caskroom/cask
 caskroom/drivers
@@ -16,10 +15,12 @@ homebrew/command-not-found
 homebrew/services
 jakehilborn/jakehilborn
 jesseduffield/lazydocker
+jzelinskie/faq
 knes1/tap
 knqyf263/pet
 koekeishiya/formulae
 kontena/chpharos
+mike-engel/jwt-cli
 neovim/neovim
 reactiveops/tap
 wagoodman/dive

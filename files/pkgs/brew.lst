@@ -60,6 +60,7 @@ elktail
 exa
 exif
 exiftool
+faq
 fd
 findutils
 gawk
@@ -103,7 +104,7 @@ kube-aws
 kubebuilder
 kubectx
 kubernetes-cli
-kubernetes-helm
+helm
 kustomize
 lab
 lazydocker
@@ -150,6 +151,7 @@ s3cmd
 sampler
 shellcheck
 siege
+skaffold
 skhd
 skopeo
 socat
