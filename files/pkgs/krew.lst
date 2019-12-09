@@ -1,6 +1,7 @@
 bulk-action
 ca-cert
 debug-shell
+doctor
 exec-all
 get-all
 krew
