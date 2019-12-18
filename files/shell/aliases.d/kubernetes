@@ -201,6 +201,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   alias microk8s.kubectl='multipass exec microk8s-vm -- /snap/bin/microk8s.kubectl'
 fi
 
+# Velero aliases
+alias velero='kubectl exec -it -n velero ${VELRO:-$(kubectl get pods -n velero | grep velero | awk '\''{ print $1}'\'')} -- /velero'
+
 # Gardener aliases
 alias gctl='gardenctl'
 alias gk='gardenctl kubectl --'
