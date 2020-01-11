@@ -63,17 +63,19 @@ libffi
 libgc
 libgcrypt
 libgmp
-libgnustl
+libgnutls
 libgpg-error
 libiconv
 libicu
 libidn
+libidn2
 libksba
 libllvm
 liblua
 liblzma
 libmpfr
 libmsgpack
+libnettle
 libnghttp2
 libnpth
 libpcap
@@ -84,7 +86,6 @@ libtalloc
 libtermkey
 libunibilium
 libunistring
-libutil
 libuuid
 libuv
 libvterm
@@ -99,7 +100,6 @@ ncdu
 ncurses
 ncurses-ui-libs
 ncurses-utils
-ndk-stl
 ndk-sysroot
 neofetch
 neovim
@@ -107,6 +107,7 @@ net-tools
 netcat
 nmap
 nodejs-lts
+oniguruma
 openssh
 openssl
 openssl-tool
