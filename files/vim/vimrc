@@ -1,5 +1,7 @@
 " Best view with a 256 color terminal and Powerline fonts
 
+set nocompatible
+
 let g:is_bash = 1
 
 " OS detection
