@@ -545,8 +545,9 @@ createSkeleton() {
   mkdir -p ${HOME}/.local/share/bash-completion
   [ -d ${HOME}/.bin ] || ln -s ${HOME}/.local/bin ${HOME}/.bin
 
+  mkdir -p ${HOME}/.aliases.d
   mkdir -p ${HOME}/.ptpython
-  mkdir -p ${HOME}/.atom/
+  mkdir -p ${HOME}/.atom
 }
 
 instrallRangerPlugins() {
