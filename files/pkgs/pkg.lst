@@ -44,6 +44,7 @@ inetutils
 jq
 jsoncpp
 krb5
+kubectl
 ldns
 less
 libandroid-glob
