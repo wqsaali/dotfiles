@@ -13,6 +13,7 @@ rbac-lookup
 rbac-view
 resource-capacity
 sniff
+sudo
 tail
 view-secret
 view-utilization

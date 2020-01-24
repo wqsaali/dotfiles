@@ -101,18 +101,37 @@
   endif
   " }}}
 
+  " Ripgrep {{{
+  let g:rg_command = 'rg --vimgrep -S'
+  " }}}
+
+
+  " CtrlSF {{{
+  nmap     <C-F>f <Plug>CtrlSFPrompt
+  vmap     <C-F>f <Plug>CtrlSFVwordPath
+  vmap     <C-F>F <Plug>CtrlSFVwordExec
+  nmap     <C-F>n <Plug>CtrlSFCwordPath
+  nmap     <C-F>p <Plug>CtrlSFPwordPath
+  nnoremap <C-F>o :CtrlSFOpen<CR>
+  nnoremap <C-F>t :CtrlSFToggle<CR>
+  inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+  let g:ctrlsf_ackprg = 'rg'
+  let g:ctrlsf_auto_close = { "normal" : 1, "compact": 1 }
+  let g:ctrlsf_default_view_mode = 'compact'
+  " }}}
+
   " CtrlP {{{
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
   " NOTE: The following should make CtrlP faster
-  "let g:ctrlp_match_window = 'bottom,order:ttb'
-  "let g:ctrlp_switch_buffer = 0
-  "let g:ctrlp_working_path_mode = 0
-  "if executable('ag')
-    "set grepprg=ag\ --nogroup\ --nocolor
-    "let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-    "let g:ctrlp_use_caching = 0
-  "endif
-  "let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_match_window = 'bottom,order:ttb'
+  let g:ctrlp_switch_buffer = 0
+  let g:ctrlp_working_path_mode = 0
+  if executable('rg')
+    set grepprg=ag\ --vimgrep
+    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+    let g:ctrlp_use_caching = 0
+  endif
+  let g:ctrlp_working_path_mode = 'ra'
   " Always open files in new tabs
   let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],

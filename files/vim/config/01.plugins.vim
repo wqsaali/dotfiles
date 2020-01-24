@@ -39,8 +39,10 @@
   Plug 'chrisbra/vim-diff-enhanced'
   "Plug 'gcmt/breeze.vim'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'dyng/ctrlsf.vim'
   Plug 'fisadev/vim-ctrlp-cmdpalette'
   Plug 'mileszs/ack.vim'
+  Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
