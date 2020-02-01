@@ -129,36 +129,6 @@ function kubectl-purge_crd() {
 }
 alias kctl-clean_crd='kubectl-purge_crd'
 
-function kubectl-clean() {
-  FORCE=""
-  if [[ "$1" == "--force" ]]; then
-    FORCE="--grace-period=0 --force"
-  fi
-  kubectl get po --all-namespaces --no-headers | grep -v Running | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete ${FORCE} po
-# kubectl get po --all-namespaces --no-headers --field-selector=status.phase!=Running | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete po
-  kubectl get job --all-namespaces -o=go-template='{{range .items}}{{if or .status.succeeded .status.failed}}{{.metadata.name}} -n {{.metadata.namespace}}{{"\n"}}{{end}}{{end}}' | xargs -L1 -r kubectl delete job
-  if [[ "$1" == "--all" ]] && [ -x "$(command -v kubectl-pssh)" ]; then
-    kubectl pssh 'sudo docker system prune -a -f'
-    kubectl pssh 'sudo sh -c "truncate -s 0 /var/lib/docker/containers/*/*-json.log"'
-    kubectl pssh 'sudo rm /var/log/*.gz'
-    kubectl pssh 'sudo rm /var/log/*.1'
-  fi
-}
-alias kctl-clean='kubectl-clean'
-
-function kubectl-killall() {
-  FORCE=""
-  if [[ "$1" == "--force" ]]; then
-    FORCE="--grace-period=0 --force"
-    shift
-  fi
-  if [[ "$2" == "--force" ]]; then
-    FORCE="--grace-period=0 --force"
-  fi
-  kubectl get po --all-namespaces --no-headers | grep ${1} | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete ${FORCE} po
-}
-alias kctl-killall='kubectl-killall'
-
 alias kctl-list_images='kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s "[[:space:]]" "\n" | sort | uniq -c'
 
 # Helm aliases

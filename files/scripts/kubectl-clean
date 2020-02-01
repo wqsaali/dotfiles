@@ -1,0 +1,55 @@
+#! /usr/bin/env bash
+
+# Script to clean kubernetes stale resources
+# This scritp can be used as a kubectl plugin and invoked as a sub-command
+# Examples:
+#   kubectl clean
+
+function usage() {
+  if ! [ -z "${1}" ] ; then
+    echo -e "${1}"
+    echo ''
+  fi
+  echo "Usage: $(basename $0) [<flags>]"
+  echo ''
+  echo 'Flags:'
+  echo '  -h, --help                            display help'
+  echo '  -d, --debug                           enable debug output'
+  echo '  -f, --force                           force delete pods'
+  echo '  -a, --all                             also clean stale docker layers and large log files from nodes'
+  exit 1
+}
+
+FORCE=""
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+  key="$1"
+
+  case $key in
+      -h | --help ) usage ;;
+      -d | --debug ) DEBUG=true; shift ;;
+      -f | --force ) FORCE=true; shift ;;
+      -a | --all ) ALL=true; shift ;;
+      *)
+      POSITIONAL+=("$1") # save it in an array for later
+      shift # past argument
+      ;;
+  esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+if [[ "${FORCE}" == "true" ]]; then
+  FORCE="--grace-period=0 --force"
+fi
+
+kubectl get po --all-namespaces --no-headers | grep -v Running | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete ${FORCE} po
+kubectl get rs --all-namespaces --no-headers | grep -E '0\s+0\s+0' | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete rs
+kubectl get job --all-namespaces -o=go-template='{{range .items}}{{if or .status.succeeded .status.failed}}{{.metadata.name}} -n {{.metadata.namespace}}{{"\n"}}{{end}}{{end}}' | xargs -L1 -r kubectl delete job
+
+# Also clean the nodes
+if [[ "${ALL}" == "true" ]] && [ -x "$(command -v kubectl-pssh)" ]; then
+  kubectl pssh 'sudo docker system prune -a -f'
+  kubectl pssh 'sudo sh -c "truncate -s 0 /var/lib/docker/containers/*/*-json.log"'
+  kubectl pssh 'sudo rm /var/log/*.gz'
+  kubectl pssh 'sudo rm /var/log/*.1'
+fi

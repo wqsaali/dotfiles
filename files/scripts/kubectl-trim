@@ -16,7 +16,7 @@ function usage() {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>] <node>"
+  echo "Usage: $(basename $0) [<flags>] <resource>"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
