@@ -54,7 +54,7 @@ alias todos="rg -n --nogroup '(TODO|FIX(ME)?):'"
 
 function fr() {
   type=""
-  if ![ -z "${3}" ]; then
+  if ! [ -z "${3}" ]; then
     type="-t ${3}"
   fi
   perl -p -i -e "s/${1}/${2}/g" $(rg -g '!*vendor/*' ${type} -l "${1}")
