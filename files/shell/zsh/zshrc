@@ -133,7 +133,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-alias -s {yml,yaml}=nvim
+alias -s {yml,yaml}=$EDITOR
 
 # Bash like CDPATH
 typeset -U path cdpath fpath

@@ -33,6 +33,7 @@
   force = push --force-with-lease
   df = diff
   sb = status -sb
+  st = status -sb
   info = remote show origin
   history = log --color --all --date-order --decorate --dirstat=lines,cumulative --stat
   lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all

@@ -43,6 +43,7 @@
   " color github
   " hi link illuminatedWord Visual
   hi link illuminatedWord CursorLine
+  hi CursorLineNr cterm=NONE
 " }}}
 
 " typographic ligatures {{{
