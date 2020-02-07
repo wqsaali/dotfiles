@@ -43,7 +43,8 @@
   piss = push
   pill = pull
 [core]
-  pager = less -F -X
+  pager = less -RF -X
+  # pager = delta --theme='Monokai Extended Bright'
   editor = vim
   excludesfile = ~/.gitexcludes
 [pager]

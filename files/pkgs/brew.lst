@@ -66,6 +66,7 @@ findutils
 gawk
 gcal
 git
+git-delta
 git-quick-stats
 git-secrets
 gnu-getopt

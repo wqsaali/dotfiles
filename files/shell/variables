@@ -174,7 +174,6 @@ ex=:\
 *.pdf=:\
 "
 
-export BAT_THEME='DarkNeon'
 export PISTOL_CHROMA_FORMATTER=terminal256
 
 # Colored less
@@ -212,7 +211,10 @@ elif type pygmentize >/dev/null 2>&1; then
   export LESSCOLORIZER='pygmentize'
 fi
 
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 export BAT_THEME='Tomorrow-Night-Bright'
+# export BAT_PAGER="less -R"
 
 # Colored grep
 # export GREP_OPTIONS='--color=auto'
