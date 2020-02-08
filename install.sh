@@ -325,6 +325,7 @@ installVimPlugins() {
 
   cp files/vim/vimrc ${HOME}/.vimrc
   cp files/vim/vimrc.local ${HOME}/.vimrc.local
+  cp files/vim/coc-settings.json ${HOME}/.vim/
   cp -r files/vim/config/* ${HOME}/.vim/config/
   cp -r files/vim/ft* ${HOME}/.vim/
   if [ ! -s ~/.config/nvim/init.vim ]; then

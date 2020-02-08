@@ -18,6 +18,7 @@ function backupDotFiles() {
   cp ${HOME}/.screenrc files/shell/screenrc
   cp ${HOME}/.vimrc files/vim/vimrc
   cp ${HOME}/.vimrc.local files/vim/vimrc.local
+  cp ${HOME}/.vim/coc-settings.json files/vim/
   cp -r ${HOME}/.vim/ft* files/vim/
   cp ${HOME}/.atom/*.cson files/atom/
   cp ${HOME}/.atom/*.coffee files/atom/

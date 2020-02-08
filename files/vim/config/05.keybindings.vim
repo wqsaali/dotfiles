@@ -89,6 +89,9 @@
   noremap  <Leader>tb :TagbarToggle<CR>
   noremap  <Leader>nt :NERDTreeToggle<CR>
   noremap  <C-\> :NERDTreeToggle<CR>
+  " nmap <C-n> :NERDTreeToggle<CR>
+  " vmap ++ <plug>NERDCommenterToggle
+  " nmap ++ <plug>NERDCommenterToggle
   nmap     <leader>TB <Plug>ToggleBrackets
   imap     <leader>TB <Plug>ToggleBrackets
   noremap  <leader>co :diffoff!<CR><C-W><C-O>

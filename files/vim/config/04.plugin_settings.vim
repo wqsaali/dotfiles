@@ -1,9 +1,51 @@
 " PluginSettings {{{
 
+  " nerdtree {{{
   if has('autocmd')
     filetype plugin indent on
     au FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=AL
   endif
+
+  let g:NERDTreeIgnore = ['^node_modules$', '^vendor$']
+
+  "  sync open file with NERDTree
+  "" Check if NERDTree is open or active
+  "function! IsNERDTreeOpen()
+  "  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+  "endfunction
+
+  "" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+  "" file, and we're not in vimdiff
+  "function! SyncTree()
+  "  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+  "    NERDTreeFind
+  "    wincmd p
+  "  endif
+  "endfunction
+
+  "" Highlight currently open buffer in NERDTree
+  "autocmd BufEnter * call SyncTree()
+
+  " }}}
+
+  " coc {{{
+  let g:coc_global_extensions = [
+        \ 'coc-git',
+        \ 'coc-pairs',
+        \ 'coc-prettier',
+        \ 'coc-tabnine',
+        \ 'coc-highlight',
+        \ 'coc-markdownlint',
+        \ 'coc-json',
+        \ 'coc-yaml',
+        \ 'coc-snippets',
+        \ 'coc-vimlsp',
+        \ 'coc-python',
+        \ 'coc-html',
+        \ 'coc-css',
+        \ 'coc-phpls',
+        \ ]
+  " }}}
 
   " vim-resize {{{
   let g:vim_resize_disable_auto_mappings = 1
@@ -96,8 +138,11 @@
     exe 'command ' . substitute(command, 'Ack', 'Ag', "") . ' ' . command
   endfor
 
-  if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
+  " if executable('ag')
+  "   let g:ackprg = 'ag --vimgrep'
+  " endif
+  if executable('rg')
+    let g:ackprg = 'rg --vimgrep'
   endif
   " }}}
 
@@ -127,9 +172,14 @@
   let g:ctrlp_match_window = 'bottom,order:ttb'
   let g:ctrlp_switch_buffer = 0
   let g:ctrlp_working_path_mode = 0
+  " if executable('ag')
+  "   set grepprg=ag\ --vimgrep
+  "   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  "   let g:ctrlp_use_caching = 0
+  " endif
   if executable('rg')
-    set grepprg=ag\ --vimgrep
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+    set grepprg=rg\ --color=never
+    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
     let g:ctrlp_use_caching = 0
   endif
   let g:ctrlp_working_path_mode = 'ra'
@@ -192,6 +242,10 @@
   let g:go_highlight_structs = 1
   let g:go_highlight_operators = 1
   let g:go_highlight_build_constraints = 1
+
+  " disable vim-go :GoDef short cut (gd)
+  " this is handled by LanguageClient [LC]
+  " let g:go_def_mapping_enabled = 0
 
   " Open go doc in vertical window, horizontal, or tab
   " au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>

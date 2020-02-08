@@ -113,5 +113,16 @@
   set noswapfile
   set fileformats=unix,dos,mac
 
+  " Better display for messages
+  set cmdheight=2
+
+  " don't give |ins-completion-menu| messages.
+  set shortmess+=c
+
+  " always show signcolumns
+  set signcolumn=yes
+
   set completeopt=menuone,longest
+
+
 " }}}

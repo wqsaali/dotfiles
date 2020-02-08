@@ -2,8 +2,8 @@
 
   "auto-install vim-plug
   if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+          \  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
   endif
 
@@ -38,39 +38,45 @@
   "Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
   Plug 'chrisbra/vim-diff-enhanced'
   "Plug 'gcmt/breeze.vim'
-  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'dyng/ctrlsf.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'fisadev/vim-ctrlp-cmdpalette'
   Plug 'mileszs/ack.vim'
   Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'
+
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
+  Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   "Plug 'jlanzarotta/bufexplorer'
   "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   "Plug 'vim-scripts/taglist.vim'
   "Plug 'severin-lemaignan/vim-minimap'
+
   "Plug 'vim-scripts/cmdalias.vim'
   Plug 'benmills/vimux'
   Plug 'nelstrom/vim-visual-star-search'
+
   "Plug 'Shougo/neocomplete.vim.git'
   "Plug 'Shougo/neosnippet'
   "Plug 'Shougo/neosnippet-snippets'
-  Plug 'SirVer/ultisnips'
-  Plug 'MarcWeber/vim-addon-mw-utils' "requiered by snipmate
-  Plug 'tomtom/tlib_vim' "requiered by snipmate
-  Plug 'garbas/vim-snipmate'
-  Plug 'honza/vim-snippets'
+  "Plug 'SirVer/ultisnips'
+  "Plug 'MarcWeber/vim-addon-mw-utils' "requiered by snipmate
+  "Plug 'tomtom/tlib_vim' "requiered by snipmate
+  "Plug 'garbas/vim-snipmate'
+  "Plug 'honza/vim-snippets'
   function! BuildYCM(info)
     if a:info.status == 'installed' || a:info.force
       !./install.py --clang-completer --go-completer --ts-completer --quiet
     endif
   endfunction
-  Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
+  "Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
   "Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
-  Plug 'davidhalter/jedi-vim', { 'for': ['python'] }
-  Plug 'mgedmin/python-imports.vim', { 'for': ['python'] }
-  Plug 'ervandew/supertab'
+  "Plug 'davidhalter/jedi-vim', { 'for': ['python'] }
+  "Plug 'mgedmin/python-imports.vim', { 'for': ['python'] }
+  "Plug 'ervandew/supertab'
+
   "Plug 'sjl/gundo.vim'
   Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
   "Plug 'luochen1990/indent-detector.vim'
@@ -87,24 +93,26 @@
   "Plug 'LucHermitte/lh-brackets'
   "Plug 'LucHermitte/lh-misc'
   "Plug 'jiangmiao/auto-pairs'
-  Plug 'alvan/vim-closetag'
-  Plug 'Raimondi/delimitMate'
+  "Plug 'alvan/vim-closetag'
+  "Plug 'Raimondi/delimitMate'
   "Plug 'Townk/vim-autoclose'
-  Plug 'tpope/vim-endwise'
+  "Plug 'tpope/vim-endwise'
   "Plug 'godlygeek/tabular'
   "Plug 'neilagabriel/vim-geeknote'
   "Plug 'kopischke/vim-stay'
   "Plug 'kopischke/vim-fetch'
   Plug 'Konfekt/FastFold'
   Plug 'luisdavim/pretty-folds'
-  Plug 'scrooloose/syntastic'
+  "Plug 'scrooloose/syntastic'
   Plug 'metakirby5/codi.vim'
+
   Plug 'flazz/vim-colorschemes'
   "Plug 'lilydjwg/colorizer'
   "Plug 'chriskempson/base16-vim'
   "Plug 'dracula/vim'
   "Plug 'rakr/vim-one'
   "Plug 'cormacrelf/vim-colors-github'
+
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'
@@ -123,6 +131,8 @@
   Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'maralla/vim-toml-enhance', { 'for': 'toml' }
   Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'handlebars'] }
+
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   call plug#end()
 
