@@ -126,8 +126,8 @@
   endif
   Plug 'tell-k/vim-autopep8', {'for': 'python'}
   Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
+  "Plug 'elzr/vim-json', { 'for': 'json' }
   Plug 'pearofducks/ansible-vim'
-  Plug 'elzr/vim-json', { 'for': 'json' }
   Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'maralla/vim-toml-enhance', { 'for': 'toml' }
   Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'handlebars'] }

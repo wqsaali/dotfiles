@@ -1,5 +1,3 @@
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -82,6 +80,7 @@ xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
