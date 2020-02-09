@@ -30,7 +30,8 @@
   "Plug 'tpope/vim-flagship'
   Plug 'airblade/vim-gitgutter'
   "Plug 'miyakogi/conoline.vim'
-  Plug 'RRethy/vim-illuminate'
+  "Plug 'RRethy/vim-illuminate'
+  Plug 'nelstrom/vim-visual-star-search'
   "Plug 'mhinz/vim-signify'
   Plug 'tpope/vim-fugitive'
   Plug 'gregsexton/gitv'
@@ -56,7 +57,6 @@
 
   "Plug 'vim-scripts/cmdalias.vim'
   Plug 'benmills/vimux'
-  Plug 'nelstrom/vim-visual-star-search'
 
   "Plug 'Shougo/neocomplete.vim.git'
   "Plug 'Shougo/neosnippet'
@@ -66,12 +66,14 @@
   "Plug 'tomtom/tlib_vim' "requiered by snipmate
   "Plug 'garbas/vim-snipmate'
   "Plug 'honza/vim-snippets'
-  function! BuildYCM(info)
-    if a:info.status == 'installed' || a:info.force
-      !./install.py --clang-completer --go-completer --ts-completer --quiet
-    endif
-  endfunction
-  "Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
+
+  " function! BuildYCM(info)
+  "   if a:info.status == 'installed' || a:info.force
+  "     !./install.py --clang-completer --go-completer --ts-completer --quiet
+  "   endif
+  " endfunction
+  " Plug 'Valloric/YouCompleteMe', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'], 'do': function('BuildYCM') }
+
   "Plug 'tenfyzhong/CompleteParameter.vim', { 'for': ['c', 'cpp', 'ruby', 'python', 'go', 'javascript'] }
   "Plug 'davidhalter/jedi-vim', { 'for': ['python'] }
   "Plug 'mgedmin/python-imports.vim', { 'for': ['python'] }
@@ -84,8 +86,8 @@
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
-  Plug 'tomtom/tcomment_vim'
-  "Plug 'scrooloose/nerdcommenter'
+  "Plug 'tomtom/tcomment_vim'
+  Plug 'scrooloose/nerdcommenter'
   Plug 'nvie/vim-togglemouse'
   "Plug 'LucHermitte/lh-vim-lib'
   "Plug 'LucHermitte/lh-tags'
@@ -142,3 +144,25 @@
     \|   PlugInstall --sync | q
     \| endif
 " }}}
+
+" coc-extensions {{{
+let g:coc_global_extensions = [
+      \ 'coc-git',
+      \ 'coc-pairs',
+      \ 'coc-prettier',
+      \ 'coc-tabnine',
+      \ 'coc-highlight',
+      \ 'coc-markdownlint',
+      \ 'coc-json',
+      \ 'coc-yaml',
+      \ 'coc-snippets',
+      \ 'coc-vimlsp',
+      \ 'coc-python',
+      \ 'coc-html',
+      \ 'coc-css',
+      \ 'coc-phpls',
+      \ 'coc-go',
+      \ 'coc-marketplace',
+      \ ]
+" }}}
+

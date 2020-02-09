@@ -15,5 +15,8 @@
     "javascriptreact",
     "typescript.tsx",
     "graphql"
-  ]
+  ],
+  "go.goplsOptions": {
+    "completeUnimported": true
+  }
 }

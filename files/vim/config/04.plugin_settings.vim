@@ -28,25 +28,6 @@
 
   " }}}
 
-  " coc {{{
-  let g:coc_global_extensions = [
-        \ 'coc-git',
-        \ 'coc-pairs',
-        \ 'coc-prettier',
-        \ 'coc-tabnine',
-        \ 'coc-highlight',
-        \ 'coc-markdownlint',
-        \ 'coc-json',
-        \ 'coc-yaml',
-        \ 'coc-snippets',
-        \ 'coc-vimlsp',
-        \ 'coc-python',
-        \ 'coc-html',
-        \ 'coc-css',
-        \ 'coc-phpls',
-        \ ]
-  " }}}
-
   " vim-resize {{{
   let g:vim_resize_disable_auto_mappings = 1
   nnoremap <silent> <S-Left> :CmdResizeLeft<cr>
