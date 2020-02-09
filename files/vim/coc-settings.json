@@ -4,8 +4,14 @@
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
     }
   },
+  "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
   "suggest.noselect": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
@@ -18,5 +24,6 @@
   ],
   "go.goplsOptions": {
     "completeUnimported": true
-  }
+  },
+  "highlight.colors.enable": false
 }

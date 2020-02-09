@@ -21,15 +21,15 @@
   " }}}
 
   " Use GIU colors
-  " if (has("nvim"))
-  "   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  " else
-  "   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  "   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  " endif
-  " if (has("termguicolors"))
-  "   set termguicolors
-  " endif
+  if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  else
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
 
   set guifont=FuraCode\ Nerd\ Font\ Mono:h12
 

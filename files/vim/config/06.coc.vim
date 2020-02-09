@@ -32,6 +32,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -46,6 +47,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
+
+" List errors
+noremap <silent> <leader>er :<C-u>CocList locationlist<CR>
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)

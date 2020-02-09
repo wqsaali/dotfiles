@@ -147,22 +147,24 @@
 
 " coc-extensions {{{
 let g:coc_global_extensions = [
+      \ 'coc-marketplace',
       \ 'coc-git',
       \ 'coc-pairs',
       \ 'coc-prettier',
       \ 'coc-tabnine',
       \ 'coc-highlight',
+      \ 'coc-snippets',
       \ 'coc-markdownlint',
+      \ 'coc-sh',
       \ 'coc-json',
       \ 'coc-yaml',
-      \ 'coc-snippets',
       \ 'coc-vimlsp',
       \ 'coc-python',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-phpls',
       \ 'coc-go',
-      \ 'coc-marketplace',
+      \ 'coc-docker',
       \ ]
 " }}}
 
