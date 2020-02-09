@@ -1,4 +1,6 @@
+# github.com/hashicorp/terraform
 # k8s.io/helm/cmd/helm
+# k8s.io/kubernetes/cmd/kubectl
 github.com/anacrolix/torrent/cmd/...
 github.com/azer/yolo
 github.com/cloudposse/slack-notifier
@@ -9,7 +11,6 @@ github.com/go-swagger/go-swagger/cmd/swagger
 github.com/gokcehan/lf
 github.com/golang/lint/golint
 github.com/gregoryv/uncover/...
-github.com/hashicorp/terraform
 github.com/ivanilves/lstags
 github.com/kubernauts/tk8
 github.com/kubicorn/kubicorn
@@ -27,5 +28,4 @@ github.com/wagoodman/dive
 github.com/zegl/kube-score
 golang.org/x/tools/cmd/godoc
 golang.org/x/tools/cmd/goimports
-k8s.io/kubernetes/cmd/kubectl
 sigs.k8s.io/kind
