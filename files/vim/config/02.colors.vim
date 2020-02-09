@@ -16,7 +16,7 @@
     if g:os != 'Android'
       set fillchars+=vert:│
     endif
-    au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none
+    au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none guibg=NONE
   endif
   " }}}
 

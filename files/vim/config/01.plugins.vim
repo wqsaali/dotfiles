@@ -42,6 +42,7 @@
   Plug 'dyng/ctrlsf.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'fisadev/vim-ctrlp-cmdpalette'
+  Plug 'DavidEGx/ctrlp-smarttabs'
   Plug 'mileszs/ack.vim'
   Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'

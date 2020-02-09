@@ -7,6 +7,7 @@
   endif
 
   let g:NERDTreeIgnore = ['^node_modules$', '^vendor$']
+  let NERDTreeMapOpenInTab='<ENTER>'
 
   "  sync open file with NERDTree
   "" Check if NERDTree is open or active
@@ -149,6 +150,12 @@
 
   " CtrlP {{{
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+
+  nnoremap <C-e> :CtrlPCmdPalette<CR>
+  let g:ctrlp_cmdpalette_execute = 1
+
+  let g:ctrlp_extensions = ['smarttabs']
+
   " NOTE: The following should make CtrlP faster
   let g:ctrlp_match_window = 'bottom,order:ttb'
   let g:ctrlp_switch_buffer = 0
