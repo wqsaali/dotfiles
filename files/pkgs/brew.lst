@@ -153,6 +153,7 @@ rke
 rust
 s3cmd
 sampler
+scrcpy
 shellcheck
 siege
 skaffold
