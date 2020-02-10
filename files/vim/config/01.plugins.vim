@@ -150,6 +150,7 @@
 let g:coc_global_extensions = [
       \ 'coc-marketplace',
       \ 'coc-git',
+      \ 'coc-gitignore',
       \ 'coc-pairs',
       \ 'coc-prettier',
       \ 'coc-tabnine',
