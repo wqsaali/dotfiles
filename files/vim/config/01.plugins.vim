@@ -165,7 +165,7 @@ let g:coc_global_extensions = [
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-phpls',
-      \ 'coc-go',
+      "\ 'coc-go',
       \ 'coc-docker',
       \ ]
 " }}}
