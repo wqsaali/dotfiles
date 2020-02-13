@@ -461,10 +461,30 @@
     # See POWERLEVEL9K_VCS_UNTRACKED_ICON above if you want to use a different icon.
     # Remove the next line if you don't want to see untracked files at all.
     (( VCS_STATUS_NUM_UNTRACKED  )) && res+="${sep}${untracked}${POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
+    # "─" if the number of unstaged files is unknown. This can happen due to
+    # POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY (see below) being set to a non-negative number lower
+    # than the number of files in the Git index, or due to bash.showDirtyState being set to false
+    # in the repository config. The number of staged and untracked files may also be unknown
+    # in this case.
+    (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}─"
 
     typeset -g my_git_format="${start}${res}${finish}"
   }
   functions -M my_git_formatter 2>/dev/null
+
+  # Don't count the number of unstaged, untracked and conflicted files in Git repositories with
+  # more than this many files in the index. Negative value means infinity.
+  #
+  # If you are working in Git repositories with tens of millions of files and seeing performance
+  # sagging, try setting POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY to a number lower than the output
+  # of `git ls-files | wc -l`. Alternatively, add `bash.showDirtyState = false` to the repository's
+  # config: `git config bash.showDirtyState false`.
+  typeset -g POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY=-1
+
+  # Don't show Git status in prompt for repositories whose workdir matches this pattern.
+  # For example, if set to '~', the Git repository at $HOME/.git will be ignored.
+  # Multiple patterns can be combined with '|': '~|~/some/dir'.
+  typeset -g POWERLEVEL9K_VCS_DISABLED_WORKDIR_PATTERN='~'
 
   # Disable the default Git status formatting.
   typeset -g POWERLEVEL9K_VCS_DISABLE_GITSTATUS_FORMATTING=true
@@ -550,23 +570,25 @@
   # Background jobs color.
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=71
   # Custom icon.
-  # Icon to show when there are background jobs.
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='⇶'
+  # typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   #######################[ direnv: direnv status (https://direnv.net/) ]########################
   # Direnv color.
   typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=178
-  # Icon to show when direnv is active.
-  typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ###############[ asdf: asdf version manager (https://github.com/asdf-vm/asdf) ]###############
   # Default asdf color. Only used to display tools for which there is no color override (see below).
   typeset -g POWERLEVEL9K_ASDF_FOREGROUND=66
 
-  # There are three parameters that can be used to hide tools. If at least one of them decides
-  # to hide a tool, that tool gets hidden. POWERLEVEL9K_ASDF_SHOW_SYSTEM=false hides "system". To
-  # see the difference between POWERLEVEL9K_ASDF_SOURCES and POWERLEVEL9K_ASDF_PROMPT_ALWAYS_SHOW
-  # consider the effect of the following commands:
+  # There are four parameters that can be used to hide asdf tools. Each parameter describes
+  # conditions under which a tool gets hidden. Parameters can hide tools but not unhide them. If at
+  # least one parameter decides to hide a tool, that tool gets hidden. If no parameter decides to
+  # hide a tool, it gets shown.
+  #
+  # Special note on the difference between POWERLEVEL9K_ASDF_SOURCES and
+  # POWERLEVEL9K_ASDF_PROMPT_ALWAYS_SHOW. Consider the effect of the following commands:
   #
   #   asdf local  python 3.8.1
   #   asdf global python 3.8.1
@@ -602,57 +624,83 @@
   # Tip: Override this parameter for ${TOOL} with POWERLEVEL9K_ASDF_${TOOL}_SHOW_SYSTEM.
   typeset -g POWERLEVEL9K_ASDF_SHOW_SYSTEM=true
 
+  # If set to non-empty value, hide tools unless there is a file matching the specified file pattern
+  # in the current directory, or its parent diretory, or its grandparent directory, and so on.
+  #
+  # Note: If this parameter is set to empty value, it won't hide tools.
+  # Note: SHOW_ON_UPGLOB isn't specific to asdf. It works with all prompt segments.
+  # Tip: Override this parameter for ${TOOL} with POWERLEVEL9K_ASDF_${TOOL}_SHOW_ON_UPGLOB.
+  #
+  # Example: Hide nodejs version when there is no package.json and no *.js files in the current
+  # directory, in `..`, in `../..` and so on.
+  #
+  #   typeset -g POWERLEVEL9K_ASDF_NODEJS_SHOW_ON_UPGLOB='*.js|package.json'
+  typeset -g POWERLEVEL9K_ASDF_SHOW_ON_UPGLOB=
+
   # Ruby version from asdf.
   typeset -g POWERLEVEL9K_ASDF_RUBY_FOREGROUND=168
   # typeset -g POWERLEVEL9K_ASDF_RUBY_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_RUBY_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Python version from asdf.
   typeset -g POWERLEVEL9K_ASDF_PYTHON_FOREGROUND=37
   # typeset -g POWERLEVEL9K_ASDF_PYTHON_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_PYTHON_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Go version from asdf.
   typeset -g POWERLEVEL9K_ASDF_GO_FOREGROUND=37
   # typeset -g POWERLEVEL9K_ASDF_GO_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_GO_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Node.js version from asdf.
   typeset -g POWERLEVEL9K_ASDF_NODEJS_FOREGROUND=70
   # typeset -g POWERLEVEL9K_ASDF_NODEJS_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_NODEJS_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Rust version from asdf.
   typeset -g POWERLEVEL9K_ASDF_RUST_FOREGROUND=37
   # typeset -g POWERLEVEL9K_ASDF_RUST_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_RUST_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # .NET Core version from asdf.
   typeset -g POWERLEVEL9K_ASDF_DOTNET_CORE_FOREGROUND=134
   # typeset -g POWERLEVEL9K_ASDF_DOTNET_CORE_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_DOTNET_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Flutter version from asdf.
   typeset -g POWERLEVEL9K_ASDF_FLUTTER_FOREGROUND=38
   # typeset -g POWERLEVEL9K_ASDF_FLUTTER_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_FLUTTER_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Lua version from asdf.
   typeset -g POWERLEVEL9K_ASDF_LUA_FOREGROUND=32
   # typeset -g POWERLEVEL9K_ASDF_LUA_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_LUA_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Java version from asdf.
   typeset -g POWERLEVEL9K_ASDF_JAVA_FOREGROUND=32
   # typeset -g POWERLEVEL9K_ASDF_JAVA_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_JAVA_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Perl version from asdf.
   typeset -g POWERLEVEL9K_ASDF_PERL_FOREGROUND=67
   # typeset -g POWERLEVEL9K_ASDF_PERL_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_PERL_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Erlang version from asdf.
   typeset -g POWERLEVEL9K_ASDF_ERLANG_FOREGROUND=125
   # typeset -g POWERLEVEL9K_ASDF_ERLANG_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_ERLANG_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Elixir version from asdf.
   typeset -g POWERLEVEL9K_ASDF_ELIXIR_FOREGROUND=129
   # typeset -g POWERLEVEL9K_ASDF_ELIXIR_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_ELIXIR_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Postgres version from asdf.
   typeset -g POWERLEVEL9K_ASDF_POSTGRES_FOREGROUND=31
   # typeset -g POWERLEVEL9K_ASDF_POSTGRES_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_ASDF_POSTGRES_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   ##########[ nordvpn: nordvpn connection status, linux only (https://nordvpn.com/) ]###########
   # NordVPN connection indicator color.
@@ -678,14 +726,14 @@
   ###########################[ vim_shell: vim shell indicator (:sh) ]###########################
   # Vim shell indicator color.
   typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=34
-  # Icon to show when in a vim shell.
-  typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_VIM_SHELL_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ######[ midnight_commander: midnight commander shell (https://midnight-commander.org/) ]######
   # Midnight Commander shell color.
   typeset -g POWERLEVEL9K_MIDNIGHT_COMMANDER_FOREGROUND=178
-  # Icon to show when in a midnight commander shell.
-  typeset -g POWERLEVEL9K_MIDNIGHT_COMMANDER_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_MIDNIGHT_COMMANDER_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   #[ nix_shell: nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html) ]##
   # Nix shell color.
@@ -828,7 +876,10 @@
   ################[ goenv: go environment (https://github.com/syndbg/goenv) ]################
   # Goenv color.
   typeset -g POWERLEVEL9K_GOENV_FOREGROUND=37
-  # Don't show the current Go version if it's the same as global.
+  # Hide go version if it doesn't come from one of these sources.
+  typeset -g POWERLEVEL9K_GOENV_SOURCES=(shell local global)
+  # If set to false, hide go version if it's the same as global:
+  # $(goenv version-name) == $(goenv global).
   typeset -g POWERLEVEL9K_GOENV_PROMPT_ALWAYS_SHOW=false
   # Custom icon.
   # typeset -g POWERLEVEL9K_GOENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
