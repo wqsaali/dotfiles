@@ -68,7 +68,7 @@ case $OUTPUT in
     CONVERT=""
     ;;
   yaml)
-    CONVERT="| yq r -"
+    CONVERT="| yq r -P -"
     ;;
   *)
     usage "Invalid output format: ${OUTPUT} \n" >&2
