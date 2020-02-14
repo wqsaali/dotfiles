@@ -48,9 +48,10 @@
   Plug 'terryma/vim-multiple-cursors'
 
   Plug 'ryanoasis/vim-devicons'
-  Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
+  Plug 'preservim/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
   Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+  " Plug 'vwxyutarooo/nerdtree-devicons-syntax', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   "Plug 'jlanzarotta/bufexplorer'
   "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   "Plug 'vim-scripts/taglist.vim'
@@ -88,7 +89,7 @@
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   "Plug 'tomtom/tcomment_vim'
-  Plug 'scrooloose/nerdcommenter'
+  Plug 'preservim/nerdcommenter'
   Plug 'nvie/vim-togglemouse'
   "Plug 'LucHermitte/lh-vim-lib'
   "Plug 'LucHermitte/lh-tags'

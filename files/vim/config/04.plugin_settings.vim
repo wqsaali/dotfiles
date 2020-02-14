@@ -3,11 +3,45 @@
   " nerdtree {{{
   if has('autocmd')
     filetype plugin indent on
+    au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     au FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=AL
+    augroup nerdtreehidecwd
+      autocmd!
+      autocmd FileType nerdtree setlocal conceallevel=3
+              \ | syntax match NERDTreeHideCWD #^[</].*$# conceal
+              \ | setlocal concealcursor=n
+    augroup end
   endif
 
   let g:NERDTreeIgnore = ['^node_modules$', '^vendor$']
-  let NERDTreeMapOpenInTab='<ENTER>'
+  " let g:NERDTreeMapOpenInTab='<ENTER>'
+  let g:NERDTreeQuitOnOpen = 1
+  let g:NERDTreeMinimalUI = 1
+  let g:NERDTreeDirArrows = 1
+
+  " let g:NERDTreeFileExtensionHighlightFullName = 1
+  " let g:NERDTreeExactMatchHighlightFullName = 1
+  " let g:NERDTreePatternMatchHighlightFullName = 1
+  " let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+  " let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+
+  " let g:NERDTreeSyntaxDisableDefaultExtensions = 1
+  " let g:NERDTreeDisableExactMatchHighlight = 1
+  " let g:NERDTreeDisablePatternMatchHighlight = 1
+  " let g:NERDTreeSyntaxEnabledExtensions = ['c', 'h', 'c++', 'php', 'rb', 'js', 'css', 'go', 'py']
+
+  let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✓",
+    \ 'Ignored'   : "!",
+    \ "Unknown"   : "?"
+    \ }
 
   "  sync open file with NERDTree
   "" Check if NERDTree is open or active
@@ -150,6 +184,10 @@
 
   " CtrlP {{{
   set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+  set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+  set wildignore+=*.pdf,*.psd
+  set wildignore+=node_modules/*,bower_components/*
 
   nnoremap <C-e> :CtrlPCmdPalette<CR>
   let g:ctrlp_cmdpalette_execute = 1

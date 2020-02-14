@@ -43,30 +43,30 @@
   piss = push
   pill = pull
 [core]
-  pager = less -RF -X
-  # pager = delta --theme='Monokai Extended Bright'
+  # pager = less -RF -X
+  pager = delta --dark --theme='Monokai Extended Bright' --file-style=box --hunk-style=plain --tabs=2
   editor = vim
   excludesfile = ~/.gitexcludes
-[pager]
-  # diff = diff-so-fancy | less --tabs=2 -RFX --pattern '^(Date|added|deleted|modified): '
-  diff = diff-so-fancy | less --tabs=2 -RFX
-  show = diff-so-fancy | less --tabs=2 -RFX
-[diff-so-fancy]
-  markEmptyLines = true
-  changeHunkIndicators = true
-  stripLeadingSymbols = true
-  useUnicodeRuler = true
+# [pager]
+#   # diff = diff-so-fancy | less --tabs=2 -RFX --pattern '^(Date|added|deleted|modified): '
+#   diff = diff-so-fancy | less --tabs=2 -RFX
+#   show = diff-so-fancy | less --tabs=2 -RFX
+# [diff-so-fancy]
+#   markEmptyLines = true
+#   changeHunkIndicators = true
+#   stripLeadingSymbols = true
+#   useUnicodeRuler = true
 [color]
   ui = true
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
-[color "diff"]
-  meta = yellow
-  frag = magenta bold
-  commit = yellow bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
+# [color "diff-highlight"]
+#   oldNormal = red bold
+#   oldHighlight = red bold 52
+#   newNormal = green bold
+#   newHighlight = green bold 22
+# [color "diff"]
+#   meta = yellow
+#   frag = magenta bold
+#   commit = yellow bold
+#   old = red bold
+#   new = green bold
+#   whitespace = red reverse
