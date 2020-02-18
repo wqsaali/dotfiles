@@ -1,5 +1,29 @@
 " PluginSettings {{{
 
+  " tComment {{{
+  " Disable tComment to escape some entities
+  let g:tcomment#replacements_xml={}
+  " }}}
+
+  " nerdcommenter {{{
+  " Add spaces after comment delimiters by default
+  let g:NERDSpaceDelims = 1
+  " Use compact syntax for prettified multi-line comments
+  let g:NERDCompactSexyComs = 1
+  " Align line-wise comment delimiters flush left instead of following code indentation
+  let g:NERDDefaultAlign = 'left'
+  " Set a language to use its alternate delimiters by default
+  let g:NERDAltDelims_java = 1
+  " Add your own custom formats or override the defaults
+  " let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+  " Allow commenting and inverting empty lines (useful when commenting a region)
+  let g:NERDCommentEmptyLines = 1
+  " Enable trimming of trailing whitespace when uncommenting
+  let g:NERDTrimTrailingWhitespace = 1
+  " Enable NERDCommenterToggle to check all selected lines is commented or not
+  let g:NERDToggleCheckAllLines = 1
+  " }}}
+
   " nerdtree {{{
   if has('autocmd')
     filetype plugin indent on
@@ -18,6 +42,8 @@
   let g:NERDTreeQuitOnOpen = 1
   let g:NERDTreeMinimalUI = 1
   let g:NERDTreeDirArrows = 1
+
+  let g:NERDTreeHijackNetrw = 0
 
   " let g:NERDTreeFileExtensionHighlightFullName = 1
   " let g:NERDTreeExactMatchHighlightFullName = 1
@@ -43,24 +69,29 @@
     \ "Unknown"   : "?"
     \ }
 
-  "  sync open file with NERDTree
-  "" Check if NERDTree is open or active
-  "function! IsNERDTreeOpen()
-  "  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-  "endfunction
+  " sync open file with NERDTree
+  " Check if NERDTree is open or active
+  " function! IsNERDTreeOpen()
+  "   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+  " endfunction
 
-  "" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-  "" file, and we're not in vimdiff
-  "function! SyncTree()
-  "  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-  "    NERDTreeFind
-  "    wincmd p
-  "  endif
-  "endfunction
+  " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+  " file, and we're not in vimdiff
+  " function! SyncTree()
+  "   if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+  "     NERDTreeFind
+  "     wincmd p
+  "   endif
+  " endfunction
 
-  "" Highlight currently open buffer in NERDTree
-  "autocmd BufEnter * call SyncTree()
+  " Highlight currently open buffer in NERDTree
+  " autocmd BufEnter * call SyncTree()
 
+  " }}}
+
+  " lf {{{
+  " let g:lf_replace_netrw = 1 " open lf when vim open a directory
+  let g:lf_map_keys = 0
   " }}}
 
   " vim-resize {{{
@@ -274,9 +305,9 @@
   " let g:go_def_mapping_enabled = 0
 
   " Open go doc in vertical window, horizontal, or tab
-  " au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
-  " au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
-  " au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
+  " au Filetype go nnoremap <leader>v :vsp <CR>:exe 'GoDef' <CR>
+  " au Filetype go nnoremap <leader>s :sp <CR>:exe 'GoDef'<CR>
+  " au Filetype go nnoremap <leader>t :tab split <CR>:exe 'GoDef'<CR>
   " }}}
 
   " Codi {{{

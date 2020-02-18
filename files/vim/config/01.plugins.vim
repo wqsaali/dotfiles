@@ -10,11 +10,11 @@
   " Load vim-plug
   call plug#begin('~/.vim/bundle')
 
-  if g:os ==? 'Darwin'
-    let g:plug_url_format = 'git@github.com:%s.git'
-  else
-    let $GIT_SSL_NO_VERIFY = 'true'
-  endif
+  " if g:os ==? 'Darwin'
+  "   let g:plug_url_format = 'git@github.com:%s.git'
+  " else
+  "   let $GIT_SSL_NO_VERIFY = 'true'
+  " endif
 
   Plug 'tpope/vim-sensible'
   Plug 'editorconfig/editorconfig-vim'
@@ -33,19 +33,24 @@
   "Plug 'RRethy/vim-illuminate'
   Plug 'nelstrom/vim-visual-star-search'
   "Plug 'mhinz/vim-signify'
+
   Plug 'tpope/vim-fugitive'
   Plug 'gregsexton/gitv'
   Plug 'junegunn/gv.vim'
-  "Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
-  Plug 'chrisbra/vim-diff-enhanced'
-  "Plug 'gcmt/breeze.vim'
-  Plug 'dyng/ctrlsf.vim'
+
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'fisadev/vim-ctrlp-cmdpalette'
   Plug 'DavidEGx/ctrlp-smarttabs'
+  Plug 'dyng/ctrlsf.vim'
+  "Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+  Plug 'chrisbra/vim-diff-enhanced'
+  "Plug 'gcmt/breeze.vim'
   Plug 'mileszs/ack.vim'
   Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'
+
+  "Plug 'ptzz/lf.vim'
+  "Plug 'rbgrouleff/bclose.vim'
 
   Plug 'ryanoasis/vim-devicons'
   Plug 'preservim/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
@@ -82,8 +87,8 @@
   "Plug 'ervandew/supertab'
 
   "Plug 'sjl/gundo.vim'
-  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
   "Plug 'luochen1990/indent-detector.vim'
+  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
   Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
@@ -166,8 +171,6 @@ let g:coc_global_extensions = [
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-phpls',
-      "\ 'coc-go',
       \ 'coc-docker',
       \ ]
 " }}}
-

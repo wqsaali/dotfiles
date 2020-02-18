@@ -2,7 +2,8 @@
 
 set nocompatible
 
-let g:is_bash = 1
+" set shell=bash
+" let g:is_bash = 1
 
 " OS detection
 if !exists("g:os")

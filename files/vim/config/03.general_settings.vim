@@ -124,5 +124,4 @@
 
   set completeopt=menuone,longest
 
-
 " }}}

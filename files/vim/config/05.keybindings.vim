@@ -23,16 +23,26 @@
 
   " Find
   map <C-f> /
-  " indend / deindent after selecting the text with (⇧ v), (.) to repeat.
-  vnoremap <Tab> >
-  vnoremap <S-Tab> <
+
+  " indent / deindent after selecting the text with (⇧ v), (.) to repeat.
+  vnoremap > >gv
+  vnoremap < <gv
+  nnoremap <Tab> >>_
+  nnoremap <S-Tab> <<_
+  inoremap <S-Tab> <C-D>
+  vnoremap <Tab> >gv
+  vnoremap <S-Tab> <gv
+
   " comment / decomment & normal comment behavior
-  vmap <C-m> gc
-  vmap <C-/> gc
-  nnoremap <C-/> gcc
-  inoremap <C-/> gcc
-  " Disable tComment to escape some entities
-  let g:tcomment#replacements_xml={}
+  " vmap <C-m> gc
+  " vmap <C-/> gc
+  " nnoremap <C-/> gcc
+  " inoremap <C-/> gcc
+  nmap <C-/>   <Plug>NERDCommenterToggle
+  vmap <C-/>   <Plug>NERDCommenterToggle<CR>gv
+  nmap <C-#>   <Plug>NERDCommenterToggle
+  vmap <C-#>   <Plug>NERDCommenterToggle<CR>gv
+
   " Text wrap simpler, then type the open tag or ',"
   vmap <C-w> S
 

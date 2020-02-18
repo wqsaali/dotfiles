@@ -5,6 +5,9 @@
 
   " Overrides {{{
   if has('autocmd')
+    " au ColorScheme * hi! link illuminatedWord Visual
+    au ColorScheme * hi! link illuminatedWord CursorLine
+    au ColorScheme * hi! CursorLineNr cterm=NONE
     au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
     au ColorScheme * hi! Conceal ctermbg=none ctermfg=239  guibg=NONE guifg=#4e4e4e
     if ! has('gui_macvim')
@@ -33,17 +36,14 @@
 
   set guifont=FuraCode\ Nerd\ Font\ Mono:h12
 
-  if has('gui_macvim')
-    set transparency=5
-  endif
+  " if has('gui_macvim')
+  "   set transparency=5
+  " endif
 
   color Tomorrow-Night-Bright
   " color one
   " color dracula
   " color github
-  " hi link illuminatedWord Visual
-  hi link illuminatedWord CursorLine
-  hi CursorLineNr cterm=NONE
 " }}}
 
 " typographic ligatures {{{
