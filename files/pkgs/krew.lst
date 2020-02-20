@@ -7,6 +7,8 @@ get-all
 krew
 mtail
 neat
+node-restart
+node-shell
 pod-logs
 pod-shell
 rbac-lookup
@@ -15,5 +17,6 @@ resource-capacity
 sniff
 sudo
 tail
+tree
 view-secret
 view-utilization
