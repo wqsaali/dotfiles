@@ -225,6 +225,16 @@
 
   let g:ctrlp_extensions = ['smarttabs']
 
+  " If 1 will highlight the selected file in the tabline.
+  let g:ctrlp_smarttabs_modify_tabline = 0
+  " Reverse the order in which files are displayed.
+  let g:ctrlp_smarttabs_reverse = 1
+  " Exclude quickfix buffers.
+  let g:ctrlp_smarttabs_exclude_quickfix = 0
+
+  " Maps to Alt-p
+  nnoremap π :CtrlPSmartTabs<CR>
+
   " NOTE: The following should make CtrlP faster
   let g:ctrlp_match_window = 'bottom,order:ttb'
   let g:ctrlp_switch_buffer = 0

@@ -168,6 +168,7 @@ let g:coc_global_extensions = [
       \ 'coc-yaml',
       \ 'coc-vimlsp',
       \ 'coc-python',
+      \ 'coc-go',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-phpls',
