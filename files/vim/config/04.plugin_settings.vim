@@ -214,11 +214,17 @@
   " }}}
 
   " CtrlP {{{
-  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,.yardoc/*
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip
   set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
-  set wildignore+=*.pdf,*.psd
-  set wildignore+=node_modules/*,bower_components/*
+  set wildignore+=*.pdf,*.psd,*.DS_Store
+  set wildignore+=node_modules/*,bower_components/*,vendor/*
+
+  " Ignore some folders and files for CtrlP indexing
+  let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$\|vendor',
+    \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+    \ }
 
   nnoremap <C-e> :CtrlPCmdPalette<CR>
   let g:ctrlp_cmdpalette_execute = 1
@@ -245,7 +251,7 @@
   "   let g:ctrlp_use_caching = 0
   " endif
   if executable('rg')
-    set grepprg=rg\ --color=never
+    set grepprg=rg\ --vimgrep
     let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
     let g:ctrlp_use_caching = 0
   endif
@@ -299,6 +305,10 @@
   " }}}
 
   " Vim-go {{{
+  " let g:go_def_mode='gopls'
+  " let g:go_info_mode='gopls'
+  "let g:go_gopls_enabled = 1
+
   let g:go_fmt_autosave = 1
   let g:go_fmt_command = "goimports"
   " let g:go_fmt_options = '-w'
@@ -307,8 +317,14 @@
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
   let g:go_highlight_structs = 1
+  " let g:go_highlight_types = 1
+  " let g:go_highlight_extra_types = 1
+  " let g:go_highlight_fields = 1
   let g:go_highlight_operators = 1
   let g:go_highlight_build_constraints = 1
+
+  "let g:go_auto_sameids = 1
+  let g:go_auto_type_info = 1
 
   " disable vim-go :GoDef short cut (gd)
   " this is handled by LanguageClient [LC]

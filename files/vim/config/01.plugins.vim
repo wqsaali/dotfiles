@@ -18,25 +18,30 @@
 
   Plug 'tpope/vim-sensible'
   Plug 'editorconfig/editorconfig-vim'
+
+  Plug 'camspiers/animate.vim'
+  Plug 'camspiers/lens.vim'
+  Plug 'breuckelen/vim-resize'
+  Plug 't9md/vim-choosewin'
+
   Plug 'wincent/terminus'
   Plug 'kassio/neoterm'
   "Plug 'edkolev/promptline.vim'
   "Plug 'edkolev/tmuxline.vim'
+  "Plug 'powerline/powerline'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'breuckelen/vim-resize'
-  Plug 't9md/vim-choosewin'
-  "Plug 'powerline/powerline'
   "Plug 'tpope/vim-flagship'
   Plug 'airblade/vim-gitgutter'
-  "Plug 'miyakogi/conoline.vim'
-  "Plug 'RRethy/vim-illuminate'
-  Plug 'nelstrom/vim-visual-star-search'
   "Plug 'mhinz/vim-signify'
 
   Plug 'tpope/vim-fugitive'
   Plug 'gregsexton/gitv'
   Plug 'junegunn/gv.vim'
+
+  "Plug 'miyakogi/conoline.vim'
+  "Plug 'RRethy/vim-illuminate'
+  Plug 'nelstrom/vim-visual-star-search'
 
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'fisadev/vim-ctrlp-cmdpalette'
@@ -125,22 +130,23 @@
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'
-  Plug 'chr4/nginx.vim'
-  Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+  Plug 'tell-k/vim-autopep8', {'for': 'python'}
+  Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
+  "Plug 'chr4/nginx.vim'
+  "Plug 'elzr/vim-json', { 'for': 'json' }
+  "Plug 'cespare/vim-toml', { 'for': 'toml' }
+  "Plug 'pearofducks/ansible-vim'
+  Plug 'maralla/vim-toml-enhance', { 'for': 'toml' }
+  "Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'handlebars'] }
+  "Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
   if has('nvim')
     Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app & yarn install'  }
   else
     Plug 'iamcco/mathjax-support-for-mkdp', { 'for': 'markdown' }
     Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
   endif
-  Plug 'tell-k/vim-autopep8', {'for': 'python'}
-  Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
-  "Plug 'elzr/vim-json', { 'for': 'json' }
-  Plug 'pearofducks/ansible-vim'
-  Plug 'cespare/vim-toml', { 'for': 'toml' }
-  Plug 'maralla/vim-toml-enhance', { 'for': 'toml' }
-  Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'handlebars'] }
 
+  Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   call plug#end()
