@@ -19,8 +19,8 @@
   Plug 'tpope/vim-sensible'
   Plug 'editorconfig/editorconfig-vim'
 
-  Plug 'camspiers/animate.vim'
-  Plug 'camspiers/lens.vim'
+  "Plug 'camspiers/animate.vim'
+  "Plug 'camspiers/lens.vim'
   Plug 'breuckelen/vim-resize'
   Plug 't9md/vim-choosewin'
 
@@ -66,6 +66,7 @@
   "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   "Plug 'vim-scripts/taglist.vim'
   "Plug 'severin-lemaignan/vim-minimap'
+  "Plug 'liuchengxu/vista.vim'
 
   "Plug 'vim-scripts/cmdalias.vim'
   Plug 'benmills/vimux'
@@ -126,6 +127,7 @@
   "Plug 'dracula/vim'
   "Plug 'rakr/vim-one'
   "Plug 'cormacrelf/vim-colors-github'
+  "Plug 'arzg/vim-colors-xcode'
 
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
