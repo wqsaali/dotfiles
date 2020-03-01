@@ -43,9 +43,12 @@
   "Plug 'RRethy/vim-illuminate'
   Plug 'nelstrom/vim-visual-star-search'
 
-  Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'fisadev/vim-ctrlp-cmdpalette'
-  Plug 'DavidEGx/ctrlp-smarttabs'
+  Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+
+  "Plug 'ctrlpvim/ctrlp.vim'
+  "Plug 'fisadev/vim-ctrlp-cmdpalette'
+  "Plug 'DavidEGx/ctrlp-smarttabs'
+
   Plug 'dyng/ctrlsf.vim'
   "Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
   Plug 'chrisbra/vim-diff-enhanced'
@@ -65,8 +68,8 @@
   "Plug 'jlanzarotta/bufexplorer'
   "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   "Plug 'vim-scripts/taglist.vim'
+  Plug 'liuchengxu/vista.vim'
   "Plug 'severin-lemaignan/vim-minimap'
-  "Plug 'liuchengxu/vista.vim'
 
   "Plug 'vim-scripts/cmdalias.vim'
   Plug 'benmills/vimux'

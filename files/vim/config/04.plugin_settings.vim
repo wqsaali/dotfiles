@@ -213,20 +213,24 @@
   let g:ctrlsf_auto_focus = { "at": "start" }
   " }}}
 
-  " CtrlP {{{
-  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,.yardoc/*
-  set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-  set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
-  set wildignore+=*.pdf,*.psd,*.DS_Store
-  set wildignore+=node_modules/*,bower_components/*,vendor/*
+  " clap-vim {{{
+  nnoremap <C-p> :Clap files<CR>
+  nnoremap <C-o> :Clap filer<CR>
+  nnoremap <C-e> :Clap command<CR>
+  " Maps to Alt-p
+  nnoremap π :Clap buffers<CR>
 
+  let g:clap_theme = 'atom_dark'
+  " }}}
+
+  " CtrlP {{{
   " Ignore some folders and files for CtrlP indexing
   let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$\|vendor',
     \ 'file': '\.so$\|\.dat$|\.DS_Store$'
     \ }
 
-  nnoremap <C-e> :CtrlPCmdPalette<CR>
+  "nnoremap <C-e> :CtrlPCmdPalette<CR>
   let g:ctrlp_cmdpalette_execute = 1
 
   let g:ctrlp_extensions = ['smarttabs']
@@ -239,7 +243,7 @@
   let g:ctrlp_smarttabs_exclude_quickfix = 0
 
   " Maps to Alt-p
-  nnoremap π :CtrlPSmartTabs<CR>
+  "nnoremap π :CtrlPSmartTabs<CR>
 
   " NOTE: The following should make CtrlP faster
   let g:ctrlp_match_window = 'bottom,order:ttb'

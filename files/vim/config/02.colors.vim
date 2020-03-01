@@ -41,6 +41,7 @@
   " endif
 
   color Tomorrow-Night-Bright
+  " color xcodedarkhc
   " color one
   " color dracula
   " color github

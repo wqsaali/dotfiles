@@ -124,4 +124,10 @@
 
   set completeopt=menuone,longest
 
+  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,.yardoc/*
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+  set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+  set wildignore+=*.pdf,*.psd,*.DS_Store
+  set wildignore+=node_modules/*,bower_components/*,vendor/*
+
 " }}}
