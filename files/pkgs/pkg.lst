@@ -16,6 +16,7 @@ cmake
 colordiff
 command-not-found
 coreutils
+ctags
 curl
 dash
 diffutils
@@ -33,6 +34,7 @@ gawk
 gdbm
 gettext
 git
+git-delta
 glib
 gnupg
 golang
@@ -92,6 +94,7 @@ libuv
 libvterm
 libxml2
 libyaml
+lld
 luv
 make
 man
@@ -129,6 +132,7 @@ resolv-conf
 rhash
 ripgrep
 ruby
+rust
 science-repo
 screenfetch
 sed
