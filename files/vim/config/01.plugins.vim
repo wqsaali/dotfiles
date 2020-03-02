@@ -26,14 +26,15 @@
 
   Plug 'wincent/terminus'
   Plug 'kassio/neoterm'
+
   "Plug 'edkolev/promptline.vim'
   "Plug 'edkolev/tmuxline.vim'
   "Plug 'powerline/powerline'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   "Plug 'tpope/vim-flagship'
-  Plug 'airblade/vim-gitgutter'
   "Plug 'mhinz/vim-signify'
+  Plug 'airblade/vim-gitgutter'
 
   Plug 'tpope/vim-fugitive'
   Plug 'gregsexton/gitv'
@@ -42,6 +43,7 @@
   "Plug 'miyakogi/conoline.vim'
   "Plug 'RRethy/vim-illuminate'
   Plug 'nelstrom/vim-visual-star-search'
+  "Plug 'pechorin/any-jump.nvim'
 
   Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
@@ -63,7 +65,8 @@
   Plug 'preservim/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
   Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
-  " Plug 'vwxyutarooo/nerdtree-devicons-syntax', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+  "Plug 'vwxyutarooo/nerdtree-devicons-syntax', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+
   "Plug 'jlanzarotta/bufexplorer'
   "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
   "Plug 'vim-scripts/taglist.vim'
@@ -102,6 +105,7 @@
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   "Plug 'tomtom/tcomment_vim'
+  "Plug 'tpope/vim-commentary'
   Plug 'preservim/nerdcommenter'
   Plug 'nvie/vim-togglemouse'
   "Plug 'LucHermitte/lh-vim-lib'

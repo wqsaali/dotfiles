@@ -1,4 +1,4 @@
-# vim:set filetype=sh:
+# vim:set filetype=bash:
 
 # Extra aliases
 for f in $HOME/.aliases.d/*; do

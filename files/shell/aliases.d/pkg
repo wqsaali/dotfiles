@@ -1,4 +1,4 @@
-# vim:set filetype=sh:
+# vim:set filetype=bash:
 
 # Gem aliases
 # alias gem-upgrade='gem update $(gem list | cut -d\  -f 1)'

@@ -1,4 +1,4 @@
-# vim:set filetype=sh:
+# vim:set filetype=bash:
 
 function _isFunction() {
   check='declare -F --'

@@ -1,4 +1,4 @@
-# vim:set filetype=sh:
+# vim:set filetype=bash:
 
 # Json aliases
 # Usage: json-diff file1 file2 section_on_file1 section_on_file2
