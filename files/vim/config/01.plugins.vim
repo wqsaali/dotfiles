@@ -32,6 +32,8 @@
   "Plug 'powerline/powerline'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  "Plug 'liuchengxu/eleline.vim'
+
   "Plug 'tpope/vim-flagship'
   "Plug 'mhinz/vim-signify'
   Plug 'airblade/vim-gitgutter'
@@ -45,7 +47,7 @@
   Plug 'nelstrom/vim-visual-star-search'
   "Plug 'pechorin/any-jump.nvim'
 
-  Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+  "Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
   "Plug 'ctrlpvim/ctrlp.vim'

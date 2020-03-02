@@ -72,6 +72,7 @@ git-secrets
 gnu-getopt
 gnu-sed
 gnu-tar
+go-jira
 godep
 goreleaser
 gotags

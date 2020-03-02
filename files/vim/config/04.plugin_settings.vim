@@ -364,7 +364,7 @@
   let g:airline#extensions#tabline#show_buffers = 0
   let g:airline#extensions#whitespace#skip_indent_check_ft = {'go': ['mixed-indent-file']}
   let g:airline_powerline_fonts = 1
-  let g:airline_theme='term'
+  let g:airline_theme='distinguished'
   " }}}
 
 " }}}
