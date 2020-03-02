@@ -22,7 +22,7 @@
   inoremap <C-c> <Esc>
 
   " Find
-  map <C-f> /
+  " map <C-f> /
 
   " indent / deindent after selecting the text with (⇧ v), (.) to repeat.
   vnoremap > >gv

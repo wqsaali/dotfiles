@@ -43,17 +43,16 @@
   "Plug 'RRethy/vim-illuminate'
   Plug 'nelstrom/vim-visual-star-search'
 
+  Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
   "Plug 'ctrlpvim/ctrlp.vim'
   "Plug 'fisadev/vim-ctrlp-cmdpalette'
   "Plug 'DavidEGx/ctrlp-smarttabs'
 
-  Plug 'dyng/ctrlsf.vim'
-  "Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
-  Plug 'chrisbra/vim-diff-enhanced'
+  "Plug 'dyng/ctrlsf.vim'
   "Plug 'gcmt/breeze.vim'
-  Plug 'mileszs/ack.vim'
+  "Plug 'mileszs/ack.vim'
   Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'
 
@@ -121,6 +120,7 @@
   "Plug 'kopischke/vim-fetch'
   Plug 'Konfekt/FastFold'
   Plug 'luisdavim/pretty-folds'
+  Plug 'chrisbra/vim-diff-enhanced'
   "Plug 'scrooloose/syntastic'
   Plug 'metakirby5/codi.vim'
 

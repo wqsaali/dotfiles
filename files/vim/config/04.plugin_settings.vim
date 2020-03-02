@@ -197,28 +197,35 @@
   let g:rg_command = 'rg --vimgrep -S'
   " }}}
 
-
   " CtrlSF {{{
-  nmap     <C-F>f <Plug>CtrlSFPrompt
-  vmap     <C-F>f <Plug>CtrlSFVwordPath
-  vmap     <C-F>F <Plug>CtrlSFVwordExec
-  nmap     <C-F>n <Plug>CtrlSFCwordPath
-  nmap     <C-F>p <Plug>CtrlSFPwordPath
-  nnoremap <C-F>o :CtrlSFOpen<CR>
-  nnoremap <C-F>t :CtrlSFToggle<CR>
-  inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+  " nmap     <C-F>f <Plug>CtrlSFPrompt
+  " vmap     <C-F>f <Plug>CtrlSFVwordPath
+  " vmap     <C-F>F <Plug>CtrlSFVwordExec
+  " nmap     <C-F>n <Plug>CtrlSFCwordPath
+  " nmap     <C-F>p <Plug>CtrlSFPwordPath
+  " nnoremap <C-F>o :CtrlSFOpen<CR>
+  " nnoremap <C-F>t :CtrlSFToggle<CR>
+  " inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
   let g:ctrlsf_ackprg = 'rg'
   let g:ctrlsf_default_view_mode = 'compact'
   let g:ctrlsf_auto_close = { "normal" : 1, "compact": 1 }
   let g:ctrlsf_auto_focus = { "at": "start" }
   " }}}
 
+  " vista {{{
+  " Executive used when opening vista sidebar without specifying it.
+  " See all the avaliable executives via `:echo g:vista#executives`.
+  let g:vista_default_executive = 'coc'
+  " }}}
+
   " clap-vim {{{
+  " Maps to Alt-p
+  nnoremap π :Clap buffers<CR>
   nnoremap <C-p> :Clap files<CR>
   nnoremap <C-o> :Clap filer<CR>
   nnoremap <C-e> :Clap command<CR>
-  " Maps to Alt-p
-  nnoremap π :Clap buffers<CR>
+  nnoremap <C-j> :Clap tags<CR>
+  nnoremap <C-f> :Clap grep<CR>
 
   let g:clap_theme = 'atom_dark'
   " }}}
