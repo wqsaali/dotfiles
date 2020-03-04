@@ -39,6 +39,17 @@ gem_install_or_update() {
   fi
 }
 
+git_clone_or_update() {
+  echo ">>> $(basename $2)"
+  if [ ! -d  ${2} ]; then
+    git clone ${1} ${2}
+  else
+    cd ${2}
+    git pull
+    cd ${INSTALLDIR}
+  fi
+}
+
 getNerdFont() {
   getFromRawGithub 'ryanoasis/nerd-fonts/' "patched-fonts/${1}" 'latest'
 }
@@ -101,37 +112,10 @@ installKrew() {
 }
 
 installKubeScripts() {
-  if [ ! -d  ${HOME}/.kube-fzf ]; then
-    git clone https://github.com/arunvelsriram/kube-fzf.git ${HOME}/.kube-fzf
-  else
-    cd ${HOME}/.kube-fzf/
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d ${HOME}/.fubectl ]; then
-    git clone https://github.com/kubermatic/fubectl.git ${HOME}/.fubectl
-  else
-    cd ${HOME}/.fubectl/
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d  ${HOME}/.kbenv ]; then
-    git clone https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
-  else
-    cd ${HOME}/.kbenv/
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d  ${HOME}/.helmenv ]; then
-    git clone https://github.com/alexppg/helmenv.git ${HOME}/.helmenv
-  else
-    cd ${HOME}/.helmenv/
-    git pull
-    cd ${INSTALLDIR}
-  fi
+  git_clone_or_update https://github.com/arunvelsriram/kube-fzf.git ${HOME}/.kube-fzf
+  git_clone_or_update https://github.com/kubermatic/fubectl.git ${HOME}/.fubectl
+  git_clone_or_update https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
+  git_clone_or_update https://github.com/alexppg/helmenv.git ${HOME}/.helmenv
 
   installKrew
 
@@ -250,12 +234,16 @@ installHelmPlugins() {
   done < files/pkgs/helm.lst
 }
 
+installTestssl() {
+  git_clone_or_update https://github.com/drwetter/testssl.sh.git ${HOME}/.testssl
+  if [ ! -s ${HOME}/.local/bin/testssl ]; then
+    ln -s ${HOME}/.testssl/testssl.sh ${HOME}/.local/bin/testssl
+  fi
+}
+
 installScripts() {
   mkdir -p ~/.local/bin/
   cp -r files/scripts/* ${HOME}/.local/bin/
-  curl -sLo testssl testssl.sh
-  chmod +x testssl
-  mv testssl ${HOME}/.local/bin/
   installFromRawGithub 'huyng/bashmarks' 'bashmarks.sh'
   installFromRawGithub 'ahmetb/goclone'
   installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
@@ -263,10 +251,11 @@ installScripts() {
   if [[ "$OSTYPE" == *"android"* ]]; then
     termux-fix-shebang ${HOME}/.local/bin/*
   fi
+  installTestssl
 }
 
 installChefVM() {
-  git clone https://github.com/trobrock/chefvm.git ~/.chefvm
+  git_clone_or_update https://github.com/trobrock/chefvm.git ${HOME}/.chefvm
   ~/.chefvm/bin/chefvm init
 }
 
@@ -301,13 +290,7 @@ installVscodePackages() {
 
 installTmuxConf() {
   cp files/shell/tmux.conf.local ${HOME}/.tmux.conf.local
-  if [ ! -d  ${HOME}/.tmux ]; then
-    git clone https://github.com/gpakosz/.tmux.git ${HOME}/.tmux
-  else
-    cd ${HOME}/.tmux/
-    git pull
-    cd ${INSTALLDIR}
-  fi
+  git_clone_or_update https://github.com/gpakosz/.tmux.git ${HOME}/.tmux
   if [ ! -s ${HOME}/.tmux.conf ]; then
     ln -s ${HOME}/.tmux/.tmux.conf ${HOME}/.tmux.conf
   fi
@@ -336,9 +319,7 @@ installVimPlugins() {
   fi
 
   # Using vim Vundle
-  # if [ ! -d  ${HOME}/.vim/bundle/Vundle.vim ]; then
-  #   git clone https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
-  # fi
+  # git_clone_or_update https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
   #
   # vim +PluginInstall +qall
   # cd ${HOME}/.vim/bundle/YouCompleteMe
@@ -403,37 +384,10 @@ installBashConf() {
   cp files/shell/bash/bashrc ${HOME}/.bashrc
   cp files/shell/bash/bash_profile ${HOME}/.bash_profile
 
-  if [ ! -d  ${HOME}/.bash/complete-alias ]; then
-    git clone https://github.com/cykerway/complete-alias.git ${HOME}/.bash/complete-alias
-  else
-    cd ${HOME}/.bash/complete-alias
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d  ${HOME}/.bash/bash-git-prompt ]; then
-    git clone https://github.com/magicmonty/bash-git-prompt.git ${HOME}/.bash/bash-git-prompt
-  else
-    cd ${HOME}/.bash/bash-git-prompt
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d  ${HOME}/.bash/kube-ps1 ]; then
-    git clone https://github.com/jonmosco/kube-ps1.git ${HOME}/.bash/kube-ps1
-  else
-    cd ${HOME}/.bash/kube-ps1
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d  ${HOME}/.bash/powerline-shell ]; then
-    git clone https://github.com/milkbikis/powerline-shell ${HOME}/.bash/powerline-shell
-  else
-    cd ${HOME}/.bash/powerline-shell
-    git pull
-    cd ${INSTALLDIR}
-  fi
+  git_clone_or_update https://github.com/cykerway/complete-alias.git ${HOME}/.bash/complete-alias
+  git_clone_or_update https://github.com/magicmonty/bash-git-prompt.git ${HOME}/.bash/bash-git-prompt
+  git_clone_or_update https://github.com/jonmosco/kube-ps1.git ${HOME}/.bash/kube-ps1
+  git_clone_or_update https://github.com/milkbikis/powerline-shell ${HOME}/.bash/powerline-shell
 
   source ${HOME}/.bash_profile
 }
@@ -463,6 +417,7 @@ installZshConf() {
   ZSH=${ZSH:-${HOME}/.oh-my-zsh}
   ZSH_CUSTOM=${ZSH_CUSTOM:-${ZSH}/custom}
 
+  echo ">>> oh-my-zsh"
   if [ ! -d ${HOME}/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   else
@@ -471,62 +426,16 @@ installZshConf() {
     cd ${INSTALLDIR}
   fi
 
-  if [ ! -d ${ZSH_CUSTOM}/themes/spaceship-prompt ]; then
-    git clone https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
+  git_clone_or_update https://github.com/denysdovhan/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt"
+  if [ ! -s "${ZSH_CUSTOM}/themes/spaceship.zsh-theme" ]; then
     ln -s "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${ZSH_CUSTOM}/themes/spaceship.zsh-theme"
-  else
-    cd $ZSH_CUSTOM/themes/spaceship-prompt
-    git pull
-    cd ${INSTALLDIR}
   fi
-
-  if [ ! -d ${ZSH_CUSTOM}/themes/powerlevel10k ]; then
-    git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-  else
-    cd $ZSH_CUSTOM/themes/powerlevel10k
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-autosuggestions ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
-  else
-    cd $ZSH_CUSTOM/plugins/zsh-autosuggestions
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
-  else
-    cd $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-completions ]; then
-    git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM}/plugins/zsh-completions
-  else
-    cd $ZSH_CUSTOM/plugins/zsh-completions
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-history-substring-search ]; then
-    git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM}/plugins/zsh-history-substring-search
-  else
-    cd $ZSH_CUSTOM/plugins/zsh-history-substring-search
-    git pull
-    cd ${INSTALLDIR}
-  fi
-
-  if [ ! -d ${ZSH_CUSTOM}/plugins/zsh-autopair ]; then
-    git clone https://github.com/hlissner/zsh-autopair.git ${ZSH_CUSTOM}/plugins/zsh-autopair
-  else
-    cd ${ZSH_CUSTOM}/plugins/zsh-autopair
-    git pull
-    cd ${INSTALLDIR}
-  fi
+  git_clone_or_update https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+  git_clone_or_update https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+  git_clone_or_update https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+  git_clone_or_update https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM}/plugins/zsh-completions
+  git_clone_or_update https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM}/plugins/zsh-history-substring-search
+  git_clone_or_update https://github.com/hlissner/zsh-autopair.git ${ZSH_CUSTOM}/plugins/zsh-autopair
 
   cp files/shell/zsh/zshrc ${HOME}/.zshrc
   cp files/shell/zsh/p10k.zsh ${HOME}/.p10k.zsh
@@ -555,14 +464,7 @@ instrallRangerPlugins() {
   rm -f ${HOME}/.config/ranger/*.{sh,py}
   ranger --copy-config=all
   mkdir -p ${HOME}/.ranger_plugins/
-  cd ${HOME}/.ranger_plugins/
-  if [ ! -d ${HOME}/.ranger_plugins/ranger_devicons ]; then
-    git clone https://github.com/alexanderjeurissen/ranger_devicons.git
-  fi
-  cd ranger_devicons
-  git pull
-  make install
-  cd ${INSTALLDIR}
+  git_clone_or_update https://github.com/alexanderjeurissen/ranger_devicons.git ${HOME}/.ranger_plugins/ranger_devicons
 }
 
 installDotFiles() {
@@ -598,9 +500,9 @@ installDotFiles() {
   installVimPlugins
   instrallRangerPlugins
 
-  if [ -x "$(command -v bat)" ] && [ ! -d "${HOME}/.config/bat/themes/sublime-tomorrow-theme" ]; then
+  if [ -x "$(command -v bat)" ]; then
     mkdir -p "${HOME}/.config/bat/themes"
-    git clone https://github.com/theymaybecoders/sublime-tomorrow-theme.git "${HOME}/.config/bat/themes/sublime-tomorrow-theme"
+    git_clone_or_update https://github.com/theymaybecoders/sublime-tomorrow-theme.git "${HOME}/.config/bat/themes/sublime-tomorrow-theme"
     bat cache --build
   fi
 }

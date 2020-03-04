@@ -246,3 +246,4 @@ export SLACK_THEME_SHELL_PROFILE="${HOME}/.profile"
 
 export BASH_COMPLETION_USER_DIR="${HOME}/.local/share/bash-completion"
 
+export TESTSSL_INSTALL_DIR=~/.testssl
