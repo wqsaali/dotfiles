@@ -10,10 +10,10 @@
     au ColorScheme * hi! CursorLineNr cterm=NONE
     au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
     au ColorScheme * hi! Conceal ctermbg=none ctermfg=239  guibg=NONE guifg=#4e4e4e
-    if ! has('gui_macvim')
-      au ColorScheme * hi! Normal ctermbg=none guibg=NONE
-      au ColorScheme * hi! NonText ctermbg=none guibg=NONE
-    endif
+    " if ! has('gui_macvim')
+    "   au ColorScheme * hi! Normal ctermbg=none guibg=NONE
+    "   au ColorScheme * hi! NonText ctermbg=none guibg=NONE
+    " endif
     au ColorScheme * hi! Folded ctermbg=none guibg=NONE
     au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
     if g:os != 'Android'
@@ -40,6 +40,7 @@
   "   set transparency=5
   " endif
 
+  let g:airline_theme='distinguished'
   color Tomorrow-Night-Bright
   " color xcodedarkhc
   " color one

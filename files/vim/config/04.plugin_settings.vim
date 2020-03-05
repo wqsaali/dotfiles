@@ -220,12 +220,13 @@
 
   " clap-vim {{{
   " Maps to Alt-p
-  nnoremap π :Clap buffers<CR>
   nnoremap <C-p> :Clap files<CR>
   nnoremap <C-o> :Clap filer<CR>
   nnoremap <C-e> :Clap command<CR>
   nnoremap <C-j> :Clap tags<CR>
   nnoremap <C-f> :Clap grep<CR>
+  nnoremap <C-w>w :Clap windows<CR>
+  nnoremap <C-w>b :Clap buffers<CR>
 
   let g:clap_theme = 'atom_dark'
   " }}}
@@ -364,7 +365,6 @@
   let g:airline#extensions#tabline#show_buffers = 0
   let g:airline#extensions#whitespace#skip_indent_check_ft = {'go': ['mixed-indent-file']}
   let g:airline_powerline_fonts = 1
-  let g:airline_theme='distinguished'
   " }}}
 
 " }}}
