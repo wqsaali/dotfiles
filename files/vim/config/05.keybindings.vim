@@ -1,5 +1,10 @@
 " Shortcuts {{{
 
+  let mapleader = '\'
+
+  " lazy ':'
+  map ; :
+
   " Easier to exit terminal mode
   tnoremap <Esc> <C-\><C-n>
 
@@ -89,10 +94,6 @@
   " inoremap <C-tab>   <Esc>:tabnext<CR>i
   " inoremap <C-t>     <Esc>:tabnew<CR>
 
-  " lazy ':'
-  map ; :
-
-  let mapleader = '\'
   nnoremap <Leader>p :set paste<CR>
   nnoremap <Leader>o :set nopaste<CR>
   noremap  <Leader>g :GitGutterToggle<CR>

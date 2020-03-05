@@ -128,7 +128,9 @@
   Plug 'luisdavim/pretty-folds'
   Plug 'chrisbra/vim-diff-enhanced'
   "Plug 'scrooloose/syntastic'
-  Plug 'metakirby5/codi.vim'
+
+  "Plug 'gpanders/vim-medieval'
+  "Plug 'metakirby5/codi.vim'
 
   Plug 'flazz/vim-colorschemes'
   "Plug 'lilydjwg/colorizer'
