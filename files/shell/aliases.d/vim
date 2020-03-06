@@ -33,7 +33,7 @@ alias geeknote-vim='vi -c Geeknote'
 
 # Aliases for vim-plug
 alias vim-install='vi +PlugInstall +qall'
-alias vim-update='vi +PlugUpdate +PlugUpgrade +qall'
+alias vim-update='vi +PlugUpdate +PlugUpgrade +CocUpdate +qall'
 alias vim-clean='vi +PlugClean! +qall'
 
 alias gitv='vi +GV -c tabonly'

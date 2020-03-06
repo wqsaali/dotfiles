@@ -40,8 +40,9 @@
   "   set transparency=5
   " endif
 
-  let g:airline_theme='distinguished'
+  let g:airline_theme='base16_tomorrow'
   color Tomorrow-Night-Bright
+  "color PaperColor
   " color xcodedarkhc
   " color one
   " color dracula
@@ -50,25 +51,26 @@
 
 " typographic ligatures {{{
 " from: https://maximewack.com/post/emulating_ligatures/
-"  if has('conceal')
-"    syntax match customOperator '//' conceal cchar=÷
-"    syntax match customOperator '*' conceal cchar=×
-"    syntax match customOperator '==' conceal cchar=≣
-"    syntax match customOperator '!=' conceal cchar=≠
-"    syntax match customOperator '>=' conceal cchar=≥
-"    syntax match customOperator '<=' conceal cchar=≤
-"    syntax match customOperator '->' conceal cchar=→
-"    syntax match customOperator '|>' conceal cchar=⊳
-"    syntax match customOperator '<|' conceal cchar=⊲
-"    syntax match customOperator '>>' conceal cchar=»
-"    syntax match customOperator '<<' conceal cchar=«
-"    syntax match customOperator '\\' conceal cchar=λ
-"    syntax match customOperator '::' conceal cchar=∷
-"    syntax match customOperator '|=' conceal cchar=⊧
-"    syntax match customOperator '|.' conceal cchar=⊦
-"    syntax match customOperator '/=' conceal cchar=≠
-"
-"    hi link customOperator Operator
-"    hi! link Conceal Operator
-"  endif
+ "if has('conceal')
+ "  syntax clear customOperator
+ "  syntax match customOperator '//' conceal cchar=÷
+ "  syntax match customOperator '*' conceal cchar=×
+ "  syntax match customOperator '==' conceal cchar=≣
+ "  syntax match customOperator '!=' conceal cchar=≠
+ "  syntax match customOperator '>=' conceal cchar=≥
+ "  syntax match customOperator '<=' conceal cchar=≤
+ "  syntax match customOperator '->' conceal cchar=→
+ "  syntax match customOperator '|>' conceal cchar=⊳
+ "  syntax match customOperator '<|' conceal cchar=⊲
+ "  syntax match customOperator '>>' conceal cchar=»
+ "  syntax match customOperator '<<' conceal cchar=«
+ "  syntax match customOperator '\\' conceal cchar=λ
+ "  syntax match customOperator '::' conceal cchar=∷
+ "  syntax match customOperator '|=' conceal cchar=⊧
+ "  syntax match customOperator '|.' conceal cchar=⊦
+ "  syntax match customOperator '/=' conceal cchar=≠
+
+ "  hi link customOperator Operator
+ "  hi! link Conceal Operator
+ "endif
 " }}}

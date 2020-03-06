@@ -101,7 +101,7 @@
 
   "Plug 'sjl/gundo.vim'
   "Plug 'luochen1990/indent-detector.vim'
-  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+  Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
   Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
@@ -133,6 +133,8 @@
   "Plug 'metakirby5/codi.vim'
 
   Plug 'flazz/vim-colorschemes'
+  "Plug 'rafi/awesome-vim-colorschemes'
+  "Plug 'rainglow/vim'
   "Plug 'lilydjwg/colorizer'
   "Plug 'chriskempson/base16-vim'
   "Plug 'dracula/vim'
@@ -144,19 +146,23 @@
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'
   Plug 'tell-k/vim-autopep8', {'for': 'python'}
-  Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoUpdateBinaries' }
+
+  Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries'}
+  Plug 'sebdah/vim-delve', {'for': 'go'}
+
   "Plug 'chr4/nginx.vim'
-  "Plug 'elzr/vim-json', { 'for': 'json' }
-  "Plug 'cespare/vim-toml', { 'for': 'toml' }
+  "Plug 'elzr/vim-json', {'for': 'json'}
+  "Plug 'cespare/vim-toml', {'for': 'toml'}
   "Plug 'pearofducks/ansible-vim'
-  Plug 'maralla/vim-toml-enhance', { 'for': 'toml' }
-  "Plug 'mustache/vim-mustache-handlebars', { 'for': ['mustache', 'handlebars'] }
-  "Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+  Plug 'maralla/vim-toml-enhance', {'for': 'toml'}
+  "Plug 'mustache/vim-mustache-handlebars', {'for': ['mustache', 'handlebars']}
+
+  "Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
   if has('nvim')
-    Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app & yarn install'  }
+    Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app & yarn install' }
   else
-    Plug 'iamcco/mathjax-support-for-mkdp', { 'for': 'markdown' }
-    Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+    Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
+    Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
   endif
 
   Plug 'sheerun/vim-polyglot'
