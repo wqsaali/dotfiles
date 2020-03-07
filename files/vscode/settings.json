@@ -37,5 +37,12 @@
     "vsicons.dontShowNewVersionMessage": true,
     "vim.neovimPath": "/usr/local/bin/nvim",
     "vim.enableNeovim": true,
-    "vim.useSystemClipboard": true
+    "vim.useSystemClipboard": true,
+    "vs-kubernetes": {
+        "vs-kubernetes.kubectl-path.mac": "/Users/l0d01f4/.vs-kubernetes/tools/kubectl/kubectl",
+        "vs-kubernetes.draft-path.mac": "/Users/l0d01f4/.vs-kubernetes/tools/draft/darwin-amd64/draft",
+        "vs-kubernetes.minikube-path.mac": "/Users/l0d01f4/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vs-kubernetes.helm-path.mac": "/Users/l0d01f4/.vs-kubernetes/tools/helm/darwin-amd64/helm"
+    },
+    "go.formatTool": "goimports"
 }
