@@ -51,7 +51,12 @@
   set lazyredraw
   set ttimeout
   set ttimeoutlen=50
-  set updatetime=250
+  set updatetime=500
+
+  if has('balloon_eval')
+    set ballooneval
+    set ballondelay=300
+  endif
 
   set laststatus=2
   set ruler

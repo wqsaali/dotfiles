@@ -141,13 +141,17 @@
   "Plug 'rakr/vim-one'
   "Plug 'cormacrelf/vim-colors-github'
   "Plug 'arzg/vim-colors-xcode'
+  "Plug 'jaredgorski/spacecamp'
+  "Plug 'NLKNguyen/papercolor-theme'
 
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'
   Plug 'tell-k/vim-autopep8', {'for': 'python'}
 
-  Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries'}
+  "Plug 'govim/govim', {'for': 'go'}
+  "Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries'}
+  " Plug 'arp242/gopher.vim', {'for': 'go'}
   Plug 'sebdah/vim-delve', {'for': 'go'}
 
   "Plug 'chr4/nginx.vim'
@@ -188,6 +192,7 @@ let g:coc_global_extensions = [
       \ 'coc-highlight',
       \ 'coc-snippets',
       \ 'coc-markdownlint',
+      \ 'coc-diagnostic',
       \ 'coc-sh',
       \ 'coc-json',
       \ 'coc-yaml',

@@ -79,8 +79,8 @@
   inoremap <S-PageUp>   <Esc>:tabprevious<CR>i
   nnoremap <S-PageDown> :tabnext<CR>
   inoremap <S-PageDown> <Esc>:tabnext<CR>i
-  nnoremap <C-t>        :tabnew<CR>
-  inoremap <C-t>        <Esc>:tabnew<CR>i
+  "nnoremap <C-t>        :tabnew<CR>
+  "inoremap <C-t>        <Esc>:tabnew<CR>i
   nnoremap <C-k>        :tabclose<CR>
   inoremap <C-k>        <Esc>:tabclose<CR>i
   nnoremap <S-h>        gT

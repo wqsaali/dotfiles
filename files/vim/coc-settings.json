@@ -1,32 +1,88 @@
 {
   "languageserver": {
-    "golang": {
+    "gopls": {
       "command": "gopls",
       "args": ["-remote=auto"],
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
+      "filetypes": ["go"],
+      "disableWorkspaceFolders": true,
+      "initializationOptions": {
+        "staticcheck": true,
+        "usePlaceholders": true,
+        "completeUnimported": true,
+        "caseSensitiveCompletion": true
+      }
     },
-    "terraform": {
+    "terraform-lsp": {
       "command": "terraform-lsp",
       "filetypes": ["terraform"],
       "initializationOptions": {}
     }
   },
+  "go.enable": false,
+  "go.goplsArgs": ["-remote=auto"],
+  "go.goplsOptions": {
+    "completeUnimported": true
+  },
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
+  // "codeLens.enable": true,
+  // "diagnostic.virtualText": true,
+  // "diagnostic.checkCurrentLine": true,
+  "suggest.timeout": 5000,
   "suggest.noselect": false,
+  "suggest.enablePreview": true,
+  "suggest.maxPreviewWidth": 35,
+  "suggest.detailMaxLength": 100,
+  "suggest.detailField": "preview",
+  "suggest.removeDuplicateItems": true,
+  "suggest.snippetIndicator": " \ue796",
+  "suggest.completionItemKindLabels": {
+    "keyword": "\uf1de",
+    "variable": "\ue79b",
+    "value": "\uf89f",
+    "operator": "\u03a8",
+    "function": "\u0192",
+    "reference": "\ufa46",
+    "constant": "\uf8fe",
+    "method": "\uf09a",
+    "struct": "\ufb44",
+    "class": "\uf0e8",
+    "interface": "\uf417",
+    "text": "\ue612",
+    "enum": "\uf435",
+    "enumMember": "\uf02b",
+    "module": "\uf40d",
+    "color": "\ue22b",
+    "property": "\ue624",
+    "field": "\uf9be",
+    "unit": "\uf475",
+    "event": "\ufacd",
+    "file": "\uf723",
+    "folder": "\uf114",
+    "snippet": "\ue60b",
+    "typeParameter": "\uf728",
+    "default": "\uf29c"
+  },
+  // "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
+  "prettier.printWidth": 160,
+  "coc.preferences.highlightTimeout": 500,
+  "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",
     "typescriptreact",
     "json",
+    "yaml",
     "javascriptreact",
     "typescript.tsx",
-    "graphql"
+    "graphql",
+    "go"
   ],
   "git.enableGlobalStatus": false,
-  "go.enable": false,
-  "go.goplsOptions": {
-    "completeUnimported": true
-  },
-  "highlight.colors.enable": false
+  "git.addGBlameToVirtualText": true,
+  "highlight.colors.enable": false,
+  "markdownlint.config": {
+    "default": true,
+    "line-length": false
+  }
 }

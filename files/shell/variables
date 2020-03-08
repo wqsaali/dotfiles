@@ -226,6 +226,7 @@ export BAT_THEME='Tomorrow-Night-Bright'
 # GO config
 GOPROXY=https://proxy.golang.org
 GO111MODULE=on
+GOVIM_GOPLS_FLAGS=-remote=auto
 
 # fzf config
 # Use ag for feeding into fzf for searching files.

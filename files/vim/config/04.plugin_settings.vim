@@ -338,7 +338,7 @@
   let g:go_highlight_build_constraints = 1
 
   "let g:go_auto_sameids = 1
-  "let g:go_auto_type_info = 1
+  let g:go_auto_type_info = 1
 
   " disable vim-go :GoDef short cut (gd)
   " this is handled by LanguageClient [LC]
