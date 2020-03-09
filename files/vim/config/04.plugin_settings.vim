@@ -350,6 +350,10 @@
   " au Filetype go nnoremap <leader>t :tab split <CR>:exe 'GoDef'<CR>
   " }}}
 
+  " vimspector {{{
+  let g:vimspector_enable_mappings = 'HUMAN'
+  " }}}
+
   " Codi {{{
   " Use pry instead of irb
   " let g:codi#interpreters = {

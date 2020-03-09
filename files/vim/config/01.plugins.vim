@@ -169,6 +169,13 @@
     Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
   endif
 
+  function! BuildVimspector(info)
+    if a:info.status == 'installed' || a:info.force
+      !./install_gadget.py --all
+    endif
+  endfunction
+  Plug 'puremourning/vimspector', {'for': ['c', 'cpp', 'go', 'python', 'java', 'javascript', 'sh'], 'do': function('BuildVimspector')}
+
   Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 

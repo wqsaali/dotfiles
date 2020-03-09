@@ -119,6 +119,9 @@ osConfigs() {
     defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true && \
     defaults write -g WebKitDeveloperExtras -bool true
 
+  # Enable Developer Mode using XCode
+  sudo /usr/sbin/DevToolsSecurity -enable
+
   echo 'You may need to restart for some changes to take effect!'
 }
 
