@@ -19,6 +19,8 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
+set tagfunc=CocTagFunc
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -49,39 +51,11 @@ endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Tag stack
-" https://github.com/neoclide/coc.nvim/issues/1054
-function! s:gotoDefinition() abort
-  let l:current_tag = expand('<cWORD>')
-
-  let l:current_position    = getcurpos()
-  let l:current_position[0] = bufnr()
-
-  let l:current_tag_stack = gettagstack()
-  let l:current_tag_index = l:current_tag_stack['curidx']
-  let l:current_tag_items = l:current_tag_stack['items']
-
-  if CocAction('jumpDefinition')
-    let l:new_tag_index = l:current_tag_index + 1
-    let l:new_tag_item = [#{tagname: l:current_tag, from: l:current_position}]
-    let l:new_tag_items = l:current_tag_items[:]
-    if l:current_tag_index <= len(l:current_tag_items)
-      call remove(l:new_tag_items, l:current_tag_index - 1, -1)
-    endif
-    let l:new_tag_items += l:new_tag_item
-
-    call settagstack(winnr(), #{curidx: l:new_tag_index, items: l:new_tag_items}, 'r')
-  endif
-endfunction
-
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-"nmap <silent> <C-]> <Plug>(coc-definition)
-nmap <silent> <C-]> :call <SID>gotoDefinition()<CR>
-nmap <silent> <C-t> :pop<CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>

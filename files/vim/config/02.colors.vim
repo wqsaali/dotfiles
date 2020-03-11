@@ -13,6 +13,8 @@
     " if ! has('gui_macvim')
     "   au ColorScheme * hi! Normal ctermbg=none guibg=NONE
     "   au ColorScheme * hi! NonText ctermbg=none guibg=NONE
+    " else
+    "   set transparency=5
     " endif
     au ColorScheme * hi! Folded ctermbg=none guibg=NONE
     au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
@@ -36,17 +38,9 @@
 
   set guifont=FuraCode\ Nerd\ Font\ Mono:h12
 
-  " if has('gui_macvim')
-  "   set transparency=5
-  " endif
-
-  let g:airline_theme='base16_tomorrow'
+  let g:clap_theme = 'atom_dark'
+  let g:airline_theme = 'base16_tomorrow'
   color Tomorrow-Night-Bright
-  "color PaperColor
-  " color xcodedarkhc
-  " color one
-  " color dracula
-  " color github
 " }}}
 
 " typographic ligatures {{{

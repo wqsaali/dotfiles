@@ -228,7 +228,6 @@
   nnoremap <C-w>w :Clap windows<CR>
   nnoremap <C-w>b :Clap buffers<CR>
 
-  let g:clap_theme = 'atom_dark'
   " }}}
 
   " CtrlP {{{

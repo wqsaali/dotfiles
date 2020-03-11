@@ -27,8 +27,6 @@
   Plug 'wincent/terminus'
   Plug 'kassio/neoterm'
 
-  Plug 'airblade/vim-gitgutter'
-
   Plug 'tpope/vim-fugitive'
   Plug 'gregsexton/gitv'
   Plug 'junegunn/gv.vim'

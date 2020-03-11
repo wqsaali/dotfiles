@@ -15,6 +15,7 @@ rbac-lookup
 rbac-view
 resource-capacity
 sniff
+status
 sudo
 tail
 tree

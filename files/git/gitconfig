@@ -44,7 +44,7 @@
   pill = pull
 [core]
   # pager = less -RF -X
-  pager = delta --dark --theme='Monokai Extended Bright' --file-style=box --hunk-style=plain --tabs=2
+  pager = delta --dark --file-style=box --hunk-style=plain --tabs=2
   editor = vim
   excludesfile = ~/.gitexcludes
 # [pager]
