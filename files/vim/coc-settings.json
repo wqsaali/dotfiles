@@ -19,9 +19,11 @@
       "initializationOptions": {}
     }
   },
-  "go.enable": false,
+  "go.enable": true,
   "go.goplsArgs": ["-remote=auto"],
   "go.goplsOptions": {
+    "staticcheck": true,
+    "usePlaceholders": true,
     "completeUnimported": true
   },
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
@@ -66,7 +68,8 @@
   // "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
   "prettier.printWidth": 160,
   "coc.preferences.highlightTimeout": 500,
-  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnType": false,
+  "coc.preferences.formatOnInsertLeave": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",

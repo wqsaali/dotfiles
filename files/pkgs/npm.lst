@@ -30,6 +30,7 @@ parse-columns-cli
 proxy-pac-proxy
 ramda-cli
 shrinkpack
+svg-term-cli
 tiny-care-terminal
 underscore-cli
 vtop
