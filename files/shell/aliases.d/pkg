@@ -16,9 +16,11 @@ function goclean() {
   go clean -modcache
   rm -rf ~/.glide/
   rm -rf ~/go/.cache/
-  rm -rf ~/go/pkg/*
-  rm -rf ~/go/src/*
   rm -rf ~/.cache/go-build/
+  for gp in ${GOPATH//:/ }; do
+    rm -rf $pg/pkg
+  done
+  # rm -rf ~/go/src/*
 }
 alias go-clean='goclean'
 
