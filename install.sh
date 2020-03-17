@@ -127,10 +127,12 @@ installKubeScripts() {
   installFromGithub 'Praqma/helmsman' "${1}" "${2}"
   installFromGithub 'shyiko/kubesec' "${1}" "${2}"
   installFromGithub 'kubermatic/kubeone' "${1}" "${2}"
-  installFromGithub 'k14s/ytt' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
-  installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
+  # installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
+  installFromGithub 'k14s/ytt' "${1}" "${2}"
+
+  installHelmPlugins
 }
 
 installDCOScli() {
@@ -226,7 +228,11 @@ installHelmPlugins() {
       brew install kubernetes-helm
     fi
   fi
-  helm init --client-only
+
+  if [ "$(helm version --short 2>/dev/null | grep -Eo 'Client')" == "Client" ]; then
+    helm init --client-only
+  fi
+
   while read -r PKG; do
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
@@ -252,6 +258,14 @@ installScripts() {
     termux-fix-shebang ${HOME}/.local/bin/*
   fi
   installTestssl
+
+  if [[ "$OSTYPE" != *"android"* ]]; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      installKubeScripts 'darwin' '64'
+    else
+      installKubeScripts 'linux' '64'
+    fi
+  fi
 }
 
 installChefVM() {
@@ -318,14 +332,6 @@ installVimPlugins() {
     ln -s ${HOME}/.vim/ftplugin/ ${HOME}/.config/nvim/ftplugin
   fi
 
-  # Using vim Vundle
-  # git_clone_or_update https://github.com/VundleVim/Vundle.vim.git ${HOME}/.vim/bundle/Vundle.vim
-  #
-  # vim +PluginInstall +qall
-  # cd ${HOME}/.vim/bundle/YouCompleteMe
-  # ./install.py
-  # cd ${INSTALLDIR}
-
   # Using vim-plug
   if [ ! -f ~/.vim/autoload/plug.vim ]; then
     curl -sLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -361,9 +367,9 @@ installShellConf() {
   done
   cat files/shell/aliases | sed -e "${sedcmd}" > ${HOME}/.aliases
 
+  # installFishConf
   installBashConf
   installZshConf
-  # installFishConf
 }
 
 installBashConf() {
@@ -526,12 +532,6 @@ installAll() {
     installVscodePackages
     installGoss
     installEls
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      installKubeScripts 'darwin' '64'
-    else
-      installKubeScripts 'linux' '64'
-    fi
-    installHelmPlugins
   fi
   # installWebApps
   installDotFiles

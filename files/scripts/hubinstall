@@ -53,7 +53,7 @@ function installFromGithub() {
   url=$(curl -sL https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\")) | .browser_download_url?")
   if [ -z "${url}" ]; then
     echo 'Error: no releases found, note that pre-releases are not supported!'
-    exit 1
+    return 1
   fi
   artifact=$(basename ${url})
 
