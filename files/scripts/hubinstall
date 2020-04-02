@@ -48,6 +48,10 @@ function installFromGithub() {
   arch="${3:-64}"
   name="${4:-$(basename ${project})}"
 
+  if [[ "${os}" == "darwin" ]]; then
+    os='(darwin|osx|macos)'
+  fi
+
   mkdir -p ${install_to}
 
   url=$(curl -sL https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\")) | .browser_download_url?")

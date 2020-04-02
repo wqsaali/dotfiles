@@ -130,6 +130,7 @@ installKubeScripts() {
   installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
   # installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
+  installFromGithub 'nutellinoit/kubenvz' "${1}" "${2}"
   installFromGithub 'k14s/ytt' "${1}" "${2}"
 
   installHelmPlugins
