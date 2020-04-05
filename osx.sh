@@ -141,7 +141,8 @@ installPackages() {
   sudo spctl --master-disable
   installHomebrew
 
-  while read -r TAP; do
+  while IFS='' read -r TAP; do
+    [[ -z "${TAP}" ]] && continue
     [[ "${TAP}" =~ ^#.*$ ]] && continue
     [[ "${TAP}" =~ ^\\s*$ ]] && continue
     brew_tap "${TAP}"
@@ -151,14 +152,16 @@ installPackages() {
   brew_install_or_upgrade cask
 
   # Install brew pkgs
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     brew_install_or_upgrade "${PKG}"
   done < files/pkgs/brew.lst
 
   # Install cask pkgs
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     cask_install "${PKG}"

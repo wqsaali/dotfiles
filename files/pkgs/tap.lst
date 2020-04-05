@@ -24,6 +24,7 @@ kontena/chpharos
 mike-engel/jwt-cli
 neovim/neovim
 reactiveops/tap
+reconquest/tubekit https://github.com/reconquest/tubekit.git
 wagoodman/dive
 wallix/awless
 yudai/gotty

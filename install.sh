@@ -8,6 +8,7 @@ ARGS="${@}"
 
 source ${dotfiles_dir}/files/scripts/hubinstall
 source ${dotfiles_dir}/files/scripts/hashinstall
+source ${dotfiles_dir}/files/scripts/gobinaries
 
 isFunction() { declare -F -- "$@" >/dev/null; }
 
@@ -104,7 +105,9 @@ installKrew() {
 
   # install krew packages
   kubectl krew update
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     kubectl krew install "${PKG}"
@@ -153,7 +156,8 @@ installDepcon() {
 }
 
 installCargo() {
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     cargo install "${PKG}"
@@ -161,7 +165,8 @@ installCargo() {
 }
 
 installGems() {
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     gem_install_or_update "${PKG}"
@@ -169,7 +174,8 @@ installGems() {
 }
 
 installChefGems() {
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     chef gem install "${PKG}"
@@ -177,7 +183,8 @@ installChefGems() {
 }
 
 installPips() {
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     pip install -U "${PKG}"
@@ -185,7 +192,8 @@ installPips() {
 }
 
 installNpms() {
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     npm install -g "${PKG}"
@@ -202,28 +210,30 @@ cleanGoPkgs() {
 }
 
 installGoPkgs() {
-  cleanGoPkgs
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     echo ">>> ${PKG}"
-    go get -u "${PKG}"
+    goinstall "${PKG}"
   done < files/pkgs/go.lst
   cd ${INSTALLDIR}
-  cleanGoPkgs
-  echo ">>> helm"
-  go get -d -u k8s.io/helm/cmd/helm
-  cd ${GOPATH/:*}/src/k8s.io/helm/
-  make bootstrap build
-  mv bin/* ${GOPATH/:*}/bin/
-  echo ">>> Cleanup go sources"
-  cd ${INSTALLDIR}
-  cleanGoPkgs
 }
 
 installHelmPlugins() {
   if ! [ -x "$(command -v helm)" ]; then
-    if [[ "$OSTYPE" != "darwin"* ]]; then
+    if [[ "$OSTYPE" == *"android"* ]]; then
+      cd ${INSTALLDIR}
+      cleanGoPkgs
+      echo ">>> helm"
+      go get -d -u k8s.io/helm/cmd/helm
+      cd ${GOPATH/:*}/src/k8s.io/helm/
+      make bootstrap build
+      mv bin/* ${GOPATH/:*}/bin/
+      echo ">>> Cleanup go sources"
+      cd ${INSTALLDIR}
+      cleanGoPkgs
+    elif [[ "$OSTYPE" != "darwin"* ]]; then
       sudo apt-get install helm
     else
       brew install kubernetes-helm
@@ -234,7 +244,8 @@ installHelmPlugins() {
     helm init --client-only
   fi
 
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     helm plugin install "${PKG}"
@@ -296,7 +307,8 @@ installVscodeConfig() {
 installVscodePackages() {
   installVscodeConfig
 
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     code --install-extension "${PKG}"
@@ -413,7 +425,8 @@ installFishConf() {
   fisher fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
   fisher teapot
 
-  while read -r PKG; do
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     omf install "${PKG}"
