@@ -41,9 +41,10 @@
   Plug 'terryma/vim-multiple-cursors'
 
   Plug 'ryanoasis/vim-devicons'
-  Plug 'preservim/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
-  Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+
+  " Plug 'preservim/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
+  " Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+  " Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 
   Plug 'liuchengxu/vista.vim'
 
@@ -105,6 +106,7 @@
 " coc-extensions {{{
 let g:coc_global_extensions = [
       \ 'coc-marketplace',
+      \ 'coc-explorer',
       \ 'coc-git',
       \ 'coc-gitignore',
       \ 'coc-pairs',
@@ -123,7 +125,9 @@ let g:coc_global_extensions = [
       \ 'coc-go',
       \ 'coc-html',
       \ 'coc-css',
+      \ 'coc-groovy',
       \ 'coc-phpls',
+      \ 'coc-sql',
       \ 'coc-docker',
       \ ]
 " }}}
