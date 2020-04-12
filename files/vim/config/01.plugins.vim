@@ -42,10 +42,6 @@
 
   Plug 'ryanoasis/vim-devicons'
 
-  " Plug 'preservim/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] } "Loads only when opening NERDTree }
-  " Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
-  " Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
-
   Plug 'liuchengxu/vista.vim'
 
   Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
@@ -54,7 +50,9 @@
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-commentary'
-  "Plug 'preservim/nerdcommenter'
+  "Plug 'tpope/vim-unimpaired'"
+  "Plug 'tpope/vim-endwise'
+  "Plug 'tpope/vim-abolish'
   Plug 'nvie/vim-togglemouse'
   Plug 'Konfekt/FastFold'
   Plug 'luisdavim/pretty-folds'

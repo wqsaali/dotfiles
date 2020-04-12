@@ -1,4 +1,5 @@
 {
+  "explorer.quitOnOpen":true,
   "languageserver": {
     "terraform-lsp": {
       "command": "terraform-lsp",
