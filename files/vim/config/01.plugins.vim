@@ -36,6 +36,7 @@
   Plug 'nelstrom/vim-visual-star-search'
 
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+  Plug 'vn-ki/coc-clap'
 
   Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'
