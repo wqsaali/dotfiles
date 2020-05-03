@@ -1,5 +1,7 @@
+access-matrix
 bulk-action
 ca-cert
+ctx
 debug-shell
 doctor
 exec-all
@@ -9,6 +11,7 @@ mtail
 neat
 node-restart
 node-shell
+ns
 pod-logs
 pod-shell
 rbac-lookup

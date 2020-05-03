@@ -124,8 +124,8 @@ installKubeScripts() {
 
   installFromRawGithub 'johanhaleby/kubetail'
   installFromRawGithub 'ctron/kill-kube-ns'
-  installFromRawGithub 'ahmetb/kubectx'
-  installFromRawGithub 'ahmetb/kubectx' 'kubens'
+  # installFromRawGithub 'ahmetb/kubectx'
+  # installFromRawGithub 'ahmetb/kubectx' 'kubens'
 
   installFromGithub 'Praqma/helmsman' "${1}" "${2}"
   installFromGithub 'shyiko/kubesec' "${1}" "${2}"
