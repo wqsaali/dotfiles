@@ -160,7 +160,7 @@ installCargo() {
     [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    cargo install "${PKG}"
+    cargo install --force "${PKG}"
   done < files/pkgs/cargo.lst
 }
 
