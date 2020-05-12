@@ -478,6 +478,7 @@ createSkeleton() {
   mkdir -p ${HOME}/.aliases.d
   mkdir -p ${HOME}/.ptpython
   mkdir -p ${HOME}/.atom
+  mkdir -p ${HOME}/.kube
 }
 
 instrallRangerPlugins() {
@@ -503,6 +504,7 @@ installDotFiles() {
     cp -r files/config/${dir##*/}/* ${HOME}/.config/${dir##*/}/
   done
 
+  cp files/config/kubie.yaml ${HOME}/.kube/kubie.yaml
   cp files/config/starship.toml ${HOME}/.config/starship.toml
   cp files/shell/screenrc ${HOME}/.screenrc
   cp files/atom/* ${HOME}/.atom/
