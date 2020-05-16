@@ -15,6 +15,7 @@ azure-cli
 bash
 bash-completion@2
 bat
+bats
 bbl
 bfg
 binutils
@@ -103,6 +104,7 @@ jsonnet
 jwt-cli
 k3d
 k9s
+kind
 kompose
 kops
 kube-aws

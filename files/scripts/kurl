@@ -1,0 +1,61 @@
+#! /usr/bin/env bash
+# A script to allow exploring the kubernetes APIs using curl
+
+SERVICE_ACCOUNT=admin-user
+NS=kube-system
+URI=${1:-'api/v1/namespaces/kube-system/pods?labelSelector=app=helm,name=tiller'}
+
+function usage() {
+  if ! [ -z "${1}" ] ; then
+    echo -e "${1}"
+    echo ''
+  fi
+  echo "Usage: $(basename $0) [<flags>] <resource>"
+  echo ''
+  echo 'Flags:'
+  echo '  -h, --help         display help'
+  echo '  -d, --debug        enable debug output'
+  echo '  -s, --sa           Service account name'
+  echo '  -n, --namespace    Service account namespace'
+  echo '  -f, --force        Force reauthentication'
+  exit 1
+}
+
+if ! [ -x "$(command -v jq)" ]; then
+  echo -e "You need jq.\nTerminating...\n" >&2
+  exit 1
+fi
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]; do
+  key="$1"
+
+  case $key in
+      -h | --help ) usage ;;
+      -d | --debug ) DEBUG=true; shift ;;
+      -s | --sa ) SERVICE_ACCOUNT="$2"; shift 2 ;;
+      -n | --namespace ) NS="$2"; shift 2 ;;
+      -f | --force ) rm -rf /tmp/kurlEnv; shift ;;
+      *)
+      POSITIONAL+=("$1") # save it in an array for later
+      shift # past argument
+      ;;
+  esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+if [ -f "/tmp/kurlEnv" ]; then
+  source /tmp/kurlEnv
+else
+  SECRET=$(kubectl get serviceaccount ${SERVICE_ACCOUNT} -n ${NS} -o json | jq -Mr '.secrets[].name | select(contains("token"))')
+  TOKEN=$(kubectl get secret ${SECRET} -n ${NS} -o json | jq -Mr '.data.token' | base64 -d)
+  kubectl get secret ${SECRET} -n ${NS} -o json | jq -Mr '.data["ca.crt"]' | base64 -d > /tmp/ca.crt
+  APISERVER=https://$(kubectl -n default get endpoints kubernetes --no-headers | awk '{ print $2 }'| cut -d, -f1)
+
+  cat <<EOF > /tmp/kurlEnv
+APISERVER="${APISERVER}"
+TOKEN="${TOKEN}"
+EOF
+fi
+
+curl "${APISERVER}/${URI}" --header "Authorization: Bearer $TOKEN" --cacert /tmp/ca.crt
