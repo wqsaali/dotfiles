@@ -104,6 +104,7 @@ jsonnet
 jwt-cli
 k3d
 k9s
+kakoune
 kind
 kompose
 kops

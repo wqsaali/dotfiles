@@ -352,6 +352,27 @@ installVimPlugins() {
   vim +PlugInstall +qall
 }
 
+installKakPlugins() {
+  mkdir -p "${HOME}/.config/kak/plugins/"
+  mkdir -p "${HOME}/.config/kak-lsp/"
+
+  git_clone_or_update https://github.com/andreyorst/plug.kak.git ${HOME}/.config/kak/plugins/plug.kak
+
+  cd ${INSTALLDIR}
+
+  cp files/kak/kakrc ${HOME}/.config/kak/kakrc
+  cp files/kak/*.kak ${HOME}/.config/kak/
+  cp -r files/kak/snippets ${HOME}/.config/kak/
+  cp files/kak/kak-lsp.toml ${HOME}/.config/kak-lsp/kak-lsp.toml
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [ ! -s $HOME/Library/Preferences/kak-lsp ]; then
+      ln -s ${HOME}/.config/kak-lsp $HOME/Library/Preferences/kak-lsp
+    fi
+  fi
+
+}
+
 installGitConf() {
   source config.sh
   #read -p "Please enter your name (for gitconfig):" NAME
@@ -585,6 +606,9 @@ case "$CMD" in
     ;;
   "vimplugins" | "vim")
     installVimPlugins
+    ;;
+  "KakPlugins" | "kak")
+    installKakPlugins
     ;;
   "atompackages" | "apkgs" | "atom" | "apm")
     installAtomPackages
