@@ -1,5 +1,4 @@
 {
-  "explorer.quitOnOpen":true,
   "languageserver": {
     "terraform-lsp": {
       "command": "terraform-lsp",
@@ -8,12 +7,14 @@
     }
   },
   "go.enable": true,
+  "go.goplsPath": "~/.config/coc/extensions/coc-go-data/bin/gopls",
   "go.goplsArgs": ["-remote=auto"],
   "go.goplsOptions": {
     "staticcheck": true,
     "usePlaceholders": true,
     "completeUnimported": true
   },
+  "explorer.quitOnOpen": true,
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
   // "codeLens.enable": true,
   // "diagnostic.virtualText": true,
