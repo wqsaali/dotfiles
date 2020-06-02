@@ -1,8 +1,5 @@
 browsh-org/homebrew-browsh
 buo/cask-upgrade
-caskroom/cask
-caskroom/drivers
-caskroom/fonts
 chef/chef
 cloudfoundry/tap
 crisidev/homebrew-chunkwm
@@ -11,6 +8,8 @@ derailed/k9s
 derailed/popeye
 egison/egison
 habitat-sh/habitat
+homebrew/cask-drivers
+homebrew/cask-fonts
 homebrew/cask-versions
 homebrew/command-not-found
 homebrew/services
