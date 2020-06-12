@@ -2,6 +2,8 @@
 [user]
   email = ${EMAIL}
   name = ${NAME}
+[pull]
+  rebase = false
 [push]
   default = simple
 [fetch]
