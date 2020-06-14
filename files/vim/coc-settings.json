@@ -7,12 +7,16 @@
     }
   },
   "go.enable": true,
+  "go.checkForUpdates": "install",
   "go.goplsPath": "~/.config/coc/extensions/coc-go-data/bin/gopls",
   "go.goplsArgs": ["-remote=auto"],
   "go.goplsOptions": {
     "staticcheck": true,
     "usePlaceholders": true,
-    "completeUnimported": true
+    "completeUnimported": true,
+    "completionDocumentation": true,
+    "deepCompletion": true,
+    "fuzzyMatching": true
   },
   "explorer.quitOnOpen": true,
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
