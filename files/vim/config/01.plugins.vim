@@ -115,6 +115,7 @@ let g:coc_global_extensions = [
       \ 'coc-snippets',
       \ 'coc-markdownlint',
       \ 'coc-diagnostic',
+      \ 'coc-swagger',
       \ 'coc-docker',
       \ 'coc-sh',
       \ 'coc-json',
