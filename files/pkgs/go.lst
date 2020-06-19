@@ -1,3 +1,4 @@
+# github.com/git-hooks/git-hooks
 # github.com/hashicorp/terraform
 # k8s.io/helm/cmd/helm
 # k8s.io/kubernetes/cmd/kubectl
@@ -21,6 +22,7 @@ github.com/liggitt/audit2rbac
 github.com/pkg/errors
 github.com/rancher/k3d
 github.com/reactiveops/rbac-lookup
+github.com/sahil-lakhwani/creyaml
 github.com/spf13/viper
 github.com/sqs/goreturns
 github.com/talos-systems/conform

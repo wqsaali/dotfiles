@@ -30,6 +30,7 @@
   Plug 'tpope/vim-dispatch'
 
   Plug 'tpope/vim-fugitive'
+  Plug 'rbong/vim-flog'
   Plug 'gregsexton/gitv'
   Plug 'junegunn/gv.vim'
 
