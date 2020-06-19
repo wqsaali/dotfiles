@@ -59,8 +59,9 @@
   Plug 'luisdavim/pretty-folds'
   Plug 'chrisbra/vim-diff-enhanced'
 
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  " Plug 'vim-airline/vim-airline'
+  " Plug 'vim-airline/vim-airline-themes'
+  Plug 'rbong/vim-crystalline'
 
   Plug 'flazz/vim-colorschemes'
 
