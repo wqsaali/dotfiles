@@ -66,7 +66,43 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
-setopt HIST_IGNORE_SPACE
+
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
+setopt hist_ignore_space      # ignore commands that start with space
+setopt append_history         # append rather then overwrite
+setopt extended_history       # save timestamp
+setopt inc_append_history     # add history immediately after typing a command
+setopt hist_reduce_blanks     # remove superfluous blanks
+
+_eternal_history_histfile=~/.zsh_eternal_history
+
+_eternal_history_mark_for_save() {
+  __eternal_history_command_entered=true
+}
+
+_eternal_history_save() {
+  if $__eternal_history_command_entered; then
+    echo $$ $USER "$(fc -liD -1)" >> $_eternal_history_histfile
+  fi
+  __eternal_history_command_entered=false
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook preexec _eternal_history_mark_for_save
+add-zsh-hook precmd _eternal_history_save
+
+hgrep() {
+  if [ ! -z "$1" ]; then
+    grep "${1}" $_eternal_history_histfile
+  else
+    history
+  fi
+}
+alias histg='hgrep'
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
