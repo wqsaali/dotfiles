@@ -25,6 +25,8 @@
   // "diagnostic.checkCurrentLine": true,
   "diagnostic.errorSign": "\u2718",
   "diagnostic.warningSign": "\u26A0",
+  // "coc.preferences.snippetStatusText": "\u2710",
+  // "prettier.statusItemText": "\u272C",
   "diagnostic.infoSign": "\u2690",
   "suggest.timeout": 5000,
   "suggest.noselect": false,

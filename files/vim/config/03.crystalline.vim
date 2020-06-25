@@ -43,7 +43,7 @@ function! StatusLine(current, width)
     let l:s .= ' '
   endif
   if a:current
-    " let l:d = crystalline#left_sep('ReplaceMode',crystalline#mode_hi()).'%{coc#status()}'
+    " let l:s = crystalline#left_sep('ReplaceMode',crystalline#mode_hi()).'%{coc#status()}'
     let l:s .= crystalline#left_sep('ReplaceMode',crystalline#mode_hi()).'%{StatusDiagnostic()}'
   endif
 

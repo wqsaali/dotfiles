@@ -122,6 +122,8 @@ function ssh() {
   fi
 }
 
+alias yq='yq -PC'
+
 # Screen aliases
 alias screen-killall='for sess in $(screen -ls); do $ screen -X -S $sess quit'
 
