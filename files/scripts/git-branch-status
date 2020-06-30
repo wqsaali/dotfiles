@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# This scritp can be used as a git plugin
+# Show how many commits each branch is ahead or behind its upstream.
+
+# Colors
+export ESC_SEQ="\x1b["
+export COL_RESET=$ESC_SEQ"39;49;00m"
+export COL_RED=$ESC_SEQ"31;01m"
+export COL_GREEN=$ESC_SEQ"32;01m"
+export COL_YELLOW=$ESC_SEQ"33;01m"
+export COL_BLUE=$ESC_SEQ"34;01m"
+export COL_MAGENTA=$ESC_SEQ"35;01m"
+export COL_CYAN=$ESC_SEQ"36;01m"
+export COL_GREY=$ESC_SEQ"38;5;245m"
+
+branch=`git rev-parse --abbrev-ref HEAD`
+
+git for-each-ref --format='%(refname:short) %(upstream:short)' refs/heads | \
+while read local upstream; do
+
+    # Use master if upstream branch is empty
+    [ -z $upstream ] && upstream=master
+
+    ahead=`git rev-list ${upstream}..${local} --count`
+    behind=`git rev-list ${local}..${upstream} --count`
+
+    if [[ $local == $branch ]]; then
+        asterisk=*
+    else
+        asterisk=' '
+    fi
+
+    # Show asterisk before current branch
+    echo -n "$asterisk $local"
+
+    # Does this branch is ahead or behind upstream branch?
+    if [[ $ahead -ne 0 && $behind -ne 0 ]]; then
+        echo -en " (${COL_YELLOW}$ahead ahead${COL_RESET} and ${COL_RED}$behind behind${COL_RESET} $upstream)"
+    elif [[ $ahead -ne 0 ]]; then
+        echo -n " (${COL_YELLOW}$ahead ahead${COL_RESET} $upstream)"
+    elif [[ $behind -ne 0 ]]; then
+        echo -n " (${COL_RED}$behind behind${COL_RESET} $upstream)"
+    fi
+
+    echo
+
+done;
