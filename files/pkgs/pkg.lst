@@ -19,6 +19,7 @@ coreutils
 ctags
 curl
 dash
+dialog
 diffutils
 dnsutils
 dos2unix
@@ -121,6 +122,7 @@ pcre
 pcre2
 perl
 pinentry
+pkg-config
 procps
 proot
 psmisc
