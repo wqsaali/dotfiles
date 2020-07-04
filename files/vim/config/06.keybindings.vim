@@ -39,14 +39,13 @@
   vnoremap <S-Tab> <gv
 
   " comment / decomment & normal comment behavior
-  " vmap <C-m> gc
-  " vmap <C-/> gc
-  " nnoremap <C-/> gcc
-  " inoremap <C-/> gcc
-  nmap <C-/>   <Plug>NERDCommenterToggle
-  vmap <C-/>   <Plug>NERDCommenterToggle<CR>gv
-  nmap <C-#>   <Plug>NERDCommenterToggle
-  vmap <C-#>   <Plug>NERDCommenterToggle<CR>gv
+  vmap <C-/> gc
+  nnoremap <C-/> gcc
+  inoremap <C-/> gcc
+  " nmap <C-/>   <Plug>NERDCommenterToggle
+  " vmap <C-/>   <Plug>NERDCommenterToggle<CR>gv
+  " nmap <C-#>   <Plug>NERDCommenterToggle
+  " vmap <C-#>   <Plug>NERDCommenterToggle<CR>gv
 
   " Text wrap simpler, then type the open tag or ',"
   vmap <C-w> S

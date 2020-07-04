@@ -117,8 +117,8 @@ installKrew() {
 installKubeScripts() {
   git_clone_or_update https://github.com/arunvelsriram/kube-fzf.git ${HOME}/.kube-fzf
   git_clone_or_update https://github.com/kubermatic/fubectl.git ${HOME}/.fubectl
-  git_clone_or_update https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
-  git_clone_or_update https://github.com/alexppg/helmenv.git ${HOME}/.helmenv
+  # git_clone_or_update https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
+  # git_clone_or_update https://github.com/alexppg/helmenv.git ${HOME}/.helmenv
 
   installKrew
 
@@ -127,6 +127,7 @@ installKubeScripts() {
   # installFromRawGithub 'ahmetb/kubectx'
   # installFromRawGithub 'ahmetb/kubectx' 'kubens'
 
+  installFromGithub 'flavio/kuberlr' "${1}" "${2}"
   installFromGithub 'Praqma/helmsman' "${1}" "${2}"
   installFromGithub 'shyiko/kubesec' "${1}" "${2}"
   installFromGithub 'kubermatic/kubeone' "${1}" "${2}"
@@ -135,6 +136,10 @@ installKubeScripts() {
   # installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
   installFromGithub 'nutellinoit/kubenvz' "${1}" "${2}"
   installFromGithub 'k14s/ytt' "${1}" "${2}"
+
+  if [ ! -s ${HOME}/.local/bin/kuberlr ]; then
+    ln -s ${HOME}/.local/bin/kuberlr ${HOME}/.local/bin/kubectl
+  fi
 
   installHelmPlugins
 }
@@ -443,8 +448,8 @@ installFishConf() {
   curl -sfL https://git.io/fundle-install | fish
   curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
   curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
-  fisher fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
-  fisher teapot
+  fisher add fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
+  fisher add teapot
 
   while IFS='' read -r PKG; do
     [[ -z "${PKG}" ]] && continue

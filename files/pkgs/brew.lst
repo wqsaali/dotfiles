@@ -87,6 +87,7 @@ grv
 hab
 hadolint
 helm
+helmenv
 highlight
 htop
 httpie
@@ -106,6 +107,7 @@ jwt-cli
 k3d
 k9s
 kakoune
+kbenv
 kind
 kompose
 kops
