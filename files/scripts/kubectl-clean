@@ -43,15 +43,16 @@ if [[ "${FORCE}" == "true" ]]; then
 fi
 
 # kubectl get po -A --no-headers | grep -v Running | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete ${FORCE} po
-# kubectl get po -A --field-selector 'status.phase!=Running' -o json | kubectl delete -f -
-kubectl delete pods --field-selector 'status.phase!=Running' -A
-kubectl get rs -A --no-headers | grep -E '0\s+0\s+0' | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete rs
-kubectl get job -A -o=go-template='{{range .items}}{{if or .status.succeeded .status.failed}}{{.metadata.name}} -n {{.metadata.namespace}}{{"\n"}}{{end}}{{end}}' | xargs -L1 -r kubectl delete job
+# kubectl get po -A --field-selector 'status.phase!=Running' -o json | kubectl delete ${FORCE} -f -
+kubectl delete pods --field-selector 'status.phase!=Running' -A ${FORCE}
+kubectl get rs -A --no-headers | grep -E '0\s+0\s+0' | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete rs ${FORCE}
+kubectl get job -A -o=go-template='{{range .items}}{{if or .status.succeeded .status.failed}}{{.metadata.name}} -n {{.metadata.namespace}}{{"\n"}}{{end}}{{end}}' | xargs -L1 -r kubectl delete job ${FORCE}
 
 # Also clean the nodes
 if [[ "${ALL}" == "true" ]] && [ -x "$(command -v kubectl-pssh)" ]; then
   kubectl pssh 'sudo docker system prune -a -f'
-  kubectl pssh 'sudo sh -c "truncate -s 0 /var/lib/docker/containers/*/*-json.log"'
+  kubectl pssh 'sudo find /var/lib/docker/containers/ -name "*-json.log" -type f -exec truncate -s 0 {} +'
+  kubectl pssh 'sudo find /var/log/ -type f -size +99M -exec truncate -s 0 {} +'
   kubectl pssh 'sudo rm /var/log/*.gz'
   kubectl pssh 'sudo rm /var/log/*.1'
 fi
