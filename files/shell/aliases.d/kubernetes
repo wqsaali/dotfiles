@@ -18,7 +18,7 @@ function kctl() {
   CMD=${1}
   shift
   COLOR=""
-  if [ -x "$(command -v grc)" ] && [[ "$CMD" != "edit" ]] && [[ "$CMD" != "exec" ]]; then
+  if [ -x "$(command -v grc)" ] && [[ "$CMD" != "edit" ]] && [[ "$CMD" != "exec" ]] && [[ "$CMD" != "ssh" ]]; then
     COLOR="grc -es --colour=auto"
   fi
 
