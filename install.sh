@@ -526,6 +526,11 @@ installDotFiles() {
   installGitConf
   installScripts
 
+  # Set alacritty themes with:
+  # alacritty-colorscheme -C ~/.alacritty-theme/themes -a tomorrow_night_bright.yaml -V
+  # a matchin vim theme will also be created in ~/.vimrc_background
+  git_clone_or_update https://github.com/eendroroy/alacritty-theme.git ${HOME}/.alacritty-theme
+
   for dir in $(ls -1d files/config/*/); do
     cp -r files/config/${dir##*/}/* ${HOME}/.config/${dir##*/}/
   done

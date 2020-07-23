@@ -22,6 +22,50 @@
       set fillchars+=vert:│
     endif
     au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none guibg=NONE
+
+    " typographic ligatures {{{
+    " from: https://maximewack.com/post/emulating_ligatures/
+    if has('conceal')
+      setlocal conceallevel=1
+      " au Syntax * syntax clear customOperator
+
+      " au Syntax * syntax match customOperator '\/' conceal cchar=÷
+      " au Syntax * syntax match customOperator '*' conceal cchar=×
+      au Syntax * syntax match customOperator '++' conceal cchar=⧺
+
+      au Syntax * syntax match customOperator "=\@<!===\@!" conceal cchar=≖
+      au Syntax * syntax match customOperator "=\@<!====\@!" conceal cchar=≡
+      au Syntax * syntax match customOperator '\~=' conceal cchar=≃
+      au Syntax * syntax match customOperator '==' conceal cchar=≣
+      au Syntax * syntax match customOperator ':=' conceal cchar=≔
+      au Syntax * syntax match customOperator '!=' conceal cchar=≠
+      au Syntax * syntax match customOperator '!==' conceal cchar=≢
+      au Syntax * syntax match customOperator '>=' conceal cchar=≥
+      au Syntax * syntax match customOperator '!>=' conceal cchar=≱
+      au Syntax * syntax match customOperator '<=' conceal cchar=≤
+      au Syntax * syntax match customOperator '!<=' conceal cchar=≰
+
+      au Syntax * syntax match customOperator '|>' conceal cchar=⊳
+      au Syntax * syntax match customOperator '<|' conceal cchar=⊲
+      au Syntax * syntax match customOperator '>>' conceal cchar=»
+      au Syntax * syntax match customOperator '<<' conceal cchar=«
+      au Syntax * syntax match customOperator '\\' conceal cchar=λ
+
+      au Syntax * syntax match customOperator '::' conceal cchar=∷
+      au Syntax * syntax match customOperator '->' conceal cchar=→
+      au Syntax * syntax match customOperator '=>' conceal cchar=⇒
+
+      au Syntax * syntax match customOperator '||' conceal cchar=∨
+      au Syntax * syntax match customOperator '&&' conceal cchar=∧
+      au Syntax * syntax match customOperator '|=' conceal cchar=⊧
+      " au Syntax * syntax match customOperator '|.' conceal cchar=⊦
+      au Syntax * syntax match customOperator '/=' conceal cchar=≠
+
+      au ColorScheme * hi link customOperator Operator
+      au ColorScheme * hi! link Conceal Operator
+
+    endif
+    " }}}
   endif
   " }}}
 
@@ -40,31 +84,11 @@
 
   let g:clap_theme = 'atom_dark'
   let g:airline_theme = 'base16_tomorrow'
-  color Tomorrow-Night-Bright
+
+  let base16colorspace=256
+
+  " color Tomorrow-Night-Bright
+  " color molokai
+  color base16-chalk
 " }}}
 
-" typographic ligatures {{{
-" from: https://maximewack.com/post/emulating_ligatures/
- "if has('conceal')
- "  syntax clear customOperator
- "  syntax match customOperator '//' conceal cchar=÷
- "  syntax match customOperator '*' conceal cchar=×
- "  syntax match customOperator '==' conceal cchar=≣
- "  syntax match customOperator '!=' conceal cchar=≠
- "  syntax match customOperator '>=' conceal cchar=≥
- "  syntax match customOperator '<=' conceal cchar=≤
- "  syntax match customOperator '->' conceal cchar=→
- "  syntax match customOperator '|>' conceal cchar=⊳
- "  syntax match customOperator '<|' conceal cchar=⊲
- "  syntax match customOperator '>>' conceal cchar=»
- "  syntax match customOperator '<<' conceal cchar=«
- "  syntax match customOperator '\\' conceal cchar=λ
- "  syntax match customOperator '::' conceal cchar=∷
- "  syntax match customOperator '|=' conceal cchar=⊧
- "  syntax match customOperator '|.' conceal cchar=⊦
- "  syntax match customOperator '/=' conceal cchar=≠
-
- "  hi link customOperator Operator
- "  hi! link Conceal Operator
- "endif
-" }}}

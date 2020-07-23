@@ -64,7 +64,10 @@
   " Plug 'vim-airline/vim-airline-themes'
   Plug 'rbong/vim-crystalline'
 
-  Plug 'flazz/vim-colorschemes'
+  " Plug 'flazz/vim-colorschemes'
+  " Plug 'rainglow/vim'
+  " Plug 'rafi/awesome-vim-colorschemes'
+  Plug 'chriskempson/base16-vim'
 
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'

@@ -47,7 +47,7 @@ function slg-ctx() {
     export KUBECONFIG="${CFG_DIR}/${CTX}"
   fi
   if [ -z "${CTX}" ]; then
-    CTX=$(sledge get cluster | jq -r '.[].clusterID' | fzf)
+    CTX=$(sledge get cluster -o json | jq -r '.[].clusterID' | fzf)
   fi
   sledge connect "${CTX}"
 }

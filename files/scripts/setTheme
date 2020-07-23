@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+THEME_DIR="${HOME}/.alacritty-theme/themes"
+THEME_NAME=$(ls -1 ${THEME_DIR} | fzf)
+
+alacritty-colorscheme -C ${THEME_DIR} -a $(basename ${THEME_NAME}) -V
