@@ -73,5 +73,10 @@
 #   new = green bold
 #   whitespace = red reverse
 
+[credential]
+	helper = manager-core
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+
 [include]
   path = .gitconfigExtra

@@ -19,6 +19,8 @@ graphicsmagick
 gtk-redshift
 highlight
 httpie
+libsecret-1-0
+libsecret-1-dev
 mediainfo
 neofetch
 poppler-utils

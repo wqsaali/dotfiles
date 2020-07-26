@@ -67,6 +67,7 @@ findutils
 gawk
 gcal
 git
+git-credential-manager
 git-delta
 git-quick-stats
 git-secrets
@@ -121,6 +122,7 @@ lazydocker
 legit
 lesspipe
 libmagic
+libsecret
 llvm
 make
 mas
