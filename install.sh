@@ -117,6 +117,7 @@ installKrew() {
 installKubeScripts() {
   git_clone_or_update https://github.com/arunvelsriram/kube-fzf.git ${HOME}/.kube-fzf
   git_clone_or_update https://github.com/kubermatic/fubectl.git ${HOME}/.fubectl
+  git_clone_or_update clone https://github.com/heptiolabs/ktx ${HOME}/.ktx
   # git_clone_or_update https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
   # git_clone_or_update https://github.com/alexppg/helmenv.git ${HOME}/.helmenv
 
@@ -540,6 +541,7 @@ installDotFiles() {
   cp files/shell/screenrc ${HOME}/.screenrc
   cp files/atom/* ${HOME}/.atom/
   cp files/ptpython.py ${HOME}/.ptpython/config.py
+  cp files/pipecolor.toml ${HOME}/.pipecolor.toml
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh dotfiles

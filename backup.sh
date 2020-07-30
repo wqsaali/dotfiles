@@ -39,6 +39,7 @@ function backupDotFiles() {
   cp ${HOME}/.yabairc files/yabai/yabairc
   cp ${HOME}/.skhdrc files/yabai/skhdrc
   cp ${HOME}/.ptpython/config.py files/ptpython.py
+  cp ${HOME}/.pipecolor.toml files/pipecolor.toml
 }
 
 function backupTermux() {

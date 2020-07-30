@@ -27,6 +27,7 @@ neovim/neovim
 reactiveops/tap
 reconquest/tubekit https://github.com/reconquest/tubekit.git
 tidwall/jj
+universal-ctags/universal-ctags
 wagoodman/dive
 wallix/awless
 yudai/gotty

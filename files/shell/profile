@@ -130,6 +130,12 @@ if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
 fi
 
+#sledge:binary path
+if [ -d "$HOME/.sledge/bin" ]; then
+  SLEDGE_BIN=${HOME}/.sledge/bin
+  PATH="${PATH}:${SLEDGE_BIN}"
+fi
+
 # Avoid duplicates
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
 

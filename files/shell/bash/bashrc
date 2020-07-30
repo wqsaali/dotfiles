@@ -226,6 +226,8 @@ fi
 
 [ -f ${HOME}/.fubectl/fubectl.source ] && source ${HOME}/.fubectl/fubectl.source
 
+[ -f ${HOME}/.ktx ] && source ${HOME}/.ktx/ktx
+
 [ -f $HOME/.kbenv/kbenv.sh ] && source $HOME/.kbenv/kbenv.sh
 
 [ -f $HOME/.helmenv/helmenv.sh ] && source $HOME/.helmenv/helmenv.sh
