@@ -141,7 +141,7 @@ function update-all-things() {
 
   # Update oh my zsh
   if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
-    upgrade_oh_my_zsh
+    omz update
   fi
 
   # vim-update
