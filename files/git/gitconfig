@@ -33,6 +33,7 @@
   amend = commit --amend --no-edit --signoff
   edit = commit --amend --signoff
   force = push --force-with-lease
+  desc = describe --always --tags
   df = diff
   sb = status -sb
   st = status -sb

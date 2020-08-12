@@ -175,6 +175,7 @@ sops
 source-highlight
 starship
 stern
+tcptraceroute
 telepresence
 telnet
 terraform
