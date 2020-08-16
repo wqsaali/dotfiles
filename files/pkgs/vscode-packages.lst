@@ -11,7 +11,9 @@ eamodio.gitlens
 erd0s.terraform-autocomplete
 file-icons.file-icons
 formulahendry.code-runner
+golang.go
 haaaad.ansible
+hashicorp.terraform
 huizhou.githd
 in4margaret.compareit
 ipedrazas.kubernetes-snippets
@@ -22,7 +24,6 @@ loganarnett.tf-snippets
 magicstack.MagicPython
 MaoSantaella.night-wolf
 marquesmps.dockerfile-validator
-mauve.terraform
 mhutchie.git-graph
 mindginative.terraform-snippets
 misogi.ruby-rubocop
@@ -32,7 +33,6 @@ ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.python
 ms-vscode.atom-keybindings
 ms-vscode.azurecli
-ms-vscode.Go
 nhoizey.gremlins
 p1c2u.docker-compose
 rebornix.ruby
