@@ -72,7 +72,7 @@
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'
-  Plug 'tell-k/vim-autopep8', {'for': 'python'}
+  " Plug 'tell-k/vim-autopep8', {'for': 'python'}
 
   "Plug 'govim/govim', {'for': 'go'}
   "Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries'}

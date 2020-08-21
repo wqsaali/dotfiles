@@ -16,6 +16,7 @@ howdoi
 importmagic
 ipython
 isort
+jedi
 k8s-handle
 kube-shell
 kubernetes
