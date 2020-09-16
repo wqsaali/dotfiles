@@ -19,9 +19,6 @@
     "fuzzyMatching": true
   },
   "python.jediEnabled": true,
-  "yaml.schemas": {
-    "kubernetes": "/*.yaml"
-  },
   "explorer.quitOnOpen": true,
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
   // "codeLens.enable": true,

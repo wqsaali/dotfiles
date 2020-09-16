@@ -86,13 +86,13 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
         if [ "$1" != '-y' ]; then
           select ynx in "Yes" "No" "Exit"; do
             case $ynx in
-              "Yes") echo "Re-installing $c"; brew cask reinstall "$c"; break;;
+              "Yes") echo "Re-installing $c"; brew reinstall "$c"; break;;
               "No") echo "Skipping $c"; break;;
               "Exit") echo "Exiting brew-cask-upgrade"; return;;
             esac
           done
         else
-          echo -e "${COL_YELLOW}>>>${COL_RESET} Re-installing $c"; brew cask reinstall "$c"
+          echo -e "${COL_YELLOW}>>>${COL_RESET} Re-installing $c"; brew reinstall "$c"
         fi
       else
           echo -e "${COL_BLUE}>>>${COL_RESET} $c is up to date"

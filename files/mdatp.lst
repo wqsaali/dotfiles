@@ -1,0 +1,13 @@
+${HOME}/Library/Caches
+${HOME}/Library/Containers/com.docker.docker
+${HOME}/Library/Containers/com.docker.helper
+${HOME}/Library/Logs
+${HOME}/go
+${HOME}/node_modules
+${HOME}/workingCopies
+/Library/Caches
+/Library/Logs
+/Library/Updates
+/System/Library/Caches
+/private/var/log
+/var/log

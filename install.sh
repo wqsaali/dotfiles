@@ -560,6 +560,10 @@ installDotFiles() {
     git_clone_or_update https://github.com/theymaybecoders/sublime-tomorrow-theme.git "${HOME}/.config/bat/themes/sublime-tomorrow-theme"
     bat cache --build
   fi
+
+  if [ -x $(command -v mdatp) ]; then
+    for F in $(cat files/mdatp.lst|envsubst); do mdatp --exclusion --add-folder ${F}; done
+  fi
 }
 
 installWebApps() {
