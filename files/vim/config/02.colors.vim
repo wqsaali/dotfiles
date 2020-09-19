@@ -1,6 +1,7 @@
 " ColorThemes {{{
   highlight clear
   set background=dark
+  set bg=dark
   set t_Co=256
 
   " Overrides {{{
@@ -82,13 +83,20 @@
 
   set guifont=FuraCode\ Nerd\ Font\ Mono:h12
 
+  " let g:github_colors_soft = 1
+  let g:github_colors_block_diffmark = 0
+
   let g:clap_theme = 'atom_dark'
-  let g:airline_theme = 'base16_tomorrow'
+  " let g:airline_theme = 'base16_tomorrow'
+  let g:airline_theme = "github"
+  let g:lightline = { 'colorscheme': 'github' }
 
   let base16colorspace=256
 
   " color Tomorrow-Night-Bright
   " color molokai
-  color base16-chalk
+  " color base16-chalk
+  color github
+
 " }}}
 

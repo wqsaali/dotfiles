@@ -8,7 +8,7 @@
   },
   "go.enable": true,
   "go.checkForUpdates": "install",
-  "go.goplsPath": "~/.config/coc/extensions/coc-go-data/bin/gopls",
+  // "go.goplsPath": "~/.config/coc/extensions/coc-go-data/bin/gopls",
   "go.goplsArgs": ["-remote=auto"],
   "go.goplsOptions": {
     "staticcheck": true,

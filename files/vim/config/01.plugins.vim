@@ -60,14 +60,15 @@
   Plug 'luisdavim/pretty-folds'
   Plug 'chrisbra/vim-diff-enhanced'
 
-  " Plug 'vim-airline/vim-airline'
-  " Plug 'vim-airline/vim-airline-themes'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'rbong/vim-crystalline'
 
   " Plug 'flazz/vim-colorschemes'
   " Plug 'rainglow/vim'
   " Plug 'rafi/awesome-vim-colorschemes'
   Plug 'chriskempson/base16-vim'
+  Plug 'cormacrelf/vim-colors-github'
 
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'

@@ -33,7 +33,7 @@
     "gitlens.views.fileHistory.enabled": true,
     "gitlens.views.lineHistory.enabled": true,
     "window.zoomLevel": 0,
-    "workbench.colorTheme": "Base16 Leaf Tomorrow",
+    "workbench.colorTheme": "GitHub Dark",
     "vsicons.dontShowNewVersionMessage": true,
     "vim.neovimPath": "/usr/local/bin/nvim",
     "vim.enableNeovim": true,
