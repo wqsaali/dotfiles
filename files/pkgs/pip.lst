@@ -2,7 +2,7 @@
 BlastRadius
 Pygments
 alacritty-colorscheme
-ansible
+# ansible
 ansible-test
 boto
 boto3

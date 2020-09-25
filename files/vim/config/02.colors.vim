@@ -6,9 +6,6 @@
 
   " Overrides {{{
   if has('autocmd')
-    " au ColorScheme * hi! link illuminatedWord Visual
-    au ColorScheme * hi! link illuminatedWord CursorLine
-    au ColorScheme * hi! CursorLineNr cterm=NONE
     au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
     au ColorScheme * hi! Conceal ctermbg=none ctermfg=239  guibg=NONE guifg=#4e4e4e
     " if ! has('gui_macvim')
@@ -17,8 +14,15 @@
     " else
     "   set transparency=5
     " endif
+    "
     au ColorScheme * hi! Folded ctermbg=none guibg=NONE
     au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
+    au ColorScheme * hi! link illuminatedWord Visual
+    " au ColorScheme * hi! link illuminatedWord CursorLine
+    au ColorScheme * hi! link CocHighlightText Visual
+    " au ColorScheme * hi! link CocHighlightText CursorLine
+
+    au ColorScheme * hi! CursorLineNr cterm=NONE
     if g:os != 'Android'
       set fillchars+=vert:│
     endif
@@ -84,7 +88,7 @@
   set guifont=FuraCode\ Nerd\ Font\ Mono:h12
 
   " let g:github_colors_soft = 1
-  let g:github_colors_block_diffmark = 0
+  " let g:github_colors_block_diffmark = 0
 
   let g:clap_theme = 'atom_dark'
   " let g:airline_theme = 'base16_tomorrow'
