@@ -73,7 +73,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       echo "Running brew update"
       brew update
     fi
-    for c in $(brew cask list); do
+    for c in $(brew list --cask); do
       installed=$(ls $(brew --prefix)/Caskroom/$c)
       info=$(brew cask info $c)
       installed_version=$(echo $installed)
@@ -145,7 +145,7 @@ function update-all-things() {
   fi
 
   # vim-update
-  vi +PlugUpdate +PlugUpgrade +qall
+  vi +PlugUpdate +PlugUpgrade +CocUpdate +qall
 
   # if [ -x "$(command -v go)" ]; then
   #   go get -u all

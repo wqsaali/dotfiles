@@ -15,6 +15,7 @@ azure-cli
 bash
 bash-completion@2
 bat
+bat-extras
 bats
 bbl
 bfg

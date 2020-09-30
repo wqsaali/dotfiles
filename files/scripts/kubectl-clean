@@ -51,7 +51,7 @@ kubectl get job -A -o=go-template='{{range .items}}{{if or .status.succeeded .st
 # Also clean the nodes
 if [[ "${ALL}" == "true" ]] && [ -x "$(command -v kubectl-pssh)" ]; then
   kubectl pssh 'sudo docker system prune -a -f'
-  kubectl pssh 'sudo find /var/lib/docker/containers/ -name "*-json.log" -type f -size +100M -exec truncate -s 100M {} +'
+  # kubectl pssh 'sudo find /var/lib/docker/containers/ -name "*-json.log" -type f -size +100M -exec truncate -s 100M {} +'
   kubectl pssh 'sudo find /var/log/ -type f -size +100M -exec truncate -s 100M {} +'
   kubectl pssh 'sudo rm /var/log/*.gz'
   kubectl pssh 'sudo rm /var/log/*.1'

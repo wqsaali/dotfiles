@@ -54,7 +54,7 @@
       au Syntax * syntax match customOperator '<|' conceal cchar=⊲
       au Syntax * syntax match customOperator '>>' conceal cchar=»
       au Syntax * syntax match customOperator '<<' conceal cchar=«
-      au Syntax * syntax match customOperator '\\' conceal cchar=λ
+      " au Syntax * syntax match customOperator '\\' conceal cchar=λ
 
       au Syntax * syntax match customOperator '::' conceal cchar=∷
       au Syntax * syntax match customOperator '->' conceal cchar=→
@@ -87,7 +87,8 @@
 
   set guifont=FuraCode\ Nerd\ Font\ Mono:h12
 
-  " let g:github_colors_soft = 1
+  " use a slightly darker background, like GitHub inline code blocks
+  let g:github_colors_soft = 1
   " let g:github_colors_block_diffmark = 0
 
   let g:clap_theme = 'atom_dark'
