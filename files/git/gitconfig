@@ -47,7 +47,7 @@
   pill = pull
 [core]
   # pager = less -RF -X
-  pager = delta --dark --file-style=box --hunk-style=plain --tabs=2
+  pager = delta --dark --file-style=box --hunk-style=plain --tabs=2 --side-by-side --line-numbers
   editor = vim
   excludesfile = ~/.gitexcludes
 # [pager]
