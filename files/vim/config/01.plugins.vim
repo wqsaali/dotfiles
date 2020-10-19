@@ -26,6 +26,7 @@
 
   Plug 'wincent/terminus'
   Plug 'kassio/neoterm'
+  Plug 'voldikss/vim-floaterm'
 
   Plug 'tpope/vim-dispatch'
 
@@ -112,6 +113,7 @@
 let g:coc_global_extensions = [
       \ 'coc-marketplace',
       \ 'coc-explorer',
+      \ 'coc-floaterm',
       \ 'coc-git',
       \ 'coc-gitignore',
       \ 'coc-pairs',
