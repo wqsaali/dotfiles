@@ -250,3 +250,5 @@ export SLACK_THEME_SHELL_PROFILE="${HOME}/.profile"
 export BASH_COMPLETION_USER_DIR="${HOME}/.local/share/bash-completion"
 
 export TESTSSL_INSTALL_DIR=~/.testssl
+
+export TIME='\t%E real,\t%U user,\t%S sys,\t%K amem,\t%M mmem'

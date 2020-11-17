@@ -13,7 +13,8 @@ chefdk
 cisco-proximity
 clipy
 cyberduck
-docker-edge
+# docker-edge
+docker
 etcher
 firefox
 flux

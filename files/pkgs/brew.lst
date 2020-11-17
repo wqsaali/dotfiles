@@ -75,6 +75,7 @@ git-secrets
 gnu-getopt
 gnu-sed
 gnu-tar
+gnu-time
 go-jira
 godep
 goreleaser

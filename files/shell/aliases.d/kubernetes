@@ -135,6 +135,8 @@ alias kctl-clean_crd='kubectl-purge_crd'
 
 alias kctl-list_images='kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s "[[:space:]]" "\n" | sort | uniq -c'
 
+alias kctl-drain='kubectl drain --delete-local-data --ignore-daemonsets'
+
 # Helm aliases
 alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -L 1 -r helm plugin update'
 
