@@ -66,7 +66,7 @@ brew_expand_alias() {
 }
 
 cask_expand_alias() {
-  brew cask info "$1" 2>/dev/null | head -1 | awk '{gsub(/.*\//, ""); gsub(/:/, ""); print $1}'
+  brew info --cask "$1" 2>/dev/null | head -1 | awk '{gsub(/.*\//, ""); gsub(/:/, ""); print $1}'
 }
 
 brew_launchctl_restart() {

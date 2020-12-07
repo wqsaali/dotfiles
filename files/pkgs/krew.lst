@@ -7,6 +7,7 @@ doctor
 exec-all
 get-all
 krew
+modify-secret
 mtail
 neat
 node-restart
