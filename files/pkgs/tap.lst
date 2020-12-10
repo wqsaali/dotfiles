@@ -9,6 +9,7 @@ derailed/popeye
 egison/egison
 eth-p/software
 habitat-sh/habitat
+hashicorp/tap
 homebrew/cask-drivers
 homebrew/cask-fonts
 homebrew/cask-versions

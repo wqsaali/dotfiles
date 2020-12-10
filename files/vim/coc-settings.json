@@ -1,15 +1,17 @@
 {
   "languageserver": {
     "terraform-lsp": {
-      "command": "terraform-lsp",
-      "filetypes": ["terraform"],
-      "initializationOptions": {}
+      // "command": "terraform-lsp",
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
     }
   },
   "go.enable": true,
   "go.checkForUpdates": "install",
-  // "go.goplsPath": "~/.config/coc/extensions/coc-go-data/bin/gopls",
-  "go.goplsArgs": ["-remote=auto"],
+  "go.goplsUseDaemon": true,
   "go.goplsOptions": {
     "staticcheck": true,
     "usePlaceholders": true,

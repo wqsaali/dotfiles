@@ -16,6 +16,7 @@ github.com/gregoryv/uncover/...
 github.com/ivanilves/lstags
 github.com/juliosueiras/terraform-lsp
 github.com/kubernauts/tk8
+github.com/kubernetes-sigs/controller-tools/cmd/controller-gen
 github.com/kubicorn/kubicorn
 github.com/kyoh86/richgo
 github.com/liggitt/audit2rbac

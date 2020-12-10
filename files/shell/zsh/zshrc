@@ -140,6 +140,30 @@ plugins=(
   zsh-history-substring-search
 )
 
+# Bash like CDPATH
+typeset -U path cdpath fpath
+setopt auto_cd autocd
+
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format %d
+zstyle ':completion:*:descriptions' format %B%d%b
+zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
+        'local-directories named-directories'
+
+# Brew completions
+# You may also need to forcibly rebuild zcompdump:
+# rm -f ~/.zcompdump; compinit
+# Additionally, if you receive “zsh compinit: insecure directories” warnings when attempting to load these completions,
+# you may need to run this:
+# chmod -R go-w "$(brew --prefix)/share"
+if [ -x "$(command -v brew)" ]; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  FPATH=${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -184,16 +208,6 @@ export TIMEFMT='%J   %U  user %S system %P cpu %*E total'$'\n'\
 #
 
 alias -s {yml,yaml,json}=$EDITOR
-
-# Bash like CDPATH
-typeset -U path cdpath fpath
-setopt auto_cd autocd
-
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*:descriptions' format %d
-zstyle ':completion:*:descriptions' format %B%d%b
-zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
-        'local-directories named-directories'
 
 # eval "$(starship init zsh)"
 
