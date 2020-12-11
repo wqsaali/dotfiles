@@ -89,12 +89,15 @@
 
   " use a slightly darker background, like GitHub inline code blocks
   let g:github_colors_soft = 1
+
+  " more blocky diff markers in signcolumn (e.g. GitGutter)
   " let g:github_colors_block_diffmark = 0
 
-  let g:clap_theme = 'atom_dark'
   " let g:airline_theme = 'base16_tomorrow'
   let g:airline_theme = "github"
   let g:lightline = { 'colorscheme': 'github' }
+
+  let g:clap_theme = 'atom_dark'
 
   let base16colorspace=256
 
