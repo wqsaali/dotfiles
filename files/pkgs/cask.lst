@@ -1,3 +1,4 @@
+# docker-edge
 # hab
 # pingplotter
 #alfred
@@ -13,7 +14,6 @@ chefdk
 cisco-proximity
 clipy
 cyberduck
-# docker-edge
 docker
 etcher
 firefox
@@ -29,6 +29,7 @@ font-firacode-nerd-font-mono
 font-firamono-nerd-font
 font-firamono-nerd-font-mono
 font-fontawesome
+font-jetbrains-mono
 font-robotomono-nerd-font
 font-robotomono-nerd-font-mono
 font-terminus

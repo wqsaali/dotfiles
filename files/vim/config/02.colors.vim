@@ -85,7 +85,7 @@
     set termguicolors
   endif
 
-  set guifont=FuraCode\ Nerd\ Font\ Mono:h12
+  set guifont=JetBrainsMono\ Nerd\ Font:h12
 
   " use a slightly darker background, like GitHub inline code blocks
   let g:github_colors_soft = 1

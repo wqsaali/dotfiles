@@ -136,17 +136,17 @@ scrolling:
 
 font:
   normal:
-    family: TerminessTTF Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Medium
   bold:
-    family: TerminessTTF Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: TerminessTTF Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Italic
 
   # Point size
-  size: 14.0
+  size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.

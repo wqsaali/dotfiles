@@ -111,16 +111,19 @@
 
 " coc-extensions {{{
 let g:coc_global_extensions = [
+      \ 'coc-actions',
       \ 'coc-marketplace',
       \ 'coc-explorer',
       \ 'coc-floaterm',
       \ 'coc-git',
       \ 'coc-gitignore',
+      \ 'coc-gist',
       \ 'coc-pairs',
       \ 'coc-prettier',
       \ 'coc-tabnine',
       \ 'coc-highlight',
       \ 'coc-snippets',
+      \ 'coc-ultisnips',
       \ 'coc-markdownlint',
       \ 'coc-diagnostic',
       \ 'coc-swagger',
@@ -128,6 +131,7 @@ let g:coc_global_extensions = [
       \ 'coc-sh',
       \ 'coc-json',
       \ 'coc-yaml',
+      \ 'coc-toml',
       \ 'coc-vimlsp',
       \ 'coc-python',
       \ 'coc-go',

@@ -30,7 +30,7 @@ cask_install() {
     fancy_echo "$1 is already installed!"
   else
     fancy_echo "Installing $1 ..."
-    brew cask install ${@} --appdir=/Applications
+    brew install --cask ${@} --appdir=/Applications
   fi
 }
 
@@ -45,7 +45,7 @@ cask_is_installed() {
   local name
   name="$(cask_expand_alias "$1")"
 
-  brew cask list -1 | grep -Fqx "$name"
+  brew list --cask -1 | grep -Fqx "$name"
 }
 
 brew_is_upgradable() {
