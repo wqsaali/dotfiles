@@ -22,6 +22,8 @@
   },
   "python.jediEnabled": true,
   "explorer.quitOnOpen": true,
+  "explorer.toggle": true,
+  "explorer.icon.enableVimDevicons":true,
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
   // "codeLens.enable": true,
   // "diagnostic.virtualText": true,
@@ -71,7 +73,6 @@
   "coc.preferences.messageLevel": "error",
   "coc.preferences.highlightTimeout": 500,
   "coc.preferences.formatOnType": false,
-  "coc.preferences.formatOnInsertLeave": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "typescript",
