@@ -1,5 +1,12 @@
 # vim:set filetype=bash:
 
+# kubectl-aliases
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
+# to use GNU watch command instead of kubectl [...] --watch
+# [ -f ~/.kubectl_aliases ] && source <(cat ~/.kubectl_aliases | sed -r 's/(kubectl.*) --watch/watch \1/g')
+# to print the full command before running it
+# function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
+
 # Extra aliases
 for f in $HOME/.aliases.d/*; do
   if [ -f "$f" ]; then
@@ -33,9 +40,13 @@ alias lc='colorls'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lt='ls -lht && echo "------Oldest--"'
-alias ltr='ls -lhtr && echo "------Newest--"'
-
+if [ -x "$(command -v exa)" ]; then
+  alias lt='ls -lhmr --sort=modified && echo "------Oldest------"'
+  alias ltr='ls -lhm --sort=modified && echo "------Newest------"'
+else
+  alias lt='ls -lht && echo "------Oldest--"'
+  alias ltr='ls -lhtr && echo "------Newest--"'
+fi
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
