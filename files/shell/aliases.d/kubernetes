@@ -29,9 +29,15 @@ function kctl() {
   eval "${COLOR} kubectl ${CMD} ${@}"
 }
 alias k='kctl'
+alias kg='kctl get'
+alias kvs='kctl view-secret'
 
 function kgy() {
-  kubectl get ${@} -o yaml | bat --theme ${BAT_THEME:-Darkneon} -l yaml
+  kubectl get ${@} -o yaml | bat --paging never --theme ${BAT_THEME:-TwoDark} -p -l yaml
+}
+
+function kgj() {
+  kubectl get ${@} -o json | bat --paging never --theme ${BAT_THEME:-TwoDark} -p -l json
 }
 
 function kubectl-leader() {

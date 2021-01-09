@@ -215,7 +215,7 @@ fi
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export BAT_THEME='Tomorrow-Night-Bright'
+export BAT_THEME='TwoDark'
 # export BAT_PAGER="less -R"
 
 # Colored grep
