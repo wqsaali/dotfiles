@@ -81,6 +81,7 @@
   " Plug 'arp242/gopher.vim', {'for': 'go'}
   Plug 'sebdah/vim-delve', {'for': 'go'}
 
+  " Plug 'mattn/emmet-vim'
   Plug 'maralla/vim-toml-enhance', {'for': 'toml'}
 
   if has('nvim')
@@ -121,6 +122,7 @@ let g:coc_global_extensions = [
       \ 'coc-pairs',
       \ 'coc-prettier',
       \ 'coc-tabnine',
+      \ 'coc-emmet',
       \ 'coc-highlight',
       \ 'coc-snippets',
       \ 'coc-ultisnips',

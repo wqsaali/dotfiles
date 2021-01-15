@@ -43,9 +43,9 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_theme_24b_colour=true
+tmux_conf_24b_colour=true
 
-# theme
+# default theme
 tmux_conf_theme_colour_1="#080808"    # dark gray
 tmux_conf_theme_colour_2="#303030"    # gray
 tmux_conf_theme_colour_3="#8a8a8a"    # light gray
@@ -135,6 +135,8 @@ tmux_conf_theme_status_attr='none'
 #     - #{circled_session_name}
 #     - #{hostname}
 #     - #{hostname_ssh}
+#     - #{hostname_full}
+#     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
@@ -145,6 +147,8 @@ tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 #     - #{circled_session_name}
 #     - #{hostname}
 #     - #{hostname_ssh}
+#     - #{hostname_full}
+#     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_window_status_fg='#8a8a8a'              # light gray
@@ -351,6 +355,8 @@ set -g mode-keys vi
 # move status line to top
 #set -g status-position top
 
+# -- custom bindings ----------------------------------------------------------
+
 set -gw xterm-keys on
 
 bind-key t choose-tree
@@ -374,24 +380,44 @@ bind-key C-b set-window-option synchronize-panes
 
 set -g @yank_selection 'primary'
 
-# List of plugins
-# set -g @plugin 'tmux-plugins/tpm'
-# set -g @plugin 'tmux-plugins/tmux-yank'
-# set -g @plugin 'tmux-plugins/tmux-copycat'
-# set -g @plugin 'tmux-plugins/tmux-open'
 
-# set -g @tpm_plugins '          \
-#   tmux-plugins/tpm             \
-#   tmux-plugins/tmux-sensible   \
-#   tmux-plugins/tmux-resurrect  \
-# '
+# -- tpm -----------------------------------------------------------------------
 
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-# if "test ! -d ~/.tmux/plugins/tpm" \
-#    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'"
-# run '~/.tmux/plugins/tpm/tpm'
+# while I don't use tpm myself, many people requested official support so here
+# is a seamless integration that automatically installs plugins in parallel
+
+# whenever a plugin introduces a variable to be used in 'status-left' or
+# 'status-right', you can use it in 'tmux_conf_theme_status_left' and
+# 'tmux_conf_theme_status_right' variables.
+
+# by default, launching tmux will update tpm and all plugins
+#   - true (default)
+#   - false
+tmux_conf_update_plugins_on_launch=true
+
+# by default, reloading the configuration will update tpm and all plugins
+#   - true (default)
+#   - false
+tmux_conf_update_plugins_on_reload=true
+
+# /!\ do not add set -g @plugin 'tmux-plugins/tpm'
+# /!\ do not add run '~/.tmux/plugins/tpm/tpm'
+
+# to enable a plugin, use the 'set -g @plugin' syntax:
+# visit https://github.com/tmux-plugins for available plugins
+#set -g @plugin 'tmux-plugins/tpm'
+#set -g @plugin 'tmux-plugins/tmux-copycat'
+#set -g @plugin 'tmux-plugins/tmux-cpu'
+#set -g @plugin 'tmux-plugins/tmux-resurrect'
+#set -g @plugin 'tmux-plugins/tmux-continuum'
+#set -g @plugin 'tmux-plugins/tmux-yank'
+#set -g @plugin 'tmux-plugins/tmux-open'
+#set -g @plugin 'tmux-plugins/tmux-sensible'
+#set -g @continuum-restore 'on'
+
 
 # -- custom variables ----------------------------------------------------------
+
 # to define a custom #{foo} variable, define a POSIX shell function between the
 # '# EOF' and the '# "$@"' lines. Please note that the opening brace { character
 # must be on the same line as the function name otherwise the parse won't detect

@@ -32,6 +32,7 @@ mrcrowl.hg
 ms-azuretools.vscode-docker
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-python.python
+ms-toolsai.jupyter
 ms-vscode-remote.remote-containers
 ms-vscode.atom-keybindings
 ms-vscode.azurecli

@@ -1,7 +1,6 @@
 # chunkwm
 # chunkwm-blur
 # macvim
-terraform-ls
 ack
 ansible
 ansible-lint
@@ -176,6 +175,7 @@ skopeo
 socat
 sops
 source-highlight
+speedtest-cli
 starship
 stern
 tcptraceroute
@@ -183,6 +183,7 @@ telepresence
 telnet
 terraform
 terraform-docs
+terraform-ls
 terragrunt
 the_silver_searcher
 thefuck

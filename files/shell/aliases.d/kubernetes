@@ -30,6 +30,7 @@ function kctl() {
 }
 alias k='kctl'
 alias kg='kctl get'
+alias kd='kctl describe'
 alias kvs='kctl view-secret'
 
 function kgy() {

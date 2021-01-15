@@ -1,9 +1,9 @@
 # vim:set filetype=bash:
 
 # kubectl-aliases
-[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
+[ -f ~/.kubectl_aliases/.kubectl_aliases ] && source ~/.kubectl_aliases/.kubectl_aliases
 # to use GNU watch command instead of kubectl [...] --watch
-# [ -f ~/.kubectl_aliases ] && source <(cat ~/.kubectl_aliases | sed -r 's/(kubectl.*) --watch/watch \1/g')
+# [ -f ~/.kubectl_aliases/.kubectl_aliases ] && source <(cat ~/.kubectl_aliases/.kubectl_aliases | sed -r 's/(kubectl.*) --watch/watch \1/g')
 # to print the full command before running it
 # function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
 
@@ -173,7 +173,8 @@ function ipinfo() {
 }
 
 # get internet speed
-alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
+# alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip'
+alias speedtest='speedtest-cli'
 
 alias netdata='docker run --rm --cap-add SYS_PTRACE -v /proc:/host/proc:ro -v /sys:/host/sys:ro -p 19999:19999 titpetric/netdata'
 
