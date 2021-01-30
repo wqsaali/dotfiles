@@ -91,6 +91,12 @@ if [ -x "$(command -v colordiff)" ]; then
   alias diff='colordiff'
 fi
 
+# Diff sorted
+# diffs file1 file2 [other diff args, e.g. -y]
+function diffs() {
+  diff "${@:3}" <(sort "$1") <(sort "$2")
+}
+
 # Syntax highlighting in cat and less
 # you need Pygments: pip install Pygments
 alias colorcat='pygmentize -g'

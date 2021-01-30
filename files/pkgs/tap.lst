@@ -15,6 +15,7 @@ homebrew/cask-fonts
 homebrew/cask-versions
 homebrew/command-not-found
 homebrew/services
+homeport/tap
 jakehilborn/jakehilborn
 jesseduffield/lazydocker
 jzelinskie/faq

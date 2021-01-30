@@ -41,6 +41,11 @@ gem_install_or_update() {
 }
 
 git_clone_or_update() {
+  if ! [ -x "$(command -v git)" ]; then
+    echo 'You need to install git!' >&2
+    exit 1
+  fi
+
   echo ">>> $(basename $2)"
   if [ ! -d  ${2} ]; then
     git clone ${1} ${2}
@@ -412,6 +417,8 @@ installShellConf() {
   # installFishConf
   installBashConf
   installZshConf
+  installTmuxConf
+  installGitConf
 }
 
 installBashConf() {
@@ -518,15 +525,8 @@ instrallRangerPlugins() {
 }
 
 installDotFiles() {
-  if ! [ -x "$(command -v git)" ]; then
-    echo 'You need to install git!' >&2
-    exit 1
-  fi
-
   createSkeleton
   installShellConf
-  installTmuxConf
-  installGitConf
   installScripts
 
   # Set alacritty themes with:
@@ -545,13 +545,7 @@ installDotFiles() {
   cp files/ptpython.py ${HOME}/.ptpython/config.py
   cp files/pipecolor.toml ${HOME}/.pipecolor.toml
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    ./osx.sh dotfiles
-  elif [[ "$OSTYPE" == *"android"* ]]; then
-    ./android.sh dotfiles
-  else
-    ./linux.sh dotfiles
-  fi
+  installOSSpecific dotfiles
 
   installVscodeConfig
   installVimPlugins
@@ -564,7 +558,7 @@ installDotFiles() {
   fi
 
   if [ -x $(command -v mdatp) ]; then
-    for F in $(cat files/mdatp.lst|envsubst); do mdatp --exclusion --add-folder ${F}; done
+    for F in $(cat files/mdatp.lst|envsubst); do mdatp exclusion folder add --path ${F}; done
   fi
 }
 
@@ -574,19 +568,33 @@ installWebApps() {
   nativefier --name 'Evernote Web' 'https://www.evernote.com/Home.action?login=true&prompt=none&authuser=0#n=66f8e46f-8a98-4294-b42f-8abf8cb9774a&s=s14&ses=4&sh=2&sds=5&'
 }
 
+installPackages() {
+  installGems
+  installPips
+  installNpms
+
+  installChefGems
+  installChefVM
+  installVagrantPlugins
+  installAtomPackages
+  installVscodePackages
+  installGoss
+  installEls
+}
+
+installOSSpecific(){
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    ./osx.sh "${@}"
+  elif [[ "$OSTYPE" == *"android"* ]]; then
+    ./android.sh "${@}"
+  else
+    ./linux.sh "${@}"
+  fi
+}
+
 installAll() {
   if [[ "$OSTYPE" != *"android"* ]]; then
-    installGems
-    installPips
-    installNpms
-
-    installChefGems
-    installChefVM
-    installVagrantPlugins
-    installAtomPackages
-    installVscodePackages
-    installGoss
-    installEls
+    installPackages
   fi
   # installWebApps
   installDotFiles
@@ -641,13 +649,7 @@ case "$CMD" in
     installHelmPlugins
     ;;
   *)
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      ./osx.sh "${CMD}" "${ARGS}"
-    elif [[ "$OSTYPE" == *"android"* ]]; then
-      ./android.sh "${CMD}" "${ARGS}"
-    else
-      ./linux.sh "${CMD}" "${ARGS}"
-    fi
+    installOSSpecific "${CMD}" "${ARGS}"
     if [ -z "${CMD}" ] || [[ "${CMD}" == "all" ]]; then
       installAll
     fi

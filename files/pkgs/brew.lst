@@ -92,6 +92,7 @@ hadolint
 helm
 helmenv
 highlight
+homeport/tap/dyff
 htop
 httpie
 httpstat
@@ -207,5 +208,6 @@ whois
 xhyve
 yabai
 yarn
+ydiff
 yq
 zsh
