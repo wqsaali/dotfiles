@@ -1,5 +1,14 @@
 # vim:set filetype=bash:
 
+# helper function used in other aliases
+function _isFunction() {
+  check='declare -F --'
+  if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
+    check='print -l ${(ok)functions} | grep -w'
+  fi
+  eval "$check $1" >/dev/null
+}
+
 # kubectl-aliases
 [ -f ~/.kubectl_aliases/.kubectl_aliases ] && source ~/.kubectl_aliases/.kubectl_aliases
 # to use GNU watch command instead of kubectl [...] --watch
@@ -138,8 +147,6 @@ function ssh() {
     command ssh "$@"
   fi
 }
-
-# alias yq='yq -PC'
 
 # Screen aliases
 alias screen-killall='for sess in $(screen -ls); do $ screen -X -S $sess quit'

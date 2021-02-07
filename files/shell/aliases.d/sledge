@@ -1,13 +1,5 @@
 # vim:set filetype=bash:
 
-function _isFunction() {
-  check='declare -F --'
-  if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
-    check='print -l ${(ok)functions} | grep'
-  fi
-  eval "$check $1" >/dev/null
-}
-
 function slg-login() {
   if [ -z "$1" ]; then
     CTX=$(kubectl config current-context)

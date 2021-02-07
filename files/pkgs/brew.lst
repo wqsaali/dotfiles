@@ -1,5 +1,7 @@
 # chunkwm
 # chunkwm-blur
+# helm
+# kubernetes-cli
 # macvim
 ack
 ansible
@@ -89,7 +91,6 @@ groovy
 grv
 hab
 hadolint
-helm
 helmenv
 highlight
 homeport/tap/dyff
@@ -118,7 +119,6 @@ kops
 kube-aws
 kubebuilder
 kubectx
-kubernetes-cli
 kustomize
 lab
 lazydocker

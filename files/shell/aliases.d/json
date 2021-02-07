@@ -1,11 +1,9 @@
 # vim:set filetype=bash:
 
 # Json aliases
-# Usage: json-diff file1 file2 section_on_file1 section_on_file2
+# Usage: json-diff [diff_opts] file1 file2 section_on_file1 section_on_file2
 function json-diff() {
-  opts=$(echo $@ | grep -Eo '(( |^)-\w+)+' | tr '\n' ' ')
-#  while getopts {a..z} opt; do :; done
-#  shift $(($OPTIND-1))
+  opts=$(echo $@ | grep -Eo '(( |^)-\w+)+' | tr -s ' ' '\n')
   for o in $opts; do shift; done
   section1=$3
   section2=$4
@@ -15,7 +13,22 @@ function json-diff() {
   if [ -z $section2 ]; then
     section2=$section1
   fi
-  colordiff $opts <(cat ${1} | jq -S "$section1") <(cat ${2} | jq -S "$section2")
+  colordiff $opts <(jq -S "$section1" ${1}) <(jq -S "$section2" ${2})
+}
+
+# Usage: yaml-diff [diff_opts] file1 file2 section_on_file1 section_on_file2
+function yaml-diff() {
+  opts=$(echo $@ | grep -Eo '(( |^)-\w+)+' | tr -s ' ' '\n')
+  for o in $opts; do shift; done
+  section1=$3
+  section2=$4
+  if [ -z $section1 ]; then
+    section1='.'
+  fi
+  if [ -z $section2 ]; then
+    section2=$section1
+  fi
+  colordiff $opts <(yq e "$section1|sortKeys(..)" ${1}) <(yq e "$section2|sortKeys(..)" ${2})
 }
 
 function json-merge() {
