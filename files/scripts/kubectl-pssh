@@ -48,8 +48,11 @@ function inventory() {
     "unhealthy" | "ko" | "notready")
       nodes=$(echo "$nodes" | jq -r '.[] | select(.status!="True") | "app@"+.ip')
       ;;
-    *)
+    "all")
       nodes=$(echo "$nodes" | jq -r '.[] | "app@"+.ip')
+      ;;
+    *)
+      nodes=$(echo "$nodes" | jq -r '.[] | select(.name|contains("'${NODES}'")) | "app@"+.ip')
       ;;
   esac
   echo -ne ${nodes} | tr -s '[[:space:]]' '\n'

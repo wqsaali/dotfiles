@@ -493,6 +493,7 @@ installZshConf() {
   git_clone_or_update https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM}/plugins/zsh-completions
   git_clone_or_update https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM}/plugins/zsh-history-substring-search
   git_clone_or_update https://github.com/hlissner/zsh-autopair.git ${ZSH_CUSTOM}/plugins/zsh-autopair
+  git_clone_or_update https://github.com/Aloxaf/fzf-tab.git ${ZSH_CUSTOM}/plugins/fzf-tab
 
   cp files/shell/zsh/zshrc ${HOME}/.zshrc
   cp files/shell/zsh/p10k.zsh ${HOME}/.p10k.zsh
