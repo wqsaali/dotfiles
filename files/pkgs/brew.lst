@@ -3,6 +3,7 @@
 # helm
 # kubernetes-cli
 # macvim
+# rust
 ack
 ansible
 ansible-lint
@@ -80,6 +81,7 @@ gnu-tar
 gnu-time
 go-jira
 godep
+golang
 goreleaser
 gotags
 gotty
@@ -164,7 +166,6 @@ remarshal
 rename
 ripgrep
 rke
-rust
 s3cmd
 sampler
 scrcpy

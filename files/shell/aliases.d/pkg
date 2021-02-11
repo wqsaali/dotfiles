@@ -127,6 +127,8 @@ elif [[ "$OSTYPE" == *"android"* ]]; then
 fi
 
 function update-all-things() {
+  # rustup self update
+  rustup update
   npm-upgrade
   gem-upgrade
   pip3-upgrade

@@ -1,10 +1,6 @@
 # vim:set filetype=bash:
 
 # Kubectl aliases
-alias kube='kubectl'
-alias kns='kubens'
-alias kc='kubectl'
-alias krew='kubectl krew'
 
 function kctl() {
   CMD=${1}
@@ -116,13 +112,11 @@ alias kctl-exec='kexec'
 function krun() { name=$1; shift; image=$1; shift; kubectl run -it --generator=run-pod/v1 --image $image $name -- $@; }
 alias kctl-run='krun'
 
-alias kctl-httpie='kubectl run --restart=Never --rm -i --tty httpie-tmp --image=alpine/httpie'
-
 function kubectl-remote_shell() {
   kubectl ${@} run --restart=Never --rm -i --tty alpine --image=alpine -- sh
 }
-alias kube-shell='kubectl-remote_shell'
 alias kctl-shell='kubectl-remote_shell'
+alias kube-shell='kubectl-remote_shell'
 
 alias kssh='kubectl-ssh'
 alias kpssh='kubectl-pssh'
@@ -139,8 +133,14 @@ function kubectl-purge_crd() {
 alias kctl-clean_crd='kubectl-purge_crd'
 
 alias kctl-list_images='kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s "[[:space:]]" "\n" | sort | uniq -c'
-
 alias kctl-drain='kubectl drain --delete-local-data --ignore-daemonsets'
+alias kctl-httpie='kubectl run --restart=Never --rm -i --tty httpie-tmp --image=alpine/httpie'
+
+alias kube='kubectl'
+alias kns='kubens'
+alias kc='kubectl'
+alias krew='kubectl krew'
+alias kindenv='export KUBECONFIG=~/.kube/kind-config'
 
 # Helm aliases
 alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -L 1 -r helm plugin update'

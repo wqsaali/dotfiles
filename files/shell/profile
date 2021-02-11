@@ -12,7 +12,7 @@ if [[ "$CONFIGURED" == "true" ]]; then
   return
 fi
 
-[ -f $HOME/.variables ] && source $HOME/.variables
+[ -f ${HOME}/.variables ] && source ${HOME}/.variables
 
 #CDPATH
 CDPATH=".:${HOME}:${HOME}/workingCopies:${HOME}/workingCopies/src:$(ls -1d ${HOME}/workingCopies/src/*/ | tr '\n' ':')"
@@ -128,6 +128,7 @@ GOBIN="${GOPATH/:*}/bin"
 PATH="$PATH:${GOBIN}"
 
 # Cargo bins
+# [ -f ${HOME}/.cargo/env ] && source ${HOME}/.cargo/env
 if [ -d "${HOME}/.cargo/bin" ]; then
   PATH="${HOME}/.cargo/bin:$PATH"
 fi

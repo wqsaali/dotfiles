@@ -137,6 +137,7 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ 'coc-python',
       \ 'coc-go',
+      \ 'coc-rls',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-groovy',
