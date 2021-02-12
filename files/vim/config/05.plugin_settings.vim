@@ -1,5 +1,20 @@
 " PluginSettings {{{
 
+  " FastFold
+  let g:markdown_folding = 1
+  let g:tex_fold_enabled = 1
+  let g:vimsyn_folding = 'af'
+  let g:xml_syntax_folding = 1
+  let g:javaScript_fold = 1
+  let g:sh_fold_enabled= 7
+  let g:ruby_fold = 1
+  let g:perl_fold = 1
+  let g:perl_fold_blocks = 1
+  let g:r_syntax_folding = 1
+  let g:rust_fold = 1
+  let g:go_fold = 1
+  let g:php_folding = 1
+
   " tComment {{{
   " Disable tComment to escape some entities
   let g:tcomment#replacements_xml={}
@@ -26,7 +41,6 @@
 
   " nerdtree {{{
   if has('autocmd')
-    filetype plugin indent on
     au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     au FileType nerdtree syntax match hideBracketsInNerdTree "\]" contained conceal containedin=AL
     augroup nerdtreehidecwd

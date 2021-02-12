@@ -59,6 +59,8 @@
   Plug 'nvie/vim-togglemouse'
   Plug 'Konfekt/FastFold'
   Plug 'luisdavim/pretty-folds'
+  " Plug 'pseewald/vim-anyfold'
+  " Plug 'pedrohdz/vim-yaml-folds'
   Plug 'chrisbra/vim-diff-enhanced'
 
   Plug 'vim-airline/vim-airline'
