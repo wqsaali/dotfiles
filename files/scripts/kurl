@@ -1,22 +1,39 @@
 #! /usr/bin/env bash
 # A script to allow exploring the kubernetes APIs using curl
+# Examples:
+#    # Update a resource
+#    kurl apis/myapi.mygroup.com/v1/mycrd/sample -X PUT -T /tmp/mcn.json
+#    # Update a resource status
+#    kurl apis/myapi.mygroup.com/v1/mycrd/sample/status -X PUT -T /tmp/mcn.json
+#    # Patch a resource
+#    kurl apis/myapi.mygroup.com/v1/mycrd/sample -X PATCH --data '[{"op": "add", "path": "/spec/enabled", "value": false }]' -H "Content-Type: application/json-patch+json"
+#    # Patch a resource status
+#    kurl apis/myapi.mygroup.com/v1/mycrd/sample/status -X PATCH --data '[{"op": "add", "path": "/status/phase", "value": "failed"}]' -H "Content-Type: application/json-patch+json"
+#    # Get secrets from a namespace
+#    kurl api/v1/namespaces/public-certs/secrets
+#    # Get pods by labels
+#    kurl api/v1/namespaces/kube-system/pods?labelSelector=app=helm,name=tiller
+#    # Get namespaced custom resources
+#    kurl apis/myapi.mygroup.com/v1/namespaces/myns/mycrd
+#    kurl apis/myapi.mygroup.com/v1/namespaces/myns/mycrd/myresource
 
 SERVICE_ACCOUNT=admin-user
 NS=kube-system
-URI=${1:-'api/v1/namespaces/kube-system/pods?labelSelector=app=helm,name=tiller'}
+OUTPUT="json"
 
 function usage() {
   if ! [ -z "${1}" ] ; then
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>] <resource>"
+  echo "Usage: $(basename $0) [<flags>] <resource_uri> [<curl_opts>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help         display help'
   echo '  -d, --debug        enable debug output'
-  echo '  -s, --sa           Service account name'
+  echo '  -S, --sa           Service account name'
   echo '  -n, --namespace    Service account namespace'
+  echo '  -o, --output       Select output format, json or yaml, default: json'
   echo '  -f, --force        Force reauthentication'
   exit 1
 }
@@ -33,29 +50,52 @@ while [[ $# -gt 0 ]]; do
   case $key in
       -h | --help ) usage ;;
       -d | --debug ) DEBUG=true; shift ;;
-      -s | --sa ) SERVICE_ACCOUNT="$2"; shift 2 ;;
+      -S | --sa ) SERVICE_ACCOUNT="$2"; shift 2 ;;
       -n | --namespace ) NS="$2"; shift 2 ;;
+      -o | --output ) OUTPUT="$2"; shift 2 ;;
       -f | --force ) rm -rf /tmp/kurlEnv; shift ;;
       *)
-      POSITIONAL+=("$1") # save it in an array for later
-      shift # past argument
-      ;;
+        POSITIONAL+=("$1") # save it in an array for later
+        shift # past argument
+        ;;
   esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [ -f "/tmp/kurlEnv" ]; then
+  [[ "${DEBUG}" == "true" ]] && echo "using pre-configured auth"
   source /tmp/kurlEnv
 else
+  [[ "${DEBUG}" == "true" ]] && echo "getting auth config using kubectl"
   SECRET=$(kubectl get serviceaccount ${SERVICE_ACCOUNT} -n ${NS} -o json | jq -Mr '.secrets[].name | select(contains("token"))')
   TOKEN=$(kubectl get secret ${SECRET} -n ${NS} -o json | jq -Mr '.data.token' | base64 -d)
   kubectl get secret ${SECRET} -n ${NS} -o json | jq -Mr '.data["ca.crt"]' | base64 -d > /tmp/ca.crt
-  APISERVER=https://$(kubectl -n default get endpoints kubernetes --no-headers | awk '{ print $2 }'| cut -d, -f1)
+  APISERVER=https://$(kubectl get -n default endpoints kubernetes --no-headers | awk '{ print $2 }'| cut -d, -f1)
 
-  cat <<EOF > /tmp/kurlEnv
+  cat << EOF > /tmp/kurlEnv
 APISERVER="${APISERVER}"
 TOKEN="${TOKEN}"
 EOF
 fi
 
-curl "${APISERVER}/${URI}" --header "Authorization: Bearer $TOKEN" --cacert /tmp/ca.crt
+case $OUTPUT in
+  json)
+    CONVERT="| jq ."
+    ;;
+  yaml)
+    CONVERT="| yq e -P -"
+    ;;
+  *)
+    usage "Invalid output format: ${OUTPUT} \n" >&2
+    ;;
+esac
+
+URI=${1}
+[ ! -z "${URI}" ] || usage
+shift
+
+CMD="curl \"${APISERVER}/${URI}\" --header \"Authorization: Bearer $TOKEN\" --cacert /tmp/ca.crt ${@} ${CONVERT}"
+
+[[ "${DEBUG}" == "true" ]] && echo "${CMD}"
+
+eval "${CMD}"
