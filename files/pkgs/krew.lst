@@ -13,6 +13,8 @@ neat
 node-restart
 node-shell
 ns
+pod-dive
+pod-inspect
 pod-logs
 pod-shell
 rbac-lookup
