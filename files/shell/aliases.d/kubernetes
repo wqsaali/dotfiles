@@ -20,6 +20,7 @@ alias k='kctl'
 alias kg='kctl get'
 alias kd='kctl describe'
 alias kvs='kctl view-secret'
+alias ked='kctl edit'
 
 function kgy() {
   kubectl get ${@} -o yaml | bat --paging never --theme ${BAT_THEME:-TwoDark} -p -l yaml

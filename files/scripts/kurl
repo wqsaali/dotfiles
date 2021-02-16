@@ -80,10 +80,10 @@ fi
 
 case $OUTPUT in
   json)
-    CONVERT="| jq ."
+    CONVERT="jq ."
     ;;
   yaml)
-    CONVERT="| yq e -P -"
+    CONVERT="yq e -P -"
     ;;
   *)
     usage "Invalid output format: ${OUTPUT} \n" >&2
@@ -94,8 +94,4 @@ URI=${1}
 [ ! -z "${URI}" ] || usage
 shift
 
-CMD="curl \"${APISERVER}/${URI}\" --header \"Authorization: Bearer $TOKEN\" --cacert /tmp/ca.crt ${@} ${CONVERT}"
-
-[[ "${DEBUG}" == "true" ]] && echo "${CMD}"
-
-eval "${CMD}"
+curl "${APISERVER}/${URI}" -H "Authorization: Bearer $TOKEN" --cacert /tmp/ca.crt "${@}" | ${CONVERT}

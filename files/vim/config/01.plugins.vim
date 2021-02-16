@@ -85,6 +85,8 @@
 
   " Plug 'mattn/emmet-vim'
   Plug 'maralla/vim-toml-enhance', {'for': 'toml'}
+  Plug 'google/vim-jsonnet'
+  Plug 'jjo/vim-cue'
 
   if has('nvim')
     Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app & yarn install' }
