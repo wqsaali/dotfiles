@@ -233,7 +233,7 @@
   " }}}
 
   " clap-vim {{{
-  " Maps to Alt-p
+  " Maps to Ctrl-p
   nnoremap <C-p> :Clap files<CR>
   nnoremap <C-o> :Clap filer<CR>
   nnoremap <C-e> :Clap command<CR>
@@ -244,6 +244,12 @@
 
   " let g:clap_provider_grep_executable = 'rg'
   let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case --hidden --glob=!.git/ --glob=!*vendor/*'
+  let g:clap_preview_direction = 'UD'
+  let g:clap_preview_size = 10
+  " let g:clap_layout = { 'relative': 'editor' }
+  let g:clap_layout = {'relative': 'editor', 'width': '67%', 'height': '15%', 'row': '15%', 'col': '17%'}
+  let g:clap_popup_border = 'sharp'
+  let g:clap_search_box_border_style = 'nil'
   " }}}
 
   " CtrlP {{{
