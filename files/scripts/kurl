@@ -62,7 +62,7 @@ while [[ $# -gt 0 ]]; do
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-if [ -f "/tmp/kurlEnv" ]; then
+if [ -f "/tmp/kurlEnv" ] && [ -f "/tmp/ca.crt" ]; then
   [[ "${DEBUG}" == "true" ]] && echo "using pre-configured auth"
   source /tmp/kurlEnv
 else
