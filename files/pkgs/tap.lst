@@ -16,6 +16,7 @@ homebrew/cask-versions
 homebrew/command-not-found
 homebrew/services
 homeport/tap
+instrumenta/instrumenta
 jakehilborn/jakehilborn
 jesseduffield/lazydocker
 jzelinskie/faq
@@ -23,6 +24,7 @@ knes1/tap
 knqyf263/pet
 koekeishiya/formulae
 kontena/chpharos
+kube-score/tap
 little-angry-clouds/homebrew-my-brews
 microsoft/git
 mike-engel/jwt-cli

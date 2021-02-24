@@ -33,7 +33,7 @@ function usage() {
   echo '  -d, --debug        enable debug output'
   echo '  -S, --sa           Service account name'
   echo '  -n, --namespace    Service account namespace'
-  echo '  -o, --output       Select output format, json or yaml, default: json'
+  echo '  -o, --output       Select output format, json, yaml or stats, default: json'
   echo '  -f, --force        Force reauthentication'
   exit 1
 }
@@ -85,6 +85,8 @@ case $OUTPUT in
   yaml)
     CONVERT="yq e -P -"
     ;;
+  stats)
+    ;;
   *)
     usage "Invalid output format: ${OUTPUT} \n" >&2
     ;;
@@ -93,5 +95,19 @@ esac
 URI=${1}
 [ ! -z "${URI}" ] || usage
 shift
+
+if [[ "$OUTPUT" == "stats" ]]; then
+  curl "${APISERVER}/${URI}" -H "Authorization: Bearer $TOKEN" --cacert /tmp/ca.crt -w @- -o /dev/null -s <<'EOF'
+    time_namelookup:  %{time_namelookup}\n
+       time_connect:  %{time_connect}\n
+    time_appconnect:  %{time_appconnect}\n
+   time_pretransfer:  %{time_pretransfer}\n
+      time_redirect:  %{time_redirect}\n
+ time_starttransfer:  %{time_starttransfer}\n
+                    ----------\n
+         time_total:  %{time_total}\n
+EOF
+  exit $?
+fi
 
 curl "${APISERVER}/${URI}" -H "Authorization: Bearer $TOKEN" --cacert /tmp/ca.crt "${@}" | ${CONVERT}
