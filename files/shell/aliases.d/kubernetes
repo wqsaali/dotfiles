@@ -16,6 +16,8 @@ function kctl() {
   fi
   eval "${COLOR} kubectl ${CMD} ${@}"
 }
+# alias k='kubectl "--context=${KUBECTL_CONTEXT:-$(kubectl config current-context)}" ${KUBECTL_NAMESPACE/[[:alnum:]-]*/--namespace=${KUBECTL_NAMESPACE}}'
+# alias kubectl="kubectl --context \${KUBE_CONTEXT:-\$(command kubectl config current-context)}"
 alias k='kctl'
 alias kg='kctl get'
 alias kd='kctl describe'
