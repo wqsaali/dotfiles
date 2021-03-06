@@ -394,4 +394,9 @@
   let g:airline_powerline_fonts = 1
   " }}}
 
+  " vim-floaterm {{{
+  let g:floaterm_width = 0.8
+  let g:floaterm_height = 0.5
+  " }}}
+
 " }}}

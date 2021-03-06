@@ -1,13 +1,14 @@
 # kontena-cli
 colorls
 hipchat
+iStats
 overcommit
 pry
 racker
+rails
 ripl
 rubocop
 rubocop-performance
 slack-notifier
 terminal-table
 terraform_landscape
-iStats

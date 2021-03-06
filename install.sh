@@ -580,6 +580,7 @@ installPackages() {
   installGems
   installPips
   installNpms
+  installGoPkgs
 
   installChefGems
   installChefVM
