@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+# Example usage:
+# ./pq http://prometheus.local 'avg by(resource)(avg_over_time(etcd_object_counts{resource=~".*marquis.*"}[5d]))' '.metric.resource'
+
+SERVER="${1}"
+QUERY="${2}"
+LABELS="${3}"
+
+curl -fs -G --data-urlencode "query=${QUERY}" "${SERVER}/api/v1/query" | jq -r ".data.result[] | [${LABELS}, .value[1] ] | @csv"

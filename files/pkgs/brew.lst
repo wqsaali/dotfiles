@@ -28,6 +28,7 @@ bosh-cli
 bosh-init
 brew-cask-completion
 brew-pip
+broot
 browsh
 calicoctl
 cask
