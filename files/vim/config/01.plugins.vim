@@ -86,6 +86,7 @@
   " Plug 'mattn/emmet-vim'
   Plug 'maralla/vim-toml-enhance', {'for': 'toml'}
   Plug 'google/vim-jsonnet'
+  Plug 'kevinoid/vim-jsonc'
   Plug 'jjo/vim-cue'
 
   if has('nvim')

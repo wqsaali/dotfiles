@@ -91,7 +91,7 @@
   let g:github_colors_soft = 1
 
   " more blocky diff markers in signcolumn (e.g. GitGutter)
-  " let g:github_colors_block_diffmark = 0
+  let g:github_colors_block_diffmark = 0
 
   " let g:airline_theme = 'base16_tomorrow'
   let g:airline_theme = "github"

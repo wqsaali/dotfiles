@@ -361,6 +361,7 @@ installVimPlugins() {
     ln -s ${HOME}/.vim/autoload/ ${HOME}/.config/nvim/autoload
     ln -s ${HOME}/.vim/ftdetect/ ${HOME}/.config/nvim/ftdetect
     ln -s ${HOME}/.vim/ftplugin/ ${HOME}/.config/nvim/ftplugin
+    ln -s ${HOME}/.vim/coc-settings.json ${HOME}/.config/nvim/coc-settings.json
   fi
 
   # Using vim-plug
