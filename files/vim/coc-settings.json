@@ -89,7 +89,8 @@
     "yaml"
   ],
   "git.enableGlobalStatus": false,
-  "git.addGBlameToVirtualText": true,
+  "git.addGBlameToVirtualText": false,
+  "git.enableGutters": true,
   "highlight.colors.enable": false,
   "markdownlint.config": {
     "default": true,

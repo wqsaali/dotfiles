@@ -75,6 +75,8 @@
   set ignorecase
   set smartcase
 
+  set numberwidth=3
+
   " In many terminal emulators the mouse works just fine, thus enable it.
   if has('mouse')
     set mouse=a

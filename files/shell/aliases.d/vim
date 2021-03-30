@@ -13,14 +13,14 @@ function gn_sync_all() {
 
 # Vim aliases
 # Use neovim if available
-if [ -x "$(command -v nvim)" ]; then
-  alias vi='nvim'
-  alias vim='nvim'
-  alias vimdiff='nvim -d'
-else
+# if [ -x "$(command -v nvim)" ]; then
+#   alias vi='nvim'
+#   alias vim='nvim'
+#   alias vimdiff='nvim -d'
+# else
    alias vi='vim'
    alias vimdiff='vim -d'
-fi
+# fi
 
 alias fzvi='vi "$(rg -g "!*vendor/*" -l . | fzf --height=100% --preview='\''pistol {}'\'')"'
 alias vim-geeknote='vi -c Geeknote'
