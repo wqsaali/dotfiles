@@ -113,6 +113,14 @@
     "typescriptreact",
     "yaml"
   ],
+  "coc.preferences.rootPatterns": [
+    ".git",
+    ".hg",
+    ".projections.json",
+    "requirements.txt",
+    "setup.cfg",
+    "package.json"
+  ],
   "git.enableGlobalStatus": false,
   "git.addGBlameToVirtualText": false,
   "git.enableGutters": true,
