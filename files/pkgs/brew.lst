@@ -12,9 +12,9 @@ asciinema
 autopep8
 avfs
 awless
+aws-iam-authenticator
 aws-shell
 awscli
-aws-iam-authenticator
 azure-cli
 bash
 bash-completion@2
@@ -103,6 +103,7 @@ httpie
 httpstat
 hub
 imagemagick
+inframap
 inlets
 ipcalc
 iproute2mac
@@ -145,6 +146,7 @@ node
 openshift-cli
 openssl
 operator-sdk
+p7zip
 packer
 pdsh
 peco

@@ -1,8 +1,8 @@
+# ansible
 # yq
 BlastRadius
 Pygments
 alacritty-colorscheme
-# ansible
 ansible-test
 boto
 boto3
@@ -11,6 +11,7 @@ click
 container-transform
 docker
 dreampie
+fastapi
 glances
 howdoi
 importmagic
@@ -20,6 +21,7 @@ jedi
 k8s-handle
 kube-shell
 kubernetes
+manage-fastapi
 mdv
 molecule
 neovim
@@ -29,6 +31,7 @@ pre-commit
 pterraform
 ptpython
 pycodestyle
+pydantic
 pyflakes
 pygments-style-tomorrownightbright
 pyhcl
@@ -41,5 +44,7 @@ setuptools
 shutit
 sshuttle
 terrafile
+tfdiagrams
 thefuck
 tomorrow
+uvicorn

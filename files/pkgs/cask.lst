@@ -1,10 +1,10 @@
 # docker-edge
 # hab
 # pingplotter
-#alfred
-#cakebrew
-#cerebro
-#oni
+# alfred
+# cakebrew
+# cerebro
+# oni
 alacritty
 android-file-transfer
 android-platform-tools
@@ -15,6 +15,7 @@ cisco-proximity
 clipy
 cyberduck
 docker
+dynamodb-local
 etcher
 firefox
 flux
