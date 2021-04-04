@@ -74,14 +74,22 @@ function installFromGithub() {
     else
       tar -xzf ${artifact} --one-top-level=${artifact_name} # gnu-tar is needed for this one
     fi
-    mv $(find ./${artifact_name}/ -type f -name "${name}*") ${name}
+    files=$(find ./${artifact_name}/ -type f -name "${name}*")
+    [[ "${DEBUG}" == "true" ]] && echo -e "files found: \n${files}"
+    if [[ $(echo "${files}" | wc -l) -gt 1 ]]; then
+      for f in ${files}; do
+        install ${f}
+      done
+    else
+      mv ${f} ${name}
+      install ${name}
+    fi
     rm ${artifact}
     rm -rf ${artifact_name}
   else
     curl -sLo ${name} ${url}
+    install ${name}
   fi
-
-  install ${name}
 }
 
 function getFromRawGithub() {

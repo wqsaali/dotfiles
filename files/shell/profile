@@ -78,18 +78,18 @@ if [ -d '/usr/local/opt/python/libexec/bin' ]; then
   PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
 
-if [ -x "$(command -v brew)" ]; then
-  if [ -d "$(ls -1d $(brew --prefix)/lib/py*/* | tail -n1)" ]; then
-    PYTHONPATH="$(ls -1d $(brew --prefix)/lib/py*/* | tail -n1)"
-  fi
-#   for P in $(ls -1d $(brew --prefix)/lib/py*/*); do
-#     if [ -z "$PYTHONPATH" ]; then
-#       PYTHONPATH="${P}"
-#     else
-#       PYTHONPATH="${P}:$PYTHONPATH"
-#     fi
-#   done
-fi
+# if [ -x "$(command -v brew)" ]; then
+#   if [ -d "$(ls -1d $(brew --prefix)/lib/py*/* | tail -n1)" ]; then
+#     PYTHONPATH="$(ls -1d $(brew --prefix)/lib/py*/* | tail -n1)"
+#   fi
+# #   for P in $(ls -1d $(brew --prefix)/lib/py*/*); do
+# #     if [ -z "$PYTHONPATH" ]; then
+# #       PYTHONPATH="${P}"
+# #     else
+# #       PYTHONPATH="${P}:$PYTHONPATH"
+# #     fi
+# #   done
+# fi
 
 # Use brew ruby
 if [ -d '/usr/local/opt/ruby/bin' ]; then

@@ -21,7 +21,7 @@
     "deepCompletion": true,
     "fuzzyMatching": true
   },
-  "jedi.enable": false,
+  "jedi.enable": true,
   "jedi.startupMessage": false,
   "jedi.markupKindPreferred": "plaintext",
   "jedi.trace.server": "off",

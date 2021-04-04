@@ -9,6 +9,7 @@ boto3
 bpython
 click
 container-transform
+docformatter
 docker
 dreampie
 fastapi
@@ -18,6 +19,7 @@ importmagic
 ipython
 isort
 jedi
+jedi-language-server
 k8s-handle
 kube-shell
 kubernetes
@@ -37,6 +39,7 @@ pygments-style-tomorrownightbright
 pyhcl
 pyinstaller
 pylint
+pyls
 pyobjc
 python-language-server
 pyvmomi
