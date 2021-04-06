@@ -121,6 +121,7 @@ let g:coc_global_extensions = [
       \ 'coc-marketplace',
       \ 'coc-explorer',
       \ 'coc-floaterm',
+      \ 'coc-terminal',
       \ 'coc-git',
       \ 'coc-gitignore',
       \ 'coc-gist',

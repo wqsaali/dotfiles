@@ -132,5 +132,13 @@
   "markdownlint.config": {
     "default": true,
     "line-length": false
-  }
+  },
+  "terminal.REPLMappings": {
+  "c": "cling",
+  "cpp": "cling",
+  "javascript": "node",
+  "typescript": "ts-node",
+  "python": "ipython",
+  "ruby": "pry"
+}
 }
