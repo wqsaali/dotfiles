@@ -66,11 +66,14 @@ fi
 if [ -d '/usr/local/opt/gnu-sed/libexec/gnubin' ]; then
   PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 fi
-if [ -d "/usr/local/opt/gnu-getopt/bin" ]; then
+if [ -d '/usr/local/opt/gnu-getopt/bin' ]; then
   PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
 fi
 if [ -d '/usr/local/opt/gnu-time/libexec/gnubin' ]; then
   PATH="/usr/local/opt/gnu-time/libexec/gnubin:$PATH"
+fi
+if [ -d '/usr/local/opt/whois/bin' ]; then
+  PATH="/usr/local/opt/whois/bin:$PATH"
 fi
 
 # Use brew python

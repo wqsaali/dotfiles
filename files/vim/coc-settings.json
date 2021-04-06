@@ -50,6 +50,10 @@
   "explorer.quitOnOpen": true,
   "explorer.toggle": true,
   "explorer.icon.enableVimDevicons":true,
+  "explorer.keyMappings.global": {
+    "<cr>": ["wait", "expanded?", "collapse", "expand"],
+    "v": "open:vsplit"
+  },
   "explorer.file.column.indent.indentLine": true,
   "explorer.file.showHiddenFiles": true,
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
