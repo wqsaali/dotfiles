@@ -105,6 +105,7 @@
 
   Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
   call plug#end()
 
@@ -128,11 +129,14 @@ let g:coc_global_extensions = [
       \ 'coc-pairs',
       \ 'coc-prettier',
       \ 'coc-tabnine',
+      \ 'coc-tag',
+      \ 'coc-lists',
       \ 'coc-emmet',
       \ 'coc-highlight',
       \ 'coc-snippets',
       \ 'coc-ultisnips',
       \ 'coc-markdownlint',
+      \ 'coc-emoji',
       \ 'coc-diagnostic',
       \ 'coc-swagger',
       \ 'coc-docker',
@@ -145,7 +149,9 @@ let g:coc_global_extensions = [
       \ 'coc-pyls',
       \ 'coc-pyright',
       \ 'coc-go',
+      \ 'coc-gocode',
       \ 'coc-rls',
+      \ 'coc-rust-analyzer',
       \ 'coc-html',
       \ 'coc-css',
       \ 'coc-groovy',

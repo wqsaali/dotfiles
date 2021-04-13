@@ -1,10 +1,11 @@
-# docker-edge
-# hab
-# pingplotter
 # alfred
 # cakebrew
 # cerebro
+# docker-edge
+# hab
+# hipchat
 # oni
+# pingplotter
 alacritty
 android-file-transfer
 android-platform-tools
@@ -42,7 +43,6 @@ git-credential-manager-core
 google-chrome
 gpg-suite
 hammerspoon
-hipchat
 iterm2
 java
 keepingyouawake

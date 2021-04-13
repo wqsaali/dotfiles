@@ -63,6 +63,7 @@ docker-ls
 ec2-ami-tools
 ec2-api-tools
 egison
+eksctl
 elktail
 exa
 exif

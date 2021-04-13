@@ -388,9 +388,13 @@
 
   " vim-airline {{{
   " let g:airline_extensions = ['branch', 'tabline', 'whitespace']
+  let g:airline#extensions#branch#enabled = 1
+  let g:airline#extensions#coc#enabled = 1
+  let g:airline#extensions#vista#enabled = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#buffer_min_count = 1
   let g:airline#extensions#tabline#show_buffers = 0
+  let g:airline#extensions#whitespace#enabled = 1
   let g:airline#extensions#whitespace#skip_indent_check_ft = {'go': ['mixed-indent-file']}
   let g:airline_powerline_fonts = 1
   " }}}
