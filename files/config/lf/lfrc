@@ -23,7 +23,6 @@ set scrolloff 10
 # enable icons
 set icons
 
-set color256
 set ratios 1:2:4
 set period 30
 
@@ -39,6 +38,8 @@ map X !$f
 # dedicated keys for file opener actions
 map o &mimeopen $f
 map O $mimeopen --ask $f
+
+map e $cd $OLDPWD && $EDITOR $fx
 
 # define a custom previewer
 set previewer pistol
