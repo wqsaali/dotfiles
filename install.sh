@@ -134,7 +134,7 @@ installKubeScripts() {
   # installFromRawGithub 'ahmetb/kubectx' 'kubens'
 
   installFromGithub 'flavio/kuberlr' "${1}" "${2}"
-  installFromGithub 'Praqma/helmsman' "${1}" "${2}"
+  # installFromGithub 'Praqma/helmsman' "${1}" "${2}"
   installFromGithub 'shyiko/kubesec' "${1}" "${2}"
   installFromGithub 'kubermatic/kubeone' "${1}" "${2}"
   installFromGithub 'kubernetes-sigs/kustomize' "${1}" "${2}"

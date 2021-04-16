@@ -98,6 +98,8 @@ grv
 hab
 hadolint
 helmenv
+helmfile
+helmsman
 highlight
 homeport/tap/dyff
 htop
