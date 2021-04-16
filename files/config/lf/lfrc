@@ -26,6 +26,7 @@ set icons
 set ratios 1:2:4
 set period 30
 
+map <backspace2> set hidden!
 map <bs2> set hidden!
 
 # use enter for shell commands
@@ -39,7 +40,7 @@ map X !$f
 map o &mimeopen $f
 map O $mimeopen --ask $f
 
-map e $cd $OLDPWD && $EDITOR $fx
+# map e $cd $OLDPWD; $EDITOR $fx
 
 # define a custom previewer
 set previewer pistol
