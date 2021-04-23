@@ -86,6 +86,7 @@ gnu-time
 go-jira
 godep
 golang
+golangci-lint
 goreleaser
 gotags
 gotty
