@@ -567,7 +567,7 @@ installDotFiles() {
     bat cache --build
   fi
 
-  if [ -x $(command -v mdatp) ]; then
+  if [ -x "$(command -v mdatp)" ]; then
     for F in $(cat files/mdatp.lst|envsubst); do mdatp exclusion folder add --path ${F}; done
   fi
 }
