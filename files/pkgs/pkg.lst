@@ -67,6 +67,7 @@ libexpat
 libffi
 libgc
 libgcrypt
+libgit2
 libgmp
 libgnutls
 libgpg-error
@@ -74,9 +75,11 @@ libiconv
 libicu
 libidn
 libidn2
+libjansson
 libksba
 libllvm
-liblua
+liblua53
+liblz4
 liblzma
 libmpfr
 libmsgpack
@@ -159,6 +162,7 @@ vim-python
 vim-runtime
 w3m
 wget
+xxhash
 xz-utils
 yarn
 zlib
