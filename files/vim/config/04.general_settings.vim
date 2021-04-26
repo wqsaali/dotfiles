@@ -41,8 +41,11 @@
 
   " Folding
   set foldmarker={{{,}}}
-  set foldlevelstart=99
   set foldmethod=indent "syntax "marker
+  set foldlevelstart=99
+  set foldnestmax=10
+  set nofoldenable
+  set foldlevel=2
 
   " set clipboard=unnamedplus
   set clipboard=unnamed
