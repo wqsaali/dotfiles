@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 
+TERMINAL_EMULATOR=$(basename $(ps -axo "comm=" $(ps -axo "ppid=" $(ps -axo "ppid=" $(tmux display-message -p "#{client_pid}")))))
 THEME_DIR="${HOME}/.alacritty-theme/themes"
+if [[ "${TERMINAL_EMULATOR}" =~ kitty ]]; then
+  THEME_DIR="${HOME}/.kitty-themes/themes"
+fi
 THEME_NAME=$(ls -1 ${THEME_DIR} | fzf)
 
-alacritty-colorscheme -C ${THEME_DIR} -a $(basename ${THEME_NAME}) -V
+if [[ "${TERMINAL_EMULATOR}" =~ kitty ]]; then
+  mkdir -p "${HOME}/.config/kitty"
+  rm "${HOME}/.config/kitty/theme.conf"
+  ln -s "${THEME_DIR}/${THEME_NAME}" "${HOME}/.config/kitty/theme.conf"
+elif [[ "${TERMINAL_EMULATOR}" =~ alacritty ]]; then
+  alacritty-colorscheme -C ${THEME_DIR} -a $(basename ${THEME_NAME}) -V
+else
+  echo "Unsupported terminal emulator: ${TERMINAL_EMULATOR}"
+  exit 1
+fi

@@ -544,6 +544,10 @@ installDotFiles() {
   # a matchin vim theme will also be created in ~/.vimrc_background
   git_clone_or_update https://github.com/eendroroy/alacritty-theme.git ${HOME}/.alacritty-theme
 
+
+  # kitty themes
+  git _clone_or_update https://github.com/dexpota/kitty-themes.git ${HOME}/.kitty-themes
+
   for dir in $(ls -1d files/config/*/); do
     cp -r files/config/${dir##*/}/* ${HOME}/.config/${dir##*/}/
   done
