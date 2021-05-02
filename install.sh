@@ -282,12 +282,13 @@ installScripts() {
   cp -r files/scripts/* ${HOME}/.local/bin/
   installFromRawGithub 'huyng/bashmarks' 'bashmarks.sh'
   installFromRawGithub 'ahmetb/goclone'
-  installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
-  installFromRawGithub 'smitt04/slack-dark-theme' 'darkSlack.sh'
+  # installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
+  # installFromRawGithub 'smitt04/slack-dark-theme' 'darkSlack.sh'
   if [[ "$OSTYPE" == *"android"* ]]; then
     termux-fix-shebang ${HOME}/.local/bin/*
   fi
   installTestssl
+  git_clone_or_update https://github.com/wookayin/kitty-tmux.git ${HOME}/.kitty-tmux
 
   if [[ "$OSTYPE" != *"android"* ]]; then
     if [[ "$OSTYPE" == "darwin"* ]]; then

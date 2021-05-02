@@ -174,45 +174,46 @@ colors:
   # COLORSCHEME: base16_default_dark.yaml
   # Default colors
   primary:
-    background: "0x181818"
-    foreground: "0xd8d8d8"
+    # hard contrast: background = '0x1d2021'
+    background: '0x181818'
+    foreground: '0xd8d8d8'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: "0xd8d8d8"
-    cursor: "0xd8d8d8"
+    text: '0xd8d8d8'
+    cursor: '0xd8d8d8'
 
   # Normal colors
   normal:
     # Bright colors
-    black: "0x181818"
-    red: "0xab4642"
-    green: "0xa1b56c"
-    yellow: "0xf7ca88"
-    blue: "0x7cafc2"
-    magenta: "0xba8baf"
-    cyan: "0x86c1b9"
-    white: "0xd8d8d8"
+    black: '0x181818'
+    red: '0xab4642'
+    green: '0xa1b56c'
+    yellow: '0xf7ca88'
+    blue: '0x7cafc2'
+    magenta: '0xba8baf'
+    cyan: '0x86c1b9'
+    white: '0xd8d8d8'
 
   # Bright colors
   bright:
-    black: "0x585858"
-    red: "0xab4642"
-    green: "0xa1b56c"
-    yellow: "0xf7ca88"
-    blue: "0x7cafc2"
-    magenta: "0xba8baf"
-    cyan: "0x86c1b9"
-    white: "0xf8f8f8"
+    black: '0x585858'
+    red: '0xab4642'
+    green: '0xa1b56c'
+    yellow: '0xf7ca88'
+    blue: '0x7cafc2'
+    magenta: '0xba8baf'
+    cyan: '0x86c1b9'
+    white: '0xf8f8f8'
   dim:
-    black: "0x31363b"
-    red: "0x783228"
-    green: "0x17a262"
-    yellow: "0xb65619"
-    blue: "0x1b668f"
-    magenta: "0x614a73"
-    cyan: "0x186c60"
-    white: "0x63686d"
+    black: '0x232323'
+    red: '0x74423f'
+    green: '0x5e6547'
+    yellow: '0x8b7653'
+    blue: '0x556b79'
+    magenta: '0x6e4962'
+    cyan: '0x5c8482'
+    white: '0x828282'
   indexed_colors: []
 
   # Bell
