@@ -4,6 +4,7 @@ ca-cert
 ctx
 debug-shell
 doctor
+edit-status
 exec-all
 get-all
 krew
@@ -28,3 +29,4 @@ tail
 tree
 view-secret
 view-utilization
+who-can
