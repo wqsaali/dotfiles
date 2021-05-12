@@ -83,6 +83,7 @@
   " In many terminal emulators the mouse works just fine, thus enable it.
   if has('mouse')
     set mouse=a
+    set ttymouse=sgr
   endif
 
   " Enable (better) mouse support under tmux
