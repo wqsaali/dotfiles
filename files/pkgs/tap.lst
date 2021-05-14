@@ -33,6 +33,7 @@ reactiveops/tap
 reconquest/tubekit https://github.com/reconquest/tubekit.git
 tidwall/jj
 universal-ctags/universal-ctags
+vmware-tanzu/carvel
 wagoodman/dive
 wallix/awless
 weaveworks/tap

@@ -108,6 +108,7 @@ httpie
 httpstat
 hub
 imagemagick
+imgpkg
 inframap
 inlets
 ipcalc
@@ -122,7 +123,9 @@ jwt-cli
 k3d
 k9s
 kakoune
+kapp
 kbenv
+kbld
 kind
 kompose
 kops
@@ -130,6 +133,7 @@ kube-aws
 kubebuilder
 kubectx
 kustomize
+kwt
 lab
 lazydocker
 legit
@@ -211,6 +215,7 @@ tubekit
 ufraw
 vagrant-completion
 vault
+vendir
 vim
 w3m
 watch
@@ -223,4 +228,5 @@ yabai
 yarn
 ydiff
 yq
+ytt
 zsh

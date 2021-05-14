@@ -141,7 +141,6 @@ installKubeScripts() {
   installFromGithub 'kubernetes-sigs/kubebuilder' "${1}" "${2}"
   # installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
   installFromGithub 'nutellinoit/kubenvz' "${1}" "${2}"
-  installFromGithub 'k14s/ytt' "${1}" "${2}"
   installFromGithub 'jaredallard/localizer' "${1}" "${2}"
 
   if [ ! -s ${HOME}/.local/bin/kuberlr ]; then
