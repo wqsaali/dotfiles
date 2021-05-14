@@ -22,6 +22,7 @@ alias k='kctl'
 alias kg='kctl get'
 alias kd='kctl describe'
 alias kvs='kctl view-secret'
+alias keds='kctl modify-secret'
 alias ked='kctl edit'
 
 function kgy() {
