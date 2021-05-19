@@ -125,20 +125,21 @@
     "setup.cfg",
     "package.json"
   ],
-  "git.enableGlobalStatus": false,
+  "git.enableGlobalStatus": true,
   "git.addGBlameToVirtualText": false,
   "git.enableGutters": true,
+  "git.signPriority":10,
   "highlight.colors.enable": false,
   "markdownlint.config": {
     "default": true,
     "line-length": false
   },
   "terminal.REPLMappings": {
-  "c": "cling",
-  "cpp": "cling",
-  "javascript": "node",
-  "typescript": "ts-node",
-  "python": "ipython",
-  "ruby": "pry"
-}
+    "c": "cling",
+    "cpp": "cling",
+    "javascript": "node",
+    "typescript": "ts-node",
+    "python": "ipython",
+    "ruby": "pry"
+  }
 }
