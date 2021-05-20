@@ -38,14 +38,13 @@
   Plug 'nelstrom/vim-visual-star-search'
 
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+  Plug 'liuchengxu/vista.vim'
   Plug 'vn-ki/coc-clap'
 
   Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'
 
   Plug 'ryanoasis/vim-devicons'
-
-  Plug 'liuchengxu/vista.vim'
 
   Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
   Plug 'tpope/vim-sleuth'
@@ -65,7 +64,7 @@
 
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'rbong/vim-crystalline'
+  " Plug 'rbong/vim-crystalline'
 
   " Plug 'flazz/vim-colorschemes'
   " Plug 'rainglow/vim'
@@ -83,7 +82,7 @@
   " Plug 'arp242/gopher.vim', {'for': 'go'}
   Plug 'sebdah/vim-delve', {'for': 'go'}
 
-  " Plug 'mattn/emmet-vim'
+  Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
   Plug 'maralla/vim-toml-enhance', {'for': 'toml'}
   Plug 'google/vim-jsonnet'
   Plug 'kevinoid/vim-jsonc'
@@ -118,26 +117,26 @@
 
 " coc-extensions {{{
 let g:coc_global_extensions = [
-      \ 'coc-actions',
       \ 'coc-marketplace',
+      \ 'coc-actions',
+      \ 'coc-pairs',
+      \ 'coc-highlight',
+      \ 'coc-diagnostic',
+      \ 'coc-lists',
+      \ 'coc-tag',
+      \ 'coc-git',
       \ 'coc-explorer',
       \ 'coc-floaterm',
       \ 'coc-terminal',
-      \ 'coc-git',
       \ 'coc-gitignore',
       \ 'coc-gist',
-      \ 'coc-pairs',
       \ 'coc-prettier',
+      \ 'coc-markdownlint',
       \ 'coc-tabnine',
-      \ 'coc-tag',
-      \ 'coc-lists',
-      \ 'coc-emmet',
-      \ 'coc-highlight',
       \ 'coc-snippets',
       \ 'coc-ultisnips',
-      \ 'coc-markdownlint',
+      \ 'coc-emmet',
       \ 'coc-emoji',
-      \ 'coc-diagnostic',
       \ 'coc-swagger',
       \ 'coc-docker',
       \ 'coc-sh',
@@ -149,16 +148,15 @@ let g:coc_global_extensions = [
       \ 'coc-jedi',
       \ 'coc-pyls',
       \ 'coc-pyright',
-      \ 'coc-go',
       \ 'coc-lua',
+      \ 'coc-go',
       \ 'coc-gocode',
       \ 'coc-rls',
       \ 'coc-rust-analyzer',
       \ 'coc-html',
       \ 'coc-css',
-      \ 'coc-groovy',
       \ 'coc-phpls',
+      \ 'coc-groovy',
       \ 'coc-sql',
-      \ 'coc-docker',
       \ ]
 " }}}
