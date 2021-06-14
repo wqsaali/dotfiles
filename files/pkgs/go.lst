@@ -21,6 +21,7 @@ github.com/kubernetes-sigs/controller-tools/cmd/controller-gen
 github.com/kubicorn/kubicorn
 github.com/kyoh86/richgo
 github.com/liggitt/audit2rbac
+github.com/pbnj/ephor
 github.com/pkg/errors
 github.com/rancher/k3d
 github.com/reactiveops/rbac-lookup
