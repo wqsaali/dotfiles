@@ -57,7 +57,7 @@ direnv
 displayplacer
 dive
 dnscrypt-proxy
-docker
+# docker
 # docker-completion
 # docker-compose-completion
 docker-ls
