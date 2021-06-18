@@ -427,6 +427,8 @@ installShellConf() {
   installZshConf
   installTmuxConf
   installGitConf
+
+  source "${HOME}/.profile"
 }
 
 installBashConf() {
@@ -546,7 +548,7 @@ installDotFiles() {
 
 
   # kitty themes
-  git _clone_or_update https://github.com/dexpota/kitty-themes.git ${HOME}/.kitty-themes
+  git_clone_or_update https://github.com/dexpota/kitty-themes.git ${HOME}/.kitty-themes
 
   for dir in $(ls -1d files/config/*/); do
     cp -r files/config/${dir##*/}/* ${HOME}/.config/${dir##*/}/

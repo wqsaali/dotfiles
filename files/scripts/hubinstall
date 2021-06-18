@@ -35,8 +35,8 @@ function usage {
 
 function install() {
   if [ -f "${1}" ]; then
-    chmod +x ${1}
-    mv ${1} ${install_to}
+    chmod +x "${1}"
+    mv "${1}" "${install_to}"
   else
     echo "Error: ${1} not found"
   fi
@@ -81,7 +81,7 @@ function installFromGithub() {
         install ${f}
       done
     else
-      mv ${f} ${name}
+      mv ${files} ${name}
       install ${name}
     fi
     rm ${artifact}
@@ -139,6 +139,8 @@ while true; do
     * ) break ;;
   esac
 done
+
+mkdir -p "${install_to}"
 
 # Allow the file to be sourced without excuting this part
 if [ "$0" = "$BASH_SOURCE" ] ; then

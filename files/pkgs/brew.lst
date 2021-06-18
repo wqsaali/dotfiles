@@ -57,8 +57,9 @@ direnv
 displayplacer
 dive
 dnscrypt-proxy
-docker-completion
-docker-compose-completion
+docker
+# docker-completion
+# docker-compose-completion
 docker-ls
 ec2-ami-tools
 ec2-api-tools
