@@ -1,5 +1,8 @@
 # chunkwm
 # chunkwm-blur
+# docker
+# docker-completion
+# docker-compose-completion
 # helm
 # kubernetes-cli
 # macvim
@@ -57,9 +60,6 @@ direnv
 displayplacer
 dive
 dnscrypt-proxy
-# docker
-# docker-completion
-# docker-compose-completion
 docker-ls
 ec2-ami-tools
 ec2-api-tools
