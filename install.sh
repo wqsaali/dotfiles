@@ -191,6 +191,7 @@ installGems() {
 }
 
 installChefGems() {
+  export CHEF_LICENSE=accept-silent
   while IFS='' read -r PKG; do
     [[ -z "${PKG}" ]] && continue
     [[ "${PKG}" =~ ^#.*$ ]] && continue
