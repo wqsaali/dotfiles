@@ -33,6 +33,7 @@ function usage {
 
 function goinstall() {
   PKG=${1:-}
+  PKG="${PKG//github.com\//}"
   [ -z "${PKG}" ] && usage "Missing package name.\nTerminating...\n" >&2
   VERSION="@${2}"
   if [[ "${VERSION}" == "@latest" ]]; then

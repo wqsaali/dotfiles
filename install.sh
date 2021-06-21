@@ -233,7 +233,8 @@ installGoPkgs() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     echo ">>> ${PKG}"
-    goinstall "${PKG}"
+    # goinstall "${PKG}"
+    go get -u "${PKG}"
   done < files/pkgs/go.lst
   cd ${INSTALLDIR}
 }
