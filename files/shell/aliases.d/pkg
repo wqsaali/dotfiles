@@ -30,6 +30,7 @@ alias pip='pip3'
 
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip install -U'
+alias pip-upgrade1='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r -L1 pip install -U'
 alias pip3-upgrade='(echo pip; pip3 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip3 install -U'
 alias pip2-upgrade='(echo pip; pip2 freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip2 install -U'
 alias pip-clean='rm -rf ~/.cache/pip/'
@@ -131,7 +132,7 @@ function update-all-things() {
   rustup update
   npm-upgrade
   gem-upgrade
-  pip3-upgrade
+  pip-upgrade1
   dist-upgrade
 
   if [ -x "$(command -v mas)" ]; then
@@ -144,6 +145,10 @@ function update-all-things() {
   # Update oh my zsh
   if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
     omz update
+  fi
+
+  if [ -x "$(command -v asdf)" ]; then
+    asdf plugin update --all
   fi
 
   # vim-update
@@ -161,10 +166,6 @@ function update-all-things() {
   fi
   if [ -x "$(command -v vagrant)" ]; then
     vagrant plugin update
-  fi
-
-  if [ -x "$(command -v asdf)" ]; then
-    asdf plugin update --all
   fi
 }
 
