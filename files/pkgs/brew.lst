@@ -12,6 +12,7 @@ ansible
 ansible-lint
 archivemount
 asciinema
+asdf
 autopep8
 avfs
 awless

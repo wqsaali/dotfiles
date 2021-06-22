@@ -162,5 +162,9 @@ function update-all-things() {
   if [ -x "$(command -v vagrant)" ]; then
     vagrant plugin update
   fi
+
+  if [ -x "$(command -v asdf)" ]; then
+    asdf plugin update --all
+  fi
 }
 

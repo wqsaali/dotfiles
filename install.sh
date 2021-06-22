@@ -56,6 +56,17 @@ git_clone_or_update() {
   fi
 }
 
+installPkgList() {
+  while IFS='' read -r PKG; do
+    [[ -z "${PKG}" ]] && continue
+    [[ "${PKG}" =~ ^#.*$ ]] && continue
+    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    echo ">>> ${PKG}"
+    eval "${1} ${PKG}"
+  done < "${2}"
+  cd ${INSTALLDIR}
+}
+
 getNerdFont() {
   getFromRawGithub 'ryanoasis/nerd-fonts/' "patched-fonts/${1}" 'latest'
 }
@@ -110,13 +121,7 @@ installKrew() {
 
   # install krew packages
   kubectl krew update
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    kubectl krew install "${PKG}"
-  done < files/pkgs/krew.lst
+  installPkgList "kubectl krew install" files/pkgs/krew.lst
 }
 
 installKubeScripts() {
@@ -166,6 +171,10 @@ installDepcon() {
   installFromGithub 'ContainX/depcon' ${1} ${2}
 }
 
+installAsdfPlugins() {
+  installPkgList "asdf plugin add" files/pkgs/asdf.lst
+}
+
 installCargo() {
   if ! [ -x "$(command -v cargo)" ]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -173,49 +182,29 @@ installCargo() {
     rustup component add rls rust-analysis rust-src
   fi
 
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    cargo install --force "${PKG}"
-  done < files/pkgs/cargo.lst
+  installPkgList "cargo install --force" files/pkgs/cargo.lst
 }
 
 installGems() {
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    gem_install_or_update "${PKG}"
-  done < files/pkgs/gem.lst
+  installPkgList gem_install_or_update files/pkgs/gem.lst
 }
 
 installChefGems() {
   export CHEF_LICENSE=accept-silent
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    chef gem install "${PKG}"
-  done < files/pkgs/chef_gem.lst
+  installPkgList "chef gem install" files/pkgs/chef_gem.lst
 }
 
 installPips() {
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    pip install -U "${PKG}"
-  done < files/pkgs/pip.lst
+  installPkgList "pip install -U" files/pkgs/pip.lst
 }
 
 installNpms() {
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    npm install -g "${PKG}"
-  done < files/pkgs/npm.lst
+  installPkgList "npm install -g" files/pkgs/npm.lst
+}
+
+installGoPkgs() {
+  # goinstall "${PKG}"
+  installPkgList "go get -u" files/pkgs/go.lst
 }
 
 cleanGoPkgs() {
@@ -225,18 +214,6 @@ cleanGoPkgs() {
   rm -rf ${GOPATH/:*}/pkg/*
   rm -rf ${GOPATH/:*}/.cache
   rm -rf ${HOME}/.cache/go-build/
-}
-
-installGoPkgs() {
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    echo ">>> ${PKG}"
-    # goinstall "${PKG}"
-    go get -u "${PKG}"
-  done < files/pkgs/go.lst
-  cd ${INSTALLDIR}
 }
 
 installHelmPlugins() {
@@ -263,12 +240,7 @@ installHelmPlugins() {
     helm init --client-only
   fi
 
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    helm plugin install "${PKG}"
-  done < files/pkgs/helm.lst
+  installPkgList "helm plugin install" files/pkgs/helm.lst
 }
 
 installTestssl() {
@@ -312,7 +284,7 @@ installAtomPackages() {
   #   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > atom-packages.lst
   cp files/atom/* ${HOME}/.atom/
   # apm install --packages-file files/pkgs/atom-packages.lst
-  cat files/pkgs/atom-packages.lst | grep -Ev '\s*#' | xargs -L1 apm install
+  installPkgList "apm install" files/pkgs/atom-packages.lst
 }
 
 installVscodeConfig() {
@@ -327,12 +299,7 @@ installVscodeConfig() {
 installVscodePackages() {
   installVscodeConfig
 
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    code --install-extension "${PKG}"
-  done < files/pkgs/vscode-packages.lst
+  installPkgList "code --install-extension" files/pkgs/vscode-packages.lst
 }
 
 installTmuxConf() {
@@ -473,12 +440,7 @@ installFishConf() {
   fisher add fzf edc/bass omf/thefuck omf/wttr omf/vundle ansible-completion docker-completion
   fisher add teapot
 
-  while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
-    omf install "${PKG}"
-  done < files/pkgs/omf.lst
+  installPkgList "omf install" files/pkgs/omf.lst
 }
 
 installZshConf() {

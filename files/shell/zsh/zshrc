@@ -157,7 +157,7 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
 # you may need to run this:
 # chmod -R go-w "$(brew --prefix)/share"
 if [ -x "$(command -v brew)" ]; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
+  export HOMEBREW_PREFIX="$(brew --prefix)"
   FPATH=${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH
 
   autoload -Uz compinit
@@ -228,5 +228,9 @@ fi
 [[ ! -f $HOME/.kbenv/kbenv.sh ]] || source $HOME/.kbenv/kbenv.sh
 [[ ! -f $HOME/.helmenv/helmenv.sh ]] || source $HOME/.helmenv/helmenv.sh
 [[ ! -f ${HOME}/.ktx ]] || source ${HOME}/.ktx/ktx
+
+if [ -n "${HOMEBREW_PREFIX}" ]; then
+  [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh ]] || source ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh
+fi
 
 export CONFIGURED="true"
