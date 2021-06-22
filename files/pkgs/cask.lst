@@ -15,6 +15,7 @@ chefdk
 cisco-proximity
 clipy
 cyberduck
+dbeaver-community
 docker
 dynamodb-local
 etcher
@@ -56,6 +57,7 @@ multipass
 powershell
 quicklook-json
 rq
+sequel-pro
 skype
 skype-for-business
 slack
