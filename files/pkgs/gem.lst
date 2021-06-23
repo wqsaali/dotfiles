@@ -1,6 +1,6 @@
+# hipchat
 # kontena-cli
 colorls
-hipchat
 iStats
 overcommit
 pry
@@ -10,5 +10,6 @@ ripl
 rubocop
 rubocop-performance
 slack-notifier
+solargraph
 terminal-table
 terraform_landscape

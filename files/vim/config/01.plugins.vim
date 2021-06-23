@@ -148,6 +148,7 @@ let g:coc_global_extensions = [
       \ 'coc-jedi',
       \ 'coc-pyls',
       \ 'coc-pyright',
+      \ 'coc-solargraph',
       \ 'coc-lua',
       \ 'coc-go',
       \ 'coc-gocode',
