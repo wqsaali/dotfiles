@@ -57,7 +57,7 @@
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     # direnv                  # direnv status (https://direnv.net/)
-    # asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
+    asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     # virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     # anaconda                # conda environment (https://conda.io/)
     # pyenv                   # python environment (https://github.com/pyenv/pyenv)
@@ -83,8 +83,8 @@
     # scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
     # haskell_stack           # haskell version from stack (https://haskellstack.org/)
     kubecontext             # current kubernetes context (https://kubernetes.io/)
-    # terraform               # terraform workspace (https://www.terraform.io)
-    # aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+    terraform               # terraform workspace (https://www.terraform.io)
+    aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
     # aws_eb_env            # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
     # azure                 # azure account name (https://docs.microsoft.com/en-us/cli/azure)
     # gcloud                # google cloud cli account and project (https://cloud.google.com/)
@@ -93,6 +93,7 @@
     # nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
     ranger                  # ranger shell (https://github.com/ranger/ranger)
     # nnn                     # nnn shell (https://github.com/jarun/nnn)
+    # xplr                    # xplr shell (https://github.com/sayanarijit/xplr)
     vim_shell               # vim shell indicator (:sh)
     # midnight_commander    # midnight commander shell (https://midnight-commander.org/)
     # nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
@@ -438,6 +439,11 @@
     # Show the git commit
     # res+=" (${VCS_STATUS_COMMIT:0:5})"
 
+    # Display "wip" if the latest commit's summary contains "wip" or "WIP".
+    if [[ $VCS_STATUS_COMMIT_SUMMARY == (|*[^[:alnum:]])(wip|WIP)(|[^[:alnum:]]*) ]]; then
+      res+=" ${modified}wip"
+    fi
+
     # Show if the local branch is not tracking any remote branch.
     if [[ -z ${VCS_STATUS_REMOTE_BRANCH} ]]; then
       res+="${meta}:${clean}L"  # escape %
@@ -744,6 +750,12 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_NNN_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
+  ##################[ xplr: xplr shell (https://github.com/sayanarijit/xplr) ]##################
+  # xplr shell color.
+  typeset -g POWERLEVEL9K_XPLR_FOREGROUND=72
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_XPLR_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
   ###########################[ vim_shell: vim shell indicator (:sh) ]###########################
   # Vim shell indicator color.
   typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=34
@@ -778,6 +790,23 @@
   typeset -g POWERLEVEL9K_DISK_USAGE_ONLY_WARNING=false
   # Custom icon.
   # typeset -g POWERLEVEL9K_DISK_USAGE_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ############[ vi_mode: vi mode (you don't need this if you've enabled prompt_char) ]###########
+  ## Text and color for normal (a.k.a. command) vi mode.
+  #typeset -g POWERLEVEL9K_VI_COMMAND_MODE_STRING=NORMAL
+  #typeset -g POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND=106
+  ## Text and color for visual vi mode.
+  #typeset -g POWERLEVEL9K_VI_VISUAL_MODE_STRING=VISUAL
+  #typeset -g POWERLEVEL9K_VI_MODE_VISUAL_FOREGROUND=68
+  ## Text and color for overtype (a.k.a. overwrite and replace) vi mode.
+  #typeset -g POWERLEVEL9K_VI_OVERWRITE_MODE_STRING=OVERTYPE
+  #typeset -g POWERLEVEL9K_VI_MODE_OVERWRITE_FOREGROUND=172
+  ## Text and color for insert vi mode.
+  #typeset -g POWERLEVEL9K_VI_INSERT_MODE_STRING=
+  #typeset -g POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND=66
+
+  ## Custom icon.
+  ## typeset -g POWERLEVEL9K_RANGER_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ######################################[ ram: free RAM ]#######################################
   # RAM color.
@@ -947,10 +976,10 @@
   #
   # The default format has the following logic:
   #
-  # 1. Display "$P9K_CONTENT $P9K_PYENV_PYTHON_VERSION" if $P9K_PYENV_PYTHON_VERSION is not
-  #   empty and unequal to $P9K_CONTENT.
-  # 2. Otherwise display just "$P9K_CONTENT".
-  typeset -g POWERLEVEL9K_PYENV_CONTENT_EXPANSION='${P9K_CONTENT}${${P9K_PYENV_PYTHON_VERSION:#$P9K_CONTENT}:+ $P9K_PYENV_PYTHON_VERSION}'
+  # 1. Display just "$P9K_CONTENT" if it's equal to "$P9K_PYENV_PYTHON_VERSION" or
+  #    starts with "$P9K_PYENV_PYTHON_VERSION/".
+  # 2. Otherwise display "$P9K_CONTENT $P9K_PYENV_PYTHON_VERSION".
+  typeset -g POWERLEVEL9K_PYENV_CONTENT_EXPANSION='${P9K_CONTENT}${${P9K_CONTENT:#$P9K_PYENV_PYTHON_VERSION(|/*)}:+ $P9K_PYENV_PYTHON_VERSION}'
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -1299,7 +1328,7 @@
   #[ aws: aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) ]#
   # Show aws only when the the command you are typing invokes one of these tools.
   # Tip: Remove the next line to always show aws.
-  typeset -g POWERLEVEL9K_AWS_SHOW_ON_COMMAND='aws|awless|terraform|pulumi|terragrunt'
+  # typeset -g POWERLEVEL9K_AWS_SHOW_ON_COMMAND='aws|awless|terraform|pulumi|terragrunt'
 
   # POWERLEVEL9K_AWS_CLASSES is an array with even number of elements. The first element
   # in each pair defines a pattern against which the current AWS profile gets matched.
@@ -1330,6 +1359,12 @@
       '*'       DEFAULT)
   typeset -g POWERLEVEL9K_AWS_DEFAULT_FOREGROUND=208
   # typeset -g POWERLEVEL9K_AWS_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  # AWS segment format. The following parameters are available within the expansion.
+  #
+  # - P9K_AWS_PROFILE  The name of the current AWS profile.
+  # - P9K_AWS_REGION   The region associated with the current AWS profile.
+  typeset -g POWERLEVEL9K_AWS_CONTENT_EXPANSION='${P9K_AWS_PROFILE//\%/%%}${P9K_AWS_REGION:+ ${P9K_AWS_REGION//\%/%%}}'
 
   #[ aws_eb_env: aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/) ]#
   # AWS Elastic Beanstalk environment color.
@@ -1469,14 +1504,16 @@
   # The following parameters are accessible within the expansion:
   #
   #   Parameter             | Meaning
-  #   ----------------------+---------------
-  #   P9K_IP_IP         | IP address
-  #   P9K_IP_INTERFACE  | network interface
-  #   P9K_IP_RX_BYTES   | total number of bytes received
-  #   P9K_IP_TX_BYTES   | total number of bytes sent
-  #   P9K_IP_RX_RATE    | receive rate (since last prompt)
-  #   P9K_IP_TX_RATE    | send rate (since last prompt)
-  typeset -g POWERLEVEL9K_IP_CONTENT_EXPANSION='$P9K_IP_IP${P9K_IP_RX_RATE:+ %70F⇣$P9K_IP_RX_RATE}${P9K_IP_TX_RATE:+ %215F⇡$P9K_IP_TX_RATE}'
+  #   ----------------------+-------------------------------------------
+  #   P9K_IP_IP             | IP address
+  #   P9K_IP_INTERFACE      | network interface
+  #   P9K_IP_RX_BYTES       | total number of bytes received
+  #   P9K_IP_TX_BYTES       | total number of bytes sent
+  #   P9K_IP_RX_BYTES_DELTA | number of bytes received since last prompt
+  #   P9K_IP_TX_BYTES_DELTA | number of bytes sent since last prompt
+  #   P9K_IP_RX_RATE        | receive rate (since last prompt)
+  #   P9K_IP_TX_RATE        | send rate (since last prompt)
+  typeset -g POWERLEVEL9K_IP_CONTENT_EXPANSION='${P9K_IP_RX_RATE:+%70F⇣$P9K_IP_RX_RATE }${P9K_IP_TX_RATE:+%215F⇡$P9K_IP_TX_RATE }%38F$P9K_IP_IP'
   # Show information for the first network interface whose name matches this regular expression.
   # Run `ifconfig` or `ip -4 a show` to see the names of all network interfaces.
   typeset -g POWERLEVEL9K_IP_INTERFACE='e.*'

@@ -1,10 +1,27 @@
 # vim:set filetype=bash:
 
+# AWS aliases
+
+# switch AWS profiles
 function actx() {
-  CTX="$(aws configure list-profiles|fzf)"
+  CTX="${1}"
+  if [ -z "${CTX}" ]; then
+    CTX="$(aws configure list-profiles|fzf)"
+  fi
   export AWS_PROFILE="${CTX}"
+  aws sts get-caller-identity
 }
 
+# switch AWS regions
+function actr() {
+  CTX="${1}"
+  if [ -z "${CTX}" ]; then
+    CTX="$(aws --output json ec2 describe-regions | jq -r '.Regions[]|.RegionName'|fzf)"
+  fi
+  export AWS_DEFAULT_REGION="${CTX}"
+}
+
+# switch EKS contexts
 function ectx() {
   CFG_DIR=~/.kube/config.d
   CTX="${1}"
