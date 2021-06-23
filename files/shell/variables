@@ -219,7 +219,8 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME='TwoDark'
 # export BAT_PAGER="less -R"
 export DELTA_PAGER="less -LREFX"
-export PAGER="bat"
+export PAGER="bat -p"
+export AWS_PAGER="bat -p"
 
 # Colored grep
 # export GREP_OPTIONS='--color=auto'

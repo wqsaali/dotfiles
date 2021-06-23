@@ -490,7 +490,7 @@ createSkeleton() {
   mkdir -p ${HOME}/.aliases.d
   mkdir -p ${HOME}/.ptpython
   mkdir -p ${HOME}/.atom
-  mkdir -p ${HOME}/.kube
+  mkdir -p ${HOME}/.kube/config.d
 }
 
 instrallRangerPlugins() {

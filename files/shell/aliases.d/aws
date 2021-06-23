@@ -1,0 +1,16 @@
+# vim:set filetype=bash:
+
+function actx() {
+  CTX="$(aws configure list-profiles|fzf)"
+  export AWS_PROFILE="${CTX}"
+}
+
+function ectx() {
+  CFG_DIR=~/.kube/config.d
+  CTX="${1}"
+  if [ -z "${CTX}" ]; then
+    CTX="$(aws --output json eks list-clusters | jq -r '.clusters[]' | fzf)"
+    export KUBECONFIG="${CFG_DIR}/${CTX}"
+    aws eks update-kubeconfig --name "${CTX}"
+  fi
+}
