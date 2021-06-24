@@ -7,9 +7,9 @@
 # kubernetes-cli
 # macvim
 # rust
-ack
-1password-cli
 1password
+1password-cli
+ack
 ansible
 ansible-lint
 archivemount
@@ -76,6 +76,7 @@ faq
 fd
 fff
 findutils
+fluxctl
 gawk
 gcal
 git
