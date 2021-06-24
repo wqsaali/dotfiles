@@ -244,7 +244,9 @@ installHelmPlugins() {
 
   if [ -x "$(command -v helmenv)" ]; then
     # Install the latest helm version
-    helmenv install $(helmenv list remote | head -1)
+    latest=$(helmenv list remote | head -1)
+    helmenv install "${latest}"
+    helmenv use "${latest}"
   fi
 
   if [ "$(helm version --short 2>/dev/null | grep -Eo 'Client')" == "Client" ]; then
