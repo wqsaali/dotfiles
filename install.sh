@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+OS="$(uname -s | tr '[:upper:]' '[:lower:]')" &&
+ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
 INSTALLDIR=$(pwd)
 dotfiles_dir="$(dirname $0)"
+
 CMD="${1:-all}"
 shift
 ARGS="${@}"
@@ -106,18 +109,21 @@ installFission() {
 
 installMinikube() {
   mkdir -p ~/.local/bin/
-  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-$(uname -s | tr '[:upper:]' '[:lower:]')-amd64
+  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-${OS}-amd64
   chmod +x minikube
   mv minikube ~/.local/bin/
 }
 
 installKrew() {
-  mkdir -p ${HOME}/.krew/bin
-  cd "$(mktemp -d)" &&
-  curl -fsSLO "https://storage.googleapis.com/krew/latest/krew.{tar.gz,yaml}" &&
-  tar zxvf krew.tar.gz &&
-  ./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" install --manifest=krew.yaml --archive=krew.tar.gz
-  cd ${INSTALLDIR}
+  if ! [ -x "$(command -v kubectl-krew)" ]; then
+    mkdir -p ${HOME}/.krew/bin
+    cd "$(mktemp -d)" && \
+    curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" && \
+    tar zxvf krew.tar.gz && \
+    KREW=./krew-"${OS}_${ARCH}" && \
+    "$KREW" install krew
+    cd ${INSTALLDIR}
+  fi
 
   # install krew packages
   kubectl krew update
@@ -157,7 +163,7 @@ installKubeScripts() {
 
 installDCOScli() {
   mkdir -p ~/.local/bin/
-  curl -Lo dcos https://downloads.dcos.io/binaries/cli/$(uname -s | tr '[:upper:]' '[:lower:]')/x86-64/latest/dcos
+  curl -Lo dcos https://downloads.dcos.io/binaries/cli/${OS}/x86-64/latest/dcos
   chmod +x dcos
   mv dcos ~/.local/bin/
 }
@@ -234,6 +240,11 @@ installHelmPlugins() {
     else
       brew install kubernetes-helm
     fi
+  fi
+
+  if [ -x "$(command -v helmenv)" ]; then
+    # Install the latest helm version
+    helmenv install $(helmenv list remote | head -1)
   fi
 
   if [ "$(helm version --short 2>/dev/null | grep -Eo 'Client')" == "Client" ]; then
