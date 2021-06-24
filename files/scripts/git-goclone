@@ -98,5 +98,5 @@ if [ -d "${path}" ] && [[ "${UPDATE}" == "true" ]]; then
   cd "${cdir}"
 else
   mkdir -p "${path}"
-  git clone ${url} "${path}"
+  git clone --recurse-submodules ${url} "${path}"
 fi
