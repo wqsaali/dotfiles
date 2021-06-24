@@ -4,8 +4,6 @@
 alias git-pull-recursive='git recursive pull'
 alias git-pull-all='git recursive pull'
 alias git-clean-all='git recursive clean'
-alias git-info='git remote show origin'
-alias git-status-sb='git status -sb'
 alias git-logbranches='git for-each-ref --sort=-committerdate refs/heads/ --format="%(color:red)%(refname:short)%(color:reset)   %(subject)"'
 alias git-unpushed-commits='git for-each-ref --format="%(push:track)" refs/heads'
 alias git-prune-branches='git remote prune origin'
@@ -14,9 +12,16 @@ alias git-purge-branches='git fetch --all -p; git branch -vv | grep "\[.*: gone\
 alias git-current-tag='git name-rev --tags --name-only $(git rev-parse HEAD)'
 alias git-reset='git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx'
 alias git-tags='git for-each-ref --format "%(refname) %09 %(taggerdate) %(subject) %(taggeremail)" refs/tags  --sort=taggerdate'
-alias git-log='git lg'
 # change the current directory to the parent directory that contains the .git folder
 alias git-root='cd "`git rev-parse --show-toplevel`"'
+
+alias gcl='git goclone -u'
+alias gdf='git diff'
+alias gpl='git pull'
+alias gph='git push'
+alias gcm='git commit'
+alias gco='git checkout'
+alias gcom='git checkout `git branch -rl "*/HEAD" | rev | cut -d/ -f1 | rev`'
 
 alias masterDiff='git diff $(git merge-base --fork-point master)'
 alias latestTag='git describe --tags `git rev-list --tags --max-count=1`'

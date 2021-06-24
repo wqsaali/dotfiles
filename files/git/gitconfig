@@ -23,7 +23,7 @@
   sprout = !legit sprout
   sync = !legit sync
   resync = !legit resync
-  cleanup = "!git clean -fdX && git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  cleanup = "!git clean -fdX && git branch --merged | grep  -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d"
   remove-untacked = "!git sb | grep '??' | awk '{print $2}' | xargs rm"
   accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
   accept-theirs = "!f() { git checkout --theirs -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
@@ -75,9 +75,9 @@
 #   whitespace = red reverse
 
 [credential]
-	helper = manager-core
+  helper = manager-core
 [credential "https://dev.azure.com"]
-	useHttpPath = true
+  useHttpPath = true
 
 [include]
   path = .gitconfigExtra
