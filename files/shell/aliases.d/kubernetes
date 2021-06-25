@@ -20,6 +20,7 @@ function kctl() {
 # alias kubectl="kubectl --context \${KUBE_CONTEXT:-\$(command kubectl config current-context)}"
 alias k='kctl'
 alias kg='kctl get'
+alias kga='kctl get -A'
 alias kd='kctl describe'
 alias kvs='kctl view-secret'
 alias keds='kctl modify-secret'
@@ -53,6 +54,10 @@ function kubectl-events() {
 alias kctl-events='kubectl-events'
 
 function kubectl-ctx() {
+  if [[ "${1}" == "kind" ]]; then
+    export KUBECONFIG=~/.kube/kind-config
+    return
+  fi
   CFG_DIR=~/.kube/config.d
   if [ -d "${CFG_DIR}" ] && [[ "$KUBECONFIG" != "~/.kube/config" ]]; then
     if [ -n "$1" ]; then

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 NAME='Luis Davim'
-EMAIL='luis.davim@jet.com'
+EMAIL='luis.davim@sendoso.com'
 
 WORKINGCOPIES='${HOME}/workingCopies'
 CODE='${HOME}/workingCopies/src'

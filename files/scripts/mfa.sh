@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# taken from: https://gist.github.com/bertrandmartel/f6b1d1ac1dbd396a94ba0ac9468d5b3a
+# adapted from: https://gist.github.com/bertrandmartel/f6b1d1ac1dbd396a94ba0ac9468d5b3a
 # https://stackoverflow.com/a/66878739/2614364
 # Example credentials setup:
 #
@@ -38,17 +38,17 @@ if [ -z $role ]; then echo "no role specified"; exit 1; fi
 if [ -z $mfa_arn ]; then echo "no mfa arn specified"; exit 1; fi
 if [ -z $profile ]; then echo "no profile specified"; exit 1; fi
 
-resp=$(aws sts get-caller-identity --profile $temp_profile | jq '.UserId')
+resp=$(aws sts get-caller-identity --profile ${temp_profile} | jq '.UserId')
 
 if [ ! -z $resp ]; then
-    echo '{
-        "Version": 1,
-        "AccessKeyId": "'"$(aws configure get aws_access_key_id --profile $temp_profile)"'",
-        "SecretAccessKey": "'"$(aws configure get aws_secret_access_key --profile $temp_profile)"'",
-        "SessionToken": "'"$(aws configure get aws_session_token --profile $temp_profile)"'",
-        "Expiration": "'"$(aws configure get expiration --profile $temp_profile)"'"
-    }'
-    exit 0
+  echo '{
+    "Version": 1,
+    "AccessKeyId": "'"$(aws configure get aws_access_key_id --profile ${temp_profile})"'",
+    "SecretAccessKey": "'"$(aws configure get aws_secret_access_key --profile ${temp_profile})"'",
+    "SessionToken": "'"$(aws configure get aws_session_token --profile ${temp_profile})"'",
+    "Expiration": "'"$(aws configure get expiration --profile ${temp_profile})"'"
+  }'
+  exit 0
 fi
 read -p "Enter MFA token: " mfa_token
 
@@ -65,11 +65,18 @@ aws_secret_access_key=$(echo $data | jq -r '.SecretAccessKey')
 aws_session_token=$(echo $data | jq -r '.SessionToken')
 expiration=$(echo $data | jq -r '.Expiration')
 
-aws configure set aws_access_key_id $aws_access_key_id --profile $temp_profile
-aws configure set aws_secret_access_key $aws_secret_access_key --profile $temp_profile
-aws configure set aws_session_token $aws_session_token --profile $temp_profile
-aws configure set expiration $expiration --profile $temp_profile
-aws configure set source_profile $profile --profile $temp_profile
+aws configure set aws_access_key_id $aws_access_key_id --profile ${temp_profile}
+aws configure set aws_secret_access_key $aws_secret_access_key --profile ${temp_profile}
+aws configure set aws_session_token $aws_session_token --profile ${temp_profile}
+aws configure set expiration $expiration --profile ${temp_profile}
+aws configure set source_profile $profile --profile ${temp_profile}
+
+# Some tools like helmsman rely on environment variables only
+export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile "${temp_profile}")
+export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile "${temp_profile}")
+export AWS_SESSION_TOKEN=$(aws configure get aws_session_token --profile "${temp_profile}")
+export AWS_SECURITY_TOKEN=$(aws configure get aws_security_token --profile "${temp_profile}")
+export AWS_DEFAULT_REGION=$(aws configure get region --profile "${temp_profile}")
 
 echo '{
   "Version": 1,

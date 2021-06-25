@@ -2,6 +2,18 @@
 
 # AWS aliases
 
+function aws_env() {
+  if [ -n "${1}" ]; then
+    profile="--profile ${1}"
+  fi
+  export AWS_ACCESS_KEY_ID=$(eval "aws configure get aws_access_key_id ${profile}")
+  export AWS_SECRET_ACCESS_KEY=$(eval "aws configure get aws_secret_access_key ${profile}")
+  export AWS_SESSION_TOKEN=$(eval "aws configure get aws_session_token ${profile}")
+  export AWS_SECURITY_TOKEN=$(eval "aws configure get aws_security_token ${profile}")
+  export AWS_DEFAULT_REGION=$(eval "aws configure get region ${profile}")
+  echo "$1 environment variables exported"
+}
+
 function ecr-login() {
   region=${AWS_DEFAULT_REGION}
   if [ -z "${region}" ]; then
@@ -19,6 +31,10 @@ function actx() {
   fi
   export AWS_PROFILE="${CTX}"
   aws sts get-caller-identity
+  if [[ "${CTX}" == "tf" ]]; then
+    CTX="mfa_temp"
+  fi
+  aws_env ${CTX}
 }
 
 # switch AWS regions
