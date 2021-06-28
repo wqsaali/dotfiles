@@ -207,6 +207,7 @@ telnet
 terraform
 terraform-docs
 terraform-ls
+terraformer
 terragrunt
 the_silver_searcher
 thefuck
