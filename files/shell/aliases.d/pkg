@@ -164,6 +164,11 @@ function update-all-things() {
     kubectl krew update
     kubectl krew upgrade
   fi
+  if [ -x "$(command -v helmenv)" ]; then
+    latest=$(helmenv list remote | sort --version-sort | tail -1)
+    helmenv install "${latest}"
+    helmenv use "${latest}"
+  fi
   if [ -x "$(command -v vagrant)" ]; then
     vagrant plugin update
   fi

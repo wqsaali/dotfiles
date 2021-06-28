@@ -154,7 +154,7 @@ installKubeScripts() {
   installFromGithub 'nutellinoit/kubenvz' "${1}" "${2}"
   installFromGithub 'jaredallard/localizer' "${1}" "${2}"
 
-  if [ ! -s ${HOME}/.local/bin/kuberlr ]; then
+  if [ -f ${HOME}/.local/bin/kuberlr ] && [ ! -s ${HOME}/.local/bin/kubectl ]; then
     ln -s ${HOME}/.local/bin/kuberlr ${HOME}/.local/bin/kubectl
   fi
 
@@ -244,7 +244,7 @@ installHelmPlugins() {
 
   if [ -x "$(command -v helmenv)" ]; then
     # Install the latest helm version
-    latest=$(helmenv list remote | head -1)
+    latest=$(helmenv list remote | sort --version-sort | tail -1)
     helmenv install "${latest}"
     helmenv use "${latest}"
   fi
