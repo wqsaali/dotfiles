@@ -151,7 +151,6 @@ let g:coc_global_extensions = [
       \ 'coc-solargraph',
       \ 'coc-lua',
       \ 'coc-go',
-      \ 'coc-gocode',
       \ 'coc-rls',
       \ 'coc-rust-analyzer',
       \ 'coc-html',

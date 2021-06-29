@@ -21,6 +21,7 @@
     "deepCompletion": true,
     "fuzzyMatching": true
   },
+  "coc.source.gocode.enable": false,
   "jedi.enable": true,
   "jedi.startupMessage": false,
   "jedi.markupKindPreferred": "plaintext",
