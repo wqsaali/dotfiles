@@ -144,6 +144,7 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-yaml',
       \ 'coc-toml',
+      \ 'coc-kite',
       \ 'coc-vimlsp',
       \ 'coc-jedi',
       \ 'coc-pyls',

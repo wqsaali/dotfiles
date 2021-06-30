@@ -20,7 +20,10 @@ function usage() {
 }
 
 FORCE=""
+DEBUG="false"
+NAMESPACE="--all-namespaces"
 POSITIONAL=()
+
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -28,6 +31,7 @@ while [[ $# -gt 0 ]]; do
       -h | --help ) usage ;;
       -d | --debug ) DEBUG=true; shift ;;
       -f | --force ) FORCE=true; shift ;;
+      -n | --namespace ) NAMESPACE="-n $2"; shift 2 ;;
       *)
       POSITIONAL+=("$1") # save it in an array for later
       shift # past argument
@@ -41,4 +45,13 @@ if [[ "${FORCE}" == "true" ]]; then
   FORCE="--grace-period=0 --force"
 fi
 
-kubectl get po --all-namespaces --no-headers -o wide | grep ${1} | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete ${FORCE} po
+filter='{print $2 " -n " $1}'
+if [[ "${NAMESPACE}" != "--all-namespaces" ]]; then
+  filter=$(printf '{print $1 " %s "}' "${NAMESPACE}")
+fi
+
+if [[ "${DEBUG}" == "true" ]]; then
+  echo "filter: ${filter}"
+fi
+
+kubectl get po ${NAMESPACE} --no-headers -o wide | grep "${1}" | awk "${filter}" | xargs -L1 -r kubectl delete ${FORCE} po
