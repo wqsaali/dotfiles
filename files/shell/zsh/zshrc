@@ -216,8 +216,9 @@ alias -s {yml,yaml,json}=$EDITOR
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 if [[ -f ~/.profile ]]; then
+  set -a
   source ~/.profile
-  export $(grep '^[ a-zA-Z0-9]*=' ~/.profile | tr -d '[:blank:]' | cut -d= -f1 | sort -u)
+  set +a
 fi
 
 [[ ! -f ~/.aliases ]] || source ~/.aliases

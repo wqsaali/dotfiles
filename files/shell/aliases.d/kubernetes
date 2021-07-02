@@ -19,7 +19,6 @@ function kctl() {
 # alias k='kubectl "--context=${KUBECTL_CONTEXT:-$(kubectl config current-context)}" ${KUBECTL_NAMESPACE/[[:alnum:]-]*/--namespace=${KUBECTL_NAMESPACE}}'
 # alias kubectl="kubectl --context \${KUBE_CONTEXT:-\$(command kubectl config current-context)}"
 alias k='kctl'
-alias kg='kctl get'
 alias kga='kctl get -A'
 alias kd='kctl describe'
 alias kvs='kctl view-secret'
@@ -122,7 +121,7 @@ function krun() { name=$1; shift; image=$1; shift; kubectl run -it --generator=r
 alias kctl-run='krun'
 
 function kubectl-remote_shell() {
-  kubectl ${@} run --restart=Never --rm -i --tty alpine --image=alpine -- sh
+  kubectl ${@} run --restart=Never --rm -i --tty alpine --image=quay.io/giantswarm/debug -- sh
 }
 alias kctl-shell='kubectl-remote_shell'
 alias kube-shell='kubectl-remote_shell'
