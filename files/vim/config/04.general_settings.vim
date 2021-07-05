@@ -141,4 +141,8 @@
   set wildignore+=*.pdf,*.psd,*.DS_Store
   set wildignore+=node_modules/*,bower_components/*,vendor/*
 
+  if exists('&inccommand')
+    set inccommand=nosplit
+  endif
+
 " }}}

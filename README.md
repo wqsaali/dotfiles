@@ -1,6 +1,7 @@
 # Dotfiles
 
-### What's included:
+## What's included
+
 - a bashrc file
 - a set of bash aliases
 - some useful scripts
@@ -18,9 +19,11 @@
 - Hammerspoon configuration scripts
 - Some kubectl plugins
 
-### The install script
+## The install script
+
 The install script supports macOS, Linux (Ubuntu) and Android ([Termux](https://termux.com)) and will install my custom dotfiles but also some extra packages and fonts, you can select what to install by passing an argument to the install script:
-```
+
+```sh
 ./install all # to bootstrap a new workstation
 ./install dotfiles # will install the dotfiles only (.vimrc .bashrc etc...)
 ./install fonts # will install some powerline patched fonts
@@ -31,28 +34,33 @@ The install script supports macOS, Linux (Ubuntu) and Android ([Termux](https://
 ```
 
 To install on android use:
-```
+
+```sh
 termux-fix-shebang install.sh; ./install.sh
 ```
 
 **NOTE:** Before running the install script you **should** take a **look at** the **config.sh** file and edit it to your preferences
 
-### The backup script
+## The backup script
+
 The backup script can backup and restore your:
+
 - List of deb repos
 - Installed packages
 - Atom packages
 - Dotfiles
 
 Usage examples:
-```
+
+```sh
 ./backup.sh dotfiles # Will backup your dotfiles, the ones managed by the install.sh script
 ./backup.sh atom # Will backup your atom configuration files and installed package list
 ./backup.sh repos # Will backup your deb package repos
 ```
 
-### For more information check out the other README files and the code.
-```
+## For more information check out the other README files and the code
+
+```console
 .
 ├── README.md
 └── files

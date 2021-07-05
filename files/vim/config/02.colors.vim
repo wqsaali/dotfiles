@@ -106,5 +106,10 @@
   " color base16-chalk
   color github
 
+  " if has('nvim')
+  "   set pumblend=5
+  "   set winblend=5
+  " endif
+
 " }}}
 

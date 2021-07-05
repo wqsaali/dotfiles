@@ -59,6 +59,7 @@ curl
 dark-mode
 dateutils
 dep
+devspace
 direnv
 displayplacer
 dive

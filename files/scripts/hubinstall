@@ -59,7 +59,7 @@ function installFromGithub() {
     echo 'Error: no releases found, note that pre-releases are not supported!'
     return 1
   fi
-  artifact=$(basename ${url})
+  artifact=$(basename "${url}")
 
   re='^(.*)\.(tar\.gz|tgz|zip)$'
   if [[ ${artifact} =~ $re ]]; then
@@ -68,11 +68,11 @@ function installFromGithub() {
     if [[ "${DEBUG}" == "true" ]]; then
       echo "Artifact ${artifact_name} is a tarball (${artifact_ext})"
     fi
-    curl -sLo ${artifact} ${url}
+    curl -sLo "${artifact}" "${url}"
     if [[ "$artifact_ext" == "zip" ]]; then
-      unzip ${artifact} -d ${artifact_name}
+      unzip "${artifact}" -d "${artifact_name}"
     else
-      tar -xzf ${artifact} --one-top-level=${artifact_name} # gnu-tar is needed for this one
+      tar -xzf "${artifact}" --one-top-level="${artifact_name}" # gnu-tar is needed for this one
     fi
     files=$(find ./${artifact_name}/ -type f -name "${name}*")
     [[ "${DEBUG}" == "true" ]] && echo -e "files found: \n${files}"
@@ -87,8 +87,8 @@ function installFromGithub() {
     rm ${artifact}
     rm -rf ${artifact_name}
   else
-    curl -sLo ${name} ${url}
-    install ${name}
+    curl -sLo "${name}" "${url}"
+    install "${name}"
   fi
 }
 

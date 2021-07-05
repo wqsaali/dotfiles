@@ -249,7 +249,11 @@
   let g:clap_preview_size = 10
   " let g:clap_layout = { 'relative': 'editor' }
   let g:clap_layout = {'relative': 'editor', 'width': '67%', 'height': '15%', 'row': '15%', 'col': '17%'}
-  let g:clap_popup_border = 'sharp'
+  if has('nvim')
+    let g:clap_popup_border = 'single'
+  else
+    let g:clap_popup_border = 'sharp'
+  endif
   let g:clap_search_box_border_style = 'nil'
   " }}}
 
