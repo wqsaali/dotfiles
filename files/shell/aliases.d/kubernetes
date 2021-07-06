@@ -3,7 +3,7 @@
 # Kubectl aliases
 
 function kctl() {
-  CMD=${1}
+  CMD="${1}"
   shift
   COLOR=""
   if [ -x "$(command -v grc)" ]  && [[ "$CMD" != "modify-secret" ]]&& [[ "$CMD" != "edit" ]] && [[ "$CMD" != "exec" ]] && [[ "$CMD" != "ssh" ]]; then
@@ -11,10 +11,14 @@ function kctl() {
   fi
 
   if _isFunction "kubectl-${CMD}"; then
-    "kubectl-${CMD}" ${@}
+    "kubectl-${CMD}" "${@}"
     return $?
   fi
-  eval "${COLOR} kubectl ${CMD} ${@}"
+  local args=(${COLOR} kubectl ${CMD})
+  for arg in ${@}; do
+    args+=( "$(printf '%q' "$arg")" )
+  done
+  eval "${args[*]}"
 }
 # alias k='kubectl "--context=${KUBECTL_CONTEXT:-$(kubectl config current-context)}" ${KUBECTL_NAMESPACE/[[:alnum:]-]*/--namespace=${KUBECTL_NAMESPACE}}'
 # alias kubectl="kubectl --context \${KUBE_CONTEXT:-\$(command kubectl config current-context)}"

@@ -145,4 +145,6 @@
     set inccommand=nosplit
   endif
 
+  set wildmenu
+  set wildmode=longest:full,full
 " }}}
