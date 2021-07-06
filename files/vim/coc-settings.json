@@ -44,9 +44,12 @@
   "pyright.enable": true,
   "explorer.quitOnOpen": true,
   "explorer.toggle": true,
-  "explorer.icon.enableVimDevicons": true,
+  "explorer.focus": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.icon.enableNerdfont": true,
   "explorer.keyMappings.global": {
     "<cr>": ["wait", "expanded?", "collapse", "expand"],
+    "o": "open",
     "v": "open:vsplit"
   },
   "explorer.file.column.indent.indentLine": true,

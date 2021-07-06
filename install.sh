@@ -567,7 +567,6 @@ installPackages() {
   installNpms
   installGoPkgs
   installCargo
-
   installChefGems
   installChefVM
   installVagrantPlugins
