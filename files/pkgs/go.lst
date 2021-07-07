@@ -36,6 +36,7 @@ github.com/wagoodman/dive
 github.com/zegl/kube-score
 golang.org/x/tools/cmd/godoc
 golang.org/x/tools/cmd/goimports
+kubepack.dev/chart-doc-gen
 mvdan.cc/gofumpt
 mvdan.cc/gofumpt/gofumports
 sigs.k8s.io/kind

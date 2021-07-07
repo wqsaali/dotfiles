@@ -29,6 +29,7 @@ little-angry-clouds/homebrew-my-brews
 microsoft/git
 mike-engel/jwt-cli
 neovim/neovim
+norwoodj/tap
 reactiveops/tap
 reconquest/tubekit https://github.com/reconquest/tubekit.git
 tidwall/jj

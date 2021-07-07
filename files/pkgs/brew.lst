@@ -104,6 +104,7 @@ groovy
 grv
 hab
 hadolint
+helm-docs
 helmenv
 helmfile
 helmsman
