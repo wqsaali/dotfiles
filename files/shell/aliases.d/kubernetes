@@ -36,6 +36,11 @@ function kgj() {
   kubectl get ${@} -o json | bat --paging never --theme ${BAT_THEME:-TwoDark} -p -l json
 }
 
+function kubectl-diff() {
+  kubectl diff ${@} | delta -s
+}
+alias kdiff='kubectl-diff'
+
 function kubectl-getNotReady(){
   filter='.items[]| select(.status != null)|select(.status.conditions[] != null)|select([.status.conditions[]|select(.type == "Ready" and .status == "False")]|length == 1)| .metadata.name'
   kubectl get ${@} -o json | jq -r ${filter}
@@ -63,8 +68,10 @@ function kubectl-ctx() {
   CFG_DIR=~/.kube/config.d
   if [ -d "${CFG_DIR}" ] && [[ "$KUBECONFIG" != "~/.kube/config" ]]; then
     if [ -n "$1" ]; then
-      export KUBECONFIG="${CFG_DIR}/${1}"
-      return
+      if [ -f "${CFG_DIR}/${1}" ]; then
+        export KUBECONFIG="${CFG_DIR}/${1}"
+        return
+      fi
     else
       CTX=$(ls -1 ${CFG_DIR}/ | fzf)
       export KUBECONFIG="${CFG_DIR}/${CTX}"

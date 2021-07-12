@@ -10,6 +10,12 @@ function _isFunction() {
 }
 
 # kubectl-aliases
+[ -f ${HOME}/.ktx ] && source ${HOME}/.ktx/ktx
+[ -f $HOME/.kbenv/kbenv.sh ] && source $HOME/.kbenv/kbenv.sh
+[ -f $HOME/.helmenv/helmenv.sh ] && source $HOME/.helmenv/helmenv.sh
+[ -f ${HOME}/.kube-fzf/kube-fzf.sh ] && source ${HOME}/.kube-fzf/kube-fzf.sh
+[ -f ${HOME}/.fubectl/fubectl.source ] && source ${HOME}/.fubectl/fubectl.source
+
 [ -f ~/.kubectl_aliases/.kubectl_aliases ] && source ~/.kubectl_aliases/.kubectl_aliases
 # to use GNU watch command instead of kubectl [...] --watch
 # [ -f ~/.kubectl_aliases/.kubectl_aliases ] && source <(cat ~/.kubectl_aliases/.kubectl_aliases | sed -r 's/(kubectl.*) --watch/watch \1/g')

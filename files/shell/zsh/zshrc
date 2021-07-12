@@ -226,10 +226,6 @@ fi
 [[ ! -f /usr/local/etc/grc.zsh ]] || source /usr/local/etc/grc.zsh
 [[ ! -f /usr/local/opt/fzf/shell/key-bindings.zsh ]] || source /usr/local/opt/fzf/shell/key-bindings.zsh
 
-[[ ! -f $HOME/.kbenv/kbenv.sh ]] || source $HOME/.kbenv/kbenv.sh
-[[ ! -f $HOME/.helmenv/helmenv.sh ]] || source $HOME/.helmenv/helmenv.sh
-[[ ! -f ${HOME}/.ktx ]] || source ${HOME}/.ktx/ktx
-
 if [ -n "${HOMEBREW_PREFIX}" ]; then
   [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh ]] || source ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh
 fi
