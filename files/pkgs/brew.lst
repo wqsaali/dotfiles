@@ -126,6 +126,7 @@ jq
 jruby
 jsmin
 jsonnet
+jsonnet-bundler
 jwt-cli
 k3d
 k9s
@@ -203,6 +204,7 @@ source-highlight
 speedtest-cli
 starship
 stern
+tanka
 tcptraceroute
 telepresence
 telnet
