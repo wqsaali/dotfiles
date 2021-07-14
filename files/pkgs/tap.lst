@@ -2,6 +2,7 @@ browsh-org/homebrew-browsh
 buo/cask-upgrade
 chef/chef
 cloudfoundry/tap
+coretech/terrafile
 crisidev/homebrew-chunkwm
 datawire/blackbird
 derailed/k9s

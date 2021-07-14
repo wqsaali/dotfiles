@@ -208,6 +208,7 @@ tanka
 tcptraceroute
 telepresence
 telnet
+terrafile
 terraform
 terraform-docs
 terraform-ls
