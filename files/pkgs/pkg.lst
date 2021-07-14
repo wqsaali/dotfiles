@@ -113,7 +113,7 @@ ndk-sysroot
 neofetch
 neovim
 net-tools
-netcat
+netcat-openbsd
 nmap
 nodejs-lts
 oniguruma
