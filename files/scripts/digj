@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Example: digj www.example.com | jq 'group_by(.Name)[] | {(.[0].Name): [.[] | .Target]}'
+
+set -- "${1:-$(</dev/stdin)}" "${@:2}"
+if [ -z "$1" ]; then
+  echo "missing arguments"
+  dig --help
+  exit 1
+fi
+dig $@ +noall +answer| awk '{if (NR>3){print}}'| tr '[:blank:]' ';'| tr -s ';'| jq -R 'split(";") |{Name:.[0],TTL:.[1],Type:.[3],Target:.[4]}'| jq --slurp 'flatten'
+
