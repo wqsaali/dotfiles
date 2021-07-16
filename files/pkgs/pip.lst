@@ -20,6 +20,7 @@ ipython
 isort
 jedi
 jedi-language-server
+jtbl
 k8s-handle
 kube-shell
 kubernetes
