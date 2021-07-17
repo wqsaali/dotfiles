@@ -19,11 +19,13 @@ coreutils
 ctags
 curl
 dash
+debianutils
 dialog
 diffutils
 dnsutils
 dos2unix
 dpkg
+dust
 ed
 exa
 fd
@@ -42,7 +44,8 @@ golang
 gpgv
 grep
 gzip
-htop
+hors
+htop-legacy
 inetutils
 jq
 jsoncpp
@@ -55,6 +58,7 @@ libandroid-glob
 libandroid-support
 libarchive
 libassuan
+libbsd
 libbz2
 libc++
 libcroco
@@ -79,6 +83,7 @@ libjansson
 libksba
 libllvm
 liblua53
+libluajit
 liblz4
 liblzma
 libmpfr
@@ -92,6 +97,8 @@ libsqlite
 libssh2
 libtalloc
 libtermkey
+libtirpc
+libtreesitter
 libunibilium
 libunistring
 libuuid
@@ -100,11 +107,13 @@ libvterm
 libxml2
 libyaml
 lld
+lsof
 luv
 make
 man
 mlocate
 mosh
+nano
 ncdu
 ncurses
 ncurses-ui-libs
@@ -115,6 +124,7 @@ neovim
 net-tools
 netcat-openbsd
 nmap
+nmap-ncat
 nodejs-lts
 oniguruma
 openssh
