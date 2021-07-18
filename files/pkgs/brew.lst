@@ -7,6 +7,8 @@
 # kubernetes-cli
 # macvim
 # rust
+# tldr
+# uutils-coreutils
 1password
 1password-cli
 ack
@@ -22,6 +24,7 @@ aws-iam-authenticator
 aws-shell
 awscli
 azure-cli
+bandwhich
 bash
 bash-completion@2
 bat
@@ -65,6 +68,7 @@ displayplacer
 dive
 dnscrypt-proxy
 docker-ls
+dust
 ec2-ami-tools
 ec2-api-tools
 egison
@@ -100,6 +104,7 @@ gotty
 graphicsmagick
 graphviz
 grc
+grex
 gron
 groovy
 grv
@@ -115,6 +120,7 @@ htop
 httpie
 httpstat
 hub
+hyperfine
 imagemagick
 imgpkg
 inframap
@@ -125,6 +131,7 @@ jc
 jid
 jj
 jq
+jql
 jruby
 jsmin
 jsonnet
@@ -163,6 +170,7 @@ neovim
 ngrep
 nmap
 node
+nushell
 openshift-cli
 openssl
 operator-sdk
@@ -175,6 +183,7 @@ pipenv
 popeye
 pre-commit
 prettyping
+procs
 pssh
 pstree
 pt
@@ -194,6 +203,7 @@ rke
 s3cmd
 sampler
 scrcpy
+sd
 shellcheck
 siege
 sipcalc
@@ -208,6 +218,7 @@ starship
 stern
 tanka
 tcptraceroute
+tealdeer
 telepresence
 telnet
 terrafile
@@ -219,10 +230,10 @@ terragrunt
 the_silver_searcher
 thefuck
 tig
-tldr
 tmux
 tmux-xpanes
 toast
+tokei
 tree
 ttyd
 tubekit
