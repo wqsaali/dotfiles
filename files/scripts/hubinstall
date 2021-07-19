@@ -54,7 +54,7 @@ function installFromGithub() {
 
   mkdir -p ${install_to}
 
-  url=$(curl -sL https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\")) | .browser_download_url?")
+  url=$(curl -sL https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\") and (test(\"sha[0-9]+\")|not)) | .browser_download_url?")
   if [ -z "${url}" ]; then
     echo 'Error: no releases found, note that pre-releases are not supported!'
     return 1

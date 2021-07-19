@@ -153,6 +153,8 @@ installKubeScripts() {
   # installFromGithub 'operator-framework/operator-sdk' "${1}" "${2}"
   installFromGithub 'nutellinoit/kubenvz' "${1}" "${2}"
   installFromGithub 'jaredallard/localizer' "${1}" "${2}"
+  installFromGithub 'loft-sh/loft' "${1}" "${2}"
+  installFromGithub 'loft-sh/vcluster' "${1}" "${2}"
 
   if [ -f ${HOME}/.local/bin/kuberlr ] && [ ! -s ${HOME}/.local/bin/kubectl ]; then
     ln -s ${HOME}/.local/bin/kuberlr ${HOME}/.local/bin/kubectl
