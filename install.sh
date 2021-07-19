@@ -155,6 +155,8 @@ installKubeScripts() {
   installFromGithub 'jaredallard/localizer' "${1}" "${2}"
   installFromGithub 'loft-sh/loft' "${1}" "${2}"
   installFromGithub 'loft-sh/vcluster' "${1}" "${2}"
+  installFromGithub 'loft-sh/devspace' "${1}" "${2}"
+  devspace add plugin https://github.com/loft-sh/devspace-plugin-loft || devspace update plugin loft
 
   if [ -f ${HOME}/.local/bin/kuberlr ] && [ ! -s ${HOME}/.local/bin/kubectl ]; then
     ln -s ${HOME}/.local/bin/kuberlr ${HOME}/.local/bin/kubectl
