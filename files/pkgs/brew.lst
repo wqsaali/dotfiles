@@ -80,6 +80,7 @@ exiftool
 faq
 fd
 fff
+figlet
 findutils
 fluxctl
 gawk
@@ -162,6 +163,7 @@ llvm
 make
 mas
 mercurial
+microk8s
 moreutils
 mtr
 ncdu
@@ -233,6 +235,7 @@ tig
 tmux
 tmux-xpanes
 toast
+toilet
 tokei
 tree
 ttyd

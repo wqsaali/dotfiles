@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # adapted from: https://gist.github.com/bertrandmartel/f6b1d1ac1dbd396a94ba0ac9468d5b3a
 # https://stackoverflow.com/a/66878739/2614364
@@ -8,7 +8,7 @@
 # aws_secret_access_key = redacted
 # aws_access_key_id = redacted
 #
-# [tf_temp]
+# [mfa_temp]
 #
 # [tf]
 # credential_process = sh -c 'mfa.sh arn:aws:iam::{account_id}:role/{role} arn:aws:iam::{account_id}:mfa/{mfa_entry} {profile} 2> $(tty)'
@@ -32,7 +32,7 @@ set -e
 role=$1
 mfa_arn=$2
 profile=$3
-temp_profile=mfa_temp
+temp_profile=${4:-mfa_temp}
 
 if [ -z $role ]; then echo "no role specified"; exit 1; fi
 if [ -z $mfa_arn ]; then echo "no mfa arn specified"; exit 1; fi
@@ -65,6 +65,7 @@ aws_secret_access_key=$(echo $data | jq -r '.SecretAccessKey')
 aws_session_token=$(echo $data | jq -r '.SessionToken')
 expiration=$(echo $data | jq -r '.Expiration')
 
+# Override the temp_profile config
 aws configure set aws_access_key_id $aws_access_key_id --profile ${temp_profile}
 aws configure set aws_secret_access_key $aws_secret_access_key --profile ${temp_profile}
 aws configure set aws_session_token $aws_session_token --profile ${temp_profile}

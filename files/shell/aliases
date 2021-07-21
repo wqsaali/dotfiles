@@ -49,7 +49,7 @@ if [ -x "$(command -v els)" ]; then
 fi
 if [ -x "$(command -v exa)" ]; then
   alias ls='exa --color-scale'
-  alias tree='exa -T --color-scale --icons'
+  alias tree='exa -T --color-scale --icons --ignore-glob "*node_modules*|*vendor*"'
 fi
 alias lc='colorls'
 alias ll='ls -alF'
