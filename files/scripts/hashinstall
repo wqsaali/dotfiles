@@ -78,9 +78,9 @@ function installHashicorp() {
 
   # TODO: ensure proper version sorting
   if [ $version -ne -1 ]; then
-    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r ".${1}.versions.\"${version}\" | .builds[] | select(.url | test(\"${os}.*${arch}\")) | .url")
+    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r ".${1}.versions.\"${version}\" | .builds[] | select(.url | test(\"${os}.*${arch}\";\"i\")) | .url")
   else
-    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.${1}.versions| .[]][${version}].builds[] | select(.url | test(\"${os}.*${arch}\")) | .url")
+    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.${1}.versions| .[]][${version}].builds[] | select(.url | test(\"${os}.*${arch}\";\"i\")) | .url")
   fi
 
   mkdir -p ${install_to}
