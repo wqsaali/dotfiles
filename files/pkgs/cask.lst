@@ -6,6 +6,7 @@
 # hipchat
 # oni
 # pingplotter
+# skype-for-business
 alacritty
 android-file-transfer
 android-platform-tools
@@ -59,7 +60,6 @@ quicklook-json
 rq
 sequel-pro
 skype
-skype-for-business
 slack
 spotify
 telegram
