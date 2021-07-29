@@ -102,6 +102,7 @@ golangci-lint
 goreleaser
 gotags
 gotty
+gpatch
 graphicsmagick
 graphviz
 grc
@@ -175,6 +176,7 @@ node
 nushell
 openshift-cli
 openssl
+openssl
 operator-sdk
 p7zip
 packer
@@ -197,6 +199,8 @@ python
 rancher-cli
 ranger
 rbac-lookup
+rbenv
+readline
 reattach-to-user-namespace
 remarshal
 rename
