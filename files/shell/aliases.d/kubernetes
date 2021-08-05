@@ -43,7 +43,7 @@ alias kdiff='kubectl-diff'
 
 function kubectl-getNotReady(){
   filter='.items[]| select(.status != null)|select(.status.conditions[] != null)|select([.status.conditions[]|select(.type == "Ready" and .status == "False")]|length == 1)| .metadata.name'
-  kubectl get ${@} -o json | jq -r ${filter}
+  kubectl get ${@} -o json | jq -r "${filter}"
 }
 alias kgnr='kctl getNotReady'
 

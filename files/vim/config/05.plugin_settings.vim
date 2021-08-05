@@ -377,7 +377,14 @@
   " }}}
 
   " vimspector {{{
-  let g:vimspector_enable_mappings = 'HUMAN'
+  " You can use 'VISUAL_STUDIO' or 'HUMAN'
+  " Visual Studio config avoid to the mapping of <F3> key, sometimes used to map file explorer buffer.
+  let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+  " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+  " for normal mode - the word under the cursor
+  nmap <Leader>di <Plug>VimspectorBalloonEval
+  " for visual mode, the visually selected text
+  xmap <Leader>di <Plug>VimspectorBalloonEval
   " }}}
 
   " Codi {{{

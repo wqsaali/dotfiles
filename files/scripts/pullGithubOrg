@@ -19,23 +19,21 @@ COL_CYAN=$ESC_SEQ"36;01m"
 COL_GREY=$ESC_SEQ"38;5;245m"
 
 TOKEN=${1}
-if [[ ! -z $TOKEN ]]; then
-  TOKEN="?access_token=${TOKEN}"
-fi
 ORG=$(basename $(pwd))
 
-# repos=$(curl -s https://api.github.com/orgs/${ORG}/repos${TOKEN} | jq -r '.[].name')
+# repos=$(curl -s https://api.github.com/orgs/${ORG}/repos -H "Authorization: bearer ${TOKEN}" | jq -r '.[].name')
 # Github uses headers for pagination, headers go into response-1.txt and the response body goes into the response-2.txt file
-curl -si "https://api.github.com/orgs/${ORG}/repos${TOKEN}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
-repos=$(jq -r '.[].name' response-2.txt)
-next=$(grep -io '<https://api.github.com/organizations/.*/repos?access_.*>; rel="next",' response-1.txt| sed -e 's/^.* rel="prev",//' | cut -d';'  -f1 | tr -d '<>;')
+curl -si "https://api.github.com/orgs/${ORG}/repos" -H "Authorization: bearer ${TOKEN}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
+repos="start"
 
 while [ ! -z "${repos}" ]; do
+  repos=$(jq -r '.[].name' response-2.txt)
+  next=$(grep -io '<https://api.github.com/organizations/[a-zA-Z0-9]*/repos[a-zA-Z0-9_\-\?=\&]*>; rel="next"' response-1.txt| cut -d';'  -f1 | tr -d '<>;')
   for repo in $repos; do
     upstream=''
     fork=$(jq -r ".[] | select(.name == \"${repo}\")| .fork" response-2.txt)
     if [ ${fork} == "true" ]; then
-      upstream=$(curl -s "https://api.github.com/repos/${ORG}/${repo}${TOKEN}" | jq -r '.parent.ssh_url')
+      upstream=$(curl -s "https://api.github.com/repos/${ORG}/${repo}" -H "Authorization: bearer ${TOKEN}" | jq -r '.parent.ssh_url')
     fi
     if [ ! -d ${repo} ]; then
       echo -e "${COL_RED}>>>${COL_RESET} Found new repo ${upstream}"
@@ -83,9 +81,7 @@ while [ ! -z "${repos}" ]; do
   done
   rm response-*
   if [ -z "${next}" ]; then break; fi
-  curl -si "${next}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
-  repos=$(jq -r '.[].name' response-2.txt)
-  next=$(grep -io '<https://api.github.com/organizations/.*/repos?access_.*>; rel="next",' response-1.txt| sed -e 's/^.* rel="prev",//' | cut -d';'  -f1 | tr -d '<>;')
+  curl -si "${next}" -H "Authorization: bearer ${TOKEN}" | awk -v RS='\r\n\r\n' '{print > ("response-" NR ".txt")}'
 done
 
 if [ -f response-1.txt ]; then

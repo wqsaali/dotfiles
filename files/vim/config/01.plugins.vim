@@ -71,6 +71,7 @@
   " Plug 'rafi/awesome-vim-colorschemes'
   Plug 'chriskempson/base16-vim'
   Plug 'cormacrelf/vim-colors-github'
+  Plug 'ghifarit53/tokyonight-vim'
 
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
@@ -90,6 +91,8 @@
 
   if has('nvim')
     Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app & yarn install' }
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'rcarriga/nvim-dap-ui'
   else
     Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
     Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}

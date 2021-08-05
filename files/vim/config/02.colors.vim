@@ -94,17 +94,24 @@
   let g:github_colors_block_diffmark = 0
 
   " let g:airline_theme = 'base16_tomorrow'
-  let g:airline_theme = "github"
-  let g:lightline = { 'colorscheme': 'github' }
+  " let g:airline_theme = 'github'
+  " let g:lightline = { 'colorscheme': 'github' }
+  let g:airline_theme = 'tokyonight'
+  let g:lightline = {'colorscheme' : 'tokyonight'}
 
   let g:clap_theme = 'atom_dark'
 
   let base16colorspace=256
+  let g:tokyonight_style = 'night' " available: night, storm
+  let g:tokyonight_enable_italic = 1
+  let g:tokyonight_transparent_background = 1
+  let g:tokyonight_current_word = 'underline' " available: 'bold', 'underline', 'italic', 'grey background'
 
+  color tokyonight
   " color Tomorrow-Night-Bright
   " color molokai
   " color base16-chalk
-  color github
+  " color github
 
   " if has('nvim')
   "   set pumblend=5

@@ -22,6 +22,11 @@
     "fuzzyMatching": true
   },
   // "coc.source.gocode.enable": false,
+  "solargraph.definitions": true,
+  "solargraph.diagnostics": true,
+  "solargraph.useBundler": false,
+  "solargraph.autoformat": true,
+  "solargraph.formatting": true,
   "jedi.enable": true,
   "jedi.startupMessage": false,
   "jedi.markupKindPreferred": "plaintext",
@@ -127,7 +132,7 @@
   "git.addGBlameToVirtualText": false,
   "git.enableGutters": true,
   "git.signPriority": 10,
-  "highlight.colors.enable": false,
+  "highlight.colors.enable": true,
   "markdownlint.config": {
     "default": true,
     "line-length": false
