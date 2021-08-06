@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 T='•••'
 echo -e "\n                 40m    100m     41m    101m     42m    102m     43m    103m     44m    104m     45m    105m     46m    106m     47m    107m";
 for FGs in '    m' '   1m' '  30m' '  90m' '  31m' '  91m' '  32m' \
