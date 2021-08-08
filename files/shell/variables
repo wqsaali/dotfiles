@@ -216,7 +216,7 @@ elif type pygmentize >/dev/null 2>&1; then
 fi
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export BAT_THEME='TwoDark'
+export BAT_THEME='Enki-Tokyo-Night'
 # export BAT_PAGER="less -R"
 export DELTA_PAGER="less -LREFX"
 export PAGER="bat -p"

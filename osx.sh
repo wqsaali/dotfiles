@@ -220,6 +220,10 @@ installDotFiles() {
     exit 1
   fi
 
+  for dir in $(ls -1d files/config/*/); do
+    cp -r files/config/${dir##*/}/* "${HOME}/Library/Application Support/${dir##*/}/"
+  done
+
   mkdir -p ${HOME}/.hammerspoon/
   mkdir -p $HOME/.hammerspoon/hs
 

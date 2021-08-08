@@ -30,46 +30,46 @@
 
     " typographic ligatures {{{
     " from: https://maximewack.com/post/emulating_ligatures/
-    if has('conceal')
-      setlocal conceallevel=1
-      " au Syntax * syntax clear customOperator
+    " if has('conceal')
+    "   setlocal conceallevel=1
+    "   " au Syntax * syntax clear customOperator
 
-      " au Syntax * syntax match customOperator '\/' conceal cchar=÷
-      " au Syntax * syntax match customOperator '*' conceal cchar=×
-      au Syntax * syntax match customOperator '++' conceal cchar=⧺
+    "   " au Syntax * syntax match customOperator '\/' conceal cchar=÷
+    "   " au Syntax * syntax match customOperator '*' conceal cchar=×
+    "   au Syntax * syntax match customOperator '++' conceal cchar=⧺
 
-      au Syntax * syntax match customOperator "=\@<!===\@!" conceal cchar=≖
-      au Syntax * syntax match customOperator "=\@<!====\@!" conceal cchar=≡
-      au Syntax * syntax match customOperator '\~=' conceal cchar=≃
-      au Syntax * syntax match customOperator '==' conceal cchar=≣
-      au Syntax * syntax match customOperator ':=' conceal cchar=≔
-      au Syntax * syntax match customOperator '!=' conceal cchar=≠
-      au Syntax * syntax match customOperator '!==' conceal cchar=≢
-      au Syntax * syntax match customOperator '>=' conceal cchar=≥
-      au Syntax * syntax match customOperator '!>=' conceal cchar=≱
-      au Syntax * syntax match customOperator '<=' conceal cchar=≤
-      au Syntax * syntax match customOperator '!<=' conceal cchar=≰
+    "   au Syntax * syntax match customOperator "=\@<!===\@!" conceal cchar=≖
+    "   au Syntax * syntax match customOperator "=\@<!====\@!" conceal cchar=≡
+    "   au Syntax * syntax match customOperator '\~=' conceal cchar=≃
+    "   au Syntax * syntax match customOperator '==' conceal cchar=≣
+    "   au Syntax * syntax match customOperator ':=' conceal cchar=≔
+    "   au Syntax * syntax match customOperator '!=' conceal cchar=≠
+    "   au Syntax * syntax match customOperator '!==' conceal cchar=≢
+    "   au Syntax * syntax match customOperator '>=' conceal cchar=≥
+    "   au Syntax * syntax match customOperator '!>=' conceal cchar=≱
+    "   au Syntax * syntax match customOperator '<=' conceal cchar=≤
+    "   au Syntax * syntax match customOperator '!<=' conceal cchar=≰
 
-      au Syntax * syntax match customOperator '|>' conceal cchar=⊳
-      au Syntax * syntax match customOperator '<|' conceal cchar=⊲
-      au Syntax * syntax match customOperator '>>' conceal cchar=»
-      au Syntax * syntax match customOperator '<<' conceal cchar=«
-      " au Syntax * syntax match customOperator '\\' conceal cchar=λ
+    "   au Syntax * syntax match customOperator '|>' conceal cchar=⊳
+    "   au Syntax * syntax match customOperator '<|' conceal cchar=⊲
+    "   au Syntax * syntax match customOperator '>>' conceal cchar=»
+    "   au Syntax * syntax match customOperator '<<' conceal cchar=«
+    "   " au Syntax * syntax match customOperator '\\' conceal cchar=λ
 
-      au Syntax * syntax match customOperator '::' conceal cchar=∷
-      au Syntax * syntax match customOperator '->' conceal cchar=→
-      au Syntax * syntax match customOperator '=>' conceal cchar=⇒
+    "   au Syntax * syntax match customOperator '::' conceal cchar=∷
+    "   au Syntax * syntax match customOperator '->' conceal cchar=→
+    "   au Syntax * syntax match customOperator '=>' conceal cchar=⇒
 
-      au Syntax * syntax match customOperator '||' conceal cchar=∨
-      au Syntax * syntax match customOperator '&&' conceal cchar=∧
-      au Syntax * syntax match customOperator '|=' conceal cchar=⊧
-      " au Syntax * syntax match customOperator '|.' conceal cchar=⊦
-      au Syntax * syntax match customOperator '/=' conceal cchar=≠
+    "   au Syntax * syntax match customOperator '||' conceal cchar=∨
+    "   au Syntax * syntax match customOperator '&&' conceal cchar=∧
+    "   au Syntax * syntax match customOperator '|=' conceal cchar=⊧
+    "   " au Syntax * syntax match customOperator '|.' conceal cchar=⊦
+    "   au Syntax * syntax match customOperator '/=' conceal cchar=≠
 
-      au ColorScheme * hi link customOperator Operator
-      au ColorScheme * hi! link Conceal Operator
+    "   au ColorScheme * hi link customOperator Operator
+    "   au ColorScheme * hi! link Conceal Operator
 
-    endif
+    " endif
     " }}}
   endif
   " }}}
@@ -85,33 +85,33 @@
     set termguicolors
   endif
 
+  let base16colorspace=256
   set guifont=JetBrainsMono\ Nerd\ Font:h12
 
   " use a slightly darker background, like GitHub inline code blocks
   let g:github_colors_soft = 1
-
   " more blocky diff markers in signcolumn (e.g. GitGutter)
   let g:github_colors_block_diffmark = 0
 
+  let g:tokyonight_style = 'night' " available: night, storm
+  let g:tokyonight_disable_italic_comment = 0
+  let g:tokyonight_enable_italic = 1
+  " let g:tokyonight_transparent_background = 1
+  let g:tokyonight_current_word = 'underline' " available: 'bold', 'underline', 'italic', 'grey background'
+
   " let g:airline_theme = 'base16_tomorrow'
   " let g:airline_theme = 'github'
-  " let g:lightline = { 'colorscheme': 'github' }
   let g:airline_theme = 'tokyonight'
+  " let g:lightline = { 'colorscheme': 'github' }
   let g:lightline = {'colorscheme' : 'tokyonight'}
 
   let g:clap_theme = 'atom_dark'
 
-  let base16colorspace=256
-  let g:tokyonight_style = 'night' " available: night, storm
-  let g:tokyonight_enable_italic = 1
-  let g:tokyonight_transparent_background = 1
-  let g:tokyonight_current_word = 'underline' " available: 'bold', 'underline', 'italic', 'grey background'
-
-  color tokyonight
   " color Tomorrow-Night-Bright
   " color molokai
   " color base16-chalk
   " color github
+  color tokyonight
 
   " if has('nvim')
   "   set pumblend=5

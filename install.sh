@@ -533,7 +533,7 @@ installDotFiles() {
   git_clone_or_update https://github.com/dexpota/kitty-themes.git ${HOME}/.kitty-themes
 
   for dir in $(ls -1d files/config/*/); do
-    cp -r files/config/${dir##*/}/* ${HOME}/.config/${dir##*/}/
+    cp -r files/config/${dir##*/}/* "${HOME}/.config/${dir##*/}/"
   done
 
   cp files/config/kubie.yaml ${HOME}/.kube/kubie.yaml
@@ -552,6 +552,7 @@ installDotFiles() {
   if [ -x "$(command -v bat)" ]; then
     mkdir -p "${HOME}/.config/bat/themes"
     git_clone_or_update https://github.com/theymaybecoders/sublime-tomorrow-theme.git "${HOME}/.config/bat/themes/sublime-tomorrow-theme"
+    git_clone_or_update https://github.com/enkia/enki-theme.git "${HOME}/.config/bat/themes/enki-theme"
     bat cache --build
   fi
 
@@ -625,6 +626,7 @@ case "$CMD" in
     ;;
   "dotfiles")
     installDotFiles
+    installOSSpecific "dotfiles"
     ;;
   "scripts")
     installScripts
