@@ -147,4 +147,6 @@
 
   set wildmenu
   set wildmode=longest:full,full
+
+  " autocmd BufRead,BufNewFile *.vue setfiletype html
 " }}}

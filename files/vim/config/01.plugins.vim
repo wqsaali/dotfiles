@@ -88,6 +88,7 @@
   Plug 'google/vim-jsonnet'
   Plug 'kevinoid/vim-jsonc'
   Plug 'jjo/vim-cue'
+  " Plug 'posva/vim-vue'
 
   if has('nvim')
     Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app & yarn install' }
@@ -106,8 +107,8 @@
   Plug 'puremourning/vimspector', {'for': ['c', 'cpp', 'go', 'python', 'java', 'javascript', 'sh'], 'do': function('BuildVimspector')}
 
   Plug 'sheerun/vim-polyglot'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   call plug#end()
 
@@ -162,5 +163,6 @@ let g:coc_global_extensions = [
       \ 'coc-phpls',
       \ 'coc-groovy',
       \ 'coc-sql',
+      \ 'coc-vetur',
       \ ]
 " }}}

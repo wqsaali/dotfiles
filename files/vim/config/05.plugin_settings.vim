@@ -342,6 +342,10 @@
   let g:usemarks = 0
   " }}}
 
+  "vim-vue {{{
+  let g:vue_pre_processors = []
+  " }}}
+
   " Vim-go {{{
   "let g:go_gopls_enabled = 1
   let g:go_gopls_options = ['-remote=auto']
