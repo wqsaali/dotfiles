@@ -164,5 +164,8 @@ let g:coc_global_extensions = [
       \ 'coc-groovy',
       \ 'coc-sql',
       \ 'coc-vetur',
+      \ 'coc-apollo',
+      \ 'coc-tsserver',
+      \ 'coc-tsdetect',
       \ ]
 " }}}
