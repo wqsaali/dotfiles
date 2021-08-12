@@ -92,18 +92,20 @@
 
   if has('nvim')
     Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app & yarn install' }
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'rcarriga/nvim-dap-ui'
+    " Plug 'mfussenegger/nvim-dap'
+    " Plug 'rcarriga/nvim-dap-ui'
   else
     Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
     Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
   endif
 
+  let g:vimspector_base_dir = expand( '<sfile>:p:h' ) . '/vimspector-conf'
   function! BuildVimspector(info)
     if a:info.status == 'installed' || a:info.force
       !./install_gadget.py --all
     endif
   endfunction
+
   Plug 'puremourning/vimspector', {'for': ['c', 'cpp', 'go', 'python', 'java', 'javascript', 'sh'], 'do': function('BuildVimspector')}
 
   Plug 'sheerun/vim-polyglot'
@@ -148,7 +150,6 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-yaml',
       \ 'coc-toml',
-      \ 'coc-kite',
       \ 'coc-vimlsp',
       \ 'coc-jedi',
       \ 'coc-pyls',
