@@ -99,7 +99,7 @@
     Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
   endif
 
-  let g:vimspector_base_dir = expand( '<sfile>:p:h' ) . '/vimspector-conf'
+  " let g:vimspector_base_dir = expand( '<sfile>:p:h' ) . '/vimspector-conf'
   function! BuildVimspector(info)
     if a:info.status == 'installed' || a:info.force
       !./install_gadget.py --all

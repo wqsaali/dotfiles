@@ -135,6 +135,9 @@
   nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
   nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
 
+  " Vista
+  noremap <space>v :Vista!!<CR>
+
   " Vimux Aliases
   command -nargs=+ Run VimuxRunCommand <args>
   command -nargs=+ Prompt VimuxPromptCommand <args>
