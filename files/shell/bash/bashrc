@@ -129,10 +129,6 @@ function fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x "$(command -v lesspipe)" ] && eval "$(SHELL=/bin/sh lesspipe)"
-[ -x "$(command -v lesspipe.sh)" ] && eval "$(SHELL=/bin/sh lesspipe.sh)"
-
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -222,13 +218,6 @@ fi
 # fi
 
 [ -x "$(command -v thefuck)" ] && eval $(thefuck --alias)
-
-if [ -x "$(command -v pyenv)" ]; then
-  eval "$(pyenv init -)"
-  [ -x "$(command -v pyenv-virtualenv-init)" ] && eval "$(pyenv virtualenv-init -)"
-fi
-
-[ -x ${HOME}/.chefvm/bin/chefvm ] && eval "$(${HOME}/.chefvm/bin/chefvm init -)"
 
 if [ -n "${HOMEBREW_PREFIX}" ]; then
   [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh ]] || source ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh

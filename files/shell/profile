@@ -80,6 +80,13 @@ if [ -d '/usr/local/opt/gpatch/bin' ]; then
   PATH="/usr/local/opt/gpatch/bin:$PATH"
 fi
 
+# Setup Compiler paths for readline and openssl
+local READLINE_PATH=$(brew --prefix readline)
+local OPENSSL_PATH=$(brew --prefix openssl)
+export LDFLAGS="-L$READLINE_PATH/lib -L$OPENSSL_PATH/lib"
+export CPPFLAGS="-I$READLINE_PATH/include -I$OPENSSL_PATH/include"
+export PKG_CONFIG_PATH="$READLINE_PATH/lib/pkgconfig:$OPENSSL_PATH/lib/pkgconfig"
+
 # Use brew python
 if [ -d '/usr/local/opt/python/libexec/bin' ]; then
   PATH="/usr/local/opt/python/libexec/bin:$PATH"
@@ -98,6 +105,12 @@ fi
 # #   done
 # fi
 
+if [ -x "$(command -v pyenv)" ]; then
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+  [ -x "$(command -v pyenv-virtualenv-init)" ] && eval "$(pyenv virtualenv-init -)"
+fi
+
 # Use brew ruby
 if [ -d '/usr/local/opt/ruby/bin' ]; then
   PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -110,13 +123,6 @@ if [ -x "$(command -v ruby)" ] && [ -x "$(command -v gem)" ]; then
     PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
     PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
-
-# Setup Compiler paths for readline and openssl
-local READLINE_PATH=$(brew --prefix readline)
-local OPENSSL_PATH=$(brew --prefix openssl)
-export LDFLAGS="-L$READLINE_PATH/lib -L$OPENSSL_PATH/lib"
-export CPPFLAGS="-I$READLINE_PATH/include -I$OPENSSL_PATH/include"
-export PKG_CONFIG_PATH="$READLINE_PATH/lib/pkgconfig:$OPENSSL_PATH/lib/pkgconfig"
 
 # Use the OpenSSL from Homebrew instead of ruby-build
 # Note: the Homebrew version gets updated, the ruby-build version doesn't
@@ -131,6 +137,12 @@ eval "$(rbenv init -)"
 # Extract the latest version of Ruby so you can do this:
 # rbenv install $LATEST_RUBY_VERSION
 export LATEST_RUBY_VERSION=$(rbenv install -L | grep -v - | tail -1)
+
+[ -x ${HOME}/.chefvm/bin/chefvm ] && eval "$(${HOME}/.chefvm/bin/chefvm init -)"
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x "$(command -v lesspipe)" ] && eval "$(SHELL=/bin/sh lesspipe)"
+[ -x "$(command -v lesspipe.sh)" ] && eval "$(SHELL=/bin/sh lesspipe.sh)"
 
 # Linuxbrew paths
 if [ -d "$HOME/.linuxbrew/bin" ]; then

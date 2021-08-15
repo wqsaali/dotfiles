@@ -86,6 +86,7 @@ fluxctl
 gawk
 gcal
 gh
+gifsicle
 git
 git-credential-manager
 git-delta
@@ -160,6 +161,7 @@ lesspipe
 lf
 libmagic
 libsecret
+lima
 llvm
 make
 mas
