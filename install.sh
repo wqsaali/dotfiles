@@ -270,6 +270,7 @@ installTestssl() {
 installScripts() {
   mkdir -p ~/.local/bin/
   cp -r files/scripts/* ${HOME}/.local/bin/
+  installFromGithub 'AkihiroSuda/sshocker'
   installFromRawGithub 'huyng/bashmarks' 'bashmarks.sh'
   installFromRawGithub 'ahmetb/goclone'
   # installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
