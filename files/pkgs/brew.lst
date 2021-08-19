@@ -83,6 +83,7 @@ fff
 figlet
 findutils
 fluxctl
+fx
 gawk
 gcal
 gh
@@ -187,6 +188,7 @@ pdsh
 peco
 pet
 pipenv
+pipx
 popeye
 pre-commit
 prettyping

@@ -4,6 +4,7 @@ BlastRadius
 Pygments
 alacritty-colorscheme
 ansible-test
+aws-sso-util
 boto
 boto3
 bpython
