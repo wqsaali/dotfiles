@@ -153,7 +153,9 @@ kompose
 kops
 kube-aws
 kubebuilder
+kubeconform
 kubectx
+kubeval
 kustomize
 kwt
 lab
