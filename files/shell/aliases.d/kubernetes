@@ -183,6 +183,10 @@ function helm-getSecrets() {
   kubectl get secret -n kube-system tiller-secret -o go-template='{{index .data "tls.key"| base64decode}}' > $HELM_HOME/key.pem
 }
 
+function helmsman-adopt() {
+  kubectl label secret -n ${2} -l name=${1} --overwrite HELMSMAN_CONTEXT=${3:-default} MANAGED-BY=HELMSMAN NAMESPACE=${2}
+}
+
 # microk8s aliases for macOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
   alias microk8s.install='multipass exec microk8s-vm -- sudo snap install microk8s --classic && multipass exec microk8s-vm -- sudo iptables -P FORWARD ACCEPT'
