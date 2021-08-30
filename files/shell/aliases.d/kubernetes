@@ -135,6 +135,7 @@ function kubectl-remote_shell() {
 }
 alias kctl-shell='kubectl-remote_shell'
 alias kube-shell='kubectl-remote_shell'
+alias kshell='kubectl-remote_shell'
 
 alias kssh='kubectl-ssh'
 alias kpssh='kubectl-pssh'

@@ -21,7 +21,11 @@
     "deepCompletion": true,
     "fuzzyMatching": true
   },
-  // "coc.source.gocode.enable": false,
+  "yaml.format.bracketSpacing": false,
+  "yaml.schemaStore.enable": true,
+  "yaml.hover": true,
+  "yaml.completion": true,
+  "yaml.validate": true,
   "solargraph.definitions": true,
   "solargraph.diagnostics": true,
   "solargraph.useBundler": false,
