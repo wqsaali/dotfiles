@@ -110,6 +110,7 @@
 
   Plug 'sheerun/vim-polyglot'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   call plug#end()
@@ -134,11 +135,16 @@ let g:coc_global_extensions = [
       \ 'coc-explorer',
       \ 'coc-floaterm',
       \ 'coc-terminal',
+      \ 'coc-fzf-preview',
       \ 'coc-gitignore',
       \ 'coc-gist',
       \ 'coc-prettier',
       \ 'coc-markdownlint',
+      \ 'coc-dot-complete',
+      \ 'coc-dash-complete',
+      \ 'coc-just-complete',
       \ 'coc-tabnine',
+      \ 'coc-spell-checker',
       \ 'coc-snippets',
       \ 'coc-ultisnips',
       \ 'coc-emmet',
@@ -160,6 +166,7 @@ let g:coc_global_extensions = [
       \ 'coc-rls',
       \ 'coc-rust-analyzer',
       \ 'coc-html',
+      \ 'coc-htmlhint',
       \ 'coc-css',
       \ 'coc-phpls',
       \ 'coc-groovy',
