@@ -55,6 +55,9 @@ function actx() {
   if [ -z "${CTX}" ]; then
     CTX="$(aws configure list-profiles|fzf)"
   fi
+  if [ -z "${CTX}" ]; then
+    return
+  fi
   export AWS_PROFILE="${CTX}"
   aws sts get-caller-identity
   if [[ "${CTX}" == "tf" ]]; then
@@ -69,6 +72,9 @@ function actr() {
   if [ -z "${CTX}" ]; then
     CTX="$(aws --output json ec2 describe-regions | jq -r '.Regions[]|.RegionName'|fzf)"
   fi
+  if [ -z "${CTX}" ]; then
+    return
+  fi
   export AWS_DEFAULT_REGION="${CTX}"
 }
 
@@ -78,7 +84,15 @@ function ectx() {
   CTX="${1}"
   if [ -z "${CTX}" ]; then
     CTX="$(aws --output json eks list-clusters | jq -r '.clusters[]' | fzf)"
-    export KUBECONFIG="${CFG_DIR}/${CTX}"
-    aws eks update-kubeconfig --name "${CTX}"
   fi
+  if [ -z "${CTX}" ]; then
+    return
+  fi
+  role=""
+  # role=$(aws sts get-caller-identity --output text --query 'Arn')
+  # if [ -n "${role}" ]; then
+  #   role="--role-arn ${role}"
+  # fi
+  export KUBECONFIG="${CFG_DIR}/${CTX}"
+  aws eks update-kubeconfig --name "${CTX}" ${role}
 }
