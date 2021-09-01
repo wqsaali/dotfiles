@@ -234,15 +234,6 @@
   " }}}
 
   " clap-vim {{{
-  " Maps to Ctrl-p
-  nnoremap <C-p> :Clap files<CR>
-  nnoremap <C-o> :Clap filer<CR>
-  nnoremap <C-e> :Clap command<CR>
-  nnoremap <C-j> :Clap tags<CR>
-  nnoremap <C-f> :Clap grep<CR>
-  nnoremap <C-w>w :Clap windows<CR>
-  nnoremap <C-w>b :Clap buffers<CR>
-
   " let g:clap_provider_grep_executable = 'rg'
   let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case --hidden --glob=!.git/* --glob=!*vendor/* --glob=!*node_modules/* '
   let g:clap_preview_direction = 'UD'

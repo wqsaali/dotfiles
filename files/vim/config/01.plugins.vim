@@ -35,7 +35,7 @@
   Plug 'gregsexton/gitv'
   Plug 'junegunn/gv.vim'
 
-  Plug 'nelstrom/vim-visual-star-search'
+  Plug 'bronson/vim-visual-star-search'
 
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
   Plug 'liuchengxu/vista.vim'

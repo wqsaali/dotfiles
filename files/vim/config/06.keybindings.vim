@@ -144,6 +144,29 @@
   command CloseRunner VimuxCloseRunner
   command RunAgain VimuxRunLastCommand
 
+  " Clap Maps to Ctrl-p
+  nnoremap <C-p> :Clap files<CR>
+  nnoremap <C-o> :Clap filer<CR>
+  nnoremap <C-e> :Clap command<CR>
+  nnoremap <C-j> :Clap tags<CR>
+  nnoremap <C-f> :Clap grep2<CR>
+  nnoremap <C-w>w :Clap windows<CR>
+  nnoremap <C-w>b :Clap buffers<CR>
+
+  nmap <Leader>c [clap]
+  xmap <Leader>c [clap]
+
+  nnoremap <silent> [clap]p :Clap files<CR>
+  nnoremap <silent> [clap]o :Clap filer<CR>
+  nnoremap <silent> [clap]t :Clap tags<CR>
+  nnoremap <silent> [clap]T :Clap proj_tags<CR>
+  nnoremap <silent> [clap]q :Clap quickfix<CR>
+  nnoremap <silent> [clap]l :Clap loclist<CR>
+  nnoremap <silent> [clap]gs :Clap git_diff_files<CR>
+  nnoremap <silent> [clap]gr :Clap grep2<CR>
+  nnoremap <silent> [clap]* :Clap grep ++query=<cword><CR>
+  xnoremap <silent> [clap]* :Clap grep ++query=@visual<CR>
+
   " coc FZF preview
   nmap <Leader>z [fzf-p]
   xmap <Leader>z [fzf-p]
