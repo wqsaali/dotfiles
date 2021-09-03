@@ -77,6 +77,7 @@ setopt append_history         # append rather then overwrite
 setopt extended_history       # save timestamp
 setopt inc_append_history     # add history immediately after typing a command
 setopt hist_reduce_blanks     # remove superfluous blanks
+setopt completealiases        # autocomplete aliases
 
 _eternal_history_histfile=~/.zsh_eternal_history
 
