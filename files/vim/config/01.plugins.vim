@@ -73,6 +73,11 @@
   Plug 'cormacrelf/vim-colors-github'
   Plug 'ghifarit53/tokyonight-vim'
 
+  Plug 'frazrepo/vim-rainbow'
+  " Plug 'nvim-treesitter/nvim-treesitter'
+  " Plug 'p00f/nvim-ts-rainbow'
+  " Plug 'junegunn/rainbow_parentheses.vim'
+
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'

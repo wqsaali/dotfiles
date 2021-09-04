@@ -107,6 +107,8 @@
 
   let g:clap_theme = 'atom_dark'
 
+  let g:rainbow_active = 1
+
   " color Tomorrow-Night-Bright
   " color molokai
   " color base16-chalk
