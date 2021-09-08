@@ -150,6 +150,8 @@ zstyle ':completion:*:descriptions' format %B%d%b
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
         'local-directories named-directories'
 
+[[ -d "~/.zsh/completion" ]] || FPATH=~/.zsh/completion:$FPATH
+
 # Brew completions
 # You may also need to forcibly rebuild zcompdump:
 # rm -f ~/.zcompdump; compinit
@@ -159,10 +161,10 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
 if [ -x "$(command -v brew)" ]; then
   export HOMEBREW_PREFIX="$(brew --prefix)"
   FPATH=${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH
+fi
 
   autoload -Uz compinit
   compinit
-fi
 
 source $ZSH/oh-my-zsh.sh
 [[ ! -f "${HOME}/.zshrcHighlightStyle" ]] || source ${HOME}/.zshrcHighlightStyle

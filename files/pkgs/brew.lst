@@ -184,6 +184,7 @@ openshift-cli
 openssl
 openssl
 operator-sdk
+oras
 p7zip
 packer
 pdsh
@@ -264,6 +265,7 @@ wget
 whois
 xhyve
 yabai
+yamllint
 yarn
 ydiff
 yq

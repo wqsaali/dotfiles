@@ -3,6 +3,7 @@
 # k8s.io/helm/cmd/helm
 # k8s.io/kubernetes/cmd/kubectl
 github.com/anacrolix/torrent/cmd/...
+github.com/axw/gocov/gocov
 github.com/azer/yolo
 github.com/cloudposse/slack-notifier
 github.com/doronbehar/pistol/cmd/pistol
@@ -27,6 +28,7 @@ github.com/pkg/errors
 github.com/rancher/k3d
 github.com/reactiveops/rbac-lookup
 github.com/sahil-lakhwani/creyaml
+github.com/spf13/cobra/cobra
 github.com/spf13/viper
 github.com/sqs/goreturns
 github.com/talos-systems/conform
