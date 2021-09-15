@@ -55,6 +55,7 @@ colordiff
 consul-template
 cookiecutter
 coreutils
+crane
 credhub-cli
 csvkit
 ctags
@@ -241,6 +242,7 @@ terraform-docs
 terraform-ls
 terraformer
 terragrunt
+tflint
 the_silver_searcher
 thefuck
 tig
