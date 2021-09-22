@@ -1,6 +1,5 @@
 # chunkwm
 # chunkwm-blur
-# docker
 # docker-completion
 # docker-compose-completion
 # helm
@@ -68,6 +67,7 @@ direnv
 displayplacer
 dive
 dnscrypt-proxy
+docker
 docker-ls
 dust
 ec2-ami-tools
@@ -127,6 +127,7 @@ httpie
 httpstat
 hub
 hyperfine
+hyperkit
 imagemagick
 imgpkg
 inframap
@@ -172,6 +173,7 @@ make
 mas
 mercurial
 microk8s
+minikube
 moreutils
 mtr
 ncdu

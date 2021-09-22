@@ -160,12 +160,12 @@ if [ -d "/usr/local/kubebuilder/bin" ]; then
   PATH="$PATH:/usr/local/kubebuilder/bin"
 fi
 
-PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+PATH="${KREW_ROOT:-${HOME}/.krew}/bin:$PATH"
 
 # GOPATH
 GOPATH="${HOME}/go:${HOME}/workingCopies"
 GOBIN="${GOPATH/:*}/bin"
-PATH="$PATH:${GOBIN}"
+PATH="${PATH}:${GOBIN}"
 
 # Cargo bins
 # [ -f ${HOME}/.cargo/env ] && source ${HOME}/.cargo/env
@@ -179,16 +179,20 @@ fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "${HOME}/.local/bin" ]; then
-  PATH="${HOME}/.local/bin:$PATH"
+  PATH="${HOME}/.local/bin:${PATH}"
 fi
 if [ -d "${HOME}/bin" ] ; then
-  PATH="$HOME/bin:$PATH"
+  PATH="${HOME}/bin:$PATH"
 fi
 
 #sledge:binary path
 if [ -d "${HOME}/.sledge/bin" ]; then
   SLEDGE_BIN=${HOME}/.sledge/bin
   PATH="${PATH}:${SLEDGE_BIN}"
+fi
+
+if [ -d "${HOME}/.colima" ]; then
+  PATH="${HOME}/.colima:${PATH}"
 fi
 
 # Avoid duplicates

@@ -1,9 +1,11 @@
 # alfred
 # cakebrew
 # cerebro
+# docker
 # docker-edge
 # hab
 # hipchat
+# minikube
 # oni
 # pingplotter
 # skype-for-business
@@ -17,7 +19,6 @@ cisco-proximity
 clipy
 cyberduck
 dbeaver-community
-docker
 drawio
 dynamodb-local
 etcher
@@ -53,7 +54,6 @@ keepingyouawake
 kitty
 macfuse
 magicprefs
-minikube
 minishift
 multipass
 powershell

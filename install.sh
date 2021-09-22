@@ -136,6 +136,7 @@ installKubeScripts() {
   git_clone_or_update https://github.com/heptiolabs/ktx ${HOME}/.ktx
   # git_clone_or_update https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
   # git_clone_or_update https://github.com/alexppg/helmenv.git ${HOME}/.helmenv
+  # git_clone_or_update https://github.com/abiosoft/colima ${HOME}/.colima
 
   installKrew
 
