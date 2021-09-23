@@ -56,6 +56,7 @@ cookiecutter
 coreutils
 crane
 credhub-cli
+cruft
 csvkit
 ctags
 curl
@@ -68,6 +69,8 @@ displayplacer
 dive
 dnscrypt-proxy
 docker
+docker-compose
+docker-credential-helper
 docker-ls
 dust
 ec2-ami-tools

@@ -10,7 +10,6 @@ boto3
 bpython
 click
 container-transform
-cruft
 docformatter
 docker
 dreampie
