@@ -71,8 +71,22 @@
 
   noremap <Leader>i :set list!<CR>
 
-  " Tabs
+  nnoremap <Leader>p :set paste<CR>
+  nnoremap <Leader>o :set nopaste<CR>
+  noremap  <Leader>tb :TagbarToggle<CR>
+  " noremap  <Leader>nt :NERDTreeToggle<CR>
+  " noremap  <C-\> :NERDTreeToggle<CR>
+  " nmap <C-n> :NERDTreeToggle<CR>
+  " vmap ++ <plug>NERDCommenterToggle
+  " nmap ++ <plug>NERDCommenterToggle
+  nmap     <leader>TB <Plug>ToggleBrackets
+  imap     <leader>TB <Plug>ToggleBrackets
+  noremap  <leader>co :diffoff!<CR><C-W><C-O>
 
+  noremap <C-w>e :SyntasticCheck<CR>
+  noremap <C-w>f :SyntasticToggleMode<CR>
+
+  " Tabs {{{
   " Tab navigation
   nnoremap <S-PageUp>   :tabprevious<CR>
   inoremap <S-PageUp>   <Esc>:tabprevious<CR>i
@@ -92,23 +106,19 @@
   " inoremap <C-S-tab> <Esc>:tabprevious<CR>i
   " inoremap <C-tab>   <Esc>:tabnext<CR>i
   " inoremap <C-t>     <Esc>:tabnew<CR>
+  " }}}
 
-  nnoremap <Leader>p :set paste<CR>
-  nnoremap <Leader>o :set nopaste<CR>
-  noremap  <Leader>g :GitGutterToggle<CR>
-  noremap  <Leader>tb :TagbarToggle<CR>
-  noremap  <Leader>nt :NERDTreeToggle<CR>
-  noremap  <C-\> :NERDTreeToggle<CR>
-  " nmap <C-n> :NERDTreeToggle<CR>
-  " vmap ++ <plug>NERDCommenterToggle
-  " nmap ++ <plug>NERDCommenterToggle
-  nmap     <leader>TB <Plug>ToggleBrackets
-  imap     <leader>TB <Plug>ToggleBrackets
-  noremap  <leader>co :diffoff!<CR><C-W><C-O>
-
-  "  Window management:
+  "  Window management {{{
   nnoremap <Leader>sv :windo wincmd K<CR>
   nnoremap <Leader>sh :windo wincmd H<CR>
+  " select a window with -
+  nmap - <Plug>(choosewin)
+  " resize windows ⇧ and the directional keys
+  nnoremap <silent> <S-Left> :CmdResizeLeft<cr>
+  nnoremap <silent> <S-Down> :CmdResizeDown<cr>
+  nnoremap <silent> <S-Up> :CmdResizeUp<cr>
+  nnoremap <silent> <S-Right> :CmdResizeRight<cr>
+  " }}}
 
   " fugitive git bindings
   "vimdiff current vs git head (fugitive extension)
@@ -118,15 +128,15 @@
   "nnoremap <Leader>gD :diffoff!<cr><c-w>h:bd<cr>
   nnoremap <Leader>gD <c-w>h<c-w>c
   nnoremap <Leader>ga :Git add %:p<CR><CR>
-  nnoremap <Leader>gs :Gstatus<CR>
+  nnoremap <Leader>gs :Git<CR>
   nnoremap <Leader>gc :Gcommit -v -q<CR>
   nnoremap <Leader>gt :Gcommit -v -q %:p<CR>
   nnoremap <Leader>ge :Gedit<CR>
   nnoremap <Leader>gr :Gread<CR>
   nnoremap <Leader>gw :Gwrite<CR><CR>
-  nnoremap <Leader>gbl :Gblame<CR>
+  nnoremap <Leader>gbl :Git blame<CR>
   nnoremap <Leader>gl :silent! Glog<CR>:bot copen<CR>
-  nnoremap <Leader>gp :Ggrep<Space>
+  nnoremap <Leader>gp :Git grep<Space>
   nnoremap <Leader>gm :Gmove<Space>
   nnoremap <Leader>gb :Git branch<Space>
   nnoremap <Leader>go :Git checkout<Space>
@@ -134,6 +144,7 @@
   nnoremap <Leader>gpl :Dispatch! git pull<CR>
   nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
   nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
+  noremap  <Leader>g :GitGutterToggle<CR>
 
   " Vista
   noremap <space>v :Vista!!<CR>
@@ -144,7 +155,7 @@
   command CloseRunner VimuxCloseRunner
   command RunAgain VimuxRunLastCommand
 
-  " Clap Maps to Ctrl-p
+  " Clap Maps to Ctrl-p {{{
   nnoremap <C-p> :Clap files<CR>
   nnoremap <C-o> :Clap filer<CR>
   nnoremap <C-e> :Clap command<CR>
@@ -166,8 +177,9 @@
   nnoremap <silent> [clap]gr :Clap grep2<CR>
   nnoremap <silent> [clap]* :Clap grep ++query=<cword><CR>
   xnoremap <silent> [clap]* :Clap grep ++query=@visual<CR>
+  " }}}
 
-  " coc FZF preview
+  " coc FZF preview {{{
   nmap <Leader>z [fzf-p]
   xmap <Leader>z [fzf-p]
 
@@ -186,4 +198,5 @@
   nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
   nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
   nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
+  " }}}
 " }}}

@@ -110,15 +110,10 @@
 
   " vim-resize {{{
   let g:vim_resize_disable_auto_mappings = 1
-  nnoremap <silent> <S-Left> :CmdResizeLeft<cr>
-  nnoremap <silent> <S-Down> :CmdResizeDown<cr>
-  nnoremap <silent> <S-Up> :CmdResizeUp<cr>
-  nnoremap <silent> <S-Right> :CmdResizeRight<cr>
   " }}}
 
   " vim-choosewin {{{
   let g:choosewin_overlay_enable = 1
-  nmap - <Plug>(choosewin)
   " }}}
 
   " matchparen {{{
@@ -138,9 +133,6 @@
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
   let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
-
-  noremap <C-w>e :SyntasticCheck<CR>
-  noremap <C-w>f :SyntasticToggleMode<CR>
   " }}}
 
   " Gundu {{{
