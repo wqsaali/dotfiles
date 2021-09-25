@@ -116,7 +116,8 @@
   Plug 'sheerun/vim-polyglot'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   " Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
   call plug#end()
 
