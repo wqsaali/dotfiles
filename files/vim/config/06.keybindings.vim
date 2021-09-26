@@ -81,7 +81,7 @@
   " nmap ++ <plug>NERDCommenterToggle
   nmap     <leader>TB <Plug>ToggleBrackets
   imap     <leader>TB <Plug>ToggleBrackets
-  noremap  <leader>co :diffoff!<CR><C-W><C-O>
+  " noremap  <leader>co :diffoff!<CR><C-W><C-O>
 
   noremap <C-w>e :SyntasticCheck<CR>
   noremap <C-w>f :SyntasticToggleMode<CR>
@@ -146,6 +146,10 @@
   nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
   noremap  <Leader>g :GitGutterToggle<CR>
 
+  " Vim Codex
+  " nnoremap  <C-x> :CreateCompletion<CR>
+  " inoremap  <C-x> <Esc>li<C-g>u<Esc>l:CreateCompletion<CR>
+
   " Vista
   noremap <space>v :Vista!!<CR>
 
@@ -167,6 +171,7 @@
   nmap <Leader>c [clap]
   xmap <Leader>c [clap]
 
+  nnoremap <silent> [clap]c :Clap coc_commands<CR>
   nnoremap <silent> [clap]p :Clap files<CR>
   nnoremap <silent> [clap]o :Clap filer<CR>
   nnoremap <silent> [clap]t :Clap tags<CR>

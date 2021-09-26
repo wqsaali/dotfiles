@@ -29,6 +29,9 @@ manage-fastapi
 mdv
 molecule
 neovim
+nginx-language-server
+nginxfmt
+openai
 parallel-ssh
 pip
 pre-commit

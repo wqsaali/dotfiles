@@ -487,6 +487,7 @@ installZshConf() {
   git_clone_or_update https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM}/plugins/zsh-history-substring-search
   git_clone_or_update https://github.com/hlissner/zsh-autopair.git ${ZSH_CUSTOM}/plugins/zsh-autopair
   git_clone_or_update https://github.com/Aloxaf/fzf-tab.git ${ZSH_CUSTOM}/plugins/fzf-tab
+  git_clone_or_update https://github.com/tom-doerr/zsh_codex.git ${ZSH_CUSTOM}/plugins/zsh_codex
 
   cp files/shell/zsh/zshrc ${HOME}/.zshrc
   cp files/shell/zsh/zshHighlightStyle ${HOME}/.zshrcHighlightStyle

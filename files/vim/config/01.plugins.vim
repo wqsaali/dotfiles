@@ -41,7 +41,7 @@
   Plug 'liuchengxu/vista.vim'
   Plug 'vn-ki/coc-clap'
 
-  Plug 'jremmen/vim-ripgrep'
+  " Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'
 
   Plug 'ryanoasis/vim-devicons'
@@ -83,26 +83,31 @@
   Plug 'andrewstuart/vim-kubernetes'
   " Plug 'tell-k/vim-autopep8', {'for': 'python'}
 
-  "Plug 'govim/govim', {'for': 'go'}
-  "Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries'}
-  " Plug 'arp242/gopher.vim', {'for': 'go'}
-  Plug 'sebdah/vim-delve', {'for': 'go'}
+  "Plug 'govim/govim', {'for': ['go', 'vim-plug']}
+  "Plug 'fatih/vim-go', {'for': ['go', 'vim-plug'], 'do': ':GoUpdateBinaries'}
+  " Plug 'arp242/gopher.vim', {'for': ['go', 'vim-plug']}
+  Plug 'sebdah/vim-delve', {'for': ['go', 'vim-plug']}
 
-  Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
-  Plug 'maralla/vim-toml-enhance', {'for': 'toml'}
+  Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'vim-plug']}
+  Plug 'maralla/vim-toml-enhance', {'for': ['toml', 'vim-plug']}
   Plug 'google/vim-jsonnet'
   Plug 'kevinoid/vim-jsonc'
   Plug 'jjo/vim-cue'
   " Plug 'posva/vim-vue'
 
-  if has('nvim')
-    Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app & yarn install' }
-    " Plug 'mfussenegger/nvim-dap'
-    " Plug 'rcarriga/nvim-dap-ui'
-  else
-    Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
-    Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
-  endif
+  Plug 'iamcco/markdown-preview.nvim', {'for': ['markdown', 'vim-plug'], 'do': 'cd app & yarn install' }
+
+  " function! BuildComposer(info)
+  "   if a:info.status != 'unchanged' || a:info.force
+  "     if has('nvim')
+  "       !cargo build --release --locked
+  "     else
+  "       !cargo build --release --locked --no-default-features --features json-rpc
+  "     endif
+  "   endif
+  " endfunction
+
+  " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
   " let g:vimspector_base_dir = expand( '<sfile>:p:h' ) . '/vimspector-conf'
   function! BuildVimspector(info)
@@ -111,13 +116,15 @@
     endif
   endfunction
 
-  Plug 'puremourning/vimspector', {'for': ['c', 'cpp', 'go', 'python', 'java', 'javascript', 'sh'], 'do': function('BuildVimspector')}
+  Plug 'puremourning/vimspector', {'for': ['c', 'cpp', 'go', 'python', 'java', 'javascript', 'sh', 'vim-plug'], 'do': function('BuildVimspector')}
 
   Plug 'sheerun/vim-polyglot'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   " Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+
+  Plug 'tom-doerr/vim_codex'
 
   call plug#end()
 
@@ -130,56 +137,61 @@
 
 " coc-extensions {{{
 let g:coc_global_extensions = [
-      \ 'coc-marketplace',
       \ 'coc-actions',
-      \ 'coc-pairs',
-      \ 'coc-highlight',
-      \ 'coc-diagnostic',
-      \ 'coc-lists',
-      \ 'coc-tag',
-      \ 'coc-git',
-      \ 'coc-explorer',
-      \ 'coc-floaterm',
-      \ 'coc-terminal',
-      \ 'coc-fzf-preview',
-      \ 'coc-gitignore',
-      \ 'coc-gist',
-      \ 'coc-prettier',
-      \ 'coc-markdownlint',
-      \ 'coc-dot-complete',
+      \ '@yaegassy/coc-ansible',
+      \ 'coc-apollo',
+      \ 'coc-css',
       \ 'coc-dash-complete',
-      \ 'coc-just-complete',
-      \ 'coc-tabnine',
-      \ 'coc-spell-checker',
-      \ 'coc-snippets',
-      \ 'coc-ultisnips',
+      \ 'coc-diagnostic',
+      \ 'coc-docker',
+      \ 'coc-dot-complete',
       \ 'coc-emmet',
       \ 'coc-emoji',
-      \ 'coc-swagger',
-      \ 'coc-docker',
-      \ 'coc-sh',
-      \ 'coc-powershell',
-      \ 'coc-json',
-      \ 'coc-yaml',
-      \ 'coc-toml',
-      \ 'coc-vimlsp',
-      \ 'coc-jedi',
-      \ 'coc-pyls',
-      \ 'coc-pyright',
-      \ 'coc-solargraph',
-      \ 'coc-lua',
+      \ 'coc-explorer',
+      \ 'coc-floaterm',
+      \ 'coc-fzf-preview',
+      \ 'coc-gist',
+      \ 'coc-git',
+      \ 'coc-gitignore',
       \ 'coc-go',
-      \ 'coc-rls',
-      \ 'coc-rust-analyzer',
+      \ 'coc-graphql',
+      \ 'coc-groovy',
+      \ 'coc-highlight',
       \ 'coc-html',
       \ 'coc-htmlhint',
-      \ 'coc-css',
+      \ 'coc-jedi',
+      \ 'coc-json',
+      \ 'coc-just-complete',
+      \ 'coc-lists',
+      \ 'coc-lua',
+      \ 'coc-markdown-preview-enhanced',
+      \ 'coc-markdownlint',
+      \ 'coc-marketplace',
+      \ '@yaegassy/coc-nginx',
+      \ 'coc-pairs',
       \ 'coc-phpls',
-      \ 'coc-groovy',
+      \ 'coc-powershell',
+      \ 'coc-prettier',
+      \ 'coc-pyls',
+      \ 'coc-pyright',
+      \ 'coc-rls',
+      \ 'coc-rust-analyzer',
+      \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-solargraph',
+      \ 'coc-spell-checker',
       \ 'coc-sql',
-      \ 'coc-vetur',
-      \ 'coc-apollo',
-      \ 'coc-tsserver',
+      \ 'coc-swagger',
+      \ 'coc-tabnine',
+      \ 'coc-tag',
+      \ 'coc-terminal',
+      \ 'coc-toml',
       \ 'coc-tsdetect',
+      \ 'coc-tsserver',
+      \ 'coc-ultisnips',
+      \ 'coc-vetur',
+      \ 'coc-vimlsp',
+      \ 'coc-yaml',
+      \ 'coc-webview',
       \ ]
 " }}}

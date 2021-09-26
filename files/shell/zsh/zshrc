@@ -138,7 +138,11 @@ plugins=(
   zsh-completions
   zsh-autosuggestions
   zsh-history-substring-search
+  # zsh_codex
 )
+
+# for zsh_codex
+# bindkey '^X' create_completion
 
 # Bash like CDPATH
 typeset -U path cdpath fpath
