@@ -189,13 +189,21 @@ function helmsman-adopt() {
 }
 
 # Minikube
-function mkstart(){
-  minikube start --driver=hyperkit
-  eval $(minikube docker-env)
+function mk() {
+  export KUBECONFIG=~/.kube/config.d/minikube
+  case "$1" in
+    start)
+      shift
+      minikube start --driver=hyperkit --container-runtime=docker "${@}"
+      eval $(minikube docker-env)
+      ;;
+    purge)
+      minikube delete --all --purge
+      ;;
+    *)
+      minikube "${@}"
+  esac
 }
-alias mkstop='minikube stop'
-alias mkstatus='minikube status'
-alias mkdelete='minikube delete'
 
 # microk8s aliases for macOS
 if [[ "$OSTYPE" == "darwin"* ]]; then
