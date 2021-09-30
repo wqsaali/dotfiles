@@ -19,21 +19,21 @@ installDotFiles() {
     apt install git
   fi
 
-  mkdir -p ${HOME}/.termux/
-  cd ${INSTALLDIR}
+  mkdir -p "${HOME}/.termux/"
+  cd "${INSTALLDIR}" || exit
 
-  cp -r files/termux/* ${HOME}/.termux/
+  cp -r files/termux/* "${HOME}/.termux/"
 
-  cp files/shell/bash/bash_aliases_completion ${PREFIX}/etc/bash_completion.d/
+  cp files/shell/bash/bash_aliases_completion "${PREFIX}/etc/bash_completion.d/"
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
-  mv knife_autocomplete ${PREFIX}/etc/bash_completion.d/
+  mv knife_autocomplete "${PREFIX}/etc/bash_completion.d/"
   curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
-  mv kitchen-completion ${PREFIX}/etc/bash_completion.d/
+  mv kitchen-completion "${PREFIX}/etc/bash_completion.d/"
 
   termux-fix-shebang /data/data/com.termux/files/usr/etc/bash_completion.d/*
   # grep -lir --exclude-dir=.git '#!' ${HOME}/.bash/ | xargs -n 1 termux-fix-shebang
 
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 }
 
 osConfigs() {

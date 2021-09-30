@@ -57,8 +57,8 @@ brew_is_upgradable() {
 
 brew_tap() {
   fancy_echo "Adding Tap: $1 ..."
-  brew tap $1
-  brew tap $1 --repair 2> /dev/null
+  brew tap "$1"
+  brew tap "$1" --repair 2> /dev/null
 }
 
 brew_expand_alias() {
@@ -183,7 +183,7 @@ installPackages() {
 installItermColors() {
   name="$*"
   url="https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/${name// /%20}.itermcolors"
-  curl -fLo theme.itermcolors ${url}
+  curl -fLo theme.itermcolors "${url}"
   echo "importing ${name} from ${url}"
   defaults write -app iTerm 'Custom Color Presets' -dict-add "${name// /_}" "$(cat theme.itermcolors)"
   rm theme.itermcolors
@@ -191,26 +191,26 @@ installItermColors() {
 
 function installIterm() {
   cask_install "iterm2"
-  cp files/iterm/com.googlecode.iterm2.plist ${HOME}/Library/Preferences/com.googlecode.iterm2.plist
-  plutil -convert binary1 ${HOME}/Library/Preferences/com.googlecode.iterm2.plist
+  cp files/iterm/com.googlecode.iterm2.plist "${HOME}"/Library/Preferences/com.googlecode.iterm2.plist
+  plutil -convert binary1 "${HOME}"/Library/Preferences/com.googlecode.iterm2.plist
   defaults read com.googlecode.iterm2
 }
 
 installFonts() {
-  mkdir -p ${HOME}/Library/Fonts
+  mkdir -p "${HOME}"/Library/Fonts
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/1.0.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
-  mv *.otf ${HOME}/Library/Fonts
+  mv *.otf "${HOME}"/Library/Fonts
   curl -sfLO https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
-  sudo mv PowerlineSymbols.otf ${HOME}/Library/Fonts/
-  if ! [ -d ${HOME}/Library/Fonts/ubuntu-mono-powerline-ttf ]; then
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/Library/Fonts/ubuntu-mono-powerline-ttf
+  sudo mv PowerlineSymbols.otf "${HOME}"/Library/Fonts/
+  if ! [ -d "${HOME}"/Library/Fonts/ubuntu-mono-powerline-ttf ]; then
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git "${HOME}"/Library/Fonts/ubuntu-mono-powerline-ttf
   else
-    cd ${HOME}/Library/Fonts/ubuntu-mono-powerline-ttf
+    cd "${HOME}"/Library/Fonts/ubuntu-mono-powerline-ttf || exit
     git pull
-    cd ${INSTALLDIR}
+    cd "${INSTALLDIR}" || exit
   fi
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 }
 
 installDotFiles() {
@@ -221,37 +221,37 @@ installDotFiles() {
   fi
 
   for dir in $(ls -1d files/config/*/); do
-    cp -r files/config/${dir##*/}/* "${HOME}/Library/Application Support/${dir##*/}/"
+    cp -r files/config/"${dir##*/}"/* "${HOME}/Library/Application Support/${dir##*/}/"
   done
 
-  mkdir -p ${HOME}/.hammerspoon/
-  mkdir -p $HOME/.hammerspoon/hs
+  mkdir -p "${HOME}"/.hammerspoon/
+  mkdir -p "$HOME"/.hammerspoon/hs
 
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 
-  cp files/slate/slate ${HOME}/.slate
-  cp files/slate/slate.js ${HOME}/.slate.js
+  cp files/slate/slate "${HOME}"/.slate
+  cp files/slate/slate.js "${HOME}"/.slate.js
   # cp files/chunkwm/chunkwmrc ${HOME}/.chunkwmrc
   # cp files/chunkwm/skhdrc ${HOME}/.skhdrc
-  cp files/yabai/yabairc ${HOME}/.yabairc
-  cp files/yabai/skhdrc ${HOME}/.skhdrc
+  cp files/yabai/yabairc "${HOME}"/.yabairc
+  cp files/yabai/skhdrc "${HOME}"/.skhdrc
 
-  if [ ! -d  ${HOME}/.hammerspoon/hs/tiling ]; then
-    git clone https://github.com/dsanson/hs.tiling $HOME/.hammerspoon/hs/tiling
+  if [ ! -d  "${HOME}"/.hammerspoon/hs/tiling ]; then
+    git clone https://github.com/dsanson/hs.tiling "$HOME"/.hammerspoon/hs/tiling
   else
-    cd ${HOME}/.hammerspoon/hs/tiling
+    cd "${HOME}"/.hammerspoon/hs/tiling || exit
     git pull
-    cd ${INSTALLDIR}
+    cd "${INSTALLDIR}" || exit
   fi
 
-  cp -r files/hammerspoon/* ${HOME}/.hammerspoon/
+  cp -r files/hammerspoon/* "${HOME}"/.hammerspoon/
 
-  if [ ! -d  ${HOME}/.reslate ]; then
-    git clone https://github.com/lunixbochs/reslate.git ${HOME}/.reslate
+  if [ ! -d  "${HOME}"/.reslate ]; then
+    git clone https://github.com/lunixbochs/reslate.git "${HOME}"/.reslate
   else
-    cd ${HOME}/.reslate/
+    cd "${HOME}"/.reslate/ || exit
     git pull
-    cd ${INSTALLDIR}
+    cd "${INSTALLDIR}" || exit
   fi
 
   # ln -s ${HOME}/.config/kitty ${HOME}/Library/Preferences/
@@ -262,7 +262,7 @@ installDotFiles() {
   curl -sfLo kitchen-completion https://raw.githubusercontent.com/MarkBorcherding/test-kitchen-bash-completion/master/kitchen-completion.bash
   mv kitchen-completion /usr/local/etc/bash_completion.d/
 
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 }
 
 installAll() {

@@ -26,7 +26,7 @@ function usage() {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>] <resource_uri> [<curl_opts>]"
+  echo "Usage: $(basename "$0") [<flags>] <resource_uri> [<curl_opts>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help         display help'
@@ -67,9 +67,9 @@ if [ -f "/tmp/kurlEnv" ] && [ -f "/tmp/ca.crt" ]; then
   source /tmp/kurlEnv
 else
   [[ "${DEBUG}" == "true" ]] && echo "getting auth config using kubectl"
-  SECRET=$(kubectl get serviceaccount ${SERVICE_ACCOUNT} -n ${NS} -o json | jq -Mr '.secrets[].name | select(contains("token"))')
-  TOKEN=$(kubectl get secret ${SECRET} -n ${NS} -o json | jq -Mr '.data.token' | base64 -d)
-  kubectl get secret ${SECRET} -n ${NS} -o json | jq -Mr '.data["ca.crt"]' | base64 -d > /tmp/ca.crt
+  SECRET=$(kubectl get serviceaccount "${SERVICE_ACCOUNT}" -n "${NS}" -o json | jq -Mr '.secrets[].name | select(contains("token"))')
+  TOKEN=$(kubectl get secret "${SECRET}" -n "${NS}" -o json | jq -Mr '.data.token' | base64 -d)
+  kubectl get secret "${SECRET}" -n "${NS}" -o json | jq -Mr '.data["ca.crt"]' | base64 -d > /tmp/ca.crt
   APISERVER=https://$(kubectl get -n default endpoints kubernetes --no-headers | awk '{ print $2 }'| cut -d, -f1)
 
   cat << EOF > /tmp/kurlEnv

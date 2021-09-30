@@ -4,9 +4,9 @@ text=''
 short_text=''
 
 for INTERFACE in $(ls /sys/class/net/); do
-  state="$(cat /sys/class/net/$INTERFACE/operstate)"
+  state="$(cat /sys/class/net/"$INTERFACE"/operstate)"
   if [ "$state" = "up" ]; then
-    ipaddr="$(ip addr show $INTERFACE | perl -n -e'/inet (.+)\// && print $1')"
+    ipaddr="$(ip addr show "$INTERFACE" | perl -n -e'/inet (.+)\// && print $1')"
     ipaddr="${ipaddr:- -}"
     iwid="$(iwgetid -r)"
 
@@ -24,14 +24,14 @@ for INTERFACE in $(ls /sys/class/net/); do
 done
 
 if [ -n "$text" ]; then
-  text=$(echo $text | sed "s/^| //")
+  text=$(echo "$text" | sed "s/^| //")
   echo "${text}"
 else
   echo '  Offline '
 fi
 
 if [ -n "$short_text" ]; then
-  short_text=$(echo $short_text | sed "s/^| //")
+  short_text=$(echo "$short_text" | sed "s/^| //")
   echo "${short_text}"
 else
   echo '  Offline '

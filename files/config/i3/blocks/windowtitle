@@ -18,10 +18,10 @@ then
   done
 fi
 size=${#output}
-if [ $size -gt 0 ]
+if [ "$size" -gt 0 ]
 then
   output="$output-${array[1]}"
 else
   output="${array[0]}"
 fi
-echo $output
+echo "$output"

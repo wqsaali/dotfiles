@@ -17,7 +17,7 @@ function usage {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [lsit] [<product>] [<os>] [<arch>] [<flags>]"
+  echo "Usage: $(basename "$0") [lsit] [<product>] [<os>] [<arch>] [<flags>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -26,7 +26,7 @@ function usage {
   echo "  -v, --version <version>               version to install; default: latest"
   echo ''
   echo 'Set --version to latest to automatically discover the latest build (default)'
-  echo "Use $(basename $0) list to get a list os all available packages"
+  echo "Use $(basename "$0") list to get a list os all available packages"
   echo ''
   exit 1
 }
@@ -83,15 +83,15 @@ function installHashicorp() {
     url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.${1}.versions| .[]][${version}].builds[] | select(.url | test(\"${os}.*${arch}\";\"i\")) | .url")
   fi
 
-  mkdir -p ${install_to}
-  cd ${install_to}
-  curl -o package.zip $url
+  mkdir -p "${install_to}"
+  cd "${install_to}" || exit
+  curl -o package.zip "$url"
   unzip package.zip
   rm package.zip
-  cd ${cdir}
+  cd "${cdir}" || exit
 }
 
-OPTS=$(getopt -o hdv:i: --long help,debug,version:,install-to: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdv:i: --long help,debug,version:,install-to: -n "$(basename "$0")" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 

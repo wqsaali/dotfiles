@@ -32,27 +32,27 @@ while [ ! -z "${repos}" ]; do
   for repo in $repos; do
     upstream=''
     fork=$(jq -r ".[] | select(.name == \"${repo}\")| .fork" response-2.txt)
-    if [ ${fork} == "true" ]; then
+    if [ "${fork}" == "true" ]; then
       upstream=$(curl -s "https://api.github.com/repos/${ORG}/${repo}" -H "Authorization: bearer ${TOKEN}" | jq -r '.parent.ssh_url')
     fi
-    if [ ! -d ${repo} ]; then
+    if [ ! -d "${repo}" ]; then
       echo -e "${COL_RED}>>>${COL_RESET} Found new repo ${upstream}"
       url=$(jq -r ".[] | select(.name == \"${repo}\")| .ssh_url" response-2.txt)
-      git clone ${url}
+      git clone "${url}"
       if [[ ! -z $upstream ]]; then
-        cd ${repo}
+        cd "${repo}" || exit
         echo -e "${COL_YELLOW}>>>${COL_RESET} Adding remote upstream ${upstream}"
-        git remote add upstream ${upstream}
+        git remote add upstream "${upstream}"
         git fetch --all
         cd ..
       fi
     else
       echo -e "${COL_YELLOW}>>>${COL_RESET} Updating ${repo}"
-      cd ${repo}
+      cd "${repo}" || exit
       if [[ ! -z $upstream ]]; then
         if ! git remote | grep -qv 'upstream' &> /dev/null; then
           echo -e "${COL_YELLOW}>>>${COL_RESET} Adding remote upstream ${upstream}"
-          git remote add upstream ${upstream}
+          git remote add upstream "${upstream}"
         fi
       fi
       echo -ne "$COL_GREY"
@@ -61,14 +61,14 @@ while [ ! -z "${repos}" ]; do
       cd ..
     fi
     if [[ ! -z $upstream ]]; then
-      cd ${repo}
+      cd "${repo}" || exit
       echo -e "${COL_BLUE}>>>${COL_RESET} Status:"
       AHEAD=$(git rev-list upstream/master..origin/master --count)
       BEHIND=$(git rev-list origin/master..upstream/master --count)
       echo -e "    This branch is ${COL_YELLOW}${AHEAD}${COL_RESET} commits ahead and ${COL_RED}${BEHIND}${COL_RESET} commits behind of Upstream."
-      if [ ${BEHIND} -ne 0 ]; then
+      if [ "${BEHIND}" -ne 0 ]; then
         echo -e "    ${COL_RED}This branch needs rebasing${COL_RESET}"
-        if [ ${AHEAD} -eq 0 ]; then
+        if [ "${AHEAD}" -eq 0 ]; then
           echo -e "    ${COL_YELLOW}Automatic rebasing...${COL_RESET}"
           git rebase upstream/master
           git push

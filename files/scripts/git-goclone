@@ -15,7 +15,7 @@ function usage {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) <url> [<flags>]"
+  echo "Usage: $(basename "$0") <url> [<flags>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                      display help'
@@ -30,7 +30,7 @@ function usage {
   exit 1
 }
 
-OPTS=$(getopt -o hduw: --long help,debug,workspace: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hduw: --long help,debug,workspace: -n "$(basename "$0")" -- "$@")
 
 [ $? != 0 ] && usage "Terminating..." >&2
 
@@ -57,7 +57,7 @@ url=${1}
 
 if [[ "$url" == "help" ]]; then usage ; fi
 
-if [ -z $url ] ; then
+if [ -z "$url" ] ; then
   usage "You need to provide a repo URL.\nTerminating...\n" >&2
 fi
 
@@ -93,10 +93,10 @@ if [[ "${DEBUG}" == "true" ]]; then
 fi
 
 if [ -d "${path}" ] && [[ "${UPDATE}" == "true" ]]; then
-  cd "${path}"
+  cd "${path}" || exit
   git pull
-  cd "${cdir}"
+  cd "${cdir}" || exit
 else
   mkdir -p "${path}"
-  git clone --recurse-submodules ${url} "${path}"
+  git clone --recurse-submodules "${url}" "${path}"
 fi

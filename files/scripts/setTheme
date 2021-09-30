@@ -5,7 +5,7 @@ THEME_DIR="${HOME}/.alacritty-theme/themes"
 if [[ "${TERMINAL_EMULATOR}" =~ kitty ]]; then
   THEME_DIR="${HOME}/.kitty-themes/themes"
 fi
-THEME_NAME=$(ls -1 ${THEME_DIR} | fzf)
+THEME_NAME=$(ls -1 "${THEME_DIR}" | fzf)
 
 if [[ "${TERMINAL_EMULATOR}" =~ kitty ]]; then
   mkdir -p "${HOME}/.config/kitty"

@@ -20,7 +20,7 @@ function usage {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) <project> [<os>] [<arch>] [<binary>] [<flags>]"
+  echo "Usage: $(basename "$0") <project> [<os>] [<arch>] [<binary>] [<flags>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -44,19 +44,19 @@ function install() {
 }
 
 extract () {
-  if [ -f $1 ] ; then
+  if [ -f "$1" ] ; then
     case $1 in
-      *.tar.bz2)   tar xvjf $1    ;;
-      *.tar.gz)    tar xvzf $1    ;;
-      *.bz2)       bunzip2 $1     ;;
-      *.rar)       rar x $1       ;;
-      *.gz)        gunzip $1      ;;
-      *.tar)       tar xvf $1     ;;
-      *.tbz2)      tar xvjf $1    ;;
-      *.tgz)       tar xvzf $1    ;;
-      *.zip)       unzip $1       ;;
-      *.Z)         uncompress $1  ;;
-      *.7z)        7z x $1        ;;
+      *.tar.bz2)   tar xvjf "$1"    ;;
+      *.tar.gz)    tar xvzf "$1"    ;;
+      *.bz2)       bunzip2 "$1"     ;;
+      *.rar)       rar x "$1"       ;;
+      *.gz)        gunzip "$1"      ;;
+      *.tar)       tar xvf "$1"     ;;
+      *.tbz2)      tar xvjf "$1"    ;;
+      *.tgz)       tar xvzf "$1"    ;;
+      *.zip)       unzip "$1"       ;;
+      *.Z)         uncompress "$1"  ;;
+      *.7z)        7z x "$1"        ;;
       *)           echo "don't know '$1'..." ;;
     esac
   else
@@ -68,15 +68,15 @@ function installFromGithub() {
   project="${1}"
   os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
   arch="${3:-64}"
-  name="${4:-$(basename ${project})}"
+  name="${4:-$(basename "${project}")}"
 
   if [[ "${os}" == "darwin" ]]; then
     os='(darwin|osx|macos)'
   fi
 
-  mkdir -p ${install_to}
+  mkdir -p "${install_to}"
 
-  url=$(curl -sL https://api.github.com/repos/${project}/releases/latest | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\";\"i\") and (test(\"sha[0-9]+\";\"i\")|not)) | .browser_download_url?" | grep -Ev '(md5|sha[0-9]+)$')
+  url=$(curl -sL https://api.github.com/repos/"${project}"/releases/latest | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\";\"i\") and (test(\"sha[0-9]+\";\"i\")|not)) | .browser_download_url?" | grep -Ev '(md5|sha[0-9]+)$')
   if [[ $(echo -e "${url}" | wc -l) -gt 1 ]]; then
     [[ "${DEBUG}" == "true" ]] && echo -e "Got multiple URLs: \n${url}"
     url=$(echo -e "${url}" | grep -E "${project}.*${name}" | head -n 1)
@@ -108,14 +108,14 @@ function installFromGithub() {
     [[ "${DEBUG}" == "true" ]] && echo -e "files found: \n${files}"
     if [[ $(echo "${files}" | wc -l) -gt 1 ]]; then
       for f in ${files}; do
-        install ${f}
+        install "${f}"
       done
     else
-      mv ${files} ${name}
-      install ${name}
+      mv "${files}" "${name}"
+      install "${name}"
     fi
-    rm ${artifact}
-    rm -rf ${artifact_name}
+    rm "${artifact}"
+    rm -rf "${artifact_name}"
     rm -rf ${artifact_folder}
   else
     curl -sLo "${name}" "${url}"
@@ -125,20 +125,20 @@ function installFromGithub() {
 
 function getFromRawGithub() {
   project="${1}"
-  name="${2:-$(basename ${project})}"
+  name="${2:-$(basename "${project}")}"
   tag="${3:-master}"
   if [[ "${tag}" == "latest" ]]; then
-    tag=$(curl -sL https://api.github.com/repos/${project}/releases/latest | jq -r '.tag_name' | tr -d 'v' )
+    tag=$(curl -sL https://api.github.com/repos/"${project}"/releases/latest | jq -r '.tag_name' | tr -d 'v' )
   fi
 
   url="https://raw.githubusercontent.com/${project}/${tag}/${name// /%20}"
 
-  curl -sLo "$(basename ${name})" "${url}"
+  curl -sLo "$(basename "${name}")" "${url}"
 }
 
 function installFromRawGithub() {
   project="${1}"
-  name="${2:-$(basename ${project})}"
+  name="${2:-$(basename "${project}")}"
   tag="${3:-master}"
   getFromRawGithub "${project}" "${name}" "${tag}"
   install "${name}"
@@ -146,14 +146,14 @@ function installFromRawGithub() {
 
 function pipeBashFromRawGithub() {
   project="${1}"
-  name="${2:-$(basename ${project})}"
+  name="${2:-$(basename "${project}")}"
   tag="${3:-master}"
   getFromRawGithub "${project}" "${name}" "${tag}"
-  bash ${name}
-  rm ${name}
+  bash "${name}"
+  rm "${name}"
 }
 
-OPTS=$(getopt -o hdrt:i: --long help,debug,raw,tag:,install-to: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdrt:i: --long help,debug,raw,tag:,install-to: -n "$(basename "$0")" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
@@ -176,17 +176,17 @@ mkdir -p "${install_to}"
 # Allow the file to be sourced without excuting this part
 if [ "$0" = "$BASH_SOURCE" ] ; then
   project="${1}"
-  if [ -z ${project} ] ; then
+  if [ -z "${project}" ] ; then
     usage "You need to provide a project.\nTerminating...\n" >&2
   fi
 
   if [[ "${RAW}" == "true" ]]; then
-    name="${2:-$(basename ${project})}"
+    name="${2:-$(basename "${project}")}"
     installFromRawGithub "${project}" "${name}" "${tag}"
   else
     os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
     arch="${3:-64}"
-    name="${4:-$(basename ${project})}"
+    name="${4:-$(basename "${project}")}"
     installFromGithub "${project}" "${os}" "${arch}" "${name}"
   fi
 fi

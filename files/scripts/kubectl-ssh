@@ -18,7 +18,7 @@ function usage {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>] <node> [<command>]"
+  echo "Usage: $(basename "$0") [<flags>] <node> [<command>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -33,7 +33,7 @@ function nodeIP() {
   kubectl get no "${1}" -o json | jq -r '.status.addresses[] | select(.type=="'${IP}'") | .address'
 }
 
-OPTS=$(getopt -o hdeu: --long help,debug,external-ip,user: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdeu: --long help,debug,external-ip,user: -n "$(basename "$0")" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
@@ -72,7 +72,7 @@ if [ "$0" = "$BASH_SOURCE" ] ; then
   NODE=$(nodeIP "${NODE}")
 
   if [[ "${DEBUG}" == "true" ]]; then
-    echo 'Executing: ssh -o StrictHostKeyChecking=no -l "'${USER}'" "'${NODE}'"' "${@}"
+    echo 'Executing: ssh -o StrictHostKeyChecking=no -l "'"${USER}"'" "'"${NODE}"'"' "${@}"
   fi
   ssh -o StrictHostKeyChecking=no -l "${USER}" "${NODE}" ${@}
 fi

@@ -28,18 +28,18 @@ url="https://api.bitbucket.org/2.0/repositories/${team}/?q=project.key=\"${proj}
 repos=$(curl -s -u "${user}:${pass}" "${url}&page=${page}" | jq -r '.values[].links.clone[] | select(.name | contains("ssh")) | .href')
 
 while [ ! -z "${repos}" ]; do
-  for repo in $(echo ${repos}); do
+  for repo in $(echo "${repos}"); do
     path=$(basename "${repo}" | cut -d'.' -f1)
     echo -e "${COL_BLUE}-=$path=-${COL_RESET}"
-    if [ -d $path ]; then
+    if [ -d "$path" ]; then
       echo -e " ${COL_YELLOW}>>>${COL_RESET} Found existing repo pulling latest changes"
-      cd $path
+      cd "$path" || exit
       git pull
-      cd $cdir
+      cd "$cdir" || exit
     else
       echo -e " ${COL_RED}>>>${COL_RESET} Repo not found starting clone process"
-      mkdir -p $path
-      git clone $repo $path
+      mkdir -p "$path"
+      git clone "$repo" "$path"
     fi
   done
   page=$((page+1))

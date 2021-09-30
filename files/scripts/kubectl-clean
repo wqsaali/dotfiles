@@ -10,7 +10,7 @@ function usage() {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>]"
+  echo "Usage: $(basename "$0") [<flags>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -44,9 +44,9 @@ fi
 
 # kubectl get po -A --no-headers | grep -v Running | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete ${FORCE} po
 # kubectl get po -A --field-selector 'status.phase!=Running' -o json | kubectl delete ${FORCE} -f -
-kubectl delete pods --field-selector 'status.phase!=Running' -A ${FORCE}
-kubectl get rs -A --no-headers | grep -E '0\s+0\s+0' | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete rs ${FORCE}
-kubectl get job -A -o=go-template='{{range .items}}{{if or .status.succeeded .status.failed}}{{.metadata.name}} -n {{.metadata.namespace}}{{"\n"}}{{end}}{{end}}' | xargs -L1 -r kubectl delete job ${FORCE}
+kubectl delete pods --field-selector 'status.phase!=Running' -A "${FORCE}"
+kubectl get rs -A --no-headers | grep -E '0\s+0\s+0' | awk '{print $2 " -n " $1}' | xargs -L1 -r kubectl delete rs "${FORCE}"
+kubectl get job -A -o=go-template='{{range .items}}{{if or .status.succeeded .status.failed}}{{.metadata.name}} -n {{.metadata.namespace}}{{"\n"}}{{end}}{{end}}' | xargs -L1 -r kubectl delete job "${FORCE}"
 
 # Also clean the nodes
 if [[ "${ALL}" == "true" ]] && [ -x "$(command -v kubectl-pssh)" ]; then

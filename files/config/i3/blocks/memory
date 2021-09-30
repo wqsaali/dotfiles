@@ -1,13 +1,13 @@
 #!/bin/sh
 
-if [ ${BLOCK_BUTTON} -eq 1 ]; then
+if [ "${BLOCK_BUTTON}" -eq 1 ]; then
   i3-sensible-terminal -e 'htop'
 fi
 
 TYPE="${1:-mem}"
 ALERT_MAX="${2:-80}"
 
-awk -v type=$TYPE -v alert_max=$ALERT_MAX '
+awk -v type="$TYPE" -v alert_max="$ALERT_MAX" '
 /^MemTotal:/ {
         mem_total=$2
 }

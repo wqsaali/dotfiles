@@ -13,16 +13,16 @@ export COL_MAGENTA=$ESC_SEQ"35;01m"
 export COL_CYAN=$ESC_SEQ"36;01m"
 export COL_GREY=$ESC_SEQ"38;5;245m"
 
-branch=`git rev-parse --abbrev-ref HEAD`
+branch=$(git rev-parse --abbrev-ref HEAD)
 
 git for-each-ref --format='%(refname:short) %(upstream:short)' refs/heads | \
 while read local upstream; do
 
     # Use master if upstream branch is empty
-    [ -z $upstream ] && upstream=master
+    [ -z "$upstream" ] && upstream=master
 
-    ahead=`git rev-list ${upstream}..${local} --count`
-    behind=`git rev-list ${local}..${upstream} --count`
+    ahead=$(git rev-list ${upstream}.."${local}" --count)
+    behind=$(git rev-list "${local}"..${upstream} --count)
 
     if [[ $local == $branch ]]; then
         asterisk=*

@@ -2,49 +2,49 @@
 
 function backupDotFiles() {
   mkdir -p files
-  cp ${HOME}/.bash/git_prompt.sh files/shell/bash/git_prompt.sh
-  cp ${HOME}/.bash/shell_prompt.sh files/shell/bash/shell_prompt.sh
-  cp ${HOME}/.bashrc files/shell/bash/bashrc
-  cp ${HOME}/.bash_profile files/shell/bash/bash_profile
-  cp ${HOME}/.variables files/shell/variables
-  cp ${HOME}/.aliases files/shell/aliases
-  cp -r $HOME/.aliases.d/* files/shell/aliases.d/
-  cp ${HOME}/.zshrc files/shell/zsh/zshrc
-  cp ${HOME}/.p10k.zsh files/shell/zsh/p10k.zsh
+  cp "${HOME}/.bash/git_prompt.sh" files/shell/bash/git_prompt.sh
+  cp "${HOME}/.bash/shell_prompt.sh" files/shell/bash/shell_prompt.sh
+  cp "${HOME}/.bashrc" files/shell/bash/bashrc
+  cp "${HOME}/.bash_profile" files/shell/bash/bash_profile
+  cp "${HOME}/.variables" files/shell/variables
+  cp "${HOME}/.aliases" files/shell/aliases
+  cp -r "${HOME}/.aliases.d"/* files/shell/aliases.d/
+  cp "${HOME}/.zshrc" files/shell/zsh/zshrc
+  cp "${HOME}/.p10k.zsh" files/shell/zsh/p10k.zsh
   cp /etc/bash_completion.d/bash_aliases_completion files/shell/bash/bash_aliases_completion
-  cp ${HOME}/.profile files/shell/profile
-  cp ${HOME}/.git-prompt-colors.sh files/shell/bash/git-prompt-colors.sh
-  cp ${HOME}/.tmux.conf.local files/shell/tmux.conf.local
-  cp ${HOME}/.screenrc files/shell/screenrc
-  cp ${HOME}/.vimrc files/vim/vimrc
-  cp ${HOME}/.vimrc.local files/vim/vimrc.local
-  cp ${HOME}/.vim/coc-settings.json files/vim/
-  cp -r ${HOME}/.vim/ft* files/vim/
-  cp ${HOME}/.atom/*.cson files/atom/
-  cp ${HOME}/.atom/*.coffee files/atom/
-  cp ${HOME}/.atom/*.less files/atom/
-  cp ${HOME}/.atom/*.json files/atom/
-  cp ${HOME}/.config/tilda/config_0 files/config/tilda/config_0
-  cp ${HOME}/.config/terminator/config files/config/terminator/config
-  cp ${HOME}/.config/alacritty/alacritty.yml files/config/alacritty.yml
-  cp ${HOME}/.config/starship.toml files/config/starship.toml
-  cp -r ${HOME}/.config/pistol files/config/
-  cp -r ${HOME}/.config/kitty/* files/config/kitty/
-  cp -r ${HOME}/.config/lf/* files/config/lf/
-  cp -r ${HOME}/.config/i3/* files/config/i3/
-  cp -r ${HOME}/.hammerspoon/* files/hammerspoon/
-  cp ${HOME}/.slate files/slate/slate
-  cp ${HOME}/.slate.js files/slate/slate.js
-  cp ${HOME}/.chunkwmrc files/chunkwm/chunkwmrc
-  cp ${HOME}/.yabairc files/yabai/yabairc
-  cp ${HOME}/.skhdrc files/yabai/skhdrc
-  cp ${HOME}/.ptpython/config.py files/ptpython.py
-  cp ${HOME}/.pipecolor.toml files/pipecolor.toml
+  cp "${HOME}/.profile" files/shell/profile
+  cp "${HOME}/.git-prompt-colors.sh" files/shell/bash/git-prompt-colors.sh
+  cp "${HOME}/.tmux.conf.local" files/shell/tmux.conf.local
+  cp "${HOME}/.screenrc" files/shell/screenrc
+  cp "${HOME}/.vimrc" files/vim/vimrc
+  cp "${HOME}/.vimrc.local" files/vim/vimrc.local
+  cp "${HOME}/.vim/coc-settings.json" files/vim/
+  cp -r "${HOME}/.vim/ft"* files/vim/
+  cp "${HOME}/.atom/"*.cson files/atom/
+  cp "${HOME}/.atom/"*.coffee files/atom/
+  cp "${HOME}/.atom/"*.less files/atom/
+  cp "${HOME}/.atom/"*.json files/atom/
+  cp "${HOME}/.config/tilda/config_0" files/config/tilda/config_0
+  cp "${HOME}/.config/terminator/config" files/config/terminator/config
+  cp "${HOME}/.config/alacritty/alacritty.yml" files/config/alacritty.yml
+  cp "${HOME}/.config/starship.toml" files/config/starship.toml
+  cp -r "${HOME}/.config/pistol" files/config/
+  cp -r "${HOME}/.config/kitty/"* files/config/kitty/
+  cp -r "${HOME}/.config/lf/"* files/config/lf/
+  cp -r "${HOME}/.config/i3/"* files/config/i3/
+  cp -r "${HOME}/.hammerspoon/"* files/hammerspoon/
+  cp "${HOME}/.slate" files/slate/slate
+  cp "${HOME}/.slate.js" files/slate/slate.js
+  cp "${HOME}/.chunkwmrc" files/chunkwm/chunkwmrc
+  cp "${HOME}/.yabairc" files/yabai/yabairc
+  cp "${HOME}/.skhdrc" files/yabai/skhdrc
+  cp "${HOME}/.ptpython/config.py" files/ptpython.py
+  cp "${HOME}/.pipecolor.toml" files/pipecolor.toml
 }
 
 function backupTermux() {
   pkg list-installed | cut -d '/' -f1 | grep -v '\.\.\.'| sort -u > files/pkgs/pkg.lst
-  cp -r ${HOME}/.termux/* files/termux/
+  cp -r "${HOME}/.termux/"* files/termux/
 }
 
 function backupIterm() {
@@ -60,7 +60,7 @@ function restoreIterm() {
 function exportItermColors() {
   cdir=$(pwd)
   mkdir -p files/iterm
-  cd files/iterm
+  cd files/iterm || exit
   # rm -f *
   /usr/libexec/PlistBuddy -c "print :'Custom Color Presets'" \
     ~/Library/Preferences/com.googlecode.iterm2.plist | grep '^    \w' | \
@@ -75,44 +75,44 @@ function exportItermColors() {
         .gsub(/}\\n/, %Q(};\n))" > "$THEME.itermcolors"
   done < list.txt
   rm list.txt
-  cd ${cdir}
+  cd "${cdir}" || exit
 }
 
 function importItermColors() {
   cdir=$(pwd)
-  cd files/iterm
+  cd files/iterm || exit
   for f in *.itermcolors; do
     THEME=$(basename "${f%.*}")
     echo "importing ${THEME}"
     defaults write -app iTerm 'Custom Color Presets' -dict-add "$THEME" "$(cat "${f}")"
   done
-  cd ${cdir}
+  cd "${cdir}" || exit
 }
 
 function backupAtomPackages() {
   apm list --installed --bare | cut -d'@' -f1 | grep -vE '^$' > files/pkgs/atom-packages.lst
-  cp ${HOME}/.atom/*.cson files/atom/
-  cp ${HOME}/.atom/*.coffee files/atom/
-  cp ${HOME}/.atom/*.less files/atom/
-  cp ${HOME}/.atom/*.json files/atom/
+  cp "${HOME}"/.atom/*.cson files/atom/
+  cp "${HOME}"/.atom/*.coffee files/atom/
+  cp "${HOME}"/.atom/*.less files/atom/
+  cp "${HOME}"/.atom/*.json files/atom/
 }
 
 function backupVscode() {
   code --list-extensions > files/pkgs/vscode-packages.lst
-  settings="$HOME/.config/Code/User"
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    settings="$HOME/Library/Application Support/Code/User"
+  settings="${HOME}/.config/Code/User"
+  if [[ "${OSTYPE}" == "darwin"* ]]; then
+    settings="${HOME}/Library/Application Support/Code/User"
   fi
-  cp -r "$settings"/* files/vscode/
+  cp -r "${settings}"/* files/vscode/
 }
 
 function backupPPAs() {
   # Get list of PPAs
-  for APT in `find /etc/apt/ -name \*.list`; do
-      grep -Po "(?<=^deb\s).*?(?=#|$)" $APT | while read ENTRY ; do
-          HOST=`echo $ENTRY | cut -d/ -f3`
-          USER=`echo $ENTRY | cut -d/ -f4`
-          PPA=`echo $ENTRY | cut -d/ -f5`
+  for APT in $(find /etc/apt/ -name \*.list); do
+      grep -Po "(?<=^deb\s).*?(?=#|$)" "$APT" | while read ENTRY ; do
+          HOST=$(echo "$ENTRY" | cut -d/ -f3)
+          USER=$(echo "$ENTRY" | cut -d/ -f4)
+          PPA=$(echo "$ENTRY" | cut -d/ -f5)
           if [ "ppa.launchpad.net" = "$HOST" ]; then
               echo "ppa:$USER/$PPA" >> files/pkgs/ppa.lst
           else
@@ -149,7 +149,7 @@ function backupHomeDir() {
     echo "$1 is not a valid directory"
   fi
   FOLDER=$(echo "$1"|sed 's/\/$//g')
-  sudo rsync -aP --exclude-from=files/rsync-homedir-excludes.txt ${HOME}/ $FOLDER/
+  sudo rsync -aP --exclude-from=files/rsync-homedir-excludes.txt "${HOME}/" "${FOLDER}/"
 }
 
 function restoreRepos() {
@@ -159,7 +159,7 @@ function restoreRepos() {
       [[ "${REPO}" =~ ^#.*$ ]] && continue
       [[ "${REPO}" =~ ^\\s*$ ]] && continue
       sudo apt-add-repository "${REPO}"
-    done < files/pkgs/${LST}
+    done < "files/pkgs/${LST}"
   done
   sudo apt update
 }
@@ -190,7 +190,7 @@ case "$1" in
     backupTermux
     ;;
   "homedir" | "home" )
-    backupHomeDir $2
+    backupHomeDir "$2"
     ;;
  "iterm" | "iterm2" )
    backupIterm

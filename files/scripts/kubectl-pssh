@@ -21,7 +21,7 @@ function usage {
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>] <command>"
+  echo "Usage: $(basename "$0") [<flags>] <command>"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -55,10 +55,10 @@ function inventory() {
       nodes=$(echo "$nodes" | jq -r '.[] | select(.name|contains("'${NODES}'")) | "app@"+.ip')
       ;;
   esac
-  echo -ne ${nodes} | tr -s '[[:space:]]' '\n'
+  echo -ne "${nodes}" | tr -s '[[:space:]]' '\n'
 }
 
-OPTS=$(getopt -o hdef:u:t: --long help,debug,external-ip,filter:,user:,timeout: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdef:u:t: --long help,debug,external-ip,filter:,user:,timeout: -n "$(basename "$0")" -- "$@")
 
 if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
 
@@ -95,17 +95,17 @@ if [ "$0" = "$BASH_SOURCE" ] ; then
   fi
 
   tmpfile=$(mktemp /tmp/pssh_hosts.XXXXXX)
-  inventory > ${tmpfile}
-  sed -i '/^[[:blank:]]*$/ d' ${tmpfile}
+  inventory > "${tmpfile}"
+  sed -i '/^[[:blank:]]*$/ d' "${tmpfile}"
   if [[ "${DEBUG}" == "true" ]]; then
     echo "Hosts list:"
-    cat ${tmpfile}
+    cat "${tmpfile}"
     echo ''
   fi
-  if ! [ -s ${tmpfile} ]; then
+  if ! [ -s "${tmpfile}" ]; then
     echo -e "No hosts found!\n" >&2
     exit 1
   fi
-  pssh -O StrictHostKeyChecking=no -t ${TIMEOUT} -i -h ${tmpfile} "${CMD}"
-  rm ${tmpfile}
+  pssh -O StrictHostKeyChecking=no -t "${TIMEOUT}" -i -h "${tmpfile}" "${CMD}"
+  rm "${tmpfile}"
 fi

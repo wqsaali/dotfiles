@@ -9,7 +9,7 @@ MICRO_DEVICE="/dev/snd/pcmC*D*c"
 symbol=${MIC_SYMBOL}
 color=${OFF_COLOR}
 
-if [ "$(fuser ${MICRO_DEVICE})" != "" ]; then
+if [ "$(fuser "${MICRO_DEVICE}")" != "" ]; then
   symbol=${MIC_SYMBOL}
   color=${ON_COLOR}
 fi

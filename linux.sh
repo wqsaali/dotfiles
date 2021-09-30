@@ -8,8 +8,8 @@ fi
 
 INSTALLDIR=$(pwd)
 
-source ${dotfiles_dir}/files/scripts/hubinstall
-source ${dotfiles_dir}/files/scripts/hashinstall
+source "${dotfiles_dir}/files/scripts/hubinstall"
+source "${dotfiles_dir}/files/scripts/hashinstall"
 
 fancy_echo() {
   # red=`tput setaf 1`
@@ -21,7 +21,7 @@ fancy_echo() {
   if [ ! -z "$2" ]; then
     COLOR=$2
   fi
-  tput setaf $COLOR
+  tput setaf "$COLOR"
   echo "$1"
   tput sgr0
 }
@@ -40,21 +40,21 @@ installDocker() {
   sudo rm -rf /etc/default/docker
   sudo apt install -y docker-ce
   sudo service docker start
-  sudo usermod -aG docker ${USER}
+  sudo usermod -aG docker "${USER}"
 }
 
 installTerragrunt() {
   os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
   arch="${3:-64}"
-  installFromGithub 'gruntwork-io/terragrunt' ${os} ${arch}
+  installFromGithub 'gruntwork-io/terragrunt' "${os}" "${arch}"
 }
 
 installKubernetes() {
-  cd ${HOME}/.local/bin/
+  cd "${HOME}/.local/bin/" || exit
   curl -sS https://get.k8s.io | bash
   rm -rf kubernetes.tar.gz
   ln -s ~/.local/bin/kubernetes/client/bin/* ~/.local/bin/
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 }
 
 installGnomeTerminalProfiles() {
@@ -76,15 +76,15 @@ installi3wm() {
     sudo npm i -g i3-alt-tab
   fi
 
-  mkdir -p ${HOME}/.config/i3
-  cp -r files/config/i3/* ${HOME}/.config/i3/
+  mkdir -p "${HOME}"/.config/i3
+  cp -r files/config/i3/* "${HOME}/.config/i3/"
 
   # if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
   #   sudo cp files/nautilus-i3 /usr/bin/
   # fi
 
-  if [ ! -s ${HOME}/.i3 ]; then
-    ln -s ${HOME}/.config/i3 ${HOME}/.i3
+  if [ ! -s "${HOME}/.i3" ]; then
+    ln -s "${HOME}/.config/i3" "${HOME}/.i3"
   fi
 }
 
@@ -164,26 +164,26 @@ installPackages() {
 }
 
 installFonts() {
-  mkdir -p ${HOME}/.fonts/
+  mkdir -p "${HOME}"/.fonts/
 
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/1.0.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
-  mv *.otf ${HOME}/.fonts/
+  mv *.otf "${HOME}/.fonts/"
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
   sudo mv PowerlineSymbols.otf /usr/share/fonts/
   wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
   sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
   wget https://github.com/powerline/fonts/raw/master/Terminus/PSF/ter-powerline-v16b.psf.gz
   sudo mv ter-powerline-v16b.psf.gz /usr/share/consolefonts/
-  if ! [ -d ${HOME}/.fonts/ubuntu-mono-powerline-ttf ]; then
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-powerline-ttf
+  if ! [ -d "${HOME}/.fonts/ubuntu-mono-powerline-ttf" ]; then
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git "${HOME}/.fonts/ubuntu-mono-powerline-ttf"
   else
-    cd ${HOME}/.fonts/ubuntu-mono-powerline-ttf
+    cd "${HOME}/.fonts/ubuntu-mono-powerline-ttf" || exit
     git pull
-    cd ${INSTALLDIR}
+    cd "${INSTALLDIR}" || exit
   fi
   sudo fc-cache -vf
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 }
 
 installDotFiles() {
@@ -196,17 +196,17 @@ installDotFiles() {
     sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt update && sudo apt install hh
   fi
 
-  mkdir -p ${HOME}/.config
+  mkdir -p "${HOME}"/.config
 
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 
-  cp -r files/config/i3/* ${HOME}/.config/i3/
-  if [ ! -s ${HOME}/.i3 ]; then
-    ln -s ${HOME}/.config/i3 ${HOME}/.i3
+  cp -r files/config/i3/* "${HOME}/.config/i3/"
+  if [ ! -s "${HOME}"/.i3 ]; then
+    ln -s "${HOME}"/.config/i3 "${HOME}/.i3"
   fi
 
-  cp -r files/config/tilda/* ${HOME}/.config/tilda/
-  cp -r files/config/terminator/* ${HOME}/.config/terminator/
+  cp -r files/config/tilda/* "${HOME}/.config/tilda/"
+  cp -r files/config/terminator/* "${HOME}/.config/terminator/"
 
   sudo cp files/shell/bash/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
@@ -215,7 +215,7 @@ installDotFiles() {
   sudo mv kitchen-completion /etc/bash_completion.d/
   sudo chown root:root /etc/bash_completion.d/*
 
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 }
 
 installAll() {
@@ -230,7 +230,7 @@ case "$1" in
     installPackages
     ;;
   "hashicorp")
-    installHashicorp $2
+    installHashicorp "$2"
     ;;
   "dotfiles")
     installDotFiles

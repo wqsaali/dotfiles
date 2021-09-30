@@ -10,7 +10,7 @@ fi
 # If not running interactively, don't do anything
 case $- in
     *i*)
-      [ -x "$(command -v tmux)" ] && [[ ! $TERM =~ screen ]] && [ -z $TMUX ]  && [ -z $VIMRUNTIME ]&& exec tmux
+      [ -x "$(command -v tmux)" ] && [[ ! $TERM =~ screen ]] && [ -z "$TMUX" ]  && [ -z "$VIMRUNTIME" ]&& exec tmux
       ;;
       *) return;;
 esac
@@ -192,7 +192,7 @@ fi
 # ~/.aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-[ -f $HOME/.aliases ] && source ${HOME}/.aliases
+[ -f "$HOME"/.aliases ] && source "${HOME}/.aliases"
 
 # Auto completion
 # enable programmable completion features (you don't need to enable
@@ -220,8 +220,8 @@ fi
 [ -x "$(command -v thefuck)" ] && eval $(thefuck --alias)
 
 if [ -n "${HOMEBREW_PREFIX}" ]; then
-  [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh ]] || source ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh
-  [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash ]] || source ${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash
+  [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh ]] || source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+  [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash ]] || source "${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
 fi
 
 [ "$OSTYPE" == "linux-gnu" ] && source /etc/profile.d/vte-2.91.sh
@@ -235,8 +235,8 @@ fi
 export KUBE_PS1_NAMESPACE_FUNCTION=get_k8s_ns
 # bash-git-prompt configuration - https://github.com/magicmonty/bash-git-prompt:
 GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
-source ${HOME}/.bash/bash-git-prompt/gitprompt.sh
-source ${HOME}/.bash/kube-ps1/kube-ps1.sh
+source "${HOME}/.bash/bash-git-prompt/gitprompt.sh"
+source "${HOME}/.bash/kube-ps1/kube-ps1.sh"
 
 # source ~/.bash/git_prompt.sh
 
