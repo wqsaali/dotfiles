@@ -10,6 +10,7 @@ derailed/k9s
 derailed/popeye
 egison/egison
 eth-p/software
+gardener/tap
 habitat-sh/habitat
 hashicorp/tap
 homebrew/cask-drivers

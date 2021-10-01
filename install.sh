@@ -215,7 +215,7 @@ installNpms() {
 
 installGoPkgs() {
   # goinstall "${PKG}"
-  installPkgList "go get -u" files/pkgs/go.lst
+  installPkgList "go install" <(sed 's|$|@latest|g' files/pkgs/go.lst)
 }
 
 cleanGoPkgs() {
