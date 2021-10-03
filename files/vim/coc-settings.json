@@ -134,7 +134,7 @@
     "json",
     "yaml"
   ],
-  "coc.preferences.rootPatterns": [".git", ".hg", ".projections.json", "requirements.txt", "setup.cfg", "package.json", "go.mod"],
+  "coc.preferences.rootPatterns": [".git", ".hg", ".projections.json", "requirements.txt", "setup.cfg", "package.json", "go.mod", "Makefile"],
   "git.enableGlobalStatus": true,
   "git.addGBlameToVirtualText": false,
   "git.enableGutters": true,

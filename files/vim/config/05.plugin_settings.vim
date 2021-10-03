@@ -103,6 +103,14 @@
 
   " }}}
 
+  " vim-rooter {{{
+  " if has('autocmd')
+  "   " Set vim current working directory to the current project root
+  "   autocmd VimEnter * if exists(":Rooter") | au BufEnter * :Rooter
+  " endif
+  let g:rooter_patterns = ['.git', '.hg', '.projections.json', 'requirements.txt', 'setup.cfg', 'package.json', 'go.mod', 'Makefile']
+  " }}}
+
   " lf {{{
   " let g:lf_replace_netrw = 1 " open lf when vim open a directory
   let g:lf_map_keys = 0

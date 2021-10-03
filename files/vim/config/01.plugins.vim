@@ -17,12 +17,14 @@
   " endif
 
   Plug 'tpope/vim-sensible'
+  Plug 'airblade/vim-rooter'
   Plug 'editorconfig/editorconfig-vim'
 
   Plug 'breuckelen/vim-resize'
   Plug 't9md/vim-choosewin'
 
   Plug 'benmills/vimux'
+  Plug 'benmills/vimux-golang'
 
   Plug 'wincent/terminus'
   Plug 'kassio/neoterm'

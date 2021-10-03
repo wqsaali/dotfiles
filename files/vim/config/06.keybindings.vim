@@ -154,9 +154,11 @@
   noremap <space>v :Vista!!<CR>
 
   " Vimux Aliases
-  command -nargs=+ Run VimuxRunCommand <args>
-  command -nargs=+ Prompt VimuxPromptCommand <args>
+  command -nargs=+ Run :call VimuxRunCommand("<args>")
+  command -nargs=* Prompt :call VimuxPromptCommand("<args>")
+  command -nargs=* RootRunner :call VimuxRunCommand("cd " . FindRootDirectory().";clear;" . "<args>")
   command CloseRunner VimuxCloseRunner
+  command ToggleRunner VimuxTogglePane
   command RunAgain VimuxRunLastCommand
 
   " Clap Maps to Ctrl-p {{{
