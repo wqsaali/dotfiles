@@ -16,7 +16,7 @@ RAW=false
 DEBUG=false
 
 function usage {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi

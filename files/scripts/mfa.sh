@@ -40,7 +40,7 @@ if [ -z "$profile" ]; then echo "no profile specified"; exit 1; fi
 
 resp=$(aws sts get-caller-identity --profile "${temp_profile}" | jq '.UserId')
 
-if [ ! -z "$resp" ]; then
+if [ -n "$resp" ]; then
   echo '{
     "Version": 1,
     "AccessKeyId": "'"$(aws configure get aws_access_key_id --profile "${temp_profile}")"'",

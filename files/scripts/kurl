@@ -22,7 +22,7 @@ NS=kube-system
 OUTPUT="json"
 
 function usage() {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
@@ -93,7 +93,7 @@ case $OUTPUT in
 esac
 
 URI=${1}
-[ ! -z "${URI}" ] || usage
+[ -n "${URI}" ] || usage
 shift
 
 if [[ "$OUTPUT" == "stats" ]]; then

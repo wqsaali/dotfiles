@@ -15,7 +15,7 @@ DEBUG=false
 BUILD=false
 
 function usage {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
@@ -63,9 +63,9 @@ while true; do
 done
 
 # Allow the file to be sourced without excuting this part
-if [ "$0" = "$BASH_SOURCE" ] ; then
+if [ "$0" = "$BASH_SOURCE" ]; then
   package="${1}"
-  if [ -z "${package}" ] ; then
+  if [ -z "${package}" ]; then
     usage "You need to provide a package.\nTerminating...\n" >&2
   fi
 

@@ -9,7 +9,7 @@
 # worldtime -t US/Pacific # convert current localtime to US/Pacific
 
 function usage {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi

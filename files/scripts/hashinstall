@@ -13,7 +13,7 @@ version=-1
 DEBUG=false
 
 function usage {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
@@ -59,7 +59,7 @@ function installHashicorp() {
   fi
 
   if [ -z "$1" ] || [[ "$1" == "list" ]]; then
-    if [ ! -z "${2}" ]; then
+    if [ -n "${2}" ]; then
       echo 'Available versions:'
       # List available packages:
       curl -s https://releases.hashicorp.com/index.json | jq ".${2}.versions | keys[]"
