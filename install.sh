@@ -186,6 +186,7 @@ installDepcon() {
 }
 
 installAsdfPlugins() {
+  cp files/asdfrc "${HOME}/.asdfrc"
   installPkgList "asdf plugin add" files/pkgs/asdf.lst
 }
 
@@ -541,6 +542,7 @@ installDotFiles() {
     cp -r files/config/"${dir##*/}"/* "${HOME}/.config/${dir##*/}/"
   done
 
+  cp files/asdfrc "${HOME}/.asdfrc"
   cp files/config/kubie.yaml "${HOME}/.kube/kubie.yaml"
   cp files/config/starship.toml "${HOME}/.config/starship.toml"
   cp files/shell/screenrc "${HOME}/.screenrc"

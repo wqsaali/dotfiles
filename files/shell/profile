@@ -105,11 +105,11 @@ fi
 # #   done
 # fi
 
-if [ -x "$(command -v pyenv)" ]; then
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-  [ -x "$(command -v pyenv-virtualenv-init)" ] && eval "$(pyenv virtualenv-init -)"
-fi
+# if [ -x "$(command -v pyenv)" ]; then
+#   eval "$(pyenv init --path)"
+#   eval "$(pyenv init -)"
+#   [ -x "$(command -v pyenv-virtualenv-init)" ] && eval "$(pyenv virtualenv-init -)"
+# fi
 
 # Use brew ruby
 if [ -d '/usr/local/opt/ruby/bin' ]; then
@@ -132,11 +132,11 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$OPENSSL_PATH"
 export PATH=$OPENSSL_PATH/bin:$PATH
 
 # Load rbenv
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 # Extract the latest version of Ruby so you can do this:
 # rbenv install $LATEST_RUBY_VERSION
-export LATEST_RUBY_VERSION=$(rbenv install -L | grep -v - | tail -1)
+# export LATEST_RUBY_VERSION=$(rbenv install -L | grep -v - | tail -1)
 
 [ -x ${HOME}/.chefvm/bin/chefvm ] && eval "$(${HOME}/.chefvm/bin/chefvm init -)"
 

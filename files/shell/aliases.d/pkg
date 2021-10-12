@@ -25,8 +25,8 @@ function goclean() {
 alias go-clean='goclean'
 
 # Python aliases
-alias python='python3'
-alias pip='pip3'
+# alias python='python3'
+# alias pip='pip3'
 
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip install -U'
