@@ -48,13 +48,13 @@ installAll() {
 }
 
 case "$1" in
-  "packages" | "pkgs")
-    installPackages
-    ;;
-  "dotfiles")
-    installDotFiles
-    ;;
-  *)
-    installAll
-    ;;
+"packages" | "pkgs")
+  installPackages
+  ;;
+"dotfiles")
+  installDotFiles
+  ;;
+*)
+  installAll
+  ;;
 esac

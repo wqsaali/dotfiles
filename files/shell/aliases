@@ -229,7 +229,8 @@ function trim() {
     echo "$trimmed"
 }
 
-alias autoshellcheck='shellcheck $(find . -type f -not -path '\''./.git/*'\'' -exec file --mime-type {} + | awk -F'\'':'\'' '\''{ if ($2 ~ /^\s+text\/x-shellscript/) {gsub("^\.\/","",$1); print $1}  }'\'') -f diff | git apply'
+alias autoshfmt='shfmt -i 2 -w .'
+alias autoshellcheck='shellcheck $(shfmt -f .) -f diff | git apply'
 
 # https://github.com/idank/explainshell/issues/4#issuecomment-354709120
 function explain-shell() {

@@ -12,7 +12,7 @@ trap "xcalib -clear" EXIT
 sleep 0.1
 
 LAST_IDLE=$(xprintidle)
-for (( i = 1; i <= $FRAMES; i++ )); do
+for ((i = 1; i <= $FRAMES; i++)); do
   NEW_IDLE=$(xprintidle)
   if [ "$LAST_IDLE" -gt "$NEW_IDLE" ]; then
     exit 0

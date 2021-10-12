@@ -28,7 +28,7 @@ repos="start"
 
 while [ -n "${repos}" ]; do
   repos=$(jq -r '.[].name' response-2.txt)
-  next=$(grep -io '<https://api.github.com/organizations/[a-zA-Z0-9]*/repos[a-zA-Z0-9_\-\?=\&]*>; rel="next"' response-1.txt| cut -d';'  -f1 | tr -d '<>;')
+  next=$(grep -io '<https://api.github.com/organizations/[a-zA-Z0-9]*/repos[a-zA-Z0-9_\-\?=\&]*>; rel="next"' response-1.txt | cut -d';' -f1 | tr -d '<>;')
   for repo in $repos; do
     upstream=''
     fork=$(jq -r ".[] | select(.name == \"${repo}\")| .fork" response-2.txt)
@@ -50,7 +50,7 @@ while [ -n "${repos}" ]; do
       echo -e "${COL_YELLOW}>>>${COL_RESET} Updating ${repo}"
       cd "${repo}" || exit
       if [[ -n $upstream ]]; then
-        if ! git remote | grep -qv 'upstream' &> /dev/null; then
+        if ! git remote | grep -qv 'upstream' &>/dev/null; then
           echo -e "${COL_YELLOW}>>>${COL_RESET} Adding remote upstream ${upstream}"
           git remote add upstream "${upstream}"
         fi

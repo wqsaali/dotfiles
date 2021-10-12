@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 OS="$(uname -s | tr '[:upper:]' '[:lower:]')" &&
-ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
-INSTALLDIR=$(pwd)
+  ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+  INSTALLDIR=$(pwd)
 dotfiles_dir="$(dirname "$0")"
 
 CMD="${1:-all}"
@@ -17,7 +17,10 @@ isFunction() { declare -F -- "$@" >/dev/null; }
 
 path() {
   mkdir -p "$(dirname "$1")"
-  echo "$(cd "$(dirname "$1")" || exit; pwd)/$(basename "$1")"
+  echo "$(
+    cd "$(dirname "$1")" || exit
+    pwd
+  )/$(basename "$1")"
 }
 
 link() {
@@ -35,7 +38,7 @@ create_link() {
 }
 
 gem_install_or_update() {
-  if gem list "$1" --installed > /dev/null; then
+  if gem list "$1" --installed >/dev/null; then
     gem update "${@}"
   else
     gem install "${@}"
@@ -50,7 +53,7 @@ git_clone_or_update() {
   fi
 
   echo ">>> $(basename "$2")"
-  if [ ! -d  "${2}" ]; then
+  if [ ! -d "${2}" ]; then
     git clone "${1}" "${2}"
   else
     cd "${2}" || exit
@@ -66,7 +69,7 @@ installPkgList() {
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     echo ">>> ${PKG}"
     eval "${1} ${PKG}"
-  done < "${2}"
+  done <"${2}"
   cd "${INSTALLDIR}" || exit
 }
 
@@ -92,7 +95,7 @@ installFastPath() {
     version='osx'
     arch=''
   fi
-  curl https://docker-fastpath.s3-eu-west-1.amazonaws.com/releases/${version}/docker-fastpath-${version}"${arch}"-latest.zip > fastpath.zip
+  curl https://docker-fastpath.s3-eu-west-1.amazonaws.com/releases/${version}/docker-fastpath-${version}"${arch}"-latest.zip >fastpath.zip
   unzip fastpath.zip
   chmod +x fastpath && mv fastpath ~/.local/bin/
 }
@@ -104,7 +107,7 @@ installFission() {
   if [[ "$OSTYPE" == "darwin"* ]]; then
     version='mac'
   fi
-  curl http://fission.io/$version/fission > fission && chmod +x fission && mv fission ~/.local/bin/
+  curl http://fission.io/$version/fission >fission && chmod +x fission && mv fission ~/.local/bin/
 }
 
 installMinikube() {
@@ -117,11 +120,11 @@ installMinikube() {
 installKrew() {
   if ! [ -x "$(command -v kubectl-krew)" ]; then
     mkdir -p "${HOME}/.krew/bin"
-    cd "$(mktemp -d)" && \
-    curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" && \
-    tar zxvf krew.tar.gz && \
-    KREW=./krew-"${OS}_${ARCH}" && \
-    "$KREW" install krew
+    cd "$(mktemp -d)" &&
+      curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" &&
+      tar zxvf krew.tar.gz &&
+      KREW=./krew-"${OS}_${ARCH}" &&
+      "$KREW" install krew
     cd "${INSTALLDIR}" || exit
   fi
 
@@ -221,9 +224,9 @@ installGoPkgs() {
 cleanGoPkgs() {
   go clean -modcache
   rm -rf "${HOME}/.glide/"*
-  rm -rf "${GOPATH/:*}/src/"*
-  rm -rf "${GOPATH/:*}/pkg/"*
-  rm -rf "${GOPATH/:*}/.cache"
+  rm -rf "${GOPATH/:*/}/src/"*
+  rm -rf "${GOPATH/:*/}/pkg/"*
+  rm -rf "${GOPATH/:*/}/.cache"
   rm -rf "${HOME}/.cache/go-build/"
 }
 
@@ -234,9 +237,9 @@ installHelmPlugins() {
       cleanGoPkgs
       echo ">>> helm"
       go get -d -u k8s.io/helm/cmd/helm
-      cd "${GOPATH/:*}/src/k8s.io/helm/" || exit
+      cd "${GOPATH/:*/}/src/k8s.io/helm/" || exit
       make bootstrap build
-      mv bin/* "${GOPATH/:*}/bin/"
+      mv bin/* "${GOPATH/:*/}/bin/"
       echo ">>> Cleanup go sources"
       cd "${INSTALLDIR}" || exit
       cleanGoPkgs
@@ -392,7 +395,7 @@ installGitConf() {
     printf -v sc 's|${%s}|%s|;' ${var} "${!var//\//\\/}"
     sedcmd+="${sc}"
   done
-  cat files/git/gitconfig | sed -e "${sedcmd}" > "${HOME}/.gitconfig"
+  cat files/git/gitconfig | sed -e "${sedcmd}" >"${HOME}/.gitconfig"
   cp files/git/gitexcludes "${HOME}/.gitexcludes"
 }
 
@@ -407,7 +410,7 @@ installShellConf() {
     printf -v sc 's|${%s}|%s|;' "${var}" "${!var//\//\\/}"
     sedcmd+="${sc}"
   done
-  cat files/shell/aliases | sed -e "${sedcmd}" > "${HOME}"/.aliases
+  cat files/shell/aliases | sed -e "${sedcmd}" >"${HOME}"/.aliases
 
   git_clone_or_update https://github.com/ahmetb/kubectl-aliases.git "${HOME}/.kubectl_aliases"
 
@@ -425,7 +428,7 @@ installBashConf() {
     SHELLVARS=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
     source config.sh
     CONF=$(comm -3 <(compgen -v | sort) <(compgen -e | sort) | grep -v '^_')
-    CONF=$(comm -3 <(echo "${CONF}" | tr ' ' '\n' | sort -u ) <(echo "${SHELLVARS}" | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
+    CONF=$(comm -3 <(echo "${CONF}" | tr ' ' '\n' | sort -u) <(echo "${SHELLVARS}" | tr ' ' '\n' | sort -u) | grep -v 'SHELLVARS')
   fi
 
   mkdir -p "${HOME}"/.bash/
@@ -496,7 +499,7 @@ installZshConf() {
 
 createSkeleton() {
   dirs=$(cat config.sh | awk -F\' '{print $2}' | grep 'HOME')
-  for d in $(envsubst <<< "${dirs}"); do
+  for d in $(envsubst <<<"${dirs}"); do
     mkdir -p "${d}"
   done
 
@@ -531,7 +534,6 @@ installDotFiles() {
   # a matchin vim theme will also be created in ~/.vimrc_background
   git_clone_or_update https://github.com/eendroroy/alacritty-theme.git "${HOME}"/.alacritty-theme
 
-
   # kitty themes
   git_clone_or_update https://github.com/dexpota/kitty-themes.git "${HOME}"/.kitty-themes
 
@@ -560,7 +562,7 @@ installDotFiles() {
   fi
 
   if [ -x "$(command -v mdatp)" ]; then
-    for F in $(cat files/mdatp.lst|envsubst); do mdatp exclusion folder add --path "${F}"; done
+    for F in $(cat files/mdatp.lst | envsubst); do mdatp exclusion folder add --path "${F}"; done
   fi
 }
 
@@ -585,7 +587,7 @@ installPackages() {
   installEls
 }
 
-installOSSpecific(){
+installOSSpecific() {
   if [[ "$OSTYPE" == "darwin"* ]]; then
     ./osx.sh "${@}"
   elif [[ "$OSTYPE" == *"android"* ]]; then
@@ -612,50 +614,50 @@ elif isFunction "install${CMD}"; then
 fi
 
 case "$CMD" in
-  "gems" | "gem")
-    installGems
-    ;;
-  "chef_gems" | "chefgems")
-    installChefGems
-    ;;
-  "pip" | "pips")
-    installPips
-    ;;
-  "npm" | "npms")
-    installNpms
-    ;;
-  "go" | "gopkgs")
-    installGoPkgs
-    ;;
-  "dotfiles")
-    installDotFiles
-    installOSSpecific "dotfiles"
-    ;;
-  "scripts")
-    installScripts
-    ;;
-  "vimplugins" | "vim")
-    installVimPlugins
-    ;;
-  "KakPlugins" | "kak")
-    installKakPlugins
-    ;;
-  "atompackages" | "apkgs" | "atom" | "apm")
-    installAtomPackages
-    ;;
-  "vscodepackages" | "vscode" | "vspkgs")
-    installVscodePackages
-    ;;
-  "vagrant" | "VagrantPlugins")
-    installVagrantPlugins
-    ;;
-  "helm" | "helmplugins")
-    installHelmPlugins
-    ;;
-  *)
-    installOSSpecific "${CMD}" "${ARGS}"
-    if [ -z "${CMD}" ] || [[ "${CMD}" == "all" ]]; then
-      installAll
-    fi
-    ;;
+"gems" | "gem")
+  installGems
+  ;;
+"chef_gems" | "chefgems")
+  installChefGems
+  ;;
+"pip" | "pips")
+  installPips
+  ;;
+"npm" | "npms")
+  installNpms
+  ;;
+"go" | "gopkgs")
+  installGoPkgs
+  ;;
+"dotfiles")
+  installDotFiles
+  installOSSpecific "dotfiles"
+  ;;
+"scripts")
+  installScripts
+  ;;
+"vimplugins" | "vim")
+  installVimPlugins
+  ;;
+"KakPlugins" | "kak")
+  installKakPlugins
+  ;;
+"atompackages" | "apkgs" | "atom" | "apm")
+  installAtomPackages
+  ;;
+"vscodepackages" | "vscode" | "vspkgs")
+  installVscodePackages
+  ;;
+"vagrant" | "VagrantPlugins")
+  installVagrantPlugins
+  ;;
+"helm" | "helmplugins")
+  installHelmPlugins
+  ;;
+*)
+  installOSSpecific "${CMD}" "${ARGS}"
+  if [ -z "${CMD}" ] || [[ "${CMD}" == "all" ]]; then
+    installAll
+  fi
+  ;;
 esac

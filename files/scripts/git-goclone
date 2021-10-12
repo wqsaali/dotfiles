@@ -44,20 +44,32 @@ UPDATE=false
 
 while true; do
   case "$1" in
-    -h | --help ) usage ;;
-    -d | --debug ) DEBUG=true; shift ;;
-    -u | --update ) UPDATE=true; shift ;;
-    -w | --workspace ) w="$2"; shift 2 ;;
-    -- ) shift; break ;;
-    * ) break ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -u | --update)
+    UPDATE=true
+    shift
+    ;;
+  -w | --workspace)
+    w="$2"
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *) break ;;
   esac
 done
 
 url=${1}
 
-if [[ "$url" == "help" ]]; then usage ; fi
+if [[ "$url" == "help" ]]; then usage; fi
 
-if [ -z "$url" ] ; then
+if [ -z "$url" ]; then
   usage "You need to provide a repo URL.\nTerminating...\n" >&2
 fi
 
@@ -70,7 +82,8 @@ if [[ $url =~ $re ]]; then
   user=${BASH_REMATCH[5]}
   repo=${BASH_REMATCH[6]}
 else
-  echo -e "Invalid repo URL.\nTerminating..." >&2 ; exit 1
+  echo -e "Invalid repo URL.\nTerminating..." >&2
+  exit 1
 fi
 
 path=${workspace}/src/$(echo "${hostname}/${user}/${repo}" | sed -e 's/\.git$//g')
@@ -78,7 +91,7 @@ path=${workspace}/src/$(echo "${hostname}/${user}/${repo}" | sed -e 's/\.git$//g
 # Check if the workspace passed by the user is a number
 # and get the corresponding workspace from GOPATH
 re='^[+-]?[0-9]+([.][0-9]+)?$'
-if [[ $w =~ $re ]] ; then
+if [[ $w =~ $re ]]; then
   saveIFS=$IFS
   IFS=":"
   workspace=($GOPATH)

@@ -15,8 +15,8 @@ export COL_GREY=$ESC_SEQ"38;5;245m"
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 
-git for-each-ref --format='%(refname:short) %(upstream:short)' refs/heads | \
-while read local upstream; do
+git for-each-ref --format='%(refname:short) %(upstream:short)' refs/heads |
+  while read local upstream; do
 
     # Use master if upstream branch is empty
     [ -z "$upstream" ] && upstream=master
@@ -25,9 +25,9 @@ while read local upstream; do
     behind=$(git rev-list "${local}"..${upstream} --count)
 
     if [[ $local == $branch ]]; then
-        asterisk=*
+      asterisk=*
     else
-        asterisk=' '
+      asterisk=' '
     fi
 
     # Show asterisk before current branch
@@ -35,13 +35,13 @@ while read local upstream; do
 
     # Does this branch is ahead or behind upstream branch?
     if [[ $ahead -ne 0 && $behind -ne 0 ]]; then
-        echo -en " (${COL_YELLOW}$ahead ahead${COL_RESET} and ${COL_RED}$behind behind${COL_RESET} $upstream)"
+      echo -en " (${COL_YELLOW}$ahead ahead${COL_RESET} and ${COL_RED}$behind behind${COL_RESET} $upstream)"
     elif [[ $ahead -ne 0 ]]; then
-        echo -n " (${COL_YELLOW}$ahead ahead${COL_RESET} $upstream)"
+      echo -n " (${COL_YELLOW}$ahead ahead${COL_RESET} $upstream)"
     elif [[ $behind -ne 0 ]]; then
-        echo -n " (${COL_RED}$behind behind${COL_RESET} $upstream)"
+      echo -n " (${COL_RED}$behind behind${COL_RESET} $upstream)"
     fi
 
     echo
 
-done;
+  done

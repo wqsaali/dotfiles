@@ -35,23 +35,35 @@ function nodeIP() {
 
 OPTS=$(getopt -o hdeu: --long help,debug,external-ip,user: -n "$(basename "$0")" -- "$@")
 
-if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+if [ $? != 0 ]; then usage "Terminating...\n" >&2; fi
 
 eval set -- "$OPTS"
 
 while true; do
   case "$1" in
-    -h | --help ) usage ;;
-    -d | --debug ) DEBUG=true; shift ;;
-    -e | --external-ip ) IP=ExternalIP; shift ;;
-    -u | --user ) USER="$2"; shift 2 ;;
-    -- ) shift; break ;;
-    * ) break ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -e | --external-ip)
+    IP=ExternalIP
+    shift
+    ;;
+  -u | --user)
+    USER="$2"
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *) break ;;
   esac
 done
 
 # Allow the file to be sourced without excuting this part
-if [ "$0" = "$BASH_SOURCE" ] ; then
+if [ "$0" = "$BASH_SOURCE" ]; then
 
   if ! [ -x "$(command -v jq)" ]; then
     echo -e "You need jq.\nTerminating...\n" >&2
@@ -59,11 +71,14 @@ if [ "$0" = "$BASH_SOURCE" ] ; then
   fi
 
   NODE="${1}"
-  if [[ -z "$NODE" ]] && [[ -t 1 && -z ${IGNORE_FZF:-} && "$(type fzf &>/dev/null; echo $?)" -eq 0 ]]; then
+  if [[ -z "$NODE" ]] && [[ -t 1 && -z ${IGNORE_FZF:-} && "$(
+    type fzf &>/dev/null
+    echo $?
+  )" -eq 0 ]]; then
     echo 'Please select a node:'
     NODE=$(echo $(kubectl get no | fzf --header-lines=1) | awk '{print $1}')
   fi
-  if [ -z "${NODE}" ] ; then
+  if [ -z "${NODE}" ]; then
     usage "You need to provide a node.\nTerminating...\n" >&2
     exit 1
   fi

@@ -14,7 +14,7 @@ test -z "$token" && echo "Token is required." 1>&2 && exit 1
 repos=$(curl -s --header "PRIVATE-TOKEN: $token" "${url}/api/v3/projects/owned?per_page=100&page=$page" | jq .[].ssh_url_to_repo | tr -d '"')
 
 while [ -n "$repos" ]; do
-  for repo in  $(echo "$repos"); do
+  for repo in $(echo "$repos"); do
     path=$(echo "$repo" | cut -d ':' -f2 | cut -d'.' -f1)
     echo "-=$path=-"
     if [ -d "$path" ]; then
@@ -28,6 +28,6 @@ while [ -n "$repos" ]; do
       git clone "$repo" "$path"
     fi
   done
-  page=$((page+1))
+  page=$((page + 1))
   repos=$(curl -s --header "PRIVATE-TOKEN: $token" "${url}/api/v3/projects/owned?per_page=100&page=$page" | jq .[].ssh_url_to_repo | tr -d '"')
 done

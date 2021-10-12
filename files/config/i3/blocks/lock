@@ -1,5 +1,5 @@
 #!/bin/sh
 case $BLOCK_BUTTON in
-  1) dm-tool lock ;;
+1) dm-tool lock ;;
 esac
 echo '   '

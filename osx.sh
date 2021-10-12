@@ -9,7 +9,8 @@ fi
 INSTALLDIR=$(pwd)
 
 fancy_echo() {
-  local fmt="$1"; shift
+  local fmt="$1"
+  shift
 
   # shellcheck disable=SC2059
   printf "\n$fmt\n" ${@}
@@ -58,7 +59,7 @@ brew_is_upgradable() {
 brew_tap() {
   fancy_echo "Adding Tap: $1 ..."
   brew tap "$1"
-  brew tap "$1" --repair 2> /dev/null
+  brew tap "$1" --repair 2>/dev/null
 }
 
 brew_expand_alias() {
@@ -89,7 +90,7 @@ osConfigs() {
   defaults write -g ApplePressAndHoldEnabled -bool false
   # Set keyboard repeate speed
   defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
-  defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+  defaults write -g KeyRepeat -int 1         # normal minimum is 2 (30 ms)
 
   # Font rendering (requires restart)
   defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
@@ -113,10 +114,10 @@ osConfigs() {
   # defaults write com.apple.universalaccess reduceTransparency -bool true
 
   # Enable Develop Menu and Web Inspector in Safari
-  defaults write com.apple.Safari IncludeInternalDebugMenu -bool true && \
-    defaults write com.apple.Safari IncludeDevelopMenu -bool true && \
-    defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true && \
-    defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true && \
+  defaults write com.apple.Safari IncludeInternalDebugMenu -bool true &&
+    defaults write com.apple.Safari IncludeDevelopMenu -bool true &&
+    defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true &&
+    defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true &&
     defaults write -g WebKitDeveloperExtras -bool true
 
   # Enable Developer Mode using XCode
@@ -128,7 +129,7 @@ osConfigs() {
 installHomebrew() {
   if [ ! -x "$(command -v brew)" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    /bin/bash -c "$(curl -fsSL  https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/stephennancekivell/brew-update-notifier/master/install.sh)"
   fi
 }
 
@@ -146,7 +147,7 @@ installPackages() {
     [[ "${TAP}" =~ ^#.*$ ]] && continue
     [[ "${TAP}" =~ ^\\s*$ ]] && continue
     brew_tap "${TAP}"
-  done < files/pkgs/tap.lst
+  done <files/pkgs/tap.lst
 
   brew update
   brew_install_or_upgrade cask
@@ -157,7 +158,7 @@ installPackages() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     brew_install_or_upgrade "${PKG}"
-  done < files/pkgs/brew.lst
+  done <files/pkgs/brew.lst
 
   # Install cask pkgs
   while IFS='' read -r PKG; do
@@ -165,10 +166,10 @@ installPackages() {
     [[ "${PKG}" =~ ^#.*$ ]] && continue
     [[ "${PKG}" =~ ^\\s*$ ]] && continue
     cask_install "${PKG}"
-  done < files/pkgs/cask.lst
+  done <files/pkgs/cask.lst
 
-  echo $(brew --prefix)/bin/zsh | sudo tee -a /etc/shells > /dev/null
-  echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells > /dev/null
+  echo $(brew --prefix)/bin/zsh | sudo tee -a /etc/shells >/dev/null
+  echo $(brew --prefix)/bin/bash | sudo tee -a /etc/shells >/dev/null
   # Set bash as the login shell
   # chsh -s $(brew --prefix)/bin/bash
 
@@ -236,7 +237,7 @@ installDotFiles() {
   cp files/yabai/yabairc "${HOME}"/.yabairc
   cp files/yabai/skhdrc "${HOME}"/.skhdrc
 
-  if [ ! -d  "${HOME}"/.hammerspoon/hs/tiling ]; then
+  if [ ! -d "${HOME}"/.hammerspoon/hs/tiling ]; then
     git clone https://github.com/dsanson/hs.tiling "$HOME"/.hammerspoon/hs/tiling
   else
     cd "${HOME}"/.hammerspoon/hs/tiling || exit
@@ -246,7 +247,7 @@ installDotFiles() {
 
   cp -r files/hammerspoon/* "${HOME}"/.hammerspoon/
 
-  if [ ! -d  "${HOME}"/.reslate ]; then
+  if [ ! -d "${HOME}"/.reslate ]; then
     git clone https://github.com/lunixbochs/reslate.git "${HOME}"/.reslate
   else
     cd "${HOME}"/.reslate/ || exit
@@ -274,19 +275,19 @@ installAll() {
 }
 
 case "$1" in
-  "packages" | "pkgs")
-    installPackages
-    ;;
-  "dotfiles")
-    installDotFiles
-    ;;
-  "fonts")
-    installFonts
-    ;;
-  "itermcolors" | "termColors" | "termProfiles")
-    installItermColors ${@:2}
-    ;;
-  *)
-    installAll
-    ;;
+"packages" | "pkgs")
+  installPackages
+  ;;
+"dotfiles")
+  installDotFiles
+  ;;
+"fonts")
+  installFonts
+  ;;
+"itermcolors" | "termColors" | "termProfiles")
+  installItermColors ${@:2}
+  ;;
+*)
+  installAll
+  ;;
 esac

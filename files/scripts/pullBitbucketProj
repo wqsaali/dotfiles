@@ -42,7 +42,7 @@ while [ -n "${repos}" ]; do
       git clone "$repo" "$path"
     fi
   done
-  page=$((page+1))
+  page=$((page + 1))
   #repos=$(curl -s -u "${user}:${pass}" "${url}&page=${page}" | jq -r '.values[].links.clone[].href | select(contains("http") | not)')
   repos=$(curl -s -u "${user}:${pass}" "${url}&page=${page}" | jq -r '.values[].links.clone[] | select(.name | contains("ssh")) | .href')
 done

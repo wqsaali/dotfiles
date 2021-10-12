@@ -42,45 +42,63 @@ function inventory() {
   nodes=$(kubectl get no -o json | jq -r "${query}")
 
   case "${NODES,,}" in
-    "healthy" | "ok" | "ready")
-      nodes=$(echo "$nodes" | jq -r '.[] | select(.status=="True") | "app@"+.ip')
-      ;;
-    "unhealthy" | "ko" | "notready")
-      nodes=$(echo "$nodes" | jq -r '.[] | select(.status!="True") | "app@"+.ip')
-      ;;
-    "all")
-      nodes=$(echo "$nodes" | jq -r '.[] | "app@"+.ip')
-      ;;
-    *)
-      nodes=$(echo "$nodes" | jq -r '.[] | select(.name|contains("'${NODES}'")) | "app@"+.ip')
-      ;;
+  "healthy" | "ok" | "ready")
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.status=="True") | "app@"+.ip')
+    ;;
+  "unhealthy" | "ko" | "notready")
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.status!="True") | "app@"+.ip')
+    ;;
+  "all")
+    nodes=$(echo "$nodes" | jq -r '.[] | "app@"+.ip')
+    ;;
+  *)
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.name|contains("'${NODES}'")) | "app@"+.ip')
+    ;;
   esac
   echo -ne "${nodes}" | tr -s '[[:space:]]' '\n'
 }
 
 OPTS=$(getopt -o hdef:u:t: --long help,debug,external-ip,filter:,user:,timeout: -n "$(basename "$0")" -- "$@")
 
-if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+if [ $? != 0 ]; then usage "Terminating...\n" >&2; fi
 
 eval set -- "$OPTS"
 
 while true; do
   case "$1" in
-    -h | --help ) usage ;;
-    -d | --debug ) DEBUG=true; shift ;;
-    -e | --external-ip ) IP=ExternalIP; shift ;;
-    -f | --filter ) NODES="$2"; shift 2 ;;
-    -u | --user ) USER="$2"; shift 2 ;;
-    -t | --timeout ) TIMEOUT="$2"; shift 2 ;;
-    -- ) shift; break ;;
-    * ) break ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -e | --external-ip)
+    IP=ExternalIP
+    shift
+    ;;
+  -f | --filter)
+    NODES="$2"
+    shift 2
+    ;;
+  -u | --user)
+    USER="$2"
+    shift 2
+    ;;
+  -t | --timeout)
+    TIMEOUT="$2"
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *) break ;;
   esac
 done
 
 # Allow the file to be sourced without excuting this part
-if [ "$0" = "$BASH_SOURCE" ] ; then
+if [ "$0" = "$BASH_SOURCE" ]; then
   CMD="${@}"
-  if [ -z "${CMD}" ] ; then
+  if [ -z "${CMD}" ]; then
     usage "You need to provide a command.\nTerminating...\n" >&2
     exit 1
   fi
@@ -95,7 +113,7 @@ if [ "$0" = "$BASH_SOURCE" ] ; then
   fi
 
   tmpfile=$(mktemp /tmp/pssh_hosts.XXXXXX)
-  inventory > "${tmpfile}"
+  inventory >"${tmpfile}"
   sed -i '/^[[:blank:]]*$/ d' "${tmpfile}"
   if [[ "${DEBUG}" == "true" ]]; then
     echo "Hosts list:"

@@ -46,19 +46,34 @@ function goinstall() {
 
 OPTS=$(getopt -o hdrt:i: --long help,debug,raw,tag:,install-to: -n "$(basename "$0")" -- "$@")
 
-if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+if [ $? != 0 ]; then usage "Terminating...\n" >&2; fi
 
 eval set -- "$OPTS"
 
 while true; do
   case "$1" in
-    -h | --help ) usage ;;
-    -d | --debug ) DEBUG=true; shift ;;
-    -b | --build ) BUILD=true; shift ;;
-    -i | --install-to ) install_to="$2"; shift 2 ;;
-    -t | --tag ) tag="$2"; shift 2 ;;
-    -- ) shift; break ;;
-    * ) break ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -b | --build)
+    BUILD=true
+    shift
+    ;;
+  -i | --install-to)
+    install_to="$2"
+    shift 2
+    ;;
+  -t | --tag)
+    tag="$2"
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *) break ;;
   esac
 done
 
