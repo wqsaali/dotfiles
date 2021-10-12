@@ -47,7 +47,7 @@ while [[ $# -gt 0 ]]; do
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-if [[ "${FORCE}" == "true" ]]; then
+if [[ ${FORCE} == "true" ]]; then
   FORCE="--grace-period=0 --force"
 fi
 
@@ -58,7 +58,7 @@ kubectl get rs -A --no-headers | grep -E '0\s+0\s+0' | awk '{print $2 " -n " $1}
 kubectl get job -A -o=go-template='{{range .items}}{{if or .status.succeeded .status.failed}}{{.metadata.name}} -n {{.metadata.namespace}}{{"\n"}}{{end}}{{end}}' | xargs -L1 -r kubectl delete job "${FORCE}"
 
 # Also clean the nodes
-if [[ "${ALL}" == "true" ]] && [ -x "$(command -v kubectl-pssh)" ]; then
+if [[ ${ALL} == "true" ]] && [ -x "$(command -v kubectl-pssh)" ]; then
   kubectl pssh 'sudo docker system prune -a -f'
   # kubectl pssh 'sudo find /var/lib/docker/containers/ -name "*-json.log" -type f -size +100M -exec truncate -s 100M {} +'
   kubectl pssh 'sudo find /var/log/ -type f -size +100M -exec truncate -s 100M {} +'

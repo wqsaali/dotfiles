@@ -64,9 +64,9 @@ git_clone_or_update() {
 
 installPkgList() {
   while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    [[ -z ${PKG} ]] && continue
+    [[ ${PKG} =~ ^#.*$ ]] && continue
+    [[ ${PKG} =~ ^\\s*$ ]] && continue
     echo ">>> ${PKG}"
     eval "${1} ${PKG}"
   done <"${2}"
@@ -91,7 +91,7 @@ installFastPath() {
   mkdir -p ~/.local/bin/
   version='linux'
   arch='-amb64'
-  if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $OSTYPE == "darwin"* ]]; then
     version='osx'
     arch=''
   fi
@@ -104,7 +104,7 @@ installFission() {
   # http://fission.io/
   mkdir -p ~/.local/bin/
   version='linux'
-  if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $OSTYPE == "darwin"* ]]; then
     version='mac'
   fi
   curl http://fission.io/$version/fission >fission && chmod +x fission && mv fission ~/.local/bin/
@@ -232,7 +232,7 @@ cleanGoPkgs() {
 
 installHelmPlugins() {
   if ! [ -x "$(command -v helm)" ]; then
-    if [[ "$OSTYPE" == *"android"* ]]; then
+    if [[ $OSTYPE == *"android"* ]]; then
       cd "${INSTALLDIR}" || exit
       cleanGoPkgs
       echo ">>> helm"
@@ -243,7 +243,7 @@ installHelmPlugins() {
       echo ">>> Cleanup go sources"
       cd "${INSTALLDIR}" || exit
       cleanGoPkgs
-    elif [[ "$OSTYPE" != "darwin"* ]]; then
+    elif [[ $OSTYPE != "darwin"* ]]; then
       sudo apt-get install helm
     else
       brew install kubernetes-helm
@@ -280,14 +280,14 @@ installScripts() {
   # installFromRawGithub 'mykeels/slack-theme-cli' 'slack-theme'
   # installFromRawGithub 'smitt04/slack-dark-theme' 'darkSlack.sh'
   installFromGithub 'dotenv-linter/dotenv-linter'
-  if [[ "$OSTYPE" == *"android"* ]]; then
+  if [[ $OSTYPE == *"android"* ]]; then
     termux-fix-shebang "${HOME}/.local/bin/"*
   fi
   installTestssl
   git_clone_or_update https://github.com/wookayin/kitty-tmux.git "${HOME}/.kitty-tmux"
 
-  if [[ "$OSTYPE" != *"android"* ]]; then
-    if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $OSTYPE != *"android"* ]]; then
+    if [[ $OSTYPE == "darwin"* ]]; then
       installKubeScripts 'darwin' '64'
     else
       installKubeScripts 'linux' '64'
@@ -312,7 +312,7 @@ installAtomPackages() {
 
 installVscodeConfig() {
   settings="$HOME/.config/Code/User"
-  if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $OSTYPE == "darwin"* ]]; then
     settings="$HOME/Library/Application Support/Code/User"
   fi
   mkdir -p "$settings"
@@ -376,7 +376,7 @@ installKakPlugins() {
   cp -r files/kak/snippets "${HOME}/.config/kak/"
   cp files/kak/kak-lsp.toml "${HOME}/.config/kak-lsp/kak-lsp.toml"
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $OSTYPE == "darwin"* ]]; then
     if [ ! -s "${HOME}/Library/Preferences/kak-lsp" ]; then
       ln -s "${HOME}/.config/kak-lsp" "${HOME}/Library/Preferences/kak-lsp"
     fi
@@ -450,7 +450,7 @@ installBashConf() {
 }
 
 installFishConf() {
-  if [[ "$OSTYPE" != "darwin"* ]]; then
+  if [[ $OSTYPE != "darwin"* ]]; then
     sudo apt-add-repository ppa:fish-shell/release-2
     sudo apt-get update
     sudo apt-get install fish
@@ -588,9 +588,9 @@ installPackages() {
 }
 
 installOSSpecific() {
-  if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [[ $OSTYPE == "darwin"* ]]; then
     ./osx.sh "${@}"
-  elif [[ "$OSTYPE" == *"android"* ]]; then
+  elif [[ $OSTYPE == *"android"* ]]; then
     ./android.sh "${@}"
   else
     ./linux.sh "${@}"
@@ -598,7 +598,7 @@ installOSSpecific() {
 }
 
 installAll() {
-  if [[ "$OSTYPE" != *"android"* ]]; then
+  if [[ $OSTYPE != *"android"* ]]; then
     installPackages
   fi
   # installWebApps
@@ -656,7 +656,7 @@ case "$CMD" in
   ;;
 *)
   installOSSpecific "${CMD}" "${ARGS}"
-  if [ -z "${CMD}" ] || [[ "${CMD}" == "all" ]]; then
+  if [ -z "${CMD}" ] || [[ ${CMD} == "all" ]]; then
     installAll
   fi
   ;;

@@ -100,7 +100,7 @@ function backupAtomPackages() {
 function backupVscode() {
   code --list-extensions >files/pkgs/vscode-packages.lst
   settings="${HOME}/.config/Code/User"
-  if [[ "${OSTYPE}" == "darwin"* ]]; then
+  if [[ ${OSTYPE} == "darwin"* ]]; then
     settings="${HOME}/Library/Application Support/Code/User"
   fi
   cp -r "${settings}"/* files/vscode/
@@ -132,7 +132,7 @@ function backupAll() {
   backupDotFiles
   backupAtomPackages
   backupVscode
-  if [[ "$OSTYPE" != "darwin"* ]]; then
+  if [[ $OSTYPE != "darwin"* ]]; then
     backupPPAs
   fi
 }
@@ -156,8 +156,8 @@ function restoreRepos() {
   LISTS=('files/pkgs/ppa.lst' 'files/pkgs/apt-repo.lst')
   for LST in ${LISTS[@]}; do
     while read -r REPO; do
-      [[ "${REPO}" =~ ^#.*$ ]] && continue
-      [[ "${REPO}" =~ ^\\s*$ ]] && continue
+      [[ ${REPO} =~ ^#.*$ ]] && continue
+      [[ ${REPO} =~ ^\\s*$ ]] && continue
       sudo apt-add-repository "${REPO}"
     done <"files/pkgs/${LST}"
   done

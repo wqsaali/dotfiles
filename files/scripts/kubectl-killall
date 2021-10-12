@@ -49,16 +49,16 @@ while [[ $# -gt 0 ]]; do
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-if [[ "${FORCE}" == "true" ]]; then
+if [[ ${FORCE} == "true" ]]; then
   FORCE="--grace-period=0 --force"
 fi
 
 filter='{print $2 " -n " $1}'
-if [[ "${NAMESPACE}" != "--all-namespaces" ]]; then
+if [[ ${NAMESPACE} != "--all-namespaces" ]]; then
   filter=$(printf '{print $1 " %s "}' "${NAMESPACE}")
 fi
 
-if [[ "${DEBUG}" == "true" ]]; then
+if [[ ${DEBUG} == "true" ]]; then
   echo "filter: ${filter}"
 fi
 

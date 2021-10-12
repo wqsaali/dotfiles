@@ -71,7 +71,7 @@ if [ "$0" = "$BASH_SOURCE" ]; then
   fi
 
   NODE="${1}"
-  if [[ -z "$NODE" ]] && [[ -t 1 && -z ${IGNORE_FZF:-} && "$(
+  if [[ -z $NODE ]] && [[ -t 1 && -z ${IGNORE_FZF:-} && "$(
     type fzf &>/dev/null
     echo $?
   )" -eq 0 ]]; then
@@ -86,7 +86,7 @@ if [ "$0" = "$BASH_SOURCE" ]; then
 
   NODE=$(nodeIP "${NODE}")
 
-  if [[ "${DEBUG}" == "true" ]]; then
+  if [[ ${DEBUG} == "true" ]]; then
     echo 'Executing: ssh -o StrictHostKeyChecking=no -l "'"${USER}"'" "'"${NODE}"'"' "${@}"
   fi
   ssh -o StrictHostKeyChecking=no -l "${USER}" "${NODE}" ${@}

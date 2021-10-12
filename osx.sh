@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ "$OSTYPE" != "darwin"* ]]; then
+if [[ $OSTYPE != "darwin"* ]]; then
   echo 'Doesnt look like you are on OS X'
   echo '  please try the install.sh script'
   exit 1
@@ -143,9 +143,9 @@ installPackages() {
   installHomebrew
 
   while IFS='' read -r TAP; do
-    [[ -z "${TAP}" ]] && continue
-    [[ "${TAP}" =~ ^#.*$ ]] && continue
-    [[ "${TAP}" =~ ^\\s*$ ]] && continue
+    [[ -z ${TAP} ]] && continue
+    [[ ${TAP} =~ ^#.*$ ]] && continue
+    [[ ${TAP} =~ ^\\s*$ ]] && continue
     brew_tap "${TAP}"
   done <files/pkgs/tap.lst
 
@@ -154,17 +154,17 @@ installPackages() {
 
   # Install brew pkgs
   while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    [[ -z ${PKG} ]] && continue
+    [[ ${PKG} =~ ^#.*$ ]] && continue
+    [[ ${PKG} =~ ^\\s*$ ]] && continue
     brew_install_or_upgrade "${PKG}"
   done <files/pkgs/brew.lst
 
   # Install cask pkgs
   while IFS='' read -r PKG; do
-    [[ -z "${PKG}" ]] && continue
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    [[ -z ${PKG} ]] && continue
+    [[ ${PKG} =~ ^#.*$ ]] && continue
+    [[ ${PKG} =~ ^\\s*$ ]] && continue
     cask_install "${PKG}"
   done <files/pkgs/cask.lst
 

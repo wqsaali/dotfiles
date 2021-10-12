@@ -5,7 +5,7 @@ get_k8s_name() {
 }
 
 get_k8s_ns() {
-  if [[ "$1" != "default" ]]; then
+  if [[ $1 != "default" ]]; then
     echo -n ":$1"
   fi
 }
@@ -15,9 +15,9 @@ get_k8s_ns() {
 override_git_prompt_colors() {
   GIT_PROMPT_THEME_NAME="Custom"
 
-  Time12a="\$(date +%H:%M:%S)"
+  Time12a='$(date +%H:%M:%S)'
   PathShort="\w"
-  kube_ps1="\$(kube_ps1)"
+  kube_ps1='$(kube_ps1)'
 
   PROMPT_DIRTRIM=2
 

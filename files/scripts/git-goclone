@@ -67,7 +67,7 @@ done
 
 url=${1}
 
-if [[ "$url" == "help" ]]; then usage; fi
+if [[ $url == "help" ]]; then usage; fi
 
 if [ -z "$url" ]; then
   usage "You need to provide a repo URL.\nTerminating...\n" >&2
@@ -101,11 +101,11 @@ else
   workspace=$w
 fi
 
-if [[ "${DEBUG}" == "true" ]]; then
+if [[ ${DEBUG} == "true" ]]; then
   echo "Cloning ${url} into: ${path}"
 fi
 
-if [ -d "${path}" ] && [[ "${UPDATE}" == "true" ]]; then
+if [ -d "${path}" ] && [[ ${UPDATE} == "true" ]]; then
   cd "${path}" || exit
   git pull
   cd "${cdir}" || exit

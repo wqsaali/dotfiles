@@ -115,7 +115,7 @@ if [ "$0" = "$BASH_SOURCE" ]; then
   tmpfile=$(mktemp /tmp/pssh_hosts.XXXXXX)
   inventory >"${tmpfile}"
   sed -i '/^[[:blank:]]*$/ d' "${tmpfile}"
-  if [[ "${DEBUG}" == "true" ]]; then
+  if [[ ${DEBUG} == "true" ]]; then
     echo "Hosts list:"
     cat "${tmpfile}"
     echo ''

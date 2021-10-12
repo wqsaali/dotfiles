@@ -36,11 +36,11 @@ function goinstall() {
   PKG="${PKG//github.com\//}"
   [ -z "${PKG}" ] && usage "Missing package name.\nTerminating...\n" >&2
   VERSION="@${2}"
-  if [[ "${VERSION}" == "@latest" ]]; then
+  if [[ ${VERSION} == "@latest" ]]; then
     VERSION=''
   fi
   PREFIX=${3:-${install_to}}
-  [[ "${DEBUG}" == "true" ]] && echo "Installing: ${PKG} ${VERSION} in ${PREFIX}"
+  [[ ${DEBUG} == "true" ]] && echo "Installing: ${PKG} ${VERSION} in ${PREFIX}"
   curl -sLf https://gobinaries.com/"${PKG}""${VERSION}" | PREFIX=${PREFIX} sh
 }
 
@@ -84,7 +84,7 @@ if [ "$0" = "$BASH_SOURCE" ]; then
     usage "You need to provide a package.\nTerminating...\n" >&2
   fi
 
-  if [[ "${BUILD}" == "true" ]]; then
+  if [[ ${BUILD} == "true" ]]; then
     got get -u "${package}"
   else
     goinstall "${package}" "${tag}" "${install_to}"

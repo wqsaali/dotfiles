@@ -21,14 +21,14 @@ brightness() {
 
 case $BLOCK_BUTTON in
 # Left click
-1) brightness $(($light + $INCREMENT)) ;;
+1) brightness $((light + INCREMENT)) ;;
   # Middle click
 2) brightness "$MAXBRIGHTNESS" ;;
   # Right click
-3) brightness $(($light - $INCREMENT)) ;;
+3) brightness $((light - INCREMENT)) ;;
 esac
 
 light=$(cat "$BRIGHTNESS_PATH")
-light=$(($(($light * 100)) / $MAXBRIGHTNESS))
+light=$(($((light * 100)) / MAXBRIGHTNESS))
 echo " $light% "
 echo " $light%"

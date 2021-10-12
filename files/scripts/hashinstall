@@ -34,7 +34,7 @@ function usage {
 function installVagrantPlugins() {
   # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
   if ! [ -x "$(command -v vagrant)" ]; then
-    if [[ "$OSTYPE" != "darwin"* ]]; then
+    if [[ $OSTYPE != "darwin"* ]]; then
       sudo apt-get install vagrant
     else
       brew cask install vagrant --appdir=/Applications
@@ -42,8 +42,8 @@ function installVagrantPlugins() {
     fi
   fi
   while read -r PKG; do
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    [[ ${PKG} =~ ^#.*$ ]] && continue
+    [[ ${PKG} =~ ^\\s*$ ]] && continue
     vagrant plugin install "${PKG}"
   done <files/pkgs/vagrant.lst
 }
@@ -53,12 +53,12 @@ function installHashicorp() {
     version=-1
   fi
 
-  if [[ "$1" == "vagrant" ]]; then
+  if [[ $1 == "vagrant" ]]; then
     installVagrantPlugins
     return
   fi
 
-  if [ -z "$1" ] || [[ "$1" == "list" ]]; then
+  if [ -z "$1" ] || [[ $1 == "list" ]]; then
     if [ -n "${2}" ]; then
       echo 'Available versions:'
       # List available packages:
@@ -124,7 +124,7 @@ done
 if [ "$0" = "$BASH_SOURCE" ]; then
   product="${1:-list}"
 
-  if [[ "$product" != "list" ]]; then
+  if [[ $product != "list" ]]; then
     os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
     arch="${3:-64}"
     installHashicorp "${product}" "${os}" "${arch}"

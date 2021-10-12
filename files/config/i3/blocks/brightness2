@@ -58,11 +58,11 @@ echo ""
 
 if [ "${METHOD}" = "xrandr" ]; then
   # Left click
-  if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-    xrandr --output "$device" --brightness $((($percent + 5) / 100))
+  if [[ ${BLOCK_BUTTON} -eq 1 ]]; then
+    xrandr --output "$device" --brightness $(((percent + 5) / 100))
   # Right click
-  elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
-    xrandr --output "$device" --brightness $((($percent - 5) / 100))
+  elif [[ ${BLOCK_BUTTON} -eq 3 ]]; then
+    xrandr --output "$device" --brightness $(((percent - 5) / 100))
   fi
 fi
 

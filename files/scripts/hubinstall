@@ -70,7 +70,7 @@ function installFromGithub() {
   arch="${3:-64}"
   name="${4:-$(basename "${project}")}"
 
-  if [[ "${os}" == "darwin" ]]; then
+  if [[ ${os} == "darwin" ]]; then
     os='(darwin|osx|macos)'
   fi
 
@@ -78,34 +78,34 @@ function installFromGithub() {
 
   url=$(curl -sL https://api.github.com/repos/"${project}"/releases/latest | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\";\"i\") and (test(\"sha[0-9]+\";\"i\")|not)) | .browser_download_url?" | grep -Ev '(md5|sha[0-9]+)$')
   if [[ $(echo -e "${url}" | wc -l) -gt 1 ]]; then
-    [[ "${DEBUG}" == "true" ]] && echo -e "Got multiple URLs: \n${url}"
+    [[ ${DEBUG} == "true" ]] && echo -e "Got multiple URLs: \n${url}"
     url=$(echo -e "${url}" | grep -E "${project}.*${name}" | head -n 1)
   fi
-  [[ "${DEBUG}" == "true" ]] && echo -e "URL: \n${url}"
+  [[ ${DEBUG} == "true" ]] && echo -e "URL: \n${url}"
 
   if [ -z "${url}" ]; then
     echo 'Error: no releases found, note that pre-releases are not supported!'
     return 1
   fi
   artifact=$(basename "${url}")
-  [[ "${DEBUG}" == "true" ]] && echo -e "Artifact: \n${artifact}"
+  [[ ${DEBUG} == "true" ]] && echo -e "Artifact: \n${artifact}"
 
   re='^(.*)\.(tar\.gz|tgz|zip)$'
   if [[ ${artifact} =~ ${re} ]]; then
     artifact_name=${BASH_REMATCH[1]}
     artifact_ext=${BASH_REMATCH[2]}
-    if [[ "${DEBUG}" == "true" ]]; then
+    if [[ ${DEBUG} == "true" ]]; then
       echo "Artifact ${artifact_name} is a tarball (${artifact_ext})"
     fi
     curl -sLo "${artifact}" "${url}"
-    if [[ "$artifact_ext" == "zip" ]]; then
+    if [[ $artifact_ext == "zip" ]]; then
       unzip "${artifact}" -d "${artifact_name}"
     else
       tar -xzf "${artifact}" --one-top-level="${artifact_folder}" --unlink-first # gnu-tar is needed for this one
     fi
-    [[ "${DEBUG}" == "true" ]] && echo -e "$(tree ${artifact_folder})"
+    [[ ${DEBUG} == "true" ]] && echo -e "$(tree ${artifact_folder})"
     files=$(find ./${artifact_folder}/ -type f -name "${name}*")
-    [[ "${DEBUG}" == "true" ]] && echo -e "files found: \n${files}"
+    [[ ${DEBUG} == "true" ]] && echo -e "files found: \n${files}"
     if [[ $(echo "${files}" | wc -l) -gt 1 ]]; then
       for f in ${files}; do
         install "${f}"
@@ -127,7 +127,7 @@ function getFromRawGithub() {
   project="${1}"
   name="${2:-$(basename "${project}")}"
   tag="${3:-master}"
-  if [[ "${tag}" == "latest" ]]; then
+  if [[ ${tag} == "latest" ]]; then
     tag=$(curl -sL https://api.github.com/repos/"${project}"/releases/latest | jq -r '.tag_name' | tr -d 'v')
   fi
 
@@ -195,7 +195,7 @@ if [ "$0" = "$BASH_SOURCE" ]; then
     usage "You need to provide a project.\nTerminating...\n" >&2
   fi
 
-  if [[ "${RAW}" == "true" ]]; then
+  if [[ ${RAW} == "true" ]]; then
     name="${2:-$(basename "${project}")}"
     installFromRawGithub "${project}" "${name}" "${tag}"
   else

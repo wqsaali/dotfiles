@@ -78,10 +78,10 @@ done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [ -f "/tmp/kurlEnv" ] && [ -f "/tmp/ca.crt" ]; then
-  [[ "${DEBUG}" == "true" ]] && echo "using pre-configured auth"
+  [[ ${DEBUG} == "true" ]] && echo "using pre-configured auth"
   source /tmp/kurlEnv
 else
-  [[ "${DEBUG}" == "true" ]] && echo "getting auth config using kubectl"
+  [[ ${DEBUG} == "true" ]] && echo "getting auth config using kubectl"
   SECRET=$(kubectl get serviceaccount "${SERVICE_ACCOUNT}" -n "${NS}" -o json | jq -Mr '.secrets[].name | select(contains("token"))')
   TOKEN=$(kubectl get secret "${SECRET}" -n "${NS}" -o json | jq -Mr '.data.token' | base64 -d)
   kubectl get secret "${SECRET}" -n "${NS}" -o json | jq -Mr '.data["ca.crt"]' | base64 -d >/tmp/ca.crt
@@ -111,7 +111,7 @@ URI=${1}
 [ -n "${URI}" ] || usage
 shift
 
-if [[ "$OUTPUT" == "stats" ]]; then
+if [[ $OUTPUT == "stats" ]]; then
   curl "${APISERVER}/${URI}" -H "Authorization: Bearer $TOKEN" --cacert /tmp/ca.crt -w @- -o /dev/null -s <<'EOF'
     time_namelookup:  %{time_namelookup}\n
        time_connect:  %{time_connect}\n

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Source: http://askubuntu.com/a/450136
 
-if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+if [[ ${BLOCK_BUTTON} -eq 1 ]]; then
   i3-sensible-terminal -e 'htop'
 fi
 
@@ -13,7 +13,7 @@ PREV_IDLE=0
 
 cpuFile="/tmp/.cpu"
 
-if [[ -f "${cpuFile}" ]]; then
+if [[ -f ${cpuFile} ]]; then
   fileCont=$(cat "${cpuFile}")
   PREV_TOTAL=$(echo "${fileCont}" | head -n 1)
   PREV_IDLE=$(echo "${fileCont}" | tail -n 1)
@@ -30,14 +30,14 @@ for VALUE in "${CPU[@]:0:4}"; do
   let "TOTAL=$TOTAL+$VALUE"
 done
 
-if [[ "${PREV_TOTAL}" != "" ]] && [[ "${PREV_IDLE}" != "" ]]; then
+if [[ ${PREV_TOTAL} != "" ]] && [[ ${PREV_IDLE} != "" ]]; then
   # Calculate the CPU usage since we last checked.
   let "DIFF_IDLE=$IDLE-$PREV_IDLE"
   let "DIFF_TOTAL=$TOTAL-$PREV_TOTAL"
   let "DIFF_USAGE=(1000*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL+5)/10"
   echo " ${DIFF_USAGE}% "
   echo " ${DIFF_USAGE}%"
-  if [[ "${DIFF_USAGE}" -gt 0 ]] && [[ "${DIFF_USAGE}" -gt "${ALERT_VALUE}" ]]; then
+  if [[ ${DIFF_USAGE} -gt 0 ]] && [[ ${DIFF_USAGE} -gt ${ALERT_VALUE} ]]; then
     echo "#FF0000"
   else
     echo ""
@@ -52,6 +52,6 @@ fi
 echo "${TOTAL}" >"${cpuFile}"
 echo "${IDLE}" >>"${cpuFile}"
 
-if [[ "${DIFF_USAGE}" -gt 0 ]] && [[ "${DIFF_USAGE}" -gt "${URGENT_VALUE}" ]]; then
+if [[ ${DIFF_USAGE} -gt 0 ]] && [[ ${DIFF_USAGE} -gt ${URGENT_VALUE} ]]; then
   exit 33
 fi

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ "$OSTYPE" != *"android"* ]]; then
+if [[ $OSTYPE != *"android"* ]]; then
   echo 'Doesnt look like you are on Android'
   echo '  please try the install.sh script'
   exit 1

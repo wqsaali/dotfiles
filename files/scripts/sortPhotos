@@ -5,7 +5,7 @@
 # otherwise it uses the last modification date
 
 STAT_CMD='stat'
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ $OSTYPE == "darwin"* ]]; then
   STAT_CMD='gstat'
 fi
 cfgSource="$1"

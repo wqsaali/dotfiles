@@ -8,7 +8,7 @@ HIGH=""
 icon=' '
 color=''
 
-for i in $(seq 0 $(($NCORES - 1))); do
+for i in $(seq 0 $((NCORES - 1))); do
   CORE="Core $i"
   DATA=$(echo "${OUTPUT}" | egrep -A4 "${CORE}")
   CURRENT="$(echo "${DATA}" | grep -Po "(?<=_input: )([0-9]+)") $CURRENT"
@@ -23,8 +23,8 @@ CURRENT=($CURRENT)
 echo " ${icon} ${CURRENT[@]} "
 echo "${icon} ${CURRENT[@]}"
 
-for i in $(seq 0 $(($NCORES - 1))); do
-  if [[ "${CURRENT[$i]}" -gt "${HIGH[$i]}" ]]; then
+for i in $(seq 0 $((NCORES - 1))); do
+  if [[ ${CURRENT[$i]} -gt ${HIGH[$i]} ]]; then
     color="FF0000"
   fi
 done
