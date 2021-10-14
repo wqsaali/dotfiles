@@ -249,6 +249,7 @@ terraform-docs
 terraform-ls
 terraformer
 terragrunt
+tfk8s
 tflint
 the_silver_searcher
 thefuck
