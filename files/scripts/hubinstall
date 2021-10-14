@@ -76,7 +76,7 @@ function installFromGithub() {
 
   mkdir -p "${install_to}"
 
-  url=$(curl -sL https://api.github.com/repos/"${project}"/releases/latest | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\";\"i\") and (test(\"sha[0-9]+\";\"i\")|not)) | .browser_download_url?" | grep -Ev '(md5|sha[0-9]+)$')
+  url=$(curl -sL "https://api.github.com/repos/${project}/releases/latest" | jq -r ".assets[]? | select(.name | test(\"${os}.*${arch}\";\"i\") and (test(\"sha[0-9]+\";\"i\")|not)) | .browser_download_url?" | grep -Ev '(md5|sha[0-9]+)$')
   if [[ $(echo -e "${url}" | wc -l) -gt 1 ]]; then
     [[ ${DEBUG} == "true" ]] && echo -e "Got multiple URLs: \n${url}"
     url=$(echo -e "${url}" | grep -E "${project}.*${name}" | head -n 1)

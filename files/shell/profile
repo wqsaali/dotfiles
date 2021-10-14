@@ -191,10 +191,6 @@ if [ -d "${HOME}/.sledge/bin" ]; then
   PATH="${PATH}:${SLEDGE_BIN}"
 fi
 
-if [ -d "${HOME}/.colima" ]; then
-  PATH="${HOME}/.colima:${PATH}"
-fi
-
 # Avoid duplicates
 PATH="$(perl -e 'print join(":", grep { not $seen{$_}++ } split(/:/, $ENV{PATH}))')"
 

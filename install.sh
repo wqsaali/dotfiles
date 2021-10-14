@@ -139,7 +139,6 @@ installKubeScripts() {
   git_clone_or_update https://github.com/heptiolabs/ktx "${HOME}/.ktx"
   # git_clone_or_update https://github.com/alexppg/kbenv.git ${HOME}/.kbenv
   # git_clone_or_update https://github.com/alexppg/helmenv.git ${HOME}/.helmenv
-  # git_clone_or_update https://github.com/abiosoft/colima ${HOME}/.colima
 
   installKrew
 
@@ -148,6 +147,7 @@ installKubeScripts() {
   # installFromRawGithub 'ahmetb/kubectx'
   # installFromRawGithub 'ahmetb/kubectx' 'kubens'
 
+  installFromGithub 'abiosoft/colima' '-' "${2}"
   installFromGithub 'flavio/kuberlr' "${1}" "${2}"
   # installFromGithub 'Praqma/helmsman' "${1}" "${2}"
   installFromGithub 'shyiko/kubesec' "${1}" "${2}"
