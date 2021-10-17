@@ -236,6 +236,10 @@ GOPROXY=https://proxy.golang.org
 GO111MODULE=on
 GOVIM_GOPLS_FLAGS=-remote=auto
 
+if [ -f "${HOME}/.config/gh/hosts.yml" ]; then
+  export GITHUB_TOKEN=$(sed -n 's/\s*oauth_token: \(.*\)$/\1/p' "${HOME}/.config/gh/hosts.yml")
+fi
+
 # fzf config
 # Use ag for feeding into fzf for searching files.
 export FZF_DEFAULT_COMMAND='ag -U --hidden --ignore .git -g ""'
