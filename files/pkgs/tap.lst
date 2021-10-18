@@ -11,6 +11,7 @@ derailed/popeye
 egison/egison
 eth-p/software
 gardener/tap
+git-chglog/git-chglog
 habitat-sh/habitat
 hashicorp/tap
 homebrew/cask-drivers
