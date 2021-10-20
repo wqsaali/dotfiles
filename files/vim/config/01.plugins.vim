@@ -88,6 +88,7 @@
   "Plug 'govim/govim', {'for': ['go', 'vim-plug']}
   "Plug 'fatih/vim-go', {'for': ['go', 'vim-plug'], 'do': ':GoUpdateBinaries'}
   " Plug 'arp242/gopher.vim', {'for': ['go', 'vim-plug']}
+  Plug 'meain/vim-jsontogo'
   Plug 'sebdah/vim-delve', {'for': ['go', 'vim-plug']}
 
   Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'vim-plug']}

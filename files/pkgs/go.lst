@@ -4,6 +4,7 @@
 # github.com/hashicorp/terraform
 # k8s.io/helm/cmd/helm
 # k8s.io/kubernetes/cmd/kubectl
+github.com/ChimeraCoder/gojson/gojson
 github.com/axw/gocov/gocov
 github.com/azer/yolo
 github.com/cloudposse/slack-notifier
