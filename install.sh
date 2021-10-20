@@ -149,6 +149,7 @@ installKubeScripts() {
 
   installFromGithub 'abiosoft/colima' '-' "${2}"
   installFromGithub 'flavio/kuberlr' "${1}" "${2}"
+  installFromGithub 'doitintl/kube-no-trouble' "${1}" "${2}" "kubent"
   # installFromGithub 'Praqma/helmsman' "${1}" "${2}"
   installFromGithub 'shyiko/kubesec' "${1}" "${2}"
   installFromGithub 'kubermatic/kubeone' "${1}" "${2}"
