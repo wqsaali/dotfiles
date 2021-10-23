@@ -238,6 +238,7 @@ GOVIM_GOPLS_FLAGS=-remote=auto
 
 if [ -f "${HOME}/.config/gh/hosts.yml" ]; then
   export GITHUB_TOKEN=$(sed -n 's/\s*oauth_token: \(.*\)$/\1/p' "${HOME}/.config/gh/hosts.yml")
+  export GITHUB_API_TOKEN="${GITHUB_TOKEN}"
 fi
 
 # fzf config
