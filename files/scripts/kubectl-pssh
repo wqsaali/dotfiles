@@ -124,6 +124,6 @@ if [ "$0" = "$BASH_SOURCE" ]; then
     echo -e "No hosts found!\n" >&2
     exit 1
   fi
-  pssh -O StrictHostKeyChecking=no -t "${TIMEOUT}" -i -h "${tmpfile}" "${CMD}"
+  eval "pssh -O StrictHostKeyChecking=no -t ${TIMEOUT} -i -h ${tmpfile} ${CMD}"
   rm "${tmpfile}"
 fi
