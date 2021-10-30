@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 # Script to trim kubectl objects by removing some properties
 # By default it will skip all k8s managed properties

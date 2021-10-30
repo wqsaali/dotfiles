@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 # Script to clean kubernetes stale resources
 # This scritp can be used as a kubectl plugin and invoked as a sub-command

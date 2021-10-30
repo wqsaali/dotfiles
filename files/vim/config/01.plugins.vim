@@ -32,6 +32,8 @@
 
   Plug 'tpope/vim-dispatch'
 
+  Plug 'jamestthompson3/nvim-remote-containers'
+
   Plug 'tpope/vim-fugitive'
   Plug 'rbong/vim-flog'
   Plug 'gregsexton/gitv'
@@ -127,7 +129,8 @@
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
-  Plug 'tom-doerr/vim_codex'
+  " Plug 'tom-doerr/vim_codex'
+  Plug 'github/copilot.vim'
 
   call plug#end()
 

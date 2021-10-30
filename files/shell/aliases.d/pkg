@@ -127,6 +127,14 @@ elif [[ "$OSTYPE" == *"android"* ]]; then
   alias dist-upgrade=apt-upgrade
 fi
 
+function asdf-update() {
+  asdf plugin update --all
+  for plugin in $(asdf plugin list); do
+    asdf install ${plugin} latest
+    asdf global ${plugin} latest
+  done
+}
+
 function update-all-things() {
   # rustup self update
   rustup update
@@ -148,7 +156,7 @@ function update-all-things() {
   fi
 
   if [ -x "$(command -v asdf)" ]; then
-    asdf plugin update --all
+    asdf-update
   fi
 
   # vim-update

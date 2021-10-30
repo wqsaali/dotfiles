@@ -83,14 +83,61 @@ fi
 # Setup Compiler paths for readline and openssl
 local READLINE_PATH=$(brew --prefix readline)
 local OPENSSL_PATH=$(brew --prefix openssl)
-export LDFLAGS="-L$READLINE_PATH/lib -L$OPENSSL_PATH/lib"
-export CPPFLAGS="-I$READLINE_PATH/include -I$OPENSSL_PATH/include"
-export PKG_CONFIG_PATH="$READLINE_PATH/lib/pkgconfig:$OPENSSL_PATH/lib/pkgconfig"
+local ZLIB_PATH=$(brew --prefix zlib)
+local BZIP2_PATH=$(brew --prefix bzip2)
+
+# export LDFLAGS="${LDFLAGS}  -L$(xcrun --show-sdk-path)/usr/lib"
+
+export LDFLAGS="${LDFLAGS}  -L${ZLIB_PATH}/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${ZLIB_PATH}/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${ZLIB_PATH}/pkgconfig"
+
+export LDFLAGS="${LDFLAGS}  -L${BZIP2_PATH}/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${BZIP2_PATH}/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BZIP2_PATH}/pkgconfig"
+
+# export LDFLAGS="${LDFLAGS}  -L$(brew --prefix sqlite)/lib"
+# export CPPFLAGS="${CPPFLAGS}  -I$(brew --prefix sqlite)/include"
+# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  $(brew --prefix sqlite)/lib/pkgconfig"
+
+export LDFLAGS="${LDFLAGS}  -L${OPENSSL_PATH}/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${OPENSSL_PATH}/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${OPENSSL_PATH}/lib/pkgconfig"
+
+export LDFLAGS="${LDFLAGS}  -L${READLINE_PATH}/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${READLINE_PATH}/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${READLINE_PATH}/lib/readline"
+
+# export LDFLAGS="${LDFLAGS} -L/usr/local/opt/tcl-tk/lib"
+# export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/tcl-tk/include"
+
+# export CPPFLAGS="${CPPFLAGS} -I$(xcrun --show-sdk-path)/usr/include"
+
+# export LDFLAGS="${LDFLAGS} -L$(brew --prefix tcl-tk)/lib"
+# export CPPFLAGS="${CPPFLAGS} -I$(brew --prefix tcl-tk)/include"
+# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix tcl-tk)/lib/pkgconfig"
+# export CFLAGS="${CFLAGS} -I$(brew --prefix tcl-tk)/include"
+
+# export LDFLAGS="${LDFLAGS}  -L/usr/local/opt/binutils/lib"
+# export CPPFLAGS="${LDFLAGS}  -I/usr/local/opt/binutils/include"
+
+export CFLAGS="-Wno-error=implicit-function-declaration"
 
 # Use brew python
 if [ -d '/usr/local/opt/python/libexec/bin' ]; then
   PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  # TODO: cant compile python with homebrew clang
+  CC="/Library/Developer/CommandLineTools/usr/bin/clang"
+  CXX="/Library/Developer/CommandLineTools/usr/bin/clang++"
+  SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+fi
+
+export PYTHON_CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
+
+# export PYTHON_CONFIGURE_OPTS="${PYTHON_CONFIGURE_OPTS} --with-tcltk-includes='-I$(brew --prefix tcl-tk)/include' --with-tcltk-libs='-L$(brew --prefix tcl-tk)/lib -ltcl8.6 -ltk8.6'"
 
 # if [ -x "$(command -v brew)" ]; then
 #   if [ -d "$(ls -1d $(brew --prefix)/lib/py*/* | tail -n1)" ]; then
