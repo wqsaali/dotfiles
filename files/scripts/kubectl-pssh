@@ -12,9 +12,10 @@
 # Defaults
 DEBUG=false
 NODES=all
-USER=app
+USER=${USER:-app}
 IP=InternalIP
 TIMEOUT=0
+IDENTITY=""
 
 function usage {
   if [ -n "${1}" ]; then
@@ -30,6 +31,7 @@ function usage {
   echo "  -f, --filter <all|healthy|unhealthy>  Filter nodes by their state default: ${NODES}"
   echo "  -u, --user <user>                     ssh user default: ${USER}"
   echo "  -t, --timeout <seconds>               kill ssh process after <seconds> default: ${TIMEOUT}"
+  echo "  -i, --indentity <file>                Path to the identity file"
   echo '                                        setting timeout to 0 disables it'
   echo ''
   exit 1
@@ -43,22 +45,22 @@ function inventory() {
 
   case "${NODES,,}" in
   "healthy" | "ok" | "ready")
-    nodes=$(echo "$nodes" | jq -r '.[] | select(.status=="True") | "app@"+.ip')
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.status=="True") | "'${USER}'@"+.ip')
     ;;
   "unhealthy" | "ko" | "notready")
-    nodes=$(echo "$nodes" | jq -r '.[] | select(.status!="True") | "app@"+.ip')
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.status!="True") | "'${USER}'@"+.ip')
     ;;
   "all")
-    nodes=$(echo "$nodes" | jq -r '.[] | "app@"+.ip')
+    nodes=$(echo "$nodes" | jq -r '.[] | "'${USER}'@"+.ip')
     ;;
   *)
-    nodes=$(echo "$nodes" | jq -r '.[] | select(.name|contains("'${NODES}'")) | "app@"+.ip')
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.name|contains("'${NODES}'")) | "'${USER}'@"+.ip')
     ;;
   esac
   echo -ne "${nodes}" | tr -s '[[:space:]]' '\n'
 }
 
-OPTS=$(getopt -o hdef:u:t: --long help,debug,external-ip,filter:,user:,timeout: -n "$(basename "$0")" -- "$@")
+OPTS=$(getopt -o hdef:u:t:i: --long help,debug,external-ip,filter:,user:,timeout:,identity: -n "$(basename "$0")" -- "$@")
 
 if [ $? != 0 ]; then usage "Terminating...\n" >&2; fi
 
@@ -85,6 +87,10 @@ while true; do
     ;;
   -t | --timeout)
     TIMEOUT="$2"
+    shift 2
+    ;;
+  -i | --identity)
+    IDENTITY="-x '-i $2'"
     shift 2
     ;;
   --)
@@ -124,6 +130,10 @@ if [ "$0" = "$BASH_SOURCE" ]; then
     echo -e "No hosts found!\n" >&2
     exit 1
   fi
-  eval "pssh -O StrictHostKeyChecking=no -t ${TIMEOUT} -i -h ${tmpfile} ${CMD}"
+  cmd="pssh -O StrictHostKeyChecking=no -t ${TIMEOUT} ${IDENTITY} -i -h ${tmpfile} ${CMD}"
+  if [[ ${DEBUG} == "true" ]]; then
+    echo "${cmd}"
+  fi
+  eval "${cmd}"
   rm "${tmpfile}"
 fi
