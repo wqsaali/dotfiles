@@ -22,11 +22,6 @@ BREW_PREFIX="$(brew --prefix)"
 if [ -d "${BREW_PREFIX}/sbin" ] ; then
   PATH="${BREW_PREFIX}/sbin:$PATH"
 fi
-
-# The following are keg only formulas
-# if [ -d "${BREW_PREFIX}/opt/binutils/bin" ]; then
-#   PATH="${BREW_PREFIX}/opt/binutils/bin:$PATH"
-# fi
 if [ -d "${BREW_PREFIX}/opt/curl/bin" ]; then
   PATH="${BREW_PREFIX}/opt/curl/bin:$PATH"
 fi
@@ -57,6 +52,12 @@ if [ -d "${BREW_PREFIX}/opt/llvm/bin" ]; then
   PATH="${BREW_PREFIX}/opt/llvm/bin:$PATH"
 fi
 
+# TODO: can't compile python with homebrew binutils
+# The following are keg only formulas
+# if [ -d "${BREW_PREFIX}/opt/binutils/bin" ]; then
+#   PATH="${BREW_PREFIX}/opt/binutils/bin:$PATH"
+# fi
+
 # Use GNU utils instead of the default ones on MacOS
 if [ -d "${BREW_PREFIX}/opt/findutils/libexec/gnubin" ]; then
   PATH="${BREW_PREFIX}/opt/findutils/libexec/gnubin:$PATH"
@@ -86,51 +87,42 @@ if [ -d "${BREW_PREFIX}/opt/gpatch/bin" ]; then
   PATH="${BREW_PREFIX}/opt/gpatch/bin:$PATH"
 fi
 
-# Setup Compiler paths for readline and openssl
-local READLINE_PATH=$(brew --prefix readline)
-local OPENSSL_PATH=$(brew --prefix openssl)
-local LIBRESSL_PATH=$(brew --prefix libressl)
-local ZLIB_PATH=$(brew --prefix zlib)
-local BZIP2_PATH=$(brew --prefix bzip2)
+# Setup Compiler paths
 
-# export LDFLAGS="${LDFLAGS}  -L$(xcrun --show-sdk-path)/usr/lib"
+export LDFLAGS="${LDFLAGS}  -L${BREW_PREFIX}/opt/zlib/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${BREW_PREFIX}/opt/zlib/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BREW_PREFIX}/opt/zlib/pkgconfig"
 
-export LDFLAGS="${LDFLAGS}  -L${ZLIB_PATH}/lib"
-export CPPFLAGS="${CPPFLAGS}  -I${ZLIB_PATH}/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${ZLIB_PATH}/pkgconfig"
+export LDFLAGS="${LDFLAGS}  -L${BREW_PREFIX}/opt/bzip2/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${BREW_PREFIX}/opt/bzip2/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BREW_PREFIX}/opt/bzip2/pkgconfig"
 
-export LDFLAGS="${LDFLAGS}  -L${BZIP2_PATH}/lib"
-export CPPFLAGS="${CPPFLAGS}  -I${BZIP2_PATH}/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BZIP2_PATH}/pkgconfig"
+export LDFLAGS="${LDFLAGS}  -L${BREW_PREFIX}/opt/libressl/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${BREW_PREFIX}/opt/libressl/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BREW_PREFIX}/opt/libressl/lib/pkgconfig"
 
-export LDFLAGS="${LDFLAGS}  -L${LIBRESSL_PATH}/lib"
-export CPPFLAGS="${CPPFLAGS}  -I${LIBRESSL_PATH}/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${LIBRESSL_PATH}/lib/pkgconfig"
+export LDFLAGS="${LDFLAGS}  -L${BREW_PREFIX}/opt/openssl/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${BREW_PREFIX}/opt/openssl/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BREW_PREFIX}/opt/openssl/lib/pkgconfig"
 
-export LDFLAGS="${LDFLAGS}  -L${OPENSSL_PATH}/lib"
-export CPPFLAGS="${CPPFLAGS}  -I${OPENSSL_PATH}/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${OPENSSL_PATH}/lib/pkgconfig"
+export LDFLAGS="${LDFLAGS}  -L${BREW_PREFIX}/opt/readline/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${BREW_PREFIX}/opt/readline/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BREW_PREFIX}/opt/readline/lib/readline"
 
-export LDFLAGS="${LDFLAGS}  -L${READLINE_PATH}/lib"
-export CPPFLAGS="${CPPFLAGS}  -I${READLINE_PATH}/include"
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${READLINE_PATH}/lib/readline"
-
-# export LDFLAGS="${LDFLAGS}  -L$(brew --prefix sqlite)/lib"
-# export CPPFLAGS="${CPPFLAGS}  -I$(brew --prefix sqlite)/include"
-# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  $(brew --prefix sqlite)/lib/pkgconfig"
+# export LDFLAGS="${LDFLAGS}  -L${BREW_PREFIX}/opt/sqlite/lib"
+# export CPPFLAGS="${CPPFLAGS}  -I${BREW_PREFIX}/opt/sqlite/include"
+# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BREW_PREFIX}/opt/sqlite/lib/pkgconfig"
 
 # export LDFLAGS="${LDFLAGS} -L${BREW_PREFIX}/opt/tcl-tk/lib"
 # export CPPFLAGS="${CPPFLAGS} -I${BREW_PREFIX}/opt/tcl-tk/include"
 
-# export LDFLAGS="${LDFLAGS} -L$(brew --prefix tcl-tk)/lib"
-# export CPPFLAGS="${CPPFLAGS} -I$(brew --prefix tcl-tk)/include"
-# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix tcl-tk)/lib/pkgconfig"
-# export CFLAGS="${CFLAGS} -I$(brew --prefix tcl-tk)/include"
+# export LDFLAGS="${LDFLAGS} -L${BREW_PREFIX}/opt/tcl-tk/lib"
+# export CPPFLAGS="${CPPFLAGS} -I${BREW_PREFIX}/opt/tcl-tk/include"
+# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} ${BREW_PREFIX}/opt/tcl-tk/lib/pkgconfig"
+# export CFLAGS="${CFLAGS} -I${BREW_PREFIX}/opt/tcl-tk/include"
 
 # export LDFLAGS="${LDFLAGS}  -L${BREW_PREFIX}/opt/binutils/lib"
 # export CPPFLAGS="${LDFLAGS}  -I${BREW_PREFIX}/opt/binutils/include"
-
-# export CPPFLAGS="${CPPFLAGS} -I$(xcrun --show-sdk-path)/usr/include"
 
 export CFLAGS="-Wno-error=implicit-function-declaration"
 
@@ -141,14 +133,17 @@ fi
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
   # TODO: cant compile python with homebrew clang
+  SDKROOT="$(xcrun --show-sdk-path)"
+  # export LDFLAGS="${LDFLAGS}  -L${SDKROOT}/usr/lib"
+  # export CPPFLAGS="${CPPFLAGS} -I${SDKROOT}/usr/include"
+
   CC="/Library/Developer/CommandLineTools/usr/bin/clang"
   CXX="/Library/Developer/CommandLineTools/usr/bin/clang++"
-  SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
 fi
 
-export PYTHON_CONFIGURE_OPTS="--with-openssl=${LIBRESSL_PATH}"
+export PYTHON_CONFIGURE_OPTS="--with-openssl=${BREW_PREFIX}/opt/libressl"
 
-# export PYTHON_CONFIGURE_OPTS="${PYTHON_CONFIGURE_OPTS} --with-tcltk-includes='-I$(brew --prefix tcl-tk)/include' --with-tcltk-libs='-L$(brew --prefix tcl-tk)/lib -ltcl8.6 -ltk8.6'"
+# export PYTHON_CONFIGURE_OPTS="${PYTHON_CONFIGURE_OPTS} --with-tcltk-includes='-I${BREW_PREFIX}/opt/tcl-tk/include' --with-tcltk-libs='-L${BREW_PREFIX}/opt/tcl-tk/lib -ltcl8.6 -ltk8.6'"
 
 # if [ -x "$(command -v brew)" ]; then
 #   if [ -d "$(ls -1d $(brew --prefix)/lib/py*/* | tail -n1)" ]; then
@@ -185,7 +180,7 @@ fi
 
 # Use the OpenSSL from Homebrew instead of ruby-build
 # Note: the Homebrew version gets updated, the ruby-build version doesn't
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=${LIBRESSL_PATH}"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=${BREW_PREFIX}/opt/libressl"
 # for older ruby versions you can try
 # export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 

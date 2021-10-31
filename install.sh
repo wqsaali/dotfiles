@@ -147,7 +147,7 @@ installKubeScripts() {
   # installFromRawGithub 'ahmetb/kubectx'
   # installFromRawGithub 'ahmetb/kubectx' 'kubens'
 
-  installFromGithub 'abiosoft/colima' '-' "${2}"
+  # installFromGithub 'abiosoft/colima' '-' "${2}"
   installFromGithub 'flavio/kuberlr' "${1}" "${2}"
   installFromGithub 'doitintl/kube-no-trouble' "${1}" "${2}" "kubent"
   # installFromGithub 'Praqma/helmsman' "${1}" "${2}"
