@@ -17,72 +17,79 @@ fi
 
 #CDPATH
 CDPATH=".:${HOME}:${HOME}/workingCopies:${HOME}/workingCopies/src:$(ls -1d ${HOME}/workingCopies/src/*/ | tr '\n' ':')"
+BREW_PREFIX="$(brew --prefix)"
 
-if [ -d "/usr/local/sbin" ] ; then
-  PATH="/usr/local/sbin:$PATH"
+if [ -d "${BREW_PREFIX}/sbin" ] ; then
+  PATH="${BREW_PREFIX}/sbin:$PATH"
 fi
 
 # The following are keg only formulas
-# if [ -d '/usr/local/opt/binutils/bin' ]; then
-#   PATH="/usr/local/opt/binutils/bin:$PATH"
+# if [ -d "${BREW_PREFIX}/opt/binutils/bin" ]; then
+#   PATH="${BREW_PREFIX}/opt/binutils/bin:$PATH"
 # fi
-if [ -d '/usr/local/opt/curl/bin' ]; then
-  PATH="/usr/local/opt/curl/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/curl/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/curl/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/icu4c/bin' ]; then
-  PATH="/usr/local/opt/icu4c/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/icu4c/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/icu4c/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/libarchive/bin' ]; then
-  PATH="/usr/local/opt/libarchive/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/libarchive/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/libarchive/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/ncurses/bin' ]; then
-  PATH="/usr/local/opt/ncurses/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/ncurses/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/ncurses/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/openssl/bin' ]; then
-  PATH="/usr/local/opt/openssl/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/openssl/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/openssl/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/sqlite/bin' ]; then
-  PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+if [ -d "${BREW_PREFIX}/opt/libressl/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/libressl/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/libpcap/bin' ]; then
-  PATH="/usr/local/opt/libpcap/bin:$PATH"
+
+if [ -d "${BREW_PREFIX}/opt/sqlite/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/sqlite/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/llvm/bin' ]; then
-  PATH="/usr/local/opt/llvm/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/libpcap/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/libpcap/bin:$PATH"
+fi
+if [ -d "${BREW_PREFIX}/opt/llvm/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/llvm/bin:$PATH"
 fi
 
 # Use GNU utils instead of the default ones on MacOS
-if [ -d '/usr/local/opt/findutils/libexec/gnubin' ]; then
-  PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/findutils/libexec/gnubin" ]; then
+  PATH="${BREW_PREFIX}/opt/findutils/libexec/gnubin:$PATH"
 fi
-if [ -d '/usr/local/opt/coreutils/libexec/gnubin' ]; then
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/coreutils/libexec/gnubin" ]; then
+  PATH="${BREW_PREFIX}/opt/coreutils/libexec/gnubin:$PATH"
 fi
-if [ -d '/usr/local/opt/make/libexec/gnubin' ];then
-  PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/make/libexec/gnubin" ];then
+  PATH="${BREW_PREFIX}/opt/make/libexec/gnubin:$PATH"
 fi
-if [ -d "/usr/local/opt/gnu-tar/libexec/gnubin" ]; then
-  PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/gnu-tar/libexec/gnubin" ]; then
+  PATH="${BREW_PREFIX}/opt/gnu-tar/libexec/gnubin:$PATH"
 fi
-if [ -d '/usr/local/opt/gnu-sed/libexec/gnubin' ]; then
-  PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/gnu-sed/libexec/gnubin" ]; then
+  PATH="${BREW_PREFIX}/opt/gnu-sed/libexec/gnubin:$PATH"
 fi
-if [ -d '/usr/local/opt/gnu-getopt/bin' ]; then
-  PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/gnu-getopt/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/gnu-getopt/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/gnu-time/libexec/gnubin' ]; then
-  PATH="/usr/local/opt/gnu-time/libexec/gnubin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/gnu-time/libexec/gnubin" ]; then
+  PATH="${BREW_PREFIX}/opt/gnu-time/libexec/gnubin:$PATH"
 fi
-if [ -d '/usr/local/opt/whois/bin' ]; then
-  PATH="/usr/local/opt/whois/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/whois/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/whois/bin:$PATH"
 fi
-if [ -d '/usr/local/opt/gpatch/bin' ]; then
-  PATH="/usr/local/opt/gpatch/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/gpatch/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/gpatch/bin:$PATH"
 fi
 
 # Setup Compiler paths for readline and openssl
 local READLINE_PATH=$(brew --prefix readline)
 local OPENSSL_PATH=$(brew --prefix openssl)
+local LIBRESSL_PATH=$(brew --prefix libressl)
 local ZLIB_PATH=$(brew --prefix zlib)
 local BZIP2_PATH=$(brew --prefix bzip2)
 
@@ -96,9 +103,9 @@ export LDFLAGS="${LDFLAGS}  -L${BZIP2_PATH}/lib"
 export CPPFLAGS="${CPPFLAGS}  -I${BZIP2_PATH}/include"
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${BZIP2_PATH}/pkgconfig"
 
-# export LDFLAGS="${LDFLAGS}  -L$(brew --prefix sqlite)/lib"
-# export CPPFLAGS="${CPPFLAGS}  -I$(brew --prefix sqlite)/include"
-# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  $(brew --prefix sqlite)/lib/pkgconfig"
+export LDFLAGS="${LDFLAGS}  -L${LIBRESSL_PATH}/lib"
+export CPPFLAGS="${CPPFLAGS}  -I${LIBRESSL_PATH}/include"
+export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${LIBRESSL_PATH}/lib/pkgconfig"
 
 export LDFLAGS="${LDFLAGS}  -L${OPENSSL_PATH}/lib"
 export CPPFLAGS="${CPPFLAGS}  -I${OPENSSL_PATH}/include"
@@ -108,24 +115,28 @@ export LDFLAGS="${LDFLAGS}  -L${READLINE_PATH}/lib"
 export CPPFLAGS="${CPPFLAGS}  -I${READLINE_PATH}/include"
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  ${READLINE_PATH}/lib/readline"
 
-# export LDFLAGS="${LDFLAGS} -L/usr/local/opt/tcl-tk/lib"
-# export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/tcl-tk/include"
+# export LDFLAGS="${LDFLAGS}  -L$(brew --prefix sqlite)/lib"
+# export CPPFLAGS="${CPPFLAGS}  -I$(brew --prefix sqlite)/include"
+# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}  $(brew --prefix sqlite)/lib/pkgconfig"
 
-# export CPPFLAGS="${CPPFLAGS} -I$(xcrun --show-sdk-path)/usr/include"
+# export LDFLAGS="${LDFLAGS} -L${BREW_PREFIX}/opt/tcl-tk/lib"
+# export CPPFLAGS="${CPPFLAGS} -I${BREW_PREFIX}/opt/tcl-tk/include"
 
 # export LDFLAGS="${LDFLAGS} -L$(brew --prefix tcl-tk)/lib"
 # export CPPFLAGS="${CPPFLAGS} -I$(brew --prefix tcl-tk)/include"
 # export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} $(brew --prefix tcl-tk)/lib/pkgconfig"
 # export CFLAGS="${CFLAGS} -I$(brew --prefix tcl-tk)/include"
 
-# export LDFLAGS="${LDFLAGS}  -L/usr/local/opt/binutils/lib"
-# export CPPFLAGS="${LDFLAGS}  -I/usr/local/opt/binutils/include"
+# export LDFLAGS="${LDFLAGS}  -L${BREW_PREFIX}/opt/binutils/lib"
+# export CPPFLAGS="${LDFLAGS}  -I${BREW_PREFIX}/opt/binutils/include"
+
+# export CPPFLAGS="${CPPFLAGS} -I$(xcrun --show-sdk-path)/usr/include"
 
 export CFLAGS="-Wno-error=implicit-function-declaration"
 
 # Use brew python
-if [ -d '/usr/local/opt/python/libexec/bin' ]; then
-  PATH="/usr/local/opt/python/libexec/bin:$PATH"
+if [ -d "${BREW_PREFIX}/opt/python/libexec/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/python/libexec/bin:$PATH"
 fi
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -135,7 +146,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
 fi
 
-export PYTHON_CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
+export PYTHON_CONFIGURE_OPTS="--with-openssl=${LIBRESSL_PATH}"
 
 # export PYTHON_CONFIGURE_OPTS="${PYTHON_CONFIGURE_OPTS} --with-tcltk-includes='-I$(brew --prefix tcl-tk)/include' --with-tcltk-libs='-L$(brew --prefix tcl-tk)/lib -ltcl8.6 -ltk8.6'"
 
@@ -152,6 +163,7 @@ export PYTHON_CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
 # #   done
 # fi
 
+# Load pyenv
 # if [ -x "$(command -v pyenv)" ]; then
 #   eval "$(pyenv init --path)"
 #   eval "$(pyenv init -)"
@@ -159,11 +171,11 @@ export PYTHON_CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
 # fi
 
 # Use brew ruby
-if [ -d '/usr/local/opt/ruby/bin' ]; then
-  PATH="/usr/local/opt/ruby/bin:$PATH"
-  # LDFLAGS="-L/usr/local/opt/ruby/lib"
-  # CPPFLAGS="-I/usr/local/opt/ruby/include"
-  # PKG_CONFIG_PATH="/usr/local/opt/ruby/lib/pkgconfig"
+if [ -d "${BREW_PREFIX}/opt/ruby/bin" ]; then
+  PATH="${BREW_PREFIX}/opt/ruby/bin:$PATH"
+  # LDFLAGS="-L${BREW_PREFIX}/opt/ruby/lib"
+  # CPPFLAGS="-I${BREW_PREFIX}/opt/ruby/include"
+  # PKG_CONFIG_PATH="${BREW_PREFIX}/opt/ruby/lib/pkgconfig"
 fi
 
 if [ -x "$(command -v ruby)" ] && [ -x "$(command -v gem)" ]; then
@@ -173,10 +185,9 @@ fi
 
 # Use the OpenSSL from Homebrew instead of ruby-build
 # Note: the Homebrew version gets updated, the ruby-build version doesn't
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$OPENSSL_PATH"
-
-# Place openssl@1.1 at the beginning of your PATH (preempt system libs)
-export PATH=$OPENSSL_PATH/bin:$PATH
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=${LIBRESSL_PATH}"
+# for older ruby versions you can try
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # Load rbenv
 # eval "$(rbenv init -)"
@@ -203,8 +214,8 @@ if [ -d "$HOME/.linuxbrew/share/info" ]; then
 fi
 
 # K8s stuff
-if [ -d "/usr/local/kubebuilder/bin" ]; then
-  PATH="$PATH:/usr/local/kubebuilder/bin"
+if [ -d "${BREW_PREFIX}/kubebuilder/bin" ]; then
+  PATH="$PATH:${BREW_PREFIX}/kubebuilder/bin"
 fi
 
 PATH="${KREW_ROOT:-${HOME}/.krew}/bin:$PATH"
@@ -230,12 +241,6 @@ if [ -d "${HOME}/.local/bin" ]; then
 fi
 if [ -d "${HOME}/bin" ] ; then
   PATH="${HOME}/bin:$PATH"
-fi
-
-#sledge:binary path
-if [ -d "${HOME}/.sledge/bin" ]; then
-  SLEDGE_BIN=${HOME}/.sledge/bin
-  PATH="${PATH}:${SLEDGE_BIN}"
 fi
 
 # Avoid duplicates
