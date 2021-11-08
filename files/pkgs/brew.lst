@@ -99,6 +99,7 @@ git
 git-chglog
 git-credential-manager
 git-delta
+git-extras
 git-quick-stats
 git-secrets
 gnu-getopt
@@ -181,6 +182,7 @@ mas
 mercurial
 microk8s
 minikube
+mockery
 moreutils
 mtr
 ncdu
