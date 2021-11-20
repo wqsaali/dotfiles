@@ -178,6 +178,7 @@ libsecret
 lima
 llvm
 make
+markdownlint-cli
 mas
 mercurial
 microk8s

@@ -133,6 +133,7 @@ function asdf-update() {
     asdf install ${plugin} latest
     asdf global ${plugin} latest
   done
+  asdf reshim
 }
 
 function update-all-things() {
