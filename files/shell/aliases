@@ -125,6 +125,10 @@ else
   alias Cat='colorcat'
 fi
 
+if [ -x "$(command -v batman)" ]; then
+  alias cls='clear'
+fi
+
 # Colorful less
 function cless() {
   if [ $# -eq 0 ]; then
@@ -133,8 +137,6 @@ function cless() {
     pygmentize -f terminal "$1" | less -R
   fi
 }
-
-alias cls='clear'
 
 # Make open and xdg-open work on all plaforms
 if ! [ -x "$(command -v open)" ]; then

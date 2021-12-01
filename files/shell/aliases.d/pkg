@@ -137,12 +137,17 @@ function asdf-update() {
 }
 
 function update-all-things() {
+  if [ -x "$(command -v asdf)" ]; then
+    asdf-update
+  fi
+
+  dist-upgrade
+
   # rustup self update
   rustup update
   npm-upgrade
   gem-upgrade
   pip-upgrade1
-  dist-upgrade
 
   if [ -x "$(command -v mas)" ]; then
     mas upgrade
@@ -154,10 +159,6 @@ function update-all-things() {
   # Update oh my zsh
   if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
     omz update
-  fi
-
-  if [ -x "$(command -v asdf)" ]; then
-    asdf-update
   fi
 
   # vim-update

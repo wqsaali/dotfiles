@@ -174,8 +174,8 @@ if [ -d "${BREW_PREFIX}/opt/ruby/bin" ]; then
 fi
 
 if [ -x "$(command -v ruby)" ] && [ -x "$(command -v gem)" ]; then
-    PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
-    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+  PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
+  PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
 
 # Use the OpenSSL from Homebrew instead of ruby-build
@@ -236,6 +236,22 @@ if [ -d "${HOME}/.local/bin" ]; then
 fi
 if [ -d "${HOME}/bin" ] ; then
   PATH="${HOME}/bin:$PATH"
+fi
+
+if [ -d "${HOME}/.theme.sh" ]; then
+  PATH="${HOME}/.theme.sh:${PATH}"
+fi
+
+if command -v theme.sh > /dev/null; then
+  [ -e ~/.theme_history ] && theme.sh "$(theme.sh -l|tail -n1)"
+
+  alias th='theme.sh -i'
+
+  # Interactively load a light theme
+  alias thl='theme.sh --light -i'
+
+  # Interactively load a dark theme
+  alias thd='theme.sh --dark -i'
 fi
 
 # Avoid duplicates

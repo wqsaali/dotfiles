@@ -177,6 +177,7 @@ libmagic
 libsecret
 lima
 llvm
+lsd
 make
 markdownlint-cli
 mas
@@ -268,6 +269,7 @@ toilet
 tokei
 tree
 ttyd
+ttyplot
 tubekit
 ufraw
 vagrant-completion

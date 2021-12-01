@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+export COLORTERM='truecolor'
+
 # export EDITOR=vim
 # export VISUAL=vim
 export EDITOR=nvim
