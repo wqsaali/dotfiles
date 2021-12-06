@@ -6,27 +6,27 @@
 
   " Overrides {{{
   if has('autocmd')
-    au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
-    au ColorScheme * hi! Conceal ctermbg=none ctermfg=239  guibg=NONE guifg=#4e4e4e
     " if ! has('gui_macvim')
     "   au ColorScheme * hi! Normal ctermbg=none guibg=NONE
     "   au ColorScheme * hi! NonText ctermbg=none guibg=NONE
     " else
     "   set transparency=5
     " endif
-    "
-    au ColorScheme * hi! Folded ctermbg=none guibg=NONE
-    au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
-    au ColorScheme * hi! link illuminatedWord Visual
-    " au ColorScheme * hi! link illuminatedWord CursorLine
-    au ColorScheme * hi! link CocHighlightText Visual
-    " au ColorScheme * hi! link CocHighlightText CursorLine
-
-    au ColorScheme * hi! CursorLineNr cterm=NONE
     if g:os != 'Android'
       set fillchars+=vert:│
     endif
-    au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none guibg=NONE
+    " au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none guibg=NONE
+
+    " au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
+    " au ColorScheme * hi! Conceal ctermbg=none ctermfg=239  guibg=NONE guifg=#4e4e4e
+    " au ColorScheme * hi! Folded ctermbg=none guibg=NONE
+    " au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
+    au ColorScheme * hi! link illuminatedWord Visual
+    au ColorScheme * hi! link CocHighlightText Visual
+    " au ColorScheme * hi! link illuminatedWord CursorLine
+    " au ColorScheme * hi! link CocHighlightText CursorLine
+
+    " au ColorScheme * hi! CursorLineNr cterm=NONE
 
     " typographic ligatures {{{
     " from: https://maximewack.com/post/emulating_ligatures/
@@ -85,13 +85,20 @@
     set termguicolors
   endif
 
+  let g:rainbow_active = 1
+
   let base16colorspace=256
   set guifont=JetBrainsMono\ Nerd\ Font:h12
 
   " use a slightly darker background, like GitHub inline code blocks
-  let g:github_colors_soft = 1
+  let g:github_colors_soft = 0
   " more blocky diff markers in signcolumn (e.g. GitGutter)
   let g:github_colors_block_diffmark = 0
+
+  let g:gh_color = "soft"
+
+  let g:github_sidebars = ["qf", "vista_kind", "terminal", "packer"]
+  " let g:github_transparent = 1
 
   let g:tokyonight_style = 'night' " available: night, storm
   let g:tokyonight_disable_italic_comment = 0
@@ -99,21 +106,24 @@
   " let g:tokyonight_transparent_background = 1
   let g:tokyonight_current_word = 'underline' " available: 'bold', 'underline', 'italic', 'grey background'
 
-  " let g:airline_theme = 'base16_tomorrow'
+  let g:airline_theme = 'base16_tomorrow'
   " let g:airline_theme = 'github'
-  let g:airline_theme = 'tokyonight'
-  " let g:lightline = { 'colorscheme': 'github' }
-  let g:lightline = {'colorscheme' : 'tokyonight'}
+  " let g:airline_theme = 'ghdark'
+  " let g:airline_theme = 'tokyonight'
+  " let g:airline_theme = 'term'
 
-  let g:clap_theme = 'atom_dark'
+  let g:lightline = { 'colorscheme': 'github' }
+  " let g:lightline = {'colorscheme' : 'ghdark'}
+  " let g:lightline = {'colorscheme' : 'tokyonight'}
 
-  let g:rainbow_active = 1
+  " let g:clap_theme = 'atom_dark'
+  " let g:clap_theme = 'onehalfdark'
 
-  " color Tomorrow-Night-Bright
-  " color molokai
-  " color base16-chalk
-  " color github
-  color tokyonight
+  if (has("nvim"))
+    colorscheme github_dark_default
+  else
+    colorscheme ghdark
+  endif
 
   " if has('nvim')
   "   set pumblend=5

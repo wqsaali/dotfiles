@@ -70,12 +70,15 @@
   Plug 'vim-airline/vim-airline-themes'
   " Plug 'rbong/vim-crystalline'
 
-  " Plug 'flazz/vim-colorschemes'
   " Plug 'rainglow/vim'
+  " Plug 'flazz/vim-colorschemes'
   " Plug 'rafi/awesome-vim-colorschemes'
   Plug 'chriskempson/base16-vim'
   Plug 'cormacrelf/vim-colors-github'
+  Plug 'wojciechkepka/vim-github-dark'
+  Plug 'projekt0n/github-nvim-theme'
   Plug 'ghifarit53/tokyonight-vim'
+  Plug 'mangeshrex/uwu.vim'
 
   Plug 'frazrepo/vim-rainbow'
   " Plug 'nvim-treesitter/nvim-treesitter'

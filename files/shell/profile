@@ -239,7 +239,7 @@ if [ -d "${HOME}/bin" ] ; then
 fi
 
 if [ -d "${HOME}/.theme.sh" ]; then
-  PATH="${HOME}/.theme.sh:${PATH}"
+  PATH="${HOME}/.theme.sh/bin:${PATH}"
 fi
 
 if command -v theme.sh > /dev/null; then
