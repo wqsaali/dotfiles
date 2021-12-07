@@ -17,16 +17,20 @@
     endif
     " au ColorScheme * hi VertSplit cterm=none ctermfg=Black ctermbg=none guibg=NONE
 
-    " au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
     " au ColorScheme * hi! Conceal ctermbg=none ctermfg=239  guibg=NONE guifg=#4e4e4e
+    " au ColorScheme * hi! FoldColumn ctermbg=none ctermfg=none guibg=NONE
     " au ColorScheme * hi! Folded ctermbg=none guibg=NONE
     " au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
-    au ColorScheme * hi! link illuminatedWord Visual
-    au ColorScheme * hi! link CocHighlightText Visual
+    " au ColorScheme * hi! CursorLineNr cterm=NONE
+
     " au ColorScheme * hi! link illuminatedWord CursorLine
     " au ColorScheme * hi! link CocHighlightText CursorLine
+    au ColorScheme * hi! link illuminatedWord Visual
+    au ColorScheme * hi! link CocHighlightText Visual
 
-    " au ColorScheme * hi! CursorLineNr cterm=NONE
+    " au ColorScheme * hi! CocUnderline gui=undercurl term=undercurl
+    " au ColorScheme * hi! CocErrorHighlight ctermfg=red guisp=red guifg=#c4384b gui=undercurl term=undercurl
+    " au ColorScheme * hi! CocWarningHighlight ctermfg=yellow guisp=yellow guifg=#c4ab39 gui=undercurl term=undercurl
 
     " typographic ligatures {{{
     " from: https://maximewack.com/post/emulating_ligatures/
@@ -75,14 +79,14 @@
   " }}}
 
   " Use GIU colors
-  if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  else
+  if has("termguicolors")
+    set termguicolors
+  endif
+  if !has("nvim")
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  endif
-  if (has("termguicolors"))
-    set termguicolors
+    let &t_Cs = "\e[4:3m"
+    let &t_Ce = "\e[4:0m"
   endif
 
   let g:rainbow_active = 1
@@ -119,7 +123,7 @@
   " let g:clap_theme = 'atom_dark'
   " let g:clap_theme = 'onehalfdark'
 
-  if (has("nvim"))
+  if has("nvim")
     colorscheme github_dark_default
   else
     colorscheme ghdark

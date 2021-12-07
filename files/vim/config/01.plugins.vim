@@ -80,6 +80,10 @@
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'mangeshrex/uwu.vim'
 
+  if has('nvim')
+    Plug 'folke/lsp-colors.nvim'
+  endif
+
   Plug 'frazrepo/vim-rainbow'
   " Plug 'nvim-treesitter/nvim-treesitter'
   " Plug 'p00f/nvim-ts-rainbow'
