@@ -110,15 +110,12 @@
   " let g:tokyonight_transparent_background = 1
   let g:tokyonight_current_word = 'underline' " available: 'bold', 'underline', 'italic', 'grey background'
 
-  let g:airline_theme = 'base16_tomorrow'
   " let g:airline_theme = 'github'
   " let g:airline_theme = 'ghdark'
-  " let g:airline_theme = 'tokyonight'
-  " let g:airline_theme = 'term'
+  let g:airline_theme = 'base16_black_metal'
 
   let g:lightline = { 'colorscheme': 'github' }
   " let g:lightline = {'colorscheme' : 'ghdark'}
-  " let g:lightline = {'colorscheme' : 'tokyonight'}
 
   " let g:clap_theme = 'atom_dark'
   " let g:clap_theme = 'onehalfdark'
