@@ -23,10 +23,10 @@
     " au ColorScheme * hi! CursorLine ctermfg=none guifg=NONE gui=NONE term=NONE cterm=NONE
     " au ColorScheme * hi! CursorLineNr cterm=NONE
 
-    " au ColorScheme * hi! link illuminatedWord CursorLine
     " au ColorScheme * hi! link CocHighlightText CursorLine
+    " au ColorScheme * hi! link illuminatedWord CursorLine
+    " au ColorScheme * hi! link CocHighlightText Visual
     au ColorScheme * hi! link illuminatedWord Visual
-    au ColorScheme * hi! link CocHighlightText Visual
 
     " au ColorScheme * hi! CocUnderline gui=undercurl term=undercurl
     " au ColorScheme * hi! CocErrorHighlight ctermfg=red guisp=red guifg=#c4384b gui=undercurl term=undercurl
@@ -90,6 +90,10 @@
   endif
 
   let g:rainbow_active = 1
+
+  " let g:minimap_highlight_range = 1
+  let g:minimap_highlight_search = 1
+  let g:minimap_git_colors = 1
 
   let base16colorspace=256
   set guifont=JetBrainsMono\ Nerd\ Font:h12

@@ -70,6 +70,8 @@
   Plug 'vim-airline/vim-airline-themes'
   " Plug 'rbong/vim-crystalline'
 
+  Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+
   " Plug 'rainglow/vim'
   " Plug 'flazz/vim-colorschemes'
   " Plug 'rafi/awesome-vim-colorschemes'
@@ -82,6 +84,7 @@
 
   if has('nvim')
     Plug 'folke/lsp-colors.nvim'
+    Plug 'rcarriga/nvim-notify'
   endif
 
   Plug 'frazrepo/vim-rainbow'
