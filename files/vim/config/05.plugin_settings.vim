@@ -176,6 +176,10 @@
   let g:indentLine_color_dark = 1 " (default: 2)'
   " }}}
 
+  " IndentBlankLine {{{
+  let g:indent_blankline_disable_warning_message = 0
+  " }}}
+
   " Conoline {{{
   " if !&diff
   "   let g:conoline_auto_enable = 1

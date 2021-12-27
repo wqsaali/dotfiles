@@ -50,7 +50,6 @@
 
   Plug 'ryanoasis/vim-devicons'
 
-  Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
   Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
@@ -78,13 +77,16 @@
   Plug 'chriskempson/base16-vim'
   Plug 'cormacrelf/vim-colors-github'
   Plug 'wojciechkepka/vim-github-dark'
-  Plug 'projekt0n/github-nvim-theme'
   Plug 'ghifarit53/tokyonight-vim'
   Plug 'mangeshrex/uwu.vim'
 
   if has('nvim')
     Plug 'folke/lsp-colors.nvim'
+    Plug 'projekt0n/github-nvim-theme'
     Plug 'rcarriga/nvim-notify'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+  else
+    Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
   endif
 
   Plug 'frazrepo/vim-rainbow'
