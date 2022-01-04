@@ -69,7 +69,7 @@
   Plug 'vim-airline/vim-airline-themes'
   " Plug 'rbong/vim-crystalline'
 
-  Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+  Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap','on': 'MinimapToggle'}
 
   " Plug 'rainglow/vim'
   " Plug 'flazz/vim-colorschemes'

@@ -32,6 +32,9 @@
     " au ColorScheme * hi! CocErrorHighlight ctermfg=red guisp=red guifg=#c4384b gui=undercurl term=undercurl
     " au ColorScheme * hi! CocWarningHighlight ctermfg=yellow guisp=yellow guifg=#c4ab39 gui=undercurl term=undercurl
 
+    au ColorScheme * hi! link ClapPreview Pmenu
+    " au ColorScheme * hi! link ClapDisplay PmenuSel
+
     " typographic ligatures {{{
     " from: https://maximewack.com/post/emulating_ligatures/
     " if has('conceal')
