@@ -144,7 +144,12 @@ function update-all-things() {
   dist-upgrade
 
   # rustup self update
-  rustup update
+  if [ -x "$(command -v rustup)" ]; then
+    rustup update
+  fi
+  if [ -x "$(command -v cargo)" ]; then
+    cargo install-update -a
+  fi
   npm-upgrade
   gem-upgrade
   pip-upgrade1
