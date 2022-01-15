@@ -9,19 +9,6 @@ function _isFunction() {
   eval "$check $1" >/dev/null
 }
 
-# kubectl-aliases
-[ -f ${HOME}/.ktx ] && source ${HOME}/.ktx/ktx
-[ -f $HOME/.kbenv/kbenv.sh ] && source $HOME/.kbenv/kbenv.sh
-[ -f $HOME/.helmenv/helmenv.sh ] && source $HOME/.helmenv/helmenv.sh
-[ -f ${HOME}/.kube-fzf/kube-fzf.sh ] && source ${HOME}/.kube-fzf/kube-fzf.sh
-[ -f ${HOME}/.fubectl/fubectl.source ] && source ${HOME}/.fubectl/fubectl.source
-
-[ -f ~/.kubectl_aliases/.kubectl_aliases ] && source ~/.kubectl_aliases/.kubectl_aliases
-# to use GNU watch command instead of kubectl [...] --watch
-# [ -f ~/.kubectl_aliases/.kubectl_aliases ] && source <(cat ~/.kubectl_aliases/.kubectl_aliases | sed -r 's/(kubectl.*) --watch/watch \1/g')
-# to print the full command before running it
-# function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
-
 # Extra aliases
 for f in $HOME/.aliases.d/*; do
   if [ -f "$f" ]; then
@@ -75,7 +62,6 @@ alias back='cd $OLDPWD'
 
 # Grep aliases
 alias gr='rg -g "!*vendor/*"'
-
 alias todos="rg -n --nogroup '(TODO|FIX(ME)?):'"
 
 function fr() {

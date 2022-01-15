@@ -415,6 +415,7 @@ installShellConf() {
   cat files/shell/aliases | sed -e "${sedcmd}" >"${HOME}"/.aliases
 
   git_clone_or_update https://github.com/ahmetb/kubectl-aliases.git "${HOME}/.kubectl_aliases"
+  git_clone_or_update https://github.com/zer0beat/terraform-aliases.git "${HOME}/.terraform_aliases"
 
   # installFishConf
   installBashConf
