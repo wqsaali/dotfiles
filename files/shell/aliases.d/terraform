@@ -4,6 +4,9 @@
 [ -f ${HOME}/.terraform_aliases/.terraform_aliases ] && source ${HOME}/.terraform_aliases/.terraform_aliases
 [ -f ${HOME}/.terraform_aliases/.terragrunt_aliases ] && source ${HOME}/.terraform_aliases/.terragrunt_aliases
 
+alias tfsrma='terraform state list | cut -f 1 -d '[' | xargs -L 1 terraform state rm'
+alias tgsrma='terragrunt state list | sed '\''s/"/\\"/g'\'' | xargs -L1 terragrunt state rm'
+
 alias tfplan='terraform plan'
 alias tfapply='terraform apply -auto-approve'
 alias tfdestroy='terraform destroy'
