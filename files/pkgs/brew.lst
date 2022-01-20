@@ -256,6 +256,7 @@ telnet
 terrafile
 terraform
 terraform-docs
+terraform-inventory
 terraform-ls
 terraformer
 terragrunt
