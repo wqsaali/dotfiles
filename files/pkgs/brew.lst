@@ -137,6 +137,7 @@ httpstat
 hub
 hyperfine
 hyperkit
+iam-policy-json-to-terraform
 imagemagick
 imgpkg
 inframap
@@ -258,6 +259,7 @@ terraform
 terraform-docs
 terraform-inventory
 terraform-ls
+terraform_landscape
 terraformer
 terragrunt
 tfk8s
