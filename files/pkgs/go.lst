@@ -15,12 +15,12 @@ github.com/go-critic/go-critic/cmd/gocritic
 github.com/go-delve/delve/cmd/dlv
 github.com/go-swagger/go-swagger/cmd/swagger
 github.com/gokcehan/lf
-github.com/golang/lint/golint
+golang.org/x/lint
 github.com/gregoryv/uncover/...
 github.com/ivanilves/lstags
 github.com/juliosueiras/terraform-lsp
 github.com/kubernauts/tk8
-github.com/kubernetes-sigs/controller-tools/cmd/controller-gen
+sigs.k8s.io/controller-tools/cmd/controller-gen
 github.com/kubicorn/kubicorn
 github.com/kyoh86/richgo
 github.com/liggitt/audit2rbac
@@ -29,7 +29,7 @@ github.com/pkg/errors
 github.com/posener/goreadme/cmd/goreadme
 github.com/princjef/gomarkdoc/cmd/gomarkdoc
 github.com/rancher/k3d
-github.com/reactiveops/rbac-lookup
+github.com/fairwindsops/rbac-lookup
 github.com/sahil-lakhwani/creyaml
 github.com/spf13/cobra/cobra
 github.com/spf13/viper
