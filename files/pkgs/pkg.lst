@@ -39,6 +39,7 @@ gettext
 git
 git-delta
 glib
+glow
 gnupg
 golang
 gpgv
