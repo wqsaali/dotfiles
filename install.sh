@@ -226,6 +226,11 @@ installGoPkgs() {
   installPkgList "go install" <(sed 's|$|@latest|g' files/pkgs/go.lst)
 }
 
+installGhExtensions() {
+  installPkgList "gh extension install" files/pkgs/gh.lst
+  installPkgList "gh extension upgrade" files/pkgs/gh.lst
+}
+
 cleanGoPkgs() {
   go clean -modcache
   rm -rf "${HOME}/.glide/"*
@@ -402,6 +407,9 @@ installGitConf() {
   done
   cat files/git/gitconfig | sed -e "${sedcmd}" >"${HOME}/.gitconfig"
   cp files/git/gitexcludes "${HOME}/.gitexcludes"
+  if [ -x "$(command -v gh)" ]; then
+    installGhExtensions
+  fi
 }
 
 installShellConf() {
