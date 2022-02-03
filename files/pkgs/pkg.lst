@@ -36,6 +36,7 @@ game-repo
 gawk
 gdbm
 gettext
+gh
 git
 git-delta
 glib
