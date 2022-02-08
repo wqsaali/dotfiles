@@ -28,7 +28,7 @@ function yaml-diff() {
   if [ -z $section2 ]; then
     section2=$section1
   fi
-  colordiff $opts <(yq e "$section1|sortKeys(..)" ${1}) <(yq e "$section2|sortKeys(..)" ${2})
+  colordiff -W $(tput cols) $opts <(yq e "$section1|sortKeys(..)" ${1}) <(yq e "$section2|sortKeys(..)" ${2})
 }
 
 function json-merge() {

@@ -243,8 +243,9 @@ GO111MODULE=on
 GOVIM_GOPLS_FLAGS=-remote=auto
 
 if [ -f "${HOME}/.config/gh/hosts.yml" ]; then
-  export GITHUB_TOKEN=$(sed -n 's/\s*oauth_token:\s*\(.*\)$/\1/p' "${HOME}/.config/gh/hosts.yml" | tr -d "[:blank:]")
+  export GITHUB_TOKEN=$(yq e '."github.com".oauth_token' ~/.config/gh/hosts.yml | tr -d '[:blank:]')
   export GITHUB_API_TOKEN="${GITHUB_TOKEN}"
+  export GITHUB_PKG_REG_TOKEN="${GITHUB_TOKEN}"
 fi
 
 # fzf config
