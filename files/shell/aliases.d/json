@@ -13,7 +13,7 @@ function json-diff() {
   if [ -z $section2 ]; then
     section2=$section1
   fi
-  colordiff $opts <(jq -S "$section1" ${1}) <(jq -S "$section2" ${2})
+  colordiff -W $(tput cols) $opts <(jq -S "$section1" ${1}) <(jq -S "$section2" ${2})
 }
 
 # Usage: yaml-diff [diff_opts] file1 file2 section_on_file1 section_on_file2
