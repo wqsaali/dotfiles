@@ -51,7 +51,7 @@ function ecr-login() {
 
 # switch AWS profiles
 function actx() {
-  CTX="${1}"
+  CTX="${1-}"
   if [ -z "${CTX}" ]; then
     CTX="$(aws configure list-profiles|fzf)"
   fi
@@ -68,7 +68,7 @@ function actx() {
 
 # switch AWS regions
 function actr() {
-  CTX="${1}"
+  CTX="${1-}"
   if [ -z "${CTX}" ]; then
     CTX="$(aws --output json ec2 describe-regions | jq -r '.Regions[]|.RegionName'|fzf)"
   fi
@@ -81,7 +81,7 @@ function actr() {
 # switch EKS contexts
 function ectx() {
   CFG_DIR=~/.kube/config.d
-  CTX="${1}"
+  CTX="${1-}"
   if [ -z "${CTX}" ]; then
     CTX="$(aws --output json eks list-clusters | jq -r '.clusters[]' | fzf)"
   fi
@@ -95,4 +95,31 @@ function ectx() {
   # fi
   export KUBECONFIG="${CFG_DIR}/${CTX}"
   aws eks update-kubeconfig --name "${CTX}" ${role}
+}
+
+function aws-assume-role() {
+  role="${1-}"
+  if [ -z "${role}" ]; then
+    role="$(aws sts get-caller-identity --output text --query 'Arn')"
+  fi
+  if [ -z "${role}" ]; then
+    echo "failed to get role ARN"
+    return
+  fi
+  sessionName="${2-}"
+  if [ -z "${sessionName}" ]; then
+    sessionName="${role##*/}"
+  fi
+  result=$(find ~/.aws/cli/cache -type f -name "*.json" -exec grep "\"Arn\": \"${role}\"" {} \;)
+  if [ -z "${result}" ]; then
+    result=$(aws sts assume-role --role-arn ${role} --role-session-name ${sessionName})
+    if [ -z "${result}" ]; then
+      echo "failed to assume role"
+      return
+    fi
+  fi
+  # eval $(echo ${result} | jq -r '"export AWS_ACCESS_KEY_ID=\""+.Credentials.AccessKeyId+"\"; export AWS_SECRET_ACCESS_KEY=\""+.Credentials.SecretAccessKey+"\"; export AWS_SESSION_TOKEN=\""+.Credentials.SessionToken+"\";"')
+  export AWS_ACCESS_KEY_ID=$(echo "${result}" | jq -r '.Credentials.AccessKeyId')
+  export AWS_SECRET_ACCESS_KEY=$(echo "${result}" | jq -r '.Credentials.SecretAccessKey')
+  export AWS_SESSION_TOKEN=$(echo "${result}" | jq -r '.Credentials.SessionToken')
 }

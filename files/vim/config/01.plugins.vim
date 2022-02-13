@@ -204,6 +204,7 @@ let g:coc_global_extensions = [
       \ 'coc-tag',
       \ 'coc-terminal',
       \ 'coc-toml',
+      \ 'coc-jsref',
       \ 'coc-tsdetect',
       \ 'coc-tsserver',
       \ 'coc-ultisnips',
