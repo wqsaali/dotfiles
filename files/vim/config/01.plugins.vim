@@ -85,12 +85,12 @@
     Plug 'projekt0n/github-nvim-theme'
     Plug 'rcarriga/nvim-notify'
     Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   else
     Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
   endif
 
   Plug 'frazrepo/vim-rainbow'
-  " Plug 'nvim-treesitter/nvim-treesitter'
   " Plug 'p00f/nvim-ts-rainbow'
   " Plug 'junegunn/rainbow_parentheses.vim'
 
@@ -111,6 +111,7 @@
   Plug 'kevinoid/vim-jsonc'
   Plug 'jjo/vim-cue'
   " Plug 'posva/vim-vue'
+  " Plug 'sheerun/vim-polyglot' " see: https://github.com/sheerun/vim-polyglot/issues/779
 
   Plug 'iamcco/markdown-preview.nvim', {'for': ['markdown', 'vim-plug'], 'do': 'cd app & yarn install' }
 
@@ -135,7 +136,6 @@
 
   Plug 'puremourning/vimspector', {'for': ['c', 'cpp', 'go', 'python', 'java', 'javascript', 'sh', 'vim-plug'], 'do': function('BuildVimspector')}
 
-  Plug 'sheerun/vim-polyglot'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   " Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}

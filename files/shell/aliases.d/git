@@ -77,6 +77,7 @@ alias gco='git checkout'
 alias gcom='git checkout $(git-main_branch)'
 alias gdm='git diff $(git-main_branch)'
 alias grbm='git rebase $(git-main_branch)'
+alias grbr='git rebase --root'
 alias gaf='git amend . && git force'
 alias gtn='git tag $(svu next)'
 

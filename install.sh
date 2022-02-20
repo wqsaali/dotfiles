@@ -371,6 +371,7 @@ installVimPlugins() {
     curl -sLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
   vim +PlugInstall +qall
+  nvim +'TSInstall all' +qall
 }
 
 installKakPlugins() {

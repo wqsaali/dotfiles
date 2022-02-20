@@ -27,7 +27,7 @@
   findbranch = branch -a --contains
   findtagbranch = "!git findbranch `git findtag`"
   cleanup = "!git clean -fdX && git branch --merged | grep  -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d"
-  remove-untacked = "!git sb | grep '??' | awk '{print $2}' | xargs rm"
+  remove-untacked = "!git sb | grep '??' | awk '{print $2}' | xargs rm -rf"
   accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
   accept-theirs = "!f() { git checkout --theirs -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
   unstage = reset --
