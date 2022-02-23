@@ -11,6 +11,10 @@ INSTALLDIR=$(pwd)
 installPackages() {
   apt update && apt upgrade
   cat files/pkgs/pkg.lst | grep -Ev '\s*#' | tr '\n' ' ' | xargs apt install -y
+
+  ./install.sh gopkgs
+  pip install -U pip
+  pip install -U neovim
 }
 
 installDotFiles() {
@@ -44,7 +48,6 @@ installAll() {
   installPackages
   installDotFiles
   osConfigs
-  ./install.sh gopkgs
 }
 
 case "$1" in
