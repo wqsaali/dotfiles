@@ -15,6 +15,15 @@ installPackages() {
   ./install.sh gopkgs
   pip install -U pip
   pip install -U neovim
+  installAwsCli
+}
+
+installAwsCli() {
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+  unzip awscliv2.zip
+  ./aws/install -i ~/.local/aws-cli -b ~/.local/bin --update
+  rm -rf aws
+  rm awscliv2.zip
 }
 
 installDotFiles() {
