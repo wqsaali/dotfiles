@@ -14,7 +14,11 @@ installPackages() {
 
   ./install.sh gopkgs
   pip install -U pip
+  pip install -U pipx
   pip install -U neovim
+  # pip install -U awscliv2
+  # export CARGO_BUILD_TARGET=aarch64-linux-android
+  # pipx install git+https://github.com/aws/aws-cli.git@v2
   installAwsCli
 }
 

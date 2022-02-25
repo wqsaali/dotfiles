@@ -2,6 +2,10 @@
 
 # AWS aliases
 
+# if [[ -x "$(command -v awsv2)" && ! -x "$(command -v aws)" ]]; then
+#   alias aws='awsv2'
+# fi
+
 function aws_env() {
   if [ -n "${1}" ]; then
     profile="--profile ${1}"
