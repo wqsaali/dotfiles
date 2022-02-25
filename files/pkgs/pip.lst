@@ -35,6 +35,7 @@ nginxfmt
 openai
 parallel-ssh
 pip
+pipx
 pre-commit
 pterraform
 ptpython
