@@ -38,6 +38,7 @@ alias kd='kctl describe'
 alias kvs='kctl view-secret'
 alias keds='command kubectl modify-secret'
 alias ked='command kubectl edit'
+alias krr='kubectl rollout restart'
 
 function kgy() {
   kubectl get ${@} -o yaml | bat --paging never --theme ${BAT_THEME:-TwoDark} -p -l yaml

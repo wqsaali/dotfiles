@@ -103,8 +103,10 @@ function ectx() {
 
 function aws-assume-role() {
   role="${1-}"
+  assumed_role=""
   if [ -z "${role}" ]; then
-    role="$(aws sts get-caller-identity --output text --query 'Arn')"
+    assumed_role="$(aws sts get-caller-identity --output text --query 'Arn')"
+    role=${"${assumed_role%/*}/assumed-/"}
   fi
   if [ -z "${role}" ]; then
     echo "failed to get role ARN"
@@ -112,7 +114,11 @@ function aws-assume-role() {
   fi
   sessionName="${2-}"
   if [ -z "${sessionName}" ]; then
-    sessionName="${role##*/}"
+    if [ -n "${assumed_role}" ]; then
+      sessionName="${assumed_role##*/}"
+    else
+      sessionName="$(date +%s)"
+    fi
   fi
   result=$(find ~/.aws/cli/cache -type f -name "*.json" -exec grep "\"Arn\": \"${role}\"" {} \;)
   if [ -z "${result}" ]; then
