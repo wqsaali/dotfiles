@@ -602,6 +602,7 @@ installPackages() {
   installVscodePackages
   installGoss
   installEls
+  installFromRawGithub 'mattolenik/hclq'
 }
 
 installOSSpecific() {
