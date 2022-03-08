@@ -226,7 +226,7 @@ export BAT_THEME='Enki-Tokyo-Night'
 # export BAT_PAGER="less -R"
 export DELTA_PAGER="less -LREFX"
 export PAGER="bat -p"
-export AWS_PAGER="bat -p"
+export AWS_PAGER="bat -p ${AWS_PAGER_OPTS}"
 
 # Colored grep
 # export GREP_OPTIONS='--color=auto'

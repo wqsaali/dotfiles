@@ -64,6 +64,10 @@ alias back='cd $OLDPWD'
 alias gr='rg -g "!*vendor/*"'
 alias todos="rg -n --nogroup '(TODO|FIX(ME)?):'"
 
+function envgrep() {
+  printenv | awk "/${1}/ {print \$1}"
+}
+
 function fr() {
   type=""
   if ! [ -z "${3}" ]; then
