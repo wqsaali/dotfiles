@@ -6,6 +6,39 @@
 #   alias aws='awsv2'
 # fi
 
+function aws-assume-role() {
+  role="${1-}"
+  assumed_role=""
+  if [ -z "${role}" ]; then
+    assumed_role="$(aws sts get-caller-identity --output text --query 'Arn')"
+    role=${"${assumed_role%/*}/assumed-/"}
+  fi
+  if [ -z "${role}" ]; then
+    echo "failed to get role ARN"
+    return
+  fi
+  sessionName="${2-}"
+  if [ -z "${sessionName}" ]; then
+    if [ -n "${assumed_role}" ]; then
+      sessionName="${assumed_role##*/}"
+    else
+      sessionName="$(date +%s)"
+    fi
+  fi
+  result=$(find ~/.aws/cli/cache -type f -name "*.json" -exec grep "\"Arn\": \"${role}\"" {} \;)
+  if [ -z "${result}" ]; then
+    result=$(aws sts assume-role --role-arn ${role} --role-session-name ${sessionName})
+    if [ -z "${result}" ]; then
+      echo "failed to assume role"
+      return
+    fi
+  fi
+  # eval $(echo ${result} | jq -r '"export AWS_ACCESS_KEY_ID=\""+.Credentials.AccessKeyId+"\"; export AWS_SECRET_ACCESS_KEY=\""+.Credentials.SecretAccessKey+"\"; export AWS_SESSION_TOKEN=\""+.Credentials.SessionToken+"\";"')
+  export AWS_ACCESS_KEY_ID=$(echo "${result}" | jq -r '.Credentials.AccessKeyId')
+  export AWS_SECRET_ACCESS_KEY=$(echo "${result}" | jq -r '.Credentials.SecretAccessKey')
+  export AWS_SESSION_TOKEN=$(echo "${result}" | jq -r '.Credentials.SessionToken')
+}
+
 function aws_env() {
   if [ -n "${1}" ]; then
     profile="--profile ${1}"
@@ -83,7 +116,7 @@ function actr() {
 }
 
 # switch EKS contexts
-function ectx() {
+function ekctx() {
   CFG_DIR=~/.kube/config.d
   CTX="${1-}"
   if [ -z "${CTX}" ]; then
@@ -99,37 +132,4 @@ function ectx() {
   # fi
   export KUBECONFIG="${CFG_DIR}/${CTX}"
   aws eks update-kubeconfig --name "${CTX}" ${role}
-}
-
-function aws-assume-role() {
-  role="${1-}"
-  assumed_role=""
-  if [ -z "${role}" ]; then
-    assumed_role="$(aws sts get-caller-identity --output text --query 'Arn')"
-    role=${"${assumed_role%/*}/assumed-/"}
-  fi
-  if [ -z "${role}" ]; then
-    echo "failed to get role ARN"
-    return
-  fi
-  sessionName="${2-}"
-  if [ -z "${sessionName}" ]; then
-    if [ -n "${assumed_role}" ]; then
-      sessionName="${assumed_role##*/}"
-    else
-      sessionName="$(date +%s)"
-    fi
-  fi
-  result=$(find ~/.aws/cli/cache -type f -name "*.json" -exec grep "\"Arn\": \"${role}\"" {} \;)
-  if [ -z "${result}" ]; then
-    result=$(aws sts assume-role --role-arn ${role} --role-session-name ${sessionName})
-    if [ -z "${result}" ]; then
-      echo "failed to assume role"
-      return
-    fi
-  fi
-  # eval $(echo ${result} | jq -r '"export AWS_ACCESS_KEY_ID=\""+.Credentials.AccessKeyId+"\"; export AWS_SECRET_ACCESS_KEY=\""+.Credentials.SecretAccessKey+"\"; export AWS_SESSION_TOKEN=\""+.Credentials.SessionToken+"\";"')
-  export AWS_ACCESS_KEY_ID=$(echo "${result}" | jq -r '.Credentials.AccessKeyId')
-  export AWS_SECRET_ACCESS_KEY=$(echo "${result}" | jq -r '.Credentials.SecretAccessKey')
-  export AWS_SESSION_TOKEN=$(echo "${result}" | jq -r '.Credentials.SessionToken')
 }
