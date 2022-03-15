@@ -179,5 +179,6 @@ wget
 xxhash
 xz-utils
 yarn
+yq
 zlib
 zsh
