@@ -122,6 +122,10 @@ function backupPPAs() {
   done
 }
 
+function backupPacman() {
+  pacman -Qqe > files/pkgs/pacman.lst
+}
+
 function backupPackages() {
   # Get list of installed packages
   apt-mark showauto >files/pkgs/pkgs_auto.lst
@@ -185,6 +189,9 @@ case "$1" in
   ;;
 "ppas" | "repos")
   backupPPAs
+  ;;
+"pacman")
+  backupPacman
   ;;
 "termux")
   backupTermux
