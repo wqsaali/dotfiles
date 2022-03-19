@@ -81,10 +81,10 @@ installLinuxbrew() {
 installPackages() {
   case "$(detectRelease)" in
     "Arch"*)
-      ./arch.sh installPackages
+      ./arch.sh packages
       ;;
     *)
-      ./ubuntu.sh installPackages
+      ./ubuntu.sh packages
       ;;
   esac
 }
