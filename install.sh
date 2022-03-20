@@ -344,6 +344,10 @@ installTmuxConf() {
 }
 
 installVimPlugins() {
+  if [ -x "$(command -v pip)" ]; then
+    pip install -U neovim
+  fi
+
   mkdir -p "${HOME}/.vim/config/"
   mkdir -p "${HOME}/.vim/ftdetect/"
   mkdir -p "${HOME}/.vim/ftplugin/"
