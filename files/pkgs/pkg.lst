@@ -1,6 +1,7 @@
 ack-grep
 apt
 asciinema
+attr
 bash
 bash-completion
 bat
@@ -32,7 +33,6 @@ fd
 file
 findutils
 fzf
-game-repo
 gawk
 gdbm
 gettext
@@ -58,12 +58,16 @@ kubectl
 ldns
 less
 libandroid-glob
+libandroid-posix-semaphore
 libandroid-support
 libarchive
 libassuan
 libbsd
 libbz2
 libc++
+libcap
+libcap-ng
+libcompiler-rt
 libcroco
 libcrypt
 libcurl
@@ -96,6 +100,7 @@ libnghttp2
 libnpth
 libpcap
 libprotobuf
+libresolv-wrapper
 libsqlite
 libssh2
 libtalloc
@@ -110,6 +115,7 @@ libvterm
 libxml2
 libyaml
 lld
+llvm
 lsof
 luv
 make
@@ -132,6 +138,7 @@ nodejs-lts
 oniguruma
 openssh
 openssl
+openssl-1.1
 openssl-tool
 patch
 pcre
@@ -152,13 +159,13 @@ rhash
 ripgrep
 ruby
 rust
-science-repo
 screenfetch
 sed
 silversearcher-ag
 starship
 tar
 termux-am
+termux-am-socket
 termux-api
 termux-auth
 termux-elf-cleaner
@@ -169,7 +176,7 @@ termux-tools
 tmux
 tracepath
 tree
-tsu
+unbound
 unzip
 util-linux
 vim-python
