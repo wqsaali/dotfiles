@@ -47,6 +47,7 @@ gpgv
 grep
 groff
 gzip
+helm
 hors
 htop-legacy
 inetutils
@@ -176,6 +177,7 @@ termux-tools
 tmux
 tracepath
 tree
+tsu
 unbound
 unzip
 util-linux
