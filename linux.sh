@@ -87,6 +87,17 @@ installPackages() {
       ./ubuntu.sh packages
       ;;
   esac
+
+  if ! [ -x "$(command -v terraform)" ]; then
+    installHashicorp terraform
+    installTerragrunt
+  fi
+  if ! [ -x "$(command -v packer)" ]; then
+    installHashicorp packer
+  fi
+  if ! [ -x "$(command -v kubectl)" ]; then
+    installKubernetes
+  fi
 }
 
 installFonts() {

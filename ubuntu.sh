@@ -111,16 +111,6 @@ installPackages() {
   if ! [ -x "$(command -v docker)" ]; then
     installDocker
   fi
-  if ! [ -x "$(command -v terraform)" ]; then
-    installHashicorp terraform
-    installTerragrunt
-  fi
-  if ! [ -x "$(command -v packer)" ]; then
-    installHashicorp packer
-  fi
-  if ! [ -x "$(command -v kubectl)" ]; then
-    installKubernetes
-  fi
 
   curl -L https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk
 
@@ -133,15 +123,6 @@ case "$1" in
   "packages" | "pkgs")
     installPackages
     ;;
-  "hashicorp")
-    installHashicorp "$2"
-    ;;
-  "dotfiles")
-    installDotFiles
-    ;;
-  "fonts")
-    installFonts
-    ;;
   "termProfiles" | "gnomeTermProfiles" | "termColors")
     installGnomeTerminalProfiles
     ;;
@@ -149,6 +130,6 @@ case "$1" in
     installi3wm
     ;;
   *)
-    installAll
+    installPackages
     ;;
 esac
