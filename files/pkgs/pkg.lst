@@ -159,6 +159,7 @@ resolv-conf
 rhash
 ripgrep
 ruby
+runit
 rust
 screenfetch
 sed
@@ -173,6 +174,7 @@ termux-elf-cleaner
 termux-exec
 termux-keyring
 termux-licenses
+termux-services
 termux-tools
 tmux
 tracepath
