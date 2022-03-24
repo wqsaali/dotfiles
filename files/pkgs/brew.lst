@@ -265,6 +265,7 @@ terraformer
 terragrunt
 tfk8s
 tflint
+tfsec
 the_silver_searcher
 thefuck
 tig
