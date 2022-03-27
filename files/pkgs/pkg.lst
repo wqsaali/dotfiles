@@ -123,6 +123,7 @@ make
 man
 mlocate
 mosh
+multitail
 nano
 ncdu
 ncurses
