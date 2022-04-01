@@ -99,7 +99,7 @@ function installFromGithub() {
     fi
     curl -sLo "${artifact}" "${url}"
     if [[ $artifact_ext == "zip" ]]; then
-      unzip "${artifact}" -d "${artifact_name}"
+      unzip "${artifact}" -d "${artifact_folder}"
     else
       tar -xzf "${artifact}" --one-top-level="${artifact_folder}" --unlink-first # gnu-tar is needed for this one
     fi

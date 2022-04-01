@@ -91,6 +91,26 @@ function fawk() {
   eval $cmd
 }
 
+# History
+function hgrep() {
+  if [ ! -z "$1" ]; then
+    grep "${1}" $_eternal_history_histfile
+  else
+    history
+  fi
+}
+
+function hbtween() {
+  # Example:
+  #   hbtween 202203301320 202203301530
+  #   hbtween '2022-03-30 13:20' '2022-03-30 15:35' mysql
+  start="$(echo ${1} | tr -d '\- :')"
+  finish="$(echo ${2} | tr -d '\- :')"
+  awk -v s=${start} -v f=${finish} 'match($4$5, "([0-9]+)-([0-9]+)-([0-9]+)([0-9]+):([0-9]+)", ary) {D=ary[1] ary[2] ary[3] ary[4] ary[5]; if (D > s && D < f) print}' $_eternal_history_histfile | grep "${3}"
+}
+alias histg='hgrep'
+
+
 # Colored diffs
 if [ -x "$(command -v colordiff)" ]; then
   alias diff='colordiff'

@@ -73,7 +73,9 @@ history() {
   builtin history "$@"
 }
 
-export PROMPT_COMMAND='echo "$(history 1)" >> ~/.bash_eternal_history'"; __bash_history_sync ${PROMPT_COMMAND}"
+_eternal_history_histfile=~/.bash_eternal_history
+
+export PROMPT_COMMAND='echo "$(history 1)" >> $_eternal_history_histfile'"; __bash_history_sync ${PROMPT_COMMAND}"
 
 # CTRL+R Alternatives
 
@@ -113,15 +115,6 @@ elif [ -x "$(command -v hh)" ]; then
   if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
 
 fi
-
-function hgrep() {
-  if [ ! -z "$1" ]; then
-    grep "${1}" ~/.bash_eternal_history
-  else
-    history
-  fi
-}
-alias histg='hgrep'
 
 # fh - repeat history
 function fh() {

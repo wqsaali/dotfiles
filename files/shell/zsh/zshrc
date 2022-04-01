@@ -95,15 +95,6 @@ autoload -U add-zsh-hook
 add-zsh-hook preexec _eternal_history_mark_for_save
 add-zsh-hook precmd _eternal_history_save
 
-hgrep() {
-  if [ ! -z "$1" ]; then
-    grep "${1}" $_eternal_history_histfile
-  else
-    history
-  fi
-}
-alias histg='hgrep'
-
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
