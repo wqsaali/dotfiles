@@ -159,25 +159,26 @@ fi
 alias cygstart='open'
 
 # Make pbcopy work on all plaforms
-# if ! [ -x "$(command -v pbcopy)" ]; then
-#   if [ -x "$(command -v xsel)" ]; then
-#     alias pbcopy='xsel -i -b'
-#   elif [ -x "$(command -v xclip)" ]; then
-#     alias pbcopy='xclip -i -selection clipboard'
-#   elif [ -x "$(command -v termux-clipboard-set)" ]; then
-#     alias pbcopy='termux-clipboard-set'
-#   fi
-# fi
+# NOTE: for termux you need to install the Termux:API app
+if ! [ -x "$(command -v pbcopy)" ]; then
+  if [ -x "$(command -v xsel)" ]; then
+    alias pbcopy='xsel -i -b'
+  elif [ -x "$(command -v xclip)" ]; then
+    alias pbcopy='xclip -i -selection clipboard'
+  elif [ -x "$(command -v termux-clipboard-set)" ]; then
+    alias pbcopy='termux-clipboard-set'
+  fi
+fi
 
-# if ! [ -x "$(command -v pbpaste)" ]; then
-#   if [ -x "$(command -v xsel)" ]; then
-#     alias pbpaste='xsel -o -b'
-#   elif [ -x "$(command -v xclip)" ]; then
-#     pbpaste='xclip -selection clipboard -o'
-#   elif [ -x "$(command -v termux-clipboard-get)" ]; then
-#     alias pbpaste='termux-clipboard-get'
-#   fi
-# fi
+if ! [ -x "$(command -v pbpaste)" ]; then
+  if [ -x "$(command -v xsel)" ]; then
+    alias pbpaste='xsel -o -b'
+  elif [ -x "$(command -v xclip)" ]; then
+    pbpaste='xclip -selection clipboard -o'
+  elif [ -x "$(command -v termux-clipboard-get)" ]; then
+    alias pbpaste='termux-clipboard-get'
+  fi
+fi
 
 # Fix window title after ssh
 function ssh() {
