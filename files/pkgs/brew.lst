@@ -52,6 +52,7 @@ cmake
 coffeescript
 colima
 colordiff
+commitizen
 consul-template
 cookiecutter
 coreutils
@@ -264,6 +265,7 @@ terraform-ls
 terraform_landscape
 terraformer
 terragrunt
+terrascan
 tfk8s
 tflint
 tfsec
