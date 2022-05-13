@@ -30,6 +30,7 @@ npm-compare
 npmrc
 npx
 organize-cli
+pageres-cli
 parse-columns-cli
 proxy-pac-proxy
 ramda-cli
