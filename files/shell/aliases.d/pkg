@@ -133,7 +133,7 @@ function asdf-update() {
     asdf install ${plugin} latest
     asdf global ${plugin} latest
   done
-  asdf reshim
+  rm -rf ${HOME}/.asdf/shims; asdf reshim
 }
 
 function update-all-things() {
