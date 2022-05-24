@@ -74,7 +74,12 @@ function installHashicorp() {
   # Get URLs for most recent versions:
   cdir=$(pwd)
   os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
-  arch="${3:-64}"
+  arch="${3}"
+  if [ -z "${arch}" ]; then
+    arch="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
+  fi
+
+  [[ ${DEBUG} == "true" ]] && echo "Finding a package for: ${1}; ${version}; ${os}; ${arch}"
 
   # TODO: ensure proper version sorting
   if [ $version -ne -1 ]; then
@@ -83,9 +88,16 @@ function installHashicorp() {
     url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.${1}.versions| .[]][${version}].builds[] | select(.url | test(\"${os}.*${arch}\";\"i\")) | .url")
   fi
 
+  if [ -z "${url}" ]; then
+    echo "Could not find a package for: ${1}; ${version}; ${os}; ${arch}"
+    exit 1
+  fi
+
+  [[ ${DEBUG} == "true" ]] && echo "Downloading: ${url}"
+
   mkdir -p "${install_to}"
   cd "${install_to}" || exit
-  curl -o package.zip "$url"
+  curl -o package.zip "${url}"
   unzip package.zip
   rm package.zip
   cd "${cdir}" || exit
@@ -126,7 +138,10 @@ if [ "$0" = "$BASH_SOURCE" ]; then
 
   if [[ $product != "list" ]]; then
     os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
-    arch="${3:-64}"
+    arch="${3}"
+    if [ -z "${arch}" ]; then
+      arch="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
+    fi
     installHashicorp "${product}" "${os}" "${arch}"
   else
     installHashicorp $@
