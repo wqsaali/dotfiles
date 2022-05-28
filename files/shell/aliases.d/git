@@ -93,4 +93,4 @@ alias standup='cd code/; git standup -L -m4 -d3; back'
 #   alias git=hub
 # fi
 
-alias prs='gh prs'
+alias prs='gh dash'
