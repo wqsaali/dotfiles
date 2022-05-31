@@ -4,7 +4,7 @@ prSections:
   - title: My Pull Requests
     filters: is:open author:@me
   - title: Subscribed
-    filters: is:open -author:@me repo:Praqma/helmsman
+    filters: is:open -author:@me repo:Praqma/helmsman repo:subosito/gotenv
     limit: 50 # optional limit per section
 defaults:
   prsLimit: 20 # global limit
