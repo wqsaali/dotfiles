@@ -87,6 +87,8 @@
     Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'sindrets/diffview.nvim'
   else
     Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
   endif
