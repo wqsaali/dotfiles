@@ -1,0 +1,249 @@
+{
+    "editor.tabSize": 2,
+    "editor.fontFamily": "Dank Mono",
+    "editor.fontSize": 16,
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "600",
+    "editor.wordWrap": "on",
+    "editor.rulers": [
+        100
+    ],
+    "zenMode.hideLineNumbers": false,
+    "ruby.intellisense": true,
+    // Basic settings: turn linter(s) on
+    "ruby.lint": {
+        "reek": true,
+        "rubocop": true,
+        "ruby": true, //Runs ruby -wc
+        "fasterer": true,
+        "debride": true,
+        "ruby-lint": true,
+        "ruby": {
+            "unicode": true //Runs ruby -wc -Ku
+        },
+        "rubocop": {
+            "only": ["SpaceInsideBlockBraces", "LeadingCommentSpace"],
+            "lint": true,
+            "rails": true
+        },
+        "reek": true
+    },
+
+    // Time (ms) to wait after keypress before running enabled linters. Ensures
+    // linters are only run when typing has finished and not for every keypress adfa adsdfa dadfa af 
+    "ruby.lintDebounceTime": 500,
+    "explorer.confirmDelete": false,
+    // "vim.useSystemClipboard": true,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+        "before": ["j", "j"],
+        "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+        "before": ["<leader>", ","],
+        "after": ["d", "d"]
+        },
+        {
+        "before": ["<C-n>"],
+        "commands": [":nohl"]
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    "workbench.editor.enablePreview": false,
+    "terminal.integrated.rendererType": "dom",
+    "files.exclude": {
+        "USE_GITIGNORE": true,
+    },
+    "cSpell.language": "en",
+    "breadcrumbs.enabled": true,
+    // "terminal.integrated.fontFamily": "'Source Code Pro for Powerline', 'Hack Nerd Font'"
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.rendererType": "canvas",
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.fontWeight": "100",
+    "terminal.integrated.scrollback": 100000000,
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "bash",
+            "args": [
+                "-l"
+            ],
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "/bin/zsh",
+            "args": [
+                "-l"
+            ],
+            "icon": "star",
+            "env": {}
+        },
+        "fish": {
+            "path": "fish",
+            "args": [
+                "-l"
+            ]
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        },
+        "csh": {
+            "path": "/bin/csh"
+        }
+    },
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "atlascode.jira.workingSite": {
+        "baseUrlSuffix": "atlassian.net"
+    },
+    "yaml.schemas": {
+        "file:///Users/waqas/.vscode-insiders/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "atlascode.jira.workingProject": {
+        "id": "10000",
+        "name": "Platform Board",
+        "key": "PB"
+    },
+    "todohighlight.isEnable": true,
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "check",
+            "type": "line"
+        },
+        "[ ]": {
+            "icon": "check",
+            "type": "line"
+        },
+        "FIXME": {
+            "iconColour": "red"
+        },
+        "BUG": {
+            "iconColour": "red"
+        },
+        "DONE":{
+            "icon": "check",
+            "type": "line",
+            "iconColour": "green",
+            "background": "#00ff0080"
+        },
+        "[x]":{
+            "icon": "check",
+            "type": "line",
+            "iconColour": "green",
+            "background": "#00ff0080"
+        }
+    },
+    "todo-tree.highlights.defaultHighlight": {
+        "icon": "alert",
+        "type": "text",
+        "iconColour": "yellow"
+    },
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "todo-tree.general.tags": [
+            "BUG",
+            "HACK",
+            "FIXME",
+            "TODO",
+            "NOTICE",
+            "NOTE",
+            "DONE",
+            "[ ]",
+            "[x]"
+        ],
+    "atlascode.jira.jqlList": [
+        {
+            "id": "2b60775e-cee6-4c87-ba5d-2edcc768cfdb",
+            "enabled": true,
+            "name": "My sendoso Issues",
+            "query": "assignee = currentUser() AND status not in (Done, Accepted, \"Pushed to Prod\", \"Pushed Live\", \"Not Selected for Work\", Duplicate) ORDER BY lastViewed DESC",
+            "siteId": "b884844b-b345-4f61-84ad-1e5a1efefde8",
+            "monitor": true
+        }
+    ],
+    "atlascode.jira.lastCreateSiteAndProject": {
+        "siteId": "b884844b-b345-4f61-84ad-1e5a1efefde8",
+        "projectKey": "FP"
+    },
+    "vsicons.dontShowNewVersionMessage": true,
+    "git.autofetch": true,
+    "workbench.colorCustomizations": {
+        "activityBarBadge.background": "#AB47BC",
+        "activityBar.activeBorder": "#AB47BC",
+        "list.activeSelectionForeground": "#AB47BC",
+        "list.inactiveSelectionForeground": "#AB47BC",
+        "list.highlightForeground": "#AB47BC",
+        "scrollbarSlider.activeBackground": "#AB47BC50",
+        "editorSuggestWidget.highlightForeground": "#AB47BC",
+        "textLink.foreground": "#AB47BC",
+        "progressBar.background": "#AB47BC",
+        "pickerGroup.foreground": "#AB47BC",
+        "tab.activeBorder": "#AB47BC",
+        "notificationLink.foreground": "#AB47BC",
+        "editorWidget.resizeBorder": "#AB47BC",
+        "editorWidget.border": "#AB47BC",
+        "settings.modifiedItemIndicator": "#AB47BC",
+        "settings.headerForeground": "#AB47BC",
+        "panelTitle.activeBorder": "#AB47BC",
+        "breadcrumb.activeSelectionForeground": "#AB47BC",
+        "menu.selectionForeground": "#AB47BC",
+        "menubar.selectionForeground": "#AB47BC",
+        "editor.findMatchBorder": "#AB47BC",
+        "selection.background": "#AB47BC40"
+    },
+    "materialTheme.accent": "Purple",
+    "editor.largeFileOptimizations": false,
+    "todo-tree.tree.showScanModeButton": false,
+    "diffEditor.renderSideBySide": false,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "vs-kubernetes": {
+        "vs-kubernetes.minikube-path.mac": "/Users/waqas/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vs-kubernetes.helm-path.mac": "/Users/waqas/.vs-kubernetes/tools/helm/darwin-amd64/helm",
+        "vs-kubernetes.draft-path.mac": "/Users/waqas/.vs-kubernetes/tools/draft/darwin-amd64/draft",
+        "vscode-kubernetes.kubectl-path.mac": "/Users/waqas/.vs-kubernetes/tools/kubectl/kubectl"
+    },
+    "cSpell.enableFiletypes": [
+        "ruby"
+    ],
+    "window.closeWhenEmpty": true,
+    "github.hosts": [
+        {
+            "host": "https://github.com",
+            "username": "oauth",
+            "token": "75d50c84e06ae5b626fdbcd30d8af01b2b593480"
+        }
+    ],
+    "codestream.email": "waqas@sendoso.com",
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": false,
+    "editor.lineNumbers": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "settingsSync.ignoredExtensions": [
+        "castwide.solargraph"
+    ],
+    "editor.minimap.enabled": false,
+    "editor.renderControlCharacters": true,
+    "terminal.external.osxExec": "iTerm2.app",
+    "terminal.integrated.localEchoExcludePrograms": [
+        "nano"
+    ],
+    "terminal.external.linuxExec": "iTerm.app",
+    "terminal.explorerKind": "external",
+    "window.zoomLevel": -1,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "workbench.colorTheme": "Atom One Light",
+}
