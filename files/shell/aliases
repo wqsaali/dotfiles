@@ -124,6 +124,10 @@ function diffs() {
   diff "${@:3}" <(sort "$1") <(sort "$2")
 }
 
+function diff-dir() {
+  diff -bur ${1} ${2:-./} --exclude '.git' | delta -s
+}
+
 # Syntax highlighting in cat and less
 # you need Pygments: pip install Pygments
 alias colorcat='pygmentize -g'
