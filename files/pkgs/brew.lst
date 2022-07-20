@@ -64,6 +64,7 @@ ctags
 curl
 dark-mode
 dateutils
+datree
 dep
 devspace
 direnv
