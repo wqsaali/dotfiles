@@ -1,4 +1,7 @@
 ack-grep
+amber
+ambr
+ambs
 apt
 asciinema
 attr
@@ -181,7 +184,7 @@ net-tools
 netcat-openbsd
 nmap
 nmap-ncat
-nodejs-lts
+nodejs
 oniguruma
 openssh
 openssh-sftp-server
