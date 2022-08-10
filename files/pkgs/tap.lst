@@ -16,6 +16,7 @@ gardener/tap
 git-chglog/git-chglog
 habitat-sh/habitat
 hashicorp/tap
+helix-editor/helix
 homebrew/cask-drivers
 homebrew/cask-fonts
 homebrew/cask-versions
