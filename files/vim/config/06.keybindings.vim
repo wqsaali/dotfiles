@@ -174,6 +174,9 @@
   xmap <Leader>c [clap]
 
   nnoremap <silent> [clap]c :Clap coc_commands<CR>
+  nnoremap <silent> [clap]co :Clap coc_outline<CR>
+  nnoremap <silent> [clap]cs :Clap coc_symbols<CR>
+  nnoremap <silent> [clap]cd :Clap coc_diagnostics<CR>
   nnoremap <silent> [clap]p :Clap files<CR>
   nnoremap <silent> [clap]o :Clap filer<CR>
   nnoremap <silent> [clap]t :Clap tags<CR>
