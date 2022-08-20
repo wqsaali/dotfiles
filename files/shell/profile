@@ -12,8 +12,8 @@ if [[ "$CONFIGURED" == "true" ]]; then
   return
 fi
 
-[ -f ${HOME}/.variables ] && source ${HOME}/.variables
-[ -f ${HOME}/.variables.local ] && source ${HOME}/.variables.local
+[ -f "${HOME}/.variables" ] && source "${HOME}/.variables"
+[ -f "${HOME}/.variables.local" ] && source "${HOME}/.variables.local"
 
 # CDPATH
 CDPATH=".:${HOME}:${HOME}/workingCopies:${HOME}/workingCopies/src:$(ls -1d ${HOME}/workingCopies/src/*/ | tr '\n' ':')"
