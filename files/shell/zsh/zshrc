@@ -112,25 +112,28 @@ export GIT_AUTO_FETCH_INTERVAL=60 #in seconds
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  tmux
   history
   ssh-agent
   git
   git-auto-fetch
-  tmux
-  thefuck
-  kube-ps1
-  colorize
-  colored-man-pages
-  command-not-found
   cp
   extract
+  command-not-found
+  zsh-completions
+  colorize
+  colored-man-pages
   zsh-syntax-highlighting
   zsh-autopair
-  zsh-completions
   zsh-autosuggestions
   zsh-history-substring-search
   zsh_codex
+  # kube-ps1
 )
+
+if [[ $OSTYPE != *"android"* ]]; then
+  plugins=(${plugins[@]} thefuck)
+fi
 
 # for zsh_codex
 zle -N create_completion
