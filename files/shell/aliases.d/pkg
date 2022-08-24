@@ -18,7 +18,7 @@ function goclean() {
   rm -rf ~/go/.cache/
   rm -rf ~/.cache/go-build/
   for gp in ${GOPATH//:/ }; do
-    rm -rf $pg/pkg
+    rm -rf $gp/pkg
   done
   # rm -rf ~/go/src/*
 }
@@ -78,7 +78,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       installed=$(ls $(brew --prefix)/Caskroom/$c)
       info=$(brew info --cask $c)
       installed_version=$(echo $installed)
-      info_version=$(echo $info | grep "$c: " | cut -d ' ' -f2)
+      info_version=$(echo $info | grep "$c: " | grep -Eo 'v?(([0-9]+).?)+((-|\+)?[a-zA-Z0-9.+_-]+)?')
       if [[ "$installed_version" != "$info_version" ]]; then
         echo -e "\n\nInstalled versions of $c:"
         echo "$installed"
