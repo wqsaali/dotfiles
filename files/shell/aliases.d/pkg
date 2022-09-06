@@ -77,7 +77,10 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     for c in $(brew list --cask); do
       installed=$(ls $(brew --prefix)/Caskroom/${c})
       installed_version=$(echo $installed | sort --version-sort| tail -n 1)
-      info_version=$(brew info --cask "${c}" | grep "${c}: " | grep -Eo '(\s+|^)v?(([0-9]+).?)+((-|\+|\.)[a-zA-Z0-9.+_-]+)?(\s+|$)' | tr -d '[[:blank:]]')
+      info_version=$(brew info --cask "${c}" | grep "${c}: " | grep -Eo '(\s|^)v?(([0-9]+).?)+((-|\+|\.)[a-zA-Z0-9.+_-]+)?(\s|$)' | tr -d '[[:blank:]]')
+      if [ -z ${info_version} ]; then
+        info_version="$(brew info --cask 1password | grep "${c}: " | awk '{print $3}')"
+      fi
       if [[ "$installed_version" != "$info_version" ]]; then
         echo -e "\n\nInstalled versions of ${c}:"
         echo "$installed"
