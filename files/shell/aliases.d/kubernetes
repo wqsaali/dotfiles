@@ -15,7 +15,9 @@
 
 function kctl() {
   CMD="${1}"
-  shift
+  if [ ${#} -gt 0 ]; then
+    shift
+  fi
   if _isFunction "kubectl-${CMD}"; then
     "kubectl-${CMD}" "${@}"
     return $?
