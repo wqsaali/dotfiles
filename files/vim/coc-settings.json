@@ -125,7 +125,9 @@
   },
   "suggest.pumFloatConfig": {
     "border": false,
-    "shadow": false
+    "shadow": false,
+    "rounded": false,
+    "winblend": 0
   },
   "cSpell.enabled": false,
   // "dot-complete.priority": 1,
