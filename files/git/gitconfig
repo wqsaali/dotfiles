@@ -23,8 +23,11 @@
   sprout = !legit sprout
   sync = !legit sync
   resync = !legit resync
+  findtag = rev-list -n 1
+  findbranch = branch -a --contains
+  findtagbranch = "!git findbranch `git findtag`"
   cleanup = "!git clean -fdX && git branch --merged | grep  -v '\\*\\|master\\|main\\|develop' | xargs -n 1 git branch -d"
-  remove-untacked = "!git sb | grep '??' | awk '{print $2}' | xargs rm"
+  remove-untacked = "!git sb | grep '??' | awk '{print $2}' | xargs rm -rf"
   accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
   accept-theirs = "!f() { git checkout --theirs -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
   unstage = reset --
@@ -47,7 +50,7 @@
   pill = pull
 [core]
   # pager = less -RF -X
-  pager = delta --dark --file-style=box --hunk-style=plain --tabs=2 --side-by-side --line-numbers
+  pager = delta --dark --file-style=box --tabs=2 --side-by-side --line-numbers
   editor = vim
   excludesfile = ~/.gitexcludes
 # [pager]
@@ -78,6 +81,9 @@
   helper = manager-core
 [credential "https://dev.azure.com"]
   useHttpPath = true
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
 
 [include]
   path = .gitconfigExtra

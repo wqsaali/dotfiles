@@ -17,12 +17,14 @@
   " endif
 
   Plug 'tpope/vim-sensible'
+  Plug 'airblade/vim-rooter'
   Plug 'editorconfig/editorconfig-vim'
 
   Plug 'breuckelen/vim-resize'
   Plug 't9md/vim-choosewin'
 
   Plug 'benmills/vimux'
+  Plug 'benmills/vimux-golang'
 
   Plug 'wincent/terminus'
   Plug 'kassio/neoterm'
@@ -30,23 +32,24 @@
 
   Plug 'tpope/vim-dispatch'
 
+  Plug 'jamestthompson3/nvim-remote-containers'
+
   Plug 'tpope/vim-fugitive'
   Plug 'rbong/vim-flog'
   Plug 'gregsexton/gitv'
   Plug 'junegunn/gv.vim'
 
-  Plug 'nelstrom/vim-visual-star-search'
+  Plug 'bronson/vim-visual-star-search'
 
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
   Plug 'liuchengxu/vista.vim'
   Plug 'vn-ki/coc-clap'
 
-  Plug 'jremmen/vim-ripgrep'
+  " Plug 'jremmen/vim-ripgrep'
   Plug 'terryma/vim-multiple-cursors'
 
   Plug 'ryanoasis/vim-devicons'
 
-  Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
   Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
@@ -66,49 +69,83 @@
   Plug 'vim-airline/vim-airline-themes'
   " Plug 'rbong/vim-crystalline'
 
-  " Plug 'flazz/vim-colorschemes'
+  Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap','on': 'MinimapToggle'}
+
   " Plug 'rainglow/vim'
+  " Plug 'flazz/vim-colorschemes'
   " Plug 'rafi/awesome-vim-colorschemes'
-  Plug 'chriskempson/base16-vim'
+  " Plug 'chriskempson/base16-vim'
+  " Plug 'ghifarit53/tokyonight-vim'
+  " Plug 'mangeshrex/uwu.vim'
   Plug 'cormacrelf/vim-colors-github'
-  Plug 'ghifarit53/tokyonight-vim'
+  Plug 'wojciechkepka/vim-github-dark'
+
+  if has('nvim')
+    Plug 'folke/lsp-colors.nvim'
+    Plug 'projekt0n/github-nvim-theme'
+    Plug 'rcarriga/nvim-notify'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter-context'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'sindrets/diffview.nvim'
+  else
+    Plug 'Yggdroot/indentLine', {'on': 'IndentLinesEnable'}
+  endif
+
+  Plug 'frazrepo/vim-rainbow'
+  " Plug 'p00f/nvim-ts-rainbow'
+  " Plug 'junegunn/rainbow_parentheses.vim'
 
   Plug 'jamessan/vim-gnupg'
   Plug 'hashivim/vim-hashicorp-tools'
   Plug 'andrewstuart/vim-kubernetes'
   " Plug 'tell-k/vim-autopep8', {'for': 'python'}
 
-  "Plug 'govim/govim', {'for': 'go'}
-  "Plug 'fatih/vim-go', {'for': 'go', 'do': ':GoUpdateBinaries'}
-  " Plug 'arp242/gopher.vim', {'for': 'go'}
-  Plug 'sebdah/vim-delve', {'for': 'go'}
+  "Plug 'govim/govim', {'for': ['go', 'vim-plug']}
+  "Plug 'fatih/vim-go', {'for': ['go', 'vim-plug'], 'do': ':GoUpdateBinaries'}
+  " Plug 'arp242/gopher.vim', {'for': ['go', 'vim-plug']}
+  Plug 'meain/vim-jsontogo'
+  Plug 'sebdah/vim-delve', {'for': ['go', 'vim-plug']}
 
-  Plug 'mattn/emmet-vim', {'for': ['html', 'css']}
-  Plug 'maralla/vim-toml-enhance', {'for': 'toml'}
+  Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'vim-plug']}
+  Plug 'maralla/vim-toml-enhance', {'for': ['toml', 'vim-plug']}
   Plug 'google/vim-jsonnet'
   Plug 'kevinoid/vim-jsonc'
   Plug 'jjo/vim-cue'
   " Plug 'posva/vim-vue'
+  " Plug 'sheerun/vim-polyglot' " see: https://github.com/sheerun/vim-polyglot/issues/779
 
-  if has('nvim')
-    Plug 'iamcco/markdown-preview.nvim', {'for': 'markdown', 'do': 'cd app & yarn install' }
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'rcarriga/nvim-dap-ui'
-  else
-    Plug 'iamcco/mathjax-support-for-mkdp', {'for': 'markdown'}
-    Plug 'iamcco/markdown-preview.vim', {'for': 'markdown'}
-  endif
+  Plug 'iamcco/markdown-preview.nvim', {'for': ['markdown', 'vim-plug'], 'do': 'cd app & yarn install' }
 
+  " function! BuildComposer(info)
+  "   if a:info.status != 'unchanged' || a:info.force
+  "     if has('nvim')
+  "       !cargo build --release --locked
+  "     else
+  "       !cargo build --release --locked --no-default-features --features json-rpc
+  "     endif
+  "   endif
+  " endfunction
+
+  " Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+
+  " let g:vimspector_base_dir = expand( '<sfile>:p:h' ) . '/vimspector-conf'
   function! BuildVimspector(info)
     if a:info.status == 'installed' || a:info.force
       !./install_gadget.py --all
     endif
   endfunction
-  Plug 'puremourning/vimspector', {'for': ['c', 'cpp', 'go', 'python', 'java', 'javascript', 'sh'], 'do': function('BuildVimspector')}
 
-  Plug 'sheerun/vim-polyglot'
+  Plug 'puremourning/vimspector', {'for': ['c', 'cpp', 'go', 'python', 'java', 'javascript', 'sh', 'vim-plug'], 'do': function('BuildVimspector')}
+
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+
+  " Plug 'tom-doerr/vim_codex'
+  Plug 'github/copilot.vim'
 
   call plug#end()
 
@@ -121,48 +158,59 @@
 
 " coc-extensions {{{
 let g:coc_global_extensions = [
-      \ 'coc-marketplace',
       \ 'coc-actions',
-      \ 'coc-pairs',
-      \ 'coc-highlight',
+      \ '@yaegassy/coc-ansible',
+      \ 'coc-css',
+      \ 'coc-cssmodules',
+      \ '@yaegassy/coc-tailwindcss3',
       \ 'coc-diagnostic',
-      \ 'coc-lists',
-      \ 'coc-tag',
-      \ 'coc-git',
-      \ 'coc-explorer',
-      \ 'coc-floaterm',
-      \ 'coc-terminal',
-      \ 'coc-gitignore',
-      \ 'coc-gist',
-      \ 'coc-prettier',
-      \ 'coc-markdownlint',
-      \ 'coc-tabnine',
-      \ 'coc-snippets',
-      \ 'coc-ultisnips',
+      \ 'coc-docker',
       \ 'coc-emmet',
       \ 'coc-emoji',
-      \ 'coc-swagger',
-      \ 'coc-docker',
-      \ 'coc-sh',
-      \ 'coc-powershell',
-      \ 'coc-json',
-      \ 'coc-yaml',
-      \ 'coc-toml',
-      \ 'coc-kite',
-      \ 'coc-vimlsp',
+      \ 'coc-explorer',
+      \ 'coc-floaterm',
+      \ 'coc-fzf-preview',
+      \ 'coc-gist',
+      \ 'coc-git',
+      \ 'coc-gitignore',
+      \ 'coc-go',
+      \ 'coc-groovy',
+      \ 'coc-highlight',
+      \ 'coc-html',
+      \ 'coc-htmlhint',
       \ 'coc-jedi',
+      \ 'coc-json',
+      \ 'coc-lists',
+      \ 'coc-lua',
+      \ 'coc-markdown-preview-enhanced',
+      \ 'coc-markdownlint',
+      \ 'coc-markmap',
+      \ 'coc-marketplace',
+      \ '@yaegassy/coc-nginx',
+      \ 'coc-pairs',
+      \ 'coc-phpls',
+      \ 'coc-powershell',
+      \ 'coc-prettier',
       \ 'coc-pyls',
       \ 'coc-pyright',
-      \ 'coc-solargraph',
-      \ 'coc-lua',
-      \ 'coc-go',
       \ 'coc-rls',
       \ 'coc-rust-analyzer',
-      \ 'coc-html',
-      \ 'coc-css',
-      \ 'coc-phpls',
-      \ 'coc-groovy',
+      \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-solargraph',
       \ 'coc-sql',
+      \ 'coc-swagger',
+      \ 'coc-tabnine',
+      \ 'coc-tag',
+      \ 'coc-terminal',
+      \ 'coc-toml',
+      \ 'coc-jsref',
+      \ 'coc-tsdetect',
+      \ 'coc-tsserver',
+      \ 'coc-ultisnips',
       \ 'coc-vetur',
+      \ 'coc-vimlsp',
+      \ 'coc-yaml',
+      \ 'coc-webview',
       \ ]
 " }}}

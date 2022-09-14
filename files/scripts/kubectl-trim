@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 # Script to trim kubectl objects by removing some properties
 # By default it will skip all k8s managed properties
@@ -12,11 +12,11 @@ OUTPUT="yaml"
 CONVERT=""
 
 function usage() {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>] <resource>"
+  echo "Usage: $(basename "$0") [<flags>] <resource>"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -28,12 +28,16 @@ function usage() {
 
 function join_by() {
   # local IFS="$1"; shift; echo -n "$*";
-  local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}";
+  local d=$1
+  shift
+  echo -n "$1"
+  shift
+  printf "%s" "${@/#/$d}"
 }
 
 function split_by() {
- # IFS="${1}" read -r -a array <<< "${2}"
- echo ${2} | tr $1 "\n"
+  # IFS="${1}" read -r -a array <<< "${2}"
+  echo "${2}" | tr "$1" "\n"
 }
 
 if ! [ -x "$(command -v jq)" ]; then
@@ -51,34 +55,43 @@ while [[ $# -gt 0 ]]; do
   key="$1"
 
   case $key in
-      -h | --help ) usage ;;
-      -d | --debug ) DEBUG=true; shift ;;
-      -o | --output ) OUTPUT="$2"; shift 2 ;;
-      -t | --trim ) FIELDS=($(split_by ',' "$2")); shift 2 ;;
-      *)
-      POSITIONAL+=("$1") # save it in an array for later
-      shift # past argument
-      ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -o | --output)
+    OUTPUT="$2"
+    shift 2
+    ;;
+  -t | --trim)
+    FIELDS=($(split_by ',' "$2"))
+    shift 2
+    ;;
+  *)
+    POSITIONAL+=("$1") # save it in an array for later
+    shift              # past argument
+    ;;
   esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
 case $OUTPUT in
-  json)
-    CONVERT=""
-    ;;
-  yaml)
-    CONVERT="| yq e -P -"
-    ;;
-  *)
-    usage "Invalid output format: ${OUTPUT} \n" >&2
-    ;;
+json)
+  CONVERT=""
+  ;;
+yaml)
+  CONVERT="| yq e -P -"
+  ;;
+*)
+  usage "Invalid output format: ${OUTPUT} \n" >&2
+  ;;
 esac
 
 TRIM='walk(if type == "object" then del('$(join_by '?, ' "${FIELDS[@]}")') else . end)'
 CMD="kubectl get -o json ${@} | jq '${TRIM}' ${CONVERT}"
 
-if [[ "${DEBUG}" == "true" ]]; then
+if [[ ${DEBUG} == "true" ]]; then
   echo "${CMD}"
 fi
 

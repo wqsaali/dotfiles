@@ -1,4 +1,4 @@
-source ${HOME}/.bash/complete-alias/bash_completion.sh
+source ${HOME}/.bash/complete-alias/complete_alias
 
 # complete -F __start_kubectl kctl
 # source <(kubectl completion bash | sed 's/kubectl/kctl/g')

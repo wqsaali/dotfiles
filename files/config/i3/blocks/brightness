@@ -2,33 +2,33 @@
 
 DEVICE="${BLOCK_INSTANCE:-intel_backlight}"
 BRIGHTNESS_PATH="/sys/class/backlight/$DEVICE/brightness"
-MAXBRIGHTNESS=$(cat /sys/class/backlight/$DEVICE/max_brightness)
+MAXBRIGHTNESS=$(cat /sys/class/backlight/"$DEVICE"/max_brightness)
 MINBRIGHTNESS=1
-light=$(cat $BRIGHTNESS_PATH)
+light=$(cat "$BRIGHTNESS_PATH")
 INCREMENT=100
 
-brightness () {
+brightness() {
   NUMBER=$1
-  if [ $NUMBER -ge $MAXBRIGHTNESS ]; then
+  if [ "$NUMBER" -ge "$MAXBRIGHTNESS" ]; then
     NUMBER=$MAXBRIGHTNESS
-  elif [ $NUMBER -lt $MINBRIGHTNESS ]; then
+  elif [ "$NUMBER" -lt $MINBRIGHTNESS ]; then
     NUMBER=$MINBRIGHTNESS
   fi
-  echo $NUMBER > $BRIGHTNESS_PATH
+  echo $NUMBER >"$BRIGHTNESS_PATH"
 }
 
 # [ $# -eq 1 ] && brightness $(($light - $1))
 
 case $BLOCK_BUTTON in
 # Left click
-  1) brightness $(($light + $INCREMENT)) ;;
-# Middle click
-  2) brightness $MAXBRIGHTNESS ;;
-# Right click
-  3) brightness $(($light - $INCREMENT)) ;;
+1) brightness $((light + INCREMENT)) ;;
+  # Middle click
+2) brightness "$MAXBRIGHTNESS" ;;
+  # Right click
+3) brightness $((light - INCREMENT)) ;;
 esac
 
-light=$(cat $BRIGHTNESS_PATH)
-light=$(($(($light*100))/$MAXBRIGHTNESS))
+light=$(cat "$BRIGHTNESS_PATH")
+light=$(($((light * 100)) / MAXBRIGHTNESS))
 echo " $light% "
 echo " $light%"

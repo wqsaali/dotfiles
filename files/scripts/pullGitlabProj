@@ -9,25 +9,25 @@ page=1
 
 url='https://gitlab.com'
 
-test -z $token && echo "Token is required." 1>&2 && exit 1
+test -z "$token" && echo "Token is required." 1>&2 && exit 1
 
 repos=$(curl -s --header "PRIVATE-TOKEN: $token" "${url}/api/v3/projects/owned?per_page=100&page=$page" | jq .[].ssh_url_to_repo | tr -d '"')
 
-while [ ! -z "$repos" ]; do
-  for repo in  $(echo $repos); do
-    path=$(echo $repo | cut -d ':' -f2 | cut -d'.' -f1)
+while [ -n "$repos" ]; do
+  for repo in $(echo "$repos"); do
+    path=$(echo "$repo" | cut -d ':' -f2 | cut -d'.' -f1)
     echo "-=$path=-"
-    if [ -d $path ]; then
+    if [ -d "$path" ]; then
       echo "  Found existing repo pulling latest changes"
-      cd $path
+      cd "$path" || exit
       git pull
-      cd $cdir
+      cd "$cdir" || exit
     else
       echo "  Repo not found starting clone process"
-      mkdir -p $path
-      git clone $repo $path
+      mkdir -p "$path"
+      git clone "$repo" "$path"
     fi
   done
-  page=$((page+1))
+  page=$((page + 1))
   repos=$(curl -s --header "PRIVATE-TOKEN: $token" "${url}/api/v3/projects/owned?per_page=100&page=$page" | jq .[].ssh_url_to_repo | tr -d '"')
 done

@@ -15,11 +15,11 @@ DEBUG=false
 BUILD=false
 
 function usage {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) <package>"
+  echo "Usage: $(basename "$0") <package>"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -36,41 +36,56 @@ function goinstall() {
   PKG="${PKG//github.com\//}"
   [ -z "${PKG}" ] && usage "Missing package name.\nTerminating...\n" >&2
   VERSION="@${2}"
-  if [[ "${VERSION}" == "@latest" ]]; then
+  if [[ ${VERSION} == "@latest" ]]; then
     VERSION=''
   fi
   PREFIX=${3:-${install_to}}
-  [[ "${DEBUG}" == "true" ]] && echo "Installing: ${PKG} ${VERSION} in ${PREFIX}"
-  curl -sLf https://gobinaries.com/${PKG}${VERSION} | PREFIX=${PREFIX} sh
+  [[ ${DEBUG} == "true" ]] && echo "Installing: ${PKG} ${VERSION} in ${PREFIX}"
+  curl -sLf https://gobinaries.com/"${PKG}""${VERSION}" | PREFIX=${PREFIX} sh
 }
 
-OPTS=$(getopt -o hdrt:i: --long help,debug,raw,tag:,install-to: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdrt:i: --long help,debug,raw,tag:,install-to: -n "$(basename "$0")" -- "$@")
 
-if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+if [ $? != 0 ]; then usage "Terminating...\n" >&2; fi
 
 eval set -- "$OPTS"
 
 while true; do
   case "$1" in
-    -h | --help ) usage ;;
-    -d | --debug ) DEBUG=true; shift ;;
-    -b | --build ) BUILD=true; shift ;;
-    -i | --install-to ) install_to="$2"; shift 2 ;;
-    -t | --tag ) tag="$2"; shift 2 ;;
-    -- ) shift; break ;;
-    * ) break ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -b | --build)
+    BUILD=true
+    shift
+    ;;
+  -i | --install-to)
+    install_to="$2"
+    shift 2
+    ;;
+  -t | --tag)
+    tag="$2"
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *) break ;;
   esac
 done
 
 # Allow the file to be sourced without excuting this part
-if [ "$0" = "$BASH_SOURCE" ] ; then
+if [ "$0" = "$BASH_SOURCE" ]; then
   package="${1}"
-  if [ -z ${package} ] ; then
+  if [ -z "${package}" ]; then
     usage "You need to provide a package.\nTerminating...\n" >&2
   fi
 
-  if [[ "${BUILD}" == "true" ]]; then
-    got get -u ${package}
+  if [[ ${BUILD} == "true" ]]; then
+    got get -u "${package}"
   else
     goinstall "${package}" "${tag}" "${install_to}"
   fi

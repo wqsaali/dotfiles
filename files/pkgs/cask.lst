@@ -1,9 +1,11 @@
 # alfred
 # cakebrew
 # cerebro
+# docker
 # docker-edge
 # hab
 # hipchat
+# minikube
 # oni
 # pingplotter
 # skype-for-business
@@ -12,12 +14,13 @@ android-file-transfer
 android-platform-tools
 applepi-baker
 atom
+avibrazil-rdm
 chefdk
 cisco-proximity
 clipy
 cyberduck
 dbeaver-community
-docker
+drawio
 dynamodb-local
 etcher
 firefox
@@ -52,7 +55,6 @@ keepingyouawake
 kitty
 macfuse
 magicprefs
-minikube
 minishift
 multipass
 powershell

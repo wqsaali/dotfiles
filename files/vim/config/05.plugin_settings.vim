@@ -103,6 +103,14 @@
 
   " }}}
 
+  " vim-rooter {{{
+  " if has('autocmd')
+  "   " Set vim current working directory to the current project root
+  "   autocmd VimEnter * if exists(":Rooter") | au BufEnter * :Rooter
+  " endif
+  let g:rooter_patterns = ['.git', '.hg', '.projections.json', 'requirements.txt', 'setup.cfg', 'package.json', 'go.mod', 'Makefile']
+  " }}}
+
   " lf {{{
   " let g:lf_replace_netrw = 1 " open lf when vim open a directory
   let g:lf_map_keys = 0
@@ -110,15 +118,10 @@
 
   " vim-resize {{{
   let g:vim_resize_disable_auto_mappings = 1
-  nnoremap <silent> <S-Left> :CmdResizeLeft<cr>
-  nnoremap <silent> <S-Down> :CmdResizeDown<cr>
-  nnoremap <silent> <S-Up> :CmdResizeUp<cr>
-  nnoremap <silent> <S-Right> :CmdResizeRight<cr>
   " }}}
 
   " vim-choosewin {{{
   let g:choosewin_overlay_enable = 1
-  nmap - <Plug>(choosewin)
   " }}}
 
   " matchparen {{{
@@ -138,9 +141,6 @@
   let g:syntastic_check_on_open = 1
   let g:syntastic_check_on_wq = 0
   let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
-
-  noremap <C-w>e :SyntasticCheck<CR>
-  noremap <C-w>f :SyntasticToggleMode<CR>
   " }}}
 
   " Gundu {{{
@@ -174,6 +174,10 @@
   " none X terminal
   let g:indentLine_color_tty_light = 7 " (default: 4)
   let g:indentLine_color_dark = 1 " (default: 2)'
+  " }}}
+
+  " IndentBlankLine {{{
+  let g:indent_blankline_disable_warning_message = 0
   " }}}
 
   " Conoline {{{
@@ -234,18 +238,8 @@
   " }}}
 
   " clap-vim {{{
-  " Maps to Ctrl-p
-  nnoremap <C-p> :Clap files<CR>
-  nnoremap <C-o> :Clap filer<CR>
-  nnoremap <C-e> :Clap command<CR>
-  nnoremap <C-j> :Clap tags<CR>
-  nnoremap <C-f>f :Clap grep2<CR>
-  nnoremap <C-f>k :Clap grep2 ++query=<cword><CR>
-  nnoremap <C-w>w :Clap windows<CR>
-  nnoremap <C-w>b :Clap buffers<CR>
-
   " let g:clap_provider_grep_executable = 'rg'
-  let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case --hidden --glob=!.git/ --glob=!*vendor/*'
+  let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case --hidden --glob=!.git/* --glob=!*vendor/* --glob=!*node_modules/* '
   let g:clap_preview_direction = 'UD'
   let g:clap_preview_size = 10
   " let g:clap_layout = { 'relative': 'editor' }

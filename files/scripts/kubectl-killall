@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 # Script to kill all pods matching a keyword
 # This scritp can be used as a kubectl plugin and invoked as a sub-command
@@ -6,11 +6,11 @@
 #   kubectl killall metrics
 
 function usage() {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>] <keyword>"
+  echo "Usage: $(basename "$0") [<flags>] <keyword>"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -28,20 +28,28 @@ while [[ $# -gt 0 ]]; do
   key="$1"
 
   case $key in
-      -h | --help ) usage ;;
-      -d | --debug ) DEBUG=true; shift ;;
-      -f | --force ) FORCE=true; shift ;;
-      -n | --namespace ) NAMESPACE="-n $2"; shift 2 ;;
-      *)
-      POSITIONAL+=("$1") # save it in an array for later
-      shift # past argument
-      ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -f | --force)
+    FORCE=true
+    shift
+    ;;
+  -n | --namespace)
+    NAMESPACE="-n $2"
+    shift 2
+    ;;
+  *)
+    POSITIONAL+=("$1") # save it in an array for later
+    shift              # past argument
+    ;;
   esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-
-if [[ "${FORCE}" == "true" ]]; then
+if [[ ${FORCE} == "true" ]]; then
   FORCE="--grace-period=0 --force"
 fi
 
@@ -50,8 +58,13 @@ if [[ "${NAMESPACE}" != "--all-namespaces" ]]; then
   filter=$(printf '{print $1 " %s "}' "${NAMESPACE}")
 fi
 
-if [[ "${DEBUG}" == "true" ]]; then
+if [[ ${DEBUG} == "true" ]]; then
   echo "filter: ${filter}"
 fi
 
-kubectl get po ${NAMESPACE} --no-headers -o wide | grep "${1}" | awk "${filter}" | xargs -L1 -r kubectl delete ${FORCE} po
+cmd="kubectl get po ${NAMESPACE} --no-headers -o wide | grep '${1}' | awk '${filter}' | xargs -L1 -r kubectl delete ${FORCE} po"
+if [[ ${DEBUG} == "true" ]]; then
+  echo "${cmd}"
+fi
+
+eval "${cmd}"

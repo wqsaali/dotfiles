@@ -11,5 +11,6 @@ rubocop
 rubocop-performance
 slack-notifier
 solargraph
+sorbet
 terminal-table
 terraform_landscape

@@ -34,43 +34,55 @@ mfa_arn=$2
 profile=$3
 temp_profile=${4:-mfa_temp}
 
-if [ -z $role ]; then echo "no role specified"; exit 1; fi
-if [ -z $mfa_arn ]; then echo "no mfa arn specified"; exit 1; fi
-if [ -z $profile ]; then echo "no profile specified"; exit 1; fi
+if [ -z "$role" ]; then
+  echo "no role specified"
+  exit 1
+fi
+if [ -z "$mfa_arn" ]; then
+  echo "no mfa arn specified"
+  exit 1
+fi
+if [ -z "$profile" ]; then
+  echo "no profile specified"
+  exit 1
+fi
 
-resp=$(aws sts get-caller-identity --profile ${temp_profile} | jq '.UserId')
+resp=$(aws sts get-caller-identity --profile "${temp_profile}" | jq '.UserId')
 
-if [ ! -z $resp ]; then
+if [ -n "$resp" ]; then
   echo '{
     "Version": 1,
-    "AccessKeyId": "'"$(aws configure get aws_access_key_id --profile ${temp_profile})"'",
-    "SecretAccessKey": "'"$(aws configure get aws_secret_access_key --profile ${temp_profile})"'",
-    "SessionToken": "'"$(aws configure get aws_session_token --profile ${temp_profile})"'",
-    "Expiration": "'"$(aws configure get expiration --profile ${temp_profile})"'"
+    "AccessKeyId": "'"$(aws configure get aws_access_key_id --profile "${temp_profile}")"'",
+    "SecretAccessKey": "'"$(aws configure get aws_secret_access_key --profile "${temp_profile}")"'",
+    "SessionToken": "'"$(aws configure get aws_session_token --profile "${temp_profile}")"'",
+    "Expiration": "'"$(aws configure get expiration --profile "${temp_profile}")"'"
   }'
   exit 0
 fi
 read -p "Enter MFA token: " mfa_token
 
-if [ -z $mfa_token ]; then echo "MFA token can't be empty"; exit 1; fi
+if [ -z "$mfa_token" ]; then
+  echo "MFA token can't be empty"
+  exit 1
+fi
 
-data=$(aws sts assume-role --role-arn $role \
-                    --profile $profile \
-                    --role-session-name "$(tr -dc A-Za-z0-9 </dev/urandom | head -c 20)" \
-                    --serial-number $mfa_arn \
-                    --token-code $mfa_token | jq '.Credentials')
+data=$(aws sts assume-role --role-arn "$role" \
+  --profile "$profile" \
+  --role-session-name "$(tr -dc A-Za-z0-9 </dev/urandom | head -c 20)" \
+  --serial-number "$mfa_arn" \
+  --token-code "$mfa_token" | jq '.Credentials')
 
-aws_access_key_id=$(echo $data | jq -r '.AccessKeyId')
-aws_secret_access_key=$(echo $data | jq -r '.SecretAccessKey')
-aws_session_token=$(echo $data | jq -r '.SessionToken')
-expiration=$(echo $data | jq -r '.Expiration')
+aws_access_key_id=$(echo "$data" | jq -r '.AccessKeyId')
+aws_secret_access_key=$(echo "$data" | jq -r '.SecretAccessKey')
+aws_session_token=$(echo "$data" | jq -r '.SessionToken')
+expiration=$(echo "$data" | jq -r '.Expiration')
 
 # Override the temp_profile config
-aws configure set aws_access_key_id $aws_access_key_id --profile ${temp_profile}
-aws configure set aws_secret_access_key $aws_secret_access_key --profile ${temp_profile}
-aws configure set aws_session_token $aws_session_token --profile ${temp_profile}
-aws configure set expiration $expiration --profile ${temp_profile}
-aws configure set source_profile $profile --profile ${temp_profile}
+aws configure set aws_access_key_id "$aws_access_key_id" --profile "${temp_profile}"
+aws configure set aws_secret_access_key "$aws_secret_access_key" --profile "${temp_profile}"
+aws configure set aws_session_token "$aws_session_token" --profile "${temp_profile}"
+aws configure set expiration "$expiration" --profile "${temp_profile}"
+aws configure set source_profile "$profile" --profile "${temp_profile}"
 
 # Some tools like helmsman rely on environment variables only
 export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile "${temp_profile}")

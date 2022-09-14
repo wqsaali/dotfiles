@@ -1,16 +1,29 @@
 # vim:set filetype=bash:
-
 # Kubectl aliases
+
+[ -f ${HOME}/.ktx ] && source ${HOME}/.ktx/ktx
+[ -f $HOME/.kbenv/kbenv.sh ] && source $HOME/.kbenv/kbenv.sh
+[ -f $HOME/.helmenv/helmenv.sh ] && source $HOME/.helmenv/helmenv.sh
+[ -f ${HOME}/.kube-fzf/kube-fzf.sh ] && source ${HOME}/.kube-fzf/kube-fzf.sh
+[ -f ${HOME}/.fubectl/fubectl.source ] && source ${HOME}/.fubectl/fubectl.source
+
+[ -f ~/.kubectl_aliases/.kubectl_aliases ] && source ~/.kubectl_aliases/.kubectl_aliases
+# to use GNU watch command instead of kubectl [...] --watch
+# [ -f ~/.kubectl_aliases/.kubectl_aliases ] && source <(cat ~/.kubectl_aliases/.kubectl_aliases | sed -r 's/(kubectl.*) --watch/watch \1/g')
+# to print the full command before running it
+# function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
 
 function kctl() {
   CMD="${1}"
-  shift
+  if [ ${#} -gt 0 ]; then
+    shift
+  fi
   if _isFunction "kubectl-${CMD}"; then
     "kubectl-${CMD}" "${@}"
     return $?
   fi
   COLOR=""
-  if [ -x "$(command -v grc)" ]  && [[ "$CMD" != "modify-secret" ]]&& [[ "$CMD" != "edit" ]] && [[ "$CMD" != "exec" ]] && [[ "$CMD" != "ssh" ]]; then
+  if [ -x "$(command -v grc)" ]  && [[ "$CMD" != "modify-secret" ]]&& [[ "$CMD" != "edit" ]] && [[ "$CMD" != "exec" ]] && [[ "$CMD" != "ssh" ]] && [[ "$CMD" != "access-matrix" ]] && [[ "$CMD" != *"shell"* ]]; then
     COLOR="grc -es --colour=auto"
   fi
   local args=(${COLOR} kubectl ${CMD})
@@ -25,8 +38,9 @@ alias k='kctl'
 alias kga='kctl get -A'
 alias kd='kctl describe'
 alias kvs='kctl view-secret'
-alias keds='kctl modify-secret'
-alias ked='kctl edit'
+alias keds='command kubectl modify-secret'
+alias ked='command kubectl edit'
+alias krr='kctl rollout restart'
 
 function kgy() {
   kubectl get ${@} -o yaml | bat --paging never --theme ${BAT_THEME:-TwoDark} -p -l yaml
@@ -35,6 +49,12 @@ function kgy() {
 function kgj() {
   kubectl get ${@} -o json | bat --paging never --theme ${BAT_THEME:-TwoDark} -p -l json
 }
+
+function kubectl-printenv() {
+  kubectl exec ${@} -- strings /proc/1/environ
+}
+alias kprintenv='kubectl-printenv'
+alias kpe='kubectl-printenv'
 
 function kubectl-diff() {
   kubectl diff ${@} | delta -s
@@ -124,17 +144,18 @@ function kubectl-enter() {
 }
 alias kctl-enter='kubectl-enter'
 
-function kexec(){ pod=$1; shift; kubectl exec -it $pod -- $@; }
+function kexec(){ pod=$1; shift; command kubectl exec -it $pod -- $@; }
 alias kctl-exec='kexec'
 
-function krun() { name=$1; shift; image=$1; shift; kubectl run -it --generator=run-pod/v1 --image $image $name -- $@; }
+function krun() { name=$1; shift; image=$1; shift; command kubectl run -it --generator=run-pod/v1 --image $image $name -- $@; }
 alias kctl-run='krun'
 
 function kubectl-remote_shell() {
-  kubectl ${@} run --restart=Never --rm -i --tty alpine --image=quay.io/giantswarm/debug -- sh
+  command kubectl ${@} run --restart=Never --rm -i --tty debug --image=quay.io/giantswarm/debug -- sh
 }
 alias kctl-shell='kubectl-remote_shell'
 alias kube-shell='kubectl-remote_shell'
+alias kshell='kubectl-remote_shell'
 
 alias kssh='kubectl-ssh'
 alias kpssh='kubectl-pssh'
@@ -161,6 +182,15 @@ alias krew='kubectl krew'
 alias kindenv='export KUBECONFIG=~/.kube/kind-config'
 
 # Helm aliases
+alias hup='helm upgrade --install --atomic --cleanup-on-fail'
+alias hls='helm list -a'
+alias hga='helm get all'
+alias hgv='helm get values'
+alias hgh='helm get hooks'
+alias hsa='helm show all'
+alias hdel='helm delete'
+alias hhist='helm history'
+
 alias helm-plugin-update='helm plugin list | awk '\''!/NAME/ {print $1}'\'' | xargs -L 1 -r helm plugin update'
 
 function helm-clean() {
@@ -181,6 +211,27 @@ function helm-getSecrets() {
   kubectl get secret -n kube-system tiller-secret -o go-template='{{index .data "ca.crt"| base64decode}}' > $HELM_HOME/ca.pem
   kubectl get secret -n kube-system tiller-secret -o go-template='{{index .data "tls.crt"| base64decode}}' > $HELM_HOME/cert.pem
   kubectl get secret -n kube-system tiller-secret -o go-template='{{index .data "tls.key"| base64decode}}' > $HELM_HOME/key.pem
+}
+
+function helmsman-adopt() {
+  kubectl label secret -n ${2} -l name=${1} --overwrite HELMSMAN_CONTEXT=${3:-default} MANAGED-BY=HELMSMAN NAMESPACE=${2}
+}
+
+# Minikube
+function mk() {
+  export KUBECONFIG=~/.kube/config.d/minikube
+  case "$1" in
+    start)
+      shift
+      minikube start --driver=hyperkit --container-runtime=docker "${@}"
+      eval $(minikube docker-env)
+      ;;
+    purge)
+      minikube delete --all --purge
+      ;;
+    *)
+      minikube "${@}"
+  esac
 }
 
 # microk8s aliases for macOS

@@ -2,11 +2,11 @@
 
 case $BLOCK_BUTTON in
 # Left click
-  1) amixer -D pulse -q sset Master 5%+ ;;
-# Middle click
-  2) amixer -D pulse -q sset Master toggle ;;
-# Right click
-  3) amixer -D pulse -q sset Master 5%- ;;
+1) amixer -D pulse -q sset Master 5%+ ;;
+  # Middle click
+2) amixer -D pulse -q sset Master toggle ;;
+  # Right click
+3) amixer -D pulse -q sset Master 5%- ;;
 esac
 
 statusLine=$(amixer -D pulse get Master | tail -n 1)
@@ -14,20 +14,20 @@ status=$(echo "${statusLine}" | grep -wo "on")
 volume=$(echo "${statusLine}" | awk -F ' ' '{print $5}' | tr -d '[]%')
 color=''
 
-if [ "$volume" -ge "50" ] ; then
+if [ "$volume" -ge "50" ]; then
   logo=''
-elif [ "$volume" -ge "25" ] ; then
+elif [ "$volume" -ge "25" ]; then
   logo=''
 else
   logo=''
 fi
 
-if [ "$(awk '/mute/ {print $2}' /proc/acpi/ibm/volume)" = "on" ] ; then
+if [ "$(awk '/mute/ {print $2}' /proc/acpi/ibm/volume)" = "on" ]; then
   logo=''
   color="#FF3333"
 fi
 
-if [ "${status}" = "on" ] ; then
+if [ "${status}" = "on" ]; then
   echo "${logo} ${volume}% "
   echo "${logo} ${volume}%"
   echo "${color}"

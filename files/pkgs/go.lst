@@ -1,31 +1,36 @@
+# github.com/anacrolix/torrent/cmd/...
+# github.com/gardener/gardenctl
 # github.com/git-hooks/git-hooks
 # github.com/hashicorp/terraform
 # k8s.io/helm/cmd/helm
 # k8s.io/kubernetes/cmd/kubectl
-github.com/anacrolix/torrent/cmd/...
+github.com/ChimeraCoder/gojson/gojson
+github.com/axw/gocov/gocov
 github.com/azer/yolo
+github.com/charmbracelet/gum
 github.com/cloudposse/slack-notifier
 github.com/doronbehar/pistol/cmd/pistol
+github.com/fairwindsops/rbac-lookup
 github.com/fiatjaf/jiq/cmd/jiq
-github.com/gardener/gardenctl
+github.com/go-bindata/go-bindata/...
 github.com/go-critic/go-critic/cmd/gocritic
 github.com/go-delve/delve/cmd/dlv
 github.com/go-swagger/go-swagger/cmd/swagger
 github.com/gokcehan/lf
-github.com/golang/lint/golint
 github.com/gregoryv/uncover/...
 github.com/ivanilves/lstags
 github.com/juliosueiras/terraform-lsp
 github.com/kubernauts/tk8
-github.com/kubernetes-sigs/controller-tools/cmd/controller-gen
 github.com/kubicorn/kubicorn
 github.com/kyoh86/richgo
 github.com/liggitt/audit2rbac
 github.com/pbnj/ephor
 github.com/pkg/errors
+github.com/posener/goreadme/cmd/goreadme
+github.com/princjef/gomarkdoc/cmd/gomarkdoc
 github.com/rancher/k3d
-github.com/reactiveops/rbac-lookup
 github.com/sahil-lakhwani/creyaml
+github.com/spf13/cobra/cobra
 github.com/spf13/viper
 github.com/sqs/goreturns
 github.com/talos-systems/conform
@@ -34,9 +39,10 @@ github.com/testfabric/ypath
 github.com/uber/astro/astro/cli/astro
 github.com/wagoodman/dive
 github.com/zegl/kube-score
-golang.org/x/tools/cmd/godoc
-golang.org/x/tools/cmd/goimports
+golang.org/x/lint
+golang.org/x/tools/...
 kubepack.dev/chart-doc-gen
 mvdan.cc/gofumpt
 mvdan.cc/gofumpt/gofumports
+sigs.k8s.io/controller-tools/cmd/controller-gen
 sigs.k8s.io/kind

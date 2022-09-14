@@ -4,12 +4,13 @@ BlastRadius
 Pygments
 alacritty-colorscheme
 ansible-test
+aws-ssm-copy
+aws-sso-util
 boto
 boto3
 bpython
 click
 container-transform
-cruft
 docformatter
 docker
 dreampie
@@ -29,8 +30,12 @@ manage-fastapi
 mdv
 molecule
 neovim
+nginx-language-server
+nginxfmt
+openai
 parallel-ssh
 pip
+pipx
 pre-commit
 pterraform
 ptpython

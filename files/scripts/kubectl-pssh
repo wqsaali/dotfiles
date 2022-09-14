@@ -12,16 +12,17 @@
 # Defaults
 DEBUG=false
 NODES=all
-USER=app
+USER=${USER:-app}
 IP=InternalIP
 TIMEOUT=0
+IDENTITY=""
 
 function usage {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [<flags>] <command>"
+  echo "Usage: $(basename "$0") [<flags>] <command>"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -30,6 +31,7 @@ function usage {
   echo "  -f, --filter <all|healthy|unhealthy>  Filter nodes by their state default: ${NODES}"
   echo "  -u, --user <user>                     ssh user default: ${USER}"
   echo "  -t, --timeout <seconds>               kill ssh process after <seconds> default: ${TIMEOUT}"
+  echo "  -i, --indentity <file>                Path to the identity file"
   echo '                                        setting timeout to 0 disables it'
   echo ''
   exit 1
@@ -42,45 +44,67 @@ function inventory() {
   nodes=$(kubectl get no -o json | jq -r "${query}")
 
   case "${NODES,,}" in
-    "healthy" | "ok" | "ready")
-      nodes=$(echo "$nodes" | jq -r '.[] | select(.status=="True") | "app@"+.ip')
-      ;;
-    "unhealthy" | "ko" | "notready")
-      nodes=$(echo "$nodes" | jq -r '.[] | select(.status!="True") | "app@"+.ip')
-      ;;
-    "all")
-      nodes=$(echo "$nodes" | jq -r '.[] | "app@"+.ip')
-      ;;
-    *)
-      nodes=$(echo "$nodes" | jq -r '.[] | select(.name|contains("'${NODES}'")) | "app@"+.ip')
-      ;;
+  "healthy" | "ok" | "ready")
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.status=="True") | "'${USER}'@"+.ip')
+    ;;
+  "unhealthy" | "ko" | "notready")
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.status!="True") | "'${USER}'@"+.ip')
+    ;;
+  "all")
+    nodes=$(echo "$nodes" | jq -r '.[] | "'${USER}'@"+.ip')
+    ;;
+  *)
+    nodes=$(echo "$nodes" | jq -r '.[] | select(.name|contains("'${NODES}'")) | "'${USER}'@"+.ip')
+    ;;
   esac
-  echo -ne ${nodes} | tr -s '[[:space:]]' '\n'
+  echo -ne "${nodes}" | tr -s '[[:space:]]' '\n'
 }
 
-OPTS=$(getopt -o hdef:u:t: --long help,debug,external-ip,filter:,user:,timeout: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdef:u:t:i: --long help,debug,external-ip,filter:,user:,timeout:,identity: -n "$(basename "$0")" -- "$@")
 
-if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+if [ $? != 0 ]; then usage "Terminating...\n" >&2; fi
 
 eval set -- "$OPTS"
 
 while true; do
   case "$1" in
-    -h | --help ) usage ;;
-    -d | --debug ) DEBUG=true; shift ;;
-    -e | --external-ip ) IP=ExternalIP; shift ;;
-    -f | --filter ) NODES="$2"; shift 2 ;;
-    -u | --user ) USER="$2"; shift 2 ;;
-    -t | --timeout ) TIMEOUT="$2"; shift 2 ;;
-    -- ) shift; break ;;
-    * ) break ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -e | --external-ip)
+    IP=ExternalIP
+    shift
+    ;;
+  -f | --filter)
+    NODES="$2"
+    shift 2
+    ;;
+  -u | --user)
+    USER="$2"
+    shift 2
+    ;;
+  -t | --timeout)
+    TIMEOUT="$2"
+    shift 2
+    ;;
+  -i | --identity)
+    IDENTITY="-x '-i $2'"
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *) break ;;
   esac
 done
 
 # Allow the file to be sourced without excuting this part
-if [ "$0" = "$BASH_SOURCE" ] ; then
+if [ "$0" = "$BASH_SOURCE" ]; then
   CMD="${@}"
-  if [ -z "${CMD}" ] ; then
+  if [ -z "${CMD}" ]; then
     usage "You need to provide a command.\nTerminating...\n" >&2
     exit 1
   fi
@@ -95,17 +119,21 @@ if [ "$0" = "$BASH_SOURCE" ] ; then
   fi
 
   tmpfile=$(mktemp /tmp/pssh_hosts.XXXXXX)
-  inventory > ${tmpfile}
-  sed -i '/^[[:blank:]]*$/ d' ${tmpfile}
-  if [[ "${DEBUG}" == "true" ]]; then
+  inventory >"${tmpfile}"
+  sed -i '/^[[:blank:]]*$/ d' "${tmpfile}"
+  if [[ ${DEBUG} == "true" ]]; then
     echo "Hosts list:"
-    cat ${tmpfile}
+    cat "${tmpfile}"
     echo ''
   fi
-  if ! [ -s ${tmpfile} ]; then
+  if ! [ -s "${tmpfile}" ]; then
     echo -e "No hosts found!\n" >&2
     exit 1
   fi
-  pssh -O StrictHostKeyChecking=no -t ${TIMEOUT} -i -h ${tmpfile} "${CMD}"
-  rm ${tmpfile}
+  cmd="pssh -O StrictHostKeyChecking=no -t ${TIMEOUT} ${IDENTITY} -i -h ${tmpfile} ${CMD}"
+  if [[ ${DEBUG} == "true" ]]; then
+    echo "${cmd}"
+  fi
+  eval "${cmd}"
+  rm "${tmpfile}"
 fi

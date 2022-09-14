@@ -13,11 +13,11 @@ version=-1
 DEBUG=false
 
 function usage {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) [lsit] [<product>] [<os>] [<arch>] [<flags>]"
+  echo "Usage: $(basename "$0") [lsit] [<product>] [<os>] [<arch>] [<flags>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                            display help'
@@ -26,7 +26,7 @@ function usage {
   echo "  -v, --version <version>               version to install; default: latest"
   echo ''
   echo 'Set --version to latest to automatically discover the latest build (default)'
-  echo "Use $(basename $0) list to get a list os all available packages"
+  echo "Use $(basename "$0") list to get a list os all available packages"
   echo ''
   exit 1
 }
@@ -34,7 +34,7 @@ function usage {
 function installVagrantPlugins() {
   # https://github.com/mitchellh/vagrant/wiki/Available-Vagrant-Plugins
   if ! [ -x "$(command -v vagrant)" ]; then
-    if [[ "$OSTYPE" != "darwin"* ]]; then
+    if [[ $OSTYPE != "darwin"* ]]; then
       sudo apt-get install vagrant
     else
       brew cask install vagrant --appdir=/Applications
@@ -42,10 +42,10 @@ function installVagrantPlugins() {
     fi
   fi
   while read -r PKG; do
-    [[ "${PKG}" =~ ^#.*$ ]] && continue
-    [[ "${PKG}" =~ ^\\s*$ ]] && continue
+    [[ ${PKG} =~ ^#.*$ ]] && continue
+    [[ ${PKG} =~ ^\\s*$ ]] && continue
     vagrant plugin install "${PKG}"
-  done < files/pkgs/vagrant.lst
+  done <files/pkgs/vagrant.lst
 }
 
 function installHashicorp() {
@@ -53,16 +53,16 @@ function installHashicorp() {
     version=-1
   fi
 
-  if [[ "$1" == "vagrant" ]]; then
+  if [[ $1 == "vagrant" ]]; then
     installVagrantPlugins
     return
   fi
 
-  if [ -z "$1" ] || [[ "$1" == "list" ]]; then
-    if [ ! -z "${2}" ]; then
+  if [ -z "$1" ] || [[ $1 == "list" ]]; then
+    if [ -n "${2}" ]; then
       echo 'Available versions:'
       # List available packages:
-      curl -s https://releases.hashicorp.com/index.json | jq ".${2}.versions | keys[]"
+      curl -s https://releases.hashicorp.com/index.json | jq ".\"${2}\".versions | keys[]"
     else
       echo 'Available packages:'
       # List available packages:
@@ -74,47 +74,74 @@ function installHashicorp() {
   # Get URLs for most recent versions:
   cdir=$(pwd)
   os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
-  arch="${3:-64}"
+  arch="${3}"
+  if [ -z "${arch}" ]; then
+    arch="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
+  fi
+
+  [[ ${DEBUG} == "true" ]] && echo "Finding a package for: ${1}; ${version}; ${os}; ${arch}"
 
   # TODO: ensure proper version sorting
   if [ $version -ne -1 ]; then
-    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r ".${1}.versions.\"${version}\" | .builds[] | select(.url | test(\"${os}.*${arch}\";\"i\")) | .url")
+    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r ".\"${1}\".versions.\"${version}\" | .builds[] | select(.url | test(\"${os}.*${arch}\";\"i\")) | .url")
   else
-    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.${1}.versions| .[]][${version}].builds[] | select(.url | test(\"${os}.*${arch}\";\"i\")) | .url")
+    url=$(curl -s https://releases.hashicorp.com/index.json | jq -r "[.\"${1}\".versions| .[]][${version}].builds[] | select(.url | test(\"${os}.*${arch}\";\"i\")) | .url")
   fi
 
-  mkdir -p ${install_to}
-  cd ${install_to}
-  curl -o package.zip $url
+  if [ -z "${url}" ]; then
+    echo "Could not find a package for: ${1}; ${version}; ${os}; ${arch}"
+    exit 1
+  fi
+
+  [[ ${DEBUG} == "true" ]] && echo "Downloading: ${url}"
+
+  mkdir -p "${install_to}"
+  cd "${install_to}" || exit
+  curl -o package.zip "${url}"
   unzip package.zip
   rm package.zip
-  cd ${cdir}
+  cd "${cdir}" || exit
 }
 
-OPTS=$(getopt -o hdv:i: --long help,debug,version:,install-to: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hdv:i: --long help,debug,version:,install-to: -n "$(basename "$0")" -- "$@")
 
-if [ $? != 0 ] ; then usage "Terminating...\n" >&2 ; fi
+if [ $? != 0 ]; then usage "Terminating...\n" >&2; fi
 
 eval set -- "$OPTS"
 
 while true; do
   case "$1" in
-    -h | --help ) usage ;;
-    -d | --debug ) DEBUG=true; shift ;;
-    -i | --install-to ) install_to="$2"; shift 2 ;;
-    -v | --version ) version="$2"; shift 2 ;;
-    -- ) shift; break ;;
-    * ) break ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -i | --install-to)
+    install_to="$2"
+    shift 2
+    ;;
+  -v | --version)
+    version="$2"
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *) break ;;
   esac
 done
 
 # Allow the file to be sourced without excuting this part
-if [ "$0" = "$BASH_SOURCE" ] ; then
+if [ "$0" = "$BASH_SOURCE" ]; then
   product="${1:-list}"
 
-  if [[ "$product" != "list" ]]; then
+  if [[ $product != "list" ]]; then
     os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
-    arch="${3:-64}"
+    arch="${3}"
+    if [ -z "${arch}" ]; then
+      arch="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
+    fi
     installHashicorp "${product}" "${os}" "${arch}"
   else
     installHashicorp $@

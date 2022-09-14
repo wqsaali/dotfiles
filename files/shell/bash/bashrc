@@ -3,25 +3,25 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-if [[ "$CONFIGURED" == "true" ]]; then
+if [[ $CONFIGURED == "true" ]]; then
   return
 fi
 
 # If not running interactively, don't do anything
 case $- in
-    *i*)
-      [ -x "$(command -v tmux)" ] && [[ ! $TERM =~ screen ]] && [ -z $TMUX ]  && [ -z $VIMRUNTIME ]&& exec tmux
-      ;;
-      *) return;;
+*i*)
+  [ -x "$(command -v tmux)" ] && [[ ! $TERM =~ screen ]] && [ -z "$TMUX" ] && [ -z "$VIMRUNTIME" ] && exec tmux
+  ;;
+*) return ;;
 esac
 
 export TERM='xterm-256color'
 
-if [[ $(tty) == "/dev/tty"* ]] && [[ "$OSTYPE" == "linux-gnu" ]]; then
+if [[ $(tty) == "/dev/tty"* ]] && [[ $OSTYPE == "linux-gnu" ]]; then
   setfont ter-powerline-v16b.psf.gz
 fi
 
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
+if [[ $OSTYPE == "linux-gnu" ]]; then
   export TERMINAL=/usr/bin/gnome-terminal
 fi
 
@@ -73,34 +73,35 @@ history() {
   builtin history "$@"
 }
 
-export PROMPT_COMMAND='echo "$(history 1)" >> ~/.bash_eternal_history'"; __bash_history_sync ${PROMPT_COMMAND}"
+_eternal_history_histfile=~/.bash_eternal_history
+
+export PROMPT_COMMAND='echo "$(history 1)" >> $_eternal_history_histfile'"; __bash_history_sync ${PROMPT_COMMAND}"
 
 # CTRL+R Alternatives
 
 # Fuzzy Find
 if [ -x "$(command -v fzf)" ]; then
 
-__ehc() {
-  if
-    [[ -n $1 ]]
-  then
-    bind '"\er": redraw-current-line'
-    bind '"\e^": magic-space'
-    READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${1}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
-    READLINE_POINT=$(( READLINE_POINT + ${#1} ))
-  else
-    bind '"\er":'
-    bind '"\e^":'
-  fi
-}
+  __ehc() {
+    if
+      [[ -n $1 ]]
+    then
+      bind '"\er": redraw-current-line'
+      bind '"\e^": magic-space'
+      READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${1}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
+      READLINE_POINT=$((READLINE_POINT + ${#1}))
+    else
+      bind '"\er":'
+      bind '"\e^":'
+    fi
+  }
 
-__fzf_history ()
-{
-  __ehc $(history | fzf --tac --tiebreak=index --height=10 | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
-}
+  __fzf_history() {
+    __ehc $(history | fzf --tac --tiebreak=index --height=10 | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
+  }
 
-bind '"\C-r": "\C-x1\e^\er"'
-bind -x '"\C-x1": __fzf_history';
+  bind '"\C-r": "\C-x1\e^\er"'
+  bind -x '"\C-x1": __fzf_history'
 
 # HH
 elif [ -x "$(command -v hh)" ]; then
@@ -108,39 +109,26 @@ elif [ -x "$(command -v hh)" ]; then
   # hh configuration:
   # https://github.com/dvorka/hstr
   # Generated with: hh --show-configuration >> ~/.bashrc
-  export HH_CONFIG=hicolor         # get more colors
+  export HH_CONFIG=hicolor # get more colors
   # export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
   # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
   if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hh -- \C-j"'; fi
 
 fi
 
-function hgrep() {
-  if [ ! -z "$1" ]; then
-    grep "${1}" ~/.bash_eternal_history
-  else
-    history
-  fi
-}
-alias histg='hgrep'
-
 # fh - repeat history
 function fh() {
   eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x "$(command -v lesspipe)" ] && eval "$(SHELL=/bin/sh lesspipe)"
-[ -x "$(command -v lesspipe.sh)" ] && eval "$(SHELL=/bin/sh lesspipe.sh)"
-
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+  debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+xterm-color | *-256color) color_prompt=yes ;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -149,30 +137,30 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+xterm* | rxvt*)
+  PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+  ;;
+*) ;;
+
 esac
 
 # Key bindings, up/down arrow searches through history
@@ -196,7 +184,7 @@ fi
 # ~/.aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-[ -f $HOME/.aliases ] && source ${HOME}/.aliases
+[ -f "$HOME"/.aliases ] && source "${HOME}/.aliases"
 
 # Auto completion
 # enable programmable completion features (you don't need to enable
@@ -214,6 +202,7 @@ fi
 # [ -x "$(command -v aws_completer)" ] && complete -C 'aws_completer' aws
 # [ -x "$(command -v awless)" ] && source <(awless completion bash)
 # [ -x "$(command -v kubectl)" ] && source <(kubectl completion bash)
+# [ -x "$(command -v helm)" ] && source <(helm completion bash)
 # [ -x "$(command -v kops)" ] && source <(kops completion bash)
 # [ -x "$(command -v azure)" ] && source <(azure --completion)
 # [ -x "$(command -v kontena)" ] && source "$(kontena whoami --bash-completion-path)"
@@ -221,18 +210,11 @@ fi
 #   source /usr/local/opt/chpharos/share/chpharos/chpharos.sh
 # fi
 
-[ -x "$(command -v thefuck)" ] && eval $(thefuck --alias)
-
-if [ -x "$(command -v pyenv)" ]; then
-  eval "$(pyenv init -)"
-  [ -x "$(command -v pyenv-virtualenv-init)" ] && eval "$(pyenv virtualenv-init -)"
-fi
-
-[ -x ${HOME}/.chefvm/bin/chefvm ] && eval "$(${HOME}/.chefvm/bin/chefvm init -)"
+[ -x "$(command -v thefuck)" ] && eval "$(thefuck --alias)"
 
 if [ -n "${HOMEBREW_PREFIX}" ]; then
-  [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh ]] || source ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh
-  [[ ! -f ${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash ]] || source ${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash
+  [ ! -f ${HOMEBREW_PREFIX}/opt/asdf/asdf.sh ] || source "${HOMEBREW_PREFIX}/opt/asdf/asdf.sh"
+  [ ! -f ${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash ] || source "${HOMEBREW_PREFIX}/opt/asdf/etc/bash_completion.d/asdf.bash"
 fi
 
 [ "$OSTYPE" == "linux-gnu" ] && source /etc/profile.d/vte-2.91.sh
@@ -246,8 +228,8 @@ fi
 export KUBE_PS1_NAMESPACE_FUNCTION=get_k8s_ns
 # bash-git-prompt configuration - https://github.com/magicmonty/bash-git-prompt:
 GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
-source ${HOME}/.bash/bash-git-prompt/gitprompt.sh
-source ${HOME}/.bash/kube-ps1/kube-ps1.sh
+[ ! -f "${HOME}/.bash/bash-git-prompt/gitprompt.sh" ] || source "${HOME}/.bash/bash-git-prompt/gitprompt.sh"
+[ ! -f "${HOME}/.bash/kube-ps1/kube-ps1.sh" ] || source "${HOME}/.bash/kube-ps1/kube-ps1.sh"
 
 # source ~/.bash/git_prompt.sh
 
@@ -268,4 +250,3 @@ export PS1
 # eval "$(starship init bash)"
 
 CONFIGURED="true"
-

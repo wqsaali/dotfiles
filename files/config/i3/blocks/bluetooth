@@ -4,24 +4,24 @@ state=$(bluetooth | cut -d ' ' -f3)
 
 case $BLOCK_BUTTON in
 # Left click
-  1)
+1)
   if [ "$state" = "on" ]; then
     rfkill block bluetooth
   else
     rfkill unblock bluetooth
   fi
   ;;
-# Middle or right click
-  2|3)
-    if [ -x "$(command -v blueman-manager)" ]; then
-      blueman-manager
-    else
-      export XDG_CURRENT_DESKTOP=GNOME; gnome-control-center;
-    fi
+  # Middle or right click
+2 | 3)
+  if [ -x "$(command -v blueman-manager)" ]; then
+    blueman-manager
+  else
+    export XDG_CURRENT_DESKTOP=GNOME
+    gnome-control-center
+  fi
   ;;
 esac
 
 state=$(bluetooth | cut -d ' ' -f3 | tr o O)
 echo "  $state "
 echo " $state"
-

@@ -1,6 +1,5 @@
 # chunkwm
 # chunkwm-blur
-# docker
 # docker-completion
 # docker-compose-completion
 # helm
@@ -51,23 +50,32 @@ chafa
 chpharos
 cmake
 coffeescript
+colima
 colordiff
+commitizen
 consul-template
 cookiecutter
 coreutils
+crane
 credhub-cli
+cruft
 csvkit
 ctags
 curl
 dark-mode
 dateutils
+datree
 dep
 devspace
 direnv
 displayplacer
 dive
 dnscrypt-proxy
+docker
+docker-compose
+docker-credential-helper
 docker-ls
+docker-slim
 dust
 ec2-ami-tools
 ec2-api-tools
@@ -83,14 +91,21 @@ fff
 figlet
 findutils
 fluxctl
+fq
+fx
+gardenctl
 gawk
 gcal
 gh
+gifsicle
 git
+git-chglog
 git-credential-manager
 git-delta
+git-extras
 git-quick-stats
 git-secrets
+glow
 gnu-getopt
 gnu-sed
 gnu-tar
@@ -98,6 +113,7 @@ gnu-time
 go-jira
 godep
 golang
+golangci-lint
 golangci-lint
 goreleaser
 gotags
@@ -110,8 +126,10 @@ grex
 gron
 groovy
 grv
+gum
 hab
 hadolint
+helix
 helm-docs
 helmenv
 helmfile
@@ -123,6 +141,8 @@ httpie
 httpstat
 hub
 hyperfine
+hyperkit
+iam-policy-json-to-terraform
 imagemagick
 imgpkg
 inframap
@@ -150,7 +170,9 @@ kompose
 kops
 kube-aws
 kubebuilder
+kubeconform
 kubectx
+kubeval
 kustomize
 kwt
 lab
@@ -160,11 +182,16 @@ lesspipe
 lf
 libmagic
 libsecret
+lima
 llvm
+lsd
 make
+markdownlint-cli
 mas
 mercurial
 microk8s
+minikube
+mockery
 moreutils
 mtr
 ncdu
@@ -178,12 +205,15 @@ openshift-cli
 openssl
 openssl
 operator-sdk
+oras
 p7zip
 packer
 pdsh
 peco
 pet
 pipenv
+pipx
+pluto
 popeye
 pre-commit
 prettyping
@@ -206,7 +236,9 @@ remarshal
 rename
 ripgrep
 rke
+rollup
 s3cmd
+samba
 sampler
 scrcpy
 sd
@@ -222,6 +254,7 @@ source-highlight
 speedtest-cli
 starship
 stern
+svu
 tanka
 tcptraceroute
 tealdeer
@@ -230,9 +263,15 @@ telnet
 terrafile
 terraform
 terraform-docs
+terraform-inventory
 terraform-ls
+terraform_landscape
 terraformer
 terragrunt
+terrascan
+tfk8s
+tflint
+tfsec
 the_silver_searcher
 thefuck
 tig
@@ -243,10 +282,12 @@ toilet
 tokei
 tree
 ttyd
+ttyplot
 tubekit
 ufraw
 vagrant-completion
 vault
+vegeta
 vendir
 vim
 w3m
@@ -256,6 +297,7 @@ wget
 whois
 xhyve
 yabai
+yamllint
 yarn
 ydiff
 yq

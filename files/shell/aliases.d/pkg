@@ -18,15 +18,15 @@ function goclean() {
   rm -rf ~/go/.cache/
   rm -rf ~/.cache/go-build/
   for gp in ${GOPATH//:/ }; do
-    rm -rf $pg/pkg
+    rm -rf $gp/pkg
   done
   # rm -rf ~/go/src/*
 }
 alias go-clean='goclean'
 
 # Python aliases
-alias python='python3'
-alias pip='pip3'
+# alias python='python3'
+# alias pip='pip3'
 
 # PIP aliases
 alias pip-upgrade='(echo pip; pip freeze | awk '\''BEGIN{FS="=="}{print $1}'\'') | xargs -r pip install -U'
@@ -75,15 +75,16 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
       brew update
     fi
     for c in $(brew list --cask); do
-      installed=$(ls $(brew --prefix)/Caskroom/$c)
-      info=$(brew info --cask $c)
-      installed_version=$(echo $installed)
-      info_version=$(echo $info | grep "$c: " | cut -d ' ' -f2)
+      installed=$(ls $(brew --prefix)/Caskroom/${c})
+      installed_version=$(echo $installed | sort --version-sort| tail -n 1)
+      info_version=$(brew info --cask "${c}" | grep "${c}: " | grep -Eo '(\s|^)v?(([0-9]+).?)+((-|\+|\.)[a-zA-Z0-9.+_-]+)?(\s|$)' | tr -d '[[:blank:]]')
+      if [ -z ${info_version} ]; then
+        info_version="$(brew info --cask 1password | grep "${c}: " | awk '{print $3}')"
+      fi
       if [[ "$installed_version" != "$info_version" ]]; then
-        echo -e "\n\nInstalled versions of $c:"
+        echo -e "\n\nInstalled versions of ${c}:"
         echo "$installed"
-        echo -e "\nCask info for $c:"
-        echo "$info"
+        echo -e "Latest version of $c: $info_version"
         if [ "$1" != '-y' ]; then
           select ynx in "Yes" "No" "Exit"; do
             case $ynx in
@@ -127,13 +128,32 @@ elif [[ "$OSTYPE" == *"android"* ]]; then
   alias dist-upgrade=apt-upgrade
 fi
 
+function asdf-update() {
+  asdf plugin update --all
+  for plugin in $(asdf plugin list); do
+    asdf install ${plugin} latest
+    asdf global ${plugin} latest
+  done
+  rm -rf ${HOME}/.asdf/shims; asdf reshim
+}
+
 function update-all-things() {
+  if [ -x "$(command -v asdf)" ]; then
+    asdf-update
+  fi
+
+  dist-upgrade
+
   # rustup self update
-  rustup update
+  if [ -x "$(command -v rustup)" ]; then
+    rustup update
+  fi
+  if [ -x "$(command -v cargo)" ]; then
+    cargo install-update -a
+  fi
   npm-upgrade
   gem-upgrade
   pip-upgrade1
-  dist-upgrade
 
   if [ -x "$(command -v mas)" ]; then
     mas upgrade
@@ -145,10 +165,6 @@ function update-all-things() {
   # Update oh my zsh
   if [[ "$(ps -p "$$" -o comm=)" == *"zsh" ]]; then
     omz update
-  fi
-
-  if [ -x "$(command -v asdf)" ]; then
-    asdf plugin update --all
   fi
 
   # vim-update

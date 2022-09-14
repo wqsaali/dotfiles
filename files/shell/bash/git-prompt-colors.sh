@@ -1,11 +1,11 @@
 # This is the custom theme template for gitprompt.sh
 
-get_k8s_name(){
+get_k8s_name() {
   echo -n "${1%@*}"
 }
 
-get_k8s_ns(){
-  if [[ "$1" != "default" ]]; then
+get_k8s_ns() {
+  if [[ $1 != "default" ]]; then
     echo -n ":$1"
   fi
 }
@@ -15,9 +15,9 @@ get_k8s_ns(){
 override_git_prompt_colors() {
   GIT_PROMPT_THEME_NAME="Custom"
 
-  Time12a="\$(date +%H:%M:%S)"
-  PathShort="\w";
-  kube_ps1="\$(kube_ps1)"
+  Time12a='$(date +%H:%M:%S)'
+  PathShort="\w"
+  kube_ps1='$(kube_ps1)'
 
   PROMPT_DIRTRIM=2
 
@@ -33,20 +33,20 @@ override_git_prompt_colors() {
   KUBE_PS1_NAMESPACE_FUNCTION=get_k8s_ns
 
   ## These are the color definitions used by gitprompt.sh
-  GIT_PROMPT_PREFIX="( "                 # start of the git info string
-  GIT_PROMPT_SUFFIX=")"                 # the end of the git info string
+  GIT_PROMPT_PREFIX="( " # start of the git info string
+  GIT_PROMPT_SUFFIX=")"   # the end of the git info string
   # GIT_PROMPT_SEPARATOR="|"              # separates each item
 
-  GIT_PROMPT_BRANCH="${White}"        # the git branch that is active in the current directory
+  GIT_PROMPT_BRANCH="${White}"            # the git branch that is active in the current directory
   GIT_PROMPT_MASTER_BRANCH="${BoldWhite}" # used if the git branch that is active in the current directory is $GIT_PROMPT_MASTER_BRANCHES
-  GIT_PROMPT_STAGED="${Red}● "           # the number of staged files/directories
-  GIT_PROMPT_CONFLICTS="${Red}✖ "       # the number of files in conflict
+  GIT_PROMPT_STAGED="${Red}● "            # the number of staged files/directories
+  GIT_PROMPT_CONFLICTS="${Red}✖ "         # the number of files in conflict
   GIT_PROMPT_CHANGED="${Yellow}✚ "        # the number of changed files
 
   # GIT_PROMPT_REMOTE=" "                 # the remote branch name (if any) and the symbols for ahead and behind
   # GIT_PROMPT_UNTRACKED="${Cyan}…"       # the number of untracked files/dirs
-  GIT_PROMPT_STASHED="${Blue}⚑ "    # the number of stashed files/dir
-  GIT_PROMPT_CLEAN="${Green}✔"      # a colored flag indicating a "clean" repo
+  GIT_PROMPT_STASHED="${Blue}⚑ " # the number of stashed files/dir
+  GIT_PROMPT_CLEAN="${Green}✔"   # a colored flag indicating a "clean" repo
 
   ## For the command indicator, the placeholder _LAST_COMMAND_STATE_
   ## will be replaced with the exit code of the last command

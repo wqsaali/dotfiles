@@ -6,10 +6,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   exit 1
 fi
 
+dotfiles_dir="${dotfiles_dir:-$(dirname "$0")}"
 INSTALLDIR=$(pwd)
 
-source ${dotfiles_dir}/files/scripts/hubinstall
-source ${dotfiles_dir}/files/scripts/hashinstall
+source "${dotfiles_dir}/files/scripts/hubinstall"
+source "${dotfiles_dir}/files/scripts/hashinstall"
 
 fancy_echo() {
   # red=`tput setaf 1`
@@ -21,131 +22,72 @@ fancy_echo() {
   if [ ! -z "$2" ]; then
     COLOR=$2
   fi
-  tput setaf $COLOR
+  tput setaf "$COLOR"
   echo "$1"
   tput sgr0
 }
 
-installDocker() {
-  # Don't run this as root as you'll not add your user to the docker group
-  sudo apt update
-  sudo apt install apt-transport-https ca-certificates software-properties-common curl
-  # sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-  # echo deb https://apt.dockerproject.org/repo ubuntu-$(lsb_release -c | awk '{print $2}') main | sudo tee /etc/apt/sources.list.d/docker.list
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  sudo apt update
-  sudo apt install -y linux-image-extra-$(uname -r)
-  sudo apt purge lxc-docker docker-engine docker.io
-  sudo rm -rf /etc/default/docker
-  sudo apt install -y docker-ce
-  sudo service docker start
-  sudo usermod -aG docker ${USER}
+detectRelease() {
+  if [ -f /etc/os-release ]; then
+    # freedesktop.org and systemd
+    . /etc/os-release
+    OS=$NAME
+    VER=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then
+    # linuxbase.org
+    OS=$(lsb_release -si)
+    VER=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then
+    # For some versions of Debian/Ubuntu without lsb_release command
+    . /etc/lsb-release
+    OS=$DISTRIB_ID
+    VER=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then
+    # Older Debian/Ubuntu/etc.
+    OS=Debian
+    VER=$(cat /etc/debian_version)
+  elif [ -f /etc/SuSe-release ]; then
+    # Older SuSE/etc.
+    OS=SuSe
+  elif [ -f /etc/redhat-release ]; then
+    # Older Red Hat, CentOS, etc.
+    OS=RedHat
+  else
+    # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
+    OS=$(uname -s)
+    VER=$(uname -r)
+  fi
+  echo "${OS}"
 }
 
 installTerragrunt() {
   os=${2:-$(uname -s | tr '[:upper:]' '[:lower:]')}
   arch="${3:-64}"
-  installFromGithub 'gruntwork-io/terragrunt' ${os} ${arch}
+  installFromGithub 'gruntwork-io/terragrunt' "${os}" "${arch}"
 }
 
 installKubernetes() {
-  cd ${HOME}/.local/bin/
+  cd "${HOME}/.local/bin/" || exit
   curl -sS https://get.k8s.io | bash
   rm -rf kubernetes.tar.gz
   ln -s ~/.local/bin/kubernetes/client/bin/* ~/.local/bin/
-  cd ${INSTALLDIR}
-}
-
-installGnomeTerminalProfiles() {
-  # gconftool-2 --set /apps/gnome-terminal/profiles/Default/font --type string "Ubuntu Mono derivative Powerline 11"
-  # gconftool-2 --set /apps/gnome-terminal/profiles/Default/use_system_font --type=boolean false
-
-  # Profiles from https://github.com/Mayccoll/Gogh
-  export {PROFILE_NAME,PROFILE_SLUG}="TomorrowNightBright" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/tomorrow-night-bright.sh && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="OneDark" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/one-dark.sh && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="MonokaiDark" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/monokai-dark.sh && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="SolarizedDark" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/solarized-dark.sh && chmod +x xt && ./xt && rm xt
-  export {PROFILE_NAME,PROFILE_SLUG}="GruvboxDark" && wget -O xt https://raw.githubusercontent.com/Mayccoll/Gogh/master/themes/gruvbox-derk.sh && chmod +x xt && ./xt && rm xt
-}
-
-installi3wm() {
-  if ! [ -x "$(command -v i3)" ]; then
-    sudo apt install i3 i3blocks i3status i3lock compton conky-all alsa-utils mpd mpc ncmpcpp feh lxappearance rxvt-unicode-256color x11-xserver-utils gtk-chtheme qt4-qtconfig xcalib xprintidle npm python-pip arandr
-    sudo pip install i3-cycle
-    sudo npm i -g i3-alt-tab
-  fi
-
-  mkdir -p ${HOME}/.config/i3
-  cp -r files/config/i3/* ${HOME}/.config/i3/
-
-  # if [ -x "$(command -v nautilus)" ] && [ ! -x "$(command -v nautilus-i3)" ]; then
-  #   sudo cp files/nautilus-i3 /usr/bin/
-  # fi
-
-  if [ ! -s ${HOME}/.i3 ]; then
-    ln -s ${HOME}/.config/i3 ${HOME}/.i3
-  fi
-}
-
-installCerebro() {
-  sudo npm install -g cerebro
-  sudo npm install -g cerebro-linux-system
-  sudo npm install -g cerebro-linux-commands
-  sudo npm install -g cerebro-shell
-  sudo npm install -g cerebro-fix-path
-  sudo npm install -g cerebro-clipboard
-  sudo npm install -g cerebro-kill
-  sudo npm install -g cerebro-timezones
-  sudo npm install -g cerebro-gif
-  sudo npm install -g cerebro-imdb
-  sudo npm install -g cerebro-ip
-  sudo npm install -g cerebro-emoj
-  sudo npm install -g cerebro-hash
-  sudo npm install -g cerebro-stackoverflow
-  sudo npm install -g cerebro-devdocs
+  cd "${INSTALLDIR}" || exit
 }
 
 installLinuxbrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
-addExtraRepos() {
-  # Google
-  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-  # Spotify
-  sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 0DF731E45CE24F27EEEB1450EFDC8610341D9410
-  echo 'deb http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list
-  # Skype
-  wget -q -O - https://repo.skype.com/data/SKYPE-GPG-KEY | sudo apt-key add -
-  echo 'deb [arch=amd64] https://repo.skype.com/deb stable main' | sudo tee /etc/apt/sources.list.d/skype-stable.list
-  # Azure
-  AZ_REPO=$(lsb_release -cs)
-  sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
-  echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
-  curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-  sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-  sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-
-}
-
 installPackages() {
-  addExtraRepos
-  sudo apt update
-  cat files/pkgs/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
-  sudo apt-mark manual $(cat files/pkgs/apt-core.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
+  case "$(detectRelease)" in
+    "Arch"*)
+      ./arch.sh packages
+      ;;
+    *)
+      ./ubuntu.sh packages
+      ;;
+  esac
 
-  # You might need some extra PPAs for these
-  cat files/pkgs/apt-extra.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ' | xargs sudo apt install -y
-  sudo apt-mark manual $(cat files/pkgs/apt-extra.lst | grep -v '^$\|^\s*\#' | tr '\n' ' ')
-
-  if ! [ -x "$(command -v cerebro)" ]; then
-    installCerebro
-  fi
-  if ! [ -x "$(command -v docker)" ]; then
-    installDocker
-  fi
   if ! [ -x "$(command -v terraform)" ]; then
     installHashicorp terraform
     installTerragrunt
@@ -156,57 +98,43 @@ installPackages() {
   if ! [ -x "$(command -v kubectl)" ]; then
     installKubernetes
   fi
-
-  curl -L https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk
-
-  sudo npm install -g coffeescrip
-  # sudo npm install -g azure-cli
 }
 
 installFonts() {
-  mkdir -p ${HOME}/.fonts/
+  mkdir -p "${HOME}"/.fonts/
 
   curl -fLo DroidSansMonoForPowerlinePlusNerdFileTypes.otf https://raw.githubusercontent.com/ryanoasis/nerd-fonts/1.0.0/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
   chmod 664 DroidSansMonoForPowerlinePlusNerdFileTypes.otf
-  mv *.otf ${HOME}/.fonts/
+  mv *.otf "${HOME}/.fonts/"
   wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
   sudo mv PowerlineSymbols.otf /usr/share/fonts/
   wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
   sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
   wget https://github.com/powerline/fonts/raw/master/Terminus/PSF/ter-powerline-v16b.psf.gz
   sudo mv ter-powerline-v16b.psf.gz /usr/share/consolefonts/
-  if ! [ -d ${HOME}/.fonts/ubuntu-mono-powerline-ttf ]; then
-    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git ${HOME}/.fonts/ubuntu-mono-powerline-ttf
+  if ! [ -d "${HOME}/.fonts/ubuntu-mono-powerline-ttf" ]; then
+    git clone https://github.com/pdf/ubuntu-mono-powerline-ttf.git "${HOME}/.fonts/ubuntu-mono-powerline-ttf"
   else
-    cd ${HOME}/.fonts/ubuntu-mono-powerline-ttf
+    cd "${HOME}/.fonts/ubuntu-mono-powerline-ttf" || exit
     git pull
-    cd ${INSTALLDIR}
+    cd "${INSTALLDIR}" || exit
   fi
   sudo fc-cache -vf
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 }
 
 installDotFiles() {
-  if ! [ -x "$(command -v git)" ]; then
-    echo 'installing git!' >&2
-    sudo apt install git
-  fi
-  if ! [ -x "$(command -v hh)" ]; then
-    echo 'installing hh!' >&2
-    sudo add-apt-repository ppa:ultradvorka/ppa && sudo apt update && sudo apt install hh
-  fi
+  mkdir -p "${HOME}"/.config
 
-  mkdir -p ${HOME}/.config
+  cd "${INSTALLDIR}" || exit
 
-  cd ${INSTALLDIR}
-
-  cp -r files/config/i3/* ${HOME}/.config/i3/
-  if [ ! -s ${HOME}/.i3 ]; then
-    ln -s ${HOME}/.config/i3 ${HOME}/.i3
+  cp -r files/config/i3/* "${HOME}/.config/i3/"
+  if [ ! -s "${HOME}"/.i3 ]; then
+    ln -s "${HOME}"/.config/i3 "${HOME}/.i3"
   fi
 
-  cp -r files/config/tilda/* ${HOME}/.config/tilda/
-  cp -r files/config/terminator/* ${HOME}/.config/terminator/
+  cp -r files/config/tilda/* "${HOME}/.config/tilda/"
+  cp -r files/config/terminator/* "${HOME}/.config/terminator/"
 
   sudo cp files/shell/bash/bash_aliases_completion /etc/bash_completion.d/
   curl -sfLo knife_autocomplete https://raw.githubusercontent.com/wk8/knife-bash-autocomplete/master/knife_autocomplete.sh
@@ -215,13 +143,12 @@ installDotFiles() {
   sudo mv kitchen-completion /etc/bash_completion.d/
   sudo chown root:root /etc/bash_completion.d/*
 
-  cd ${INSTALLDIR}
+  cd "${INSTALLDIR}" || exit
 }
 
 installAll() {
   installPackages
   installFonts
-  installGnomeTerminalProfiles
   installDotFiles
 }
 
@@ -230,7 +157,7 @@ case "$1" in
     installPackages
     ;;
   "hashicorp")
-    installHashicorp $2
+    installHashicorp "$2"
     ;;
   "dotfiles")
     installDotFiles
@@ -238,11 +165,8 @@ case "$1" in
   "fonts")
     installFonts
     ;;
-  "termProfiles" | "gnomeTermProfiles" | "termColors")
-    installGnomeTerminalProfiles
-    ;;
-  "i3wm" | "i3")
-    installi3wm
+  "release" | "getRelease")
+    detectRelease
     ;;
   *)
     installAll

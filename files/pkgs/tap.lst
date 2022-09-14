@@ -1,5 +1,8 @@
+FairwindsOps/tap
 browsh-org/homebrew-browsh
 buo/cask-upgrade
+caarlos0/tap
+charmbracelet/tap
 chef/chef
 cloudfoundry/tap
 coretech/terrafile
@@ -9,8 +12,11 @@ derailed/k9s
 derailed/popeye
 egison/egison
 eth-p/software
+gardener/tap
+git-chglog/git-chglog
 habitat-sh/habitat
 hashicorp/tap
+helix-editor/helix
 homebrew/cask-drivers
 homebrew/cask-fonts
 homebrew/cask-versions
@@ -37,6 +43,7 @@ tidwall/jj
 ubuntu/microk8s
 universal-ctags/universal-ctags
 vmware-tanzu/carvel
+wader/tap
 wagoodman/dive
 wallix/awless
 weaveworks/tap

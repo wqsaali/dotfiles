@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+export COLORTERM='truecolor'
+# export TERM="xterm-kitty"
+# export TERM="xterm-256color"
+# export TERMINFO="$HOME/.terminfo"
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
 # export EDITOR=vim
 # export VISUAL=vim
 export EDITOR=nvim
@@ -220,7 +226,7 @@ export BAT_THEME='Enki-Tokyo-Night'
 # export BAT_PAGER="less -R"
 export DELTA_PAGER="less -LREFX"
 export PAGER="bat -p"
-export AWS_PAGER="bat -p"
+export AWS_PAGER="bat -p ${AWS_PAGER_OPTS}"
 
 # Colored grep
 # export GREP_OPTIONS='--color=auto'
@@ -229,10 +235,18 @@ export AWS_PAGER="bat -p"
 # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # export FLAGS_GETOPT_CMD="$(brew --prefix gnu-getopt)/bin/getopt"
 
+export GRC_ALIASES=true
+
 # GO config
 GOPROXY=https://proxy.golang.org
 GO111MODULE=on
 GOVIM_GOPLS_FLAGS=-remote=auto
+
+if [ -f "${HOME}/.config/gh/hosts.yml" ]; then
+  export GITHUB_TOKEN=$(yq e '."github.com".oauth_token' ~/.config/gh/hosts.yml | tr -d '[:blank:]')
+  export GITHUB_API_TOKEN="${GITHUB_TOKEN}"
+  export GITHUB_PKG_REG_TOKEN="${GITHUB_TOKEN}"
+fi
 
 # fzf config
 # Use ag for feeding into fzf for searching files.

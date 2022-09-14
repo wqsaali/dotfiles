@@ -2,7 +2,7 @@
 
 # git sub-command to perform git actions recusively accross multiple repos
 
-function _help(){
+function _help() {
   echo -e "Runs git commands recusively by looking for git repos under the current directory."
   echo -e "  git recursive [CMD]."
   echo -e "Available subcommands are: pull status clean reset"\\n
@@ -14,38 +14,40 @@ function recursive-cmd() {
   cmd=${1}
   cdir=$(pwd)
   bdir='.'
-  if [ ! -z "$2" ]; then
+  if [ -n "$2" ]; then
     bdir=${2}
   fi
-  repos=$(find ${bdir} -type d -name .git -exec sh -c "dirname '{}/'" \; | grep -Ev '.*\/\..*')
+  repos=$(find "${bdir}" -type d -name .git -exec sh -c "dirname '{}/'" \; | grep -Ev '.*\/\..*')
   for d in $repos; do
     echo -e "\n${COL_BLUE}>>>${COL_RESET} $d" >&2
-    cd $d
-    echo -ne "${COL_GREY}"; eval ${cmd}; echo -ne "${COL_RESET}"
-    cd $cdir
+    cd "$d" || exit
+    echo -ne "${COL_GREY}"
+    eval "${cmd}"
+    echo -ne "${COL_RESET}"
+    cd "$cdir" || exit
   done
 }
 
 case "${1}" in
-  help) _help ;;
-  sb)
-    recursive-cmd 'git status -sb' ${2}
-    ;;
-  clean)
-    recursive-cmd 'git clean -fdX' ${2}
-    ;;
-  reset)
-    recursive-cmd 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' ${2}
-    ;;
-  prune)
-    recursive-cmd 'git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '"'"'{ print $1 }'"'"' | xargs -r -n 1 git branch -d' ${2}
+help) _help ;;
+sb)
+  recursive-cmd 'git status -sb' "${2}"
   ;;
-  purge)
-    recursive-cmd 'git branch -r --merged | grep -v master | sed "s/origin\///" | xargs -r -n 1 git push --delete origin' ${2}
-    recursive-cmd 'git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '"'"'{ print $1 }'"'"' | xargs -r -n 1 git branch -d' ${2}
+clean)
+  recursive-cmd 'git clean -fdX' "${2}"
   ;;
-  list|ls)
-    recursive-cmd 'git remote get-url origin'
+reset)
+  recursive-cmd 'git fetch origin; git reset --hard $(git remote | head -1)/$(git name-rev --name-only HEAD); git clean -fdx' "${2}"
   ;;
-  *) recursive-cmd "git ${*}" ;;
+prune)
+  recursive-cmd 'git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '"'"'{ print $1 }'"'"' | xargs -r -n 1 git branch -d' "${2}"
+  ;;
+purge)
+  recursive-cmd 'git branch -r --merged | grep -v master | sed "s/origin\///" | xargs -r -n 1 git push --delete origin' "${2}"
+  recursive-cmd 'git fetch --all -p; git branch -vv | grep "\[.*: gone\]" | awk '"'"'{ print $1 }'"'"' | xargs -r -n 1 git branch -d' "${2}"
+  ;;
+list | ls)
+  recursive-cmd 'git remote get-url origin'
+  ;;
+*) recursive-cmd "git ${*}" ;;
 esac

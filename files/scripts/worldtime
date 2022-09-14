@@ -9,11 +9,11 @@
 # worldtime -t US/Pacific # convert current localtime to US/Pacific
 
 function usage {
-  if ! [ -z "${1}" ] ; then
+  if [ -n "${1}" ]; then
     echo -e "${1}"
     echo ''
   fi
-  echo "Usage: $(basename $0) <url> [<flags>]"
+  echo "Usage: $(basename "$0") <url> [<flags>]"
   echo ''
   echo 'Flags:'
   echo '  -h, --help                    display help'
@@ -54,7 +54,7 @@ function showtime {
 
   time=$3
 
-  TZ=$TZOUT date --date='TZ="'$TZIN'"'" $time" +"$time $TZIN is $TZOUT $FORMAT"
+  TZ=$TZOUT date --date='TZ="'"$TZIN"'"'" $time" +"$time $TZIN is $TZOUT $FORMAT"
 }
 
 # Defaults
@@ -70,7 +70,7 @@ FORMAT='%H:%M (%p) %Z %a %d %b %Y'
 
 REVERSE=false
 
-OPTS=$(getopt -o hrt: --long help,reverse,timezone: -n "$(basename $0)" -- "$@")
+OPTS=$(getopt -o hrt: --long help,reverse,timezone: -n "$(basename "$0")" -- "$@")
 
 [ $? != 0 ] && usage "Terminating..." >&2
 
@@ -78,25 +78,37 @@ eval set -- "$OPTS"
 
 while true; do
   case "$1" in
-    -h | --help ) usage ;;
-    -d | --debug ) DEBUG=true; shift ;;
-    -r | --update ) REVERSE=true; shift ;;
-    -t | --workspace ) TZONES="$2"; shift 2 ;;
-    -- ) shift; break ;;
-    * ) break ;;
+  -h | --help) usage ;;
+  -d | --debug)
+    DEBUG=true
+    shift
+    ;;
+  -r | --update)
+    REVERSE=true
+    shift
+    ;;
+  -t | --workspace)
+    TZONES="$2"
+    shift 2
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *) break ;;
   esac
 done
 
 # Main
 
-if [ "$1" ] ; then
+if [ "$1" ]; then
   time="$1"
 else
-  time=`date +%T`
+  time=$(date +%T)
 fi
 
-for tz in $TZONES ; do
-  showtime $TZBASE $tz $time
+for tz in $TZONES; do
+  showtime "$TZBASE" "$tz" "$time"
 done
 
 echo

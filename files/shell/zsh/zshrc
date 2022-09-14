@@ -95,15 +95,6 @@ autoload -U add-zsh-hook
 add-zsh-hook preexec _eternal_history_mark_for_save
 add-zsh-hook precmd _eternal_history_save
 
-hgrep() {
-  if [ ! -z "$1" ]; then
-    grep "${1}" $_eternal_history_histfile
-  else
-    history
-  fi
-}
-alias histg='hgrep'
-
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -121,24 +112,32 @@ export GIT_AUTO_FETCH_INTERVAL=60 #in seconds
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  tmux
   history
   ssh-agent
   git
   git-auto-fetch
-  tmux
-  thefuck
-  kube-ps1
-  colorize
-  colored-man-pages
-  command-not-found
   cp
   extract
+  command-not-found
+  zsh-completions
+  colorize
+  colored-man-pages
   zsh-syntax-highlighting
   zsh-autopair
-  zsh-completions
   zsh-autosuggestions
   zsh-history-substring-search
+  zsh_codex
+  # kube-ps1
 )
+
+if [[ $OSTYPE != *"android"* ]]; then
+  plugins=(${plugins[@]} thefuck)
+fi
+
+# for zsh_codex
+zle -N create_completion
+bindkey '^X' create_completion
 
 # Bash like CDPATH
 typeset -U path cdpath fpath
@@ -150,6 +149,8 @@ zstyle ':completion:*:descriptions' format %B%d%b
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
         'local-directories named-directories'
 
+[[ -d "~/.zsh/completion" ]] || FPATH=~/.zsh/completion:$FPATH
+
 # Brew completions
 # You may also need to forcibly rebuild zcompdump:
 # rm -f ~/.zcompdump; compinit
@@ -159,10 +160,10 @@ zstyle ':completion:*:complete:(cd|pushd):*' tag-order \
 if [ -x "$(command -v brew)" ]; then
   export HOMEBREW_PREFIX="$(brew --prefix)"
   FPATH=${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH
+fi
 
   autoload -Uz compinit
   compinit
-fi
 
 source $ZSH/oh-my-zsh.sh
 [[ ! -f "${HOME}/.zshrcHighlightStyle" ]] || source ${HOME}/.zshrcHighlightStyle

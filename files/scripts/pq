@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 # Example usage:
 # ./pq http://prometheus.local 'avg by(resource)(avg_over_time(etcd_object_counts{resource=~".*marquis.*"}[5d]))' '.metric.resource'

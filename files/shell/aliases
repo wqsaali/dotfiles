@@ -9,19 +9,6 @@ function _isFunction() {
   eval "$check $1" >/dev/null
 }
 
-# kubectl-aliases
-[ -f ${HOME}/.ktx ] && source ${HOME}/.ktx/ktx
-[ -f $HOME/.kbenv/kbenv.sh ] && source $HOME/.kbenv/kbenv.sh
-[ -f $HOME/.helmenv/helmenv.sh ] && source $HOME/.helmenv/helmenv.sh
-[ -f ${HOME}/.kube-fzf/kube-fzf.sh ] && source ${HOME}/.kube-fzf/kube-fzf.sh
-[ -f ${HOME}/.fubectl/fubectl.source ] && source ${HOME}/.fubectl/fubectl.source
-
-[ -f ~/.kubectl_aliases/.kubectl_aliases ] && source ~/.kubectl_aliases/.kubectl_aliases
-# to use GNU watch command instead of kubectl [...] --watch
-# [ -f ~/.kubectl_aliases/.kubectl_aliases ] && source <(cat ~/.kubectl_aliases/.kubectl_aliases | sed -r 's/(kubectl.*) --watch/watch \1/g')
-# to print the full command before running it
-# function kubectl() { echo "+ kubectl $@">&2; command kubectl $@; }
-
 # Extra aliases
 for f in $HOME/.aliases.d/*; do
   if [ -f "$f" ]; then
@@ -75,8 +62,11 @@ alias back='cd $OLDPWD'
 
 # Grep aliases
 alias gr='rg -g "!*vendor/*"'
-
 alias todos="rg -n --nogroup '(TODO|FIX(ME)?):'"
+
+function envgrep() {
+  printenv | awk "/${1}/ {print \$1}"
+}
 
 function fr() {
   type=""
@@ -101,6 +91,28 @@ function fawk() {
   eval $cmd
 }
 
+# History
+function hgrep() {
+  if [ ! -z "$1" ]; then
+    echo -e '#ID\t#USER\t#SEQ\t#DATE TIME\t#DURATION\t#COMMAND'
+    grep "${1}" $_eternal_history_histfile
+  else
+    history
+  fi
+}
+
+function hbtween() {
+  # Example:
+  #   hbtween 202203301320 202203301530
+  #   hbtween '2022-03-30 13:20' '2022-03-30 15:35' mysql
+  start="$(echo ${1} | tr -d '\- :')"
+  finish="$(echo ${2} | tr -d '\- :')"
+  echo -e '#ID\t#USER\t#SEQ\t#DATE TIME\t#DURATION\t#COMMAND'
+  awk -v s=${start} -v f=${finish} 'match($4$5, "([0-9]+)-([0-9]+)-([0-9]+)([0-9]+):([0-9]+)", ary) {D=ary[1] ary[2] ary[3] ary[4] ary[5]; if (D > s && D < f) print}' $_eternal_history_histfile | grep "${3}"
+}
+alias histg='hgrep'
+
+
 # Colored diffs
 if [ -x "$(command -v colordiff)" ]; then
   alias diff='colordiff'
@@ -110,6 +122,10 @@ fi
 # diffs file1 file2 [other diff args, e.g. -y]
 function diffs() {
   diff "${@:3}" <(sort "$1") <(sort "$2")
+}
+
+function diff-dir() {
+  diff -bur ${1} ${2:-./} --exclude '.git' | delta -s
 }
 
 # Syntax highlighting in cat and less
@@ -125,6 +141,10 @@ else
   alias Cat='colorcat'
 fi
 
+if [ -x "$(command -v batman)" ]; then
+  alias cls='clear'
+fi
+
 # Colorful less
 function cless() {
   if [ $# -eq 0 ]; then
@@ -134,8 +154,6 @@ function cless() {
   fi
 }
 
-alias cls='clear'
-
 # Make open and xdg-open work on all plaforms
 if ! [ -x "$(command -v open)" ]; then
   alias open='xdg-open'
@@ -143,6 +161,28 @@ elif ! [ -x "$(command -v xdg-open)" ]; then
   alias xdg-open='open'
 fi
 alias cygstart='open'
+
+# Make pbcopy work on all plaforms
+# NOTE: for termux you need to install the Termux:API app
+if ! [ -x "$(command -v pbcopy)" ]; then
+  if [ -x "$(command -v xsel)" ]; then
+    alias pbcopy='xsel -i -b'
+  elif [ -x "$(command -v xclip)" ]; then
+    alias pbcopy='xclip -i -selection clipboard'
+  elif [ -x "$(command -v termux-clipboard-set)" ]; then
+    alias pbcopy='termux-clipboard-set'
+  fi
+fi
+
+if ! [ -x "$(command -v pbpaste)" ]; then
+  if [ -x "$(command -v xsel)" ]; then
+    alias pbpaste='xsel -o -b'
+  elif [ -x "$(command -v xclip)" ]; then
+    pbpaste='xclip -selection clipboard -o'
+  elif [ -x "$(command -v termux-clipboard-get)" ]; then
+    alias pbpaste='termux-clipboard-get'
+  fi
+fi
 
 # Fix window title after ssh
 function ssh() {
@@ -228,6 +268,9 @@ function trim() {
 
     echo "$trimmed"
 }
+
+alias autoshfmt='shfmt -i 2 -s -w .'
+alias autoshellcheck='shellcheck $(shfmt -f .) -f diff | git apply'
 
 # https://github.com/idank/explainshell/issues/4#issuecomment-354709120
 function explain-shell() {

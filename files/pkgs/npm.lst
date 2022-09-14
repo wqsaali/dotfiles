@@ -1,3 +1,4 @@
+ansible-language-server
 asar
 asciicast2gif
 check-dependencies
@@ -22,12 +23,14 @@ kubelive
 marked
 mdlt
 nativefier
+neovim
 nesh
 npm-check
 npm-compare
 npmrc
 npx
 organize-cli
+pageres-cli
 parse-columns-cli
 proxy-pac-proxy
 ramda-cli
